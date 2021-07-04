@@ -15,7 +15,7 @@
 #macro  BONK_DRAW_SPHERE_STEPS  24
 
 #macro  BONK_DRAW_DEFAULT_DIFFUSE_COLOR  c_white
-#macro  BONK_DRAW_AMBIENT_LIGHT_COLOR    c_black
+#macro  BONK_DRAW_AMBIENT_LIGHT_COLOR    c_gray
 #macro  BONK_DRAW_LIGHT_COLOR            c_white
 #macro  BONK_DRAW_LIGHT_DIRECTION_X      1
 #macro  BONK_DRAW_LIGHT_DIRECTION_Y      1

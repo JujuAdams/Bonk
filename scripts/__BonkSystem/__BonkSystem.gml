@@ -52,10 +52,14 @@ shader_set_uniform_f(shader_get_uniform(__shdBonk, "u_vDirectLightColor"),
                      color_get_green(BONK_DRAW_LIGHT_COLOR)/255,
                      color_get_blue( BONK_DRAW_LIGHT_COLOR)/255);
 
-shader_set_uniform_f(shader_get_uniform(__shdBonk, "u_vDirectLightDirection"),
-                     BONK_DRAW_LIGHT_DIRECTION_X,
-                     BONK_DRAW_LIGHT_DIRECTION_Y,
-                     BONK_DRAW_LIGHT_DIRECTION_Z);
+var _inverseLength = 1/sqrt(BONK_DRAW_LIGHT_DIRECTION_X*BONK_DRAW_LIGHT_DIRECTION_X
+                          + BONK_DRAW_LIGHT_DIRECTION_Y*BONK_DRAW_LIGHT_DIRECTION_Y
+                          + BONK_DRAW_LIGHT_DIRECTION_Z*BONK_DRAW_LIGHT_DIRECTION_Z);
+var _directionX = BONK_DRAW_LIGHT_DIRECTION_X*_inverseLength;
+var _directionY = BONK_DRAW_LIGHT_DIRECTION_Y*_inverseLength;
+var _directionZ = BONK_DRAW_LIGHT_DIRECTION_Z*_inverseLength;
+
+shader_set_uniform_f(shader_get_uniform(__shdBonk, "u_vDirectLightDirection"), _directionX, _directionY, _directionZ);
 shader_reset();
 
 

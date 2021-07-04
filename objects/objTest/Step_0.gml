@@ -1,1 +1,1 @@
-sphereA.SetPosition(mouse_x, mouse_y, 0);
+sphereB.SetPosition(mouse_x, mouse_y, 0);
