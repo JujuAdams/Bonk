@@ -11,7 +11,7 @@
 
 #region Debug Draw
 
-#macro  BONK_DRAW_POINT_RADIUS  0.5
+#macro  BONK_DRAW_POINT_RADIUS  1
 #macro  BONK_DRAW_SPHERE_STEPS  24
 
 #macro  BONK_DRAW_DEFAULT_DIFFUSE_COLOR  c_white
