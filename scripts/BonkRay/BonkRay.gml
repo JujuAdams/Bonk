@@ -121,7 +121,9 @@ function BonkRay() constructor
         var _ray_a  = [x1, y1, z1];
         var _ray_b  = [x2, y2, z2];
         
-        var _dir = BonkVecNormalize(BonkVecSubtract( _ray_b, _ray_a));
+        var _dir = BonkVecSubtract( _ray_b, _ray_a);
+        var _length = BonkVecLength(_dir);
+        _dir = BonkVecMultiply(_dir, 1/_length);
         
         if (is_nan(_dir[0])) return new BonkResult();
         
@@ -134,6 +136,8 @@ function BonkRay() constructor
         
         var _t_min = -_b - sqrt(_discriminant);
         var _t_max = -_b + sqrt(_discriminant);
+        
+        if (_length < _t_min) return new BonkResult();
         
         if (_t_min < 0)
         {

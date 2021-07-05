@@ -15,7 +15,7 @@ function BonkDebugDrawRay(_in_x1, _in_y1, _in_z1, _in_x2, _in_y2, _in_z2, _color
     
     var _delta = BonkVecNormalize([_dx, _dy, _dz]);
     
-    if (BonkVecEqual(_delta, [0, 0, 1]))
+    if (!BonkVecEqual(_delta, [0, 0, 1]))
     {
         var _tangent_normal = BonkVecCross(_delta, [0, 0, 1]);
     }
