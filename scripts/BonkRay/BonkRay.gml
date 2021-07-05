@@ -123,10 +123,10 @@ function BonkRay() constructor
         
         var _dir = BonkVecSubtract( _ray_b, _ray_a);
         var _length = BonkVecLength(_dir);
+        
+        if (_length <= 0) return new BonkResult();
+        
         _dir = BonkVecMultiply(_dir, 1/_length);
-        
-        if (is_nan(_dir[0])) return new BonkResult();
-        
         var _local = BonkVecSubtract(_ray_a, _centre);
         var _b = BonkVecDot(_local, _dir);
         var _c = BonkVecSqiareLength(_local) - _radius*_radius;

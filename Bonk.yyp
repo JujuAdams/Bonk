@@ -16,6 +16,7 @@
     {"id":{"name":"BonkVecCross","path":"scripts/BonkVecCross/BonkVecCross.yy",},"order":4,},
     {"id":{"name":"BonkPoint","path":"scripts/BonkPoint/BonkPoint.yy",},"order":0,},
     {"id":{"name":"BonkResult","path":"scripts/BonkResult/BonkResult.yy",},"order":2,},
+    {"id":{"name":"BonkVecReflect","path":"scripts/BonkVecReflect/BonkVecReflect.yy",},"order":9,},
     {"id":{"name":"BonkVecAdd","path":"scripts/BonkVecAdd/BonkVecAdd.yy",},"order":0,},
     {"id":{"name":"BonkRay","path":"scripts/BonkRay/BonkRay.yy",},"order":2,},
     {"id":{"name":"BonkDebugDrawPoint","path":"scripts/BonkDebugDrawPoint/BonkDebugDrawPoint.yy",},"order":0,},
