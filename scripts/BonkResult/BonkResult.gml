@@ -1,5 +1,3 @@
-/// 
-/// 
 /// @param normalX
 /// @param normalY
 /// @param normalZ
@@ -12,7 +10,7 @@
 
 function BonkResult(_normalX, _normalY, _normalZ, _depth, _x, _y, _z) constructor
 {
-    if (_depth == undefined)
+    if ((_normalX == undefined) && (_normalY == undefined) && (_normalZ == undefined) && (_depth == undefined))
     {
         collided = false;
         
@@ -57,6 +55,14 @@ function BonkResult(_normalX, _normalY, _normalZ, _depth, _x, _y, _z) constructo
         normalZ *= -1;
         
         return self;
+    }
+    
+    static DebugDraw = function(_color = BONK_DRAW_DEFAULT_DIFFUSE_COLOR, _thickness = BONK_DRAW_RAY_THICKNESS)
+    {
+        if (collided && (x != undefined) && (y != undefined) && (z != undefined))
+        {
+            BonkDebugDrawRay(x, y, z, BONK_DRAW_RESULT_NORMAL_LENGTH*normalX + x, BONK_DRAW_RESULT_NORMAL_LENGTH*normalY + y, BONK_DRAW_RESULT_NORMAL_LENGTH*normalZ + z, _color, _thickness);
+        }
     }
     
     

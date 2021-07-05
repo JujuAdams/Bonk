@@ -70,7 +70,7 @@ function BonkPoint() constructor
     
     static Draw = function(_color = BONK_DRAW_DEFAULT_DIFFUSE_COLOR)
     {
-        __BonkDrawSphere(x, y, z, BONK_DRAW_POINT_RADIUS, _color);
+        BonkDebugDrawPoint(x, y, z, _color);
     }
     
     #endregion
@@ -144,7 +144,7 @@ function BonkPoint() constructor
         
         //Early out if the point is fully outside the sphere
         var _radius = _sphere.radius;
-    	if (_squareLength >= _radius*_radius) return new BonkResult();
+        if (_squareLength >= _radius*_radius) return new BonkResult();
         
         var _length = sqrt(_squareLength);
         
@@ -154,6 +154,11 @@ function BonkPoint() constructor
         _directionZ *= _inverseLength;
         
         return new BonkResult(_directionX, _directionY, _directionZ, _radius - _length);
+    }
+    
+    static __CollisionWithRay = function(_other)
+    {
+        return _other.__CollisionWithRay(self).__Invert();
     }
     
     #endregion

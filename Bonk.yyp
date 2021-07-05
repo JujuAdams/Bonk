@@ -1,14 +1,26 @@
 {
   "resources": [
+    {"id":{"name":"BonkVecNormalize","path":"scripts/BonkVecNormalize/BonkVecNormalize.yy",},"order":5,},
+    {"id":{"name":"BonkDebugDrawSphere","path":"scripts/BonkDebugDrawSphere/BonkDebugDrawSphere.yy",},"order":1,},
     {"id":{"name":"__BonkConfig","path":"scripts/__BonkConfig/__BonkConfig.yy",},"order":0,},
+    {"id":{"name":"BonkVecDot","path":"scripts/BonkVecDot/BonkVecDot.yy",},"order":3,},
     {"id":{"name":"__shdBonk","path":"shaders/__shdBonk/__shdBonk.yy",},"order":1,},
     {"id":{"name":"BonkSphere","path":"scripts/BonkSphere/BonkSphere.yy",},"order":1,},
-    {"id":{"name":"BonkGetErrorLevel","path":"scripts/BonkGetErrorLevel/BonkGetErrorLevel.yy",},"order":5,},
+    {"id":{"name":"BonkDebugDrawRay","path":"scripts/BonkDebugDrawRay/BonkDebugDrawRay.yy",},"order":2,},
+    {"id":{"name":"BonkGetErrorLevel","path":"scripts/BonkGetErrorLevel/BonkGetErrorLevel.yy",},"order":4,},
+    {"id":{"name":"BonkVecEqual","path":"scripts/BonkVecEqual/BonkVecEqual.yy",},"order":7,},
+    {"id":{"name":"BonkVecMultiply","path":"scripts/BonkVecMultiply/BonkVecMultiply.yy",},"order":2,},
+    {"id":{"name":"BonkVecSqiareLength","path":"scripts/BonkVecSqiareLength/BonkVecSqiareLength.yy",},"order":6,},
+    {"id":{"name":"BonkVecSubtract","path":"scripts/BonkVecSubtract/BonkVecSubtract.yy",},"order":1,},
+    {"id":{"name":"BonkVecCross","path":"scripts/BonkVecCross/BonkVecCross.yy",},"order":4,},
     {"id":{"name":"BonkPoint","path":"scripts/BonkPoint/BonkPoint.yy",},"order":0,},
     {"id":{"name":"BonkResult","path":"scripts/BonkResult/BonkResult.yy",},"order":2,},
+    {"id":{"name":"BonkVecAdd","path":"scripts/BonkVecAdd/BonkVecAdd.yy",},"order":0,},
+    {"id":{"name":"BonkRay","path":"scripts/BonkRay/BonkRay.yy",},"order":2,},
+    {"id":{"name":"BonkDebugDrawPoint","path":"scripts/BonkDebugDrawPoint/BonkDebugDrawPoint.yy",},"order":0,},
     {"id":{"name":"objTest","path":"objects/objTest/objTest.yy",},"order":2,},
     {"id":{"name":"__BonkSystem","path":"scripts/__BonkSystem/__BonkSystem.yy",},"order":0,},
-    {"id":{"name":"BonkSetErrorLevel","path":"scripts/BonkSetErrorLevel/BonkSetErrorLevel.yy",},"order":4,},
+    {"id":{"name":"BonkSetErrorLevel","path":"scripts/BonkSetErrorLevel/BonkSetErrorLevel.yy",},"order":3,},
     {"id":{"name":"rmTest","path":"rooms/rmTest/rmTest.yy",},"order":1,},
   ],
   "Options": [
@@ -31,7 +43,9 @@
   "Folders": [
     {"folderPath":"folders/Bonk.yy","order":0,"resourceVersion":"1.0","name":"Bonk","tags":[],"resourceType":"GMFolder",},
     {"folderPath":"folders/Bonk/Primitives.yy","order":1,"resourceVersion":"1.0","name":"Primitives","tags":[],"resourceType":"GMFolder",},
-    {"folderPath":"folders/Bonk/(System).yy","order":6,"resourceVersion":"1.0","name":"(System)","tags":[],"resourceType":"GMFolder",},
+    {"folderPath":"folders/Bonk/(System).yy","order":7,"resourceVersion":"1.0","name":"(System)","tags":[],"resourceType":"GMFolder",},
+    {"folderPath":"folders/Bonk/Debug Drawing.yy","order":5,"resourceVersion":"1.0","name":"Debug Drawing","tags":[],"resourceType":"GMFolder",},
+    {"folderPath":"folders/Bonk/Vectors.yy","order":6,"resourceVersion":"1.0","name":"Vectors","tags":[],"resourceType":"GMFolder",},
   ],
   "AudioGroups": [
     {"targets":-1,"resourceVersion":"1.3","name":"audiogroup_default","resourceType":"GMAudioGroup",},
@@ -41,7 +55,7 @@
   ],
   "IncludedFiles": [],
   "MetaData": {
-    "IDEVersion": "23.1.1.313",
+    "IDEVersion": "23.1.1.314",
   },
   "resourceVersion": "1.4",
   "name": "Bonk",
