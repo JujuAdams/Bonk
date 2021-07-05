@@ -156,8 +156,39 @@ function BonkRay() constructor
     
     static __CollisionWithRay = function(_other)
     {
-        //TODO
-        return new BonkResult();
+        var _self_a  = [x1, y1, z1];
+        var _self_b  = [x2, y2, z2];
+        
+        with(_other)
+        {
+            var _other_a  = [x1, y1, z1];
+            var _other_b  = [x2, y2, z2];
+        }
+        
+        var _self_direction  = BonkVecSubtract( _self_b,  _self_a );
+        var _other_direction = BonkVecSubtract( _other_b, _other_a);
+        var _other_local     = BonkVecSubtract( _other_a, _self_a );
+        
+        var _cross = BonkVecCross(_self_direction, _other_direction);
+        
+        if (abs(BonkVecDot(_other_local, _cross)) > 0)
+        {
+            //Not coplanar
+            return new BonkResult();
+        }
+        
+        var _t = BonkVecDot(BonkVecCross(_other_local, _other_direction), _cross) / BonkVecSqiareLength(_cross);
+        if ((_t < 0) || (_t > 1)) return new BonkResult();
+        
+    	var _point = BonkVecAdd(_self_a, BonkVecMultiply(_self_direction, _t));
+		
+    	//See if this lies on the segment
+    	if (BonkVecSqiareLength(BonkVecSubtract(_point, _self_a)) + BonkVecSqiareLength(BonkVecSubtract(_point, _self_b)) > BonkVecSqiareLength(_other_direction))
+        {
+            return new BonkResult();
+        }
+        
+    	return new BonkResult(undefined, undefined, undefined, undefined, _point[0], _point[1], _point[2]);
     }
     
     #endregion
