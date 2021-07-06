@@ -104,6 +104,8 @@ function __BonkSharedCollisionHandler(_other)
     {
         case __BONK_TYPE.POINT:  return __CollisionWithPoint( _other); break;
         case __BONK_TYPE.SPHERE: return __CollisionWithSphere(_other); break;
+        case __BONK_TYPE.RAY:    return __CollisionWithRay(   _other); break;
+        case __BONK_TYPE.AABB:   return __CollisionWithAABB(  _other); break;
         
         default:
             switch(global.__bonkErrorLevel)
@@ -115,4 +117,21 @@ function __BonkSharedCollisionHandler(_other)
             return new BonkResult();
         break;
     }
+}
+
+
+
+/// @param point
+/// @param aabbMin
+/// @param aabbMax
+function __BonkAABBPointInsideMinMax(_point, _min, _max)
+{
+	if (_point[0] < _min[0]) return false;
+	if (_point[1] < _min[1]) return false;
+	if (_point[2] < _min[2]) return false;
+	if (_point[0] > _max[0]) return false;
+	if (_point[1] > _max[1]) return false;
+	if (_point[2] > _max[2]) return false;
+    
+	return true;
 }

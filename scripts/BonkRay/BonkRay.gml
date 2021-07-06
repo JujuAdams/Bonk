@@ -191,5 +191,11 @@ function BonkRay() constructor
     	return new BonkResult(undefined, undefined, undefined, undefined, _point[0], _point[1], _point[2]);
     }
     
+    static __CollisionWithAABB = function(_aabb)
+    {
+        //TODO
+        return new BonkResult();
+    }
+    
     #endregion
 }

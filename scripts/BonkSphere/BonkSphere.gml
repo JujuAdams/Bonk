@@ -151,5 +151,11 @@ function BonkSphere() constructor
         return _other.__CollisionWithRay(self).__Invert();
     }
     
+    static __CollisionWithAABB = function(_aabb)
+    {
+        //TODO
+        return new BonkResult();
+    }
+    
     #endregion
 }
