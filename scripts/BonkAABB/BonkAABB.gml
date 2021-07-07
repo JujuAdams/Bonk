@@ -103,22 +103,19 @@ function BonkAABB() constructor
     
     #region Specific Collisions
     
-    static __CollisionWithPoint = function(_point)
+    static __CollisionWithPoint = function(_other)
     {
-        //TODO
-        return new BonkResult();
+        return _other.__CollisionWithAABB(self).__Invert();
     }
     
-    static __CollisionWithSphere = function(_sphere)
+    static __CollisionWithSphere = function(_other)
     {
-        //TODO
-        return new BonkResult();
+        return _other.__CollisionWithAABB(self).__Invert();
     }
     
-    static __CollisionWithRay = function(_ray)
+    static __CollisionWithRay = function(_other)
     {
-        //TODO
-        return new BonkResult();
+        return _other.__CollisionWithAABB(self).__Invert();
     }
     
     static __CollisionWithAABB = function(_other)
