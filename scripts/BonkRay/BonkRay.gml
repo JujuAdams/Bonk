@@ -180,21 +180,100 @@ function BonkRay() constructor
         var _t = BonkVecDot(BonkVecCross(_other_local, _other_direction), _cross) / BonkVecSqiareLength(_cross);
         if ((_t < 0) || (_t > 1)) return new BonkResult();
         
-    	var _point = BonkVecAdd(_self_a, BonkVecMultiply(_self_direction, _t));
-		
-    	//See if this lies on the segment
-    	if (BonkVecSqiareLength(BonkVecSubtract(_point, _self_a)) + BonkVecSqiareLength(BonkVecSubtract(_point, _self_b)) > BonkVecSqiareLength(_other_direction))
+        var _point = BonkVecAdd(_self_a, BonkVecMultiply(_self_direction, _t));
+        
+        //See if this lies on the segment
+        if (BonkVecSqiareLength(BonkVecSubtract(_point, _self_a)) + BonkVecSqiareLength(BonkVecSubtract(_point, _self_b)) > BonkVecSqiareLength(_other_direction))
         {
             return new BonkResult();
         }
         
-    	return new BonkResult(undefined, undefined, undefined, undefined, _point[0], _point[1], _point[2]);
+        return new BonkResult(undefined, undefined, undefined, undefined, _point[0], _point[1], _point[2]);
     }
     
     static __CollisionWithAABB = function(_aabb)
     {
         //TODO
         return new BonkResult();
+        
+        //var _aabb_centre    = argument0;
+        //var _aabb_half_dims = argument1;
+        //var _ray0           = argument2;
+        //var _ray1           = argument3;
+        //
+        //var _dir = vec3_subtract( _ray1, _ray0 );
+        //if ( _dir[0] == 0 ) && ( _dir[1] == 0 ) && ( _dir[2] == 0 ) return undefined;
+        //
+        //var _aabb_min = vec3_subtract( _aabb_centre, _aabb_half_dims );
+        //var _aabb_max = vec3_add(      _aabb_centre, _aabb_half_dims );
+        //
+        //var _t_min = undefined;
+        //var _t_max = undefined;
+        //
+        //if ( _dir[0] != 0 )
+        //{
+        //    var _t_min = ( _aabb_min[0] - _ray0[0] ) / _dir[0];
+        //    var _t_max = ( _aabb_max[0] - _ray0[0] ) / _dir[0];
+        //    if ( _t_min > _t_max ) { var _temp = _t_max; _t_max = _t_min; _t_min = _temp; }
+        //}
+        //
+        //if ( _dir[1] != 0 )
+        //{
+        //    var _t_y_min = ( _aabb_min[1] - _ray0[1] ) / _dir[1];
+        //    var _t_y_max = ( _aabb_max[1] - _ray0[1] ) / _dir[1];
+        //    if ( _t_y_min > _t_y_max ) { var _temp = _t_y_max; _t_y_max = _t_y_min; _t_y_min = _temp; }
+        //
+        //    if ( _t_min == undefined )
+        //    {
+        //        _t_min = _t_y_min;
+        //        _t_max = _t_y_max;
+        //    }
+        //    else
+        //    {
+        //        if ( _t_min > _t_y_max ) || ( _t_y_min > _t_max ) return undefined;
+        //        if ( _t_y_min > _t_min ) _t_min = _t_y_min;
+        //        if ( _t_y_max < _t_max ) _t_max = _t_y_max;
+        //    }
+        //}
+        //
+        //if ( _dir[2] != 0 )
+        //{
+        //    var _t_z_min = ( _aabb_min[2] - _ray0[2] ) / _dir[2];
+        //    var _t_z_max = ( _aabb_max[2] - _ray0[2] ) / _dir[2];
+        //    if ( _t_z_min > _t_z_max ) { var _temp = _t_z_max; _t_z_max = _t_z_min; _t_z_min = _temp; }
+        //
+        //    if ( _t_min == undefined )
+        //    {
+        //        _t_min = _t_z_min;
+        //        _t_max = _t_z_max;
+        //    }
+        //    else
+        //    {
+        //        if ( _t_min > _t_z_max ) || ( _t_z_min > _t_max ) return undefined;
+        //        if ( _t_z_min > _t_min ) _t_min = _t_z_min;
+        //        if ( _t_z_max < _t_max ) _t_max = _t_z_max;
+        //    }
+        //}
+        //
+        //if ( _t_min == undefined ) return undefined;
+        //
+        //var _t = _t_min;
+        //if ( _t_min <= 0 ) || ( _t_min >= 1 )
+        //{
+        //    if ( _t_max <= 0 ) || ( _t_max >= 1 ) return undefined;
+        //    var _t = _t_max;
+        //}
+        //
+        //var _point = vec3_lerp( _ray0, _ray1, _t );
+        //if ( !bonk_aabb_point_inside_minmax( _point, _aabb_min, _aabb_max ) ) return undefined;
+        //
+        //var _normal = vec3_entrywise_divide( vec3_subtract( _point, _aabb_centre ), _aabb_half_dims );
+        //_normal[0] = (_normal[0] <= -1)? -1 : ((_normal[0] >= 1)? 1 : 0);
+        //_normal[1] = (_normal[1] <= -1)? -1 : ((_normal[1] >= 1)? 1 : 0);
+        //_normal[2] = (_normal[2] <= -1)? -1 : ((_normal[2] >= 1)? 1 : 0);
+        //
+        //return [ _normal[0], _normal[1], _normal[2],
+        //          _point[0],  _point[1],  _point[2] ];
     }
     
     #endregion

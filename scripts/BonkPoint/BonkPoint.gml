@@ -163,34 +163,34 @@ function BonkPoint() constructor
     
     static __CollisionWithAABB = function(_aabb)
     {
-    	var _position = [x, y, z];
+        var _position = [x, y, z];
         
         with(_aabb)
         {
-        	var _aabb_centre    = [x, y, z];
-        	var _aabb_half_dims = [xHalfSize, yHalfSize, zHalfSize];
+            var _aabb_centre    = [x, y, z];
+            var _aabb_half_dims = [xHalfSize, yHalfSize, zHalfSize];
         }
 
-    	var _aabb_min = BonkVecSubtract(_aabb_centre, _aabb_half_dims);
-    	var _aabb_max = BonkVecAdd(     _aabb_centre, _aabb_half_dims);
+        var _aabb_min = BonkVecSubtract(_aabb_centre, _aabb_half_dims);
+        var _aabb_max = BonkVecAdd(     _aabb_centre, _aabb_half_dims);
 
-    	if (!__BonkAABBPointInsideMinMax(_position, _aabb_min, _aabb_max)) return new BonkResult();
+        if (!__BonkAABBPointInsideMinMax(_position, _aabb_min, _aabb_max)) return new BonkResult();
 
-    	var _local_position = BonkVecSubtract(_position, _aabb_centre);
-    	var _k = BonkVecSubtract(_aabb_half_dims, BonkVecAbs(_local_position));
+        var _local_position = BonkVecSubtract(_position, _aabb_centre);
+        var _k = BonkVecSubtract(_aabb_half_dims, BonkVecAbs(_local_position));
 
-    	if ((_k[0] < _k[1]) && (_k[0] < _k[2]))
-    	{
-    	    var _sign = sign(_local_position[0]);
+        if ((_k[0] < _k[1]) && (_k[0] < _k[2]))
+        {
+            var _sign = sign(_local_position[0]);
             return new BonkResult(_sign, 0, 0, abs(_local_position[0]));
-    	}
-    	else if ((_k[1] < _k[0]) && (_k[1] < _k[2]))
-    	{
-    	    var _sign = sign(_local_position[1]);
+        }
+        else if ((_k[1] < _k[0]) && (_k[1] < _k[2]))
+        {
+            var _sign = sign(_local_position[1]);
             return new BonkResult(0, _sign, 0, abs(_local_position[1]));
-    	}
+        }
 
-    	var _sign = sign(_local_position[2]);
+        var _sign = sign(_local_position[2]);
         return new BonkResult(0, 0, _sign, abs(_local_position[2]));
     }
     
