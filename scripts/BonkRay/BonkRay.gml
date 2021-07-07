@@ -282,5 +282,11 @@ function BonkRay() constructor
         //          _point[0],  _point[1],  _point[2] ];
     }
     
+    static __CollisionWithPlane = function(_plane)
+    {
+        //TODO
+        return new BonkResult();
+    }
+    
     #endregion
 }

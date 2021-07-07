@@ -207,5 +207,11 @@ function BonkSphere() constructor
         //         -_overlap[2] ];
     }
     
+    static __CollisionWithPlane = function(_plane)
+    {
+        //TODO
+        return new BonkResult();
+    }
+    
     #endregion
 }

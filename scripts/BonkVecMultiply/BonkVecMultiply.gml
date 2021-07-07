@@ -1,5 +1,5 @@
-/// @param a
-/// @param scale
+/// @param vector
+/// @param coefficient
 
 function BonkVecMultiply(_a, _scale)
 {

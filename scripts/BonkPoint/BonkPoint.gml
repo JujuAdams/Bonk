@@ -66,9 +66,9 @@ function BonkPoint() constructor
     
     
     
-    #region Draw
+    #region Debug Draw
     
-    static Draw = function(_color = BONK_DRAW_DEFAULT_DIFFUSE_COLOR)
+    static DebugDraw = function(_color = BONK_DRAW_DEFAULT_DIFFUSE_COLOR)
     {
         BonkDebugDrawPoint(x, y, z, _color);
     }
@@ -192,6 +192,12 @@ function BonkPoint() constructor
 
         var _sign = sign(_local_position[2]);
         return new BonkResult(0, 0, _sign, abs(_local_position[2]));
+    }
+    
+    static __CollisionWithPlane = function(_plane)
+    {
+        //TODO
+        return new BonkResult();
     }
     
     #endregion
