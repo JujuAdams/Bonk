@@ -209,8 +209,22 @@ function BonkSphere() constructor
     
     static __CollisionWithPlane = function(_plane)
     {
-        //TODO
-        return new BonkResult();
+        with(_plane)
+        {
+            var _plane_point    = [x, y, z];
+            var _plane_normal   = [xNormal, yNormal, zNormal];
+            var _plane_distance = BonkVecDot(_plane_point, _plane_normal); //TODO - Optimise this!
+        }
+        
+        var _sphere_min = BonkVecDot([x, y, z], _plane_normal) - radius;
+        if (_plane_distance <= _sphere_min) return new BonkResult();
+        
+        return new BonkResult(_plane_normal[0], _plane_normal[1], _plane_normal[2], _plane_distance - _sphere_min);
+        
+        //var _pushout_point = vec3_extend( _sphere_centre, _plane, _distance - _sphere_min );
+        //return [ _plane[0], _plane[1], _plane[2],
+        //         _pushout_point[0], _pushout_point[1], _pushout_point[2],
+        //         _distance - _sphere_min ];
     }
     
     #endregion

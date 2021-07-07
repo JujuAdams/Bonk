@@ -106,6 +106,7 @@ function __BonkSharedCollisionHandler(_other)
         case __BONK_TYPE.SPHERE: return __CollisionWithSphere(_other); break;
         case __BONK_TYPE.RAY:    return __CollisionWithRay(   _other); break;
         case __BONK_TYPE.AABB:   return __CollisionWithAABB(  _other); break;
+        case __BONK_TYPE.PLANE:  return __CollisionWithPlane( _other); break;
         
         default:
             switch(global.__bonkErrorLevel)

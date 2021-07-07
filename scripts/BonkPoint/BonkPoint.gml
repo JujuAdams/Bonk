@@ -196,8 +196,20 @@ function BonkPoint() constructor
     
     static __CollisionWithPlane = function(_plane)
     {
-        //TODO
-        return new BonkResult();
+        with(_plane)
+        {
+            var _plane_point    = [x, y, z];
+            var _plane_normal   = [xNormal, yNormal, zNormal];
+            var _plane_distance = BonkVecDot(_plane_point, _plane_normal); //TODO - Optimise this!
+        }
+        
+        var _distance = BonkVecDot([x, y, z], _plane_normal) - _plane_distance;
+        if (_distance > 0) return new BonkResult();
+        
+        //var _point = BonkVecSubtract(_point, BonkVecMultiply(_plane_normal, _distance));
+        return new BonkResult(_plane_normal[0], _plane_normal[1], _plane_normal[2]);
+        //return [ _plane[0], _plane[1], _plane[2],
+        //         _point[0], _point[1], _point[2] ];
     }
     
     #endregion
