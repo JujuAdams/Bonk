@@ -153,51 +153,55 @@ function BonkSphere() constructor
     
     static __CollisionWithAABB = function(_aabb)
     {
-        //TODO
-        return new BonkResult();
+        var _sphere_centre  = [x, y, z];
+        var _sphere_radius  = radius;
         
-        //var _sphere_centre  = argument0;
-        //var _sphere_radius  = argument1;
-        //var _aabb_centre    = argument2;
-        //var _aabb_half_size = argument3;
-        //
-        //var _local_sphere_pos = vec3_subtract( _sphere_centre, _aabb_centre );
-        //var _edge_point = [ clamp( _local_sphere_pos[0], -_aabb_half_size[0], _aabb_half_size[0] ),
-        //                    clamp( _local_sphere_pos[1], -_aabb_half_size[1], _aabb_half_size[1] ),
-        //                    clamp( _local_sphere_pos[2], -_aabb_half_size[2], _aabb_half_size[2] ) ];
-        //
-        //var _overlap = vec3_subtract( _aabb_half_size, vec3_abs( _local_sphere_pos ) );
-        //
-        //if ( _overlap[0] < 0 ) || ( _overlap[1] < 0 ) || ( _overlap[2] < 0 )
-        //{
-        //    var _edge_to_local = vec3_subtract( _local_sphere_pos, _edge_point );
-        //    var _distance = vec3_length( _edge_to_local );
-        //    if ( _distance >= _sphere_radius ) return undefined;
-        //    var _normal = vec3_normalise( _edge_to_local );
-        //
-        //    var _pushout_point = vec3_add( _aabb_centre, vec3_add( _edge_point, vec3_scale( _normal, _sphere_radius ) ) );
-        //
-        //    return [ _normal[0], _normal[1], _normal[2],
-        //             _pushout_point[0], _pushout_point[1], _pushout_point[2],
-        //             _distance ];
-        //}
-        //
-        //if ( _overlap[0] <= _overlap[1] ) && ( _overlap[0] <= _overlap[2] )
-        //{
-        //    var _sign = (_local_sphere_pos[0] >= 0)? 1 : -1;
-        //    return [ _sign, 0, 0,
-        //             _sphere_centre[0] + _sign*(_sphere_radius + _overlap[0]), _sphere_centre[1], _sphere_centre[2],
-        //             -_overlap[0] ];
-        //}
-        //else if ( _overlap[1] <= _overlap[2] )
-        //{
-        //    var _sign = (_local_sphere_pos[1] >= 0)? 1 : -1;
-        //    return [ 0, _sign, 0,
-        //             _sphere_centre[0], _sphere_centre[1] + _sign*(_sphere_radius + _overlap[1]), _sphere_centre[2],
-        //             -_overlap[1] ];
-        //}
-        //
-        //var _sign = (_local_sphere_pos[2] >= 0)? 1 : -1;
+        with(_aabb)
+        {
+            var _aabb_centre    = [x, y, z];
+            var _aabb_half_size = [xHalfSize, yHalfSize, zHalfSize];
+        }
+        
+        var _local_sphere_pos = BonkVecSubtract(_sphere_centre, _aabb_centre);
+        var _edge_point = [ clamp(_local_sphere_pos[0], -_aabb_half_size[0], _aabb_half_size[0]),
+                            clamp(_local_sphere_pos[1], -_aabb_half_size[1], _aabb_half_size[1]),
+                            clamp(_local_sphere_pos[2], -_aabb_half_size[2], _aabb_half_size[2]) ];
+        
+        var _overlap = BonkVecSubtract(_aabb_half_size, BonkVecAbs(_local_sphere_pos));
+        
+        if ((_overlap[0] < 0) || (_overlap[1] < 0) || (_overlap[2] < 0))
+        {
+            var _edge_to_local = BonkVecSubtract(_local_sphere_pos, _edge_point);
+            var _distance = BonkVecLength(_edge_to_local);
+            if ( _distance >= _sphere_radius ) return new BonkResult();
+            
+            var _normal = BonkVecNormalize(_edge_to_local);
+            //var _pushout_point = BonkVecAdd(_aabb_centre, BonkVecAdd(_edge_point, BonkVecMultiply(_normal, _sphere_radius)));
+            return new BonkResult(_normal[0], _normal[1], _normal[2], _distance);
+            //return [ _normal[0], _normal[1], _normal[2],
+            //         _pushout_point[0], _pushout_point[1], _pushout_point[2],
+            //         _distance ];
+        }
+        
+        if ((_overlap[0] <= _overlap[1]) && (_overlap[0] <= _overlap[2]))
+        {
+            var _sign = (_local_sphere_pos[0] >= 0)? 1 : -1;
+            return new BonkResult(_sign, 0, 0, -_overlap[0]);
+            //return [ _sign, 0, 0,
+            //         _sphere_centre[0] + _sign*(_sphere_radius + _overlap[0]), _sphere_centre[1], _sphere_centre[2],
+            //         -_overlap[0] ];
+        }
+        else if ((_overlap[1] <= _overlap[2]))
+        {
+            var _sign = (_local_sphere_pos[1] >= 0)? 1 : -1;
+            return new BonkResult(0, _sign, 0, -_overlap[1]);
+            //return [ 0, _sign, 0,
+            //         _sphere_centre[0], _sphere_centre[1] + _sign*(_sphere_radius + _overlap[1]), _sphere_centre[2],
+            //         -_overlap[1] ];
+        }
+        
+        var _sign = (_local_sphere_pos[2] >= 0)? 1 : -1;
+        return new BonkResult(0, 0, _sign, -_overlap[2]);
         //return [ 0, 0, _sign,
         //         _sphere_centre[0], _sphere_centre[1], _sphere_centre[2] + _sign*(_sphere_radius + _overlap[2]),
         //         -_overlap[2] ];
