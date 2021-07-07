@@ -22,10 +22,9 @@ enum __BONK_TYPE
     RAY,
     PLANE,
     AABB,
-    TRIANGLE,
-    QUAD,
-    CAPSULE,
     OBB,
+    CAPSULE,
+    TRIANGLE,
     CONVEX,
     __SIZE
 }
