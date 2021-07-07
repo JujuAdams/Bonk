@@ -165,8 +165,35 @@ function BonkAABB() constructor
     
     static __CollisionWithPlane = function(_plane)
     {
-        //TODO
-        return new BonkResult();
+        var _centre    = [x, y, z];
+        var _half_dims = [xNormal, yNormal, zNormal];
+        
+        with(_plane)
+        {
+            var _plane_point    = [x, y, z];
+            var _plane_normal   = [xNormal, yNormal, zNormal];
+            var _plane_distance = BonkVecDot(_plane_point, _plane_normal); //TODO - Optimise this!
+        }
+
+        var _sign_plane_normal = BonkVecSign(_plane_distance);
+        
+        var _edge_direction = [
+            _half_dims[0]*_sign_plane_normal[0],
+            _half_dims[1]*_sign_plane_normal[1],
+            _half_dims[2]*_sign_plane_normal[2],
+        ];
+        
+        var _corner_point = BonkVecSubtract(_centre, _edge_direction);
+
+        var _distance = BonkVecDot(_plane_normal, _corner_point) - _plane_distance;
+        if (_distance >= 0) return new BonkResult();
+
+        return new BonkResult(_plane_normal[0], _plane_normal[1], _plane_normal[2]);
+        
+        //var _point = vec3_extend( _centre, _plane, -_distance );
+        //return [ _plane[0], _plane[1], _plane[2],
+        //         _point[0], _point[1], _point[2],
+        //         -_distance ];
     }
     
     #endregion

@@ -284,8 +284,31 @@ function BonkRay() constructor
     
     static __CollisionWithPlane = function(_plane)
     {
-        //TODO
-        return new BonkResult();
+        var _ray0  = [x1, y1, z1];
+        var _ray1  = [x2, y2, z2];
+        
+        with(_plane)
+        {
+            var _plane_point    = [x, y, z];
+            var _plane_normal   = [xNormal, yNormal, zNormal];
+            var _plane_distance = BonkVecDot(_plane_point, _plane_normal); //TODO - Optimise this!
+        }
+
+        var _dir = BonkVecSubtract(_ray1, _ray0); //TODO - Optimise this!
+
+        var _v_dot_n = BonkVecDot(_dir, _plane_normal);
+        if (_v_dot_n == 0) return new BonkResult(); //Parallel to the plane
+
+        var _r0_dot_n = BonkVecDot(_ray0, _plane);
+        var _t = (_plane_distance - _r0_dot_n) / _v_dot_n;
+
+        if ((_t < 0) || (_t > 1)) return new BonkResult();
+        
+        return new BonkResult(_plane_normal[0], _plane_normal[1], _plane_normal[2]);
+        
+        //var _pos = vec3_lerp( _ray0, _ray1, _t );
+        //return [ _plane[0], _plane[1], _plane[2],
+        //           _pos[0],   _pos[1],   _pos[2] ];
     }
     
     #endregion

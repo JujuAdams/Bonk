@@ -5,6 +5,7 @@
     {"id":{"name":"__BonkConfig","path":"scripts/__BonkConfig/__BonkConfig.yy",},"order":0,},
     {"id":{"name":"BonkVecDot","path":"scripts/BonkVecDot/BonkVecDot.yy",},"order":3,},
     {"id":{"name":"__shdBonk","path":"shaders/__shdBonk/__shdBonk.yy",},"order":1,},
+    {"id":{"name":"BonkVecSign","path":"scripts/BonkVecSign/BonkVecSign.yy",},"order":11,},
     {"id":{"name":"BonkSphere","path":"scripts/BonkSphere/BonkSphere.yy",},"order":1,},
     {"id":{"name":"BonkDebugDrawAABB","path":"scripts/BonkDebugDrawAABB/BonkDebugDrawAABB.yy",},"order":3,},
     {"id":{"name":"BonkDebugDrawRay","path":"scripts/BonkDebugDrawRay/BonkDebugDrawRay.yy",},"order":2,},
