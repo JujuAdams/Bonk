@@ -96,32 +96,48 @@ function BonkPlane() constructor
     
     static __CollisionWithPoint = function(_other)
     {
-        //TODO
-        return new BonkResult();
+        return _other.__CollisionWithPlane(self).__Invert();
     }
     
-    static __CollisionWithSphere = function(_sphere)
+    static __CollisionWithSphere = function(_other)
     {
-        //TODO
-        return new BonkResult();
+        return _other.__CollisionWithPlane(self).__Invert();
     }
     
     static __CollisionWithRay = function(_other)
     {
-        //TODO
-        return new BonkResult();
+        return _other.__CollisionWithPlane(self).__Invert();
     }
     
-    static __CollisionWithAABB = function(_aabb)
+    static __CollisionWithAABB = function(_other)
     {
-        //TODO
-        return new BonkResult();
+        return _other.__CollisionWithPlane(self).__Invert();
     }
     
-    static __CollisionWithPlane = function(_plane)
+    static __CollisionWithPlane = function(_other)
     {
-        //TODO
-        return new BonkResult();
+        //If both plane share a point on the plane then they have to collide
+        if ((x == _other.x) && (y == _other.y) && (z == _other.z))
+        {
+            return new BonkResult(true);
+        }
+        
+        var _dot = dot_product_3d(xNormal, yNormal, zNormal, _other.xNormal, _other.yNormal, _other.zNormal);
+        
+        //If the planes aren't parallel then they must collide between the origin and infinity
+        if (abs(_dot) != 1)
+        {
+            return new BonkResult(true);
+        }
+        
+        //We know the planes are parallel
+        //If the projection of a point on our plane with our normal is the same as the projection as a point on the other plane then the plane are coincident
+        if (dot_product_3d(x, y, z, xNormal, yNormal, zNormal) == dot_product_3d(_other.x, _other.y, _other.z, xNormal, yNormal, zNormal))
+        {
+            return new BonkResult(true);
+        }
+        
+        return new BonkResult(false);
     }
     
     #endregion
