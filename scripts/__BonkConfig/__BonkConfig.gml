@@ -11,7 +11,7 @@
 
 #region Debug Draw
 
-#macro  BONK_DRAW_POINT_RADIUS          1
+#macro  BONK_DRAW_POINT_RADIUS          2
 #macro  BONK_DRAW_SPHERE_STEPS          24
 #macro  BONK_DRAW_RAY_THICKNESS         2
 #macro  BONK_DRAW_RESULT_NORMAL_LENGTH  100

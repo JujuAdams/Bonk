@@ -5,8 +5,9 @@
 /// @param y2
 /// @param z2
 /// @param [color]
+/// @param [thickness]
 
-function BonkDebugDrawRay(_x1, _y1, _z1, _x2, _y2, _z2, _color = BONK_DRAW_DEFAULT_DIFFUSE_COLOR)
+function BonkDebugDrawRay(_x1, _y1, _z1, _x2, _y2, _z2, _color = BONK_DRAW_DEFAULT_DIFFUSE_COLOR, _thickness = BONK_DRAW_RAY_THICKNESS)
 {
     var _dx = _x2 - _x1;
     var _dy = _y2 - _y1;
@@ -19,7 +20,7 @@ function BonkDebugDrawRay(_x1, _y1, _z1, _x2, _y2, _z2, _color = BONK_DRAW_DEFAU
     var _z_angle = point_direction(0, 0, _plane_length, _dz);
     var _p_angle = point_direction(0, 0, _dx, _dy);
     
-    var _matrix = matrix_build(0,0,0,   0,0,0,   BONK_DRAW_RAY_THICKNESS, BONK_DRAW_RAY_THICKNESS, _length);
+    var _matrix = matrix_build(0,0,0,   0,0,0,   _thickness, _thickness, _length);
     _matrix = matrix_multiply(_matrix, matrix_build(0,0,0,   0, -90 - _z_angle, 0,   1,1,1));
     _matrix = matrix_multiply(_matrix, matrix_build(0,0,0,   0, 0, _p_angle,   1,1,1));
     _matrix = matrix_multiply(_matrix, matrix_build(_x1, _y1, _z1,   0,0,0,   1,1,1));
