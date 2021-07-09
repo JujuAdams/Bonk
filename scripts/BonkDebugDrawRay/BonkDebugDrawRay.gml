@@ -93,74 +93,74 @@ function BonkDebugDrawRay(_in_x1, _in_y1, _in_z1, _in_x2, _in_y2, _in_z2, _color
     #region Write to the vertex buffer
     
     //Top
-    vertex_position_3d(_vertexBuffer, _a1_x, _a1_y, _a1_z); vertex_color(_vertexBuffer, _color, 1.0); vertex_normal(_vertexBuffer, _bitangent_normal_x, _bitangent_normal_y, _bitangent_normal_z);
-    vertex_position_3d(_vertexBuffer, _c1_x, _c1_y, _c1_z); vertex_color(_vertexBuffer, _color, 1.0); vertex_normal(_vertexBuffer, _bitangent_normal_x, _bitangent_normal_y, _bitangent_normal_z);
-    vertex_position_3d(_vertexBuffer, _c2_x, _c2_y, _c2_z); vertex_color(_vertexBuffer, _color, 1.0); vertex_normal(_vertexBuffer, _bitangent_normal_x, _bitangent_normal_y, _bitangent_normal_z);
+    vertex_position_3d(_vertexBuffer, _a1_x, _a1_y, _a1_z); vertex_normal(_vertexBuffer, _bitangent_normal_x, _bitangent_normal_y, _bitangent_normal_z);
+    vertex_position_3d(_vertexBuffer, _c1_x, _c1_y, _c1_z); vertex_normal(_vertexBuffer, _bitangent_normal_x, _bitangent_normal_y, _bitangent_normal_z);
+    vertex_position_3d(_vertexBuffer, _c2_x, _c2_y, _c2_z); vertex_normal(_vertexBuffer, _bitangent_normal_x, _bitangent_normal_y, _bitangent_normal_z);
     
-    vertex_position_3d(_vertexBuffer, _a1_x, _a1_y, _a1_z); vertex_color(_vertexBuffer, _color, 1.0); vertex_normal(_vertexBuffer, _bitangent_normal_x, _bitangent_normal_y, _bitangent_normal_z);
-    vertex_position_3d(_vertexBuffer, _c2_x, _c2_y, _c2_z); vertex_color(_vertexBuffer, _color, 1.0); vertex_normal(_vertexBuffer, _bitangent_normal_x, _bitangent_normal_y, _bitangent_normal_z);
-    vertex_position_3d(_vertexBuffer, _a2_x, _a2_y, _a2_z); vertex_color(_vertexBuffer, _color, 1.0); vertex_normal(_vertexBuffer, _bitangent_normal_x, _bitangent_normal_y, _bitangent_normal_z);
+    vertex_position_3d(_vertexBuffer, _a1_x, _a1_y, _a1_z); vertex_normal(_vertexBuffer, _bitangent_normal_x, _bitangent_normal_y, _bitangent_normal_z);
+    vertex_position_3d(_vertexBuffer, _c2_x, _c2_y, _c2_z); vertex_normal(_vertexBuffer, _bitangent_normal_x, _bitangent_normal_y, _bitangent_normal_z);
+    vertex_position_3d(_vertexBuffer, _a2_x, _a2_y, _a2_z); vertex_normal(_vertexBuffer, _bitangent_normal_x, _bitangent_normal_y, _bitangent_normal_z);
     
     //Bottom
     _bitangent_normal_x *= -1;
     _bitangent_normal_y *= -1;
     _bitangent_normal_z *= -1;
     
-    vertex_position_3d(_vertexBuffer, _b1_x, _b1_y, _b1_z); vertex_color(_vertexBuffer, _color, 1.0); vertex_normal(_vertexBuffer, _bitangent_normal_x, _bitangent_normal_y, _bitangent_normal_z);
-    vertex_position_3d(_vertexBuffer, _d1_x, _d1_y, _d1_z); vertex_color(_vertexBuffer, _color, 1.0); vertex_normal(_vertexBuffer, _bitangent_normal_x, _bitangent_normal_y, _bitangent_normal_z);
-    vertex_position_3d(_vertexBuffer, _d2_x, _d2_y, _d2_z); vertex_color(_vertexBuffer, _color, 1.0); vertex_normal(_vertexBuffer, _bitangent_normal_x, _bitangent_normal_y, _bitangent_normal_z);
+    vertex_position_3d(_vertexBuffer, _b1_x, _b1_y, _b1_z); vertex_normal(_vertexBuffer, _bitangent_normal_x, _bitangent_normal_y, _bitangent_normal_z);
+    vertex_position_3d(_vertexBuffer, _d1_x, _d1_y, _d1_z); vertex_normal(_vertexBuffer, _bitangent_normal_x, _bitangent_normal_y, _bitangent_normal_z);
+    vertex_position_3d(_vertexBuffer, _d2_x, _d2_y, _d2_z); vertex_normal(_vertexBuffer, _bitangent_normal_x, _bitangent_normal_y, _bitangent_normal_z);
     
-    vertex_position_3d(_vertexBuffer, _b1_x, _b1_y, _b1_z); vertex_color(_vertexBuffer, _color, 1.0); vertex_normal(_vertexBuffer, _bitangent_normal_x, _bitangent_normal_y, _bitangent_normal_z);
-    vertex_position_3d(_vertexBuffer, _d2_x, _d2_y, _d2_z); vertex_color(_vertexBuffer, _color, 1.0); vertex_normal(_vertexBuffer, _bitangent_normal_x, _bitangent_normal_y, _bitangent_normal_z);
-    vertex_position_3d(_vertexBuffer, _b2_x, _b2_y, _b2_z); vertex_color(_vertexBuffer, _color, 1.0); vertex_normal(_vertexBuffer, _bitangent_normal_x, _bitangent_normal_y, _bitangent_normal_z);
+    vertex_position_3d(_vertexBuffer, _b1_x, _b1_y, _b1_z); vertex_normal(_vertexBuffer, _bitangent_normal_x, _bitangent_normal_y, _bitangent_normal_z);
+    vertex_position_3d(_vertexBuffer, _d2_x, _d2_y, _d2_z); vertex_normal(_vertexBuffer, _bitangent_normal_x, _bitangent_normal_y, _bitangent_normal_z);
+    vertex_position_3d(_vertexBuffer, _b2_x, _b2_y, _b2_z); vertex_normal(_vertexBuffer, _bitangent_normal_x, _bitangent_normal_y, _bitangent_normal_z);
     
     
     
     //Rear
-    vertex_position_3d(_vertexBuffer, _a1_x, _a1_y, _a1_z); vertex_color(_vertexBuffer, _color, 1.0); vertex_normal(_vertexBuffer, _tangent_normal_x, _tangent_normal_y, _tangent_normal_z);
-    vertex_position_3d(_vertexBuffer, _a2_x, _a2_y, _a2_z); vertex_color(_vertexBuffer, _color, 1.0); vertex_normal(_vertexBuffer, _tangent_normal_x, _tangent_normal_y, _tangent_normal_z);
-    vertex_position_3d(_vertexBuffer, _b2_x, _b2_y, _b2_z); vertex_color(_vertexBuffer, _color, 1.0); vertex_normal(_vertexBuffer, _tangent_normal_x, _tangent_normal_y, _tangent_normal_z);
+    vertex_position_3d(_vertexBuffer, _a1_x, _a1_y, _a1_z); vertex_normal(_vertexBuffer, _tangent_normal_x, _tangent_normal_y, _tangent_normal_z);
+    vertex_position_3d(_vertexBuffer, _a2_x, _a2_y, _a2_z); vertex_normal(_vertexBuffer, _tangent_normal_x, _tangent_normal_y, _tangent_normal_z);
+    vertex_position_3d(_vertexBuffer, _b2_x, _b2_y, _b2_z); vertex_normal(_vertexBuffer, _tangent_normal_x, _tangent_normal_y, _tangent_normal_z);
     
-    vertex_position_3d(_vertexBuffer, _a1_x, _a1_y, _a1_z); vertex_color(_vertexBuffer, _color, 1.0); vertex_normal(_vertexBuffer, _tangent_normal_x, _tangent_normal_y, _tangent_normal_z);
-    vertex_position_3d(_vertexBuffer, _b2_x, _b2_y, _b2_z); vertex_color(_vertexBuffer, _color, 1.0); vertex_normal(_vertexBuffer, _tangent_normal_x, _tangent_normal_y, _tangent_normal_z);
-    vertex_position_3d(_vertexBuffer, _b1_x, _b1_y, _b1_z); vertex_color(_vertexBuffer, _color, 1.0); vertex_normal(_vertexBuffer, _tangent_normal_x, _tangent_normal_y, _tangent_normal_z);
+    vertex_position_3d(_vertexBuffer, _a1_x, _a1_y, _a1_z); vertex_normal(_vertexBuffer, _tangent_normal_x, _tangent_normal_y, _tangent_normal_z);
+    vertex_position_3d(_vertexBuffer, _b2_x, _b2_y, _b2_z); vertex_normal(_vertexBuffer, _tangent_normal_x, _tangent_normal_y, _tangent_normal_z);
+    vertex_position_3d(_vertexBuffer, _b1_x, _b1_y, _b1_z); vertex_normal(_vertexBuffer, _tangent_normal_x, _tangent_normal_y, _tangent_normal_z);
     
     //Front
     _delta_normal_x *= -1;
     _delta_normal_y *= -1;
     _delta_normal_z *= -1;
     
-    vertex_position_3d(_vertexBuffer, _c1_x, _c1_y, _c1_z); vertex_color(_vertexBuffer, _color, 1.0); vertex_normal(_vertexBuffer, _tangent_normal_x, _tangent_normal_y, _tangent_normal_z);
-    vertex_position_3d(_vertexBuffer, _c2_x, _c2_y, _c2_z); vertex_color(_vertexBuffer, _color, 1.0); vertex_normal(_vertexBuffer, _tangent_normal_x, _tangent_normal_y, _tangent_normal_z);
-    vertex_position_3d(_vertexBuffer, _d2_x, _d2_y, _d2_z); vertex_color(_vertexBuffer, _color, 1.0); vertex_normal(_vertexBuffer, _tangent_normal_x, _tangent_normal_y, _tangent_normal_z);
+    vertex_position_3d(_vertexBuffer, _c1_x, _c1_y, _c1_z); vertex_normal(_vertexBuffer, _tangent_normal_x, _tangent_normal_y, _tangent_normal_z);
+    vertex_position_3d(_vertexBuffer, _c2_x, _c2_y, _c2_z); vertex_normal(_vertexBuffer, _tangent_normal_x, _tangent_normal_y, _tangent_normal_z);
+    vertex_position_3d(_vertexBuffer, _d2_x, _d2_y, _d2_z); vertex_normal(_vertexBuffer, _tangent_normal_x, _tangent_normal_y, _tangent_normal_z);
     
-    vertex_position_3d(_vertexBuffer, _c1_x, _c1_y, _c1_z); vertex_color(_vertexBuffer, _color, 1.0); vertex_normal(_vertexBuffer, _tangent_normal_x, _tangent_normal_y, _tangent_normal_z);
-    vertex_position_3d(_vertexBuffer, _d2_x, _d2_y, _d2_z); vertex_color(_vertexBuffer, _color, 1.0); vertex_normal(_vertexBuffer, _tangent_normal_x, _tangent_normal_y, _tangent_normal_z);
-    vertex_position_3d(_vertexBuffer, _d1_x, _d1_y, _d1_z); vertex_color(_vertexBuffer, _color, 1.0); vertex_normal(_vertexBuffer, _tangent_normal_x, _tangent_normal_y, _tangent_normal_z);
+    vertex_position_3d(_vertexBuffer, _c1_x, _c1_y, _c1_z); vertex_normal(_vertexBuffer, _tangent_normal_x, _tangent_normal_y, _tangent_normal_z);
+    vertex_position_3d(_vertexBuffer, _d2_x, _d2_y, _d2_z); vertex_normal(_vertexBuffer, _tangent_normal_x, _tangent_normal_y, _tangent_normal_z);
+    vertex_position_3d(_vertexBuffer, _d1_x, _d1_y, _d1_z); vertex_normal(_vertexBuffer, _tangent_normal_x, _tangent_normal_y, _tangent_normal_z);
     
     
     
     //B cap
-    vertex_position_3d(_vertexBuffer, _a2_x, _a2_y, _a2_z); vertex_color(_vertexBuffer, _color, 1.0); vertex_normal(_vertexBuffer, _delta_normal_x, _delta_normal_y, _delta_normal_z);
-    vertex_position_3d(_vertexBuffer, _b2_x, _b2_y, _b2_z); vertex_color(_vertexBuffer, _color, 1.0); vertex_normal(_vertexBuffer, _delta_normal_x, _delta_normal_y, _delta_normal_z);
-    vertex_position_3d(_vertexBuffer, _d2_x, _d2_y, _d2_z); vertex_color(_vertexBuffer, _color, 1.0); vertex_normal(_vertexBuffer, _delta_normal_x, _delta_normal_y, _delta_normal_z);
+    vertex_position_3d(_vertexBuffer, _a2_x, _a2_y, _a2_z); vertex_normal(_vertexBuffer, _delta_normal_x, _delta_normal_y, _delta_normal_z);
+    vertex_position_3d(_vertexBuffer, _b2_x, _b2_y, _b2_z); vertex_normal(_vertexBuffer, _delta_normal_x, _delta_normal_y, _delta_normal_z);
+    vertex_position_3d(_vertexBuffer, _d2_x, _d2_y, _d2_z); vertex_normal(_vertexBuffer, _delta_normal_x, _delta_normal_y, _delta_normal_z);
     
-    vertex_position_3d(_vertexBuffer, _a2_x, _a2_y, _a2_z); vertex_color(_vertexBuffer, _color, 1.0); vertex_normal(_vertexBuffer, _delta_normal_x, _delta_normal_y, _delta_normal_z);
-    vertex_position_3d(_vertexBuffer, _d2_x, _d2_y, _d2_z); vertex_color(_vertexBuffer, _color, 1.0); vertex_normal(_vertexBuffer, _delta_normal_x, _delta_normal_y, _delta_normal_z);
-    vertex_position_3d(_vertexBuffer, _c2_x, _c2_y, _c2_z); vertex_color(_vertexBuffer, _color, 1.0); vertex_normal(_vertexBuffer, _delta_normal_x, _delta_normal_y, _delta_normal_z);
+    vertex_position_3d(_vertexBuffer, _a2_x, _a2_y, _a2_z); vertex_normal(_vertexBuffer, _delta_normal_x, _delta_normal_y, _delta_normal_z);
+    vertex_position_3d(_vertexBuffer, _d2_x, _d2_y, _d2_z); vertex_normal(_vertexBuffer, _delta_normal_x, _delta_normal_y, _delta_normal_z);
+    vertex_position_3d(_vertexBuffer, _c2_x, _c2_y, _c2_z); vertex_normal(_vertexBuffer, _delta_normal_x, _delta_normal_y, _delta_normal_z);
     
     //A cap
     _delta_normal_x *= -1;
     _delta_normal_y *= -1;
     _delta_normal_z *= -1;
     
-    vertex_position_3d(_vertexBuffer, _a1_x, _a1_y, _a1_z); vertex_color(_vertexBuffer, _color, 1.0); vertex_normal(_vertexBuffer, _delta_normal_x, _delta_normal_y, _delta_normal_z);
-    vertex_position_3d(_vertexBuffer, _b1_x, _b1_y, _b1_z); vertex_color(_vertexBuffer, _color, 1.0); vertex_normal(_vertexBuffer, _delta_normal_x, _delta_normal_y, _delta_normal_z);
-    vertex_position_3d(_vertexBuffer, _d1_x, _d1_y, _d1_z); vertex_color(_vertexBuffer, _color, 1.0); vertex_normal(_vertexBuffer, _delta_normal_x, _delta_normal_y, _delta_normal_z);
+    vertex_position_3d(_vertexBuffer, _a1_x, _a1_y, _a1_z); vertex_normal(_vertexBuffer, _delta_normal_x, _delta_normal_y, _delta_normal_z);
+    vertex_position_3d(_vertexBuffer, _b1_x, _b1_y, _b1_z); vertex_normal(_vertexBuffer, _delta_normal_x, _delta_normal_y, _delta_normal_z);
+    vertex_position_3d(_vertexBuffer, _d1_x, _d1_y, _d1_z); vertex_normal(_vertexBuffer, _delta_normal_x, _delta_normal_y, _delta_normal_z);
     
-    vertex_position_3d(_vertexBuffer, _a1_x, _a1_y, _a1_z); vertex_color(_vertexBuffer, _color, 1.0); vertex_normal(_vertexBuffer, _delta_normal_x, _delta_normal_y, _delta_normal_z);
-    vertex_position_3d(_vertexBuffer, _d1_x, _d1_y, _d1_z); vertex_color(_vertexBuffer, _color, 1.0); vertex_normal(_vertexBuffer, _delta_normal_x, _delta_normal_y, _delta_normal_z);
-    vertex_position_3d(_vertexBuffer, _c1_x, _c1_y, _c1_z); vertex_color(_vertexBuffer, _color, 1.0); vertex_normal(_vertexBuffer, _delta_normal_x, _delta_normal_y, _delta_normal_z);
+    vertex_position_3d(_vertexBuffer, _a1_x, _a1_y, _a1_z); vertex_normal(_vertexBuffer, _delta_normal_x, _delta_normal_y, _delta_normal_z);
+    vertex_position_3d(_vertexBuffer, _d1_x, _d1_y, _d1_z); vertex_normal(_vertexBuffer, _delta_normal_x, _delta_normal_y, _delta_normal_z);
+    vertex_position_3d(_vertexBuffer, _c1_x, _c1_y, _c1_z); vertex_normal(_vertexBuffer, _delta_normal_x, _delta_normal_y, _delta_normal_z);
     
     #endregion
     
@@ -169,6 +169,9 @@ function BonkDebugDrawRay(_in_x1, _in_y1, _in_z1, _in_x2, _in_y2, _in_z2, _color
     vertex_end(_vertexBuffer);
     
     shader_set(__shdBonk);
+    shader_set_uniform_f(global.__bonkUniform_shdBonk_u_vColor, color_get_red(  _color)/255,
+                                                                color_get_green(_color)/255,
+                                                                color_get_blue( _color)/255);
     vertex_submit(_vertexBuffer, pr_trianglelist, -1);
     shader_reset();
     

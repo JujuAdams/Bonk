@@ -7,9 +7,10 @@ __BonkTrace("Welcome to Bonk by @jujuadams! This is version ", __BONK_VERSION, "
 
 vertex_format_begin();
 vertex_format_add_position_3d();
-vertex_format_add_color();
 vertex_format_add_normal();
 global.__bonkVertexFormat = vertex_format_end();
+
+global.__bonkUniform_shdBonk_u_vColor = shader_get_uniform(__shdBonk, "u_vColor");
 
 global.__bonkErrorLevel = BONK_DEFAULT_ERROR_LEVEL;
 
@@ -59,6 +60,9 @@ var _directionY = BONK_DRAW_LIGHT_DIRECTION_Y*_inverseLength;
 var _directionZ = BONK_DRAW_LIGHT_DIRECTION_Z*_inverseLength;
 
 shader_set_uniform_f(shader_get_uniform(__shdBonk, "u_vDirectLightDirection"), _directionX, _directionY, _directionZ);
+shader_set_uniform_f(global.__bonkUniform_shdBonk_u_vColor, color_get_red(  BONK_DRAW_DEFAULT_DIFFUSE_COLOR)/255,
+                                                            color_get_green(BONK_DRAW_DEFAULT_DIFFUSE_COLOR)/255,
+                                                            color_get_blue( BONK_DRAW_DEFAULT_DIFFUSE_COLOR)/255);
 shader_reset();
 
 
