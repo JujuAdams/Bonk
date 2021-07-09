@@ -1,16 +1,16 @@
 //Mouse lock variables (press F3 to lock the mouse and use mouselook)
-mouse_lock = false;
-mouse_lock_timer = 0;
+mouseLock = false;
+mouseLockTimer = 0;
 
 //Some variables to track the camera
-cam_x     = x;
-cam_y     = y;
-cam_z     = 0;
-cam_yaw   = 0;
-cam_pitch = 0;
-cam_dx    =  dcos(cam_yaw)*dcos(cam_pitch);
-cam_dy    = -dsin(cam_yaw)*dcos(cam_pitch);
-cam_dz    =  dsin(cam_pitch);
+camX     = 450;
+camY     = 230;
+camZ     = 200;
+camYaw   = 120;
+camPitch = -45;
+camDX    =  dcos(camYaw)*dcos(camPitch);
+camDY    = -dsin(camYaw)*dcos(camPitch);
+camDZ    =  dsin(camPitch);
 
 //F1 toggles the info panel
-show_info = true;
+showInfo = true;
