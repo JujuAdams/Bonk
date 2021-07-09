@@ -17,6 +17,13 @@ function BonkRay() constructor
         y1 = _y;
         z1 = _z;
         
+        if (isRay)
+        {
+            x2 = x1 + __BONK_VERY_LARGE*(x2 - x1);
+            y2 = y1 + __BONK_VERY_LARGE*(y2 - y1);
+            z2 = z1 + __BONK_VERY_LARGE*(z2 - z1);
+        }
+        
         return self;
     }
     
@@ -25,6 +32,24 @@ function BonkRay() constructor
         x2 = _x;
         y2 = _y;
         z2 = _z;
+        
+        isRay = false;
+        
+        return self;
+    }
+    
+    static SetRay = function(_x, _y, _z, _dx, _dy, _dz)
+    {
+        x1 = _x;
+        y1 = _y;
+        z1 = _z;
+        
+        var _d = __BONK_VERY_LARGE / sqrt(_dx*_dx + _dy*_dy + _dz*_dz);
+        x2 = x1 + _d*_dx;
+        y2 = y1 + _d*_dy;
+        z2 = z1 + _d*_dz;
+        
+        isRay = true;
         
         return self;
     }
@@ -47,6 +72,11 @@ function BonkRay() constructor
         };
     }
     
+    static GetRay = function()
+    {
+        return isRay;
+    }
+    
     #endregion
     
     
@@ -60,6 +90,8 @@ function BonkRay() constructor
     x2 = 0;
     y2 = 0;
     z2 = 0;
+    
+    isRay = false;
     
     #endregion
     
@@ -111,7 +143,7 @@ function BonkRay() constructor
         var _length = sqrt(_square_length);
         var _normal = BonkVecMultiply( _diff, -1/_length); //Bounce the ray directly off the point
         
-        return (new BonkResult(true, _normal[0], _normal[1], _normal[2], math_get_epsilon())).__SetPosition(_point[0], _point[1], _point[2]);
+        return (new BonkResult(true, _normal[0], _normal[1], _normal[2], math_get_epsilon())).__SetPoint(_point[0], _point[1], _point[2]);
     }
     
     static __CollisionWithSphere = function(_sphere)
@@ -151,7 +183,7 @@ function BonkRay() constructor
         
         var _normal = BonkVecMultiply(BonkVecSubtract(_point, _centre), 1/_radius);
         
-        return (new BonkResult(true, _normal[0], _normal[1], _normal[2])).__SetPosition(_point[0], _point[1], _point[2]);
+        return (new BonkResult(true, _normal[0], _normal[1], _normal[2])).__SetPoint(_point[0], _point[1], _point[2]);
     }
     
     static __CollisionWithRay = function(_other)
@@ -277,7 +309,7 @@ function BonkRay() constructor
         _normal[1] = (_normal[1] <= -1)? -1 : ((_normal[1] >= 1)? 1 : 0);
         _normal[2] = (_normal[2] <= -1)? -1 : ((_normal[2] >= 1)? 1 : 0);
         
-        return (new BonkResult(true, _normal[0], _normal[1], _normal[2])).__SetPosition(_point[0], _point[1], _point[2]);
+        return (new BonkResult(true, _normal[0], _normal[1], _normal[2])).__SetPoint(_point[0], _point[1], _point[2]);
     }
     
     static __CollisionWithPlane = function(_plane)
@@ -303,7 +335,7 @@ function BonkRay() constructor
         if ((_t < 0) || (_t > 1)) return new BonkResult(false);
         
         var _pos = BonkVecAdd(_ray0, BonkVecMultiply(BonkVecSubtract(_ray1, _ray0), _t));
-        return (new BonkResult(true, _plane_normal[0], _plane_normal[1], _plane_normal[2])).__SetPosition(_pos[0], _pos[1], _pos[2]);
+        return (new BonkResult(true, _plane_normal[0], _plane_normal[1], _plane_normal[2])).__SetPoint(_pos[0], _pos[1], _pos[2]);
     }
     
     #endregion

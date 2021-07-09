@@ -46,11 +46,11 @@ camDY = -dsin(camYaw)*dcos(camPitch);
 camDZ =  dsin(camPitch);
 
 //Move parallel/perpendicular to the camera
-var _para = 5*(keyboard_check(ord("W")) - keyboard_check(ord("S")));
-var _perp = 5*(keyboard_check(ord("A")) - keyboard_check(ord("D")));
+var _para = 2*(keyboard_check(ord("W")) - keyboard_check(ord("S")));
+var _perp = 2*(keyboard_check(ord("A")) - keyboard_check(ord("D")));
 var _sin  = dsin(camYaw);
 var _cos  = dcos(camYaw);
 
 camX +=  _para*_cos - _perp*_sin;
 camY += -_para*_sin - _perp*_cos;
-camZ += 5*(keyboard_check(vk_space) - keyboard_check(vk_shift));
+camZ += 2*(keyboard_check(vk_space) - keyboard_check(vk_shift));

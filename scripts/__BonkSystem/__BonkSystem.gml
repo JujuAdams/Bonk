@@ -1,6 +1,8 @@
 #macro  __BONK_VERSION  "0.0.0"
 #macro  __BONK_DATE     "2021-07-04"
 
+#macro __BONK_VERY_LARGE  1000000
+
 __BonkTrace("Welcome to Bonk by @jujuadams! This is version ", __BONK_VERSION, " ", __BONK_DATE);
 
 
@@ -77,7 +79,15 @@ function __BonkTrace()
     var _i = 0;
     repeat(argument_count)
     {
-        _string += string(argument[_i]);
+        if (is_numeric(argument[_i]))
+        {
+            _string += string_format(argument[_i], 0, 7);
+        }
+        else
+        {
+            _string += string(argument[_i]);
+        }
+        
         ++_i;
     }
     
