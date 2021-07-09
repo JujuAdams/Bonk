@@ -9,5 +9,6 @@ void main()
 {
     gl_FragColor = vec4(u_vColor, 1.0);
     
-    gl_FragColor.rgb *= min(vec3(1.0), u_vAmbientColor + u_vDirectLightColor*max(0.0, dot(normalize(v_vNormal), normalize(u_vDirectLightDirection))));
+    float dotProduct = max(0.0, dot(normalize(v_vNormal), normalize(u_vDirectLightDirection)));
+    gl_FragColor.rgb *= min(vec3(1.0), u_vAmbientColor + u_vDirectLightColor*dotProduct);
 }

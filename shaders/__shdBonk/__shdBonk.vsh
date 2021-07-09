@@ -1,5 +1,4 @@
 attribute vec3 in_Position;
-attribute vec4 in_Colour;
 attribute vec3 in_Normal;
 
 varying vec3 v_vNormal;
