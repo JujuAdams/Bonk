@@ -1,8 +1,11 @@
-/// @param matrix
-/// @param x
-/// @param y
-/// @param z
-/// @param w
+/// Transforms a vec4 by the given 4x4 matrix and returns the resulting vec4
+/// This is an improvement of GameMaker's native matrix_transform_vertex() as this function allows an input w-component to be specified and returns a vec4
+/// 
+/// @param matrix   Matrix to use for the transformation
+/// @param x        x-component of the input vec4
+/// @param y        y-component of the input vec4
+/// @param z        z-component of the input vec4
+/// @param w        w-component of the input vec4
 
 function BonkMatrixTransformVertexExt(_matrix, _x_in, _y_in, _z_in, _w_in)
 {

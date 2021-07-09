@@ -1,3 +1,2 @@
-var _result = ray.Collision(sphere);
+var _result = objRay.ray.Collision(sphere);
 sphere.DebugDraw(_result.GetCollided()? c_red : c_lime);
-ray.DebugDraw(c_yellow);

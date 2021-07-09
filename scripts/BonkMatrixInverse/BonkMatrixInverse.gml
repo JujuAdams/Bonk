@@ -1,5 +1,6 @@
 /// @desc Returns the inverse of a 4x4 matrix
-/// @param matrix
+/// 
+/// @param matrix   4x4 matrix to calcuate the inverse of
 
 function BonkMatrixInverse(_matrix)
 {

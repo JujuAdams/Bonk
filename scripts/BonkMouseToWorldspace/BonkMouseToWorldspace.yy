@@ -6,7 +6,7 @@
     "path": "folders/Bonk/Screenspace To Worldspace.yy",
   },
   "resourceVersion": "1.0",
-  "name": "BonkScreenspaceToWorldspace",
+  "name": "BonkMouseToWorldspace",
   "tags": [],
   "resourceType": "GMScript",
 }

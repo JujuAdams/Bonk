@@ -10,7 +10,5 @@ old_world_matrix      = matrix_get(matrix_world);
 old_view_matrix       = matrix_get(matrix_view); 
 old_projection_matrix = matrix_get(matrix_projection);
 
-matrix_set(matrix_view, matrix_build_lookat(camX, camY, camZ,
-                                            camX+camDX, camY+camDY, camZ+camDZ,
-                                            0, 0, 1));
-matrix_set(matrix_projection, matrix_build_projection_perspective_fov(90, room_width/room_height, 1, 3000));
+matrix_set(matrix_view, view_matrix);
+matrix_set(matrix_projection, projection_matrix);

@@ -54,3 +54,9 @@ var _cos  = dcos(camYaw);
 camX +=  _para*_cos - _perp*_sin;
 camY += -_para*_sin - _perp*_cos;
 camZ += 2*(keyboard_check(vk_space) - keyboard_check(vk_shift));
+
+//Calculate matrices that we'll want to use later
+view_matrix = matrix_build_lookat(camX, camY, camZ,
+                                  camX+camDX, camY+camDY, camZ+camDZ,
+                                  0, 0, 1);
+projection_matrix = matrix_build_projection_perspective_fov(90, room_width/room_height, 1, 3000);

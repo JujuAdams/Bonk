@@ -28,7 +28,7 @@
     "path": "Bonk.yyp",
   },
   "resourceVersion": "1.0",
-  "name": "objSphereRaycast",
+  "name": "objSphereSphere",
   "tags": [],
   "resourceType": "GMObject",
 }

@@ -1,0 +1,1 @@
+ray = new BonkRay();

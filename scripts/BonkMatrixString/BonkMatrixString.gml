@@ -1,5 +1,8 @@
-/// @param matrix
-/// @param [newlineChar]
+/// Returns a string containing the contents of a 4x4 matrix
+/// This function gives greater decimal accuracy which is useful when dealing with real-world matrices
+/// 
+/// @param matrix          4x4 matrix to stringify
+/// @param [newlineChar]   Character to use for each newline. If not provided, this will default to \n
 
 function BonkMatrixString(_matrix, _newline)
 {
