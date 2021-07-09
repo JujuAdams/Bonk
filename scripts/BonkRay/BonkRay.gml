@@ -99,19 +99,19 @@ function BonkRay() constructor
         var _diff        = BonkVecSubtract(_b, _a);
         
         var _dot = BonkVecDot(_point_local, _diff);
-        if (_dot < 0) return new BonkResult();
+        if (_dot < 0) return new BonkResult(false);
         
         var _square_length = BonkVecSqiareLength(_diff);
         var _t = _dot / _square_length;
-        if (_t > 1) return new BonkResult();
+        if (_t > 1) return new BonkResult(false);
         
         var _new_point = BonkVecMultiply(_diff, _t);
-        if (!BonkVecEqual(_new_point, _point_local)) return new BonkResult();
+        if (!BonkVecEqual(_new_point, _point_local)) return new BonkResult(false);
         
         var _length = sqrt(_square_length);
         var _normal = BonkVecMultiply( _diff, -1/_length); //Bounce the ray directly off the point
         
-        return new BonkResult(_normal[0], _normal[1], _normal[2], undefined);
+        return (new BonkResult(true, _normal[0], _normal[1], _normal[2], math_get_epsilon())).__SetPosition(_point[0], _point[1], _point[2]);
     }
     
     static __CollisionWithSphere = function(_sphere)
@@ -124,7 +124,7 @@ function BonkRay() constructor
         var _dir = BonkVecSubtract( _ray_b, _ray_a);
         var _length = BonkVecLength(_dir);
         
-        if (_length <= 0) return new BonkResult();
+        if (_length <= 0) return new BonkResult(false);
         
         _dir = BonkVecMultiply(_dir, 1/_length);
         var _local = BonkVecSubtract(_ray_a, _centre);
@@ -132,16 +132,16 @@ function BonkRay() constructor
         var _c = BonkVecSqiareLength(_local) - _radius*_radius;
         
         var _discriminant = _b*_b - _c;
-        if (_discriminant < 0) return new BonkResult();
+        if (_discriminant < 0) return new BonkResult(false);
         
         var _t_min = -_b - sqrt(_discriminant);
         var _t_max = -_b + sqrt(_discriminant);
         
-        if (_length < _t_min) return new BonkResult();
+        if (_length < _t_min) return new BonkResult(false);
         
         if (_t_min < 0)
         {
-            if (_t_max < 0) return new BonkResult();
+            if (_t_max < 0) return new BonkResult(false);
             var _point = BonkVecAdd(_ray_a, BonkVecMultiply(_dir, _t_max));
         }
         else
@@ -151,7 +151,7 @@ function BonkRay() constructor
         
         var _normal = BonkVecMultiply(BonkVecSubtract(_point, _centre), 1/_radius);
         
-        return new BonkResult(_normal[0], _normal[1], _normal[2], undefined, _point[0], _point[1], _point[2]);
+        return (new BonkResult(true, _normal[0], _normal[1], _normal[2])).__SetPosition(_point[0], _point[1], _point[2]);
     }
     
     static __CollisionWithRay = function(_other)
@@ -174,18 +174,18 @@ function BonkRay() constructor
         if (abs(BonkVecDot(_other_local, _cross)) > 0)
         {
             //Not coplanar
-            return new BonkResult();
+            return new BonkResult(false);
         }
         
         var _t = BonkVecDot(BonkVecCross(_other_local, _other_direction), _cross) / BonkVecSqiareLength(_cross);
-        if ((_t < 0) || (_t > 1)) return new BonkResult();
+        if ((_t < 0) || (_t > 1)) return new BonkResult(false);
         
         var _point = BonkVecAdd(_self_a, BonkVecMultiply(_self_direction, _t));
         
         //See if this lies on the segment
         if (BonkVecSqiareLength(BonkVecSubtract(_point, _self_a)) + BonkVecSqiareLength(BonkVecSubtract(_point, _self_b)) > BonkVecSqiareLength(_other_direction))
         {
-            return new BonkResult();
+            return new BonkResult(false);
         }
         
         return new BonkResult(undefined, undefined, undefined, undefined, _point[0], _point[1], _point[2]);
@@ -203,7 +203,7 @@ function BonkRay() constructor
         }
         
         var _dir = BonkVecSubtract( _ray1, _ray0 );
-        if ((_dir[0] == 0) && (_dir[1] == 0) && (_dir[2] == 0)) return new BonkResult();
+        if ((_dir[0] == 0) && (_dir[1] == 0) && (_dir[2] == 0)) return new BonkResult(false);
         
         var _aabb_min = BonkVecSubtract(_aabb_centre, _aabb_half_dims);
         var _aabb_max = BonkVecAdd(_aabb_centre, _aabb_half_dims);
@@ -231,7 +231,7 @@ function BonkRay() constructor
             }
             else
             {
-                if ((_t_min > _t_y_max) || ( _t_y_min > _t_max)) return new BonkResult();
+                if ((_t_min > _t_y_max) || ( _t_y_min > _t_max)) return new BonkResult(false);
                 if (_t_y_min > _t_min) _t_min = _t_y_min;
                 if (_t_y_max < _t_max) _t_max = _t_y_max;
             }
@@ -250,23 +250,23 @@ function BonkRay() constructor
             }
             else
             {
-                if ((_t_min > _t_z_max) || (_t_z_min > _t_max)) return new BonkResult();
+                if ((_t_min > _t_z_max) || (_t_z_min > _t_max)) return new BonkResult(false);
                 if (_t_z_min > _t_min) _t_min = _t_z_min;
                 if (_t_z_max < _t_max) _t_max = _t_z_max;
             }
         }
         
-        if (_t_min == undefined) return new BonkResult();
+        if (_t_min == undefined) return new BonkResult(false);
         
         var _t = _t_min;
         if ((_t_min <= 0) || (_t_min >= 1))
         {
-            if ((_t_max <= 0) || (_t_max >= 1)) return new BonkResult();
+            if ((_t_max <= 0) || (_t_max >= 1)) return new BonkResult(false);
             var _t = _t_max;
         }
         
         var _point = BonkVecAdd(_ray0, BonkVecMultiply(BonkVecSubtract(_ray1, _ray0), _t));
-        if (!__BonkAABBPointInsideMinMax(_point, _aabb_min, _aabb_max)) return new BonkResult();
+        if (!__BonkAABBPointInsideMinMax(_point, _aabb_min, _aabb_max)) return new BonkResult(false);
         
         var _normal = BonkVecSubtract(_point, _aabb_centre);
         _normal[0] /= _aabb_half_dims[0];
@@ -277,9 +277,7 @@ function BonkRay() constructor
         _normal[1] = (_normal[1] <= -1)? -1 : ((_normal[1] >= 1)? 1 : 0);
         _normal[2] = (_normal[2] <= -1)? -1 : ((_normal[2] >= 1)? 1 : 0);
         
-        return new BonkResult(_normal[0], _normal[1], _normal[2]);
-        //return [ _normal[0], _normal[1], _normal[2],
-        //          _point[0],  _point[1],  _point[2] ];
+        return (new BonkResult(true, _normal[0], _normal[1], _normal[2])).__SetPosition(_point[0], _point[1], _point[2]);
     }
     
     static __CollisionWithPlane = function(_plane)
@@ -297,18 +295,15 @@ function BonkRay() constructor
         var _dir = BonkVecSubtract(_ray1, _ray0); //TODO - Optimise this!
 
         var _v_dot_n = BonkVecDot(_dir, _plane_normal);
-        if (_v_dot_n == 0) return new BonkResult(); //Parallel to the plane
+        if (_v_dot_n == 0) return new BonkResult(false); //Parallel to the plane
 
         var _r0_dot_n = BonkVecDot(_ray0, _plane);
         var _t = (_plane_distance - _r0_dot_n) / _v_dot_n;
 
-        if ((_t < 0) || (_t > 1)) return new BonkResult();
+        if ((_t < 0) || (_t > 1)) return new BonkResult(false);
         
-        return new BonkResult(_plane_normal[0], _plane_normal[1], _plane_normal[2]);
-        
-        //var _pos = vec3_lerp( _ray0, _ray1, _t );
-        //return [ _plane[0], _plane[1], _plane[2],
-        //           _pos[0],   _pos[1],   _pos[2] ];
+        var _pos = BonkVecAdd(_ray0, BonkVecMultiply(BonkVecSubtract(_ray1, _ray0), _t));
+        return (new BonkResult(true, _plane_normal[0], _plane_normal[1], _plane_normal[2])).__SetPosition(_pos[0], _pos[1], _pos[2]);
     }
     
     #endregion

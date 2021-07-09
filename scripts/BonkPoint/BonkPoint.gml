@@ -109,7 +109,7 @@ function BonkPoint() constructor
         }
         else
         {
-            return new BonkResult();
+            return new BonkResult(false);
         }
     }
     
@@ -139,12 +139,12 @@ function BonkPoint() constructor
             _directionY *= _inverseLength;
             _directionZ *= _inverseLength;
             
-            return new BonkResult(_directionX, _directionY, _directionZ, _radius);
+            return new BonkResult(true, _directionX, _directionY, _directionZ, _radius);
         }
         
         //Early out if the point is fully outside the sphere
         var _radius = _sphere.radius;
-        if (_squareLength >= _radius*_radius) return new BonkResult();
+        if (_squareLength >= _radius*_radius) return new BonkResult(false);
         
         var _length = sqrt(_squareLength);
         
@@ -153,7 +153,7 @@ function BonkPoint() constructor
         _directionY *= _inverseLength;
         _directionZ *= _inverseLength;
         
-        return new BonkResult(_directionX, _directionY, _directionZ, _radius - _length);
+        return new BonkResult(true, _directionX, _directionY, _directionZ, _radius - _length);
     }
     
     static __CollisionWithRay = function(_other)
@@ -174,7 +174,7 @@ function BonkPoint() constructor
         var _aabb_min = BonkVecSubtract(_aabb_centre, _aabb_half_dims);
         var _aabb_max = BonkVecAdd(     _aabb_centre, _aabb_half_dims);
 
-        if (!__BonkAABBPointInsideMinMax(_position, _aabb_min, _aabb_max)) return new BonkResult();
+        if (!__BonkAABBPointInsideMinMax(_position, _aabb_min, _aabb_max)) return new BonkResult(false);
 
         var _local_position = BonkVecSubtract(_position, _aabb_centre);
         var _k = BonkVecSubtract(_aabb_half_dims, BonkVecAbs(_local_position));
@@ -182,7 +182,7 @@ function BonkPoint() constructor
         if ((_k[0] < _k[1]) && (_k[0] < _k[2]))
         {
             var _sign = sign(_local_position[0]);
-            return new BonkResult(_sign, 0, 0, abs(_local_position[0]));
+            return new BonkResult(true, _sign, 0, 0, abs(_local_position[0]));
         }
         else if ((_k[1] < _k[0]) && (_k[1] < _k[2]))
         {
@@ -204,10 +204,10 @@ function BonkPoint() constructor
         }
         
         var _distance = BonkVecDot([x, y, z], _plane_normal) - _plane_distance;
-        if (_distance > 0) return new BonkResult();
+        if (_distance > 0) return new BonkResult(false);
         
         //var _point = BonkVecSubtract(_point, BonkVecMultiply(_plane_normal, _distance));
-        return new BonkResult(_plane_normal[0], _plane_normal[1], _plane_normal[2]);
+        return new BonkResult(true, _plane_normal[0], _plane_normal[1], _plane_normal[2]);
         //return [ _plane[0], _plane[1], _plane[2],
         //         _point[0], _point[1], _point[2] ];
     }

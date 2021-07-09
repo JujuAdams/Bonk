@@ -133,13 +133,13 @@ function BonkAABB() constructor
 
         if ((_overlap[0] >= 0) || (_overlap[1] >= 0) || (_overlap[2] >= 0))
         {
-            return new BonkResult();
+            return new BonkResult(false);
         }
 
         if ((_overlap[0] > _overlap[1]) && (_overlap[0] > _overlap[2]))
         {
             var _sign = sign(_centre_distance[0]);
-            return new BonkResult(_sign, 0, 0, -_overlap[0]);
+            return new BonkResult(true, _sign, 0, 0, -_overlap[0]);
             
             //return [ _sign, 0, 0,
             //         _aabb0_centre[0] - _sign*_overlap[0], _aabb0_centre[1], _aabb0_centre[2],
@@ -184,9 +184,9 @@ function BonkAABB() constructor
         var _corner_point = BonkVecSubtract(_centre, _edge_direction);
 
         var _distance = BonkVecDot(_plane_normal, _corner_point) - _plane_distance;
-        if (_distance >= 0) return new BonkResult();
+        if (_distance >= 0) return new BonkResult(false);
 
-        return new BonkResult(_plane_normal[0], _plane_normal[1], _plane_normal[2]);
+        return new BonkResult(true, _plane_normal[0], _plane_normal[1], _plane_normal[2]);
         
         //var _point = vec3_extend( _centre, _plane, -_distance );
         //return [ _plane[0], _plane[1], _plane[2],

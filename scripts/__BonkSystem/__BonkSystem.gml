@@ -122,7 +122,7 @@ function __BonkSharedCollisionHandler(_other)
                 case __BONK_ERROR_LEVEL.WARNING: __BonkTrace("Unsupported collision, self=", self, ", other=", _other); break;
             }
             
-            return new BonkResult();
+            return new BonkResult(false);
         break;
     }
 }

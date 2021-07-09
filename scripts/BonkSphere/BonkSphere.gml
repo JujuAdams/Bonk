@@ -132,18 +132,18 @@ function BonkSphere() constructor
             _directionY *= _inverseLength;
             _directionZ *= _inverseLength;
             
-            return new BonkResult(_directionX, _directionY, _directionZ, radius + _radius_other);
+            return new BonkResult(true, _directionX, _directionY, _directionZ, radius + _radius_other);
         }
         
         //Early out if the point is fully outside the sphere
-        if (_length >= radius + _radius_other) return new BonkResult();
+        if (_length >= radius + _radius_other) return new BonkResult(false);
         
         var _inverseLength = 1/_length;
         _directionX *= _inverseLength;
         _directionY *= _inverseLength;
         _directionZ *= _inverseLength;
         
-        return new BonkResult(_directionX, _directionY, _directionZ, radius + _radius_other - _length);
+        return new BonkResult(true, _directionX, _directionY, _directionZ, radius + _radius_other - _length);
     }
     
     static __CollisionWithRay = function(_other)
@@ -173,11 +173,11 @@ function BonkSphere() constructor
         {
             var _edge_to_local = BonkVecSubtract(_local_sphere_pos, _edge_point);
             var _distance = BonkVecLength(_edge_to_local);
-            if ( _distance >= _sphere_radius ) return new BonkResult();
+            if ( _distance >= _sphere_radius ) return new BonkResult(false);
             
             var _normal = BonkVecNormalize(_edge_to_local);
             //var _pushout_point = BonkVecAdd(_aabb_centre, BonkVecAdd(_edge_point, BonkVecMultiply(_normal, _sphere_radius)));
-            return new BonkResult(_normal[0], _normal[1], _normal[2], _distance);
+            return new BonkResult(true, _normal[0], _normal[1], _normal[2], _distance);
             //return [ _normal[0], _normal[1], _normal[2],
             //         _pushout_point[0], _pushout_point[1], _pushout_point[2],
             //         _distance ];
@@ -186,7 +186,7 @@ function BonkSphere() constructor
         if ((_overlap[0] <= _overlap[1]) && (_overlap[0] <= _overlap[2]))
         {
             var _sign = (_local_sphere_pos[0] >= 0)? 1 : -1;
-            return new BonkResult(_sign, 0, 0, -_overlap[0]);
+            return new BonkResult(true, _sign, 0, 0, -_overlap[0]);
             //return [ _sign, 0, 0,
             //         _sphere_centre[0] + _sign*(_sphere_radius + _overlap[0]), _sphere_centre[1], _sphere_centre[2],
             //         -_overlap[0] ];
@@ -217,9 +217,9 @@ function BonkSphere() constructor
         }
         
         var _sphere_min = BonkVecDot([x, y, z], _plane_normal) - radius;
-        if (_plane_distance <= _sphere_min) return new BonkResult();
+        if (_plane_distance <= _sphere_min) return new BonkResult(false);
         
-        return new BonkResult(_plane_normal[0], _plane_normal[1], _plane_normal[2], _plane_distance - _sphere_min);
+        return new BonkResult(true, _plane_normal[0], _plane_normal[1], _plane_normal[2], _plane_distance - _sphere_min);
         
         //var _pushout_point = vec3_extend( _sphere_centre, _plane, _distance - _sphere_min );
         //return [ _plane[0], _plane[1], _plane[2],

@@ -1,42 +1,52 @@
-/// @param normalX
-/// @param normalY
-/// @param normalZ
-/// @param depth
-/// @param [collisionX]
-/// @param [collisionY]
-/// @param [collisionZ]
+/// @param collided
+/// @param [normalX]
+/// @param [normalY]
+/// @param [normalZ]
+/// @param [depth]
 
 
 
-function BonkResult(_normalX, _normalY, _normalZ, _depth, _x, _y, _z) constructor
+function BonkResult(_collided, _normalX, _normalY, _normalZ, _depth) constructor
 {
-    if ((_normalX == undefined) && (_normalY == undefined) && (_normalZ == undefined) && (_depth == undefined))
+    collided = _collided;
+    
+    normalX = _normalX;
+    normalY = _normalY;
+    normalZ = _normalZ;
+    
+    depth = _depth;
+    
+    x = undefined;
+    y = undefined;
+    z = undefined;
+    
+    
+    
+    static DebugDraw = function(_color = BONK_DRAW_DEFAULT_DIFFUSE_COLOR, _thickness = BONK_DRAW_RAY_THICKNESS)
     {
-        collided = false;
-        
-        normalX = 0;
-        normalY = 0;
-        normalZ = 0;
-        
-        depth = 0;
-        
-        x = undefined;
-        y = undefined
-        z = undefined;
+        if (collided && (x != undefined) && (y != undefined) && (z != undefined))
+        {
+            BonkDebugDrawRay(x, y, z, BONK_DRAW_RESULT_NORMAL_LENGTH*normalX + x, BONK_DRAW_RESULT_NORMAL_LENGTH*normalY + y, BONK_DRAW_RESULT_NORMAL_LENGTH*normalZ + z, _color, _thickness);
+        }
     }
-    else
+    
+    static toString = function()
     {
-        collided = true;
-        
-        normalX = _normalX;
-        normalY = _normalY;
-        normalZ = _normalZ;
-        
-        depth = _depth;
-        
-        x = _x;
-        y = _y;
-        z = _z;
+        if (collided)
+        {
+            if ((x != undefined) && (y != undefined) && (z != undefined))
+            {
+                return "collision @ " + string(x) + "," + string(y) + "," + string(z) + ", normal=" + string(normalX) + "," + string(normalY) + "," + string(normalZ) + ", depth=" + string(depth);
+            }
+            else
+            {
+                return "collision, normal=" + string(normalX) + "," + string(normalY) + "," + string(normalZ) + ", depth=" + string(depth);
+            }
+        }
+        else
+        {
+            return "no collision";
+        }
     }
     
     
@@ -57,32 +67,12 @@ function BonkResult(_normalX, _normalY, _normalZ, _depth, _x, _y, _z) constructo
         return self;
     }
     
-    static DebugDraw = function(_color = BONK_DRAW_DEFAULT_DIFFUSE_COLOR, _thickness = BONK_DRAW_RAY_THICKNESS)
+    static __SetPoint = function(_x, _y, _z)
     {
-        if (collided && (x != undefined) && (y != undefined) && (z != undefined))
-        {
-            BonkDebugDrawRay(x, y, z, BONK_DRAW_RESULT_NORMAL_LENGTH*normalX + x, BONK_DRAW_RESULT_NORMAL_LENGTH*normalY + y, BONK_DRAW_RESULT_NORMAL_LENGTH*normalZ + z, _color, _thickness);
-        }
-    }
-    
-    
-    
-    static toString = function()
-    {
-        if (collided)
-        {
-            if ((x != undefined) && (y != undefined) && (z != undefined))
-            {
-                return "collision @ " + string(x) + "," + string(y) + "," + string(z) + ", normal=" + string(normalX) + "," + string(normalY) + "," + string(normalZ) + ", depth=" + string(depth);
-            }
-            else
-            {
-                return "collision, normal=" + string(normalX) + "," + string(normalY) + "," + string(normalZ) + ", depth=" + string(depth);
-            }
-        }
-        else
-        {
-            return "no collision";
-        }
+        x = _x;
+        y = _y;
+        z = _z;
+        
+        return self;
     }
 }
