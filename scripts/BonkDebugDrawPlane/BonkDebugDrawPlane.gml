@@ -8,6 +8,8 @@
 
 function BonkDebugDrawPlane(_x, _y, _z, _xNormal, _yNormal, _zNormal, _color = BONK_DRAW_DEFAULT_DIFFUSE_COLOR)
 {
+    //TODO - Optimise this and draw it relative to the camera's position
+    
     var _vertexBuffer = vertex_create_buffer();
     vertex_begin( _vertexBuffer, global.__bonkVertexFormat);
     

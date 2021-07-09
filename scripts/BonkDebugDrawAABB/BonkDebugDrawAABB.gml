@@ -1,74 +1,23 @@
-/// @param x1
-/// @param y1
-/// @param z1
-/// @param x2
-/// @param y2
-/// @param z2
-/// @param [color]
+/// Draws an axis-aligned bounding box
+/// 
+/// @param xCentre  x-coordinate of the centre of the AABB
+/// @param yCentre  y-coordinate of the centre of the AABB
+/// @param zCentre  z-coordinate of the centre of the AABB
+/// @param xSize    Size of the AABB in the x-axis
+/// @param ySize    Size of the AABB in the y-axis
+/// @param zSize    Size of the AABB in the z-axis
+/// @param [color]  Colour of the AABB (standard GameMaker 24-integer)
 
-function BonkDebugDrawAABB(_x1, _y1, _z1, _x2, _y2, _z2, _color = BONK_DRAW_DEFAULT_DIFFUSE_COLOR)
+function BonkDebugDrawAABB(_x, _y, _z, _xSize, _ySize, _zSize, _color = BONK_DRAW_DEFAULT_DIFFUSE_COLOR)
 {
-    var _vertexBuffer = vertex_create_buffer();
-    vertex_begin( _vertexBuffer, global.__bonkVertexFormat);
-    
-    
-    
-    vertex_position_3d(_vertexBuffer, _x1, _y1, _z1); vertex_normal(_vertexBuffer, -1,  0,  0);
-    vertex_position_3d(_vertexBuffer, _x1, _y1, _z2); vertex_normal(_vertexBuffer, -1,  0,  0);
-    vertex_position_3d(_vertexBuffer, _x1, _y2, _z2); vertex_normal(_vertexBuffer, -1,  0,  0);
-    vertex_position_3d(_vertexBuffer, _x1, _y1, _z1); vertex_normal(_vertexBuffer, -1,  0,  0);
-    vertex_position_3d(_vertexBuffer, _x1, _y2, _z2); vertex_normal(_vertexBuffer, -1,  0,  0);
-    vertex_position_3d(_vertexBuffer, _x1, _y2, _z1); vertex_normal(_vertexBuffer, -1,  0,  0);
-    
-    vertex_position_3d(_vertexBuffer, _x2, _y1, _z1); vertex_normal(_vertexBuffer,  1,  0,  0);
-    vertex_position_3d(_vertexBuffer, _x2, _y2, _z1); vertex_normal(_vertexBuffer,  1,  0,  0);
-    vertex_position_3d(_vertexBuffer, _x2, _y2, _z2); vertex_normal(_vertexBuffer,  1,  0,  0);
-    vertex_position_3d(_vertexBuffer, _x2, _y1, _z1); vertex_normal(_vertexBuffer,  1,  0,  0);
-    vertex_position_3d(_vertexBuffer, _x2, _y2, _z2); vertex_normal(_vertexBuffer,  1,  0,  0);
-    vertex_position_3d(_vertexBuffer, _x2, _y1, _z2); vertex_normal(_vertexBuffer,  1,  0,  0);
-    
-    
-    
-    vertex_position_3d(_vertexBuffer, _x1, _y1, _z1); vertex_normal(_vertexBuffer,  0, -1,  0);
-    vertex_position_3d(_vertexBuffer, _x1, _y1, _z2); vertex_normal(_vertexBuffer,  0, -1,  0);
-    vertex_position_3d(_vertexBuffer, _x2, _y1, _z2); vertex_normal(_vertexBuffer,  0, -1,  0);
-    vertex_position_3d(_vertexBuffer, _x1, _y1, _z1); vertex_normal(_vertexBuffer,  0, -1,  0);
-    vertex_position_3d(_vertexBuffer, _x2, _y1, _z2); vertex_normal(_vertexBuffer,  0, -1,  0);
-    vertex_position_3d(_vertexBuffer, _x2, _y1, _z1); vertex_normal(_vertexBuffer,  0, -1,  0);
-    
-    vertex_position_3d(_vertexBuffer, _x1, _y2, _z1); vertex_normal(_vertexBuffer,  0,  1,  0);
-    vertex_position_3d(_vertexBuffer, _x1, _y2, _z2); vertex_normal(_vertexBuffer,  0,  1,  0);
-    vertex_position_3d(_vertexBuffer, _x2, _y2, _z2); vertex_normal(_vertexBuffer,  0,  1,  0);
-    vertex_position_3d(_vertexBuffer, _x1, _y2, _z1); vertex_normal(_vertexBuffer,  0,  1,  0);
-    vertex_position_3d(_vertexBuffer, _x2, _y2, _z2); vertex_normal(_vertexBuffer,  0,  1,  0);
-    vertex_position_3d(_vertexBuffer, _x2, _y2, _z1); vertex_normal(_vertexBuffer,  0,  1,  0);
-    
-    
-    
-    vertex_position_3d(_vertexBuffer, _x1, _y1, _z1); vertex_normal(_vertexBuffer,  0,  0, -1);
-    vertex_position_3d(_vertexBuffer, _x1, _y2, _z1); vertex_normal(_vertexBuffer,  0,  0, -1);
-    vertex_position_3d(_vertexBuffer, _x2, _y2, _z1); vertex_normal(_vertexBuffer,  0,  0, -1);
-    vertex_position_3d(_vertexBuffer, _x1, _y1, _z1); vertex_normal(_vertexBuffer,  0,  0, -1);
-    vertex_position_3d(_vertexBuffer, _x2, _y2, _z1); vertex_normal(_vertexBuffer,  0,  0, -1);
-    vertex_position_3d(_vertexBuffer, _x2, _y1, _z1); vertex_normal(_vertexBuffer,  0,  0, -1);
-    
-    vertex_position_3d(_vertexBuffer, _x1, _y1, _z2); vertex_normal(_vertexBuffer,  0,  0,  1);
-    vertex_position_3d(_vertexBuffer, _x1, _y2, _z2); vertex_normal(_vertexBuffer,  0,  0,  1);
-    vertex_position_3d(_vertexBuffer, _x2, _y2, _z2); vertex_normal(_vertexBuffer,  0,  0,  1);
-    vertex_position_3d(_vertexBuffer, _x1, _y1, _z2); vertex_normal(_vertexBuffer,  0,  0,  1);
-    vertex_position_3d(_vertexBuffer, _x2, _y2, _z2); vertex_normal(_vertexBuffer,  0,  0,  1);
-    vertex_position_3d(_vertexBuffer, _x2, _y1, _z2); vertex_normal(_vertexBuffer,  0,  0,  1);
-    
-    
-    
-    vertex_end(_vertexBuffer);
+    matrix_set(matrix_world, matrix_build(_x, _y, _z,   0, 0, 0,   _xSize, _ySize, _zSize));
     
     shader_set(__shdBonk);
     shader_set_uniform_f(global.__bonkUniform_shdBonk_u_vColor, color_get_red(  _color)/255,
                                                                 color_get_green(_color)/255,
                                                                 color_get_blue( _color)/255);
-    vertex_submit(_vertexBuffer, pr_trianglelist, -1);
+    vertex_submit(global.__bonkAABB, pr_trianglelist, -1);
     shader_reset();
     
-    vertex_delete_buffer(_vertexBuffer);
+    matrix_set(matrix_world, matrix_build_identity());
 }
