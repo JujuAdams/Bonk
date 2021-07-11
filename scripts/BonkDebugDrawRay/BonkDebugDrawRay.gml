@@ -20,11 +20,12 @@ function BonkDebugDrawRay(_x1, _y1, _z1, _x2, _y2, _z2, _color = BONK_DRAW_DEFAU
     var _z_angle = point_direction(0, 0, _plane_length, _dz);
     var _p_angle = point_direction(0, 0, _dx, _dy);
     
+    var _worldMatrix = matrix_get(matrix_world);
     var _matrix = matrix_build(0,0,0,   0,0,0,   _thickness, _thickness, _length);
-    _matrix = matrix_multiply(_matrix, matrix_build(0,0,0,   0, -90 - _z_angle, 0,   1,1,1));
-    _matrix = matrix_multiply(_matrix, matrix_build(0,0,0,   0, 0, _p_angle,   1,1,1));
-    _matrix = matrix_multiply(_matrix, matrix_build(_x1, _y1, _z1,   0,0,0,   1,1,1));
-    
+       _matrix = matrix_multiply(_matrix, matrix_build(0,0,0,   0, -90 - _z_angle, 0,   1,1,1));
+       _matrix = matrix_multiply(_matrix, matrix_build(0,0,0,   0, 0, _p_angle,   1,1,1));
+       _matrix = matrix_multiply(_matrix, matrix_build(_x1, _y1, _z1,   0,0,0,   1,1,1));
+       _matrix = matrix_multiply(_matrix, _worldMatrix);
     matrix_set(matrix_world, _matrix);
     
     shader_set(__shdBonk);
@@ -34,5 +35,5 @@ function BonkDebugDrawRay(_x1, _y1, _z1, _x2, _y2, _z2, _color = BONK_DRAW_DEFAU
     vertex_submit(global.__bonkRay, pr_trianglelist, -1);
     shader_reset();
     
-    matrix_set(matrix_world, matrix_build_identity());
+    matrix_set(matrix_world, _worldMatrix);
 }

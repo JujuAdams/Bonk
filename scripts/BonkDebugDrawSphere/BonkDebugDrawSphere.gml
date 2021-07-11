@@ -6,7 +6,10 @@
 
 function BonkDebugDrawSphere(_x, _y, _z, _radius, _color = BONK_DRAW_DEFAULT_DIFFUSE_COLOR)
 {
-    matrix_set(matrix_world, matrix_build(_x, _y, _z,   0, 0, 0,   _radius, _radius, _radius));
+    var _worldMatrix = matrix_get(matrix_world);
+    var _matrix = matrix_build(_x, _y, _z,   0, 0, 0,   _radius, _radius, _radius);
+        _matrix = matrix_multiply(_matrix, _worldMatrix);
+    matrix_set(matrix_world, _matrix);
     
     shader_set(__shdBonk);
     shader_set_uniform_f(global.__bonkUniform_shdBonk_u_vColor, color_get_red(  _color)/255,
@@ -15,5 +18,5 @@ function BonkDebugDrawSphere(_x, _y, _z, _radius, _color = BONK_DRAW_DEFAULT_DIF
     vertex_submit(global.__bonkSphere, pr_trianglelist, -1);
     shader_reset();
     
-    matrix_set(matrix_world, matrix_build_identity());
+    matrix_set(matrix_world, _worldMatrix);
 }
