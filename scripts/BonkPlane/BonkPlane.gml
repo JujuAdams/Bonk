@@ -145,5 +145,10 @@ function BonkPlane() constructor
         return new BonkResult(false);
     }
     
+    static __CollisionWithCapsule = function(_other)
+    {
+        return new BonkResult(false);
+    }
+    
     #endregion
 }

@@ -1,10 +1,10 @@
-function BonkTriangle() constructor
+function BonkCapsule() constructor
 {
-    static __bonkType = __BONK_TYPE.TRIANGLE;
+    static __bonkType = __BONK_TYPE.CAPSULE;
     
     static toString = function()
     {
-        return "triangle";
+        return "capsule";
     }
     
     
@@ -29,11 +29,9 @@ function BonkTriangle() constructor
         return self;
     }
     
-    static SetC = function(_x = x3, _y = y3, _z = z3)
+    static SetRadius = function(_radius = radius)
     {
-        x3 = _x;
-        y3 = _y;
-        z3 = _z;
+        radius = _radius;
         
         return self;
     }
@@ -56,12 +54,20 @@ function BonkTriangle() constructor
         };
     }
     
-    static GetC = function()
+    static GetRadius = function()
+    {
+        return radius;
+    }
+    
+    static GetAABB = function()
     {
         return {
-            x: x3,
-            y: y3,
-            z: z3,
+            x1: min(x1, x2) - radius,
+            y1: min(y1, y2) - radius,
+            z1: min(z1, z2) - radius,
+            x2: max(x1, x2) + radius,
+            y2: max(y1, y2) + radius,
+            z2: max(z1, z2) + radius,
         };
     }
     
@@ -79,9 +85,7 @@ function BonkTriangle() constructor
     y2 = 0;
     z2 = 0;
     
-    x3 = 0;
-    y3 = 0;
-    z3 = 0;
+    radius = 0;
     
     #endregion
     
@@ -91,7 +95,7 @@ function BonkTriangle() constructor
     
     static DebugDraw = function(_color = BONK_DRAW_DEFAULT_DIFFUSE_COLOR)
     {
-        BonkDebugDrawTriangle(x1, y1, z1, x2, y2, z2, x3, y3, z3, _color);
+        BonkDebugDrawCapsule(x1, y1, z1, x2, y2, z2, radius, _color);
     }
     
     #endregion
@@ -126,7 +130,7 @@ function BonkTriangle() constructor
         return new BonkResult(false);
     }
     
-    static __CollisionWithAABB = function(_aabb)
+    static __CollisionWithAABB = function(_other)
     {
         return new BonkResult(false);
     }
