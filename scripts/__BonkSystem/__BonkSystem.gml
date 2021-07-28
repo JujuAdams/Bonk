@@ -352,9 +352,9 @@ function __BonkPrebuildAABB(_x1, _y1, _z1, _x2, _y2, _z2)
 
 
 // Support for the static test query.
-function __BonkDiskOverlapsPoint(_px, _py, _radius)
+function __BonkDiskOverlapsPoint(_x, _y, _radius)
 {
-    return (_px*_px + _py*_py <= _radius*_radius);
+    return (_x*_x + _y*_y <= _radius*_radius);
 }
 
 function __BonkDiskOverlapsSegment(_x0, _y0, _x1, _y1, _radius)
@@ -373,65 +373,125 @@ function __BonkDiskOverlapsSegment(_x0, _y0, _x1, _y1, _radius)
     return (_perpDot*_perpDot <= _sqrLength*_sqrRadius);
 }
 
-function __BonkDiskOverlapsPolygon(_point_array, _radius)
+function __BonkDiskOverlapsTriangle(_x0, _y0, _x1, _y1, _x2, _y2, _radius)
 {
-    var _size = array_length(_point_array);
-    
     //Test whether the polygon contains the origin (0,0)
-    var _x0 = undefined;
-    var _y0 = undefined;
-    var _x1 = _point_array[_size-1][0];
-    var _y1 = _point_array[_size-1][1];
-    
     var _positive = 0;
     var _negative = 0;
     
-    var _i = 0;
-    repeat(_size)
-    {
-        _x0 = _x1;
-        _y0 = _y1;
-        _x1 = _point_array[_i][0];
-        _y1 = _point_array[_i][1];
-        
-        var _dx = _x0 - _x1;
-        var _dy = _y0 - _y1;
-        
-        var _perpDot = _x0*_dy - _y0*_dx;
-        if (_perpDot > 0)
-        {
-            ++_positive;
-        }
-        else if (_perpDot < 0)
-        {
-            ++_negative;
-        }
-        
-        ++_i;
-    }
+    // p0 -> p1
+    var _dx = _x0 - _x1;
+    var _dy = _y0 - _y1;
+    var _perpDot = _x0*_dy - _y0*_dx;
+    if (_perpDot > 0) { _positive = true; } else if (_perpDot < 0) { _negative = true; }
     
-    //FIXME - This can be optimised surely
-    if ((_positive == 0) || (_negative == 0)) return true;
+    // p1 -> p2
+    var _dx = _x1 - _x2;
+    var _dy = _y1 - _y2;
+    var _perpDot = _x1*_dy - _y1*_dx;
+    if (_perpDot > 0) { _positive = true; } else if (_perpDot < 0) { _negative = true; }
+    
+    // p2 -> p1
+    var _dx = _x2 - _x0;
+    var _dy = _y2 - _y0;
+    var _perpDot = _x2*_dy - _y2*_dx;
+    if (_perpDot > 0) { _positive = true; } else if (_perpDot < 0) { _negative = true; }
+    
+    if (!_positive || !_negative) return true;
     
     //Test whether any edge is overlapped by the disk
-    var _x0 = undefined;
-    var _y0 = undefined;
-    var _x1 = _point_array[_size-1][0];
-    var _y1 = _point_array[_size-1][1];
+    if (__BonkDiskOverlapsSegment(_x0, _y0, _x1, _y1, _radius)) return true;
+    if (__BonkDiskOverlapsSegment(_x1, _y1, _x2, _y2, _radius)) return true;
+    if (__BonkDiskOverlapsSegment(_x2, _y2, _x0, _y0, _radius)) return true;
     
-    var _i = 0;
-    repeat(_size)
-    {
-        _x0 = _x1;
-        _y0 = _y1;
-        _x1 = _point_array[_i][0];
-        _y1 = _point_array[_i][1];
-        
-        if (__BonkDiskOverlapsSegment(_x0, _y0, _x1, _y1, _radius))
-        {
-            return true;
-        }
-        
-        ++_i;
-    }
+    return false;
+}
+
+function __BonkDiskOverlapsQuad(_x0, _y0, _x1, _y1, _x2, _y2, _x3, _y3, _radius)
+{
+    //Test whether the polygon contains the origin (0,0)
+    var _positive = 0;
+    var _negative = 0;
+    
+    // p0 -> p1
+    var _dx = _x0 - _x1;
+    var _dy = _y0 - _y1;
+    var _perpDot = _x0*_dy - _y0*_dx;
+    if (_perpDot > 0) { _positive = true; } else if (_perpDot < 0) { _negative = true; }
+    
+    // p1 -> p2
+    var _dx = _x1 - _x2;
+    var _dy = _y1 - _y2;
+    var _perpDot = _x1*_dy - _y1*_dx;
+    if (_perpDot > 0) { _positive = true; } else if (_perpDot < 0) { _negative = true; }
+    
+    // p2 -> p3
+    var _dx = _x2 - _x3;
+    var _dy = _y2 - _y3;
+    var _perpDot = _x2*_dy - _y2*_dx;
+    if (_perpDot > 0) { _positive = true; } else if (_perpDot < 0) { _negative = true; }
+    
+    // p3 -> p0
+    var _dx = _x3 - _x0;
+    var _dy = _y3 - _y0;
+    var _perpDot = _x3*_dy - _y3*_dx;
+    if (_perpDot > 0) { _positive = true; } else if (_perpDot < 0) { _negative = true; }
+    
+    if (!_positive || !_negative) return true;
+    
+    //Test whether any edge is overlapped by the disk
+    if (__BonkDiskOverlapsSegment(_x0, _y0, _x1, _y1, _radius)) return true;
+    if (__BonkDiskOverlapsSegment(_x1, _y1, _x2, _y2, _radius)) return true;
+    if (__BonkDiskOverlapsSegment(_x2, _y2, _x3, _y3, _radius)) return true;
+    if (__BonkDiskOverlapsSegment(_x3, _y3, _x0, _y0, _radius)) return true;
+    
+    return false;
+}
+
+function __BonkDiskOverlapsPentagon(_x0, _y0, _x1, _y1, _x2, _y2, _x3, _y3, _x4, _y4, _radius)
+{
+    //Test whether the polygon contains the origin (0,0)
+    var _positive = 0;
+    var _negative = 0;
+    
+    // p0 -> p1
+    var _dx = _x0 - _x1;
+    var _dy = _y0 - _y1;
+    var _perpDot = _x0*_dy - _y0*_dx;
+    if (_perpDot > 0) { _positive = true; } else if (_perpDot < 0) { _negative = true; }
+    
+    // p1 -> p2
+    var _dx = _x1 - _x2;
+    var _dy = _y1 - _y2;
+    var _perpDot = _x1*_dy - _y1*_dx;
+    if (_perpDot > 0) { _positive = true; } else if (_perpDot < 0) { _negative = true; }
+    
+    // p2 -> p3
+    var _dx = _x2 - _x3;
+    var _dy = _y2 - _y3;
+    var _perpDot = _x2*_dy - _y2*_dx;
+    if (_perpDot > 0) { _positive = true; } else if (_perpDot < 0) { _negative = true; }
+    
+    // p3 -> p4
+    var _dx = _x3 - _x4;
+    var _dy = _y3 - _y4;
+    var _perpDot = _x3*_dy - _y3*_dx;
+    if (_perpDot > 0) { _positive = true; } else if (_perpDot < 0) { _negative = true; }
+    
+    // p4 -> p0
+    var _dx = _x4 - _x0;
+    var _dy = _y4 - _y0;
+    var _perpDot = _x4*_dy - _y4*_dx;
+    if (_perpDot > 0) { _positive = true; } else if (_perpDot < 0) { _negative = true; }
+    
+    if (!_positive || !_negative) return true;
+    
+    //Test whether any edge is overlapped by the disk
+    if (__BonkDiskOverlapsSegment(_x0, _y0, _x1, _y1, _radius)) return true;
+    if (__BonkDiskOverlapsSegment(_x1, _y1, _x2, _y2, _radius)) return true;
+    if (__BonkDiskOverlapsSegment(_x2, _y2, _x3, _y3, _radius)) return true;
+    if (__BonkDiskOverlapsSegment(_x3, _y3, _x4, _y4, _radius)) return true;
+    if (__BonkDiskOverlapsSegment(_x4, _y4, _x0, _y0, _radius)) return true;
+    
+    return false;
 }

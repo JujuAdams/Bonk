@@ -138,11 +138,6 @@ function BonkCylinder() constructor
     
     static __CollisionWithTriangle = function(_other)
     {
-        if (keyboard_check_pressed(ord("T")))
-        {
-            show_debug_message("!");
-        }
-        
         var _cylinder_origin = [x, y, z];
         
         var _triangle = [ [_other.x1, _other.y1, _other.z1],
@@ -205,28 +200,32 @@ function BonkCylinder() constructor
         
         #endregion
         
-        //Maintain the xy-components and z-components separately. The z-components are used for clipping against bottom and top
-        //planes of the cylinder. The xy-components are used for disk-containment tests x*x + y*y <= r*r
-        var _z_array = [_triangle[_t0][2], _triangle[_t1][2], _triangle[_t2][2]];
+        var _z0 = _triangle[_t0][2];
+        var _z1 = _triangle[_t1][2];
+        var _z2 = _triangle[_t2][2];
         
         //Attempt an early exit by testing whether the triangle is strictly outside the cylinder slab -h/2 < z < h/2
-        if ((_z_array[0] > halfHeight) || (_z_array[2] < -halfHeight))
+        if ((_z0 > halfHeight) || (_z2 < -halfHeight))
         {
             return new BonkResult(false);
         }
         
         //Project the triangle vertices onto the xy-plane
-        var _xy_array = [ [_triangle[_t0][0], _triangle[_t0][1]],
-                          [_triangle[_t1][0], _triangle[_t1][1]],
-                          [_triangle[_t2][0], _triangle[_t2][1]] ];
+        var _x0 = _triangle[_t0][0];
+        var _y0 = _triangle[_t0][1];
+        var _x1 = _triangle[_t1][0];
+        var _y1 = _triangle[_t1][1];
+        var _x2 = _triangle[_t2][0];
+        var _y2 = _triangle[_t2][1];
         
         //Attempt an early exit when the triangle does not have to be clipped
-        if ((-halfHeight <= _z_array[0]) && (_z_array[2] <= halfHeight))
+        if ((-halfHeight <= _z0) && (_z2 <= halfHeight))
         {
             //The triangle is between the planes of the top-disk and the bottom disk of the cylinder. Determine whether the
             //projection of the triangle onto a plane perpendicular to the cylinder axis overlaps the disk of projection
             //of the cylinder onto the same plane
-            var _intersects = __BonkDiskOverlapsPolygon(_xy_array, radius);
+            
+            var _intersects = __BonkDiskOverlapsTriangle(_x0, _y0, _x1, _y1, _x2, _y2, radius);
             return new BonkResult(_intersects);
         }
         
@@ -234,11 +233,11 @@ function BonkCylinder() constructor
         //test-intersection query involves testing for overlap between the xy-projection of the clipped triangle and the xy-projection
         //of the cylinder (a disk in the projection plane). The code below computes the vertices of the projection of the clipped
         //triangle. The t-values of the triangle-edge parameterizations satisfy 0 <= t <= 1
-        if (_z_array[0] < -halfHeight)
+        if (_z0 < -halfHeight)
         {
-            if (_z_array[2] > halfHeight)
+            if (_z2 > halfHeight)
             {
-                if (_z_array[1] >= halfHeight)
+                if (_z1 >= halfHeight)
                 {
                     // Cases 4a and 4b of Figure 1 in the PDF.
                     //
@@ -258,30 +257,24 @@ function BonkCylinder() constructor
                     //   +h/2 = z0 + t * (z2 - z0)
                     //   t = (+h/2 - z0) / (z2 - z0) = numerPos0 / denom20
                     
-                    var _numerNeg = -halfHeight - _z_array[0];
-                    var _numerPos =  halfHeight - _z_array[0];
-                    var _denom10  = _z_array[1] - _z_array[0];
-                    var _denom20  = _z_array[2] - _z_array[0];
+                    var _numerNeg = -halfHeight - _z0;
+                    var _numerPos =  halfHeight - _z0;
+                    var _denom10  = _z1 - _z0;
+                    var _denom20  = _z2 - _z0;
                     
-                    var _dx10 = (_xy_array[1][0] - _xy_array[0][0]) / _denom10;
-                    var _dy10 = (_xy_array[1][1] - _xy_array[0][1]) / _denom10;
-                    var _dx20 = (_xy_array[2][0] - _xy_array[0][0]) / _denom20;
-                    var _dy20 = (_xy_array[2][1] - _xy_array[0][1]) / _denom20;
+                    var _dx10 = (_x1 - _x0) / _denom10;
+                    var _dy10 = (_y1 - _y0) / _denom10;
+                    var _dx20 = (_x2 - _x0) / _denom20;
+                    var _dy20 = (_y2 - _y0) / _denom20;
                     
-                    var _x = _xy_array[0][0];
-                    var _y = _xy_array[0][1];
-                    
-                    var _polygon = [
-                        [_x + _numerNeg*_dx20, _y + _numerNeg*_dy20],
-                        [_x + _numerNeg*_dx10, _y + _numerNeg*_dy10],
-                        [_x + _numerPos*_dx10, _y + _numerPos*_dy10],
-                        [_x + _numerPos*_dx20, _y + _numerPos*_dy20],
-                    ];
-                    
-                    var _intersects = __BonkDiskOverlapsPolygon(_polygon, radius);
+                    var _intersects = __BonkDiskOverlapsQuad(_x0 + _numerNeg*_dx20, _y0 + _numerNeg*_dy20,
+                                                             _x0 + _numerNeg*_dx10, _y0 + _numerNeg*_dy10,
+                                                             _x0 + _numerPos*_dx10, _y0 + _numerPos*_dy10,
+                                                             _x0 + _numerPos*_dx20, _y0 + _numerPos*_dy20,
+                                                             radius);
                     return new BonkResult(_intersects);
                 }
-                else if (_z_array[1] <= -halfHeight)
+                else if (_z1 <= -halfHeight)
                 {
                     // Cases 4c and 4d of Figure 1 of the PDF.
                     //
@@ -301,27 +294,21 @@ function BonkCylinder() constructor
                     //   +h/2 = z2 + t * (z1 - z2)
                     //   t = (+h/2 - z2) / (z1 - z2) = numerPos2 / denom12
                     
-                    var _numerNeg = -halfHeight - _z_array[2];
-                    var _numerPos =  halfHeight - _z_array[2];
-                    var _denom02  = _z_array[0] - _z_array[2];
-                    var _denom12  = _z_array[1] - _z_array[2];
+                    var _numerNeg = -halfHeight - _z2;
+                    var _numerPos =  halfHeight - _z2;
+                    var _denom02  = _z0 - _z2;
+                    var _denom12  = _z1 - _z2;
                     
-                    var _dx02 = (_xy_array[0][0] - _xy_array[2][0]) / _denom02;
-                    var _dy02 = (_xy_array[0][1] - _xy_array[2][1]) / _denom02;
-                    var _dx12 = (_xy_array[1][0] - _xy_array[2][0]) / _denom12;
-                    var _dy12 = (_xy_array[1][1] - _xy_array[2][1]) / _denom12;
+                    var _dx02 = (_x0 - _x2) / _denom02;
+                    var _dy02 = (_y0 - _y2) / _denom02;
+                    var _dx12 = (_x1 - _x2) / _denom12;
+                    var _dy12 = (_y1 - _y2) / _denom12;
                     
-                    var _x = _xy_array[2][0];
-                    var _y = _xy_array[2][1];
-                    
-                    var _polygon = [
-                        [_x + _numerNeg*_dx02, _y + _numerNeg*_dy02],
-                        [_x + _numerNeg*_dx12, _y + _numerNeg*_dy12],
-                        [_x + _numerPos*_dx12, _y + _numerPos*_dy12],
-                        [_x + _numerPos*_dx02, _y + _numerPos*_dy02],
-                    ];
-                    
-                    var _intersects = __BonkDiskOverlapsPolygon(_polygon, radius);
+                    var _intersects = __BonkDiskOverlapsQuad(_x2 + _numerNeg*_dx02, _y2 + _numerNeg*_dy02,
+                                                             _x2 + _numerNeg*_dx12, _y2 + _numerNeg*_dy12,
+                                                             _x2 + _numerPos*_dx12, _y2 + _numerPos*_dy12,
+                                                             _x2 + _numerPos*_dx02, _y2 + _numerPos*_dy02,
+                                                             radius);
                     return new BonkResult(_intersects);
                 }
                 else  // -halfHeight < z[1] < halfHeight
@@ -346,41 +333,33 @@ function BonkCylinder() constructor
                     //   +h/2 = z1 + t * (z2 - z1)
                     //   t = (+h/2 - z1) / (z2 - z1) = numerPos1 / denom21
                     
-                    var _numerNeg0 = -halfHeight - _z_array[0];
-                    var _numerPos0 =  halfHeight - _z_array[0];
-                    var _numerNeg1 = -halfHeight - _z_array[1];
-                    var _numerPos1 =  halfHeight - _z_array[1];
-                    var _denom20   = _z_array[2] - _z_array[0];
-                    var _denom01   = _z_array[0] - _z_array[1];
-                    var _denom21   = _z_array[2] - _z_array[1];
+                    var _numerNeg0 = -halfHeight - _z0;
+                    var _numerPos0 =  halfHeight - _z0;
+                    var _numerNeg1 = -halfHeight - _z1;
+                    var _numerPos1 =  halfHeight - _z1;
+                    var _denom20   = _z2 - _z0;
+                    var _denom01   = _z0 - _z1;
+                    var _denom21   = _z2 - _z1;
                     
-                    var _dx20 = (_xy_array[2][0] - _xy_array[0][0]) / _denom20;
-                    var _dy20 = (_xy_array[2][1] - _xy_array[0][1]) / _denom20;
-                    var _dx01 = (_xy_array[0][0] - _xy_array[1][0]) / _denom01;
-                    var _dy01 = (_xy_array[0][1] - _xy_array[1][1]) / _denom01;
-                    var _dx21 = (_xy_array[2][0] - _xy_array[1][0]) / _denom21;
-                    var _dy21 = (_xy_array[2][1] - _xy_array[1][1]) / _denom21;
+                    var _dx20 = (_x2 - _x0) / _denom20;
+                    var _dy20 = (_y2 - _y0) / _denom20;
+                    var _dx01 = (_x0 - _x1) / _denom01;
+                    var _dy01 = (_y0 - _y1) / _denom01;
+                    var _dx21 = (_x2 - _x1) / _denom21;
+                    var _dy21 = (_y2 - _y1) / _denom21;
                     
-                    var _x0 = _xy_array[0][0];
-                    var _y0 = _xy_array[0][1];
-                    var _x1 = _xy_array[0][0];
-                    var _y1 = _xy_array[0][1];
-                    
-                    var _polygon = [
-                        [_x0 + _numerNeg0*_dx20, _y0 + _numerNeg0*_dy20],
-                        [_x1 + _numerNeg1*_dx01, _y1 + _numerNeg1*_dy01],
-                        [_x1,                    _y1                   ],
-                        [_x1 + _numerPos1*_dx21, _y1 + _numerPos1*_dy21],
-                        [_x0 + _numerPos0*_dx20, _y0 + _numerPos0*_dy20],
-                    ];
-                    
-                    var _intersects = __BonkDiskOverlapsPolygon(_polygon, radius);
+                    var _intersects = __BonkDiskOverlapsPentagon(_x0 + _numerNeg0*_dx20, _y0 + _numerNeg0*_dy20,
+                                                                 _x1 + _numerNeg1*_dx01, _y1 + _numerNeg1*_dy01,
+                                                                 _x1,                    _y1,
+                                                                 _x1 + _numerPos1*_dx21, _y1 + _numerPos1*_dy21,
+                                                                 _x0 + _numerPos0*_dx20, _y0 + _numerPos0*_dy20,
+                                                                 radius);
                     return new BonkResult(_intersects);
                 }
             }
-            else if (_z_array[2] > -halfHeight)
+            else if (_z2 > -halfHeight)
             {
-                if (_z_array[1] <= -halfHeight)
+                if (_z1 <= -halfHeight)
                 {
                     // Cases 3b and 3c of Figure 1 of the PDF.
                     //
@@ -394,25 +373,19 @@ function BonkCylinder() constructor
                     //   -h/2 = z2 + t * (z1 - z2)
                     //   t = (-h/2 - z2) / (z1 - z2) = numerNeg2 / denom12
                     
-                    var _numerNeg = -halfHeight - _z_array[2];
-                    var _denom02  = _z_array[0] - _z_array[2];
-                    var _denom12  = _z_array[1] - _z_array[2];
+                    var _numerNeg = -halfHeight - _z2;
+                    var _denom02  = _z0 - _z2;
+                    var _denom12  = _z1 - _z2;
                     
-                    var _dx02 = (_xy_array[0][0] - _xy_array[2][0]) / _denom02;
-                    var _dy02 = (_xy_array[0][1] - _xy_array[2][1]) / _denom02;
-                    var _dx12 = (_xy_array[1][0] - _xy_array[2][0]) / _denom12;
-                    var _dy12 = (_xy_array[1][1] - _xy_array[2][1]) / _denom12;
+                    var _dx02 = (_x0 - _x2) / _denom02;
+                    var _dy02 = (_y0 - _y2) / _denom02;
+                    var _dx12 = (_x1 - _x2) / _denom12;
+                    var _dy12 = (_y1 - _y2) / _denom12;
                     
-                    var _x = _xy_array[2][0];
-                    var _y = _xy_array[2][1];
-                    
-                    var _polygon = [
-                        [_x,                   _y                  ],
-                        [_x + _numerNeg*_dx02, _y + _numerNeg*_dy02],
-                        [_x + _numerNeg*_dx12, _y + _numerNeg*_dy12],
-                    ];
-                    
-                    var _intersects = __BonkDiskOverlapsPolygon(_polygon, radius);
+                    var _intersects = __BonkDiskOverlapsTriangle(_x2,                   _y2,
+                                                                 _x2 + _numerNeg*_dx02, _y2 + _numerNeg*_dy02,
+                                                                 _x2 + _numerNeg*_dx12, _y2 + _numerNeg*_dy12,
+                                                                 radius);
                     return new BonkResult(_intersects);
                 }
                 else // z[1] > -halfHeight
@@ -428,48 +401,43 @@ function BonkCylinder() constructor
                     // On the bottom of the slab,
                     //   -h/2 = z0 + t * (z2 - z0)
                     //   t = (-h/2 - z0) / (z2 - z0) = numerNeg0 / denom20
-                    var _numerNeg = -halfHeight - _z_array[0];
-                    var _denom10  = _z_array[1] - _z_array[0];
-                    var _denom20  = _z_array[2] - _z_array[0];
                     
-                    var _dx20 = (_xy_array[2][0] - _xy_array[0][0]) / _denom20;
-                    var _dy20 = (_xy_array[2][1] - _xy_array[0][1]) / _denom20;
-                    var _dx10 = (_xy_array[1][0] - _xy_array[0][0]) / _denom10;
-                    var _dy10 = (_xy_array[1][1] - _xy_array[0][1]) / _denom10;
+                    var _numerNeg = -halfHeight - _z0;
+                    var _denom10  = _z1 - _z0;
+                    var _denom20  = _z2 - _z0;
                     
-                    var _x = _xy_array[0][0];
-                    var _y = _xy_array[0][1];
+                    var _dx20 = (_x2 - _x0) / _denom20;
+                    var _dy20 = (_y2 - _y0) / _denom20;
+                    var _dx10 = (_x1 - _x0) / _denom10;
+                    var _dy10 = (_y1 - _y0) / _denom10;
                     
-                    var _polygon = [
-                        [_x + _numerNeg*_dx20, _y + _numerNeg*_dy20],
-                        [_x + _numerNeg*_dx10, _y + _numerNeg*_dy10],
-                        [_xy_array[1][0], _xy_array[1][1]],
-                        [_xy_array[2][0], _xy_array[2][1]],
-                    ];
-                    
-                    var _intersects = __BonkDiskOverlapsPolygon(_polygon, radius);
+                    var _intersects = __BonkDiskOverlapsQuad(_x0 + _numerNeg*_dx20, _y0 + _numerNeg*_dy20,
+                                                             _x0 + _numerNeg*_dx10, _y0 + _numerNeg*_dy10,
+                                                             _x1, _y1,
+                                                             _x2, _y2,
+                                                             radius);
                     return new BonkResult(_intersects);
                 }
             }
             else  // z[2] == -hhalf
             {
-                if (_z_array[1] < -halfHeight)
+                if (_z1 < -halfHeight)
                 {
                     // Case 1a of Figure 1 of the PDF.
-                    var _intersects = __BonkDiskOverlapsPoint(_xy_array[2][0], _xy_array[2][1], radius);
+                    var _intersects = __BonkDiskOverlapsPoint(_x2, _y2, radius);
                     return new BonkResult(_intersects);
                 }
                 else
                 {
                     // Case 2a of Figure 1 of the PDF.
-                    var _intersects = __BonkDiskOverlapsSegment(_xy_array[1][0], _xy_array[1][1], _xy_array[2][0], _xy_array[2][1], radius);
+                    var _intersects = __BonkDiskOverlapsSegment(_x1, _y1, _x2, _y2, radius);
                     return new BonkResult(_intersects);
                 }
             }
         }
-        else if (_z_array[0] < halfHeight)
+        else if (_z0 < halfHeight)
         {
-            if (_z_array[1] >= halfHeight)
+            if (_z1 >= halfHeight)
             {
                 // Cases 3d and 3e of Figure 1 of the PDF.
                 //
@@ -483,25 +451,19 @@ function BonkCylinder() constructor
                 //   +h/2 = z0 + t * (z2 - z0)
                 //   t = (+h/2 - z0) / (z2 - z0) = numerPos0 / denom20
                 
-                var _numerPos =  halfHeight - _z_array[0];
-                var _denom10  = _z_array[1] - _z_array[0];
-                var _denom20  = _z_array[2] - _z_array[0];
+                var _numerPos =  halfHeight - _z0;
+                var _denom10  = _z1 - _z0;
+                var _denom20  = _z2 - _z0;
                 
-                var _dx10 = (_xy_array[1][0] - _xy_array[0][0]) / _denom10;
-                var _dy10 = (_xy_array[1][1] - _xy_array[0][1]) / _denom10;
-                var _dx20 = (_xy_array[2][0] - _xy_array[0][0]) / _denom20;
-                var _dy20 = (_xy_array[2][1] - _xy_array[0][1]) / _denom20;
+                var _dx10 = (_x1 - _x0) / _denom10;
+                var _dy10 = (_y1 - _y0) / _denom10;
+                var _dx20 = (_x2 - _x0) / _denom20;
+                var _dy20 = (_y2 - _y0) / _denom20;
                 
-                var _x = _xy_array[0][0];
-                var _y = _xy_array[0][1];
-                
-                var _polygon = [
-                    [_x,                   _y                  ],
-                    [_x + _numerPos*_dx10, _y + _numerPos*_dy10],
-                    [_x + _numerPos*_dx20, _y + _numerPos*_dy20],
-                ];
-                
-                var _intersects = __BonkDiskOverlapsPolygon(_polygon, radius);
+                var _intersects = __BonkDiskOverlapsTriangle(_x0,                   _y0,
+                                                             _x0 + _numerPos*_dx10, _y0 + _numerPos*_dy10,
+                                                             _x0 + _numerPos*_dx20, _y0 + _numerPos*_dy20,
+                                                             radius);
                 return new BonkResult(_intersects);
             }
             else // z[1] < hhalf
@@ -518,41 +480,35 @@ function BonkCylinder() constructor
                 //   +h/2 = z2 + t * (z1 - z2)
                 //   t = (+h/2 - z2) / (z1 - z2) = numerPos2 / denom12
                 
-                var _numerPos =  halfHeight - _z_array[2];
-                var _denom02  = _z_array[0] - _z_array[2];
-                var _denom12  = _z_array[1] - _z_array[2];
+                var _numerPos =  halfHeight - _z2;
+                var _denom02  = _z0 - _z2;
+                var _denom12  = _z1 - _z2;
                 
-                var _dx02 = (_xy_array[0][0] - _xy_array[2][0]) / _denom02;
-                var _dy02 = (_xy_array[0][1] - _xy_array[2][1]) / _denom02;
-                var _dx12 = (_xy_array[1][0] - _xy_array[2][0]) / _denom12;
-                var _dy12 = (_xy_array[1][1] - _xy_array[2][1]) / _denom12;
+                var _dx02 = (_x0 - _x2) / _denom02;
+                var _dy02 = (_y0 - _y2) / _denom02;
+                var _dx12 = (_x1 - _x2) / _denom12;
+                var _dy12 = (_y1 - _y2) / _denom12;
                 
-                var _x = _xy_array[2][0];
-                var _y = _xy_array[2][1];
-                
-                var _polygon = [
-                    [_xy_array[0][0], _xy_array[0][1]],
-                    [_xy_array[1][0], _xy_array[1][1]],
-                    [_x + _numerPos*_dx12, _y + _numerPos*_dy12],
-                    [_x + _numerPos*_dx02, _y + _numerPos*_dy02],
-                ];
-                
-                var _intersects = __BonkDiskOverlapsPolygon(_polygon, radius);
+                var _intersects = __BonkDiskOverlapsQuad(_x0, _y0,
+                                                         _x1, _y1,
+                                                         _x2 + _numerPos*_dx12, _y2 + _numerPos*_dy12,
+                                                         _x2 + _numerPos*_dx02, _y2 + _numerPos*_dy02,
+                                                         radius);
                 return new BonkResult(_intersects);
             }
         }
         else // z[0] == halfHeight
         {
-            if (_z_array[1] > halfHeight)
+            if (_z1 > halfHeight)
             {
                 // Case 1b of Figure 1 of the PDF.
-                var _intersects = __BonkDiskOverlapsPoint(_xy_array[0][0], _xy_array[0][1], radius);
+                var _intersects = __BonkDiskOverlapsPoint(_x0, _y0, radius);
                 return new BonkResult(_intersects);
             }
             else
             {
                 // Case 2b of Figure 1 of the PDF.
-                var _intersects = __BonkDiskOverlapsSegment(_xy_array[0][0], _xy_array[0][1], _xy_array[1][0], _xy_array[1][1], radius);
+                var _intersects = __BonkDiskOverlapsSegment(_x0, _y0, _x1, _y1, radius);
                 return new BonkResult(_intersects);
             }
         }
