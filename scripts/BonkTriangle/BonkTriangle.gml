@@ -205,4 +205,45 @@ function BonkTriangle() constructor
     }
     
     #endregion
+    
+    
+    
+    #region Helpers
+    
+    static ContainsPoint = function(_point)
+    {
+		var _barycentric = GetBarycentricCoordinates(_point[0], _point[1], _point[2]);
+		return ((_barycentric[0] >= 0 ) && (_barycentric[1] >= 0 ) && (_barycentric[0] + _barycentric[1] <= 1));
+    }
+    
+    static GetBarycentricCoordinates = function(_px, _py, _pz)
+    {
+        var _v0x = x3 - x1;
+        var _v0y = y3 - y1;
+        var _v0z = z3 - z1;
+        
+        var _v1x = x2 - x1;
+        var _v1y = y2 - y1;
+        var _v1z = z2 - z1;
+        
+        var _v2x = _px - x1;
+        var _v2y = _py - y1;
+        var _v2z = _pz - z1;
+        
+        var _dot00 = _v0x*_v0x + _v0y*_v0y + _v0z*_v0z;
+        var _dot01 = _v0x*_v1x + _v0y*_v1y + _v0z*_v1z;
+        var _dot02 = _v0x*_v2x + _v0y*_v2y + _v0z*_v2z;
+        var _dot11 = _v1x*_v1x + _v1y*_v1y + _v1z*_v1z;
+        var _dot12 = _v1x*_v2x + _v1y*_v2y + _v1z*_v2z;
+        
+        var _denominator = _dot00*_dot11 - _dot01*_dot01;
+        if (_denominator == 0) return [-1, -1, -1];
+        
+        var _u = (_dot11*_dot02 - _dot01*_dot12) / _denominator;
+        var _v = (_dot00*_dot12 - _dot01*_dot02) / _denominator;
+        
+        return [1 - _u - _v, _v, _u];
+    }
+    
+    #endregion
 }

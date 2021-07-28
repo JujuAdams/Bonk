@@ -156,53 +156,100 @@ function BonkCapsule() constructor
     	    var _planeDistance = planeDistance;
         }
         
-        var _ray0 = [x1, y1, z1];
-        var _ray1 = [x2, y2, z2];
+        var _ray1 = [x1, y1, z1];
+        var _ray2 = [x2, y2, z2];
         
-    	//Check if the ray is parallel to the plane, and early-out if so
-    	var _dir = BonkVecSubtract(_ray1, _ray0);
-    	var _n_dot_dir = BonkVecDot(_normal, _dir);
-    	if (abs(_n_dot_dir) == 0) return new BonkResult(false);
+        var _distance1 = (BonkVecDot(_normal, _ray1) - _planeDistance) - radius;
+        var _distance2 = (BonkVecDot(_normal, _ray2) - _planeDistance) - radius;
         
-    	//Find the point of collision with the triangle's plane
-    	var _t = (_planeDistance - BonkVecDot(_normal, _ray0)) / _n_dot_dir;
-        _t = clamp(_t, 0, 1);
-        var _sphere_centre = BonkVecAdd(_ray0, BonkVecMultiply(_dir, _t));
+        if (((_distance1 > 0) && (_distance2 > 0)) || ((_distance1 < -radius) && (_distance2 < -radius)))
+        {
+            return new BonkResult(false);
+        }
         
-    	for(var _i = 0; _i < 3; _i++)
-    	{
-            var _j = (_i+1) mod 3;
-    	    var _vertex_i = _vertices[_i];
-    	    var _vertex_j = _vertices[_j];
+        var _delta = abs(_distance1 / (abs(_distance1) + abs(_distance2)));
+        var _intersectionPoint = BonkVecAdd(_ray1, BonkVecMultiply(_ray2, _delta));
+        
+        if (_other.ContainsPoint(_intersectionPoint))
+        {
+            return new BonkResult(true);
+        }
+        
+        var _capsuleAxis = [_ray1, _ray2];
+        var _edges = [[_vertices[0], _vertices[1]], [_vertices[1], _vertices[2]], [_vertices[2], _vertices[0]]];
+        
+        var _i = 0;
+        repeat(3)
+        {
+            var _edge = _edges[_i];
             
-    	    var _t = BonkVecSubtract(_sphere_centre, _vertex_i);
-    	    var _u = BonkVecSubtract(_vertex_j, _vertex_i);
-    	    var _w = BonkVecCross(_t, _u);
+            var _minimumPoints = LineLineMinimumPoints(_capsuleAxis, _edge);
             
-    	    if (BonkVecDot(_w, _normal) <= 0)
-    	    {
-    	        var _dp = clamp(BonkVecDot(_u, _t) / BonkVecSqiareLength(_u), 0, 1);
-    	        var _contactPoint = BonkVecAdd(_vertex_i, BonkVecMultiply(_u, _dp));
-    	        break;
-    	    }
-    	}
+            if (BonkVecSqiareLength(BonkVecSubtract(_minimumPoints[1], _minimumPoints[0])) < radius*radius)
+            {
+                return new BonkResult(true);
+            }
+            
+            ++_i;
+        }
         
-    	if (_i >= 3)
-    	{
-    	    var _dp = BonkVecDot(_normal, _t);
-    	    var _contactPoint = BonkVecSubtract(_sphere_centre, BonkVecMultiply(_normal, _dp));
-    	}
-        
-    	var _pushoutNormal = BonkVecSubtract(_sphere_centre, _contactPoint);
-    	var _pushoutDistance = BonkVecLength(_pushoutNormal);
-    	if (_pushoutDistance >= radius) return new BonkResult(false);
-        
-        return new BonkResult(true);
+        return new BonkResult(false);
     }
     
     static __CollisionWithCapsule = function(_other)
     {
         return new BonkResult(false);
+    }
+    
+    #endregion
+    
+    
+    
+    #region Helpers
+    
+    static LineLineMinimumPoints = function(_lineA, _lineB)
+    {
+        var _r = BonkVecSubtract(_lineA[1], _lineA[0]);
+        var _s = BonkVecSubtract(_lineB[1], _lineB[0]);
+        var _w = BonkVecSubtract(_lineB[0], _lineA[0]);
+        
+        var _a = BonkVecDot(_r, _s);
+        var _b = BonkVecDot(_r, _r);
+        var _c = BonkVecDot(_s, _s);
+        var _d = BonkVecDot(_s, _w);
+        var _e = BonkVecDot(_r, _w);
+        
+        var _t1 = undefined;
+        var _t2 = undefined;
+        var _divisor = _b*_c - _a*_a;
+        
+        if (abs(_divisor) <= 0)
+        {
+            var _d1 = -_d / _c;
+            var _d2 = (_a - _d) / _c;
+            
+            if (abs(_d1 - 0.5) < abs(_d2 - 0.5))
+            {
+                _t1 = 0;
+                _t2 = _d1;
+            }
+            else
+            {
+                _t1 = 1;
+                _t2 = _d2;
+            }
+        }
+        else
+        {
+            _t1 = (_d*_a + _e*_c) / _divisor;
+            _t2 = (_t1*_a - _d) / _c;
+        }
+        
+        _t1 = clamp(_t1, 0, 1);
+        _t2 = clamp(_t2, 0, 1);
+        
+        return [ BonkVecAdd(_lineA[0], BonkVecMultiply(_r, _t1)),
+                 BonkVecAdd(_lineB[0], BonkVecMultiply(_s, _t2)) ];
     }
     
     #endregion
