@@ -229,6 +229,12 @@ function BonkSphere() constructor
     
     static __CollisionWithCylinder = function(_other)
     {
+        return new BonkResult(false);
+    }
+    
+    static __CollisionWithTriangle = function(_other)
+    {
+        return new BonkResult(false);
     }
     
     #endregion

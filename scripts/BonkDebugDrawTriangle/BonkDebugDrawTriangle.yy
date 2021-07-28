@@ -6,7 +6,7 @@
     "path": "folders/Bonk/Debug Drawing.yy",
   },
   "resourceVersion": "1.0",
-  "name": "BonkDebugDrawCyinder",
+  "name": "BonkDebugDrawTriangle",
   "tags": [],
   "resourceType": "GMScript",
 }
