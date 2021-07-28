@@ -1,0 +1,1 @@
+cylinder = new BonkCylinder().SetHeight(150).SetRadius(50).SetPosition(x, y, 0);

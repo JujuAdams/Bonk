@@ -212,5 +212,9 @@ function BonkPoint() constructor
         //         _point[0], _point[1], _point[2] ];
     }
     
+    static __CollisionWithCylinder = function(_other)
+    {
+    }
+    
     #endregion
 }

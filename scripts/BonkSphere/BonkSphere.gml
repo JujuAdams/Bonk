@@ -227,5 +227,9 @@ function BonkSphere() constructor
         //         _distance - _sphere_min ];
     }
     
+    static __CollisionWithCylinder = function(_other)
+    {
+    }
+    
     #endregion
 }

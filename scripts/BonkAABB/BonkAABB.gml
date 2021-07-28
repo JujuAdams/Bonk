@@ -194,5 +194,9 @@ function BonkAABB() constructor
         //         -_distance ];
     }
     
+    static __CollisionWithCylinder = function(_other)
+    {
+    }
+    
     #endregion
 }

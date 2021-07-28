@@ -140,5 +140,9 @@ function BonkPlane() constructor
         return new BonkResult(false);
     }
     
+    static __CollisionWithCylinder = function(_other)
+    {
+    }
+    
     #endregion
 }
