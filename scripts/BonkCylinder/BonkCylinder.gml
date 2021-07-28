@@ -230,693 +230,332 @@ function BonkCylinder() constructor
             return new BonkResult(_intersects);
         }
         
-        
-        
-        /*
-            // Clip against |z| <= h/2. At this point we know that z2 >= -h/2
-            // and z0 <= h/2 with either z0 < -h/2 or z2 > h/2 or both. The
-            // test-intersection query involves testing for overlap between
-            // the xy-projection of the clipped triangle and the xy-projection
-            // of the cylinder (a disk in the projection plane). The code
-            // below computes the vertices of the projection of the clipped
-            // triangle. The t-values of the triangle-edge parameterizations
-            // satisfy 0 <= t <= 1.
-            if (z[0] < -hhalf)
+        //Clip against |z| <= h/2. At this point we know that z2 >= -h/2 and z0 <= h/2 with either z0 < -h/2 or z2 > h/2 or both. The
+        //test-intersection query involves testing for overlap between the xy-projection of the clipped triangle and the xy-projection
+        //of the cylinder (a disk in the projection plane). The code below computes the vertices of the projection of the clipped
+        //triangle. The t-values of the triangle-edge parameterizations satisfy 0 <= t <= 1
+        if (_z_array[0] < -halfHeight)
+        {
+            if (_z_array[2] > halfHeight)
             {
-                if (z[2] > hhalf)
+                if (_z_array[1] >= halfHeight)
                 {
-                    if (z[1] >= hhalf)
-                    {
-                        // Cases 4a and 4b of Figure 1 in the PDF.
-                        //
-                        // The edge <V0,V1> is parameterized by V0+t*(V1-V0).
-                        // On the bottom of the slab,
-                        //   -h/2 = z0 + t * (z1 - z0)
-                        //   t = (-h/2 - z0) / (z1 - z0) = numerNeg0 / denom10
-                        // and on the tob of the slab,
-                        //   +h/2 = z0 + t * (z1 - z0)
-                        //   t = (+h/2 - z0) / (z1 - z0) = numerPos0 / denom10
-                        //
-                        // The edge <V0,V2> is parameterized by V0+t*(V2-V0).
-                        // On the bottom of the slab,
-                        //   -h/2 = z0 + t * (z2 - z0)
-                        //   t = (-h/2 - z0) / (z2 - z0) = numerNeg0 / denom20
-                        // and on the tob of the slab,
-                        //   +h/2 = z0 + t * (z2 - z0)
-                        //   t = (+h/2 - z0) / (z2 - z0) = numerPos0 / denom20
-                        Real numerNeg0 = -hhalf - z[0];
-                        Real numerPos0 = +hhalf - z[0];
-                        Real denom10 = z[1] - z[0];
-                        Real denom20 = z[2] - z[0];
-                        Vector2<Real> dir20 = (Q[2] - Q[0]) / denom20;
-                        Vector2<Real> dir10 = (Q[1] - Q[0]) / denom10;
-                        std::array<Vector2<Real>, 4> polygon
-                        {
-                            Q[0] + numerNeg0 * dir20,
-                            Q[0] + numerNeg0 * dir10,
-                            Q[0] + numerPos0 * dir10,
-                            Q[0] + numerPos0 * dir20
-                        };
-                        return Result(DiskOverlapsPolygon(4, polygon.data(), radius));
-                    }
-                    else if (z[1] <= -hhalf)
-                    {
-                        // Cases 4c and 4d of Figure 1 of the PDF.
-                        //
-                        // The edge <V2,V0> is parameterized by V0+t*(V2-V0).
-                        // On the bottom of the slab,
-                        //   -h/2 = z2 + t * (z0 - z2)
-                        //   t = (-h/2 - z2) / (z0 - z2) = numerNeg2 / denom02
-                        // and on the tob of the slab,
-                        //   +h/2 = z2 + t * (z0 - z2)
-                        //   t = (+h/2 - z2) / (z0 - z2) = numerPos2 / denom02
-                        //
-                        // The edge <V2,V1> is parameterized by V2+t*(V1-V2).
-                        // On the bottom of the slab,
-                        //   -h/2 = z2 + t * (z1 - z2)
-                        //   t = (-h/2 - z2) / (z1 - z2) = numerNeg2 / denom12
-                        // and on the top of the slab,
-                        //   +h/2 = z2 + t * (z1 - z2)
-                        //   t = (+h/2 - z2) / (z1 - z2) = numerPos2 / denom12
-                        Real numerNeg2 = -hhalf - z[2];
-                        Real numerPos2 = +hhalf - z[2];
-                        Real denom02 = z[0] - z[2];
-                        Real denom12 = z[1] - z[2];
-                        Vector2<Real> dir02 = (Q[0] - Q[2]) / denom02;
-                        Vector2<Real> dir12 = (Q[1] - Q[2]) / denom12;
-                        std::array<Vector2<Real>, 4> polygon
-                        {
-                            Q[2] + numerNeg2 * dir02,
-                            Q[2] + numerNeg2 * dir12,
-                            Q[2] + numerPos2 * dir12,
-                            Q[2] + numerPos2 * dir02
-                        };
-                        return Result(DiskOverlapsPolygon(4, polygon.data(), radius));
-                    }
-                    else  // -hhalf < z[1] < hhalf
-                    {
-                        // Case 5 of Figure 1 of the PDF.
-                        //
-                        // The edge <V0,V2> is parameterized by V0+t*(V2-V0).
-                        // On the bottom of the slab,
-                        //   -h/2 = z0 + t * (z2 - z0)
-                        //   t = (-h/2 - z0) / (z2 - z0) = numerNeg0 / denom20
-                        // and on the tob of the slab,
-                        //   +h/2 = z0 + t * (z2 - z0)
-                        //   t = (+h/2 - z0) / (z2 - z0) = numerPos0 / denom20
-                        //
-                        // The edge <V1,V0> is parameterized by V1+t*(V0-V1).
-                        // On the bottom of the slab,
-                        //   -h/2 = z1 + t * (z0 - z1)
-                        //   t = (-h/2 - z1) / (z0 - z1) = numerNeg1 / denom01
-                        //
-                        // The edge <V1,V2> is parameterized by V1+t*(V2-V1).
-                        // On the top of the slab,
-                        //   +h/2 = z1 + t * (z2 - z1)
-                        //   t = (+h/2 - z1) / (z2 - z1) = numerPos1 / denom21
-                        Real numerNeg0 = -hhalf - z[0];
-                        Real numerPos0 = +hhalf - z[0];
-                        Real numerNeg1 = -hhalf - z[1];
-                        Real numerPos1 = +hhalf - z[1];
-                        Real denom20 = z[2] - z[0];
-                        Real denom01 = z[0] - z[1];
-                        Real denom21 = z[2] - z[1];
-                        Vector2<Real> dir20 = (Q[2] - Q[0]) / denom20;
-                        Vector2<Real> dir01 = (Q[0] - Q[1]) / denom01;
-                        Vector2<Real> dir21 = (Q[2] - Q[1]) / denom21;
-                        std::array<Vector2<Real>, 5> polygon
-                        {
-                            Q[0] + numerNeg0 * dir20,
-                            Q[1] + numerNeg1 * dir01,
-                            Q[1],
-                            Q[1] + numerPos1 * dir21,
-                            Q[0] + numerPos0 * dir20
-                        };
-                        return Result(DiskOverlapsPolygon(5, polygon.data(), radius));
-                    }
-                }
-                else if (z[2] > -hhalf)
-                {
-                    if (z[1] <= -hhalf)
-                    {
-                        // Cases 3b and 3c of Figure 1 of the PDF.
-                        //
-                        // The edge <V2,V0> is parameterized by V2+t*(V0-V2).
-                        // On the bottom of the slab,
-                        //   -h/2 = z2 + t * (z0 - z2)
-                        //   t = (-h/2 - z2) / (z0 - z2) = numerNeg2 / denom02
-                        //
-                        // The edge <V2,V1> is parameterized by V2+t*(V1-V2).
-                        // On the bottom of the slab,
-                        //   -h/2 = z2 + t * (z1 - z2)
-                        //   t = (-h/2 - z2) / (z1 - z2) = numerNeg2 / denom12
-                        Real numerNeg2 = -hhalf - z[2];
-                        Real denom02 = z[0] - z[2];
-                        Real denom12 = z[1] - z[2];
-                        Vector2<Real> dir02 = (Q[0] - Q[2]) / denom02;
-                        Vector2<Real> dir12 = (Q[1] - Q[2]) / denom12;
-                        std::array<Vector2<Real>, 3> polygon
-                        {
-                            Q[2],
-                            Q[2] + numerNeg2 * dir02,
-                            Q[2] + numerNeg2 * dir12
-                        };
-                        return Result(DiskOverlapsPolygon(3, polygon.data(), radius));
-                    }
-                    else // z[1] > -hhalf
-                    {
-                        // Case 4e of Figure 1 of the PDF.
-                        //
-                        // The edge <V0,V1> is parameterized by V0+t*(V1-V0).
-                        // On the bottom of the slab,
-                        //   -h/2 = z0 + t * (z1 - z0)
-                        //   t = (-h/2 - z0) / (z1 - z0) = numerNeg0 / denom10
-                        //
-                        // The edge <V0,V2> is parameterized by V0+t*(V2-V0).
-                        // On the bottom of the slab,
-                        //   -h/2 = z0 + t * (z2 - z0)
-                        //   t = (-h/2 - z0) / (z2 - z0) = numerNeg0 / denom20
-                        Real numerNeg0 = -hhalf - z[0];
-                        Real denom10 = z[1] - z[0];
-                        Real denom20 = z[2] - z[0];
-                        Vector2<Real> dir20 = (Q[2] - Q[0]) / denom20;
-                        Vector2<Real> dir10 = (Q[1] - Q[0]) / denom10;
-                        std::array<Vector2<Real>, 4> polygon
-                        {
-                            Q[0] + numerNeg0 * dir20,
-                            Q[0] + numerNeg0 * dir10,
-                            Q[1],
-                            Q[2]
-                        };
-                        return Result(DiskOverlapsPolygon(4, polygon.data(), radius));
-                    }
-                }
-                else  // z[2] == -hhalf
-                {
-                    if (z[1] < -hhalf)
-                    {
-                        // Case 1a of Figure 1 of the PDF.
-                        return Result(DiskOverlapsPoint(Q[2], radius));
-                    }
-                    else
-                    {
-                        // Case 2a of Figure 1 of the PDF.
-                        return Result(DiskOverlapsSegment(Q[1], Q[2], radius));
-                    }
-                }
-            }
-            else if (z[0] < hhalf)
-            {
-                if (z[1] >= hhalf)
-                {
-                    // Cases 3d and 3e of Figure 1 of the PDF.
+                    // Cases 4a and 4b of Figure 1 in the PDF.
                     //
                     // The edge <V0,V1> is parameterized by V0+t*(V1-V0).
-                    // On the top of the slab,
+                    // On the bottom of the slab,
+                    //   -h/2 = z0 + t * (z1 - z0)
+                    //   t = (-h/2 - z0) / (z1 - z0) = numerNeg0 / denom10
+                    // and on the tob of the slab,
                     //   +h/2 = z0 + t * (z1 - z0)
                     //   t = (+h/2 - z0) / (z1 - z0) = numerPos0 / denom10
                     //
                     // The edge <V0,V2> is parameterized by V0+t*(V2-V0).
-                    // On the top of the slab,
+                    // On the bottom of the slab,
+                    //   -h/2 = z0 + t * (z2 - z0)
+                    //   t = (-h/2 - z0) / (z2 - z0) = numerNeg0 / denom20
+                    // and on the tob of the slab,
                     //   +h/2 = z0 + t * (z2 - z0)
                     //   t = (+h/2 - z0) / (z2 - z0) = numerPos0 / denom20
-                    Real numerPos0 = +hhalf - z[0];
-                    Real denom10 = z[1] - z[0];
-                    Real denom20 = z[2] - z[0];
-                    Vector2<Real> dir10 = (Q[1] - Q[0]) / denom10;
-                    Vector2<Real> dir20 = (Q[2] - Q[0]) / denom20;
-                    std::array<Vector2<Real>, 3> polygon
-                    {
-                        Q[0],
-                        Q[0] + numerPos0 * dir10,
-                        Q[0] + numerPos0 * dir20
-                    };
-                    return Result(DiskOverlapsPolygon(3, polygon.data(), radius));
+                    
+                    var _numerNeg = -halfHeight - _z_array[0];
+                    var _numerPos =  halfHeight - _z_array[0];
+                    var _denom10  = _z_array[1] - _z_array[0];
+                    var _denom20  = _z_array[2] - _z_array[0];
+                    
+                    var _dx10 = (_xy_array[1][0] - _xy_array[0][0]) / _denom10;
+                    var _dy10 = (_xy_array[1][1] - _xy_array[0][1]) / _denom10;
+                    var _dx20 = (_xy_array[2][0] - _xy_array[0][0]) / _denom20;
+                    var _dy20 = (_xy_array[2][1] - _xy_array[0][1]) / _denom20;
+                    
+                    var _x = _xy_array[0][0];
+                    var _y = _xy_array[0][1];
+                    
+                    var _polygon = [
+                        [_x + _numerNeg*_dx20, _y + _numerNeg*_dy20],
+                        [_x + _numerNeg*_dx10, _y + _numerNeg*_dy10],
+                        [_x + _numerPos*_dx10, _y + _numerPos*_dy10],
+                        [_x + _numerPos*_dx20, _y + _numerPos*_dy20],
+                    ];
+                    
+                    var _intersects = __BonkDiskOverlapsPolygon(_polygon, radius);
+                    return new BonkResult(_intersects);
                 }
-                else // z[1] < hhalf
+                else if (_z_array[1] <= -halfHeight)
                 {
-                    // Case 4f of Figure 1 of the PDF.
+                    // Cases 4c and 4d of Figure 1 of the PDF.
                     //
-                    // The edge <V2,V0> is parameterized by V2+t*(V0-V2).
-                    // On the top of the slab,
+                    // The edge <V2,V0> is parameterized by V0+t*(V2-V0).
+                    // On the bottom of the slab,
+                    //   -h/2 = z2 + t * (z0 - z2)
+                    //   t = (-h/2 - z2) / (z0 - z2) = numerNeg2 / denom02
+                    // and on the tob of the slab,
                     //   +h/2 = z2 + t * (z0 - z2)
                     //   t = (+h/2 - z2) / (z0 - z2) = numerPos2 / denom02
                     //
                     // The edge <V2,V1> is parameterized by V2+t*(V1-V2).
-                    // On the top of the slab,
+                    // On the bottom of the slab,
+                    //   -h/2 = z2 + t * (z1 - z2)
+                    //   t = (-h/2 - z2) / (z1 - z2) = numerNeg2 / denom12
+                    // and on the top of the slab,
                     //   +h/2 = z2 + t * (z1 - z2)
                     //   t = (+h/2 - z2) / (z1 - z2) = numerPos2 / denom12
-                    Real numerPos2 = +hhalf - z[2];
-                    Real denom02 = z[0] - z[2];
-                    Real denom12 = z[1] - z[2];
-                    Vector2<Real> dir02 = (Q[0] - Q[2]) / denom02;
-                    Vector2<Real> dir12 = (Q[1] - Q[2]) / denom12;
-                    std::array<Vector2<Real>, 4> polygon
-                    {
-                        Q[0],
-                        Q[1],
-                        Q[2] + numerPos2 * dir12,
-                        Q[2] + numerPos2 * dir02
-                    };
-                    return Result(DiskOverlapsPolygon(4, polygon.data(), radius));
+                    
+                    var _numerNeg = -halfHeight - _z_array[2];
+                    var _numerPos =  halfHeight - _z_array[2];
+                    var _denom02  = _z_array[0] - _z_array[2];
+                    var _denom12  = _z_array[1] - _z_array[2];
+                    
+                    var _dx02 = (_xy_array[0][0] - _xy_array[2][0]) / _denom02;
+                    var _dy02 = (_xy_array[0][1] - _xy_array[2][1]) / _denom02;
+                    var _dx12 = (_xy_array[1][0] - _xy_array[2][0]) / _denom12;
+                    var _dy12 = (_xy_array[1][1] - _xy_array[2][1]) / _denom12;
+                    
+                    var _x = _xy_array[2][0];
+                    var _y = _xy_array[2][1];
+                    
+                    var _polygon = [
+                        [_x + _numerNeg*_dx02, _y + _numerNeg*_dy02],
+                        [_x + _numerNeg*_dx12, _y + _numerNeg*_dy12],
+                        [_x + _numerPos*_dx12, _y + _numerPos*_dy12],
+                        [_x + _numerPos*_dx02, _y + _numerPos*_dy02],
+                    ];
+                    
+                    var _intersects = __BonkDiskOverlapsPolygon(_polygon, radius);
+                    return new BonkResult(_intersects);
+                }
+                else  // -halfHeight < z[1] < halfHeight
+                {
+                    // Case 5 of Figure 1 of the PDF.
+                    //
+                    // The edge <V0,V2> is parameterized by V0+t*(V2-V0).
+                    // On the bottom of the slab,
+                    //   -h/2 = z0 + t * (z2 - z0)
+                    //   t = (-h/2 - z0) / (z2 - z0) = numerNeg0 / denom20
+                    // and on the tob of the slab,
+                    //   +h/2 = z0 + t * (z2 - z0)
+                    //   t = (+h/2 - z0) / (z2 - z0) = numerPos0 / denom20
+                    //
+                    // The edge <V1,V0> is parameterized by V1+t*(V0-V1).
+                    // On the bottom of the slab,
+                    //   -h/2 = z1 + t * (z0 - z1)
+                    //   t = (-h/2 - z1) / (z0 - z1) = numerNeg1 / denom01
+                    //
+                    // The edge <V1,V2> is parameterized by V1+t*(V2-V1).
+                    // On the top of the slab,
+                    //   +h/2 = z1 + t * (z2 - z1)
+                    //   t = (+h/2 - z1) / (z2 - z1) = numerPos1 / denom21
+                    
+                    var _numerNeg0 = -halfHeight - _z_array[0];
+                    var _numerPos0 =  halfHeight - _z_array[0];
+                    var _numerNeg1 = -halfHeight - _z_array[1];
+                    var _numerPos1 =  halfHeight - _z_array[1];
+                    var _denom20   = _z_array[2] - _z_array[0];
+                    var _denom01   = _z_array[0] - _z_array[1];
+                    var _denom21   = _z_array[2] - _z_array[1];
+                    
+                    var _dx20 = (_xy_array[2][0] - _xy_array[0][0]) / _denom20;
+                    var _dy20 = (_xy_array[2][1] - _xy_array[0][1]) / _denom20;
+                    var _dx01 = (_xy_array[0][0] - _xy_array[1][0]) / _denom01;
+                    var _dy01 = (_xy_array[0][1] - _xy_array[1][1]) / _denom01;
+                    var _dx21 = (_xy_array[2][0] - _xy_array[1][0]) / _denom21;
+                    var _dy21 = (_xy_array[2][1] - _xy_array[1][1]) / _denom21;
+                    
+                    var _x0 = _xy_array[0][0];
+                    var _y0 = _xy_array[0][1];
+                    var _x1 = _xy_array[0][0];
+                    var _y1 = _xy_array[0][1];
+                    
+                    var _polygon = [
+                        [_x0 + _numerNeg0*_dx20, _y0 + _numerNeg0*_dy20],
+                        [_x1 + _numerNeg1*_dx01, _y1 + _numerNeg1*_dy01],
+                        [_x1,                    _y1                   ],
+                        [_x1 + _numerPos1*_dx21, _y1 + _numerPos1*_dy21],
+                        [_x0 + _numerPos0*_dx20, _y0 + _numerPos0*_dy20],
+                    ];
+                    
+                    var _intersects = __BonkDiskOverlapsPolygon(_polygon, radius);
+                    return new BonkResult(_intersects);
                 }
             }
-            else // z[0] == hhalf
+            else if (_z_array[2] > -halfHeight)
             {
-                if (z[1] > hhalf)
+                if (_z_array[1] <= -halfHeight)
                 {
-                    // Case 1b of Figure 1 of the PDF.
-                    return Result(DiskOverlapsPoint(Q[0], radius));
+                    // Cases 3b and 3c of Figure 1 of the PDF.
+                    //
+                    // The edge <V2,V0> is parameterized by V2+t*(V0-V2).
+                    // On the bottom of the slab,
+                    //   -h/2 = z2 + t * (z0 - z2)
+                    //   t = (-h/2 - z2) / (z0 - z2) = numerNeg2 / denom02
+                    //
+                    // The edge <V2,V1> is parameterized by V2+t*(V1-V2).
+                    // On the bottom of the slab,
+                    //   -h/2 = z2 + t * (z1 - z2)
+                    //   t = (-h/2 - z2) / (z1 - z2) = numerNeg2 / denom12
+                    
+                    var _numerNeg = -halfHeight - _z_array[2];
+                    var _denom02  = _z_array[0] - _z_array[2];
+                    var _denom12  = _z_array[1] - _z_array[2];
+                    
+                    var _dx02 = (_xy_array[0][0] - _xy_array[2][0]) / _denom02;
+                    var _dy02 = (_xy_array[0][1] - _xy_array[2][1]) / _denom02;
+                    var _dx12 = (_xy_array[1][0] - _xy_array[2][0]) / _denom12;
+                    var _dy12 = (_xy_array[1][1] - _xy_array[2][1]) / _denom12;
+                    
+                    var _x = _xy_array[2][0];
+                    var _y = _xy_array[2][1];
+                    
+                    var _polygon = [
+                        [_x,                   _y                  ],
+                        [_x + _numerNeg*_dx02, _y + _numerNeg*_dy02],
+                        [_x + _numerNeg*_dx12, _y + _numerNeg*_dy12],
+                    ];
+                    
+                    var _intersects = __BonkDiskOverlapsPolygon(_polygon, radius);
+                    return new BonkResult(_intersects);
+                }
+                else // z[1] > -halfHeight
+                {
+                    // Case 4e of Figure 1 of the PDF.
+                    //
+                    // The edge <V0,V1> is parameterized by V0+t*(V1-V0).
+                    // On the bottom of the slab,
+                    //   -h/2 = z0 + t * (z1 - z0)
+                    //   t = (-h/2 - z0) / (z1 - z0) = numerNeg0 / denom10
+                    //
+                    // The edge <V0,V2> is parameterized by V0+t*(V2-V0).
+                    // On the bottom of the slab,
+                    //   -h/2 = z0 + t * (z2 - z0)
+                    //   t = (-h/2 - z0) / (z2 - z0) = numerNeg0 / denom20
+                    var _numerNeg = -halfHeight - _z_array[0];
+                    var _denom10  = _z_array[1] - _z_array[0];
+                    var _denom20  = _z_array[2] - _z_array[0];
+                    
+                    var _dx20 = (_xy_array[2][0] - _xy_array[0][0]) / _denom20;
+                    var _dy20 = (_xy_array[2][1] - _xy_array[0][1]) / _denom20;
+                    var _dx10 = (_xy_array[1][0] - _xy_array[0][0]) / _denom10;
+                    var _dy10 = (_xy_array[1][1] - _xy_array[0][1]) / _denom10;
+                    
+                    var _x = _xy_array[0][0];
+                    var _y = _xy_array[0][1];
+                    
+                    var _polygon = [
+                        [_x + _numerNeg*_dx20, _y + _numerNeg*_dy20],
+                        [_x + _numerNeg*_dx10, _y + _numerNeg*_dy10],
+                        [_xy_array[1][0], _xy_array[1][1]],
+                        [_xy_array[2][0], _xy_array[2][1]],
+                    ];
+                    
+                    var _intersects = __BonkDiskOverlapsPolygon(_polygon, radius);
+                    return new BonkResult(_intersects);
+                }
+            }
+            else  // z[2] == -hhalf
+            {
+                if (_z_array[1] < -halfHeight)
+                {
+                    // Case 1a of Figure 1 of the PDF.
+                    var _intersects = __BonkDiskOverlapsPoint(_xy_array[2][0], _xy_array[2][1], radius);
+                    return new BonkResult(_intersects);
                 }
                 else
                 {
-                    // Case 2b of Figure 1 of the PDF.
-                    return Result(DiskOverlapsSegment(Q[0], Q[1], radius));
+                    // Case 2a of Figure 1 of the PDF.
+                    var _intersects = __BonkDiskOverlapsSegment(_xy_array[1][0], _xy_array[1][1], _xy_array[2][0], _xy_array[2][1], radius);
+                    return new BonkResult(_intersects);
                 }
             }
         }
-        */
-        
-        
-        
-        /*
-        // David Eberly, Geometric Tools, Redmond WA 98052
-        // Copyright (c) 1998-2021
-        // Distributed under the Boost Software License, Version 1.0.
-        // https://www.boost.org/LICENSE_1_0.txt
-        // https://www.geometrictools.com/License/Boost/LICENSE_1_0.txt
-        // Version: 5.10.2021.04.30
-
-        #pragma once
-
-        #include <Mathematics/TIQuery.h>
-        #include <Mathematics/Triangle.h>
-        #include <Mathematics/Cylinder3.h>
-        #include <Mathematics/Vector2.h>
-        #include <Mathematics/Vector3.h>
-
-        // An algorithm for the test-intersection query between a triangle and a
-        // finite cylinder is described in
-        // https://www.geometrictools.com/Documentation/IntersectionTriangleCylinder.pdf
-        // The code here is an implementation of that algorithm. The comments include
-        // references to Figure 1 of the PDF.
-
-        namespace gte
+        else if (_z_array[0] < halfHeight)
         {
-            template <typename Real>
-            class TIQuery<Real, Triangle3<Real>, Cylinder3<Real>>
+            if (_z_array[1] >= halfHeight)
             {
-            public:
-                struct Result
-                {
-                    Result(bool inIntersect = false)
-                        :
-                        intersect(inIntersect)
-                    {
-                    }
-
-                    bool intersect;
-                };
-
-                Result operator()(Triangle3<Real> const& triangle, Cylinder3<Real> const& cylinder)
-                {
-                    // Get a right-handed orthonormal basis from the cylinder axis
-                    // direction.
-                    std::array<Vector3<Real>, 3> basis{};  // {U2,U0,U1}
-                    basis[0] = cylinder.axis.direction;
-                    ComputeOrthogonalComplement(1, basis.data());
-
-                    // Compute coordinates of the triangle vertices in the coordinate
-                    // system {C;U0,U1,U2}, where C is the cylinder center and U2 is
-                    // the cylinder direction. The basis {U0,U1,U2} is orthonormal and
-                    // right-handed.
-                    std::array<Vector3<Real>, 3> P{};
-                    for (size_t i = 0; i < 3; ++i)
-                    {
-                        Vector3<Real> delta = triangle.v[i] - cylinder.axis.origin;
-                        P[i][0] = Dot(basis[1], delta);  // x[i]
-                        P[i][1] = Dot(basis[2], delta);  // y[i]
-                        P[i][2] = Dot(basis[0], delta);  // z[i]
-                    }
-
-                    // Sort the triangle vertices so that z[0] <= z[1] <= z[2].
-                    size_t j0, j1, j2;
-                    if (P[0][2] < P[1][2])
-                    {
-                        if (P[2][2] < P[0][2])
-                        {
-                            j0 = 2;
-                            j1 = 0;
-                            j2 = 1;
-                        }
-                        else if (P[2][2] < P[1][2])
-                        {
-                            j0 = 0;
-                            j1 = 2;
-                            j2 = 1;
-                        }
-                        else
-                        {
-                            j0 = 0;
-                            j1 = 1;
-                            j2 = 2;
-                        }
-                    }
-                    else
-                    {
-                        if (P[2][2] < P[1][2])
-                        {
-                            j0 = 2;
-                            j1 = 1;
-                            j2 = 0;
-                        }
-                        else if (P[2][2] < P[0][2])
-                        {
-                            j0 = 1;
-                            j1 = 2;
-                            j2 = 0;
-                        }
-                        else
-                        {
-                            j0 = 1;
-                            j1 = 0;
-                            j2 = 2;
-                        }
-                    }
-
-                    std::array<Real, 3> z = { P[j0][2], P[j1][2], P[j2][2] };
-
-                    // Maintain the xy-components and z-components separately. The
-                    // z-components are used for clipping against bottom and top
-                    // planes of the cylinder. The xy-components are used for
-                    // disk-containment tests x * x + y * y <= r * r.
-
-                    // Attempt an early exit by testing whether the triangle is
-                    // strictly outside the cylinder slab -h/2 < z < h/2.
-                    Real const hhalf = static_cast<Real>(0.5) * cylinder.height;
-                    if (z[2] < -hhalf)
-                    {
-                        // The triangle is strictly below the bottom-disk plane of
-                        // the cylinder. See case 0a of Figure 1 in the PDF.
-                        return Result(false);
-                    }
-
-                    if (z[0] > hhalf)
-                    {
-                        // The triangle is strictly above the top-disk plane of the
-                        // cylinder. See case 0b of Figure 1 in the PDF.
-                        return Result(false);
-                    }
-
-                    // Project the triangle vertices onto the xy-plane.
-                    std::array<Vector2<Real>, 3> Q
-                    {
-                        Vector2<Real>{ P[j0][0], P[j0][1] },
-                        Vector2<Real>{ P[j1][0], P[j1][1] },
-                        Vector2<Real>{ P[j2][0], P[j2][1] }
-                    };
-
-                    // Attempt an early exit when the triangle does not have to be
-                    // clipped.
-                    Real const& radius = cylinder.radius;
-                    if (-hhalf <= z[0] && z[2] <= hhalf)
-                    {
-                        // The triangle is between the planes of the top-disk and
-                        // the bottom disk of the cylinder. Determine whether the
-                        // projection of the triangle onto a plane perpendicular
-                        // to the cylinder axis overlaps the disk of projection
-                        // of the cylinder onto the same plane. See case 3a of
-                        // Figure 1 of the PDF.
-                        return Result(DiskOverlapsPolygon(3, Q.data(), radius));
-                    }
-
-                    // Clip against |z| <= h/2. At this point we know that z2 >= -h/2
-                    // and z0 <= h/2 with either z0 < -h/2 or z2 > h/2 or both. The
-                    // test-intersection query involves testing for overlap between
-                    // the xy-projection of the clipped triangle and the xy-projection
-                    // of the cylinder (a disk in the projection plane). The code
-                    // below computes the vertices of the projection of the clipped
-                    // triangle. The t-values of the triangle-edge parameterizations
-                    // satisfy 0 <= t <= 1.
-                    if (z[0] < -hhalf)
-                    {
-                        if (z[2] > hhalf)
-                        {
-                            if (z[1] >= hhalf)
-                            {
-                                // Cases 4a and 4b of Figure 1 in the PDF.
-                                //
-                                // The edge <V0,V1> is parameterized by V0+t*(V1-V0).
-                                // On the bottom of the slab,
-                                //   -h/2 = z0 + t * (z1 - z0)
-                                //   t = (-h/2 - z0) / (z1 - z0) = numerNeg0 / denom10
-                                // and on the tob of the slab,
-                                //   +h/2 = z0 + t * (z1 - z0)
-                                //   t = (+h/2 - z0) / (z1 - z0) = numerPos0 / denom10
-                                //
-                                // The edge <V0,V2> is parameterized by V0+t*(V2-V0).
-                                // On the bottom of the slab,
-                                //   -h/2 = z0 + t * (z2 - z0)
-                                //   t = (-h/2 - z0) / (z2 - z0) = numerNeg0 / denom20
-                                // and on the tob of the slab,
-                                //   +h/2 = z0 + t * (z2 - z0)
-                                //   t = (+h/2 - z0) / (z2 - z0) = numerPos0 / denom20
-                                Real numerNeg0 = -hhalf - z[0];
-                                Real numerPos0 = +hhalf - z[0];
-                                Real denom10 = z[1] - z[0];
-                                Real denom20 = z[2] - z[0];
-                                Vector2<Real> dir20 = (Q[2] - Q[0]) / denom20;
-                                Vector2<Real> dir10 = (Q[1] - Q[0]) / denom10;
-                                std::array<Vector2<Real>, 4> polygon
-                                {
-                                    Q[0] + numerNeg0 * dir20,
-                                    Q[0] + numerNeg0 * dir10,
-                                    Q[0] + numerPos0 * dir10,
-                                    Q[0] + numerPos0 * dir20
-                                };
-                                return Result(DiskOverlapsPolygon(4, polygon.data(), radius));
-                            }
-                            else if (z[1] <= -hhalf)
-                            {
-                                // Cases 4c and 4d of Figure 1 of the PDF.
-                                //
-                                // The edge <V2,V0> is parameterized by V0+t*(V2-V0).
-                                // On the bottom of the slab,
-                                //   -h/2 = z2 + t * (z0 - z2)
-                                //   t = (-h/2 - z2) / (z0 - z2) = numerNeg2 / denom02
-                                // and on the tob of the slab,
-                                //   +h/2 = z2 + t * (z0 - z2)
-                                //   t = (+h/2 - z2) / (z0 - z2) = numerPos2 / denom02
-                                //
-                                // The edge <V2,V1> is parameterized by V2+t*(V1-V2).
-                                // On the bottom of the slab,
-                                //   -h/2 = z2 + t * (z1 - z2)
-                                //   t = (-h/2 - z2) / (z1 - z2) = numerNeg2 / denom12
-                                // and on the top of the slab,
-                                //   +h/2 = z2 + t * (z1 - z2)
-                                //   t = (+h/2 - z2) / (z1 - z2) = numerPos2 / denom12
-                                Real numerNeg2 = -hhalf - z[2];
-                                Real numerPos2 = +hhalf - z[2];
-                                Real denom02 = z[0] - z[2];
-                                Real denom12 = z[1] - z[2];
-                                Vector2<Real> dir02 = (Q[0] - Q[2]) / denom02;
-                                Vector2<Real> dir12 = (Q[1] - Q[2]) / denom12;
-                                std::array<Vector2<Real>, 4> polygon
-                                {
-                                    Q[2] + numerNeg2 * dir02,
-                                    Q[2] + numerNeg2 * dir12,
-                                    Q[2] + numerPos2 * dir12,
-                                    Q[2] + numerPos2 * dir02
-                                };
-                                return Result(DiskOverlapsPolygon(4, polygon.data(), radius));
-                            }
-                            else  // -hhalf < z[1] < hhalf
-                            {
-                                // Case 5 of Figure 1 of the PDF.
-                                //
-                                // The edge <V0,V2> is parameterized by V0+t*(V2-V0).
-                                // On the bottom of the slab,
-                                //   -h/2 = z0 + t * (z2 - z0)
-                                //   t = (-h/2 - z0) / (z2 - z0) = numerNeg0 / denom20
-                                // and on the tob of the slab,
-                                //   +h/2 = z0 + t * (z2 - z0)
-                                //   t = (+h/2 - z0) / (z2 - z0) = numerPos0 / denom20
-                                //
-                                // The edge <V1,V0> is parameterized by V1+t*(V0-V1).
-                                // On the bottom of the slab,
-                                //   -h/2 = z1 + t * (z0 - z1)
-                                //   t = (-h/2 - z1) / (z0 - z1) = numerNeg1 / denom01
-                                //
-                                // The edge <V1,V2> is parameterized by V1+t*(V2-V1).
-                                // On the top of the slab,
-                                //   +h/2 = z1 + t * (z2 - z1)
-                                //   t = (+h/2 - z1) / (z2 - z1) = numerPos1 / denom21
-                                Real numerNeg0 = -hhalf - z[0];
-                                Real numerPos0 = +hhalf - z[0];
-                                Real numerNeg1 = -hhalf - z[1];
-                                Real numerPos1 = +hhalf - z[1];
-                                Real denom20 = z[2] - z[0];
-                                Real denom01 = z[0] - z[1];
-                                Real denom21 = z[2] - z[1];
-                                Vector2<Real> dir20 = (Q[2] - Q[0]) / denom20;
-                                Vector2<Real> dir01 = (Q[0] - Q[1]) / denom01;
-                                Vector2<Real> dir21 = (Q[2] - Q[1]) / denom21;
-                                std::array<Vector2<Real>, 5> polygon
-                                {
-                                    Q[0] + numerNeg0 * dir20,
-                                    Q[1] + numerNeg1 * dir01,
-                                    Q[1],
-                                    Q[1] + numerPos1 * dir21,
-                                    Q[0] + numerPos0 * dir20
-                                };
-                                return Result(DiskOverlapsPolygon(5, polygon.data(), radius));
-                            }
-                        }
-                        else if (z[2] > -hhalf)
-                        {
-                            if (z[1] <= -hhalf)
-                            {
-                                // Cases 3b and 3c of Figure 1 of the PDF.
-                                //
-                                // The edge <V2,V0> is parameterized by V2+t*(V0-V2).
-                                // On the bottom of the slab,
-                                //   -h/2 = z2 + t * (z0 - z2)
-                                //   t = (-h/2 - z2) / (z0 - z2) = numerNeg2 / denom02
-                                //
-                                // The edge <V2,V1> is parameterized by V2+t*(V1-V2).
-                                // On the bottom of the slab,
-                                //   -h/2 = z2 + t * (z1 - z2)
-                                //   t = (-h/2 - z2) / (z1 - z2) = numerNeg2 / denom12
-                                Real numerNeg2 = -hhalf - z[2];
-                                Real denom02 = z[0] - z[2];
-                                Real denom12 = z[1] - z[2];
-                                Vector2<Real> dir02 = (Q[0] - Q[2]) / denom02;
-                                Vector2<Real> dir12 = (Q[1] - Q[2]) / denom12;
-                                std::array<Vector2<Real>, 3> polygon
-                                {
-                                    Q[2],
-                                    Q[2] + numerNeg2 * dir02,
-                                    Q[2] + numerNeg2 * dir12
-                                };
-                                return Result(DiskOverlapsPolygon(3, polygon.data(), radius));
-                            }
-                            else // z[1] > -hhalf
-                            {
-                                // Case 4e of Figure 1 of the PDF.
-                                //
-                                // The edge <V0,V1> is parameterized by V0+t*(V1-V0).
-                                // On the bottom of the slab,
-                                //   -h/2 = z0 + t * (z1 - z0)
-                                //   t = (-h/2 - z0) / (z1 - z0) = numerNeg0 / denom10
-                                //
-                                // The edge <V0,V2> is parameterized by V0+t*(V2-V0).
-                                // On the bottom of the slab,
-                                //   -h/2 = z0 + t * (z2 - z0)
-                                //   t = (-h/2 - z0) / (z2 - z0) = numerNeg0 / denom20
-                                Real numerNeg0 = -hhalf - z[0];
-                                Real denom10 = z[1] - z[0];
-                                Real denom20 = z[2] - z[0];
-                                Vector2<Real> dir20 = (Q[2] - Q[0]) / denom20;
-                                Vector2<Real> dir10 = (Q[1] - Q[0]) / denom10;
-                                std::array<Vector2<Real>, 4> polygon
-                                {
-                                    Q[0] + numerNeg0 * dir20,
-                                    Q[0] + numerNeg0 * dir10,
-                                    Q[1],
-                                    Q[2]
-                                };
-                                return Result(DiskOverlapsPolygon(4, polygon.data(), radius));
-                            }
-                        }
-                        else  // z[2] == -hhalf
-                        {
-                            if (z[1] < -hhalf)
-                            {
-                                // Case 1a of Figure 1 of the PDF.
-                                return Result(DiskOverlapsPoint(Q[2], radius));
-                            }
-                            else
-                            {
-                                // Case 2a of Figure 1 of the PDF.
-                                return Result(DiskOverlapsSegment(Q[1], Q[2], radius));
-                            }
-                        }
-                    }
-                    else if (z[0] < hhalf)
-                    {
-                        if (z[1] >= hhalf)
-                        {
-                            // Cases 3d and 3e of Figure 1 of the PDF.
-                            //
-                            // The edge <V0,V1> is parameterized by V0+t*(V1-V0).
-                            // On the top of the slab,
-                            //   +h/2 = z0 + t * (z1 - z0)
-                            //   t = (+h/2 - z0) / (z1 - z0) = numerPos0 / denom10
-                            //
-                            // The edge <V0,V2> is parameterized by V0+t*(V2-V0).
-                            // On the top of the slab,
-                            //   +h/2 = z0 + t * (z2 - z0)
-                            //   t = (+h/2 - z0) / (z2 - z0) = numerPos0 / denom20
-                            Real numerPos0 = +hhalf - z[0];
-                            Real denom10 = z[1] - z[0];
-                            Real denom20 = z[2] - z[0];
-                            Vector2<Real> dir10 = (Q[1] - Q[0]) / denom10;
-                            Vector2<Real> dir20 = (Q[2] - Q[0]) / denom20;
-                            std::array<Vector2<Real>, 3> polygon
-                            {
-                                Q[0],
-                                Q[0] + numerPos0 * dir10,
-                                Q[0] + numerPos0 * dir20
-                            };
-                            return Result(DiskOverlapsPolygon(3, polygon.data(), radius));
-                        }
-                        else // z[1] < hhalf
-                        {
-                            // Case 4f of Figure 1 of the PDF.
-                            //
-                            // The edge <V2,V0> is parameterized by V2+t*(V0-V2).
-                            // On the top of the slab,
-                            //   +h/2 = z2 + t * (z0 - z2)
-                            //   t = (+h/2 - z2) / (z0 - z2) = numerPos2 / denom02
-                            //
-                            // The edge <V2,V1> is parameterized by V2+t*(V1-V2).
-                            // On the top of the slab,
-                            //   +h/2 = z2 + t * (z1 - z2)
-                            //   t = (+h/2 - z2) / (z1 - z2) = numerPos2 / denom12
-                            Real numerPos2 = +hhalf - z[2];
-                            Real denom02 = z[0] - z[2];
-                            Real denom12 = z[1] - z[2];
-                            Vector2<Real> dir02 = (Q[0] - Q[2]) / denom02;
-                            Vector2<Real> dir12 = (Q[1] - Q[2]) / denom12;
-                            std::array<Vector2<Real>, 4> polygon
-                            {
-                                Q[0],
-                                Q[1],
-                                Q[2] + numerPos2 * dir12,
-                                Q[2] + numerPos2 * dir02
-                            };
-                            return Result(DiskOverlapsPolygon(4, polygon.data(), radius));
-                        }
-                    }
-                    else // z[0] == hhalf
-                    {
-                        if (z[1] > hhalf)
-                        {
-                            // Case 1b of Figure 1 of the PDF.
-                            return Result(DiskOverlapsPoint(Q[0], radius));
-                        }
-                        else
-                        {
-                            // Case 2b of Figure 1 of the PDF.
-                            return Result(DiskOverlapsSegment(Q[0], Q[1], radius));
-                        }
-                    }
-                }
-            };
+                // Cases 3d and 3e of Figure 1 of the PDF.
+                //
+                // The edge <V0,V1> is parameterized by V0+t*(V1-V0).
+                // On the top of the slab,
+                //   +h/2 = z0 + t * (z1 - z0)
+                //   t = (+h/2 - z0) / (z1 - z0) = numerPos0 / denom10
+                //
+                // The edge <V0,V2> is parameterized by V0+t*(V2-V0).
+                // On the top of the slab,
+                //   +h/2 = z0 + t * (z2 - z0)
+                //   t = (+h/2 - z0) / (z2 - z0) = numerPos0 / denom20
+                
+                var _numerPos =  halfHeight - _z_array[0];
+                var _denom10  = _z_array[1] - _z_array[0];
+                var _denom20  = _z_array[2] - _z_array[0];
+                
+                var _dx10 = (_xy_array[1][0] - _xy_array[0][0]) / _denom10;
+                var _dy10 = (_xy_array[1][1] - _xy_array[0][1]) / _denom10;
+                var _dx20 = (_xy_array[2][0] - _xy_array[0][0]) / _denom20;
+                var _dy20 = (_xy_array[2][1] - _xy_array[0][1]) / _denom20;
+                
+                var _x = _xy_array[0][0];
+                var _y = _xy_array[0][1];
+                
+                var _polygon = [
+                    [_x,                   _y                  ],
+                    [_x + _numerPos*_dx10, _y + _numerPos*_dy10],
+                    [_x + _numerPos*_dx20, _y + _numerPos*_dy20],
+                ];
+                
+                var _intersects = __BonkDiskOverlapsPolygon(_polygon, radius);
+                return new BonkResult(_intersects);
+            }
+            else // z[1] < hhalf
+            {
+                // Case 4f of Figure 1 of the PDF.
+                //
+                // The edge <V2,V0> is parameterized by V2+t*(V0-V2).
+                // On the top of the slab,
+                //   +h/2 = z2 + t * (z0 - z2)
+                //   t = (+h/2 - z2) / (z0 - z2) = numerPos2 / denom02
+                //
+                // The edge <V2,V1> is parameterized by V2+t*(V1-V2).
+                // On the top of the slab,
+                //   +h/2 = z2 + t * (z1 - z2)
+                //   t = (+h/2 - z2) / (z1 - z2) = numerPos2 / denom12
+                
+                var _numerPos =  halfHeight - _z_array[2];
+                var _denom02  = _z_array[0] - _z_array[2];
+                var _denom12  = _z_array[1] - _z_array[2];
+                
+                var _dx02 = (_xy_array[0][0] - _xy_array[2][0]) / _denom02;
+                var _dy02 = (_xy_array[0][1] - _xy_array[2][1]) / _denom02;
+                var _dx12 = (_xy_array[1][0] - _xy_array[2][0]) / _denom12;
+                var _dy12 = (_xy_array[1][1] - _xy_array[2][1]) / _denom12;
+                
+                var _x = _xy_array[2][0];
+                var _y = _xy_array[2][1];
+                
+                var _polygon = [
+                    [_xy_array[0][0], _xy_array[0][1]],
+                    [_xy_array[1][0], _xy_array[1][1]],
+                    [_x + _numerPos*_dx12, _y + _numerPos*_dy12],
+                    [_x + _numerPos*_dx02, _y + _numerPos*_dy02],
+                ];
+                
+                var _intersects = __BonkDiskOverlapsPolygon(_polygon, radius);
+                return new BonkResult(_intersects);
+            }
         }
-        */
-        
-        return new BonkResult(false);
+        else // z[0] == halfHeight
+        {
+            if (_z_array[1] > halfHeight)
+            {
+                // Case 1b of Figure 1 of the PDF.
+                var _intersects = __BonkDiskOverlapsPoint(_xy_array[0][0], _xy_array[0][1], radius);
+                return new BonkResult(_intersects);
+            }
+            else
+            {
+                // Case 2b of Figure 1 of the PDF.
+                var _intersects = __BonkDiskOverlapsSegment(_xy_array[0][0], _xy_array[0][1], _xy_array[1][0], _xy_array[1][1], radius);
+                return new BonkResult(_intersects);
+            }
+        }
     }
     
     #endregion
