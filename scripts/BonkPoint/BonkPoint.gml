@@ -212,5 +212,10 @@ function BonkPoint() constructor
         //         _point[0], _point[1], _point[2] ];
     }
     
+    static __CollisionWithTriangle = function(_other)
+    {
+        return new BonkResult(false);
+    }
+    
     #endregion
 }

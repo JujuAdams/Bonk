@@ -227,5 +227,10 @@ function BonkSphere() constructor
         //         _distance - _sphere_min ];
     }
     
+    static __CollisionWithTriangle = function(_other)
+    {
+        return new BonkResult(false);
+    }
+    
     #endregion
 }

@@ -140,5 +140,10 @@ function BonkPlane() constructor
         return new BonkResult(false);
     }
     
+    static __CollisionWithTriangle = function(_other)
+    {
+        return new BonkResult(false);
+    }
+    
     #endregion
 }

@@ -194,5 +194,10 @@ function BonkAABB() constructor
         //         -_distance ];
     }
     
+    static __CollisionWithTriangle = function(_other)
+    {
+        return new BonkResult(false);
+    }
+    
     #endregion
 }

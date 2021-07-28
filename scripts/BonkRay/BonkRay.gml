@@ -338,5 +338,10 @@ function BonkRay() constructor
         return (new BonkResult(true, _plane_normal[0], _plane_normal[1], _plane_normal[2])).__SetPoint(_pos[0], _pos[1], _pos[2]);
     }
     
+    static __CollisionWithTriangle = function(_other)
+    {
+        return new BonkResult(false);
+    }
+    
     #endregion
 }
