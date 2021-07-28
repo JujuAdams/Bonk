@@ -5,6 +5,11 @@
 
 function BonkDebugDrawTriangle(_x1, _y1, _z1, _x2, _y2, _z2, _x3, _y3, _z3, _color = BONK_DRAW_DEFAULT_DIFFUSE_COLOR) 
 {
+    var _oldCullmode = gpu_get_cullmode();
+    gpu_set_cullmode(cull_noculling);
+    
+    
+    
     var _dx12 = _x2 - _x1;
     var _dy12 = _y2 - _y1;
     var _dz12 = _z2 - _z1;
@@ -37,4 +42,5 @@ function BonkDebugDrawTriangle(_x1, _y1, _z1, _x2, _y2, _z2, _x3, _y3, _z3, _col
     
     
     vertex_delete_buffer(_vertexBuffer);
+    gpu_set_cullmode(cull_noculling);
 }
