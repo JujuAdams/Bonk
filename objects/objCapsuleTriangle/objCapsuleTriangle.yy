@@ -29,7 +29,7 @@
     "path": "Bonk.yyp",
   },
   "resourceVersion": "1.0",
-  "name": "objCapsule",
+  "name": "objCapsuleTriangle",
   "tags": [],
   "resourceType": "GMObject",
 }

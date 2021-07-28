@@ -244,11 +244,11 @@ function BonkSphere() constructor
             var _j = (_i+1) mod 3;
     	    var _vertex_i = _vertices[_i];
     	    var _vertex_j = _vertices[_j];
-    
+            
     	    var _t = BonkVecSubtract(_sphere_centre, _vertex_i);
     	    var _u = BonkVecSubtract(_vertex_j, _vertex_i);
     	    var _w = BonkVecCross(_t, _u);
-    
+            
     	    if (BonkVecDot(_w, _normal) <= 0)
     	    {
     	        var _dp = clamp(BonkVecDot(_u, _t) / BonkVecSqiareLength(_u), 0, 1);
@@ -256,13 +256,13 @@ function BonkSphere() constructor
     	        break;
     	    }
     	}
-
+        
     	if (_i >= 3)
     	{
     	    var _dp = BonkVecDot(_normal, _t);
     	    var _contactPoint = BonkVecSubtract(_sphere_centre, BonkVecMultiply(_normal, _dp));
     	}
-
+        
     	var _pushoutNormal = BonkVecSubtract(_sphere_centre, _contactPoint);
     	var _pushoutDistance = BonkVecLength(_pushoutNormal);
     	if (_pushoutDistance >= radius) return new BonkResult(false);

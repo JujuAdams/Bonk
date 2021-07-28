@@ -167,28 +167,37 @@ function BonkCapsule() constructor
     	//Find the point of collision with the triangle's plane
     	var _t = (_planeDistance - BonkVecDot(_normal, _ray0)) / _n_dot_dir;
         _t = clamp(_t, 0, 1);
-        var _p = BonkVecAdd(_ray0, BonkVecMultiply(_dir, _t));
+        var _sphere_centre = BonkVecAdd(_ray0, BonkVecMultiply(_dir, _t));
         
-    	//Check if P is inside the triangle
-    	var _c = BonkVecCross(BonkVecSubtract(          _p, _vertices[0]),
-    	                      BonkVecSubtract(_vertices[1], _vertices[0]));
-    	if (BonkVecDot(_normal, _c) < -radius*radius) return new BonkResult(false);
+    	for(var _i = 0; _i < 3; _i++)
+    	{
+            var _j = (_i+1) mod 3;
+    	    var _vertex_i = _vertices[_i];
+    	    var _vertex_j = _vertices[_j];
+            
+    	    var _t = BonkVecSubtract(_sphere_centre, _vertex_i);
+    	    var _u = BonkVecSubtract(_vertex_j, _vertex_i);
+    	    var _w = BonkVecCross(_t, _u);
+            
+    	    if (BonkVecDot(_w, _normal) <= 0)
+    	    {
+    	        var _dp = clamp(BonkVecDot(_u, _t) / BonkVecSqiareLength(_u), 0, 1);
+    	        var _contactPoint = BonkVecAdd(_vertex_i, BonkVecMultiply(_u, _dp));
+    	        break;
+    	    }
+    	}
         
-    	var _c = BonkVecCross(BonkVecSubtract(          _p, _vertices[1]),
-    	                      BonkVecSubtract(_vertices[2], _vertices[1]));
-    	if (BonkVecDot(_normal, _c) < -radius*radius) return new BonkResult(false);
+    	if (_i >= 3)
+    	{
+    	    var _dp = BonkVecDot(_normal, _t);
+    	    var _contactPoint = BonkVecSubtract(_sphere_centre, BonkVecMultiply(_normal, _dp));
+    	}
         
-    	var _c = BonkVecCross(BonkVecSubtract(          _p, _vertices[2]),
-    	                      BonkVecSubtract(_vertices[0], _vertices[2]));
-    	if (BonkVecDot(_normal, _c) < -radius*radius) return new BonkResult(false);
+    	var _pushoutNormal = BonkVecSubtract(_sphere_centre, _contactPoint);
+    	var _pushoutDistance = BonkVecLength(_pushoutNormal);
+    	if (_pushoutDistance >= radius) return new BonkResult(false);
         
-        //FIXME - Return actual collision information
         return new BonkResult(true);
-        
-    	////Put the point of collision back into worldspace
-    	//_p = vec3_add( _position, _p );
-    	//return [ _plane[0], _plane[1], _plane[2],
-    	//         _p[0], _p[1], _p[2] ];
     }
     
     static __CollisionWithCapsule = function(_other)

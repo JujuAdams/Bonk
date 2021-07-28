@@ -31,7 +31,7 @@
     {"id":{"name":"BonkDebugDrawAABB","path":"scripts/BonkDebugDrawAABB/BonkDebugDrawAABB.yy",},"order":3,},
     {"id":{"name":"BonkQuatNormalize","path":"scripts/BonkQuatNormalize/BonkQuatNormalize.yy",},"order":15,},
     {"id":{"name":"BonkQuatIdentity","path":"scripts/BonkQuatIdentity/BonkQuatIdentity.yy",},"order":0,},
-    {"id":{"name":"objCapsule","path":"objects/objCapsule/objCapsule.yy",},"order":9,},
+    {"id":{"name":"objCapsuleTriangle","path":"objects/objCapsuleTriangle/objCapsuleTriangle.yy",},"order":9,},
     {"id":{"name":"BonkDebugDrawRay","path":"scripts/BonkDebugDrawRay/BonkDebugDrawRay.yy",},"order":2,},
     {"id":{"name":"BonkTriangle","path":"scripts/BonkTriangle/BonkTriangle.yy",},"order":6,},
     {"id":{"name":"BonkVecAbs","path":"scripts/BonkVecAbs/BonkVecAbs.yy",},"order":10,},
