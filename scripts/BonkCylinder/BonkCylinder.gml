@@ -138,125 +138,101 @@ function BonkCylinder() constructor
     
     static __CollisionWithTriangle = function(_other)
     {
+        if (keyboard_check_pressed(ord("T")))
+        {
+            show_debug_message("!");
+        }
         
+        var _cylinder_origin = [x, y, z];
         
+        var _triangle = [ [_other.x1, _other.y1, _other.z1],
+                          [_other.x2, _other.y2, _other.z2],
+                          [_other.x3, _other.y3, _other.z3] ];
         
+        //Move the triangle into the 
+        _triangle[@ 0] = BonkVecSubtract(_triangle[0], _cylinder_origin);
+        _triangle[@ 1] = BonkVecSubtract(_triangle[1], _cylinder_origin);
+        _triangle[@ 2] = BonkVecSubtract(_triangle[2], _cylinder_origin);
+        
+        #region Sort the triangle vertices so that z0 <= z1 <= z2
+        
+        var _tri_z0 = _triangle[0][2];
+        var _tri_z1 = _triangle[1][2];
+        var _tri_z2 = _triangle[2][2];
+        
+        if (_tri_z0 < _tri_z1)
+        {
+            if (_tri_z2 < _tri_z0)
+            {
+                var _t0 = 2;
+                var _t1 = 0;
+                var _t2 = 1;
+            }
+            else if (_tri_z2 < _tri_z1)
+            {
+                var _t0 = 0;
+                var _t1 = 2;
+                var _t2 = 1;
+            }
+            else
+            {
+                var _t0 = 0;
+                var _t1 = 1;
+                var _t2 = 2;
+            }
+        }
+        else
+        {
+            if (_tri_z2 < _tri_z1)
+            {
+                var _t0 = 2;
+                var _t1 = 1;
+                var _t2 = 0;
+            }
+            else if (_tri_z2 < _tri_z0)
+            {
+                var _t0 = 1;
+                var _t1 = 2;
+                var _t2 = 0;
+            }
+            else
+            {
+                var _t0 = 1;
+                var _t1 = 0;
+                var _t2 = 2;
+            }
+        }
+        
+        #endregion
+        
+        //Maintain the xy-components and z-components separately. The z-components are used for clipping against bottom and top
+        //planes of the cylinder. The xy-components are used for disk-containment tests x*x + y*y <= r*r
+        var _z_array = [_triangle[_t0][2], _triangle[_t1][2], _triangle[_t2][2]];
+        
+        //Attempt an early exit by testing whether the triangle is strictly outside the cylinder slab -h/2 < z < h/2
+        if ((_z_array[0] > halfHeight) || (_z_array[2] < -halfHeight))
+        {
+            return new BonkResult(false);
+        }
+        
+        //Project the triangle vertices onto the xy-plane
+        var _xy_array = [ [_triangle[_t0][0], _triangle[_t0][1]],
+                          [_triangle[_t1][0], _triangle[_t1][1]],
+                          [_triangle[_t2][0], _triangle[_t2][1]] ];
+        
+        //Attempt an early exit when the triangle does not have to be clipped
+        if ((-halfHeight <= _z_array[0]) && (_z_array[2] <= halfHeight))
+        {
+            //The triangle is between the planes of the top-disk and the bottom disk of the cylinder. Determine whether the
+            //projection of the triangle onto a plane perpendicular to the cylinder axis overlaps the disk of projection
+            //of the cylinder onto the same plane
+            var _intersects = __BonkDiskOverlapsPolygon(_xy_array, radius);
+            return new BonkResult(_intersects);
+        }
         
         
         
         /*
-        Result operator()(Triangle3<Real> const& triangle, Cylinder3<Real> const& cylinder)
-        {
-            // Get a right-handed orthonormal basis from the cylinder axis
-            // direction.
-            std::array<Vector3<Real>, 3> basis{};  // {U2,U0,U1}
-            basis[0] = cylinder.axis.direction;
-            ComputeOrthogonalComplement(1, basis.data());
-
-            // Compute coordinates of the triangle vertices in the coordinate
-            // system {C;U0,U1,U2}, where C is the cylinder center and U2 is
-            // the cylinder direction. The basis {U0,U1,U2} is orthonormal and
-            // right-handed.
-            std::array<Vector3<Real>, 3> P{};
-            for (size_t i = 0; i < 3; ++i)
-            {
-                Vector3<Real> delta = triangle.v[i] - cylinder.axis.origin;
-                P[i][0] = Dot(basis[1], delta);  // x[i]
-                P[i][1] = Dot(basis[2], delta);  // y[i]
-                P[i][2] = Dot(basis[0], delta);  // z[i]
-            }
-
-            // Sort the triangle vertices so that z[0] <= z[1] <= z[2].
-            size_t j0, j1, j2;
-            if (P[0][2] < P[1][2])
-            {
-                if (P[2][2] < P[0][2])
-                {
-                    j0 = 2;
-                    j1 = 0;
-                    j2 = 1;
-                }
-                else if (P[2][2] < P[1][2])
-                {
-                    j0 = 0;
-                    j1 = 2;
-                    j2 = 1;
-                }
-                else
-                {
-                    j0 = 0;
-                    j1 = 1;
-                    j2 = 2;
-                }
-            }
-            else
-            {
-                if (P[2][2] < P[1][2])
-                {
-                    j0 = 2;
-                    j1 = 1;
-                    j2 = 0;
-                }
-                else if (P[2][2] < P[0][2])
-                {
-                    j0 = 1;
-                    j1 = 2;
-                    j2 = 0;
-                }
-                else
-                {
-                    j0 = 1;
-                    j1 = 0;
-                    j2 = 2;
-                }
-            }
-
-            std::array<Real, 3> z = { P[j0][2], P[j1][2], P[j2][2] };
-
-            // Maintain the xy-components and z-components separately. The
-            // z-components are used for clipping against bottom and top
-            // planes of the cylinder. The xy-components are used for
-            // disk-containment tests x * x + y * y <= r * r.
-
-            // Attempt an early exit by testing whether the triangle is
-            // strictly outside the cylinder slab -h/2 < z < h/2.
-            Real const hhalf = static_cast<Real>(0.5) * cylinder.height;
-            if (z[2] < -hhalf)
-            {
-                // The triangle is strictly below the bottom-disk plane of
-                // the cylinder. See case 0a of Figure 1 in the PDF.
-                return Result(false);
-            }
-
-            if (z[0] > hhalf)
-            {
-                // The triangle is strictly above the top-disk plane of the
-                // cylinder. See case 0b of Figure 1 in the PDF.
-                return Result(false);
-            }
-
-            // Project the triangle vertices onto the xy-plane.
-            std::array<Vector2<Real>, 3> Q
-            {
-                Vector2<Real>{ P[j0][0], P[j0][1] },
-                Vector2<Real>{ P[j1][0], P[j1][1] },
-                Vector2<Real>{ P[j2][0], P[j2][1] }
-            };
-
-            // Attempt an early exit when the triangle does not have to be
-            // clipped.
-            Real const& radius = cylinder.radius;
-            if (-hhalf <= z[0] && z[2] <= hhalf)
-            {
-                // The triangle is between the planes of the top-disk and
-                // the bottom disk of the cylinder. Determine whether the
-                // projection of the triangle onto a plane perpendicular
-                // to the cylinder axis overlaps the disk of projection
-                // of the cylinder onto the same plane. See case 3a of
-                // Figure 1 of the PDF.
-                return Result(DiskOverlapsPolygon(3, Q.data(), radius));
-            }
-
             // Clip against |z| <= h/2. At this point we know that z2 >= -h/2
             // and z0 <= h/2 with either z0 < -h/2 or z2 > h/2 or both. The
             // test-intersection query involves testing for overlap between
@@ -939,6 +915,8 @@ function BonkCylinder() constructor
             };
         }
         */
+        
+        return new BonkResult(false);
     }
     
     #endregion

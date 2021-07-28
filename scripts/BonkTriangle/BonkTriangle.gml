@@ -1,6 +1,6 @@
 function BonkTriangle() constructor
 {
-    static __bonkType = __BONK_TYPE.POINT;
+    static __bonkType = __BONK_TYPE.TRIANGLE;
     
     static toString = function()
     {

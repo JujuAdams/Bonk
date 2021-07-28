@@ -127,6 +127,7 @@ function __BonkSharedCollisionHandler(_other)
         case __BONK_TYPE.AABB:     return __CollisionWithAABB(    _other); break;
         case __BONK_TYPE.PLANE:    return __CollisionWithPlane(   _other); break;
         case __BONK_TYPE.CYLINDER: return __CollisionWithCylinder(_other); break;
+        case __BONK_TYPE.TRIANGLE: return __CollisionWithTriangle(_other); break;
         
         default:
             switch(global.__bonkErrorLevel)
@@ -374,27 +375,24 @@ function __BonkDiskOverlapsSegment(_x0, _y0, _x1, _y1, _radius)
 
 function __BonkDiskOverlapsPolygon(_point_array, _radius)
 {
-    var _size  = array_length(_point_array);
-    var _count = _size div 2;
+    var _size = array_length(_point_array);
     
     //Test whether the polygon contains the origin (0,0)
     var _x0 = undefined;
     var _y0 = undefined;
-    var _x1 = _point_array[0];
-    var _y1 = _point_array[1];
+    var _x1 = _point_array[_size-1][0];
+    var _y1 = _point_array[_size-1][1];
     
     var _positive = 0;
     var _negative = 0;
     
-    var _i = 2;
-    repeat(_count)
+    var _i = 0;
+    repeat(_size)
     {
-        var _j = (_i + 2) mod _size;
-        
         _x0 = _x1;
         _y0 = _y1;
-        _x1 = _point_array[_j  ];
-        _y1 = _point_array[_j+1];
+        _x1 = _point_array[_i][0];
+        _y1 = _point_array[_i][1];
         
         var _dx = _x0 - _x1;
         var _dy = _y0 - _y1;
@@ -409,7 +407,7 @@ function __BonkDiskOverlapsPolygon(_point_array, _radius)
             ++_negative;
         }
         
-        _i = _j;
+        ++_i;
     }
     
     //FIXME - This can be optimised surely
@@ -418,22 +416,22 @@ function __BonkDiskOverlapsPolygon(_point_array, _radius)
     //Test whether any edge is overlapped by the disk
     var _x0 = undefined;
     var _y0 = undefined;
-    var _x1 = _point_array[0];
-    var _y1 = _point_array[1];
+    var _x1 = _point_array[_size-1][0];
+    var _y1 = _point_array[_size-1][1];
     
-    var _i = 2;
-    repeat(_count)
+    var _i = 0;
+    repeat(_size)
     {
-        var _j = (_i + 2) mod _size;
-        
         _x0 = _x1;
         _y0 = _y1;
-        _x1 = _point_array[_j  ];
-        _y1 = _point_array[_j+1];
+        _x1 = _point_array[_i][0];
+        _y1 = _point_array[_i][1];
         
         if (__BonkDiskOverlapsSegment(_x0, _y0, _x1, _y1, _radius))
         {
             return true;
         }
+        
+        ++_i;
     }
 }
