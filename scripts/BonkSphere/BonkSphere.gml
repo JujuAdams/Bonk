@@ -229,7 +229,45 @@ function BonkSphere() constructor
     
     static __CollisionWithTriangle = function(_other)
     {
-        return new BonkResult(false);
+    	var _sphere_centre = [x, y, z];
+        
+        with(_other)
+        {
+            var _vertices = [[x1, y1, z1], [x2, y2, z2], [x3, y3, z3]];
+            
+            __CalculateNormal();
+            var _normal = [normalX, normalY, normalZ];
+        }
+        
+    	for(var _i = 0; _i < 3; _i++)
+    	{
+            var _j = (_i+1) mod 3;
+    	    var _vertex_i = _vertices[_i];
+    	    var _vertex_j = _vertices[_j];
+    
+    	    var _t = BonkVecSubtract(_sphere_centre, _vertex_i);
+    	    var _u = BonkVecSubtract(_vertex_j, _vertex_i);
+    	    var _w = BonkVecCross(_t, _u);
+    
+    	    if (BonkVecDot(_w, _normal) <= 0)
+    	    {
+    	        var _dp = clamp(BonkVecDot(_u, _t) / BonkVecSqiareLength(_u), 0, 1);
+    	        var _contactPoint = BonkVecAdd(_vertex_i, BonkVecMultiply(_u, _dp));
+    	        break;
+    	    }
+    	}
+
+    	if (_i >= 3)
+    	{
+    	    var _dp = BonkVecDot(_normal, _t);
+    	    var _contactPoint = BonkVecSubtract(_sphere_centre, BonkVecMultiply(_normal, _dp));
+    	}
+
+    	var _pushoutNormal = BonkVecSubtract(_sphere_centre, _contactPoint);
+    	var _pushoutDistance = BonkVecLength(_pushoutNormal);
+    	if (_pushoutDistance >= radius) return new BonkResult(false);
+        
+        return new BonkResult(true);
     }
     
     static __CollisionWithCapsule = function(_other)

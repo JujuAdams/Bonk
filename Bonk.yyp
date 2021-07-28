@@ -21,6 +21,7 @@
     {"id":{"name":"BonkQuatGetAxisAngle","path":"scripts/BonkQuatGetAxisAngle/BonkQuatGetAxisAngle.yy",},"order":20,},
     {"id":{"name":"BonkVecDot","path":"scripts/BonkVecDot/BonkVecDot.yy",},"order":3,},
     {"id":{"name":"BonkQuatDot","path":"scripts/BonkQuatDot/BonkQuatDot.yy",},"order":12,},
+    {"id":{"name":"objSphereTriangle","path":"objects/objSphereTriangle/objSphereTriangle.yy",},"order":10,},
     {"id":{"name":"BonkQuatDuplicate","path":"scripts/BonkQuatDuplicate/BonkQuatDuplicate.yy",},"order":7,},
     {"id":{"name":"__shdBonk","path":"shaders/__shdBonk/__shdBonk.yy",},"order":1,},
     {"id":{"name":"BonkScreenspaceToWorldspace","path":"scripts/BonkScreenspaceToWorldspace/BonkScreenspaceToWorldspace.yy",},"order":0,},

@@ -340,11 +340,6 @@ function BonkRay() constructor
     
     static __CollisionWithTriangle = function(_other)
     {
-        if (keyboard_check_pressed(ord("T")))
-        {
-            show_debug_message("!");
-        }
-        
         with(_other)
         {
             var _vertices = [[x1, y1, z1], [x2, y2, z2], [x3, y3, z3]];
@@ -380,6 +375,7 @@ function BonkRay() constructor
     	                      BonkVecSubtract(_vertices[0], _vertices[2]));
     	if (BonkVecDot(_normal, _c) < 0) return new BonkResult(false);
         
+        //FIXME - Return actual collision information
         return new BonkResult(true);
         
     	////Put the point of collision back into worldspace
