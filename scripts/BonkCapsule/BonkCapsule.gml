@@ -142,10 +142,7 @@ function BonkCapsule() constructor
     
     static __CollisionWithTriangle = function(_other)
     {
-        if (keyboard_check_pressed(ord("T")))
-        {
-            show_debug_message("!");
-        }
+        //Similar to the solution three.js uses
         
         with(_other)
         {
@@ -162,36 +159,24 @@ function BonkCapsule() constructor
         var _distance1 = (BonkVecDot(_normal, _ray1) - _planeDistance) - radius;
         var _distance2 = (BonkVecDot(_normal, _ray2) - _planeDistance) - radius;
         
-        if (((_distance1 > 0) && (_distance2 > 0)) || ((_distance1 < -radius) && (_distance2 < -radius)))
+        if (((_distance1 > 0) && (_distance2 > 0)) || ((_distance1 < -2*radius) && (_distance2 < -2*radius)))
         {
             return new BonkResult(false);
         }
         
         var _delta = abs(_distance1 / (abs(_distance1) + abs(_distance2)));
-        var _intersectionPoint = BonkVecAdd(_ray1, BonkVecMultiply(_ray2, _delta));
+        var _intersectionPoint = BonkVecAdd(_ray1, BonkVecMultiply(BonkVecSubtract(_ray2, _ray1), _delta));
         
-        if (_other.ContainsPoint(_intersectionPoint))
-        {
-            return new BonkResult(true);
-        }
+        if (_other.ContainsPoint(_intersectionPoint)) return new BonkResult(true);
         
-        var _capsuleAxis = [_ray1, _ray2];
-        var _edges = [[_vertices[0], _vertices[1]], [_vertices[1], _vertices[2]], [_vertices[2], _vertices[0]]];
+        var _minimumPoints = LineLineMinimumPoints(_ray1, _ray2, _vertices[0], _vertices[1]);
+        if (BonkVecSqiareLength(BonkVecSubtract(_minimumPoints[1], _minimumPoints[0])) < radius*radius) return new BonkResult(true);
         
-        var _i = 0;
-        repeat(3)
-        {
-            var _edge = _edges[_i];
-            
-            var _minimumPoints = LineLineMinimumPoints(_capsuleAxis, _edge);
-            
-            if (BonkVecSqiareLength(BonkVecSubtract(_minimumPoints[1], _minimumPoints[0])) < radius*radius)
-            {
-                return new BonkResult(true);
-            }
-            
-            ++_i;
-        }
+        var _minimumPoints = LineLineMinimumPoints(_ray1, _ray2, _vertices[1], _vertices[2]);
+        if (BonkVecSqiareLength(BonkVecSubtract(_minimumPoints[1], _minimumPoints[0])) < radius*radius) return new BonkResult(true);
+        
+        var _minimumPoints = LineLineMinimumPoints(_ray1, _ray2, _vertices[2], _vertices[0]);
+        if (BonkVecSqiareLength(BonkVecSubtract(_minimumPoints[1], _minimumPoints[0])) < radius*radius) return new BonkResult(true);
         
         return new BonkResult(false);
     }
@@ -207,49 +192,87 @@ function BonkCapsule() constructor
     
     #region Helpers
     
-    static LineLineMinimumPoints = function(_lineA, _lineB)
+    static LineLineMinimumPoints = function(_p1, _p2, _q1, _q2)
     {
-        var _r = BonkVecSubtract(_lineA[1], _lineA[0]);
-        var _s = BonkVecSubtract(_lineB[1], _lineB[0]);
-        var _w = BonkVecSubtract(_lineB[0], _lineA[0]);
+        //https://zalo.github.io/blog/closest-point-between-segments/
         
-        var _a = BonkVecDot(_r, _s);
-        var _b = BonkVecDot(_r, _r);
-        var _c = BonkVecDot(_s, _s);
-        var _d = BonkVecDot(_s, _w);
-        var _e = BonkVecDot(_r, _w);
+        var _pDir = BonkVecSubtract(_p2, _p1);
+        var _qDir = BonkVecSubtract(_q2, _q1);
+        var _pSquareLength = BonkVecSqiareLength(_pDir);
+        var _qSquareLength = BonkVecSqiareLength(_qDir);
         
-        var _t1 = undefined;
-        var _t2 = undefined;
-        var _divisor = _b*_c - _a*_a;
+        var _inPlaneA = BonkVecSubtract(_p1, BonkVecMultiply(_qDir, BonkVecDot(BonkVecSubtract(_p1, _q1), _qDir) / _qSquareLength));
+        var _inPlaneB = BonkVecSubtract(_p2, BonkVecMultiply(_qDir, BonkVecDot(BonkVecSubtract(_p2, _q1), _qDir) / _qSquareLength));
+        var _inPlaneBA = BonkVecSubtract(_inPlaneB, _inPlaneA);
         
-        if (abs(_divisor) <= 0)
+        var _squareLength = BonkVecSqiareLength(_inPlaneBA);
+        if (_squareLength == 0)
         {
-            var _d1 = -_d / _c;
-            var _d2 = (_a - _d) / _c;
-            
-            if (abs(_d1 - 0.5) < abs(_d2 - 0.5))
-            {
-                _t1 = 0;
-                _t2 = _d1;
-            }
-            else
-            {
-                _t1 = 1;
-                _t2 = _d2;
-            }
+            var _t = 0;
         }
         else
         {
-            _t1 = (_d*_a + _e*_c) / _divisor;
-            _t2 = (_t1*_a - _d) / _c;
+            var _t = BonkVecDot(BonkVecSubtract(_q1, _inPlaneA), _inPlaneBA) / _squareLength;
+                _t = clamp(_t, 0, 1);
         }
         
-        _t1 = clamp(_t1, 0, 1);
-        _t2 = clamp(_t2, 0, 1);
+        var _segABtoLineCD = BonkVecAdd(_p1, BonkVecMultiply(_pDir, _t));
         
-        return [ BonkVecAdd(_lineA[0], BonkVecMultiply(_r, _t1)),
-                 BonkVecAdd(_lineB[0], BonkVecMultiply(_s, _t2)) ];
+        var _t = BonkVecDot(BonkVecSubtract(_segABtoLineCD, _q1), _qDir) / _qSquareLength;
+            _t = clamp(_t, 0, 1);
+        var _segCDtoSegAB = BonkVecAdd(_q1, BonkVecMultiply(_qDir, _t));
+        
+        var _t = BonkVecDot(BonkVecSubtract(_segCDtoSegAB, _p1), _pDir) / _pSquareLength;
+            _t = clamp(_t, 0, 1);
+        var _segABtoSegCD = BonkVecAdd(_p1, BonkVecMultiply(_pDir, _t));
+        
+        return [ _segCDtoSegAB, _segABtoSegCD ];
+        
+        // three.js
+        // This seems to be very buggy and I'm sure not why
+        
+        //var _r = BonkVecSubtract(_p2, _p1);
+        //var _s = BonkVecSubtract(_q2, _q1);
+        //var _w = BonkVecSubtract(_q1, _p1);
+        //
+        //var _a = BonkVecDot(_r, _s);
+        //var _b = BonkVecDot(_r, _r);
+        //var _c = BonkVecDot(_s, _s);
+        //var _d = BonkVecDot(_s, _w);
+        //var _e = BonkVecDot(_r, _w);
+        //
+        //var _t1 = undefined;
+        //var _t2 = undefined;
+        //var _divisor = _b*_c - _a*_a;
+        //
+        //if (_divisor == 0)
+        //{
+        //    //Lines are coplanar and parallel
+        //    var _d1 = -_d / _c;
+        //    var _d2 = (_a - _d) / _c;
+        //    
+        //    if (abs(_d1 - 0.5) < abs(_d2 - 0.5))
+        //    {
+        //        _t1 = 0;
+        //        _t2 = _d1;
+        //    }
+        //    else
+        //    {
+        //        _t1 = 1;
+        //        _t2 = _d2;
+        //    }
+        //}
+        //else
+        //{
+        //    _t1 = (_d*_a + _e*_c) / _divisor;
+        //    _t2 = (_t1*_a - _d) / _c;
+        //}
+        //
+        //_t1 = clamp(_t1, 0, 1);
+        //_t2 = clamp(_t2, 0, 1);
+        //
+        //return [ BonkVecAdd(_p1, BonkVecMultiply(_r, _t1)),
+        //         BonkVecAdd(_q2, BonkVecMultiply(_s, -_t2)) ];
     }
     
     #endregion
