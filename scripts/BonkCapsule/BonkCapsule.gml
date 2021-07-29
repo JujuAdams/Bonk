@@ -146,8 +146,6 @@ function BonkCapsule() constructor
         
         with(_other)
         {
-            var _vertices = [[x1, y1, z1], [x2, y2, z2], [x3, y3, z3]];
-            
             __CalculateNormal();
             var _normal = [normalX, normalY, normalZ];
     	    var _planeDistance = planeDistance;
@@ -167,16 +165,53 @@ function BonkCapsule() constructor
         var _delta = abs(_distance1 / (abs(_distance1) + abs(_distance2)));
         var _intersectionPoint = BonkVecAdd(_ray1, BonkVecMultiply(BonkVecSubtract(_ray2, _ray1), _delta));
         
-        if (_other.ContainsPoint(_intersectionPoint)) return new BonkResult(true);
+        if (_other.ContainsPoint(_intersectionPoint))
+        {
+            return new BonkResult(true, _normal[0], _normal[1], _normal[2], abs(min(_distance1, _distance2)));
+        }
         
-        var _minimumPoints = LineLineMinimumPoints(_ray1, _ray2, _vertices[0], _vertices[1]);
-        if (BonkVecSqiareLength(BonkVecSubtract(_minimumPoints[1], _minimumPoints[0])) < radius*radius) return new BonkResult(true);
+        var _minimumPoints = LineLineMinimumPoints(_ray1, _ray2,
+                                                   [_other.x1, _other.y1, _other.z1],
+                                                   [_other.x2, _other.y2, _other.z2]);
+        var _distance = point_distance_3d(_minimumPoints[0][0], _minimumPoints[0][1], _minimumPoints[0][2],
+                                          _minimumPoints[1][0], _minimumPoints[1][1], _minimumPoints[1][2]);
+        if (_distance < radius)
+        {
+            _distance = max(math_get_epsilon(), _distance);
+            var _rx = (_minimumPoints[1][0] - _minimumPoints[0][0]) / _distance;
+            var _ry = (_minimumPoints[1][1] - _minimumPoints[0][1]) / _distance;
+            var _rz = (_minimumPoints[1][2] - _minimumPoints[0][2]) / _distance;
+            __BonkTrace("A: ", _rx, ",", _ry, ",", _rz);
+            return new BonkResult(true, _rx, _ry, _rz, radius - _distance);
+        }
         
-        var _minimumPoints = LineLineMinimumPoints(_ray1, _ray2, _vertices[1], _vertices[2]);
-        if (BonkVecSqiareLength(BonkVecSubtract(_minimumPoints[1], _minimumPoints[0])) < radius*radius) return new BonkResult(true);
+        var _minimumPoints = LineLineMinimumPoints(_ray1, _ray2,
+                                                   [_other.x2, _other.y2, _other.z2],
+                                                   [_other.x3, _other.y3, _other.z3]);
+        var _distance = point_distance_3d(_minimumPoints[0][0], _minimumPoints[0][1], _minimumPoints[0][2],
+                                          _minimumPoints[1][0], _minimumPoints[1][1], _minimumPoints[1][2]);
+        if (_distance < radius)
+        {
+            _distance = max(math_get_epsilon(), _distance);
+            var _rx = (_minimumPoints[1][0] - _minimumPoints[0][0]) / _distance;
+            var _ry = (_minimumPoints[1][1] - _minimumPoints[0][1]) / _distance;
+            var _rz = (_minimumPoints[1][2] - _minimumPoints[0][2]) / _distance;
+            return new BonkResult(true, _rx, _ry, _rz, radius - _distance);
+        }
         
-        var _minimumPoints = LineLineMinimumPoints(_ray1, _ray2, _vertices[2], _vertices[0]);
-        if (BonkVecSqiareLength(BonkVecSubtract(_minimumPoints[1], _minimumPoints[0])) < radius*radius) return new BonkResult(true);
+        var _minimumPoints = LineLineMinimumPoints(_ray1, _ray2,
+                                                   [_other.x3, _other.y3, _other.z3],
+                                                   [_other.x1, _other.y1, _other.z1]);
+        var _distance = point_distance_3d(_minimumPoints[0][0], _minimumPoints[0][1], _minimumPoints[0][2],
+                                          _minimumPoints[1][0], _minimumPoints[1][1], _minimumPoints[1][2]);
+        if (_distance < radius)
+        {
+            _distance = max(math_get_epsilon(), _distance);
+            var _rx = (_minimumPoints[1][0] - _minimumPoints[0][0]) / _distance;
+            var _ry = (_minimumPoints[1][1] - _minimumPoints[0][1]) / _distance;
+            var _rz = (_minimumPoints[1][2] - _minimumPoints[0][2]) / _distance;
+            return new BonkResult(true, _rx, _ry, _rz, radius - _distance);
+        }
         
         return new BonkResult(false);
     }
