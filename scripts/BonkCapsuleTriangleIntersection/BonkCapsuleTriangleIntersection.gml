@@ -128,7 +128,7 @@ function __BonkSegmentSegmentMinimumPoints(_ax, _ay, _az,    _bx, _by, _bz,    _
     var _ab_x = _bx - _ax,    _ab_y = _by - _ay,    _ab_z = _bz - _az;
     var _cd_x = _dx - _cx,    _cd_y = _dy - _cy,    _cd_z = _dz - _cz;
     var _ab_sqr_length = _ab_x*_ab_x + _ab_y*_ab_y + _ab_z*_ab_z;
-    var _cd_sqr_length = _cd_x*_cd_x + _cd_y*_ab_y + _cd_z*_cd_z;
+    var _cd_sqr_length = _cd_x*_cd_x + _cd_y*_cd_y + _cd_z*_cd_z;
     
     var _ac_x = _ax - _cx,    _ac_y = _ay - _cy,    _ac_z = _az - _az;
     var _bc_x = _bx - _cx,    _bc_y = _by - _cy,    _bc_z = _cz - _az;
