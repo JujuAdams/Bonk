@@ -2,11 +2,11 @@
   "isDnD": false,
   "isCompatibility": false,
   "parent": {
-    "name": "Debug Drawing",
-    "path": "folders/Bonk/Debug Drawing.yy",
+    "name": "Primitives",
+    "path": "folders/Bonk/Primitives.yy",
   },
   "resourceVersion": "1.0",
-  "name": "BonkDebugDrawCapsule",
+  "name": "BonkPoint",
   "tags": [],
   "resourceType": "GMScript",
 }

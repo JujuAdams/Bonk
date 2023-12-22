@@ -6,7 +6,7 @@
     "path": "folders/Bonk/Primitives.yy",
   },
   "resourceVersion": "1.0",
-  "name": "BonkCapsule",
+  "name": "BonkPoint",
   "tags": [],
   "resourceType": "GMScript",
 }

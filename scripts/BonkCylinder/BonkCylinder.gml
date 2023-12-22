@@ -1,10 +1,10 @@
-function BonkCapsule() constructor
+function BonkCylinder() constructor
 {
     static __bonkType = __BONK_TYPE.CAPSULE;
     
     static toString = function()
     {
-        return "capsule";
+        return "cylinder";
     }
     
     
