@@ -7,6 +7,7 @@
     {"id":{"name":"BonkQuatRotateLocalZ","path":"scripts/BonkQuatRotateLocalZ/BonkQuatRotateLocalZ.yy",},"order":3,},
     {"id":{"name":"BonkVecNormalize","path":"scripts/BonkVecNormalize/BonkVecNormalize.yy",},"order":5,},
     {"id":{"name":"BonkDebugDrawSphere","path":"scripts/BonkDebugDrawSphere/BonkDebugDrawSphere.yy",},"order":1,},
+    {"id":{"name":"BonkDebugDrawQuad","path":"scripts/BonkDebugDrawQuad/BonkDebugDrawQuad.yy",},"order":9,},
     {"id":{"name":"BonkQuatRotateVector","path":"scripts/BonkQuatRotateVector/BonkQuatRotateVector.yy",},"order":22,},
     {"id":{"name":"objSphereRaycast","path":"objects/objSphereRaycast/objSphereRaycast.yy",},"order":6,},
     {"id":{"name":"BonkMatrixInverse","path":"scripts/BonkMatrixInverse/BonkMatrixInverse.yy",},"order":0,},
