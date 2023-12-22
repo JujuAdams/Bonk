@@ -1,11 +1,11 @@
 {
   "resourceType": "GMScript",
   "resourceVersion": "1.0",
-  "name": "BonkSlope",
+  "name": "BonkRayInFloor",
   "isDnD": false,
   "isCompatibility": false,
   "parent": {
-    "name": "Primitives",
-    "path": "folders/Bonk/Primitives.yy",
+    "name": "Collisions",
+    "path": "folders/Bonk/Collisions.yy",
   },
 }

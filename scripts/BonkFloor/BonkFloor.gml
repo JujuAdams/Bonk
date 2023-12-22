@@ -1,4 +1,4 @@
-function BonkSlope() constructor
+function BonkFloor() constructor
 {
     static toString = function()
     {
