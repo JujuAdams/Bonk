@@ -233,14 +233,14 @@ function BonkCylinder() constructor
         
         var _pDir = BonkVecSubtract(_p2, _p1);
         var _qDir = BonkVecSubtract(_q2, _q1);
-        var _pSquareLength = BonkVecSqiareLength(_pDir);
-        var _qSquareLength = BonkVecSqiareLength(_qDir);
+        var _pSquareLength = BonkVecSquareLength(_pDir);
+        var _qSquareLength = BonkVecSquareLength(_qDir);
         
         var _inPlaneA = BonkVecSubtract(_p1, BonkVecMultiply(_qDir, BonkVecDot(BonkVecSubtract(_p1, _q1), _qDir) / _qSquareLength));
         var _inPlaneB = BonkVecSubtract(_p2, BonkVecMultiply(_qDir, BonkVecDot(BonkVecSubtract(_p2, _q1), _qDir) / _qSquareLength));
         var _inPlaneBA = BonkVecSubtract(_inPlaneB, _inPlaneA);
         
-        var _squareLength = BonkVecSqiareLength(_inPlaneBA);
+        var _squareLength = BonkVecSquareLength(_inPlaneBA);
         if (_squareLength == 0)
         {
             var _t = 0;

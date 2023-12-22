@@ -251,7 +251,7 @@ function BonkSphere() constructor
             
     	    if (BonkVecDot(_w, _normal) <= 0)
     	    {
-    	        var _dp = clamp(BonkVecDot(_u, _t) / BonkVecSqiareLength(_u), 0, 1);
+    	        var _dp = clamp(BonkVecDot(_u, _t) / BonkVecSquareLength(_u), 0, 1);
     	        var _contactPoint = BonkVecAdd(_vertex_i, BonkVecMultiply(_u, _dp));
     	        break;
     	    }

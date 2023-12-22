@@ -133,7 +133,7 @@ function BonkRay() constructor
         var _dot = BonkVecDot(_point_local, _diff);
         if (_dot < 0) return new BonkResult(false);
         
-        var _square_length = BonkVecSqiareLength(_diff);
+        var _square_length = BonkVecSquareLength(_diff);
         var _t = _dot / _square_length;
         if (_t > 1) return new BonkResult(false);
         
@@ -161,7 +161,7 @@ function BonkRay() constructor
         _dir = BonkVecMultiply(_dir, 1/_length);
         var _local = BonkVecSubtract(_ray_a, _centre);
         var _b = BonkVecDot(_local, _dir);
-        var _c = BonkVecSqiareLength(_local) - _radius*_radius;
+        var _c = BonkVecSquareLength(_local) - _radius*_radius;
         
         var _discriminant = _b*_b - _c;
         if (_discriminant < 0) return new BonkResult(false);
@@ -209,13 +209,13 @@ function BonkRay() constructor
             return new BonkResult(false);
         }
         
-        var _t = BonkVecDot(BonkVecCross(_other_local, _other_direction), _cross) / BonkVecSqiareLength(_cross);
+        var _t = BonkVecDot(BonkVecCross(_other_local, _other_direction), _cross) / BonkVecSquareLength(_cross);
         if ((_t < 0) || (_t > 1)) return new BonkResult(false);
         
         var _point = BonkVecAdd(_self_a, BonkVecMultiply(_self_direction, _t));
         
         //See if this lies on the segment
-        if (BonkVecSqiareLength(BonkVecSubtract(_point, _self_a)) + BonkVecSqiareLength(BonkVecSubtract(_point, _self_b)) > BonkVecSqiareLength(_other_direction))
+        if (BonkVecSquareLength(BonkVecSubtract(_point, _self_a)) + BonkVecSquareLength(BonkVecSubtract(_point, _self_b)) > BonkVecSquareLength(_other_direction))
         {
             return new BonkResult(false);
         }

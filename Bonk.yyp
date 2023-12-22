@@ -57,7 +57,7 @@
     {"id":{"name":"BonkVecLength","path":"scripts/BonkVecLength/BonkVecLength.yy",},"order":6,},
     {"id":{"name":"BonkMouseToWorldspace","path":"scripts/BonkMouseToWorldspace/BonkMouseToWorldspace.yy",},"order":1,},
     {"id":{"name":"BonkQuatInvert","path":"scripts/BonkQuatInvert/BonkQuatInvert.yy",},"order":14,},
-    {"id":{"name":"BonkVecSqiareLength","path":"scripts/BonkVecSqiareLength/BonkVecSqiareLength.yy",},"order":7,},
+    {"id":{"name":"BonkVecSquareLength","path":"scripts/BonkVecSquareLength/BonkVecSquareLength.yy",},"order":7,},
     {"id":{"name":"BonkQuatFromAxisAngle","path":"scripts/BonkQuatFromAxisAngle/BonkQuatFromAxisAngle.yy",},"order":9,},
     {"id":{"name":"BonkQuatEqual","path":"scripts/BonkQuatEqual/BonkQuatEqual.yy",},"order":18,},
     {"id":{"name":"BonkVecSubtract","path":"scripts/BonkVecSubtract/BonkVecSubtract.yy",},"order":1,},
