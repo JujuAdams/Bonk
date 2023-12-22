@@ -1,6 +1,6 @@
 function BonkCylinder() constructor
 {
-    static __bonkType = __BONK_TYPE.CAPSULE;
+    static __bonkType = __BONK_TYPE.CYLINDER;
     
     static toString = function()
     {
@@ -81,10 +81,7 @@ function BonkCylinder() constructor
     y1 = 0;
     z1 = 0;
     
-    x2 = 0;
-    y2 = 0;
-    z2 = 0;
-    
+    height = 0;
     radius = 0;
     
     #endregion
@@ -95,7 +92,7 @@ function BonkCylinder() constructor
     
     static DebugDraw = function(_color = BONK_DRAW_DEFAULT_DIFFUSE_COLOR)
     {
-        BonkDebugDrawCapsule(x1, y1, z1, x2, y2, z2, radius, _color);
+        BonkDebugDrawCylinder(x1, y1, z1, height, radius, _color);
     }
     
     #endregion
@@ -216,7 +213,7 @@ function BonkCylinder() constructor
         return new BonkResult(false);
     }
     
-    static __CollisionWithCapsule = function(_other)
+    static __CollisionWithCylinder = function(_other)
     {
         return new BonkResult(false);
     }

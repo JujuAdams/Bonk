@@ -31,7 +31,9 @@ enum __BONK_TYPE
     PLANE,
     AABB,
     TRIANGLE,
-    CAPSULE,
+    CYLINDER,
+    SLOPE,
+    WALL,
     //OBB,
     //CONVEX,
     __SIZE
@@ -126,7 +128,7 @@ function __BonkSharedCollisionHandler(_other)
         case __BONK_TYPE.AABB:     return __CollisionWithAABB(    _other); break;
         case __BONK_TYPE.PLANE:    return __CollisionWithPlane(   _other); break;
         case __BONK_TYPE.TRIANGLE: return __CollisionWithTriangle(_other); break;
-        case __BONK_TYPE.CAPSULE:  return __CollisionWithCapsule( _other); break;
+        case __BONK_TYPE.CYLINDER: return __CollisionWithCylinder( _other); break;
         
         default:
             switch(global.__bonkErrorLevel)

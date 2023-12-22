@@ -384,7 +384,7 @@ function BonkRay() constructor
     	//         _p[0], _p[1], _p[2] ];
     }
     
-    static __CollisionWithCapsule = function(_other)
+    static __CollisionWithCylinder = function(_other)
     {
         return new BonkResult(false);
     }

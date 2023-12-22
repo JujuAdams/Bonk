@@ -1,4 +1,4 @@
-with(capsule)
+with(cylinder)
 {
     if (keyboard_check(ord("J"))) { x1 -= 0.5; x2 -= 0.5; }
     if (keyboard_check(ord("L"))) { x1 += 0.5; x2 += 0.5; }

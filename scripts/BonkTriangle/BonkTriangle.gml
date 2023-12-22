@@ -199,7 +199,7 @@ function BonkTriangle() constructor
         return new BonkResult(false);
     }
     
-    static __CollisionWithCapsule = function(_other)
+    static __CollisionWithCylinder = function(_other)
     {
         return new BonkResult(false);
     }
