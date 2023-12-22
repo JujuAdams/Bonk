@@ -1,11 +1,11 @@
 {
   "resourceType": "GMScript",
   "resourceVersion": "1.0",
-  "name": "BonkDebugDrawAABB",
+  "name": "__BonkPrebuildCylinder",
   "isDnD": false,
   "isCompatibility": false,
   "parent": {
-    "name": "Debug Drawing",
-    "path": "folders/Bonk/Debug Drawing.yy",
+    "name": "(System)",
+    "path": "folders/Bonk/(System).yy",
   },
 }

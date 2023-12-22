@@ -9,6 +9,8 @@
 
 function BonkDebugDrawRay(_x1, _y1, _z1, _x2, _y2, _z2, _color = BONK_DRAW_DEFAULT_DIFFUSE_COLOR, _thickness = BONK_DRAW_RAY_THICKNESS)
 {
+    __BONK_GLOBAL
+    
     var _dx = _x2 - _x1;
     var _dy = _y2 - _y1;
     var _dz = _z2 - _z1;
@@ -29,10 +31,10 @@ function BonkDebugDrawRay(_x1, _y1, _z1, _x2, _y2, _z2, _color = BONK_DRAW_DEFAU
     matrix_set(matrix_world, _matrix);
     
     shader_set(__shdBonk);
-    shader_set_uniform_f(global.__bonkUniform_shdBonk_u_vColor, color_get_red(  _color)/255,
-                                                                color_get_green(_color)/255,
-                                                                color_get_blue( _color)/255);
-    vertex_submit(global.__bonkRay, pr_trianglelist, -1);
+    shader_set_uniform_f(_global.__bonkUniform_shdBonk_u_vColor, color_get_red(  _color)/255,
+                                                                 color_get_green(_color)/255,
+                                                                 color_get_blue( _color)/255);
+    vertex_submit(_global.__bonkRay, pr_trianglelist, -1);
     shader_reset();
     
     matrix_set(matrix_world, _worldMatrix);

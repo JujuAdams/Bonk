@@ -1,7 +1,5 @@
 function BonkCylinder() constructor
 {
-    static __bonkType = __BONK_TYPE.CYLINDER;
-    
     static toString = function()
     {
         return "cylinder";

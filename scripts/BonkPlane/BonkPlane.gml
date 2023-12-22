@@ -1,7 +1,5 @@
 function BonkPlane() constructor
 {
-    static __bonkType = __BONK_TYPE.PLANE;
-    
     static toString = function()
     {
         return "plane";

@@ -8,10 +8,10 @@
 
 function BonkDebugDrawQuad(_x, _y, _z, _xNormal, _yNormal, _zNormal, _color = BONK_DRAW_DEFAULT_DIFFUSE_COLOR)
 {
-    //TODO - Optimise this and draw it relative to the camera's position
+    __BONK_GLOBAL
     
     var _vertexBuffer = vertex_create_buffer();
-    vertex_begin( _vertexBuffer, global.__bonkVertexFormat);
+    vertex_begin( _vertexBuffer, _global.__bonkVertexFormat);
     
     var _position = [_x, _y, _z];
     var _normal = BonkVecNormalize([_xNormal, _yNormal, _zNormal]);
@@ -46,9 +46,9 @@ function BonkDebugDrawQuad(_x, _y, _z, _xNormal, _yNormal, _zNormal, _color = BO
     vertex_end(_vertexBuffer);
     
     shader_set(__shdBonk);
-    shader_set_uniform_f(global.__bonkUniform_shdBonk_u_vColor, color_get_red(  _color)/255,
-                                                                color_get_green(_color)/255,
-                                                                color_get_blue( _color)/255);
+    shader_set_uniform_f(_global.__bonkUniform_shdBonk_u_vColor, color_get_red(  _color)/255,
+                                                                 color_get_green(_color)/255,
+                                                                 color_get_blue( _color)/255);
     vertex_submit(_vertexBuffer, pr_trianglelist, -1);
     shader_reset();
     

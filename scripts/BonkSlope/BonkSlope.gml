@@ -1,7 +1,5 @@
 function BonkSlope() constructor
 {
-    static __bonkType = __BONK_TYPE.PLANE;
-    
     static toString = function()
     {
         return "slope";

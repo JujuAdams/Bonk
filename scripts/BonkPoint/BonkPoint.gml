@@ -1,7 +1,5 @@
 function BonkPoint() constructor
 {
-    static __bonkType = __BONK_TYPE.POINT;
-    
     static toString = function()
     {
         return "point";

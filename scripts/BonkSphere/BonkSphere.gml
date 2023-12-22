@@ -1,7 +1,5 @@
 function BonkSphere() constructor
 {
-    static __bonkType = __BONK_TYPE.SPHERE;
-    
     static toString = function()
     {
         return "sphere";
