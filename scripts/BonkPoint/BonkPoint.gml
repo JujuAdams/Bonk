@@ -61,15 +61,4 @@ function BonkPoint() constructor
     zPrevious = 0;
     
     #endregion
-    
-    
-    
-    #region Debug Draw
-    
-    static DebugDraw = function(_color = BONK_DRAW_DEFAULT_DIFFUSE_COLOR)
-    {
-        BonkDebugDrawPoint(x, y, z, _color);
-    }
-    
-    #endregion
 }

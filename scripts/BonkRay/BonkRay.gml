@@ -92,15 +92,4 @@ function BonkRay() constructor
     isRay = false;
     
     #endregion
-    
-    
-    
-    #region Draw
-    
-    static DebugDraw = function(_color = BONK_DRAW_DEFAULT_DIFFUSE_COLOR)
-    {
-        BonkDebugDrawRay(x1, y1, z1, x2, y2, z2, _color);
-    }
-    
-    #endregion
 }

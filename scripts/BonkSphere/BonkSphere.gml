@@ -75,15 +75,4 @@ function BonkSphere() constructor
     radius = 0;
     
     #endregion
-    
-    
-    
-    #region Draw
-    
-    static DebugDraw = function(_color = BONK_DRAW_DEFAULT_DIFFUSE_COLOR)
-    {
-        BonkDebugDrawSphere(x, y, z, radius, _color);
-    }
-    
-    #endregion
 }

@@ -72,15 +72,4 @@ function BonkAABB() constructor
     zHalfSize = 0;
     
     #endregion
-    
-    
-    
-    #region Draw
-    
-    static DebugDraw = function(_color = BONK_DRAW_DEFAULT_DIFFUSE_COLOR)
-    {
-        BonkDebugDrawAABB(x, y, z, 2*xHalfSize, 2*yHalfSize, 2*zHalfSize, _color);
-    }
-    
-    #endregion
 }

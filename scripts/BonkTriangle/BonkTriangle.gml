@@ -140,15 +140,4 @@ function BonkTriangle() constructor
     dirty = false;
     
     #endregion
-    
-    
-    
-    #region Draw
-    
-    static DebugDraw = function(_color = BONK_DRAW_DEFAULT_DIFFUSE_COLOR)
-    {
-        BonkDebugDrawTriangle(x1, y1, z1, x2, y2, z2, x3, y3, z3, _color);
-    }
-    
-    #endregion
 }

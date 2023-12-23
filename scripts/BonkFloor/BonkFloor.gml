@@ -65,15 +65,4 @@ function BonkFloor() constructor
     zNormal = 0;
     
     #endregion
-    
-    
-    
-    #region Draw
-    
-    static DebugDraw = function(_color = BONK_DRAW_PLANE_DEFAULT_COLOR)
-    {
-        BonkDebugDrawPlane(x, y, z, xNormal, yNormal, zNormal, _color);
-    }
-    
-    #endregion
 }

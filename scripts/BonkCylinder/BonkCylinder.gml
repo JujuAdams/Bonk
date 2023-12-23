@@ -83,15 +83,4 @@ function BonkCylinder() constructor
     radius = 0;
     
     #endregion
-    
-    
-    
-    #region Draw
-    
-    static DebugDraw = function(_color = BONK_DRAW_DEFAULT_DIFFUSE_COLOR)
-    {
-        BonkDebugDrawCylinder(x1, y1, z1, height, radius, _color);
-    }
-    
-    #endregion
 }
