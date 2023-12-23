@@ -6,6 +6,6 @@
   "isCompatibility": false,
   "parent": {
     "name": "Vectors",
-    "path": "folders/Bonk/Vectors.yy",
+    "path": "folders/Bonk/(System)/Vectors.yy",
   },
 }
