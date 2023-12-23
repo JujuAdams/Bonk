@@ -5,9 +5,17 @@ function BonkRay() constructor
         return "point";
     }
     
+    x1 = 0;
+    y1 = 0;
+    z1 = 0;
+    
+    x2 = 0;
+    y2 = 0;
+    z2 = 0;
+    
+    isRay = false;
     
     
-    #region Setters / Getters
     
     static SetA = function(_x = x1, _y = y1, _z = z1)
     {
@@ -74,22 +82,4 @@ function BonkRay() constructor
     {
         return isRay;
     }
-    
-    #endregion
-    
-    
-    
-    #region Variables
-    
-    x1 = 0;
-    y1 = 0;
-    z1 = 0;
-    
-    x2 = 0;
-    y2 = 0;
-    z2 = 0;
-    
-    isRay = false;
-    
-    #endregion
 }

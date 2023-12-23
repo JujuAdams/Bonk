@@ -5,9 +5,15 @@ function BonkFloor() constructor
         return "slope";
     }
     
+    x = 0;
+    y = 0;
+    z = 0;
+    
+    xNormal = 0;
+    yNormal = 0;
+    zNormal = 0;
     
     
-    #region Setters / Getters
     
     static SetPosition = function(_x = x, _y = y, _z = z)
     {
@@ -49,20 +55,4 @@ function BonkFloor() constructor
             z: zNormal,
         };
     }
-    
-    #endregion
-    
-    
-    
-    #region Variables
-    
-    x = 0;
-    y = 0;
-    z = 0;
-    
-    xNormal = 0;
-    yNormal = 0;
-    zNormal = 0;
-    
-    #endregion
 }

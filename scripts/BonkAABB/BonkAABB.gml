@@ -5,9 +5,15 @@ function BonkAABB() constructor
         return "point";
     }
     
+    x = 0;
+    y = 0;
+    z = 0;
+    
+    xHalfSize = 0;
+    yHalfSize = 0;
+    zHalfSize = 0;
     
     
-    #region Setters / Getters
     
     static SetPosition = function(_x = x, _y = y, _z = z)
     {
@@ -56,20 +62,4 @@ function BonkAABB() constructor
             z2: z + zHalfSize,
         };
     }
-    
-    #endregion
-    
-    
-    
-    #region Variables
-    
-    x = 0;
-    y = 0;
-    z = 0;
-    
-    xHalfSize = 0;
-    yHalfSize = 0;
-    zHalfSize = 0;
-    
-    #endregion
 }

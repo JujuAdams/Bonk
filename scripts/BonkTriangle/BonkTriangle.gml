@@ -5,9 +5,26 @@ function BonkTriangle() constructor
         return "triangle";
     }
     
+    x1 = 0;
+    y1 = 0;
+    z1 = 0;
+    
+    x2 = 0;
+    y2 = 0;
+    z2 = 0;
+    
+    x3 = 0;
+    y3 = 0;
+    z3 = 0;
+    
+    normalX = 0;
+    normalY = 0;
+    normalZ = 0;
+    planeDistance = 0;
+    
+    dirty = false;
     
     
-    #region Setters / Getters
     
     static SetA = function(_x = x1, _y = y1, _z = z1)
     {
@@ -113,31 +130,4 @@ function BonkTriangle() constructor
         
         return planeDistance;
     }
-    
-    #endregion
-    
-    
-    
-    #region Variables
-    
-    x1 = 0;
-    y1 = 0;
-    z1 = 0;
-    
-    x2 = 0;
-    y2 = 0;
-    z2 = 0;
-    
-    x3 = 0;
-    y3 = 0;
-    z3 = 0;
-    
-    normalX = 0;
-    normalY = 0;
-    normalZ = 0;
-    planeDistance = 0;
-    
-    dirty = false;
-    
-    #endregion
 }

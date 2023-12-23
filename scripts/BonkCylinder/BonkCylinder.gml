@@ -5,9 +5,14 @@ function BonkCylinder() constructor
         return "cylinder";
     }
     
+    x1 = 0;
+    y1 = 0;
+    z1 = 0;
+    
+    height = 0;
+    radius = 0;
     
     
-    #region Setters / Getters
     
     static SetA = function(_x = x1, _y = y1, _z = z1)
     {
@@ -68,19 +73,4 @@ function BonkCylinder() constructor
             z2: max(z1, z2) + radius,
         };
     }
-    
-    #endregion
-    
-    
-    
-    #region Variables
-    
-    x1 = 0;
-    y1 = 0;
-    z1 = 0;
-    
-    height = 0;
-    radius = 0;
-    
-    #endregion
 }

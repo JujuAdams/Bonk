@@ -5,9 +5,17 @@ function BonkSphere() constructor
         return "sphere";
     }
     
+    x = 0;
+    y = 0;
+    z = 0;
+    
+    xPrevious = 0;
+    yPrevious = 0;
+    zPrevious = 0;
+    
+    radius = 0;
     
     
-    #region Setters / Getters
     
     static SetPosition = function(_x = x, _y = y, _z = z)
     {
@@ -57,22 +65,4 @@ function BonkSphere() constructor
             z2: z + radius,
         };
     }
-    
-    #endregion
-    
-    
-    
-    #region Variables
-    
-    x = 0;
-    y = 0;
-    z = 0;
-    
-    xPrevious = 0;
-    yPrevious = 0;
-    zPrevious = 0;
-    
-    radius = 0;
-    
-    #endregion
 }
