@@ -4,4 +4,6 @@
 
 <p align="center"><a href="https://github.com/JujuAdams/bonk/releases/">Download the .yymps</a></p>
 
-<p align="center">Chat about Ugg on the <a href="https://discord.gg/mWWpCAnsCx">Discord server</a></p>
+<p align="center">Chat about Bonk on the <a href="https://discord.gg/mWWpCAnsCx">Discord server</a></p>
+
+You may also be interestee in [Dragonite's 3D Collisions](https://dragonite.itch.io/collisions).
