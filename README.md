@@ -6,4 +6,4 @@
 
 <p align="center">Chat about Bonk on the <a href="https://discord.gg/mWWpCAnsCx">Discord server</a></p>
 
-You may also be interestee in [Dragonite's 3D Collisions](https://dragonite.itch.io/collisions).
+You may also be interested in [Dragonite's 3D Collisions](https://dragonite.itch.io/collisions). Dragonite also has many videos on [3D topics](https://youtube.com/@DragoniteSpam?feature=shared) in GameMaker.
