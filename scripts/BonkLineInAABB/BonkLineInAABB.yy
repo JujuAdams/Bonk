@@ -1,11 +1,11 @@
 {
   "resourceType": "GMScript",
   "resourceVersion": "1.0",
-  "name": "BonkRay",
+  "name": "BonkLineInAABB",
   "isCompatibility": false,
   "isDnD": false,
   "parent": {
-    "name": "Primitives",
-    "path": "folders/Bonk/Primitives.yy",
+    "name": "Collisions",
+    "path": "folders/Bonk/Collisions.yy",
   },
 }

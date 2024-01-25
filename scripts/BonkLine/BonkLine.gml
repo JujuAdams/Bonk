@@ -1,4 +1,4 @@
-function BonkRay() constructor
+function BonkLine() constructor
 {
     static toString = function()
     {
@@ -13,7 +13,7 @@ function BonkRay() constructor
     y2 = 0;
     z2 = 0;
     
-    isRay = false;
+    isLine = false;
     
     
     
@@ -23,7 +23,7 @@ function BonkRay() constructor
         y1 = _y;
         z1 = _z;
         
-        if (isRay)
+        if (isLine)
         {
             x2 = x1 + __BONK_VERY_LARGE*(x2 - x1);
             y2 = y1 + __BONK_VERY_LARGE*(y2 - y1);
@@ -39,12 +39,12 @@ function BonkRay() constructor
         y2 = _y;
         z2 = _z;
         
-        isRay = false;
+        isLine = false;
         
         return self;
     }
     
-    static SetRay = function(_x, _y, _z, _dx, _dy, _dz)
+    static SetLine = function(_x, _y, _z, _dx, _dy, _dz)
     {
         x1 = _x;
         y1 = _y;
@@ -55,7 +55,7 @@ function BonkRay() constructor
         y2 = y1 + _d*_dy;
         z2 = z1 + _d*_dz;
         
-        isRay = true;
+        isLine = true;
         
         return self;
     }
@@ -78,8 +78,8 @@ function BonkRay() constructor
         };
     }
     
-    static GetRay = function()
+    static GetLine = function()
     {
-        return isRay;
+        return isLine;
     }
 }

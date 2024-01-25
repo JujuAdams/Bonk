@@ -1,7 +1,7 @@
 {
   "resourceType": "GMScript",
   "resourceVersion": "1.0",
-  "name": "BonkRayInAABB",
+  "name": "BonkLineInFloor",
   "isCompatibility": false,
   "isDnD": false,
   "parent": {

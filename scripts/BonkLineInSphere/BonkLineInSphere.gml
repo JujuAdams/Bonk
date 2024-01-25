@@ -1,24 +1,24 @@
 // Feather disable all
 
-/// @param ray
+/// @param line
 /// @param sphere
 
-function BonkRayInSphere(_ray, _sphere)
+function BonkLineInSphere(_line, _sphere)
 {
-    with(_ray)
+    with(_line)
     {
         var _centre = [_sphere.x, _sphere.y, _sphere.z];
         var _radius = _sphere.radius;
-        var _ray_a  = [x1, y1, z1];
-        var _ray_b  = [x2, y2, z2];
+        var _line0  = [x1, y1, z1];
+        var _line1  = [x2, y2, z2];
         
-        var _dir = BonkVecSubtract( _ray_b, _ray_a);
+        var _dir = BonkVecSubtract( _line1, _line0);
         var _length = BonkVecLength(_dir);
         
         if (_length <= 0) return false;
         
         _dir = BonkVecMultiply(_dir, 1/_length);
-        var _local = BonkVecSubtract(_ray_a, _centre);
+        var _local = BonkVecSubtract(_line0, _centre);
         var _b = BonkVecDot(_local, _dir);
         var _c = BonkVecSquareLength(_local) - _radius*_radius;
         

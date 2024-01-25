@@ -1,11 +1,11 @@
 {
   "resourceType": "GMScript",
   "resourceVersion": "1.0",
-  "name": "BonkRayInTriangle",
+  "name": "BonkLine",
   "isCompatibility": false,
   "isDnD": false,
   "parent": {
-    "name": "Collisions",
-    "path": "folders/Bonk/Collisions.yy",
+    "name": "Primitives",
+    "path": "folders/Bonk/Primitives.yy",
   },
 }

@@ -6,9 +6,9 @@ gpu_set_zwriteenable(true);
 gpu_set_cullmode(cull_counterclockwise);
 
 //Set our view + projection matrices
-old_world_matrix      = matrix_get(matrix_world); 
-old_view_matrix       = matrix_get(matrix_view); 
-old_projection_matrix = matrix_get(matrix_projection);
+oldWorldMatrix      = matrix_get(matrix_world); 
+oldViewMatrix       = matrix_get(matrix_view); 
+oldProjectionMatrix = matrix_get(matrix_projection);
 
-matrix_set(matrix_view, view_matrix);
-matrix_set(matrix_projection, projection_matrix);
+matrix_set(matrix_view, viewMatrix);
+matrix_set(matrix_projection, projectionMatrix);
