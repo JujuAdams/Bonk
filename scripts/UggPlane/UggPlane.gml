@@ -8,8 +8,8 @@
 
 function UggPlane(_x, _y, _z, _normalX, _normalY, _normalZ, _color = UGG_DEFAULT_DIFFUSE_COLOR)
 {
-    static _vertexFormat = __Ugg().__vertexFormat;
-    __UGG_COLOR_UNIFORM
+    static _vertexFormat = __Ugg().__volumeVertexFormat;
+    __UGG_COLOR_UNIFORMS
     
     //TODO - Optimise this and draw it relative to the camera's position
     
@@ -76,8 +76,8 @@ function UggPlane(_x, _y, _z, _normalX, _normalY, _normalZ, _color = UGG_DEFAULT
     
     vertex_end(_vertexBuffer);
     
-    shader_set(__shdUgg);
-    shader_set_uniform_f(_shdUgg_u_vColor, color_get_red(  _color)/255,
+    shader_set(__shdUggVolume);
+    shader_set_uniform_f(_shdUggVolume_u_vColor, color_get_red(  _color)/255,
                                            color_get_green(_color)/255,
                                            color_get_blue( _color)/255);
     vertex_submit(_vertexBuffer, pr_trianglelist, -1);
