@@ -13,7 +13,7 @@ function BonkLine() constructor
     y2 = 0;
     z2 = 0;
     
-    isLine = false;
+    isSegment = false;
     
     
     
@@ -23,7 +23,7 @@ function BonkLine() constructor
         y1 = _y;
         z1 = _z;
         
-        if (isLine)
+        if (isSegment)
         {
             x2 = x1 + __BONK_VERY_LARGE*(x2 - x1);
             y2 = y1 + __BONK_VERY_LARGE*(y2 - y1);
@@ -39,7 +39,7 @@ function BonkLine() constructor
         y2 = _y;
         z2 = _z;
         
-        isLine = false;
+        isSegment = false;
         
         return self;
     }
@@ -55,7 +55,7 @@ function BonkLine() constructor
         y2 = y1 + _d*_dy;
         z2 = z1 + _d*_dz;
         
-        isLine = true;
+        isSegment = true;
         
         return self;
     }
@@ -78,8 +78,14 @@ function BonkLine() constructor
         };
     }
     
-    static GetLine = function()
+    static GetSegment = function()
     {
-        return isLine;
+        return isSegment;
+    }
+    
+    static Draw = function(_color = undefined, _thickness = undefined)
+    {
+        __BONK_VERIFY_UGG
+        UggLine(x1, y1, z1, x2, y2, z2, _color, _thickness);
     }
 }

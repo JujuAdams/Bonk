@@ -73,4 +73,10 @@ function BonkCylinder() constructor
             z2: max(z1, z2) + radius,
         };
     }
+    
+    static Draw = function(_color = undefined)
+    {
+        __BONK_VERIFY_UGG
+        UggCylinder(x, y, z, height, radius, _color);
+    }
 }

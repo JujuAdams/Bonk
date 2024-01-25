@@ -62,4 +62,10 @@ function BonkAABB() constructor
             z2: z + zHalfSize,
         };
     }
+    
+    static Draw = function(_color = undefined)
+    {
+        __BONK_VERIFY_UGG
+        UggAABB(x, y, z, 2*xHalfSize, 2*yHalfSize, 2*zHalfSize, _color);
+    }
 }

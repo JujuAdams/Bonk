@@ -65,4 +65,10 @@ function BonkSphere() constructor
             z2: z + radius,
         };
     }
+    
+    static Draw = function(_color = undefined)
+    {
+        __BONK_VERIFY_UGG
+        UggSphere(x, y, z, radius, _color);
+    }
 }

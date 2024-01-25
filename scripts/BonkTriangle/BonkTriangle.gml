@@ -130,4 +130,10 @@ function BonkTriangle() constructor
         
         return planeDistance;
     }
+    
+    static Draw = function(_color = undefined)
+    {
+        __BONK_VERIFY_UGG
+        UggTriangle(x1, y1, z1, x2, y2, z2, x3, y3, z3, _color);
+    }
 }

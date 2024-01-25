@@ -51,4 +51,10 @@ function BonkPoint() constructor
             z2: z,
         };
     }
+    
+    static Draw = function(_color = undefined)
+    {
+        __BONK_VERIFY_UGG
+        UggPoint(x, y, z, _color);
+    }
 }

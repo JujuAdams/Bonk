@@ -1,5 +1,6 @@
 {
   "FolderOrderSettings": [
+    {"name":"Vectors","order":2,"path":"folders/Bonk/(System)/Vectors.yy",},
     {"name":"Ugg","order":1,"path":"folders/Ugg.yy",},
     {"name":"(System)","order":1,"path":"folders/Ugg/(System).yy",},
     {"name":"Volumes","order":1,"path":"folders/Ugg/(System)/Volumes.yy",},
@@ -52,6 +53,7 @@
     {"name":"UggTriangle","order":17,"path":"scripts/UggTriangle/UggTriangle.yy",},
     {"name":"BonkVecCross","order":7,"path":"scripts/BonkVecCross/BonkVecCross.yy",},
     {"name":"__UggPrebuildWireframeCone","order":1,"path":"scripts/__UggPrebuildWireframeCone/__UggPrebuildWireframeCone.yy",},
+    {"name":"__BonkError","order":1,"path":"scripts/__BonkError/__BonkError.yy",},
     {"name":"UggLine","order":10,"path":"scripts/UggLine/UggLine.yy",},
     {"name":"BonkWall","order":6,"path":"scripts/BonkWall/BonkWall.yy",},
     {"name":"BonkLineInWall","order":9,"path":"scripts/BonkLineInWall/BonkLineInWall.yy",},

@@ -55,4 +55,10 @@ function BonkWall() constructor
             z: zNormal,
         };
     }
+    
+    static Draw = function(_color = undefined)
+    {
+        __BONK_VERIFY_UGG
+        UggPlane(x, y, z, xNormal, yNormal, zNormal, _color);
+    }
 }

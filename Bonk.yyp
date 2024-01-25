@@ -76,6 +76,7 @@
     {"id":{"name":"BonkVecCross","path":"scripts/BonkVecCross/BonkVecCross.yy",},},
     {"id":{"name":"BonkPoint","path":"scripts/BonkPoint/BonkPoint.yy",},},
     {"id":{"name":"__UggPrebuildWireframeCone","path":"scripts/__UggPrebuildWireframeCone/__UggPrebuildWireframeCone.yy",},},
+    {"id":{"name":"__BonkError","path":"scripts/__BonkError/__BonkError.yy",},},
     {"id":{"name":"UggLine","path":"scripts/UggLine/UggLine.yy",},},
     {"id":{"name":"BonkWall","path":"scripts/BonkWall/BonkWall.yy",},},
     {"id":{"name":"BonkLineInWall","path":"scripts/BonkLineInWall/BonkLineInWall.yy",},},
