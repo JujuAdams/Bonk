@@ -5,7 +5,7 @@
   "isDnD": false,
   "isCompatibility": false,
   "parent": {
-    "name": "Untested",
-    "path": "folders/Bonk/Collisions/Untested.yy",
+    "name": "Collisions",
+    "path": "folders/Bonk/Collisions.yy",
   },
 }
