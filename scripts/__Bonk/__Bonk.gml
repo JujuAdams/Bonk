@@ -19,6 +19,8 @@ function __Bonk()
     static _global = undefined;
     if (_global != undefined) return _global;
     
+    _global = {};
+    
     try
     {
         __Ugg();
