@@ -7,10 +7,10 @@ function BonkCylinderInCylinder(_cylinder1, _cylinder2)
 {
     with(_cylinder1)
     {
-        if ((z - height >  _cylinder2.z + _cylinder2.height)
-        &&  (z + height <= _cylinder2.z - _cylinder2.height)) return false;
+        if ((z - 0.5*height >  _cylinder2.z + 0.5*_cylinder2.height)
+        ||  (z + 0.5*height <= _cylinder2.z - 0.5*_cylinder2.height)) return false;
         
-        return (point_distance(x, y, _cylinder1.x, _cylinder1.y) < radius + _cylinder2.radius);
+        return (point_distance(x, y, _cylinder2.x, _cylinder2.y) < radius + _cylinder2.radius);
     }
     
     return false;

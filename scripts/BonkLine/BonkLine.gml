@@ -39,7 +39,7 @@ function BonkLine() constructor
         y2 = _y;
         z2 = _z;
         
-        isSegment = false;
+        isSegment = true;
         
         return self;
     }
@@ -55,7 +55,7 @@ function BonkLine() constructor
         y2 = y1 + _d*_dy;
         z2 = z1 + _d*_dz;
         
-        isSegment = true;
+        isSegment = false;
         
         return self;
     }
