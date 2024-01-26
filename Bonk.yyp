@@ -38,7 +38,6 @@
     {"id":{"name":"BonkPointInAABB","path":"scripts/BonkPointInAABB/BonkPointInAABB.yy",},"order":4,},
     {"id":{"name":"BonkLineInTriangle","path":"scripts/BonkLineInTriangle/BonkLineInTriangle.yy",},"order":3,},
     {"id":{"name":"UggCone","path":"scripts/UggCone/UggCone.yy",},"order":0,},
-    {"id":{"name":"BonkPlane","path":"scripts/BonkPlane/BonkPlane.yy",},"order":0,},
     {"id":{"name":"objTestCylinderInCylinder","path":"objects/objTestCylinderInCylinder/objTestCylinderInCylinder.yy",},"order":7,},
     {"id":{"name":"__UggPrebuildVolumeCone","path":"scripts/__UggPrebuildVolumeCone/__UggPrebuildVolumeCone.yy",},"order":0,},
     {"id":{"name":"objTestLineInSphere","path":"objects/objTestLineInSphere/objTestLineInSphere.yy",},"order":9,},
