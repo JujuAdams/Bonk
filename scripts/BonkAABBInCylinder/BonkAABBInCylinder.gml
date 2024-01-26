@@ -13,9 +13,11 @@ function BonkAABBInCylinder(_aabb, _cylinder)
     
     with(_aabb)
     {
-        if ((z1 < _minZ) || (z2 >= _maxZ)) return false;
+        if ((z - zHalfSize < _minZ) || (z + zHalfSize >= _maxZ)) return false;
         
-        return rectangle_in_circle(x1, y1, x2, y2, _cylinder.x, _cylinder.y, _cylinder.radius);
+        return rectangle_in_circle(x - xHalfSize, y - yHalfSize,
+                                   x + xHalfSize, y + yHalfSize,
+                                   _cylinder.x, _cylinder.y, _cylinder.radius);
     }
     
     return false;
