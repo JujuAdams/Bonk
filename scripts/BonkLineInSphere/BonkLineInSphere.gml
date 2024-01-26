@@ -29,9 +29,10 @@ function BonkLineInSphere(_line, _sphere)
         if (_discriminant < 0) return false;
         
         var _t1 = (-_B - sqrt(_discriminant)) / (2*_A);
-        var _t2 = (-_B + sqrt(_discriminant)) / (2*_A);
+        if ((_t1 >= 0) && (_t1 <= 1)) return true;
         
-        return ((_t1 >= 0) && (_t1 <= 1) || (_t2 >= 0) && (_t2 <= 1));
+        var _t2 = (-_B + sqrt(_discriminant)) / (2*_A);
+        if ((_t2 >= 0) && (_t2 <= 1)) return true;
     }
     
     return false;
