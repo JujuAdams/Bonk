@@ -7,28 +7,31 @@ function BonkLineInSphere(_line, _sphere)
 {
     with(_line)
     {
-        var _centre = [_sphere.x, _sphere.y, _sphere.z];
-        var _radius = _sphere.radius;
-        var _line0  = [x1, y1, z1];
-        var _line1  = [x2, y2, z2];
+        var _circleRadius = _sphere.radius;
         
-        var _dir = BonkVecSubtract( _line1, _line0);
-        var _length = BonkVecLength(_dir);
+        var _Cx = _sphere.x;
+        var _Cy = _sphere.y;
+        var _Cz = _sphere.z;
         
-        if (_length <= 0) return false;
+        var _Dx = x2 - x1;
+        var _Dy = y2 - y1;
+        var _Dz = z2 - z1;
         
-        _dir = BonkVecMultiply(_dir, 1/_length);
-        var _local = BonkVecSubtract(_line0, _centre);
-        var _b = BonkVecDot(_local, _dir);
-        var _c = BonkVecSquareLength(_local) - _radius*_radius;
+        var _Lx = _Cx - x1;
+        var _Ly = _Cy - y1;
+        var _Lz = _Cz - z1;
         
-        var _discriminant = _b*_b - _c;
+        var _A = _Dx*_Dx + _Dy*_Dy + _Dz*_Dz;
+        var _B = -2*(_Dx*_Lx + _Dy*_Ly + _Dz*_Lz);
+        var _C = _Lx*_Lx + _Ly*_Ly + _Lz*_Lz - _circleRadius*_circleRadius;
+        
+        var _discriminant = _B*_B - 4*_A*_C;
         if (_discriminant < 0) return false;
         
-        var _t_min = -_b - sqrt(_discriminant);
-        var _t_max = -_b + sqrt(_discriminant);
+        var _t1 = (-_B - sqrt(_discriminant)) / (2*_A);
+        var _t2 = (-_B + sqrt(_discriminant)) / (2*_A);
         
-        return ((_length < _t_min) && (_t_min >= 0) && (_t_max >= 0));
+        return ((_t1 >= 0) && (_t1 <= 1) || (_t2 >= 0) && (_t2 <= 1));
     }
     
     return false;
