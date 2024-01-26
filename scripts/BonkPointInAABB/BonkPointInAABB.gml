@@ -5,10 +5,14 @@
 
 function BonkPointInAABB(_point, _aabb)
 {
-    with(_point)
+    with(_aabb)
     {
-        return ((x >= _aabb.x1) && (y >= _aabb.y1) && (z >= _aabb.z1)
-             && (x <  _aabb.x2) && (y <  _aabb.y2) && (z <  _aabb.z2));
+        var _x = _point.x;
+        var _y = _point.y;
+        var _z = _point.z;
+        
+        return ((_x >= x - xHalfSize) && (_y >= y - yHalfSize) && (_z >= z - zHalfSize)
+             && (_x <  x + xHalfSize) && (_y <  y + yHalfSize) && (_z <  z + zHalfSize));
     }
     
     return false;

@@ -1,0 +1,1 @@
+point.SetPosition(lerp(100, 300, 0.5 + 0.5*dsin(current_time/30)), undefined, undefined);
