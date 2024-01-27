@@ -5,18 +5,39 @@
 
 function BonkLineInWall(_line, _wall)
 {
-    with(_line)
+    with(_wall)
     {
-        //If both plane share a point on the plane then they have to collide
-        if ((x == _wall.x) && (y == _wall.y) && (z == _wall.z)) return true;
+        var _normalX = y2 - y1;
+        var _normalY = x1 - x2;
+        var _d = 1 / sqrt(_normalX*_normalX + _normalY*_normalY);
+        _normalX *= _d;
+        _normalY *= _d;
         
-        var _dot = dot_product_3d(xNormal, yNormal, zNormal, _wall.xNormal, _wall.yNormal, _wall.zNormal);
+        var _planeDistance = x1*_normalX + y1*_normalY;
         
-        //If the planes aren't parallel then they must collide between the origin and infinity
-        if (abs(_dot) != 1) return true;
+        var _dX = _line.x2 - _line.x1;
+        var _dY = _line.y2 - _line.y1;
         
-        //We know the planes are parallel
-        //If the projection of a point on our plane with our normal is the same as the projection as a point on the other plane then the plane are coincident
-        return (dot_product_3d(x, y, z, xNormal, yNormal, zNormal) == dot_product_3d(_wall.x, _wall.y, _wall.z, xNormal, yNormal, zNormal));
+        var _n_dot_d = dot_product(_normalX, _normalY, _dX, _dY);
+        
+        var _t = (_planeDistance - dot_product(_normalX, _normalY, _line.x1, _line.y1)) / _n_dot_d;
+        
+    	if ((_t < 0) || (_t > 1)) return false; //Exit if the point of collision is off the line
+        
+        var _z = _line.z1 + _t*(_line.z2 - _line.z1);
+        if ((_z < z1) || (_z > z2)) return false;
+        
+        var _x = _line.x1 + _t*_dX;
+        var _y = _line.y1 + _t*_dY;
+        
+        var _dX = x2 - x1;
+        var _dY = y2 - y1;
+        
+        _x -= x1;
+        _y -= y1;
+        
+        var _dot = (_x*_dX + _y*_dY) / (_dX*_dX + _dY*_dY);
+        
+        return ((_dot >= 0) && (_dot <= 1));
     }
 }
