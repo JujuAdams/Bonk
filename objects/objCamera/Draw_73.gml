@@ -1,7 +1,7 @@
 //Reset draw state
-matrix_set(matrix_world,      old_world_matrix     );
-matrix_set(matrix_view,       old_view_matrix      );
-matrix_set(matrix_projection, old_projection_matrix);
+matrix_set(matrix_world,      oldWorldMatrix     );
+matrix_set(matrix_view,       oldViewMatrix      );
+matrix_set(matrix_projection, oldProjectionMatrix);
 
 gpu_set_ztestenable(false);
 gpu_set_zwriteenable(false);

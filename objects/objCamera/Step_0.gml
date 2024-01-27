@@ -2,7 +2,7 @@
 if (keyboard_check_released(vk_f1)) showInfo = !showInfo;
 
 //Lock the mouse if we press F3
-if (keyboard_check_released(vk_f3))
+if (mouse_check_button_released(mb_left))
 {
     mouseLock = !mouseLock;
     mouseLockTimer = 0;
@@ -56,7 +56,7 @@ camY += -_para*_sin - _perp*_cos;
 camZ += 2*(keyboard_check(vk_space) - keyboard_check(vk_shift));
 
 //Calculate matrices that we'll want to use later
-view_matrix = matrix_build_lookat(camX, camY, camZ,
+viewMatrix = matrix_build_lookat(camX, camY, camZ,
                                   camX+camDX, camY+camDY, camZ+camDZ,
                                   0, 0, 1);
-projection_matrix = matrix_build_projection_perspective_fov(90, room_width/room_height, 1, 3000);
+projectionMatrix = matrix_build_projection_perspective_fov(90, room_width/room_height, 1, 3000);
