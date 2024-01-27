@@ -7,53 +7,35 @@ function BonkFloor() constructor
     
     x1 = 0;
     y1 = 0;
-    z1 = 0;
-    
     x2 = 0;
     y2 = 0;
-    z2 = 0;
+    z  = 0;
     
-    
-    
-    static SetA = function(_x = x1, _y = y1, _z = z1)
+    static SetPosition = function(_x1 = x1, _y1 = y1, _x2 = x2, _y2 = y2, _z = z)
     {
-        x1 = _x;
-        y1 = _y;
-        z1 = _z;
+        x1 = _x1;
+        y1 = _y1;
+        x2 = _x2;
+        y2 = _y2;
+        z  = _z;
         
         return self;
     }
     
-    static SetB = function(_x = x2, _y = y2, _z = z2)
-    {
-        x2 = _x;
-        y2 = _y;
-        z2 = _z;
-        
-        return self;
-    }
-    
-    static GetA = function()
+    static GetPosition = function()
     {
         return {
-            x: x1,
-            y: y1,
-            z: z1,
-        };
-    }
-    
-    static GetB = function()
-    {
-        return {
-            x: x2,
-            y: y2,
-            z: z2,
+            x1: x1,
+            y1: y1,
+            x2: x2,
+            y2: y2,
+            z:  z,
         };
     }
     
     static Draw = function(_color = undefined)
     {
         __BONK_VERIFY_UGG
-        UggQuad(x1, y1, z1, 
+        UggQuad(x1, y1, z,   x2, y1, z,   x1, y2, z,   _color);
     }
 }

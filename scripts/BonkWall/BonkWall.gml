@@ -13,8 +13,6 @@ function BonkWall() constructor
     y2 = 0;
     z2 = 0;
     
-    
-    
     static SetA = function(_x = x1, _y = y1, _z = z1)
     {
         x1 = _x;
@@ -54,6 +52,6 @@ function BonkWall() constructor
     static Draw = function(_color = undefined)
     {
         __BONK_VERIFY_UGG
-        UggWall(x1, y1, z1, x2, y2, z2, _color);
+        UggQuad(x1, y1, z1,   x1, y1, z2,   x2, y2, z1,   _color);
     }
 }
