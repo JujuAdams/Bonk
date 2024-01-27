@@ -7,16 +7,14 @@ function BonkLineInFloor(_line, _floor)
 {
     with(_line)
     {
-        //If both plane share a point on the plane then they have to collide
-        if ((x == _floor.x) && (y == _floor.y) && (z == _floor.z)) return true;
+        if (z1 == z2) return false;
+        if (min(z1, z2) > _floor.z) return false;
+        if (max(z1, z2) < _floor.z) return false;
         
-        var _dot = dot_product_3d(xNormal, yNormal, zNormal, _floor.xNormal, _floor.yNormal, _floor.zNormal);
+        var _t = (_floor.z - z1) / (z2 - z1);
+        var _x = x1 + _t*(x2 - x1);
+        var _y = y1 + _t*(y2 - y1);
         
-        //If the planes aren't parallel then they must collide between the origin and infinity
-        if (abs(_dot) != 1) return true;
-        
-        //We know the planes are parallel
-        //If the projection of a point on our plane with our normal is the same as the projection as a point on the other plane then the plane are coincident
-        return (dot_product_3d(x, y, z, xNormal, yNormal, zNormal) == dot_product_3d(_floor.x, _floor.y, _floor.z, xNormal, yNormal, zNormal));
+        return (point_in_rectangle(_x, _y, _floor.x1, _floor.y1, _floor.x2, _floor.y2) > 0);
     }
 }

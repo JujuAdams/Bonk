@@ -19,6 +19,7 @@ function BonkLineInWall(_line, _wall)
         var _dY = _line.y2 - _line.y1;
         
         var _n_dot_d = dot_product(_normalX, _normalY, _dX, _dY);
+        if (abs(_n_dot_d) == 0) return false;
         
         var _t = (_planeDistance - dot_product(_normalX, _normalY, _line.x1, _line.y1)) / _n_dot_d;
         
