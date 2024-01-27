@@ -2,63 +2,58 @@ function BonkFloor() constructor
 {
     static toString = function()
     {
-        return "slope";
+        return "floor";
     }
     
-    x = 0;
-    y = 0;
-    z = 0;
+    x1 = 0;
+    y1 = 0;
+    z1 = 0;
     
-    xNormal = 0;
-    yNormal = 0;
-    zNormal = 0;
+    x2 = 0;
+    y2 = 0;
+    z2 = 0;
     
     
     
-    static SetPosition = function(_x = x, _y = y, _z = z)
+    static SetA = function(_x = x1, _y = y1, _z = z1)
     {
-        x = _x;
-        y = _y;
-        z = _z;
+        x1 = _x;
+        y1 = _y;
+        z1 = _z;
         
         return self;
     }
     
-    static SetNormal = function(_x = xNormal, _y = yNormal, _z = zNormal)
+    static SetB = function(_x = x2, _y = y2, _z = z2)
     {
-        var _inverse_length = 1/sqrt(_x*_x + _y*_y + _z*_z);
-        _x *= _inverse_length;
-        _y *= _inverse_length;
-        _z *= _inverse_length;
-        
-        xNormal = _x;
-        yNormal = _y;
-        zNormal = _z;
+        x2 = _x;
+        y2 = _y;
+        z2 = _z;
         
         return self;
     }
     
-    static GetPosition = function()
+    static GetA = function()
     {
         return {
-            x: x,
-            y: y,
-            z: z,
+            x: x1,
+            y: y1,
+            z: z1,
         };
     }
     
-    static GetNormal = function()
+    static GetB = function()
     {
         return {
-            x: xNormal,
-            y: yNormal,
-            z: zNormal,
+            x: x2,
+            y: y2,
+            z: z2,
         };
     }
     
     static Draw = function(_color = undefined)
     {
         __BONK_VERIFY_UGG
-        UggPlane(x, y, z, xNormal, yNormal, zNormal, _color);
+        UggQuad(x1, y1, z1, 
     }
 }
