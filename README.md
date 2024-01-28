@@ -10,7 +10,7 @@
 
 Bonk is a simple 3D collision library. It supports boolean intersection tests between the following primitives:
 
-<table align="center">
+<table>
     <tr>
         <td align="center"></td>
         <td align="center">AABB</td>
