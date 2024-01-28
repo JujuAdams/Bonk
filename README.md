@@ -8,6 +8,8 @@
 
 *You may also be interested in [Dragonite's 3D Collisions](https://dragonite.itch.io/collisions). Dragonite also has many videos on [3D topics](https://youtube.com/@DragoniteSpam?feature=shared) in GameMaker.*
 
+&nbsp;
+
 Bonk supports boolean intersection tests between the following primitives:
 
 <table align="center">
