@@ -13,7 +13,7 @@ if (not oCamera.mouseLock)
     cylinder.z += velocityZ;
 }
 
-var _anyCollision = false;
+var _onGround = false;
 repeat(5)
 {
     var _collision = false;
@@ -31,6 +31,8 @@ repeat(5)
                 y += _reaction.dY;
                 z += _reaction.dZ;
             }
+            
+            if (_reaction.dZ > 0) _onGround = true;
         }
     }
     
@@ -47,17 +49,12 @@ repeat(5)
                 y += _reaction.dY;
                 z += _reaction.dZ;
             }
+            
+            if (_reaction.dZ > 0) _onGround = true;
         }
     }
     
-    if (_collision)
-    {
-        _anyCollision = true;
-    }
-    else
-    {
-        break;
-    }
+    if (not _collision) break;
 }
 
-if (_anyCollision) velocityZ = 0;
+if (_onGround) velocityZ = 0;
