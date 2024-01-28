@@ -14,4 +14,13 @@ function __BonkClassReaction() constructor
         dY = 0;
         dZ = 0;
     }
+    
+    static Reverse = function()
+    {
+        dX = -dX;
+        dY = -dY;
+        dZ = -dZ;
+        
+        return self;
+    }
 }

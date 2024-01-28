@@ -29,7 +29,7 @@ function BonkCylinderInFloor(_cylinder, _floor)
         {
             _reaction.__NoCollision();
         }
+        
+        return _reaction;
     }
-    
-    return _reaction;
 }

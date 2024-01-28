@@ -5,20 +5,39 @@
 
 function BonkAABBInCylinder(_aabb, _cylinder)
 {
+    static _reaction = new __BonkClassReaction();
+    
     with(_cylinder)
     {
-        var _minZ = z - height;
-        var _maxZ = z + height;
+        var _minZ = z - 0.5*height;
+        var _maxZ = z + 0.5*height;
     }
     
     with(_aabb)
     {
-        if ((z - zHalfSize < _minZ) || (z + zHalfSize >= _maxZ)) return false;
+        if ((z - zHalfSize >= _maxZ) || (z + zHalfSize <= _minZ))
+        {
+            _reaction.__NoCollision();
+            return _reaction;
+        }
         
-        return rectangle_in_circle(x - xHalfSize, y - yHalfSize,
-                                   x + xHalfSize, y + yHalfSize,
-                                   _cylinder.x, _cylinder.y, _cylinder.radius);
+        if (rectangle_in_circle(x - xHalfSize, y - yHalfSize,
+                                x + xHalfSize, y + yHalfSize,
+                                _cylinder.x, _cylinder.y, _cylinder.radius))
+        {
+            with(_reaction)
+            {
+                collision = true;
+                dX = 0;
+                dY = 0;
+                dZ = (_minZ - _aabb.zHalfSize) - _aabb.z;
+            }
+        }
+        else
+        {
+            _reaction.__NoCollision();
+        }
+        
+        return _reaction;
     }
-    
-    return false;
 }

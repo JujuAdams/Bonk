@@ -34,6 +34,22 @@ repeat(5)
         }
     }
     
+    with(oTestPlatformerAABB)
+    {
+        var _reaction = BonkAABBInCylinder(aabb, other.cylinder).Reverse();
+        if (_reaction.collision)
+        {
+            _collision = true;
+            
+            with(other.cylinder)
+            {
+                x += _reaction.dX;
+                y += _reaction.dY;
+                z += _reaction.dZ;
+            }
+        }
+    }
+    
     if (_collision)
     {
         _anyCollision = true;
