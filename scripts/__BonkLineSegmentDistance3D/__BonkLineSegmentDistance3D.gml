@@ -56,37 +56,3 @@ function __BonkLineSegmentDistance3D(_xA0, _yA0, _zA0,   _xA1, _yA1, _zA1,   _xB
     
     return _result;
 }
-
-/*
-local eta = 1e-6
-local function nearestPointsOnLineSegments(a0, a1, b0, b1)
-    local r = b0 - a0
-    local u = a1 - a0
-    local v = b1 - b0
-
-    local ru = r:Dot(u)
-    local rv = r:Dot(v)
-    local uu = u:Dot(u)
-    local uv = u:Dot(v)
-    local vv = v:Dot(v)
-
-    local det = uu*vv - uv*uv
-    local s, t
-
-    if det < eta*uu*vv then
-        s = math.clamp(ru/uu, 0, 1)
-        t = 0
-    else
-        s = math.clamp((ru*vv - rv*uv)/det, 0, 1)
-        t = math.clamp((ru*uv - rv*uu)/det, 0, 1)
-    end
-
-    local S = math.clamp((t*uv + ru)/uu, 0, 1)
-    local T = math.clamp((s*uv - rv)/vv, 0, 1)
-
-    local A = a0 + S*u
-    local B = b0 + T*v
-    return A, B, (B - A):Length()
-end
-
-*/
