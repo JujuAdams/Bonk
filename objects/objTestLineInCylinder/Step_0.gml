@@ -1,0 +1,1 @@
+cylinder.SetPosition(undefined, undefined, lerp(-200, 200, 0.5 + 0.5*dsin(current_time/30)));
