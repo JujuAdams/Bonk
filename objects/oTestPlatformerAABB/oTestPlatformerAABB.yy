@@ -1,8 +1,11 @@
 {
   "resourceType": "GMObject",
   "resourceVersion": "1.0",
-  "name": "objTestCylinderInFloor",
-  "spriteId": null,
+  "name": "oTestPlatformerAABB",
+  "spriteId": {
+    "name": "sAABB",
+    "path": "sprites/sAABB/sAABB.yy",
+  },
   "solid": false,
   "visible": true,
   "managed": true,
@@ -24,12 +27,11 @@
   "eventList": [
     {"resourceType":"GMEvent","resourceVersion":"1.0","name":"","isDnD":false,"eventNum":0,"eventType":0,"collisionObjectId":null,},
     {"resourceType":"GMEvent","resourceVersion":"1.0","name":"","isDnD":false,"eventNum":0,"eventType":8,"collisionObjectId":null,},
-    {"resourceType":"GMEvent","resourceVersion":"1.0","name":"","isDnD":false,"eventNum":0,"eventType":3,"collisionObjectId":null,},
   ],
   "properties": [],
   "overriddenProperties": [],
   "parent": {
-    "name": "Primitive Collision Tests",
-    "path": "folders/Test Cases/Primitive Collision Tests.yy",
+    "name": "Test Cases",
+    "path": "folders/Test Cases.yy",
   },
 }

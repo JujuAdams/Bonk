@@ -1,8 +1,11 @@
 {
   "resourceType": "GMObject",
   "resourceVersion": "1.0",
-  "name": "objTestCylinderInFloor",
-  "spriteId": null,
+  "name": "oTestPlatformerPlayer",
+  "spriteId": {
+    "name": "sCylinder",
+    "path": "sprites/sCylinder/sCylinder.yy",
+  },
   "solid": false,
   "visible": true,
   "managed": true,
@@ -29,7 +32,7 @@
   "properties": [],
   "overriddenProperties": [],
   "parent": {
-    "name": "Primitive Collision Tests",
-    "path": "folders/Test Cases/Primitive Collision Tests.yy",
+    "name": "Test Cases",
+    "path": "folders/Test Cases.yy",
   },
 }

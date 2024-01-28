@@ -28,7 +28,7 @@
   "properties": [],
   "overriddenProperties": [],
   "parent": {
-    "name": "Bonk",
-    "path": "Bonk.yyp",
+    "name": "Primitive Collision Tests",
+    "path": "folders/Test Cases/Primitive Collision Tests.yy",
   },
 }

@@ -38,22 +38,22 @@ if (mouseLock)
     
     //Now move the mouse
     window_mouse_set(_centreX, _centreY);
+    
+    ////Figure out where the camera is looking
+    camDX =  dcos(camYaw)*dcos(camPitch);
+    camDY = -dsin(camYaw)*dcos(camPitch);
+    camDZ =  dsin(camPitch);
+    
+    //Move parallel/perpendicular to the camera
+    var _para = 2*(keyboard_check(ord("W")) - keyboard_check(ord("S")));
+    var _perp = 2*(keyboard_check(ord("A")) - keyboard_check(ord("D")));
+    var _sin  = dsin(camYaw);
+    var _cos  = dcos(camYaw);
+    
+    camX +=  _para*_cos - _perp*_sin;
+    camY += -_para*_sin - _perp*_cos;
+    camZ += 2*(keyboard_check(vk_space) - keyboard_check(vk_shift));
 }
-
-////Figure out where the camera is looking
-camDX =  dcos(camYaw)*dcos(camPitch);
-camDY = -dsin(camYaw)*dcos(camPitch);
-camDZ =  dsin(camPitch);
-
-//Move parallel/perpendicular to the camera
-var _para = 2*(keyboard_check(ord("W")) - keyboard_check(ord("S")));
-var _perp = 2*(keyboard_check(ord("A")) - keyboard_check(ord("D")));
-var _sin  = dsin(camYaw);
-var _cos  = dcos(camYaw);
-
-camX +=  _para*_cos - _perp*_sin;
-camY += -_para*_sin - _perp*_cos;
-camZ += 2*(keyboard_check(vk_space) - keyboard_check(vk_shift));
 
 //Calculate matrices that we'll want to use later
 viewMatrix = matrix_build_lookat(camX, camY, camZ,
