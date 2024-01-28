@@ -4,7 +4,7 @@
   "name": "Windows",
   "option_windows_display_name": "Bonk",
   "option_windows_executable_name": "${project_name}.exe",
-  "option_windows_version": "0.1.0.0",
+  "option_windows_version": "0.2.0.0",
   "option_windows_company_info": "Juju Adams",
   "option_windows_product_info": "Bonk",
   "option_windows_copyright_info": "Juju Adams 2024",

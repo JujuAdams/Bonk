@@ -1,5 +1,5 @@
-#macro  __BONK_VERSION  "0.1.0"
-#macro  __BONK_DATE     "2024-01-27"
+#macro  __BONK_VERSION  "0.2.0"
+#macro  __BONK_DATE     "2024-01-28"
 
 #macro __BONK_VERY_LARGE  1000000
 
