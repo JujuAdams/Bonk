@@ -1,7 +1,6 @@
 if (not oCamera.mouseLock)
 {
     if (keyboard_check_pressed(vk_space)) velocityZ += 15;
-    velocityZ -= 1;
     
     var _para = 2*(keyboard_check(ord("W")) - keyboard_check(ord("S")));
     var _perp = 2*(keyboard_check(ord("A")) - keyboard_check(ord("D")));
@@ -10,17 +9,19 @@ if (not oCamera.mouseLock)
     
     cylinder.x +=  _para*_cos - _perp*_sin;
     cylinder.y += -_para*_sin - _perp*_cos;
-    cylinder.z += velocityZ;
 }
 
+velocityZ -= 1;
+cylinder.z += velocityZ;
+
 var _onGround = false;
-repeat(5)
+repeat(1)
 {
     var _collision = false;
     
     with(oTestPlatformerFloor)
     {
-        var _reaction = BonkCylinderInFloor(other.cylinder, floor_);
+        var _reaction = BonkAABBInCylinder(aabb, other.cylinder).Reverse();
         if (_reaction.collision)
         {
             _collision = true;
