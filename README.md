@@ -4,8 +4,6 @@
 
 <p align="center"><a href="https://github.com/JujuAdams/bonk/releases/">Download the .yymps</a></p>
 
-<p align="center">Chat about Bonk on the <a href="https://discord.gg/mWWpCAnsCx">Discord server</a></p>
-
 &nbsp;
 
 Bonk is a simple 3D collision library. It supports boolean intersection tests between the following primitives:
