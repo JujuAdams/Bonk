@@ -1,11 +1,13 @@
 {
-  "resourceType": "GMScript",
-  "resourceVersion": "1.0",
-  "name": "BonkWall",
-  "isDnD": false,
-  "isCompatibility": false,
-  "parent": {
-    "name": "Primitives",
-    "path": "folders/Bonk/Primitives.yy",
+  "$GMScript":"v1",
+  "%Name":"BonkWall",
+  "isCompatibility":false,
+  "isDnD":false,
+  "name":"BonkWall",
+  "parent":{
+    "name":"Primitives",
+    "path":"folders/Bonk/Primitives.yy",
   },
+  "resourceType":"GMScript",
+  "resourceVersion":"2.0",
 }

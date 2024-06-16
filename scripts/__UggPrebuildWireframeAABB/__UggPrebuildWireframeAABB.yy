@@ -1,11 +1,13 @@
 {
-  "resourceType": "GMScript",
-  "resourceVersion": "1.0",
-  "name": "__UggPrebuildWireframeAABB",
-  "isCompatibility": false,
-  "isDnD": false,
-  "parent": {
-    "name": "Wireframes",
-    "path": "folders/Ugg/(System)/Wireframes.yy",
+  "$GMScript":"v1",
+  "%Name":"__UggPrebuildWireframeAABB",
+  "isCompatibility":false,
+  "isDnD":false,
+  "name":"__UggPrebuildWireframeAABB",
+  "parent":{
+    "name":"Wireframes",
+    "path":"folders/Ugg/(System)/Wireframes.yy",
   },
+  "resourceType":"GMScript",
+  "resourceVersion":"2.0",
 }

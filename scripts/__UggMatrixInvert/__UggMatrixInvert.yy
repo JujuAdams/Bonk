@@ -1,11 +1,13 @@
 {
-  "resourceType": "GMScript",
-  "resourceVersion": "1.0",
-  "name": "__UggMatrixInvert",
-  "isCompatibility": false,
-  "isDnD": false,
-  "parent": {
-    "name": "(System)",
-    "path": "folders/Ugg/(System).yy",
+  "$GMScript":"v1",
+  "%Name":"__UggMatrixInvert",
+  "isCompatibility":false,
+  "isDnD":false,
+  "name":"__UggMatrixInvert",
+  "parent":{
+    "name":"(System)",
+    "path":"folders/Ugg/(System).yy",
   },
+  "resourceType":"GMScript",
+  "resourceVersion":"2.0",
 }

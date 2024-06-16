@@ -1,11 +1,13 @@
 {
-  "resourceType": "GMScript",
-  "resourceVersion": "1.0",
-  "name": "BonkVecDot",
-  "isCompatibility": false,
-  "isDnD": false,
-  "parent": {
-    "name": "Vectors",
-    "path": "folders/Bonk/(System)/Vectors.yy",
+  "$GMScript":"v1",
+  "%Name":"BonkVecDot",
+  "isCompatibility":false,
+  "isDnD":false,
+  "name":"BonkVecDot",
+  "parent":{
+    "name":"Vectors",
+    "path":"folders/Bonk/(System)/Vectors.yy",
   },
+  "resourceType":"GMScript",
+  "resourceVersion":"2.0",
 }

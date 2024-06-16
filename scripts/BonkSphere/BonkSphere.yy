@@ -1,11 +1,13 @@
 {
-  "resourceType": "GMScript",
-  "resourceVersion": "1.0",
-  "name": "BonkSphere",
-  "isCompatibility": false,
-  "isDnD": false,
-  "parent": {
-    "name": "Primitives",
-    "path": "folders/Bonk/Primitives.yy",
+  "$GMScript":"v1",
+  "%Name":"BonkSphere",
+  "isCompatibility":false,
+  "isDnD":false,
+  "name":"BonkSphere",
+  "parent":{
+    "name":"Primitives",
+    "path":"folders/Bonk/Primitives.yy",
   },
+  "resourceType":"GMScript",
+  "resourceVersion":"2.0",
 }

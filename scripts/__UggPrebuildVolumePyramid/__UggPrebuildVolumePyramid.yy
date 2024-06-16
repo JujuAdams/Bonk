@@ -1,11 +1,13 @@
 {
-  "resourceType": "GMScript",
-  "resourceVersion": "1.0",
-  "name": "__UggPrebuildVolumePyramid",
-  "isCompatibility": false,
-  "isDnD": false,
-  "parent": {
-    "name": "Volumes",
-    "path": "folders/Ugg/(System)/Volumes.yy",
+  "$GMScript":"v1",
+  "%Name":"__UggPrebuildVolumePyramid",
+  "isCompatibility":false,
+  "isDnD":false,
+  "name":"__UggPrebuildVolumePyramid",
+  "parent":{
+    "name":"Volumes",
+    "path":"folders/Ugg/(System)/Volumes.yy",
   },
+  "resourceType":"GMScript",
+  "resourceVersion":"2.0",
 }

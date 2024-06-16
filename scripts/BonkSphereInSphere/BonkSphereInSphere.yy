@@ -1,11 +1,13 @@
 {
-  "resourceType": "GMScript",
-  "resourceVersion": "1.0",
-  "name": "BonkSphereInSphere",
-  "isDnD": false,
-  "isCompatibility": false,
-  "parent": {
-    "name": "Collisions",
-    "path": "folders/Bonk/Collisions.yy",
+  "$GMScript":"v1",
+  "%Name":"BonkSphereInSphere",
+  "isCompatibility":false,
+  "isDnD":false,
+  "name":"BonkSphereInSphere",
+  "parent":{
+    "name":"Collisions",
+    "path":"folders/Bonk/Collisions.yy",
   },
+  "resourceType":"GMScript",
+  "resourceVersion":"2.0",
 }

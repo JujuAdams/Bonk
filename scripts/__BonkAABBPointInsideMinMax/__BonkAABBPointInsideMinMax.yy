@@ -1,11 +1,13 @@
 {
-  "resourceType": "GMScript",
-  "resourceVersion": "1.0",
-  "name": "__BonkAABBPointInsideMinMax",
-  "isCompatibility": false,
-  "isDnD": false,
-  "parent": {
-    "name": "Vectors",
-    "path": "folders/Bonk/(System)/Vectors.yy",
+  "$GMScript":"v1",
+  "%Name":"__BonkAABBPointInsideMinMax",
+  "isCompatibility":false,
+  "isDnD":false,
+  "name":"__BonkAABBPointInsideMinMax",
+  "parent":{
+    "name":"Vectors",
+    "path":"folders/Bonk/(System)/Vectors.yy",
   },
+  "resourceType":"GMScript",
+  "resourceVersion":"2.0",
 }
