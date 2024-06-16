@@ -1,5 +1,5 @@
-#macro  __UGG_VERSION  "0.4.0"
-#macro  __UGG_DATE     "2024-01-24"
+#macro  __UGG_VERSION  "1.0.0"
+#macro  __UGG_DATE     "2024-06-14"
 
 #macro __UGG_GLOBAL  static _global = __Ugg();
 #macro __UGG_COLOR_UNIFORMS  static _shdUggVolume_u_vColor    = shader_get_uniform(__shdUggVolume, "u_vColor");\
