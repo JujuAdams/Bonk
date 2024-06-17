@@ -13,12 +13,12 @@ if (not oCamera.mouseLock)
 
 velocityZ -= 1;
 
-cylinder.x += velocityX;
-cylinder.y += velocityY;
-cylinder.z += velocityZ;
-
 repeat(1)
 {
+    cylinder.x += velocityX;
+    cylinder.y += velocityY;
+    cylinder.z += velocityZ;
+    
     var _collision = false;
     
     with(oTestPlatformerFloor)
@@ -41,8 +41,11 @@ repeat(1)
                 velocityZ = _velocityProjection.z;
             }
             
+            break;
         }
     }
+    
+    if (not _collision) break;
     
     with(oTestPlatformerAABB)
     {
@@ -63,6 +66,8 @@ repeat(1)
                 velocityY = _velocityProjection.y;
                 velocityZ = _velocityProjection.z;
             }
+            
+            break;
         }
     }
     
