@@ -7,55 +7,64 @@ if (not oCamera.mouseLock)
     var _sin  = dsin(oCamera.camYaw);
     var _cos  = dcos(oCamera.camYaw);
     
-    cylinder.x +=  _para*_cos - _perp*_sin;
-    cylinder.y += -_para*_sin - _perp*_cos;
+    velocityX =  _para*_cos - _perp*_sin;
+    velocityY = -_para*_sin - _perp*_cos;
 }
 
 velocityZ -= 1;
+
+cylinder.x += velocityX;
+cylinder.y += velocityY;
 cylinder.z += velocityZ;
 
-var _onGround = false;
 repeat(1)
 {
     var _collision = false;
     
     with(oTestPlatformerFloor)
     {
-        var _reaction = BonkAABBInCylinder(aabb, other.cylinder).Reverse();
+        var _reaction = BonkAABBInCylinder(aabb, other.cylinder);
         if (_reaction.collision)
         {
             _collision = true;
+            _reaction.Reverse();
             
-            with(other.cylinder)
+            with(other)
             {
-                x += _reaction.dX;
-                y += _reaction.dY;
-                z += _reaction.dZ;
+                cylinder.x += _reaction.dX;
+                cylinder.y += _reaction.dY;
+                cylinder.z += _reaction.dZ;
+                
+                var _velocityProjection = BonkVecProjectOntoPlane(velocityX, velocityY, velocityZ, _reaction.dX, _reaction.dY, _reaction.dZ);
+                velocityX = _velocityProjection.x;
+                velocityY = _velocityProjection.y;
+                velocityZ = _velocityProjection.z;
             }
             
-            if (_reaction.dZ > 0) _onGround = true;
         }
     }
     
     with(oTestPlatformerAABB)
     {
-        var _reaction = BonkAABBInCylinder(aabb, other.cylinder).Reverse();
+        var _reaction = BonkAABBInCylinder(aabb, other.cylinder);
         if (_reaction.collision)
         {
             _collision = true;
+            _reaction.Reverse();
             
-            with(other.cylinder)
+            with(other)
             {
-                x += _reaction.dX;
-                y += _reaction.dY;
-                z += _reaction.dZ;
+                cylinder.x += _reaction.dX;
+                cylinder.y += _reaction.dY;
+                cylinder.z += _reaction.dZ;
+                
+                var _velocityProjection = BonkVecProjectOntoPlane(velocityX, velocityY, velocityZ, _reaction.dX, _reaction.dY, _reaction.dZ);
+                velocityX = _velocityProjection.x;
+                velocityY = _velocityProjection.y;
+                velocityZ = _velocityProjection.z;
             }
-            
-            if (_reaction.dZ > 0) _onGround = true;
         }
     }
     
     if (not _collision) break;
 }
-
-if (_onGround) velocityZ = 0;

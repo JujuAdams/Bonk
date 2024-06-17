@@ -32,6 +32,7 @@ function BonkAABBInCylinder(_aabb, _cylinder)
         var _bottom = y + yHalfSize;
         var _above  = z + zHalfSize;
         
+        //2D collision check 
         if (rectangle_in_circle(_left, _top, _right, _bottom, _cylinder.x, _cylinder.y, _cylinder.radius))
         {
             var _pushX = 0;

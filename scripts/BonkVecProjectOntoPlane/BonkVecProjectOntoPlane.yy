@@ -1,0 +1,13 @@
+{
+  "$GMScript":"v1",
+  "%Name":"BonkVecProjectOntoPlane",
+  "isCompatibility":false,
+  "isDnD":false,
+  "name":"BonkVecProjectOntoPlane",
+  "parent":{
+    "name":"Vectors",
+    "path":"folders/Bonk/(System)/Vectors.yy",
+  },
+  "resourceType":"GMScript",
+  "resourceVersion":"2.0",
+}

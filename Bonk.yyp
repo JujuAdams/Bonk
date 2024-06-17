@@ -102,6 +102,7 @@
     {"id":{"name":"BonkVecDot","path":"scripts/BonkVecDot/BonkVecDot.yy",},},
     {"id":{"name":"BonkVecLength","path":"scripts/BonkVecLength/BonkVecLength.yy",},},
     {"id":{"name":"BonkVecMultiply","path":"scripts/BonkVecMultiply/BonkVecMultiply.yy",},},
+    {"id":{"name":"BonkVecProjectOntoPlane","path":"scripts/BonkVecProjectOntoPlane/BonkVecProjectOntoPlane.yy",},},
     {"id":{"name":"BonkVecSquareLength","path":"scripts/BonkVecSquareLength/BonkVecSquareLength.yy",},},
     {"id":{"name":"BonkVecSubtract","path":"scripts/BonkVecSubtract/BonkVecSubtract.yy",},},
     {"id":{"name":"BonkWall","path":"scripts/BonkWall/BonkWall.yy",},},
