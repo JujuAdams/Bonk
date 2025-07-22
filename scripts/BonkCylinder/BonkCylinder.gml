@@ -32,25 +32,6 @@ function BonkCylinder() constructor
         return self;
     }
     
-    static GetPosition = function()
-    {
-        return {
-            x: x,
-            y: y,
-            z: z,
-        };
-    }
-    
-    static GetHeight = function()
-    {
-        return height;
-    }
-    
-    static GetRadius = function()
-    {
-        return radius;
-    }
-    
     static GetAABB = function()
     {
         return {

@@ -24,20 +24,6 @@ function BonkSphere() constructor
         return self;
     }
     
-    static GetPosition = function()
-    {
-        return {
-            x: x,
-            y: y,
-            z: z,
-        };
-    }
-    
-    static GetRadius = function()
-    {
-        return radius;
-    }
-    
     static GetAABB = function()
     {
         return {

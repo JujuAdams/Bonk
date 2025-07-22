@@ -54,33 +54,6 @@ function BonkTriangle() constructor
         return self;
     }
     
-    static GetA = function()
-    {
-        return {
-            x: x1,
-            y: y1,
-            z: z1,
-        };
-    }
-    
-    static GetB = function()
-    {
-        return {
-            x: x2,
-            y: y2,
-            z: z2,
-        };
-    }
-    
-    static GetC = function()
-    {
-        return {
-            x: x3,
-            y: y3,
-            z: z3,
-        };
-    }
-    
     static __CalculateNormal = function()
     {
         if (dirty)

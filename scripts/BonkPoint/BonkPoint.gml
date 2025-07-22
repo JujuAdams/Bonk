@@ -15,15 +15,6 @@ function BonkPoint() constructor
         return self;
     }
     
-    static GetPosition = function()
-    {
-        return {
-            x: x,
-            y: y,
-            z: z,
-        };
-    }
-    
     static GetAABB = function()
     {
         return {

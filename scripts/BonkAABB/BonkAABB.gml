@@ -28,24 +28,6 @@ function BonkAABB() constructor
         return self;
     }
     
-    static GetPosition = function()
-    {
-        return {
-            x: x,
-            y: y,
-            z: z,
-        };
-    }
-    
-    static GetSize = function()
-    {
-        return {
-            x: 2*xHalfSize,
-            y: 2*yHalfSize,
-            z: 2*zHalfSize,
-        };
-    }
-    
     static GetAABB = function()
     {
         return {
