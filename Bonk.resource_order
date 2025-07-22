@@ -1,9 +1,11 @@
 {
   "FolderOrderSettings":[
     {"name":"Vectors","order":2,"path":"folders/Bonk/(System)/Vectors.yy",},
+    {"name":"Collisions","order":1,"path":"folders/Bonk/Collisions.yy",},
     {"name":"AABB","order":2,"path":"folders/Bonk/Collisions/AABB.yy",},
-    {"name":"Other","order":3,"path":"folders/Bonk/Collisions/Other.yy",},
     {"name":"Line","order":1,"path":"folders/Bonk/Collisions/Line.yy",},
+    {"name":"Other","order":3,"path":"folders/Bonk/Collisions/Other.yy",},
+    {"name":"Primitives","order":2,"path":"folders/Bonk/Primitives.yy",},
     {"name":"Ugg","order":3,"path":"folders/Ugg.yy",},
     {"name":"(System)","order":1,"path":"folders/Ugg/(System).yy",},
     {"name":"Volumes","order":1,"path":"folders/Ugg/(System)/Volumes.yy",},
@@ -60,6 +62,7 @@
     {"name":"BonkAABBInAABB","order":2,"path":"scripts/BonkAABBInAABB/BonkAABBInAABB.yy",},
     {"name":"BonkAABBInCylinder","order":3,"path":"scripts/BonkAABBInCylinder/BonkAABBInCylinder.yy",},
     {"name":"BonkAABBInSphere","order":1,"path":"scripts/BonkAABBInSphere/BonkAABBInSphere.yy",},
+    {"name":"BonkCollisionResponse","order":3,"path":"scripts/BonkCollisionResponse/BonkCollisionResponse.yy",},
     {"name":"BonkCollisionResponseExt","order":4,"path":"scripts/BonkCollisionResponseExt/BonkCollisionResponseExt.yy",},
     {"name":"BonkCylinder","order":4,"path":"scripts/BonkCylinder/BonkCylinder.yy",},
     {"name":"BonkCylinderInCylinder","order":1,"path":"scripts/BonkCylinderInCylinder/BonkCylinderInCylinder.yy",},
