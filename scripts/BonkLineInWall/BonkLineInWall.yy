@@ -5,8 +5,8 @@
   "isDnD":false,
   "name":"BonkLineInWall",
   "parent":{
-    "name":"Collisions",
-    "path":"folders/Bonk/Collisions.yy",
+    "name":"Line",
+    "path":"folders/Bonk/Collisions/Line.yy",
   },
   "resourceType":"GMScript",
   "resourceVersion":"2.0",

@@ -5,8 +5,8 @@
   "isDnD":false,
   "name":"BonkAABBInWall",
   "parent":{
-    "name":"Collisions",
-    "path":"folders/Bonk/Collisions.yy",
+    "name":"AABB",
+    "path":"folders/Bonk/Collisions/AABB.yy",
   },
   "resourceType":"GMScript",
   "resourceVersion":"2.0",

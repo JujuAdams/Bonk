@@ -5,8 +5,8 @@
   "isDnD":false,
   "name":"BonkCylinderInCylinder",
   "parent":{
-    "name":"Collisions",
-    "path":"folders/Bonk/Collisions.yy",
+    "name":"Other",
+    "path":"folders/Bonk/Collisions/Other.yy",
   },
   "resourceType":"GMScript",
   "resourceVersion":"2.0",

@@ -5,8 +5,8 @@
   "isDnD":false,
   "name":"BonkPointInPoint",
   "parent":{
-    "name":"Collisions",
-    "path":"folders/Bonk/Collisions.yy",
+    "name":"Point",
+    "path":"folders/Bonk/Collisions/Point.yy",
   },
   "resourceType":"GMScript",
   "resourceVersion":"2.0",
