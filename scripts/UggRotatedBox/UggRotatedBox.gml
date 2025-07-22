@@ -2,16 +2,17 @@
 
 /// Draws a cuboid with optional rotation in the z axis.
 /// 
-/// @param  xCentre
-/// @param  yCentre
-/// @param  zCentre
-/// @param  xSize
-/// @param  ySize
-/// @param  zSize
-/// @param  [zRotation=0]
-/// @param  [color]
+/// @param xCentre
+/// @param yCentre
+/// @param zCentre
+/// @param xSize
+/// @param ySize
+/// @param zSize
+/// @param [zRotation=0]
+/// @param [color]
+/// @param [wireframe}
 
-function UggRotatedBox(_x, _y, _z, _xSize, _ySize, _zSize, _zRotation = 0, _color = UGG_DEFAULT_DIFFUSE_COLOR)
+function UggRotatedBox(_x, _y, _z, _xSize, _ySize, _zSize, _zRotation = 0, _color = UGG_DEFAULT_DIFFUSE_COLOR, _wireframe = undefined)
 {
     __UGG_GLOBAL
     __UGG_COLOR_UNIFORMS
@@ -34,7 +35,7 @@ function UggRotatedBox(_x, _y, _z, _xSize, _ySize, _zSize, _zRotation = 0, _colo
     matrix_stack_push(_staticMatrix);
     matrix_set(matrix_world, matrix_stack_top());
     
-    if (_global.__wireframe)
+    if (_wireframe ?? _global.__wireframe)
     {
         shader_set(__shdUggWireframe);
         shader_set_uniform_f(_shdUggWireframe_u_vColor, color_get_red(  _color)/255,

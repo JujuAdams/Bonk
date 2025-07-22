@@ -13,8 +13,9 @@
 /// @param y3
 /// @param z3
 /// @param [color]
+/// @param [wireframe}
 
-function UggTriangle(_x1, _y1, _z1, _x2, _y2, _z2, _x3, _y3, _z3, _color = UGG_DEFAULT_DIFFUSE_COLOR) 
+function UggTriangle(_x1, _y1, _z1, _x2, _y2, _z2, _x3, _y3, _z3, _color = UGG_DEFAULT_DIFFUSE_COLOR, _wireframe = undefined) 
 {
     __UGG_GLOBAL
     __UGG_COLOR_UNIFORMS
@@ -22,7 +23,7 @@ function UggTriangle(_x1, _y1, _z1, _x2, _y2, _z2, _x3, _y3, _z3, _color = UGG_D
     static _wireframeVertexFormat = _global.__wireframeVertexFormat;
     static _staticVBuff           = vertex_create_buffer();
     
-    if (_global.__wireframe)
+    if (_wireframe ?? _global.__wireframe)
     {
     	vertex_begin(_staticVBuff, _wireframeVertexFormat);
     	vertex_position_3d(_staticVBuff, _x1, _y1, _z1); vertex_color(_staticVBuff, c_white, 1);

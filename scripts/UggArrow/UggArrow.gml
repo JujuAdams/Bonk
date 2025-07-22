@@ -12,8 +12,9 @@
 /// @param [arrowSize]
 /// @param [color]
 /// @param [thickness]
+/// @param [wireframe}
 
-function UggArrow(_x1, _y1, _z1, _x2, _y2, _z2, _arrowSize = undefined, _color = UGG_DEFAULT_DIFFUSE_COLOR, _thickness = UGG_LINE_THICKNESS)
+function UggArrow(_x1, _y1, _z1, _x2, _y2, _z2, _arrowSize = undefined, _color = UGG_DEFAULT_DIFFUSE_COLOR, _thickness = UGG_LINE_THICKNESS, _wireframe = undefined)
 {
     __UGG_GLOBAL
     __UGG_COLOR_UNIFORMS
@@ -24,6 +25,8 @@ function UggArrow(_x1, _y1, _z1, _x2, _y2, _z2, _arrowSize = undefined, _color =
     static _vectorMatrix          = matrix_build_identity();
     static _workMatrix            = matrix_build_identity();
     static _staticVBuff           = vertex_create_buffer();
+    
+    _wireframe ??= _global.__wireframe;
     
     if (_arrowSize == undefined) _arrowSize = 4*_thickness;
     
@@ -79,7 +82,7 @@ function UggArrow(_x1, _y1, _z1, _x2, _y2, _z2, _arrowSize = undefined, _color =
     _y2 = _y1 + _length*_dy;
     _z2 = _z1 + _length*_dz;
     
-    if (_global.__wireframe)
+    if (_wireframe)
     {
         shader_set(__shdUggWireframe);
         shader_set_uniform_f(_shdUggWireframe_u_vColor, color_get_red(  _color)/255,
@@ -141,7 +144,7 @@ function UggArrow(_x1, _y1, _z1, _x2, _y2, _z2, _arrowSize = undefined, _color =
     matrix_stack_push(_workMatrix);
     matrix_set(matrix_world, matrix_stack_top());
     
-    if (_global.__wireframe)
+    if (_wireframe)
     {
         vertex_submit(_wireframePyramid, pr_linelist, -1);
     }

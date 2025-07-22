@@ -7,8 +7,9 @@
 /// @param z
 /// @param radius
 /// @param [color]
+/// @param [wireframe}
 
-function UggSphere(_x, _y, _z, _radius, _color = UGG_DEFAULT_DIFFUSE_COLOR)
+function UggSphere(_x, _y, _z, _radius, _color = UGG_DEFAULT_DIFFUSE_COLOR, _wireframe = undefined)
 {
     __UGG_GLOBAL
     __UGG_COLOR_UNIFORMS
@@ -26,7 +27,7 @@ function UggSphere(_x, _y, _z, _radius, _color = UGG_DEFAULT_DIFFUSE_COLOR)
     matrix_stack_push(_staticMatrix);
     matrix_set(matrix_world, matrix_stack_top());
     
-    if (_global.__wireframe)
+    if (_wireframe ?? _global.__wireframe)
     {
         shader_set(__shdUggWireframe);
         shader_set_uniform_f(_shdUggWireframe_u_vColor, color_get_red(  _color)/255,

@@ -1,17 +1,17 @@
 // Feather disable all
 
-function __UggPrebuildWireframeCone()
+function __UggPrebuildWireframeCone(_steps)
 {
 	var _vertexBuffer = vertex_create_buffer();
 	vertex_begin(_vertexBuffer, __Ugg().__wireframeVertexFormat);
     
-    var _incr = 360 / UGG_CONE_STEPS;
+    var _incr = 360 / _steps;
     var _angle = _incr/2;
     
 	var _bx = dcos(_angle);
 	var _by = dsin(_angle);
     
-    repeat(UGG_CONE_STEPS)
+    repeat(_steps)
     {
         _angle += _incr;
         var _cos = dcos(_angle);

@@ -10,8 +10,9 @@
 /// @param z2
 /// @param [color]
 /// @param [thickness]
+/// @param [wireframe}
 
-function UggLine(_x1, _y1, _z1, _x2, _y2, _z2, _color = UGG_DEFAULT_DIFFUSE_COLOR, _thickness = UGG_LINE_THICKNESS)
+function UggLine(_x1, _y1, _z1, _x2, _y2, _z2, _color = UGG_DEFAULT_DIFFUSE_COLOR, _thickness = UGG_LINE_THICKNESS, _wireframe = undefined)
 {
     __UGG_GLOBAL
     __UGG_COLOR_UNIFORMS
@@ -20,7 +21,7 @@ function UggLine(_x1, _y1, _z1, _x2, _y2, _z2, _color = UGG_DEFAULT_DIFFUSE_COLO
     static _staticMatrix          = matrix_build_identity();
     static _staticVBuff           = vertex_create_buffer();
     
-    if (_global.__wireframe)
+    if (_wireframe ?? _global.__wireframe)
     {
     	vertex_begin(_staticVBuff, _wireframeVertexFormat);
     	vertex_position_3d(_staticVBuff, _x1, _y1, _z1); vertex_color(_staticVBuff, c_white, 1);

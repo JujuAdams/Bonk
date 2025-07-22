@@ -1,0 +1,13 @@
+{
+  "$GMScript":"v1",
+  "%Name":"UggCross",
+  "isCompatibility":false,
+  "isDnD":false,
+  "name":"UggCross",
+  "parent":{
+    "name":"Ugg",
+    "path":"folders/Ugg.yy",
+  },
+  "resourceType":"GMScript",
+  "resourceVersion":"2.0",
+}

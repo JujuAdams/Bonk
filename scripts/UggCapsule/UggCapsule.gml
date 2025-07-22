@@ -8,8 +8,9 @@
 /// @param height
 /// @param radius
 /// @param [color]
+/// @param [wireframe}
 
-function UggCapsule(_x, _y, _z, _height, _radius, _color = UGG_DEFAULT_DIFFUSE_COLOR)
+function UggCapsule(_x, _y, _z, _height, _radius, _color = UGG_DEFAULT_DIFFUSE_COLOR, _wireframe = undefined)
 {
     __UGG_GLOBAL
     __UGG_COLOR_UNIFORMS
@@ -21,7 +22,7 @@ function UggCapsule(_x, _y, _z, _height, _radius, _color = UGG_DEFAULT_DIFFUSE_C
     
     _radius = min(_height/2, _radius);
     
-    if (_global.__wireframe)
+    if (_wireframe ?? _global.__wireframe)
     {
         shader_set(__shdUggWireframe);
         shader_set_uniform_f(_shdUggWireframe_u_vColor, color_get_red(  _color)/255,
