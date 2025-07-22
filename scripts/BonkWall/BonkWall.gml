@@ -1,10 +1,5 @@
 function BonkWall() constructor
 {
-    static toString = function()
-    {
-        return "wall";
-    }
-    
     x1 = 0;
     y1 = 0;
     z1 = 0;

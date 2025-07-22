@@ -1,10 +1,5 @@
 function BonkCylinder() constructor
 {
-    static toString = function()
-    {
-        return "cylinder";
-    }
-    
     x = 0;
     y = 0;
     z = 0;

@@ -1,10 +1,5 @@
 function BonkSphere() constructor
 {
-    static toString = function()
-    {
-        return "sphere";
-    }
-    
     x = 0;
     y = 0;
     z = 0;

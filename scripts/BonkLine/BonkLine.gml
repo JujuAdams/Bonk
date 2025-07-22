@@ -1,10 +1,5 @@
 function BonkLine() constructor
 {
-    static toString = function()
-    {
-        return "line";
-    }
-    
     x1 = 0;
     y1 = 0;
     z1 = 0;

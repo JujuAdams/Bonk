@@ -1,10 +1,5 @@
 function BonkTriangle() constructor
 {
-    static toString = function()
-    {
-        return "triangle";
-    }
-    
     x1 = 0;
     y1 = 0;
     z1 = 0;

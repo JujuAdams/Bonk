@@ -1,10 +1,5 @@
 function BonkAABB() constructor
 {
-    static toString = function()
-    {
-        return "point";
-    }
-    
     x = 0;
     y = 0;
     z = 0;
