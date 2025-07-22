@@ -54,15 +54,3 @@ function BonkAABBInSphere(_aabb, _sphere)
     
     return _reaction;
 }
-
-/*
-1) find point 'pbox' on box the closest to the sphere centre.
-2) if 'pbox' is outside the sphere no collision.
-3) find point 'pshpere' on sphere surface the closest to point 'pbox'.
-4) to push sphere on the box surface, 'pbox' should be equal to 'psphere'.
--> Vector delta = (psphere - pbox);
--> float distance =  delta.length();
--> Vector push = delta * (sphere.radius - distance) / distance;
--> sphere.position += push;
--> sphere.velocity -= delta * (sphere.velocity.dotProduct(delta) / delta.dotProduct(delta));
-*/

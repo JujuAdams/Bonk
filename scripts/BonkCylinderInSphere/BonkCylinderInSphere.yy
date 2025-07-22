@@ -1,0 +1,13 @@
+{
+  "$GMScript":"v1",
+  "%Name":"BonkCylinderInSphere",
+  "isCompatibility":false,
+  "isDnD":false,
+  "name":"BonkCylinderInSphere",
+  "parent":{
+    "name":"Reaction",
+    "path":"folders/Bonk/Reaction.yy",
+  },
+  "resourceType":"GMScript",
+  "resourceVersion":"2.0",
+}

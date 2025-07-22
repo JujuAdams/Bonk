@@ -16,4 +16,9 @@ repeat(_steps)
     {
         BonkCollision(other, other.primitive, primitive);
     }
+    
+    with(oTestPlatformerCylinder)
+    {
+        BonkCollision(other, other.primitive, primitive);
+    }
 }

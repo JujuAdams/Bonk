@@ -105,6 +105,7 @@
     {"id":{"name":"BonkCollision","path":"scripts/BonkCollision/BonkCollision.yy",},},
     {"id":{"name":"BonkCylinder","path":"scripts/BonkCylinder/BonkCylinder.yy",},},
     {"id":{"name":"BonkCylinderInCylinder","path":"scripts/BonkCylinderInCylinder/BonkCylinderInCylinder.yy",},},
+    {"id":{"name":"BonkCylinderInSphere","path":"scripts/BonkCylinderInSphere/BonkCylinderInSphere.yy",},},
     {"id":{"name":"BonkLine","path":"scripts/BonkLine/BonkLine.yy",},},
     {"id":{"name":"BonkManualCollisionResponse","path":"scripts/BonkManualCollisionResponse/BonkManualCollisionResponse.yy",},},
     {"id":{"name":"BonkPoint","path":"scripts/BonkPoint/BonkPoint.yy",},},
