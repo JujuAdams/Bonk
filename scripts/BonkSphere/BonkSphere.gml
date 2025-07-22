@@ -41,10 +41,10 @@ function BonkSphere(_x, _y, _z, _radius) constructor
         };
     }
     
-    static Draw = function(_color = undefined)
+    static Draw = function(_color = undefined, _wireframe = undefined)
     {
         __BONK_VERIFY_UGG
-        UggSphere(x, y, z, radius, _color);
+        UggSphere(x, y, z, radius, _color, _wireframe);
     }
     
     static Collide = function(_otherPrimitive)

@@ -62,9 +62,9 @@ function BonkLine(_x1, _y1, _z1, _x2, _y2, _z2) constructor
         return self;
     }
     
-    static Draw = function(_color = undefined, _thickness = undefined)
+    static Draw = function(_color = undefined, _thickness = undefined, _wireframe = undefined)
     {
         __BONK_VERIFY_UGG
-        UggLine(x1, y1, z1, x2, y2, z2, _color, _thickness);
+        UggLine(x1, y1, z1, x2, y2, z2, _color, _thickness, _wireframe);
     }
 }

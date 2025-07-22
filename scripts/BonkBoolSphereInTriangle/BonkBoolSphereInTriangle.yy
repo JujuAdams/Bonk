@@ -1,9 +1,9 @@
 {
   "$GMScript":"v1",
-  "%Name":"BonkBoolSphereInSphere",
+  "%Name":"BonkBoolSphereInTriangle",
   "isCompatibility":false,
   "isDnD":false,
-  "name":"BonkBoolSphereInSphere",
+  "name":"BonkBoolSphereInTriangle",
   "parent":{
     "name":"Sphere",
     "path":"folders/Bonk/Boolean/Sphere.yy",

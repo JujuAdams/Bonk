@@ -1,19 +1,17 @@
 /// @param xCenter
 /// @param yCenter
 /// @param zCenter
-/// @param xSize
-/// @param ySize
-/// @param zSize
+/// @param height
+/// @param radius
 
-function BonkAABB(_x, _y, _z, _xSize, _ySize, _zSize) constructor
+function BonkCapsule(_x, _y, _z, _height, _radius) constructor
 {
     x = _x;
     y = _y;
     z = _z;
     
-    xHalfSize = 0.5*_xSize;
-    yHalfSize = 0.5*_ySize;
-    zHalfSize = 0.5*_zSize;
+    height = _height;
+    radius = _radius;
     
     
     
@@ -26,11 +24,16 @@ function BonkAABB(_x, _y, _z, _xSize, _ySize, _zSize) constructor
         return self;
     }
     
-    static SetSize = function(_x = 2*xHalfSize, _y = 2*yHalfSize, _z = 2*zHalfSize)
+    static SetHeight = function(_height = height)
     {
-        xHalfSize = 0.5*_x;
-        yHalfSize = 0.5*_y;
-        zHalfSize = 0.5*_z;
+        height = _height;
+        
+        return self;
+    }
+    
+    static SetRadius = function(_radius = radius)
+    {
+        radius = _radius;
         
         return self;
     }
@@ -38,19 +41,19 @@ function BonkAABB(_x, _y, _z, _xSize, _ySize, _zSize) constructor
     static GetAABB = function()
     {
         return {
-            x1: x - xHalfSize,
-            y1: y - yHalfSize,
-            z1: z - zHalfSize,
-            x2: x + xHalfSize,
-            y2: y + yHalfSize,
-            z2: z + zHalfSize,
+            x1: x - radius,
+            y1: y - radius,
+            z1: z - 0.5*height,
+            x2: x + radius,
+            y2: y + radius,
+            z2: z + 0.5*height,
         };
     }
     
     static Draw = function(_color = undefined, _wireframe = undefined)
     {
         __BONK_VERIFY_UGG
-        UggAABB(x, y, z, 2*xHalfSize, 2*yHalfSize, 2*zHalfSize, _color, _wireframe);
+        UggCapsule(x, y, z - height/2, height, radius, _color, _wireframe);
     }
     
     static Collide = function(_otherPrimitive)
@@ -59,15 +62,19 @@ function BonkAABB(_x, _y, _z, _xSize, _ySize, _zSize) constructor
         
         if (is_instanceof(_otherPrimitive, BonkAABB))
         {
-            return BonkAABBInAABB(self, _otherPrimitive);
+            return BonkAABBInCylinder(_otherPrimitive, self).Reverse();
         }
         else if (is_instanceof(_otherPrimitive, BonkCylinder))
         {
-            return BonkAABBInCylinder(self, _otherPrimitive);
+            return BonkCylinderInCylinder(self, _otherPrimitive);
         }
         else if (is_instanceof(_otherPrimitive, BonkSphere))
         {
-            return BonkAABBInSphere(self, _otherPrimitive);
+            return BonkCylinderInSphere(self, _otherPrimitive);
+        }
+        else if (is_instanceof(_otherPrimitive, BonkQuad))
+        {
+            return BonkCapsuleInQuad(self, _otherPrimitive);
         }
         
         if (BONK_STRICT_COLLISION_COMPATIBILITY)

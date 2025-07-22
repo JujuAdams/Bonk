@@ -19,9 +19,9 @@ function BonkPoint(_x, _y, _z) constructor
         return self;
     }
     
-    static Draw = function(_color = undefined)
+    static Draw = function(_color = undefined, _wireframe = undefined)
     {
         __BONK_VERIFY_UGG
-        UggPoint(x, y, z, _color);
+        UggPoint(x, y, z, _color, _wireframe);
     }
 }

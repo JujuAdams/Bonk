@@ -1,12 +1,12 @@
 {
   "$GMScript":"v1",
-  "%Name":"BonkBoolSphereInSphere",
+  "%Name":"BonkQuad",
   "isCompatibility":false,
   "isDnD":false,
-  "name":"BonkBoolSphereInSphere",
+  "name":"BonkQuad",
   "parent":{
-    "name":"Sphere",
-    "path":"folders/Bonk/Boolean/Sphere.yy",
+    "name":"Primitives",
+    "path":"folders/Bonk/Primitives.yy",
   },
   "resourceType":"GMScript",
   "resourceVersion":"2.0",

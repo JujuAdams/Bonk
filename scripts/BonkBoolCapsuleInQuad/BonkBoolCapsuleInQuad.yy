@@ -1,12 +1,12 @@
 {
   "$GMScript":"v1",
-  "%Name":"BonkBoolSphereInSphere",
+  "%Name":"BonkBoolCapsuleInQuad",
   "isCompatibility":false,
   "isDnD":false,
-  "name":"BonkBoolSphereInSphere",
+  "name":"BonkBoolCapsuleInQuad",
   "parent":{
-    "name":"Sphere",
-    "path":"folders/Bonk/Boolean/Sphere.yy",
+    "name":"Quad",
+    "path":"folders/Bonk/Boolean/Quad.yy",
   },
   "resourceType":"GMScript",
   "resourceVersion":"2.0",

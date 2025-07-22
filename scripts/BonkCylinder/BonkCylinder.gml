@@ -50,10 +50,10 @@ function BonkCylinder(_x, _y, _z, _height, _radius) constructor
         };
     }
     
-    static Draw = function(_color = undefined)
+    static Draw = function(_color = undefined, _wireframe = undefined)
     {
         __BONK_VERIFY_UGG
-        UggCylinder(x, y, z - height/2, height, radius, _color);
+        UggCylinder(x, y, z - height/2, height, radius, _color, _wireframe);
     }
     
     static Collide = function(_otherPrimitive)
