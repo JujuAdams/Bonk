@@ -16,10 +16,10 @@ function BonkCylinderInCylinder(_cylinder1, _cylinder2)
         var _zMin2 = _cylinder2.z - 0.5*_cylinder2.height;
         var _zMax2 = _cylinder2.z + 0.5*_cylinder2.height;
         
-        var _pushDown = _zMax1 - _zMin2;
-        var _pushUp   = _zMax2 - _zMin1;
+        var _pushBelow = _zMax1 - _zMin2;
+        var _pushAbove = _zMax2 - _zMin1;
         
-        if ((_pushDown >= 0) && (_pushUp <= 0))
+        if ((_pushBelow >= 0) && (_pushAbove <= 0))
         {
             return _nullReaction;
         }
@@ -37,7 +37,7 @@ function BonkCylinderInCylinder(_cylinder1, _cylinder2)
         
         _reaction.collision = true;
         
-        var _dZ = (abs(_pushDown) < abs(_pushUp))? _pushDown : _pushUp;
+        var _dZ = (abs(_pushBelow) < abs(_pushAbove))? _pushBelow : _pushAbove;
         if (abs(_dZ) < _pushXY)
         {
             _reaction.dX = 0;
