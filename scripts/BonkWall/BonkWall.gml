@@ -1,12 +1,19 @@
-function BonkWall() constructor
+/// @param x1
+/// @Param y1
+/// @param z1
+/// @param x2
+/// @param y2
+/// @param z2
+
+function BonkWall(_x1, _y1, _z1, _x2, _y2, _z2) constructor
 {
-    x1 = 0;
-    y1 = 0;
-    z1 = 0;
+    x1 = _x1;
+    y1 = _y1;
+    z1 = _z1;
     
-    x2 = 0;
-    y2 = 0;
-    z2 = 0;
+    x2 = _x2;
+    y2 = _y2;
+    z2 = _z2;
     
     static SetA = function(_x = x1, _y = y1, _z = z1)
     {
@@ -24,24 +31,6 @@ function BonkWall() constructor
         z2 = _z;
         
         return self;
-    }
-    
-    static GetA = function()
-    {
-        return {
-            x: x1,
-            y: y1,
-            z: z1,
-        };
-    }
-    
-    static GetB = function()
-    {
-        return {
-            x: x2,
-            y: y2,
-            z: z2,
-        };
     }
     
     static Draw = function(_color = undefined)

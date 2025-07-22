@@ -1,4 +1,4 @@
-cylinder = new BonkCylinder().SetPosition(x, y, 50).SetHeight(100).SetRadius(25);
+cylinder = new BonkCylinder(x, y, 50,   100, 25);
 
 xSpeed = 0;
 ySpeed = 0;

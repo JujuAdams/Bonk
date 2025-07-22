@@ -1,23 +1,34 @@
-function BonkTriangle() constructor
+/// @param x1
+/// @Param y1
+/// @param z1
+/// @param x2
+/// @param y2
+/// @param z2
+/// @param x3
+/// @param y3
+/// @param z3
+
+function BonkTriangle(_x1, _y1, _z1, _x2, _y2, _z2, _x3, _y3, _z3) constructor
 {
-    x1 = 0;
-    y1 = 0;
-    z1 = 0;
+    x1 = _x1;
+    y1 = _y1;
+    z1 = _z1;
     
-    x2 = 0;
-    y2 = 0;
-    z2 = 0;
+    x2 = _x2;
+    y2 = _y2;
+    z2 = _z2;
     
-    x3 = 0;
-    y3 = 0;
-    z3 = 0;
+    x3 = _x3;
+    y3 = _y3;
+    z3 = _z3;
     
     normalX = 0;
     normalY = 0;
     normalZ = 0;
     planeDistance = 0;
     
-    dirty = false;
+    dirty = true;
+    __CalculateNormal();
     
     
     

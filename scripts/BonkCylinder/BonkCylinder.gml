@@ -1,11 +1,17 @@
-function BonkCylinder() constructor
+/// @param xCenter
+/// @param yCenter
+/// @param zCenter
+/// @param height
+/// @param radius
+
+function BonkCylinder(_x, _y, _z, _height, _radius) constructor
 {
-    x = 0;
-    y = 0;
-    z = 0;
+    x = _x;
+    y = _y;
+    z = _z;
     
-    height = 0;
-    radius = 0;
+    height = _height;
+    radius = _radius;
     
     
     

@@ -1,1 +1,1 @@
-aabb = new BonkAABB().SetPosition(room_width/2, room_height/2, 0).SetSize(2*room_width, 2*room_height, 10);
+aabb = new BonkAABB(room_width/2, room_height/2, 0,   2*room_width, 2*room_height, 10);

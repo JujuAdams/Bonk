@@ -1,10 +1,15 @@
-function BonkSphere() constructor
+/// @param x
+/// @param y
+/// @param z
+/// @param radius
+
+function BonkSphere(_x, _y, _z, _radius) constructor
 {
-    x = 0;
-    y = 0;
-    z = 0;
+    x = _x;
+    y = _y;
+    z = _z;
     
-    radius = 0;
+    radius = _radius;
     
     
     

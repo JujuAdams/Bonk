@@ -1,1 +1,1 @@
-aabb = new BonkAABB().SetPosition(0.5*(bbox_left + bbox_right), 0.5*(bbox_top + bbox_bottom), 25).SetSize(sprite_width, sprite_height, 50);
+aabb = new BonkAABB(0.5*(bbox_left + bbox_right), 0.5*(bbox_top + bbox_bottom), 25,   sprite_width, sprite_height, 50);

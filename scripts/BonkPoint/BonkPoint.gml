@@ -1,8 +1,12 @@
-function BonkPoint() constructor
+/// @param x
+/// @param y
+/// @param z
+
+function BonkPoint(_x, _y, _z) constructor
 {
-    x = 0;
-    y = 0;
-    z = 0;
+    x = _x;
+    y = _y;
+    z = _z;
     
     
     

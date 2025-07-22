@@ -1,12 +1,19 @@
-function BonkAABB() constructor
+/// @param xCenter
+/// @param yCenter
+/// @param zCenter
+/// @param xSize
+/// @param ySize
+/// @param zSize
+
+function BonkAABB(_x, _y, _z, _xSize, _ySize, _zSize) constructor
 {
-    x = 0;
-    y = 0;
-    z = 0;
+    x = _x;
+    y = _y;
+    z = _z;
     
-    xHalfSize = 0;
-    yHalfSize = 0;
-    zHalfSize = 0;
+    xHalfSize = 0.5*_xSize;
+    yHalfSize = 0.5*_ySize;
+    zHalfSize = 0.5*_zSize;
     
     
     
