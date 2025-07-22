@@ -1,5 +1,12 @@
 if (not oCamera.mouseLock)
 {
+    if (keyboard_check_pressed(ord("R")))
+    {
+        cylinder.x = xstart;
+        cylinder.y = ystart;
+        cylinder.z = 200;
+    }
+    
     if (keyboard_check_pressed(vk_space)) velocityZ += 15;
     
     var _para = 2*(keyboard_check(ord("W")) - keyboard_check(ord("S")));
@@ -13,20 +20,18 @@ if (not oCamera.mouseLock)
 
 velocityZ -= 1;
 
-repeat(1)
+var _steps = 1;
+repeat(_steps)
 {
-    cylinder.x += velocityX;
-    cylinder.y += velocityY;
-    cylinder.z += velocityZ;
-    
-    var _collision = false;
+    cylinder.x += velocityX / _steps;
+    cylinder.y += velocityY / _steps;
+    cylinder.z += velocityZ / _steps;
     
     with(oTestPlatformerFloor)
     {
         var _reaction = BonkAABBInCylinder(aabb, other.cylinder);
         if (_reaction.collision)
         {
-            _collision = true;
             _reaction.Reverse();
             
             with(other)
@@ -40,19 +45,14 @@ repeat(1)
                 velocityY = _velocityProjection.y;
                 velocityZ = _velocityProjection.z;
             }
-            
-            break;
         }
     }
-    
-    if (not _collision) break;
     
     with(oTestPlatformerAABB)
     {
         var _reaction = BonkAABBInCylinder(aabb, other.cylinder);
         if (_reaction.collision)
         {
-            _collision = true;
             _reaction.Reverse();
             
             with(other)
@@ -66,10 +66,6 @@ repeat(1)
                 velocityY = _velocityProjection.y;
                 velocityZ = _velocityProjection.z;
             }
-            
-            break;
         }
     }
-    
-    if (not _collision) break;
 }
