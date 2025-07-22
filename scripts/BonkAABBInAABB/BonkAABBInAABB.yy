@@ -1,0 +1,13 @@
+{
+  "$GMScript":"v1",
+  "%Name":"BonkAABBInAABB",
+  "isCompatibility":false,
+  "isDnD":false,
+  "name":"BonkAABBInAABB",
+  "parent":{
+    "name":"Reaction",
+    "path":"folders/Bonk/Reaction.yy",
+  },
+  "resourceType":"GMScript",
+  "resourceVersion":"2.0",
+}

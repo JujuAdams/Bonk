@@ -52,4 +52,25 @@ function BonkAABB(_x, _y, _z, _xSize, _ySize, _zSize) constructor
         __BONK_VERIFY_UGG
         UggAABB(x, y, z, 2*xHalfSize, 2*yHalfSize, 2*zHalfSize, _color);
     }
+    
+    static Collide = function(_otherPrimitive)
+    {
+        static _nullReaction = __Bonk().__nullReaction;
+        
+        if (is_instanceof(_otherPrimitive, BonkAABB))
+        {
+            return BonkAABBInAABB(self, _otherPrimitive);
+        }
+        else if (is_instanceof(_otherPrimitive, BonkCylinder))
+        {
+            return BonkAABBInCylinder(self, _otherPrimitive);
+        }
+        
+        if (BONK_STRICT_COLLISION_COMPATIBILITY)
+        {
+            __BonkError($"Collision not supported between \"{instanceof(self)}\" and \"{instanceof(_otherPrimitive)}\"");
+        }
+        
+        return _nullReaction;
+    }
 }

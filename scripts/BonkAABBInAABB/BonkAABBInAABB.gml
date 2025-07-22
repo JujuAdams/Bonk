@@ -1,0 +1,23 @@
+// Feather disable all
+
+/// @param aabb1
+/// @param aabb2
+
+function BonkAABBInAABB(_aabb1, _aabb2)
+{
+    static _nullReaction = __Bonk().__nullReaction;
+    static _reaction     = new __BonkClassReaction();
+    
+    with(_aabb1)
+    {
+        if not ((x - xHalfSize <= _aabb2.x + _aabb2.xHalfSize) && (y - yHalfSize <= _aabb2.y + _aabb2.yHalfSize) && (z - zHalfSize <= _aabb2.z + _aabb2.zHalfSize)
+             && (x + xHalfSize >  _aabb2.x - _aabb2.xHalfSize) && (y + yHalfSize >  _aabb2.y - _aabb2.yHalfSize) && (z + zHalfSize >  _aabb2.z - _aabb2.zHalfSize))
+        {
+            return _nullReaction;
+        }
+        
+        return _reaction;
+    }
+    
+    return _nullReaction;
+}

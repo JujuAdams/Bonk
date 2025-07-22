@@ -64,6 +64,10 @@ function BonkCylinder(_x, _y, _z, _height, _radius) constructor
         {
             return BonkAABBInCylinder(_otherPrimitive, self).Reverse();
         }
+        else if (is_instanceof(_otherPrimitive, BonkCylinder))
+        {
+            return BonkCylinderInCylinder(self, _otherPrimitive);
+        }
         
         if (BONK_STRICT_COLLISION_COMPATIBILITY)
         {
