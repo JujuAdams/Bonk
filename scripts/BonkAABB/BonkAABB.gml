@@ -65,6 +65,10 @@ function BonkAABB(_x, _y, _z, _xSize, _ySize, _zSize) constructor
         {
             return BonkAABBInCylinder(self, _otherPrimitive);
         }
+        else if (is_instanceof(_otherPrimitive, BonkSphere))
+        {
+            return BonkAABBInSphere(self, _otherPrimitive);
+        }
         
         if (BONK_STRICT_COLLISION_COMPATIBILITY)
         {

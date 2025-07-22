@@ -68,6 +68,10 @@ function BonkCylinder(_x, _y, _z, _height, _radius) constructor
         {
             return BonkCylinderInCylinder(self, _otherPrimitive);
         }
+        else if (is_instanceof(_otherPrimitive, BonkSphere))
+        {
+            return BonkCylinderInSphere(self, _otherPrimitive);
+        }
         
         if (BONK_STRICT_COLLISION_COMPATIBILITY)
         {

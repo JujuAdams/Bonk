@@ -28,8 +28,20 @@ function BonkCylinderInCylinder(_cylinder1, _cylinder2)
         var _dY = y - _cylinder2.y;
         
         var _xyDist = sqrt(_dX*_dX + _dY*_dY);
-        var _pushXY = (radius + _cylinder2.radius) - _xyDist;
+        if (_xyDist <= 0)
+        {
+            //Cylinders exactly overlap, fall back on pushing out in the z-axis
+            with(_reaction)
+            {
+                dX = 0;
+                dY = 0;
+                dZ = _dZ;
+            }
+            
+            return _reaction;
+        }
         
+        var _pushXY = (radius + _cylinder2.radius) - _xyDist;
         if (_pushXY <= 0)
         {
             return _nullReaction;
