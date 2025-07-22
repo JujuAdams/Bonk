@@ -1,0 +1,13 @@
+{
+  "$GMScript":"v1",
+  "%Name":"BonkCollisionResponseExt",
+  "isCompatibility":false,
+  "isDnD":false,
+  "name":"BonkCollisionResponseExt",
+  "parent":{
+    "name":"Bonk",
+    "path":"folders/Bonk.yy",
+  },
+  "resourceType":"GMScript",
+  "resourceVersion":"2.0",
+}

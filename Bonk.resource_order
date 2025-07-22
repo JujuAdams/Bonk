@@ -60,6 +60,7 @@
     {"name":"BonkAABBInAABB","order":2,"path":"scripts/BonkAABBInAABB/BonkAABBInAABB.yy",},
     {"name":"BonkAABBInCylinder","order":3,"path":"scripts/BonkAABBInCylinder/BonkAABBInCylinder.yy",},
     {"name":"BonkAABBInSphere","order":1,"path":"scripts/BonkAABBInSphere/BonkAABBInSphere.yy",},
+    {"name":"BonkCollisionResponseExt","order":4,"path":"scripts/BonkCollisionResponseExt/BonkCollisionResponseExt.yy",},
     {"name":"BonkCylinder","order":4,"path":"scripts/BonkCylinder/BonkCylinder.yy",},
     {"name":"BonkCylinderInCylinder","order":1,"path":"scripts/BonkCylinderInCylinder/BonkCylinderInCylinder.yy",},
     {"name":"BonkCylinderInWall","order":2,"path":"scripts/BonkCylinderInWall/BonkCylinderInWall.yy",},
