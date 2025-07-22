@@ -35,21 +35,22 @@ function BonkCylinderInCylinder(_cylinder1, _cylinder2)
             return _nullReaction;
         }
         
-        _reaction.collision = true;
-        
-        var _dZ = (abs(_pushBelow) < abs(_pushAbove))? _pushBelow : _pushAbove;
-        if (abs(_dZ) < _pushXY)
+        with(_reaction)
         {
-            _reaction.dX = 0;
-            _reaction.dY = 0;
-            _reaction.dZ = _dZ;
-        }
-        else
-        {
-            var _coeff = _pushXY / _xyDist;
-            _reaction.dX = _coeff*_dX;
-            _reaction.dY = _coeff*_dY;
-            _reaction.dZ = 0;
+            var _dZ = (abs(_pushBelow) < abs(_pushAbove))? _pushBelow : _pushAbove;
+            if (abs(_dZ) < _pushXY)
+            {
+                dX = 0;
+                dY = 0;
+                dZ = _dZ;
+            }
+            else
+            {
+                var _coeff = _pushXY / _xyDist;
+                dX = _coeff*_dX;
+                dY = _coeff*_dY;
+                dZ = 0;
+            }
         }
         
         return _reaction;

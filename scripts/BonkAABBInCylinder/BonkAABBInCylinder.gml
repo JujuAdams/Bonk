@@ -94,7 +94,6 @@ function BonkAABBInCylinder(_aabb, _cylinder)
             
             with(_reaction)
             {
-                collision = true;
                 dX = _pushX;
                 dY = _pushY;
                 dZ = _pushZ;

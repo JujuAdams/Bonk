@@ -42,44 +42,45 @@ function BonkAABBInAABB(_aabb1, _aabb2)
         return _nullReaction;
     }
     
-    _reaction.collision = true;
-    
-    var _min = min(abs(_pushLeft), abs(_pushRight), abs(_pushUp), abs(_pushDown), abs(_pushBelow), abs(_pushAbove));
-    if (_min == abs(_pushBelow)) //Prefer z-axis
+    with(_reaction)
     {
-        _reaction.dX = 0;
-        _reaction.dY = 0;
-        _reaction.dZ = _pushBelow;
-    }
-    if (_min == abs(_pushAbove))
-    {
-        _reaction.dX = 0;
-        _reaction.dY = 0;
-        _reaction.dZ = _pushAbove;
-    }
-    else if (_min == abs(_pushLeft)) //Then x-axis
-    {
-        _reaction.dX = _pushLeft;
-        _reaction.dY = 0;
-        _reaction.dZ = 0;
-    }
-    else if (_min == abs(_pushRight))
-    {
-        _reaction.dX = _pushRight;
-        _reaction.dY = 0;
-        _reaction.dZ = 0;
-    }
-    else if (_min == abs(_pushUp)) //Then y-axis
-    {
-        _reaction.dX = 0;
-        _reaction.dY = _pushUp;
-        _reaction.dZ = 0;
-    }
-    else if (_min == abs(_pushDown))
-    {
-        _reaction.dX = 0;
-        _reaction.dY = _pushDown;
-        _reaction.dZ = 0;
+        var _min = min(abs(_pushLeft), abs(_pushRight), abs(_pushUp), abs(_pushDown), abs(_pushBelow), abs(_pushAbove));
+        if (_min == abs(_pushBelow)) //Prefer z-axis
+        {
+            dX = 0;
+            dY = 0;
+            dZ = _pushBelow;
+        }
+        if (_min == abs(_pushAbove))
+        {
+            dX = 0;
+            dY = 0;
+            dZ = _pushAbove;
+        }
+        else if (_min == abs(_pushLeft)) //Then x-axis
+        {
+            dX = _pushLeft;
+            dY = 0;
+            dZ = 0;
+        }
+        else if (_min == abs(_pushRight))
+        {
+            dX = _pushRight;
+            dY = 0;
+            dZ = 0;
+        }
+        else if (_min == abs(_pushUp)) //Then y-axis
+        {
+            dX = 0;
+            dY = _pushUp;
+            dZ = 0;
+        }
+        else if (_min == abs(_pushDown))
+        {
+            dX = 0;
+            dY = _pushDown;
+            dZ = 0;
+        }
     }
     
     return _reaction;
