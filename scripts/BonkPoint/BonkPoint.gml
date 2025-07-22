@@ -9,24 +9,13 @@ function BonkPoint() constructor
     y = 0;
     z = 0;
     
-    xPrevious = 0;
-    yPrevious = 0;
-    zPrevious = 0;
-    
     
     
     static SetPosition = function(_x = x, _y = y, _z = z)
     {
-        if ((x != _x) || (y != _y) || (z != _z))
-        {
-            xPrevious = x;
-            yPrevious = y;
-            zPrevious = z;
-            
-            x = _x;
-            y = _y;
-            z = _z;
-        }
+        x = _x;
+        y = _y;
+        z = _z;
         
         return self;
     }

@@ -2,7 +2,7 @@ function BonkLine() constructor
 {
     static toString = function()
     {
-        return "point";
+        return "line";
     }
     
     x1 = 0;
@@ -78,7 +78,7 @@ function BonkLine() constructor
         };
     }
     
-    static GetSegment = function()
+    static GetIsSegment = function()
     {
         return isSegment;
     }
