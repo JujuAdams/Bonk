@@ -20,15 +20,19 @@ function __Bonk()
     if (_global != undefined) return _global;
     
     _global = {};
-    
-    try
+    with(_global)
     {
-        __Ugg();
-        _global.__uggPresent = true;
-    }
-    catch(_error)
-    {
-        _global.__uggPresent = false;
+        __nullReaction = (new __BonkClassReaction()).__NoCollision();
+        
+        try
+        {
+            __Ugg();
+            __uggPresent = true;
+        }
+        catch(_error)
+        {
+            __uggPresent = false;
+        }
     }
     
     return _global;

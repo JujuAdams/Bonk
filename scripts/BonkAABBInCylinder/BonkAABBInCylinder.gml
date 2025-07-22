@@ -5,7 +5,8 @@
 
 function BonkAABBInCylinder(_aabb, _cylinder)
 {
-    static _reaction = new __BonkClassReaction();
+    static _nullReaction = __Bonk().__nullReaction;
+    static _reaction     = new __BonkClassReaction();
     
     with(_cylinder)
     {
@@ -21,8 +22,7 @@ function BonkAABBInCylinder(_aabb, _cylinder)
     {
         if ((z - zHalfSize >= _maxZ) || (z + zHalfSize <= _minZ))
         {
-            _reaction.__NoCollision();
-            return _reaction;
+            return _nullReaction;
         }
         
         var _left   = x - xHalfSize;
@@ -33,7 +33,11 @@ function BonkAABBInCylinder(_aabb, _cylinder)
         var _above  = z + zHalfSize;
         
         //2D collision check 
-        if (rectangle_in_circle(_left, _top, _right, _bottom, _cylinder.x, _cylinder.y, _cylinder.radius))
+        if (not rectangle_in_circle(_left, _top, _right, _bottom, _cylinder.x, _cylinder.y, _cylinder.radius))
+        {
+            return _nullReaction;
+        }
+        else
         {
             var _pushX = 0;
             var _pushY = 0;
@@ -95,12 +99,8 @@ function BonkAABBInCylinder(_aabb, _cylinder)
                 dY = _pushY;
                 dZ = _pushZ;
             }
+            
+            return _reaction;
         }
-        else
-        {
-            _reaction.__NoCollision();
-        }
-        
-        return _reaction;
     }
 }
