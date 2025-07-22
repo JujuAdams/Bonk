@@ -19,18 +19,6 @@ function BonkPoint(_x, _y, _z) constructor
         return self;
     }
     
-    static GetAABB = function()
-    {
-        return {
-            x1: x,
-            y1: y,
-            z1: z,
-            x2: x,
-            y2: y,
-            z2: z,
-        };
-    }
-    
     static Draw = function(_color = undefined)
     {
         __BONK_VERIFY_UGG

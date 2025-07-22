@@ -29,7 +29,7 @@ function BonkCylinderInSphere(_cylinder, _sphere)
     var _dY = _sphereY - _y;
     
     var _dist = sqrt(_dX*_dX + _dY*_dY);
-    if (_dist > 0)
+    if (_dist > _radius)
     {
         var _coeff = _radius / _dist;
         var _cylinderClosestX = _x + _coeff*_dX;
@@ -37,8 +37,8 @@ function BonkCylinderInSphere(_cylinder, _sphere)
     }
     else
     {
-        var _cylinderClosestX = _x;
-        var _cylinderClosestY = _y;
+        var _cylinderClosestX = _sphereX;
+        var _cylinderClosestY = _sphereY;
     }
     
     var _cylinderClosestZ = clamp(_sphere.z, _zMin, _zMax);

@@ -18,9 +18,10 @@ function BonkSphereInSphere(_sphere1, _sphere2)
         with(_reaction)
         {
             var _randomVector = __BonkRandomVector();
-            dX = _randomVector.x;
-            dY = _randomVector.y;
-            dZ = _randomVector.z;
+            var _dist = _sphere1.radius + _sphere2.radius;
+            dX = _dist*_randomVector.x;
+            dY = _dist*_randomVector.y;
+            dZ = _dist*_randomVector.z;
         }
         
         return _reaction;
