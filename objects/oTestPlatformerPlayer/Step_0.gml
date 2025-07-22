@@ -36,4 +36,9 @@ repeat(_steps)
     {
         BonkCollision(other, other.cylinder, aabb);
     }
+    
+    with(oTestPlatformerCylinder)
+    {
+        BonkCollision(other, other.cylinder, cylinder);
+    }
 }
