@@ -1,1 +1,1 @@
-primitive.Draw(c_yellow);
+primitive.Draw();

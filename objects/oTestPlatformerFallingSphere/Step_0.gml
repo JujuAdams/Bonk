@@ -21,4 +21,9 @@ repeat(_steps)
     {
         BonkCollision(other, other.primitive, primitive);
     }
+    
+    with(oTestPlatformerSphere)
+    {
+        BonkCollision(other, other.primitive, primitive);
+    }
 }
