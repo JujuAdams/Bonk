@@ -5,8 +5,8 @@
   "isDnD":false,
   "name":"BonkBoolCylinderInCylinder",
   "parent":{
-    "name":"Other",
-    "path":"folders/Bonk/Boolean/Other.yy",
+    "name":"Cylinder & Sphere",
+    "path":"folders/Bonk/Boolean/Cylinder & Sphere.yy",
   },
   "resourceType":"GMScript",
   "resourceVersion":"2.0",
