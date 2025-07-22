@@ -1,0 +1,13 @@
+{
+  "$GMScript":"v1",
+  "%Name":"BonkBoolAABBInWall",
+  "isCompatibility":false,
+  "isDnD":false,
+  "name":"BonkBoolAABBInWall",
+  "parent":{
+    "name":"AABB",
+    "path":"folders/Bonk/Boolean/AABB.yy",
+  },
+  "resourceType":"GMScript",
+  "resourceVersion":"2.0",
+}

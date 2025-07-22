@@ -1,0 +1,13 @@
+{
+  "$GMScript":"v1",
+  "%Name":"BonkBoolPointInPoint",
+  "isCompatibility":false,
+  "isDnD":false,
+  "name":"BonkBoolPointInPoint",
+  "parent":{
+    "name":"Point",
+    "path":"folders/Bonk/Boolean/Point.yy",
+  },
+  "resourceType":"GMScript",
+  "resourceVersion":"2.0",
+}

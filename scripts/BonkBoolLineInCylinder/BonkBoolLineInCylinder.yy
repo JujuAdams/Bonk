@@ -1,0 +1,13 @@
+{
+  "$GMScript":"v1",
+  "%Name":"BonkBoolLineInCylinder",
+  "isCompatibility":false,
+  "isDnD":false,
+  "name":"BonkBoolLineInCylinder",
+  "parent":{
+    "name":"Line",
+    "path":"folders/Bonk/Boolean/Line.yy",
+  },
+  "resourceType":"GMScript",
+  "resourceVersion":"2.0",
+}

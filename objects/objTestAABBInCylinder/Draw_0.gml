@@ -2,5 +2,5 @@ UggSetWireframe(true);
 cylinder.Draw();
 UggSetWireframe(false);
 
-aabbA.Draw(BonkAABBInCylinder(aabbA, cylinder)? c_red : c_lime);
-aabbB.Draw(BonkAABBInCylinder(aabbB, cylinder)? c_red : c_lime);
+aabbA.Draw(BonkBoolAABBInCylinder(aabbA, cylinder)? c_red : c_lime);
+aabbB.Draw(BonkBoolAABBInCylinder(aabbB, cylinder)? c_red : c_lime);

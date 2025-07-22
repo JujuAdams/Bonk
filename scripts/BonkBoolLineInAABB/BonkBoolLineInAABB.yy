@@ -1,0 +1,13 @@
+{
+  "$GMScript":"v1",
+  "%Name":"BonkBoolLineInAABB",
+  "isCompatibility":false,
+  "isDnD":false,
+  "name":"BonkBoolLineInAABB",
+  "parent":{
+    "name":"Line",
+    "path":"folders/Bonk/Boolean/Line.yy",
+  },
+  "resourceType":"GMScript",
+  "resourceVersion":"2.0",
+}

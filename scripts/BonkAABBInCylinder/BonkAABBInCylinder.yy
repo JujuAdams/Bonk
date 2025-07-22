@@ -5,8 +5,8 @@
   "isDnD":false,
   "name":"BonkAABBInCylinder",
   "parent":{
-    "name":"AABB",
-    "path":"folders/Bonk/Collisions/AABB.yy",
+    "name":"Reaction",
+    "path":"folders/Bonk/Reaction.yy",
   },
   "resourceType":"GMScript",
   "resourceVersion":"2.0",

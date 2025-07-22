@@ -1,0 +1,13 @@
+{
+  "$GMScript":"v1",
+  "%Name":"BonkBoolLineInTriangle",
+  "isCompatibility":false,
+  "isDnD":false,
+  "name":"BonkBoolLineInTriangle",
+  "parent":{
+    "name":"Line",
+    "path":"folders/Bonk/Boolean/Line.yy",
+  },
+  "resourceType":"GMScript",
+  "resourceVersion":"2.0",
+}
