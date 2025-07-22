@@ -1,0 +1,13 @@
+{
+  "$GMScript":"v1",
+  "%Name":"__UggPrebuildVolumeCapsuleBody",
+  "isCompatibility":false,
+  "isDnD":false,
+  "name":"__UggPrebuildVolumeCapsuleBody",
+  "parent":{
+    "name":"Volumes",
+    "path":"folders/Ugg/(System)/Volumes.yy",
+  },
+  "resourceType":"GMScript",
+  "resourceVersion":"2.0",
+}

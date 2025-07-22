@@ -71,6 +71,6 @@ function BonkCylinder() constructor
     static Draw = function(_color = undefined)
     {
         __BONK_VERIFY_UGG
-        UggCylinder(x, y, z, height, radius, _color);
+        UggCylinder(x, y, z - height/2, height, radius, _color);
     }
 }

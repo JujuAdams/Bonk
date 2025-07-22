@@ -1,0 +1,13 @@
+{
+  "$GMScript":"v1",
+  "%Name":"__UggPrebuildWireframePlane",
+  "isCompatibility":false,
+  "isDnD":false,
+  "name":"__UggPrebuildWireframePlane",
+  "parent":{
+    "name":"Wireframes",
+    "path":"folders/Ugg/(System)/Wireframes.yy",
+  },
+  "resourceType":"GMScript",
+  "resourceVersion":"2.0",
+}

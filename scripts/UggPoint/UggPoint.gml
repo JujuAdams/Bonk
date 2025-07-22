@@ -1,3 +1,8 @@
+// Feather disable all
+
+/// Draws a small point at the given coordinates. The size of the point is given by the
+/// `UGG_POINT_RADIUS` macro.
+/// 
 /// @param x
 /// @param y
 /// @param z
@@ -10,10 +15,17 @@ function UggPoint(_x, _y, _z, _color = UGG_DEFAULT_DIFFUSE_COLOR)
     static _volumePoint    = _global.__volumePoint;
     static _wireframePoint = _global.__wireframePoint;
     
-    var _worldMatrix = matrix_get(matrix_world);
-    var _matrix = matrix_build(_x, _y, _z,   0, 0, 0,   UGG_POINT_RADIUS, UGG_POINT_RADIUS, UGG_POINT_RADIUS);
-        _matrix = matrix_multiply(_matrix, _worldMatrix);
-    matrix_set(matrix_world, _matrix);
+    static _staticMatrix = [UGG_POINT_RADIUS, 0, 0, 0,
+                            0, UGG_POINT_RADIUS, 0, 0,
+                            0, 0, UGG_POINT_RADIUS, 0,
+                            0, 0, 0, 1];
+    
+    _staticMatrix[@ 12] = _x;
+    _staticMatrix[@ 13] = _y;
+    _staticMatrix[@ 14] = _z;
+    
+    matrix_stack_push(_staticMatrix);
+    matrix_set(matrix_world, matrix_stack_top());
     
     if (_global.__wireframe)
     {
@@ -34,5 +46,6 @@ function UggPoint(_x, _y, _z, _color = UGG_DEFAULT_DIFFUSE_COLOR)
         shader_reset();
     }
     
-    matrix_set(matrix_world, _worldMatrix);
+    matrix_stack_pop();
+    matrix_set(matrix_world, matrix_stack_top());
 }

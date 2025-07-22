@@ -1,5 +1,9 @@
 // Feather disable all
 
+/// Draws the frame of a frustrum as defined by a view and projection matrix.
+/// 
+/// N.B. This function is expensive (especially in VM) so use it sparingly.
+/// 
 /// @param viewMatrix
 /// @param projectionMatrix
 /// @param [color]

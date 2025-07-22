@@ -1,0 +1,13 @@
+{
+  "$GMScript":"v1",
+  "%Name":"UggRotatedBox",
+  "isCompatibility":false,
+  "isDnD":false,
+  "name":"UggRotatedBox",
+  "parent":{
+    "name":"Ugg",
+    "path":"folders/Ugg.yy",
+  },
+  "resourceType":"GMScript",
+  "resourceVersion":"2.0",
+}

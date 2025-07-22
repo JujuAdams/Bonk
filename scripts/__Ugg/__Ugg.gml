@@ -1,5 +1,4 @@
-#macro  __UGG_VERSION  "1.0.0"
-#macro  __UGG_DATE     "2024-06-14"
+
 
 #macro __UGG_GLOBAL  static _global = __Ugg();
 #macro __UGG_COLOR_UNIFORMS  static _shdUggVolume_u_vColor    = shader_get_uniform(__shdUggVolume, "u_vColor");\
@@ -15,11 +14,11 @@ function __Ugg()
     if (_global != undefined) return _global;
     _global = {};
     
-    show_debug_message("Welcome to Ugg by Juju Adams! This is version " + __UGG_VERSION + " " + __UGG_DATE);
+    show_debug_message($"Welcome to Ugg by Juju Adams! This is version {UGG_VERSION}, {UGG_DATE}");
     
     
     
-    _global.__wireframe = UGG_START_WIREFRAME;
+    _global.__wireframe = false;
     
     vertex_format_begin();
     vertex_format_add_position_3d();
@@ -33,22 +32,28 @@ function __Ugg()
     
     
     
-    _global.__volumeSphere   = __UggPrebuildVolumeSphere(UGG_SPHERE_STEPS);
-    _global.__volumePoint    = __UggPrebuildVolumeSphere(6);
-    _global.__volumeCylinder = __UggPrebuildVolumeCylinder();
-    _global.__volumeCone     = __UggPrebuildVolumeCone();
-    _global.__volumePyramid  = __UggPrebuildVolumePyramid();
-    _global.__volumeAABB     = __UggPrebuildVolumeAABB(-0.5, -0.5, -0.5, 0.5, 0.5, 0.5);
-    _global.__volumeLine     = __UggPrebuildVolumeAABB(-0.5, -0.5,  0.0, 0.5, 0.5, 1.0);
+    _global.__volumeSphere      = __UggPrebuildVolumeSphere(UGG_SPHERE_STEPS);
+    _global.__volumePoint       = __UggPrebuildVolumeSphere(2);
+    _global.__volumeCylinder    = __UggPrebuildVolumeCylinder(UGG_CYLINDER_STEPS);
+    _global.__volumeCone        = __UggPrebuildVolumeCone();
+    _global.__volumePyramid     = __UggPrebuildVolumePyramid();
+    _global.__volumeAABB        = __UggPrebuildVolumeAABB(-0.5, -0.5, -0.5, 0.5, 0.5, 0.5);
+    _global.__volumeLine        = __UggPrebuildVolumeAABB(-0.5, -0.5,  0.0, 0.5, 0.5, 1.0);
+    _global.__volumePlane       = __UggPrebuildVolumePlane(UGG_PLANE_SIZE);
+    _global.__volumeCapsuleCap  = __UggPrebuildVolumeCapsuleCap(UGG_CAPSULE_STEPS);
+    _global.__volumeCapsuleBody = __UggPrebuildVolumeCapsuleBody(UGG_CAPSULE_STEPS);
     
     
     
-    _global.__wireframeSphere   = __UggPrebuildWireframeSphere(UGG_SPHERE_STEPS div 2);
-    _global.__wireframePoint    = __UggPrebuildWireframeSphere(3);
-    _global.__wireframeCylinder = __UggPrebuildWireframeCylinder();
-    _global.__wireframeCone     = __UggPrebuildWireframeCone();
-    _global.__wireframePyramid  = __UggPrebuildWireframePyramid();
-    _global.__wireframeAABB     = __UggPrebuildWireframeAABB(-0.5, -0.5, -0.5, 0.5, 0.5, 0.5);
+    _global.__wireframeSphere      = __UggPrebuildWireframeSphere(UGG_SPHERE_STEPS);
+    _global.__wireframePoint       = __UggPrebuildWireframeSphere(2);
+    _global.__wireframeCylinder    = __UggPrebuildWireframeCylinder(UGG_CYLINDER_STEPS);
+    _global.__wireframeCone        = __UggPrebuildWireframeCone();
+    _global.__wireframePyramid     = __UggPrebuildWireframePyramid();
+    _global.__wireframeAABB        = __UggPrebuildWireframeAABB(-0.5, -0.5, -0.5, 0.5, 0.5, 0.5);
+    _global.__wireframePlane       = __UggPrebuildWireframePlane(UGG_PLANE_SIZE, 8);
+    _global.__wireframeCapsuleCap  = __UggPrebuildWireframeCapsuleCap(UGG_CAPSULE_STEPS);
+    _global.__wireframeCapsuleBody = __UggPrebuildWireframeCapsuleBody(UGG_CAPSULE_STEPS);
     
     
     

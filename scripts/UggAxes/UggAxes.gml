@@ -1,12 +1,15 @@
 // Feather disable all
 
+/// Draws an axis direction "gizmo". The x-axis is red, the y-axis is green, and the z-axis is
+/// blue.
+/// 
 /// @param [x=0]
 /// @param [y=0]
 /// @param [z=0]
 /// @param [length=100]
-/// @param [thickness=5]
+/// @param [thickness=3]
 
-function UggAxes(_x = 0, _y = 0, _z = 0, _length = 100, _thickness = 5)
+function UggAxes(_x = 0, _y = 0, _z = 0, _length = 100, _thickness = 3)
 {
     __UGG_GLOBAL
     
@@ -20,6 +23,6 @@ function UggAxes(_x = 0, _y = 0, _z = 0, _length = 100, _thickness = 5)
     }
     else
     {
-        UggSphere(_x, _y, _z, _thickness, c_white);
+        UggSphere(_x, _y, _z, _thickness+2, c_white);
     }
 }

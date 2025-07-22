@@ -1,3 +1,7 @@
+// Feather disable all
+
+/// Draws a cone. The `x` `y` `z` parameters define the centre of the base of the cone.
+/// 
 /// @param x
 /// @param y
 /// @param z
@@ -9,13 +13,19 @@ function UggCone(_x, _y, _z, _height, _radius, _color = UGG_DEFAULT_DIFFUSE_COLO
 {
     __UGG_GLOBAL
     __UGG_COLOR_UNIFORMS
-    static _volumeCone    = __Ugg().__volumeCone;
-    static _wireframeCone = __Ugg().__wireframeCone;
+    static _volumeCone    = _global.__volumeCone;
+    static _wireframeCone = _global.__wireframeCone;
+    static _staticMatrix  = matrix_build_identity();
     
-    var _worldMatrix = matrix_get(matrix_world);
-    var _matrix = matrix_build(_x, _y, _z,   0, 0, 0,   _radius, _radius, _height);
-        _matrix = matrix_multiply(_matrix, _worldMatrix);
-    matrix_set(matrix_world, _matrix);
+    _staticMatrix[@  0] = _radius;
+    _staticMatrix[@  5] = _radius;
+    _staticMatrix[@ 10] = _height;
+    _staticMatrix[@ 12] = _x;
+    _staticMatrix[@ 13] = _y;
+    _staticMatrix[@ 14] = _z;
+    
+    matrix_stack_push(_staticMatrix);
+    matrix_set(matrix_world, matrix_stack_top());
     
     if (_global.__wireframe)
     {
@@ -36,5 +46,6 @@ function UggCone(_x, _y, _z, _height, _radius, _color = UGG_DEFAULT_DIFFUSE_COLO
         shader_reset();
     }
     
-    matrix_set(matrix_world, _worldMatrix);
+    matrix_stack_pop();
+    matrix_set(matrix_world, matrix_stack_top());
 }

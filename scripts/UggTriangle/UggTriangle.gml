@@ -1,3 +1,8 @@
+// Feather disable all
+
+/// Draws a triangle stretched over three coordinates. This function presumes a clockwise winding
+/// order.
+/// 
 /// @param x1
 /// @param y1
 /// @param z1
@@ -15,26 +20,24 @@ function UggTriangle(_x1, _y1, _z1, _x2, _y2, _z2, _x3, _y3, _z3, _color = UGG_D
     __UGG_COLOR_UNIFORMS
     static _volumeVertexFormat    = _global.__volumeVertexFormat;
     static _wireframeVertexFormat = _global.__wireframeVertexFormat;
+    static _staticVBuff           = vertex_create_buffer();
     
     if (_global.__wireframe)
     {
-    	var _vertexBuffer = vertex_create_buffer();
-    	vertex_begin(_vertexBuffer, _wireframeVertexFormat);
-        
-    	vertex_position_3d(_vertexBuffer, _x1, _y1, _z1); vertex_color(_vertexBuffer, c_white, 1);
-    	vertex_position_3d(_vertexBuffer, _x2, _y2, _z2); vertex_color(_vertexBuffer, c_white, 1);
-    	vertex_position_3d(_vertexBuffer, _x2, _y2, _z2); vertex_color(_vertexBuffer, c_white, 1);
-    	vertex_position_3d(_vertexBuffer, _x3, _y3, _z3); vertex_color(_vertexBuffer, c_white, 1);
-    	vertex_position_3d(_vertexBuffer, _x3, _y3, _z3); vertex_color(_vertexBuffer, c_white, 1);
-    	vertex_position_3d(_vertexBuffer, _x1, _y1, _z1); vertex_color(_vertexBuffer, c_white, 1);
-        
-    	vertex_end(_vertexBuffer);
+    	vertex_begin(_staticVBuff, _wireframeVertexFormat);
+    	vertex_position_3d(_staticVBuff, _x1, _y1, _z1); vertex_color(_staticVBuff, c_white, 1);
+    	vertex_position_3d(_staticVBuff, _x2, _y2, _z2); vertex_color(_staticVBuff, c_white, 1);
+    	vertex_position_3d(_staticVBuff, _x2, _y2, _z2); vertex_color(_staticVBuff, c_white, 1);
+    	vertex_position_3d(_staticVBuff, _x3, _y3, _z3); vertex_color(_staticVBuff, c_white, 1);
+    	vertex_position_3d(_staticVBuff, _x3, _y3, _z3); vertex_color(_staticVBuff, c_white, 1);
+    	vertex_position_3d(_staticVBuff, _x1, _y1, _z1); vertex_color(_staticVBuff, c_white, 1);
+    	vertex_end(_staticVBuff);
         
         shader_set(__shdUggWireframe);
         shader_set_uniform_f(_shdUggWireframe_u_vColor, color_get_red(  _color)/255,
                                                         color_get_green(_color)/255,
                                                         color_get_blue( _color)/255);
-        vertex_submit(_vertexBuffer, pr_linelist, -1);
+        vertex_submit(_staticVBuff, pr_linelist, -1);
         shader_reset();
     }
     else
@@ -53,22 +56,19 @@ function UggTriangle(_x1, _y1, _z1, _x2, _y2, _z2, _x3, _y3, _z3, _color = UGG_D
         var _normalY = -(_dx12*_dz13 - _dz12*_dx13);
         var _normalZ = -(_dy12*_dx13 - _dx12*_dy13);
         
-    	var _vertexBuffer = vertex_create_buffer();
-    	vertex_begin(_vertexBuffer, _volumeVertexFormat);
-    	vertex_position_3d(_vertexBuffer, _x1, _y1, _z1); vertex_normal(_vertexBuffer, _normalX, _normalY, _normalZ);
-    	vertex_position_3d(_vertexBuffer, _x2, _y2, _z2); vertex_normal(_vertexBuffer, _normalX, _normalY, _normalZ);
-    	vertex_position_3d(_vertexBuffer, _x3, _y3, _z3); vertex_normal(_vertexBuffer, _normalX, _normalY, _normalZ);
-    	vertex_end(_vertexBuffer);
+    	vertex_begin(_staticVBuff, _volumeVertexFormat);
+    	vertex_position_3d(_staticVBuff, _x1, _y1, _z1); vertex_normal(_staticVBuff, _normalX, _normalY, _normalZ);
+    	vertex_position_3d(_staticVBuff, _x2, _y2, _z2); vertex_normal(_staticVBuff, _normalX, _normalY, _normalZ);
+    	vertex_position_3d(_staticVBuff, _x3, _y3, _z3); vertex_normal(_staticVBuff, _normalX, _normalY, _normalZ);
+    	vertex_end(_staticVBuff);
         
         shader_set(__shdUggVolume);
         shader_set_uniform_f(_shdUggVolume_u_vColor, color_get_red(  _color)/255,
-                                               color_get_green(_color)/255,
-                                               color_get_blue( _color)/255);
-        vertex_submit(_vertexBuffer, pr_trianglelist, -1);
+                                                     color_get_green(_color)/255,
+                                                     color_get_blue( _color)/255);
+        vertex_submit(_staticVBuff, pr_trianglelist, -1);
         shader_reset();
         
         gpu_set_cullmode(_oldCullmode);
     }
-    
-    vertex_delete_buffer(_vertexBuffer);
 }
