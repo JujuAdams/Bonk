@@ -1,9 +1,9 @@
 {
   "$GMScript":"v1",
-  "%Name":"BonkCollisionResponse",
+  "%Name":"__BonkConfig",
   "isCompatibility":false,
   "isDnD":false,
-  "name":"BonkCollisionResponse",
+  "name":"__BonkConfig",
   "parent":{
     "name":"Bonk",
     "path":"folders/Bonk.yy",

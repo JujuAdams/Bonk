@@ -1,16 +1,20 @@
 // Feather disable all
 
-/// @param reaction
-/// @param primitive
 /// @param speedContainer
+/// @param primitive
+/// @param otherPrimitive
 
-function BonkCollisionResponse(_reaction, _primitive, _speedContainer)
+function BonkCollision(_speedContainer, _primitive, _otherPrimitive)
 {
+    var _reaction = _primitive.Collide(_otherPrimitive);
     if (_reaction.collision)
     {
-        _primitive.x += _reaction.dX;
-        _primitive.y += _reaction.dY;
-        _primitive.z += _reaction.dZ;
+        with(_primitive)
+        {
+            x += _reaction.dX;
+            y += _reaction.dY;
+            z += _reaction.dZ;
+        }
         
         with(_speedContainer)
         {

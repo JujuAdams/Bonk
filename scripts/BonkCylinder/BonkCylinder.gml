@@ -68,4 +68,21 @@ function BonkCylinder() constructor
         __BONK_VERIFY_UGG
         UggCylinder(x, y, z - height/2, height, radius, _color);
     }
+    
+    static Collide = function(_otherPrimitive)
+    {
+        static _nullReaction = __Bonk().__nullReaction;
+        
+        if (is_instanceof(_otherPrimitive, BonkAABB))
+        {
+            return BonkAABBInCylinder(_otherPrimitive, self).Reverse();
+        }
+        
+        if (BONK_STRICT_COLLISION_COMPATIBILITY)
+        {
+            __BonkError($"Collision not supported between \"{instanceof(self)}\" and \"{instanceof(_otherPrimitive)}\"");
+        }
+        
+        return _nullReaction;
+    }
 }

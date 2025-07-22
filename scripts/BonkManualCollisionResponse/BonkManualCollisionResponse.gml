@@ -8,7 +8,7 @@
 /// @param ySpeed
 /// @param zSpeed
 
-function BonkCollisionResponseExt(_reaction, _x, _y, _z, _xSpeed, _ySpeed, _zSpeed)
+function BonkManualCollisionResponse(_reaction, _x, _y, _z, _xSpeed, _ySpeed, _zSpeed)
 {
     static _result = {
         x: 0,

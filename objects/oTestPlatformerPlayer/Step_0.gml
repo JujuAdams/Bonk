@@ -20,7 +20,7 @@ if (not oCamera.mouseLock)
 
 zSpeed -= 1;
 
-var _steps = 5;
+var _steps = 1;
 repeat(_steps)
 {
     cylinder.x += xSpeed / _steps;
@@ -29,11 +29,11 @@ repeat(_steps)
     
     with(oTestPlatformerFloor)
     {
-        BonkCollisionResponse(BonkAABBInCylinder(aabb, other.cylinder).Reverse(), other.cylinder, other);
+        BonkCollision(other, other.cylinder, aabb);
     }
     
     with(oTestPlatformerAABB)
     {
-        BonkCollisionResponse(BonkAABBInCylinder(aabb, other.cylinder).Reverse(), other.cylinder, other);
+        BonkCollision(other, other.cylinder, aabb);
     }
 }
