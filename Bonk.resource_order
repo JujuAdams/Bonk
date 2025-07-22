@@ -91,6 +91,7 @@
     {"name":"BonkQuad","order":6,"path":"scripts/BonkQuad/BonkQuad.yy",},
     {"name":"BonkSphere","order":5,"path":"scripts/BonkSphere/BonkSphere.yy",},
     {"name":"BonkSphereInSphere","order":5,"path":"scripts/BonkSphereInSphere/BonkSphereInSphere.yy",},
+    {"name":"BonkSphereInTriangle","order":7,"path":"scripts/BonkSphereInTriangle/BonkSphereInTriangle.yy",},
     {"name":"BonkTriangle","order":7,"path":"scripts/BonkTriangle/BonkTriangle.yy",},
     {"name":"BonkVecMultiply","order":2,"path":"scripts/BonkVecMultiply/BonkVecMultiply.yy",},
     {"name":"BonkVecProjectOntoPlane","order":8,"path":"scripts/BonkVecProjectOntoPlane/BonkVecProjectOntoPlane.yy",},

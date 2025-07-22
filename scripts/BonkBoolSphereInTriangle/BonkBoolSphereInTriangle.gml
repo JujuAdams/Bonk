@@ -47,8 +47,6 @@ function BonkBoolSphereInTriangle(_sphere, _triangle)
         _normalX /= _length
         _normalY /= _length;
         _normalZ /= _length;
-        
-        //UggArrow(_triX3, _triY3, _triZ3,   _triX3 + 20*_normalX, _triY3 + 20*_normalY, _triZ3 + 20*_normalZ,   undefined, undefined, undefined, true);
     }
     
     //Distance from the sphere's centre to the plane
@@ -79,13 +77,10 @@ function BonkBoolSphereInTriangle(_sphere, _triangle)
     
     if ((_dot1 >= 0) && (_dot2 >= 0) && (_dot3 >= 0))
     {
-        //UggCross(_pX, _pY, _pZ, 3, c_lime, undefined, true);
         return true;
     }
     else
     {
-        //UggCross(_pX, _pY, _pZ, 3, c_white, undefined, true);
-        
         var _funcClosestPoint = function(_pX, _pY, _pZ, _x1, _y1, _z1, _dX, _dY, _dZ)
         {
             static _result = {};
@@ -111,7 +106,6 @@ function BonkBoolSphereInTriangle(_sphere, _triangle)
         var _vY = _sphY - _pointEdge12.y;
         var _vZ = _sphZ - _pointEdge12.z;
         var _distSqrEdge12 = _vX*_vX + _vY*_vY + _vZ*_vZ;
-        //UggPoint(_pointEdge12.x, _pointEdge12.y, _pointEdge12.z, c_red);
         
         //edge 2 -> 3
         var _pointEdge23 = _funcClosestPoint(_pX, _pY, _pZ,   _triX2, _triY2, _triZ2,   _dX23, _dY23, _dZ23);
@@ -119,7 +113,6 @@ function BonkBoolSphereInTriangle(_sphere, _triangle)
         var _vY = _sphY - _pointEdge23.y;
         var _vZ = _sphZ - _pointEdge23.z;
         var _distSqrEdge23 = _vX*_vX + _vY*_vY + _vZ*_vZ;
-        //UggPoint(_pointEdge23.x, _pointEdge23.y, _pointEdge23.z, c_lime);
         
         //edge 3 -> 1
         var _pointEdge31 = _funcClosestPoint(_pX, _pY, _pZ,   _triX3, _triY3, _triZ3,   _dX31, _dY31, _dZ31);
@@ -127,7 +120,6 @@ function BonkBoolSphereInTriangle(_sphere, _triangle)
         var _vY = _sphY - _pointEdge31.y;
         var _vZ = _sphZ - _pointEdge31.z;
         var _distSqrEdge31 = _vX*_vX + _vY*_vY + _vZ*_vZ;
-        //UggPoint(_pointEdge31.x, _pointEdge31.y, _pointEdge31.z, c_blue);
         
         return ((_distSqrEdge12 < _radiusSqr) || (_distSqrEdge23 < _radiusSqr) || (_distSqrEdge31 < _radiusSqr));
     }

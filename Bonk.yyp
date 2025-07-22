@@ -127,6 +127,7 @@
     {"id":{"name":"BonkQuad","path":"scripts/BonkQuad/BonkQuad.yy",},},
     {"id":{"name":"BonkSphere","path":"scripts/BonkSphere/BonkSphere.yy",},},
     {"id":{"name":"BonkSphereInSphere","path":"scripts/BonkSphereInSphere/BonkSphereInSphere.yy",},},
+    {"id":{"name":"BonkSphereInTriangle","path":"scripts/BonkSphereInTriangle/BonkSphereInTriangle.yy",},},
     {"id":{"name":"BonkTriangle","path":"scripts/BonkTriangle/BonkTriangle.yy",},},
     {"id":{"name":"BonkVecAdd","path":"scripts/BonkVecAdd/BonkVecAdd.yy",},},
     {"id":{"name":"BonkVecMultiply","path":"scripts/BonkVecMultiply/BonkVecMultiply.yy",},},
