@@ -1,1 +1,1 @@
-cylinder.Draw();
+primitive.Draw();

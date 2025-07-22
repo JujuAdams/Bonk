@@ -2,9 +2,9 @@ if (not oCamera.mouseLock)
 {
     if (keyboard_check_pressed(ord("R")))
     {
-        cylinder.x = xstart;
-        cylinder.y = ystart;
-        cylinder.z = 200;
+        primitive.x = xstart;
+        primitive.y = ystart;
+        primitive.z = 200;
     }
     
     if (keyboard_check_pressed(vk_space)) zSpeed += 15;
@@ -23,22 +23,22 @@ zSpeed -= 1;
 var _steps = 1;
 repeat(_steps)
 {
-    cylinder.x += xSpeed / _steps;
-    cylinder.y += ySpeed / _steps;
-    cylinder.z += zSpeed / _steps;
+    primitive.x += xSpeed / _steps;
+    primitive.y += ySpeed / _steps;
+    primitive.z += zSpeed / _steps;
     
     with(oTestPlatformerFloor)
     {
-        BonkCollision(other, other.cylinder, aabb);
+        BonkCollision(other, other.primitive, primitive);
     }
     
     with(oTestPlatformerAABB)
     {
-        BonkCollision(other, other.cylinder, aabb);
+        BonkCollision(other, other.primitive, primitive);
     }
     
     with(oTestPlatformerCylinder)
     {
-        BonkCollision(other, other.cylinder, cylinder);
+        BonkCollision(other, other.primitive, primitive);
     }
 }

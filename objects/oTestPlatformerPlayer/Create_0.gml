@@ -1,4 +1,4 @@
-cylinder = new BonkCylinder(x, y, 200,   100, 25);
+primitive = new BonkCylinder(x, y, 200,   100, 25);
 
 xSpeed = 0;
 ySpeed = 0;

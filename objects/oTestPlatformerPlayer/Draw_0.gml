@@ -1,1 +1,1 @@
-cylinder.Draw(c_lime);
+primitive.Draw(c_lime);

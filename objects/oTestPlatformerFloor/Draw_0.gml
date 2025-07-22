@@ -1,1 +1,1 @@
-aabb.Draw(c_ltgray);
+primitive.Draw(c_ltgray);
