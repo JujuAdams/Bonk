@@ -94,7 +94,7 @@ function BonkSphereInTriangle(_sphere, _triangle)
     {
         //UggCross(_pX, _pY, _pZ, 3, c_white, undefined, true);
         
-        var _funcClosestPoint = function(_pX, _pY, _pZ, _x, _y, _z, _dX, _dY, _dZ)
+        var _funcClosestPointOnLineSegment = function(_pX, _pY, _pZ, _x, _y, _z, _dX, _dY, _dZ)
         {
             static _result = {};
             
@@ -114,7 +114,7 @@ function BonkSphereInTriangle(_sphere, _triangle)
         var _radiusSqr = _radius*_radius;
         
         //edge 1 -> 2
-        var _pointEdge12 = _funcClosestPoint(_pX, _pY, _pZ,   _triX1, _triY1, _triZ1,   _dX12, _dY12, _dZ12);
+        var _pointEdge12 = _funcClosestPointOnLineSegment(_pX, _pY, _pZ,   _triX1, _triY1, _triZ1,   _dX12, _dY12, _dZ12);
         var _closestX12 = _sphX - _pointEdge12.x;
         var _closestY12 = _sphY - _pointEdge12.y;
         var _closestZ12 = _sphZ - _pointEdge12.z;
@@ -122,7 +122,7 @@ function BonkSphereInTriangle(_sphere, _triangle)
         //UggPoint(_pointEdge12.x, _pointEdge12.y, _pointEdge12.z, c_red);
         
         //edge 2 -> 3
-        var _pointEdge23 = _funcClosestPoint(_pX, _pY, _pZ,   _triX2, _triY2, _triZ2,   _dX23, _dY23, _dZ23);
+        var _pointEdge23 = _funcClosestPointOnLineSegment(_pX, _pY, _pZ,   _triX2, _triY2, _triZ2,   _dX23, _dY23, _dZ23);
         var _closestX23 = _sphX - _pointEdge23.x;
         var _closestY23 = _sphY - _pointEdge23.y;
         var _closestZ23 = _sphZ - _pointEdge23.z;
@@ -130,7 +130,7 @@ function BonkSphereInTriangle(_sphere, _triangle)
         //UggPoint(_pointEdge23.x, _pointEdge23.y, _pointEdge23.z, c_lime);
         
         //edge 3 -> 1
-        var _pointEdge31 = _funcClosestPoint(_pX, _pY, _pZ,   _triX3, _triY3, _triZ3,   _dX31, _dY31, _dZ31);
+        var _pointEdge31 = _funcClosestPointOnLineSegment(_pX, _pY, _pZ,   _triX3, _triY3, _triZ3,   _dX31, _dY31, _dZ31);
         var _closestX31 = _sphX - _pointEdge31.x;
         var _closestY31 = _sphY - _pointEdge31.y;
         var _closestZ31 = _sphZ - _pointEdge31.z;
@@ -185,9 +185,9 @@ function BonkSphereInTriangle(_sphere, _triangle)
         with(_reaction)
         {
             var _coeff = (_radius - _pushLength) / _pushLength;
-            dX = _pushX*_coeff; 
-            dY = _pushY*_coeff; 
-            dZ = _pushZ*_coeff; 
+            dX = -_pushX*_coeff; 
+            dY = -_pushY*_coeff; 
+            dZ = -_pushZ*_coeff; 
         }
     }
     

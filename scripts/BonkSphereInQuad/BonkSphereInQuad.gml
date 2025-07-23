@@ -102,7 +102,7 @@ function BonkSphereInQuad(_sphere, _quad)
     }
     else
     {
-        var _funcClosestPoint = function(_pX, _pY, _pZ, _x1, _y1, _z1, _dX, _dY, _dZ)
+        var _funcClosestPointOnLineSegment = function(_pX, _pY, _pZ, _x1, _y1, _z1, _dX, _dY, _dZ)
         {
             static _result = {};
             
@@ -122,28 +122,28 @@ function BonkSphereInQuad(_sphere, _quad)
         var _radiusSqr = _radius*_radius;
         
         //edge 1 -> 2
-        var _pointEdge12 = _funcClosestPoint(_pX, _pY, _pZ,   _quadX1, _quadY1, _quadZ1,   _dX12, _dY12, _dZ12);
+        var _pointEdge12 = _funcClosestPointOnLineSegment(_pX, _pY, _pZ,   _quadX1, _quadY1, _quadZ1,   _dX12, _dY12, _dZ12);
         var _closestX12 = _sphX - _pointEdge12.x;
         var _closestY12 = _sphY - _pointEdge12.y;
         var _closestZ12 = _sphZ - _pointEdge12.z;
         var _distSqrEdge12 = _closestX12*_closestX12 + _closestY12*_closestY12 + _closestZ12*_closestZ12;
         
         //edge 2 -> 3
-        var _pointEdge23 = _funcClosestPoint(_pX, _pY, _pZ,   _quadX2, _quadY2, _quadZ2,   _dX23, _dY23, _dZ23);
+        var _pointEdge23 = _funcClosestPointOnLineSegment(_pX, _pY, _pZ,   _quadX2, _quadY2, _quadZ2,   _dX23, _dY23, _dZ23);
         var _closestX23 = _sphX - _pointEdge23.x;
         var _closestY23 = _sphY - _pointEdge23.y;
         var _closestZ23 = _sphZ - _pointEdge23.z;
         var _distSqrEdge23 = _closestX23*_closestX23 + _closestY23*_closestY23 + _closestZ23*_closestZ23;
         
         //edge 3 -> 4
-        var _pointEdge34 = _funcClosestPoint(_pX, _pY, _pZ,   _quadX3, _quadY3, _quadZ3,   _dX34, _dY34, _dZ34);
+        var _pointEdge34 = _funcClosestPointOnLineSegment(_pX, _pY, _pZ,   _quadX3, _quadY3, _quadZ3,   _dX34, _dY34, _dZ34);
         var _closestX34 = _sphX - _pointEdge34.x;
         var _closestY34 = _sphY - _pointEdge34.y;
         var _closestZ34 = _sphZ - _pointEdge34.z;
         var _distSqrEdge34 = _closestX34*_closestX34 + _closestY34*_closestY34 + _closestZ34*_closestZ34;
         
         //edge 4 -> 1
-        var _pointEdge41 = _funcClosestPoint(_pX, _pY, _pZ,   _quadX4, _quadY4, _quadZ4,   _dX41, _dY41, _dZ41);
+        var _pointEdge41 = _funcClosestPointOnLineSegment(_pX, _pY, _pZ,   _quadX4, _quadY4, _quadZ4,   _dX41, _dY41, _dZ41);
         var _closestX41 = _sphX - _pointEdge41.x;
         var _closestY41 = _sphY - _pointEdge41.y;
         var _closestZ41 = _sphZ - _pointEdge41.z;
@@ -207,9 +207,9 @@ function BonkSphereInQuad(_sphere, _quad)
         with(_reaction)
         {
             var _coeff = (_radius - _pushLength) / _pushLength;
-            dX = _pushX*_coeff; 
-            dY = _pushY*_coeff; 
-            dZ = _pushZ*_coeff; 
+            dX = -_pushX*_coeff; 
+            dY = -_pushY*_coeff; 
+            dZ = -_pushZ*_coeff; 
         }
     }
     

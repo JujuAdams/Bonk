@@ -83,7 +83,7 @@ function BonkBoolSphereInTriangle(_sphere, _triangle)
     }
     else
     {
-        var _funcClosestPoint = function(_pX, _pY, _pZ, _x1, _y1, _z1, _dX, _dY, _dZ)
+        var _funcClosestPointOnLineSegment = function(_pX, _pY, _pZ, _x1, _y1, _z1, _dX, _dY, _dZ)
         {
             static _result = {};
             
@@ -103,21 +103,21 @@ function BonkBoolSphereInTriangle(_sphere, _triangle)
         var _radiusSqr = _radius*_radius;
         
         //edge 1 -> 2
-        var _pointEdge12 = _funcClosestPoint(_pX, _pY, _pZ,   _triX1, _triY1, _triZ1,   _dX12, _dY12, _dZ12);
+        var _pointEdge12 = _funcClosestPointOnLineSegment(_pX, _pY, _pZ,   _triX1, _triY1, _triZ1,   _dX12, _dY12, _dZ12);
         var _vX = _sphX - _pointEdge12.x;
         var _vY = _sphY - _pointEdge12.y;
         var _vZ = _sphZ - _pointEdge12.z;
         var _distSqrEdge12 = _vX*_vX + _vY*_vY + _vZ*_vZ;
         
         //edge 2 -> 3
-        var _pointEdge23 = _funcClosestPoint(_pX, _pY, _pZ,   _triX2, _triY2, _triZ2,   _dX23, _dY23, _dZ23);
+        var _pointEdge23 = _funcClosestPointOnLineSegment(_pX, _pY, _pZ,   _triX2, _triY2, _triZ2,   _dX23, _dY23, _dZ23);
         var _vX = _sphX - _pointEdge23.x;
         var _vY = _sphY - _pointEdge23.y;
         var _vZ = _sphZ - _pointEdge23.z;
         var _distSqrEdge23 = _vX*_vX + _vY*_vY + _vZ*_vZ;
         
         //edge 3 -> 1
-        var _pointEdge31 = _funcClosestPoint(_pX, _pY, _pZ,   _triX3, _triY3, _triZ3,   _dX31, _dY31, _dZ31);
+        var _pointEdge31 = _funcClosestPointOnLineSegment(_pX, _pY, _pZ,   _triX3, _triY3, _triZ3,   _dX31, _dY31, _dZ31);
         var _vX = _sphX - _pointEdge31.x;
         var _vY = _sphY - _pointEdge31.y;
         var _vZ = _sphZ - _pointEdge31.z;
