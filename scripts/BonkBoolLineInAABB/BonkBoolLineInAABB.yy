@@ -6,7 +6,7 @@
   "name":"BonkBoolLineInAABB",
   "parent":{
     "name":"Line",
-    "path":"folders/Bonk/Boolean/Line.yy",
+    "path":"folders/Bonk/Overlap/Line.yy",
   },
   "resourceType":"GMScript",
   "resourceVersion":"2.0",

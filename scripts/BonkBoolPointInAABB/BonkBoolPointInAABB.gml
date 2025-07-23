@@ -1,5 +1,7 @@
 // Feather disable all
 
+/// Returns whether a Bonk point lies inside an AABB.
+/// 
 /// @param point
 /// @param aabb
 

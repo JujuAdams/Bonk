@@ -1,5 +1,7 @@
 // Feather disable all
 
+/// Returns whether a Bonk sphere and quad overlap.
+/// 
 /// @param sphere
 /// @param quad
 

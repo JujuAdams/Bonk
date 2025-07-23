@@ -1,5 +1,7 @@
 // Feather disable all
 
+/// Returns whether a Bonk cylinder and sphere overlap.
+/// 
 /// @param cylinder
 /// @param sphere
 

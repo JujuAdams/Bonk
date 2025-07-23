@@ -6,7 +6,7 @@
   "name":"BonkBoolSphereInQuad",
   "parent":{
     "name":"Sphere",
-    "path":"folders/Bonk/Boolean/Sphere.yy",
+    "path":"folders/Bonk/Overlap/Sphere.yy",
   },
   "resourceType":"GMScript",
   "resourceVersion":"2.0",

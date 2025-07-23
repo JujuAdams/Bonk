@@ -1,5 +1,7 @@
 // Feather disable all
 
+/// Returns whether a Bonk point lies inside a cylinder.
+/// 
 /// @param point
 /// @param cylinder
 

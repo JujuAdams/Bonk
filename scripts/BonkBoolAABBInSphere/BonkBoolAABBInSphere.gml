@@ -1,5 +1,7 @@
 // Feather disable all
 
+/// Returns whether a Bonk AABB and sphere overlap.
+/// 
 /// @param aabb
 /// @param sphere
 

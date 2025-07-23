@@ -6,7 +6,7 @@
   "name":"BonkBoolAABBInSphere",
   "parent":{
     "name":"AABB",
-    "path":"folders/Bonk/Boolean/AABB.yy",
+    "path":"folders/Bonk/Overlap/AABB.yy",
   },
   "resourceType":"GMScript",
   "resourceVersion":"2.0",

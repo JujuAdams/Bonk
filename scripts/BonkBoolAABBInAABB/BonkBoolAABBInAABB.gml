@@ -1,5 +1,7 @@
 // Feather disable all
 
+/// Returns whether two Bonk AABBs overlap.
+/// 
 /// @param aabb1
 /// @param aabb2
 

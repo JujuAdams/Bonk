@@ -1,5 +1,7 @@
 // Feather disable all
 
+/// Returns whether a Bonk AABB and cylinder overlap.
+/// 
 /// @param aabb
 /// @param cylinder
 

@@ -1,5 +1,7 @@
 // Feather disable all
 
+/// Returns whether a Bonk point lies inside a sphere.
+/// 
 /// @param point
 /// @param sphere
 

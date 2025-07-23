@@ -1,5 +1,7 @@
 // Feather disable all
 
+/// Returns whether two Bonk spheres overlap.
+/// 
 /// @param sphereA
 /// @param sphereB
 

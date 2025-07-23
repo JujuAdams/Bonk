@@ -6,7 +6,7 @@
   "name":"BonkBoolPointInCylinder",
   "parent":{
     "name":"Point",
-    "path":"folders/Bonk/Boolean/Point.yy",
+    "path":"folders/Bonk/Overlap/Point.yy",
   },
   "resourceType":"GMScript",
   "resourceVersion":"2.0",

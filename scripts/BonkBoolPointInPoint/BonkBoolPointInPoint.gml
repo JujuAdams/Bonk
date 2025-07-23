@@ -1,5 +1,7 @@
 // Feather disable all
 
+/// Returns whether two Bonk points share the same coordinates.
+/// 
 /// @param point1
 /// @param point2
 

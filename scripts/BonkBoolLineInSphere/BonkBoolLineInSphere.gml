@@ -1,5 +1,7 @@
 // Feather disable all
 
+/// Returns whether a Bonk line and sphere overlap.
+/// 
 /// @param line
 /// @param sphere
 
