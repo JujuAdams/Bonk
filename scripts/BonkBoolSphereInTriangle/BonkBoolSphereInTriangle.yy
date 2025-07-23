@@ -6,7 +6,7 @@
   "name":"BonkBoolSphereInTriangle",
   "parent":{
     "name":"Sphere",
-    "path":"folders/Bonk/Overlap/Sphere.yy",
+    "path":"folders/Bonk/Boolean/Sphere.yy",
   },
   "resourceType":"GMScript",
   "resourceVersion":"2.0",

@@ -6,7 +6,7 @@
   "name":"BonkBoolCapsuleInQuad",
   "parent":{
     "name":"Quad",
-    "path":"folders/Bonk/Overlap/Quad.yy",
+    "path":"folders/Bonk/Boolean/Quad.yy",
   },
   "resourceType":"GMScript",
   "resourceVersion":"2.0",

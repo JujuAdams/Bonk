@@ -5,8 +5,8 @@
   "isDnD":false,
   "name":"BonkSphereInTriangle",
   "parent":{
-    "name":"Reaction",
-    "path":"folders/Bonk/Reaction.yy",
+    "name":"Overlap",
+    "path":"folders/Bonk/Overlap.yy",
   },
   "resourceType":"GMScript",
   "resourceVersion":"2.0",

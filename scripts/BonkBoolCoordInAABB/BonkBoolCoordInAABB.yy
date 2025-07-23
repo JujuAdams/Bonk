@@ -6,7 +6,7 @@
   "name":"BonkBoolCoordInAABB",
   "parent":{
     "name":"Coordinate",
-    "path":"folders/Bonk/Overlap/Coordinate.yy",
+    "path":"folders/Bonk/Boolean/Coordinate.yy",
   },
   "resourceType":"GMScript",
   "resourceVersion":"2.0",

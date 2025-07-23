@@ -5,8 +5,8 @@
   "isDnD":false,
   "name":"BonkQuad",
   "parent":{
-    "name":"Primitives",
-    "path":"folders/Bonk/Primitives.yy",
+    "name":"Primitive Constructors",
+    "path":"folders/Bonk/Primitive Constructors.yy",
   },
   "resourceType":"GMScript",
   "resourceVersion":"2.0",

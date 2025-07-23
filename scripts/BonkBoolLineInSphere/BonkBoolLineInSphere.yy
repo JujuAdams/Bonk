@@ -6,7 +6,7 @@
   "name":"BonkBoolLineInSphere",
   "parent":{
     "name":"Line",
-    "path":"folders/Bonk/Overlap/Line.yy",
+    "path":"folders/Bonk/Boolean/Line.yy",
   },
   "resourceType":"GMScript",
   "resourceVersion":"2.0",
