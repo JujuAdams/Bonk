@@ -1,0 +1,13 @@
+{
+  "$GMScript":"v1",
+  "%Name":"BonkBoolCoordInAABB",
+  "isCompatibility":false,
+  "isDnD":false,
+  "name":"BonkBoolCoordInAABB",
+  "parent":{
+    "name":"Coordinate",
+    "path":"folders/Bonk/Overlap/Coordinate.yy",
+  },
+  "resourceType":"GMScript",
+  "resourceVersion":"2.0",
+}
