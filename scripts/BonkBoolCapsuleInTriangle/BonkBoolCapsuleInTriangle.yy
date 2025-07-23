@@ -1,0 +1,13 @@
+{
+  "$GMScript":"v1",
+  "%Name":"BonkBoolCapsuleInTriangle",
+  "isCompatibility":false,
+  "isDnD":false,
+  "name":"BonkBoolCapsuleInTriangle",
+  "parent":{
+    "name":"Quad",
+    "path":"folders/Bonk/Boolean/Quad.yy",
+  },
+  "resourceType":"GMScript",
+  "resourceVersion":"2.0",
+}

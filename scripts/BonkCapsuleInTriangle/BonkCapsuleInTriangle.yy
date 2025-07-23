@@ -1,0 +1,13 @@
+{
+  "$GMScript":"v1",
+  "%Name":"BonkCapsuleInTriangle",
+  "isCompatibility":false,
+  "isDnD":false,
+  "name":"BonkCapsuleInTriangle",
+  "parent":{
+    "name":"Overlap",
+    "path":"folders/Bonk/Overlap.yy",
+  },
+  "resourceType":"GMScript",
+  "resourceVersion":"2.0",
+}
