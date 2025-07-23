@@ -85,10 +85,8 @@ function BonkBoolCapsuleInQuad(_capsule, _quad)
     }
     else
     {
-        //Shortest distance from the capsule to the plane
+        //Point on the plane along the capsule's axis
         var _t = dot_product_3d(_normalX, _normalY, _normalZ, _quadX1 - _capsuleX, _quadY1 - _capsuleY, _quadZ1 - _capsuleZ) / abs(_normalZ);
-        
-        //Point on the plane closest to the capsule
         var _iX = _capsuleX;
         var _iY = _capsuleY;
         var _iZ = _capsuleZ + _t;
