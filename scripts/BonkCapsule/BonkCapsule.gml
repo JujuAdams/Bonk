@@ -76,6 +76,10 @@ function BonkCapsule(_x, _y, _z, _height, _radius) constructor
         {
             return BonkCapsuleInQuad(self, _otherPrimitive);
         }
+        else if (is_instanceof(_otherPrimitive, BonkTriangle))
+        {
+            return BonkCapsuleInTriangle(self, _otherPrimitive);
+        }
         
         if (BONK_STRICT_COLLISION_COMPATIBILITY)
         {

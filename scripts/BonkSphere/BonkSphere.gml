@@ -63,6 +63,14 @@ function BonkSphere(_x, _y, _z, _radius) constructor
         {
             return BonkSphereInSphere(self, _otherPrimitive);
         }
+        else if (is_instanceof(_otherPrimitive, BonkQuad))
+        {
+            return BonkSphereInQuad(self, _otherPrimitive);
+        }
+        else if (is_instanceof(_otherPrimitive, BonkTriangle))
+        {
+            return BonkSphereInTriangle(self, _otherPrimitive);
+        }
         
         if (BONK_STRICT_COLLISION_COMPATIBILITY)
         {

@@ -1,1 +1,1 @@
-primitive = new BonkTriangle(x, y, 50,   x + 64, y, 0,   x, y + 64, 50);
+primitive = new BonkTriangle(x, y, 50,   x + 64, y, 0,   x, y + 64, 0);

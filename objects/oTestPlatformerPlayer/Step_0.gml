@@ -17,6 +17,11 @@ if (not oCamera.mouseLock)
     xSpeed =  _para*_cos - _perp*_sin;
     ySpeed = -_para*_sin - _perp*_cos;
 }
+else
+{
+    xSpeed = 0;
+    ySpeed = 0;
+}
 
 zSpeed -= 1;
 
@@ -47,8 +52,13 @@ repeat(_steps)
         BonkCollision(other, other.primitive, primitive);
     }
     
-    //with(oTestPlatformerQuad)
-    //{
-    //    BonkCollision(other, other.primitive, primitive);
-    //}
+    with(oTestPlatformerQuad)
+    {
+        BonkCollision(other, other.primitive, primitive);
+    }
+    
+    with(oTestPlatformerTriangle)
+    {
+        BonkCollision(other, other.primitive, primitive);
+    }
 }

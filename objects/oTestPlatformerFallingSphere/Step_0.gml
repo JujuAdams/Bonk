@@ -26,4 +26,14 @@ repeat(_steps)
     {
         BonkCollision(other, other.primitive, primitive);
     }
+    
+    with(oTestPlatformerQuad)
+    {
+        BonkCollision(other, other.primitive, primitive);
+    }
+    
+    with(oTestPlatformerTriangle)
+    {
+        BonkCollision(other, other.primitive, primitive);
+    }
 }
