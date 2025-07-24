@@ -62,7 +62,7 @@ function BonkCapsule(_x, _y, _z, _height, _radius) constructor
         
         if (is_instanceof(_otherPrimitive, BonkAABB))
         {
-            return BonkAABBInCylinder(_otherPrimitive, self).Reverse();
+            return BonkCapsuleInAABB(self, _otherPrimitive);
         }
         else if (is_instanceof(_otherPrimitive, BonkCylinder))
         {
