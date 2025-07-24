@@ -5,8 +5,8 @@
   "isDnD":false,
   "name":"BonkLine",
   "parent":{
-    "name":"Primitive Constructors",
-    "path":"folders/Bonk/Primitive Constructors.yy",
+    "name":"Shape Constructors",
+    "path":"folders/Bonk/Shape Constructors.yy",
   },
   "resourceType":"GMScript",
   "resourceVersion":"2.0",

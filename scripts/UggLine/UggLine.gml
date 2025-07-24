@@ -16,22 +16,20 @@ function UggLine(_x1, _y1, _z1, _x2, _y2, _z2, _color = UGG_DEFAULT_DIFFUSE_COLO
 {
     __UGG_GLOBAL
     __UGG_COLOR_UNIFORMS
+    static _nativeLine            = _global.__nativeLine;
     static _volumeLine            = _global.__volumeLine;
     static _wireframeVertexFormat = _global.__wireframeVertexFormat;
     static _staticMatrix          = matrix_build_identity();
     static _staticVBuff           = vertex_create_buffer();
     
-    if (_wireframe ?? _global.__wireframe)
+    if (_wireframe ?? __UGG_WIREFRAME)
     {
-    	vertex_begin(_staticVBuff, _wireframeVertexFormat);
-    	vertex_position_3d(_staticVBuff, _x1, _y1, _z1); vertex_color(_staticVBuff, c_white, 1);
-    	vertex_position_3d(_staticVBuff, _x2, _y2, _z2); vertex_color(_staticVBuff, c_white, 1);
-    	vertex_end(_staticVBuff);
+        vertex_begin(_staticVBuff, _wireframeVertexFormat);
+        vertex_position_3d(_staticVBuff, _x1, _y1, _z1); vertex_color(_staticVBuff, c_white, 1);
+        vertex_position_3d(_staticVBuff, _x2, _y2, _z2); vertex_color(_staticVBuff, c_white, 1);
+        vertex_end(_staticVBuff);
         
-        shader_set(__shdUggWireframe);
-        shader_set_uniform_f(_shdUggWireframe_u_vColor, color_get_red(  _color)/255,
-                                                        color_get_green(_color)/255,
-                                                        color_get_blue( _color)/255);
+        __UGG_WIREFRAME_SHADER
         vertex_submit(_staticVBuff, pr_linelist, -1);
     }
     else
@@ -89,15 +87,12 @@ function UggLine(_x1, _y1, _z1, _x2, _y2, _z2, _color = UGG_DEFAULT_DIFFUSE_COLO
         matrix_stack_push(_staticMatrix);
         matrix_set(matrix_world, matrix_stack_top());
         
-        shader_set(__shdUggVolume);
-        shader_set_uniform_f(_shdUggVolume_u_vColor, color_get_red(  _color)/255,
-                                                     color_get_green(_color)/255,
-                                                     color_get_blue( _color)/255);
-        vertex_submit(_volumeLine, pr_trianglelist, -1);
+        __UGG_VOLUME_SHADER
+        vertex_submit(__UGG_USE_SHADERS? _volumeLine : _nativeLine, pr_trianglelist, -1);
         
         matrix_stack_pop();
         matrix_set(matrix_world, matrix_stack_top());
     }
     
-    shader_reset();
+    __UGG_RESET_SHADER
 }

@@ -18,7 +18,7 @@ function __UggPrebuildVolumePlane(_size)
     vertex_position_3d(_vertexBuffer, -_size,  _size, 0); vertex_normal(_vertexBuffer, 0,  0,  1);
     
     vertex_end(_vertexBuffer);
-	vertex_freeze(_vertexBuffer);
+    //Don't freeze, we'll need this vertex buffer for conversion into the native GML format
     
     return _vertexBuffer;
 }

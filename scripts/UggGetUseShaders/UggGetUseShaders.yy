@@ -1,12 +1,12 @@
 {
   "$GMScript":"v1",
-  "%Name":"__UggMatrixInvert",
+  "%Name":"UggGetUseShaders",
   "isCompatibility":false,
   "isDnD":false,
-  "name":"__UggMatrixInvert",
+  "name":"UggGetUseShaders",
   "parent":{
-    "name":"(System)",
-    "path":"folders/Ugg/(System).yy",
+    "name":"Settings",
+    "path":"folders/Ugg/Settings.yy",
   },
   "resourceType":"GMScript",
   "resourceVersion":"2.0",

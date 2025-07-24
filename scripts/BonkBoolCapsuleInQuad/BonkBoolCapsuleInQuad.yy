@@ -5,8 +5,8 @@
   "isDnD":false,
   "name":"BonkBoolCapsuleInQuad",
   "parent":{
-    "name":"Quad",
-    "path":"folders/Bonk/Boolean/Quad.yy",
+    "name":"Capsule",
+    "path":"folders/Bonk/Boolean/Capsule.yy",
   },
   "resourceType":"GMScript",
   "resourceVersion":"2.0",

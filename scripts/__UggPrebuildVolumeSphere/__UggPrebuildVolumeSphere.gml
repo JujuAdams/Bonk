@@ -83,7 +83,7 @@ function __UggPrebuildVolumeSphere(_steps)
     }
     
     vertex_end(_vertexBuffer);
-	vertex_freeze(_vertexBuffer);
+    //Don't freeze, we'll need this vertex buffer for conversion into the native GML format
     
     return _vertexBuffer;
 }

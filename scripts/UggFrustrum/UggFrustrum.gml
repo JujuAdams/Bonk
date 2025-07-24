@@ -14,7 +14,7 @@ function UggFrustrum(_viewMatrix, _projectionMatrix, _color = undefined, _thickn
 {
     //TODO - Optimise
     
-    var _vpMatrixInverse = __UggMatrixInvert(matrix_multiply(_viewMatrix, _projectionMatrix));
+    var _vpMatrixInverse = matrix_inverse(matrix_multiply(_viewMatrix, _projectionMatrix));
     
     var _tlNear = __UggMatrixTransformVertex4DDivW(_vpMatrixInverse, -1, -1, 0, 1);
     var _trNear = __UggMatrixTransformVertex4DDivW(_vpMatrixInverse,  1, -1, 0, 1);

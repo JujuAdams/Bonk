@@ -15,6 +15,7 @@ function UggSphere(_x, _y, _z, _radius, _color = UGG_DEFAULT_DIFFUSE_COLOR, _wir
     __UGG_COLOR_UNIFORMS
     static _volumeSphere    = _global.__volumeSphere;
     static _wireframeSphere = _global.__wireframeSphere;
+    static _nativeSphere    = _global.__nativeSphere;
     static _staticMatrix    = matrix_build_identity();
     
     _staticMatrix[@  0] = _radius;
@@ -27,24 +28,18 @@ function UggSphere(_x, _y, _z, _radius, _color = UGG_DEFAULT_DIFFUSE_COLOR, _wir
     matrix_stack_push(_staticMatrix);
     matrix_set(matrix_world, matrix_stack_top());
     
-    if (_wireframe ?? _global.__wireframe)
+    if (_wireframe ?? __UGG_WIREFRAME)
     {
-        shader_set(__shdUggWireframe);
-        shader_set_uniform_f(_shdUggWireframe_u_vColor, color_get_red(  _color)/255,
-                                                        color_get_green(_color)/255,
-                                                        color_get_blue( _color)/255);
+        __UGG_WIREFRAME_SHADER
         vertex_submit(_wireframeSphere, pr_linelist, -1);
-        shader_reset();
     }
     else 
     {
-        shader_set(__shdUggVolume);
-        shader_set_uniform_f(_shdUggVolume_u_vColor, color_get_red(  _color)/255,
-                                                     color_get_green(_color)/255,
-                                                     color_get_blue( _color)/255);
-        vertex_submit(_volumeSphere, pr_trianglelist, -1);
-        shader_reset();
+        __UGG_VOLUME_SHADER
+        vertex_submit(__UGG_USE_SHADERS? _volumeSphere : _nativeSphere, pr_trianglelist, -1);
     }
+    
+    __UGG_RESET_SHADER
     
     matrix_stack_pop();
     matrix_set(matrix_world, matrix_stack_top());

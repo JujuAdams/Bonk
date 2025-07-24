@@ -18,7 +18,7 @@ function UggAxes(_x = 0, _y = 0, _z = 0, _length = 100, _thickness = 3, _wirefra
     UggLine(_x, _y, _z,   _x, _y + _length, _z,   c_lime,  _thickness);
     UggLine(_x, _y, _z,   _x, _y, _z + _length,   c_blue,  _thickness);
     
-    if (_wireframe ?? _global.__wireframe)
+    if (_wireframe ?? __UGG_WIREFRAME)
     {
         UggPoint(_x, _y, _z, c_white, _wireframe);
     }

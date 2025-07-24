@@ -1,90 +1,84 @@
 // Feather disable all
 
-/// @param steps
+/// @param stripSteps
+/// @param stripCount
+/// @param bandCount
+/// @param bandAccuracy
 
-function __UggPrebuildWireframeSphere(_steps)
+function __UggPrebuildWireframeSphere(_stripSteps, _stripCount, _bandCount, _bandAccuracy)
 {
     var _vertexBuffer = vertex_create_buffer();
     vertex_begin(_vertexBuffer, __Ugg().__wireframeVertexFormat);
     
-    var _phi    = 180 / _steps;
-    var _length = dsin(_phi);
-    var _z      = dcos(_phi);
+    var _lengthB = 0;
+    var _zB      = 1;
     
-    var _x2 = _length;
-    var _y2 = 0;
-    
-    var _i = 1;
-    repeat(_steps+1)
-    {
-        var _x1 = _x2;
-        var _y1 = _y2;
-        
-        var _theta = 360*(_i / (_steps+1));
-        _x2 =  _length*dcos(_theta);
-        _y2 = -_length*dsin(_theta);
-        
-        vertex_position_3d(_vertexBuffer,   0,   0,  1); vertex_color(_vertexBuffer, c_white, 1);
-        vertex_position_3d(_vertexBuffer, _x1, _y1, _z); vertex_color(_vertexBuffer, c_white, 1);
-        
-        vertex_position_3d(_vertexBuffer, _x1, _y1, _z); vertex_color(_vertexBuffer, c_white, 1);
-        vertex_position_3d(_vertexBuffer, _x2, _y2, _z); vertex_color(_vertexBuffer, c_white, 1);
-        
-        vertex_position_3d(_vertexBuffer,   0,   0,  -1); vertex_color(_vertexBuffer, c_white, 1);
-        vertex_position_3d(_vertexBuffer, _x1, _y1, -_z); vertex_color(_vertexBuffer, c_white, 1);
-        
-        vertex_position_3d(_vertexBuffer, _x1, _y1, -_z); vertex_color(_vertexBuffer, c_white, 1);
-        vertex_position_3d(_vertexBuffer, _x2, _y2, -_z); vertex_color(_vertexBuffer, c_white, 1);
-        
-        ++_i;
-    }
-    
-    //Borrow values from the cap calculations
-    var _lengthB = _length;
-    var _zB      = _z;
-    
-    var _j = 2;
-    repeat(_steps-2)
+    var _j = 1;
+    repeat(_stripSteps)
     {
         var _lengthA = _lengthB;
         var _zA      = _zB;
         
-        var _phi     = 180*(_j / _steps);
+        var _phi     = 180*(_j / _stripSteps);
         var _lengthB = dsin(_phi);
         var _zB      = dcos(_phi);
         
-        var _x2A = _lengthA;
-        var _y2A = 0;
-        var _x2B = _lengthB;
-        var _y2B = 0;
+        var _xA = _lengthA;
+        var _yA = 0;
+        var _xB = _lengthB;
+        var _yB = 0;
         
         var _i = 1;
-        repeat(_steps+1)
+        repeat(_stripCount)
         {
-            var _x1A = _x2A;
-            var _y1A = _y2A;
-            var _x1B = _x2B;
-            var _y1B = _y2B;
-            
-            var _theta = 360*(_i / (_steps+1));
+            var _theta = 360*(_i / _stripCount);
             var _cos = dcos(_theta);
             var _sin = dsin(_theta);
-            _x2A =  _lengthA*_cos;
-            _y2A = -_lengthA*_sin;
-            _x2B =  _lengthB*_cos;
-            _y2B = -_lengthB*_sin;
             
-            vertex_position_3d(_vertexBuffer, _x1A, _y1A, _zA); vertex_color(_vertexBuffer, c_white, 1);
-            vertex_position_3d(_vertexBuffer, _x2A, _y2A, _zA); vertex_color(_vertexBuffer, c_white, 1);
+            _xA =  _lengthA*_cos;
+            _yA = -_lengthA*_sin;
+            _xB =  _lengthB*_cos;
+            _yB = -_lengthB*_sin;
             
-            vertex_position_3d(_vertexBuffer, _x2A, _y2A, _zA); vertex_color(_vertexBuffer, c_white, 1);
-            vertex_position_3d(_vertexBuffer, _x2B, _y2B, _zB); vertex_color(_vertexBuffer, c_white, 1);
+            vertex_position_3d(_vertexBuffer, _xA, _yA, _zA); vertex_color(_vertexBuffer, c_white, 1);
+            vertex_position_3d(_vertexBuffer, _xB, _yB, _zB); vertex_color(_vertexBuffer, c_white, 1);
             
-            vertex_position_3d(_vertexBuffer, _x2B, _y2B, _zB); vertex_color(_vertexBuffer, c_white, 1);
-            vertex_position_3d(_vertexBuffer, _x1B, _y1B, _zB); vertex_color(_vertexBuffer, c_white, 1);
+            ++_i;
+        }
+        
+        ++_j;
+    }
+    
+    var _bandSteps = _stripCount*_bandAccuracy;
+    
+    var _j = 0;
+    repeat(_bandCount)
+    {
+        //var _phi    = 180*((_j + 1) / (_bandCount + 1));
+        //var _length = dsin(_phi);
+        //var _z      = dcos(_phi);
+        
+        var _z = 2*((_j + 1) / (_bandCount + 1)) - 1;
+        var _length = sqrt(1 - _z*_z);
+        
+        var _x2 = _length;
+        var _y2 = 0;
+        
+        var _i = 0;
+        repeat(_bandSteps+1)
+        {
+            var _x1 = _x2;
+            var _y1 = _y2;
             
-            vertex_position_3d(_vertexBuffer, _x1B, _y1B, _zB); vertex_color(_vertexBuffer, c_white, 1);
-            vertex_position_3d(_vertexBuffer, _x1A, _y1A, _zA); vertex_color(_vertexBuffer, c_white, 1);
+            var _theta = 360*(_i / _bandSteps);
+            var _cos = dcos(_theta);
+            var _sin = dsin(_theta);
+            
+            _x2 =  _length*_cos;
+            _y2 = -_length*_sin;
+            
+            vertex_position_3d(_vertexBuffer, _x1, _y1, _z); vertex_color(_vertexBuffer, c_white, 1);
+            vertex_position_3d(_vertexBuffer, _x2, _y2, _z); vertex_color(_vertexBuffer, c_white, 1);
             
             ++_i;
         }
@@ -93,7 +87,7 @@ function __UggPrebuildWireframeSphere(_steps)
     }
     
     vertex_end(_vertexBuffer);
-	vertex_freeze(_vertexBuffer);
+    vertex_freeze(_vertexBuffer);
     
     return _vertexBuffer;
 }

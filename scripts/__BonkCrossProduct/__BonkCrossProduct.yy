@@ -5,8 +5,8 @@
   "isDnD":false,
   "name":"__BonkCrossProduct",
   "parent":{
-    "name":"(System)",
-    "path":"folders/Bonk/(System).yy",
+    "name":"Vectors",
+    "path":"folders/Bonk/(System)/Vectors.yy",
   },
   "resourceType":"GMScript",
   "resourceVersion":"2.0",

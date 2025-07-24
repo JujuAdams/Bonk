@@ -56,7 +56,7 @@ function __UggPrebuildWireframePlane(_size, _subdivisions)
     }
     
     vertex_end(_vertexBuffer);
-	vertex_freeze(_vertexBuffer);
+    vertex_freeze(_vertexBuffer);
     
     return _vertexBuffer;
 }

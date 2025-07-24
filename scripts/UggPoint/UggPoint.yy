@@ -5,8 +5,8 @@
   "isDnD":false,
   "name":"UggPoint",
   "parent":{
-    "name":"Ugg",
-    "path":"folders/Ugg.yy",
+    "name":"Shapes",
+    "path":"folders/Ugg/Shapes.yy",
   },
   "resourceType":"GMScript",
   "resourceVersion":"2.0",

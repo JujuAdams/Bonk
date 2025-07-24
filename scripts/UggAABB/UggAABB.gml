@@ -17,6 +17,7 @@ function UggAABB(_x, _y, _z, _xSize, _ySize, _zSize, _color = UGG_DEFAULT_DIFFUS
     __UGG_COLOR_UNIFORMS
     static _volumeAABB    = _global.__volumeAABB;
     static _wireframeAABB = _global.__wireframeAABB;
+    static _nativeAABB    = _global.__nativeAABB;
     static _staticMatrix  = matrix_build_identity();
     
     _staticMatrix[@  0] = _xSize;
@@ -29,24 +30,18 @@ function UggAABB(_x, _y, _z, _xSize, _ySize, _zSize, _color = UGG_DEFAULT_DIFFUS
     matrix_stack_push(_staticMatrix);
     matrix_set(matrix_world, matrix_stack_top());
     
-    if (_wireframe ?? _global.__wireframe)
+    if (_wireframe ?? __UGG_WIREFRAME)
     {
-        shader_set(__shdUggWireframe);
-        shader_set_uniform_f(_shdUggWireframe_u_vColor, color_get_red(  _color)/255,
-                                                        color_get_green(_color)/255,
-                                                        color_get_blue( _color)/255);
+        __UGG_WIREFRAME_SHADER
         vertex_submit(_wireframeAABB, pr_linelist, -1);
-        shader_reset();
     }
     else
     {
-        shader_set(__shdUggVolume);
-        shader_set_uniform_f(_shdUggVolume_u_vColor, color_get_red(  _color)/255,
-                                                     color_get_green(_color)/255,
-                                                     color_get_blue( _color)/255);
-        vertex_submit(_volumeAABB, pr_trianglelist, -1);
-        shader_reset();
+        __UGG_VOLUME_SHADER
+        vertex_submit(__UGG_USE_SHADERS? _volumeAABB : _nativeAABB, pr_trianglelist, -1);
     }
+    
+    __UGG_RESET_SHADER
     
     matrix_stack_pop();
     matrix_set(matrix_world, matrix_stack_top());

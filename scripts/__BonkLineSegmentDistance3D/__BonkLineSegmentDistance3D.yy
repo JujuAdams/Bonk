@@ -5,8 +5,8 @@
   "isDnD":false,
   "name":"__BonkLineSegmentDistance3D",
   "parent":{
-    "name":"(System)",
-    "path":"folders/Bonk/(System).yy",
+    "name":"Misc",
+    "path":"folders/Misc.yy",
   },
   "resourceType":"GMScript",
   "resourceVersion":"2.0",

@@ -5,5 +5,5 @@
 function UggGetWireframe()
 {
     __UGG_GLOBAL
-    return _global.__wireframe;
+    return __UGG_WIREFRAME;
 }
