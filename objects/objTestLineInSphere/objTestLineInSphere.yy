@@ -9,8 +9,8 @@
   "name":"objTestLineInSphere",
   "overriddenProperties":[],
   "parent":{
-    "name":"Primitive Collision Tests",
-    "path":"folders/Test Cases/Primitive Collision Tests.yy",
+    "name":"Basic Collision Tests",
+    "path":"folders/Test Cases/Basic Collision Tests.yy",
   },
   "parentObjectId":null,
   "persistent":false,

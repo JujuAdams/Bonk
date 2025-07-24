@@ -1,0 +1,1 @@
+capsule.SetPosition(undefined, lerp(130, 310, 0.5 + 0.5*dsin(current_time/20)), undefined);
