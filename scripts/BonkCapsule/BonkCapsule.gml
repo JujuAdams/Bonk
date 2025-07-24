@@ -70,7 +70,7 @@ function BonkCapsule(_x, _y, _z, _height, _radius) constructor
         }
         else if (is_instanceof(_otherPrimitive, BonkSphere))
         {
-            return BonkCylinderInSphere(self, _otherPrimitive);
+            return BonkCapsuleInSphere(self, _otherPrimitive);
         }
         else if (is_instanceof(_otherPrimitive, BonkQuad))
         {

@@ -37,7 +37,6 @@ function BonkCapsuleInCylinder(_capsule, _cylinder)
         }
         
         var _cylinderZ = clamp(_capsuleZ, z - 0.5*height, z + 0.5*height);
-        
     }
     
     var _capsuleClosestZ = clamp(_cylinderZ, _capsuleZMin, _capsuleZMax);
