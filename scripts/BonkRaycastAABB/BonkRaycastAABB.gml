@@ -62,7 +62,7 @@ function BonkRaycastAABB(_aabb, _x1, _y1, _z1, _x2, _y2, _z2)
         var _tMin = max(min(_t1, _t2), min(_t3, _t4), min(_t5, _t6));
         var _tMax = min(max(_t1, _t2), max(_t3, _t4), max(_t5, _t6));
         
-        if ((_tMax < 0) || (_tMin > _tMax))
+        if ((_tMax < 0) || (_tMax > 1) || (_tMin > _tMax))
         {
             return _nullCoordiante;
         }

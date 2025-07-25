@@ -43,9 +43,14 @@ function BonkRaycastSphere(_sphere, _x1, _y1, _z1, _x2, _y2, _z2)
         _discriminant = sqrt(_discriminant);
         if (-_b < _discriminant) _discriminant *= -1;
         
+        var _t = (-_b - _discriminant) / (2*_a);
+        if (_t > 1)
+        {
+            return _nullCoordiante;
+        }
+        
         with(_coordinate)
         {
-            var _t = (-_b - _discriminant) / (2*_a);
             x = _x1 + _t*_dX;
             y = _y1 + _t*_dY;
             z = _z1 + _t*_dZ;

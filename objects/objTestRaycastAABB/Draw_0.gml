@@ -11,3 +11,4 @@ _func(line1);
 _func(line2);
 _func(line3);
 _func(line4);
+_func(line5);
