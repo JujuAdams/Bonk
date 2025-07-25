@@ -45,7 +45,7 @@ function UggArrow(_x1, _y1, _z1, _x2, _y2, _z2, _arrowSize = undefined, _color =
     
     //TODO - Optimize
     
-    if ((_dx == 0) && (_dy == 0) && (_dz == 1))
+    if ((_dx == 0) && (_dy == 0) && (abs(_dz) == 1))
     {
         var _ux = 0;
         var _uy = 1;

@@ -31,7 +31,7 @@ function UggCircle(_x, _y, _z, _radius, _normalX, _normalY, _normalZ, _color = U
     
     //TODO - Optimize
     
-    if ((_normalX == 0) && (_normalY == 0) && (_normalZ == 1))
+    if ((_normalX == 0) && (_normalY == 0) && (abs(_normalZ) == 1))
     {
         var _ux = 0;
         var _uy = 1;

@@ -39,7 +39,7 @@ function UggPlane(_x, _y, _z, _dx, _dy, _dz, _color = UGG_DEFAULT_DIFFUSE_COLOR,
     _y = _camY - _distance*_dy;
     _z = _camZ - _distance*_dz;
     
-    if ((_dx == 0) && (_dy == 0) && (_dz == 1))
+    if ((_dx == 0) && (_dy == 0) && (abs(_dz) == 1))
     {
         var _ux = 0;
         var _uy = 1;
