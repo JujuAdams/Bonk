@@ -5,6 +5,8 @@
 /// @param sphere
 /// @param triangle
 
+// TODO - Optimize
+
 function BonkBoolSphereInTriangle(_sphere, _triangle)
 {
     with(_sphere)

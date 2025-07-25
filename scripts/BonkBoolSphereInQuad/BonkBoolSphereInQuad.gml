@@ -5,6 +5,8 @@
 /// @param sphere
 /// @param quad
 
+// TODO - Optimize
+
 function BonkBoolSphereInQuad(_sphere, _quad)
 {
     with(_sphere)

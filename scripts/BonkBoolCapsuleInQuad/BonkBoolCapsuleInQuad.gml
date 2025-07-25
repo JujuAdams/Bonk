@@ -7,31 +7,14 @@
 
 function BonkBoolCapsuleInQuad(_capsule, _quad)
 {
-    var _funcClosestPointOnLineSegment = function(_pX, _pY, _pZ, _x1, _y1, _z1, _dX, _dY, _dZ)
-    {
-        static _result = {};
-        
-        var _t = dot_product_3d(_pX - _x1, _pY - _y1, _pZ - _z1,   _dX, _dY, _dZ) / (_dX*_dX + _dY*_dY + _dZ*_dZ);
-        _t = clamp(_t, 0, 1);
-        
-        with(_result)
-        {
-            x = _x1 + _t*_dX;
-            y = _y1 + _t*_dY;
-            z = _z1 + _t*_dZ;
-        }
-        
-        return _result;
-    }
-    
     with(_capsule)
     {
-        var _radius   = radius;
+        var _capsuleHeight = height - 2*radius;
+        var _capsuleRadius = radius;
+        
         var _capsuleX = x;
         var _capsuleY = y;
         var _capsuleZ = z - 0.5*height + radius;
-        
-        var _capsuleSegmentLength = height - 2*radius;
     }
     
     with(_quad)
@@ -50,6 +33,7 @@ function BonkBoolCapsuleInQuad(_capsule, _quad)
         var _quadY4 = y3;
         var _quadZ4 = z3;
         
+        //TODO - Precalculate all of this
         var _dX12 = _quadX2 - _quadX1;
         var _dY12 = _quadY2 - _quadY1;
         var _dZ12 = _quadZ2 - _quadZ1;
@@ -71,119 +55,229 @@ function BonkBoolCapsuleInQuad(_capsule, _quad)
         _normalY /= _length;
         _normalZ /= _length;
         
+        var _dX34 = -_dX12;
+        var _dY34 = -_dY12;
+        var _dZ34 = -_dZ12;
+        
         var _quadX3 = _quadX2 - _dX41;
         var _quadY3 = _quadY2 - _dY41;
         var _quadZ3 = _quadZ2 - _dZ41;
+        
+        var _dX23 = _quadX3 - _quadX2;
+        var _dY23 = _quadY3 - _quadY2;
+        var _dZ23 = _quadZ3 - _quadZ2;
+        
+        var _edgeSqrLength12 = dot_product_3d(_dX12, _dY12, _dZ12, _dX12, _dY12, _dZ12);
+        var _edgeSqrLength23 = dot_product_3d(_dX23, _dY23, _dZ23, _dX23, _dY23, _dZ23);
+        var _edgeSqrLength41 = dot_product_3d(_dX41, _dY41, _dZ41, _dX41, _dY41, _dZ41);
+        
+        var _edgeSqrLength34 = _edgeSqrLength12;
     }
     
     if (_normalZ == 0)
     {
-        //Plane is parallel to the capsule (the normal is perpendicular to the capsule axis {0,0,1} )
-        var _iX = _quadX1;
-        var _iY = _quadY1;
-        var _iZ = _quadZ1;
+        var _penDepth = clamp(dot_product_3d(_quadX1 - _capsuleX, _quadY1 - _capsuleY, _quadZ1 - _capsuleZ, 0, 0, 1), 0, _capsuleHeight);
     }
     else
     {
-        //Point on the plane along the capsule's axis
-        var _t = dot_product_3d(_normalX, _normalY, _normalZ, _quadX1 - _capsuleX, _quadY1 - _capsuleY, _quadZ1 - _capsuleZ) / abs(_normalZ);
-        var _iX = _capsuleX;
-        var _iY = _capsuleY;
-        var _iZ = _capsuleZ + _t;
+        var _penDepth = undefined;
+        
+        var _trace = dot_product_3d(_quadX1 - _capsuleX, _quadY1 - _capsuleY, _quadZ1 - _capsuleZ, _normalX, _normalY, _normalZ) / _normalZ;
+        var _traceX = _capsuleX;
+        var _traceY = _capsuleY;
+        var _traceZ = _capsuleZ + _trace;
+        
+        //Check the intersection point is on the inner side of the edge 1->2
+        //If we fail, these values fall through
+        var _tempX = _traceX - _quadX1;
+        var _tempY = _traceY - _quadY1;
+        var _tempZ = _traceZ - _quadZ1;
+        
+        var _edgeSqrLen = _edgeSqrLength12;
+        var _edgeX = _dX12;
+        var _edgeY = _dY12;
+        var _edgeZ = _dZ12;
+        
+        if (dot_product_3d(_tempZ*_edgeY - _tempY*_edgeZ,
+                           _tempX*_edgeZ - _tempZ*_edgeX,
+                           _tempY*_edgeX - _tempX*_edgeY,
+                           _normalX, _normalY, _normalZ) > 0)
+        {
+            
+            //Check the intersection point is on the inner side of the edge 2->3
+            //If we fail, these values fall through
+            _tempX = _traceX - _quadX2;
+            _tempY = _traceY - _quadY2;
+            _tempZ = _traceZ - _quadZ2;
+            
+            _edgeSqrLen = _edgeSqrLength23;
+            _edgeX = _dX23;
+            _edgeY = _dY23;
+            _edgeZ = _dZ23;
+            
+            if (dot_product_3d(_tempZ*_edgeY - _tempY*_edgeZ,
+                               _tempX*_edgeZ - _tempZ*_edgeX,
+                               _tempY*_edgeX - _tempX*_edgeY,
+                               _normalX, _normalY, _normalZ) > 0)
+            {
+                
+                //Check the intersection point is on the inner side of the edge 3->4
+                //If we fail, these values fall through
+                _tempX = _traceX - _quadX3;
+                _tempY = _traceY - _quadY3;
+                _tempZ = _traceZ - _quadZ3;
+                
+                _edgeSqrLen = _edgeSqrLength34;
+                _edgeX = _dX34;
+                _edgeY = _dY34;
+                _edgeZ = _dZ34;
+                
+                if (dot_product_3d(_tempZ*_edgeY - _tempY*_edgeZ,
+                                    _tempX*_edgeZ - _tempZ*_edgeX,
+                                    _tempY*_edgeX - _tempX*_edgeY,
+                                    _normalX, _normalY, _normalZ) > 0)
+                {
+                    //Check the intersection point is on the inner side of the edge 4->1
+                    //If we fail, these values fall through
+                    _tempX = _traceX - _quadX4;
+                    _tempY = _traceY - _quadY4;
+                    _tempZ = _traceZ - _quadZ4;
+                    
+                    _edgeSqrLen = _edgeSqrLength41;
+                    _edgeX = _dX41;
+                    _edgeY = _dY41;
+                    _edgeZ = _dZ41;
+                    
+                    if (dot_product_3d(_tempZ*_edgeY - _tempY*_edgeZ,
+                                       _tempX*_edgeZ - _tempZ*_edgeX,
+                                       _tempY*_edgeX - _tempX*_edgeY,
+                                       _normalX, _normalY, _normalZ) > 0)
+                    {
+                        _penDepth = clamp(_trace, 0, _capsuleHeight);
+                    }
+                }
+            }
+        }
+        
+        if (_penDepth == undefined)
+        {
+            //Catch intersection points that are outside the triangle
+            
+            //Work backwards to get the original vertex z component
+            var _quadZ = _tempZ - _trace;
+            
+            //The projection of the edge vector onto the capsule axis will always just be the z-component because
+            //the axis vector is {0,0,1}
+            if (_edgeZ*_edgeZ == _edgeSqrLen)
+            {
+                _penDepth = clamp(_quadZ, 0, _capsuleHeight);
+            }
+            else
+            {
+                var _gradient = clamp((_tempX*_edgeX + _tempY*_edgeY) / (_edgeSqrLen - _edgeZ*_edgeZ), 0, 1);
+                _penDepth = clamp(_gradient*_edgeZ - _quadZ, 0, _capsuleHeight);
+            }
+        }
     }
     
-    var _point = _funcClosestPointOnLineSegment(_iX, _iY, _iZ, _capsuleX, _capsuleY, _capsuleZ, 0, 0, _capsuleSegmentLength);
-    var _sphX = _point.x;
-    var _sphY = _point.y;
-    var _sphZ = _point.z;
+    var _refX = _capsuleX;
+    var _refY = _capsuleY;
+    var _refZ = _capsuleZ + _penDepth;
     
-    //Distance from the sphere's centre to the plane
-    var _dist = dot_product_3d(_sphX - _quadX1, _sphY - _quadY1, _sphZ - _quadZ1, _normalX, _normalY, _normalZ);
+    //Check the reference point is on the inner side of the edge 1->2
+    //If we fail, these values fall through
+    var _tempX = _refX - _quadX1;
+    var _tempY = _refY - _quadY1;
+    var _tempZ = _refZ - _quadZ1;
     
-    //Early out if the sphere is too far away from the plane
-    if ((_dist < -_radius) || (_dist > _radius))
+        //Sneaky distance-to-plane check as an early-out
+        var _refToPlaneDist = dot_product_3d(_tempX, _tempY, _tempZ, _normalX, _normalY, _normalZ);
+        if (abs(_refToPlaneDist) > _capsuleRadius) return false;
+    
+    _edgeSqrLen = _edgeSqrLength12;
+    _edgeX = _dX12;
+    _edgeY = _dY12;
+    _edgeZ = _dZ12;
+    
+    if (dot_product_3d(_tempZ*_edgeY - _tempY*_edgeZ,
+                       _tempX*_edgeZ - _tempZ*_edgeX,
+                       _tempY*_edgeX - _tempX*_edgeY,
+                       _normalX, _normalY, _normalZ) > 0)
+    {
+        //Check the reference point is on the inner side of the edge 2->3
+        //If we fail, these values fall through
+        _tempX = _refX - _quadX2;
+        _tempY = _refY - _quadY2;
+        _tempZ = _refZ - _quadZ2;
+        
+        _edgeSqrLen = _edgeSqrLength23;
+        _edgeX = _dX23;
+        _edgeY = _dY23;
+        _edgeZ = _dZ23;
+        
+        if (dot_product_3d(_tempZ*_edgeY - _tempY*_edgeZ,
+                           _tempX*_edgeZ - _tempZ*_edgeX,
+                           _tempY*_edgeX - _tempX*_edgeY,
+                           _normalX, _normalY, _normalZ) > 0)
+        {
+            //Check the reference point is on the inner side of the edge 4->1
+            //If we fail, these values fall through
+            _tempX = _refX - _quadX3;
+            _tempY = _refY - _quadY3;
+            _tempZ = _refZ - _quadZ3;
+            
+            _edgeSqrLen = _edgeSqrLength34;
+            _edgeX = _dX34;
+            _edgeY = _dY34;
+            _edgeZ = _dZ34;
+            
+            if (dot_product_3d(_tempZ*_edgeY - _tempY*_edgeZ,
+                               _tempX*_edgeZ - _tempZ*_edgeX,
+                               _tempY*_edgeX - _tempX*_edgeY,
+                               _normalX, _normalY, _normalZ) > 0)
+            {
+                //Check the reference point is on the inner side of the edge 4->1
+                //If we fail, these values fall through
+                _tempX = _refX - _quadX4;
+                _tempY = _refY - _quadY4;
+                _tempZ = _refZ - _quadZ4;
+                
+                _edgeSqrLen = _edgeSqrLength41;
+                _edgeX = _dX41;
+                _edgeY = _dY41;
+                _edgeZ = _dZ41;
+                
+                if (dot_product_3d(_tempZ*_edgeY - _tempY*_edgeZ,
+                                   _tempX*_edgeZ - _tempZ*_edgeX,
+                                   _tempY*_edgeX - _tempX*_edgeY,
+                                   _normalX, _normalY, _normalZ) > 0)
+                {
+                    //Reference point is inside the triangle
+                    return true;
+                }
+            }
+        }
+    }
+    
+    //Catch reference point that is outside the triangle
+    
+    //Calculate the direction to push the reference point away from the triangle. This is the perpendicular
+    //vector from the edge to the reference point
+    var _dot = clamp(dot_product_3d(_edgeX, _edgeY, _edgeZ, _tempX, _tempY, _tempZ) / _edgeSqrLen, 0, 1);
+    var _pushX = _tempX - _dot*_edgeX; 
+    var _pushY = _tempY - _dot*_edgeY;
+    var _pushZ = _tempZ - _dot*_edgeZ;
+    
+    var _pushLength = point_distance_3d(0, 0, 0, _pushX, _pushY, _pushZ);
+    if (_pushLength == 0)
     {
         return false;
     }
     
-    //Point on the plane closest to the sphere's centre
-    var _pX = _sphX - _normalX*_dist;
-    var _pY = _sphY - _normalY*_dist;
-    var _pZ = _sphZ - _normalZ*_dist;
-    
-    //Remembering that P3 is generated by `P2 - (P1 - P4)`
-    var _dX23 = -_dX41;
-    var _dY23 = -_dY41;
-    var _dZ23 = -_dZ41;
-    
-    //Remembering that P3 can also be generated by `P4 + (P2 - P1)`
-    var _dX34 = -_dX12;
-    var _dY34 = -_dY12;
-    var _dZ34 = -_dZ12;
-    
-    var _cross12 = variable_clone(__BonkCrossProduct(_pX - _quadX1, _pY - _quadY1, _pZ - _quadZ1, _dX12, _dY12, _dZ12));
-    var _cross23 = variable_clone(__BonkCrossProduct(_pX - _quadX2, _pY - _quadY2, _pZ - _quadZ2, _dX23, _dY23, _dZ23));
-    var _cross34 = variable_clone(__BonkCrossProduct(_pX - _quadX3, _pY - _quadY3, _pZ - _quadZ3, _dX34, _dY34, _dZ34));
-    var _cross41 = variable_clone(__BonkCrossProduct(_pX - _quadX4, _pY - _quadY4, _pZ - _quadZ4, _dX41, _dY41, _dZ41));
-    
-    var _dot12 = dot_product_3d(_cross12.x, _cross12.y, _cross12.z, _normalX, _normalY, _normalZ);
-    var _dot23 = dot_product_3d(_cross23.x, _cross23.y, _cross23.z, _normalX, _normalY, _normalZ);
-    var _dot34 = dot_product_3d(_cross34.x, _cross34.y, _cross34.z, _normalX, _normalY, _normalZ);
-    var _dot41 = dot_product_3d(_cross41.x, _cross41.y, _cross41.z, _normalX, _normalY, _normalZ);
-    
-    if ((_dot12 >= 0) && (_dot23 >= 0) && (_dot34 >= 0) && (_dot41 >= 0))
+    if (_pushLength >= _capsuleRadius)
     {
-        return true;
+        return false;
     }
-    else
-    {
-        var _funcClosestPointOnLineSegment = function(_pX, _pY, _pZ, _x1, _y1, _z1, _dX, _dY, _dZ)
-        {
-            static _result = {};
-            
-            var _t = dot_product_3d(_pX - _x1, _pY - _y1, _pZ - _z1,   _dX, _dY, _dZ) / (_dX*_dX + _dY*_dY + _dZ*_dZ);
-            _t = clamp(_t, 0, 1);
-            
-            with(_result)
-            {
-                x = _x1 + _t*_dX;
-                y = _y1 + _t*_dY;
-                z = _z1 + _t*_dZ;
-            }
-            
-            return _result;
-        }
-        
-        var _radiusSqr = _radius*_radius;
-        
-        //edge 1 -> 2
-        var _pointEdge12 = _funcClosestPointOnLineSegment(_pX, _pY, _pZ,   _quadX1, _quadY1, _quadZ1,   _dX12, _dY12, _dZ12);
-        var _vX = _sphX - _pointEdge12.x;
-        var _vY = _sphY - _pointEdge12.y;
-        var _vZ = _sphZ - _pointEdge12.z;
-        var _distSqrEdge12 = _vX*_vX + _vY*_vY + _vZ*_vZ;
-        
-        //edge 2 -> 3
-        var _pointEdge23 = _funcClosestPointOnLineSegment(_pX, _pY, _pZ,   _quadX2, _quadY2, _quadZ2,   _dX23, _dY23, _dZ23);
-        var _vX = _sphX - _pointEdge23.x;
-        var _vY = _sphY - _pointEdge23.y;
-        var _vZ = _sphZ - _pointEdge23.z;
-        var _distSqrEdge23 = _vX*_vX + _vY*_vY + _vZ*_vZ;
-        
-        //edge 3 -> 4
-        var _pointEdge34 = _funcClosestPointOnLineSegment(_pX, _pY, _pZ,   _quadX3, _quadY3, _quadZ3,   _dX34, _dY34, _dZ34);
-        var _vX = _sphX - _pointEdge34.x;
-        var _vY = _sphY - _pointEdge34.y;
-        var _vZ = _sphZ - _pointEdge34.z;
-        var _distSqrEdge34 = _vX*_vX + _vY*_vY + _vZ*_vZ;
-        
-        //edge 4 -> 1
-        var _pointEdge41 = _funcClosestPointOnLineSegment(_pX, _pY, _pZ,   _quadX4, _quadY4, _quadZ4,   _dX41, _dY41, _dZ41);
-        var _vX = _sphX - _pointEdge41.x;
-        var _vY = _sphY - _pointEdge41.y;
-        var _vZ = _sphZ - _pointEdge41.z;
-        var _distSqrEdge41 = _vX*_vX + _vY*_vY + _vZ*_vZ;
-        
-        return ((_distSqrEdge12 < _radiusSqr) || (_distSqrEdge23 < _radiusSqr) || (_distSqrEdge34 < _radiusSqr) || (_distSqrEdge41 < _radiusSqr));
-    }
+    
+    return true;
 }
