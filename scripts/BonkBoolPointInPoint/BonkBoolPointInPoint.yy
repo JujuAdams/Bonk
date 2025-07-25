@@ -6,7 +6,7 @@
   "name":"BonkBoolPointInPoint",
   "parent":{
     "name":"Point",
-    "path":"folders/Bonk/Boolean/Point.yy",
+    "path":"folders/Bonk/Manual Collisions/Boolean/Point.yy",
   },
   "resourceType":"GMScript",
   "resourceVersion":"2.0",

@@ -6,7 +6,7 @@
   "name":"BonkBoolCapsuleInAABB",
   "parent":{
     "name":"Capsule",
-    "path":"folders/Bonk/Boolean/Capsule.yy",
+    "path":"folders/Bonk/Manual Collisions/Boolean/Capsule.yy",
   },
   "resourceType":"GMScript",
   "resourceVersion":"2.0",

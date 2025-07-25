@@ -6,7 +6,7 @@
   "name":"BonkAABBInCylinder",
   "parent":{
     "name":"AABB",
-    "path":"folders/Bonk/Overlap/AABB.yy",
+    "path":"folders/Bonk/Manual Collisions/Overlap/AABB.yy",
   },
   "resourceType":"GMScript",
   "resourceVersion":"2.0",

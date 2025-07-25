@@ -6,7 +6,7 @@
   "name":"BonkCapsuleInCapsule",
   "parent":{
     "name":"Capsule",
-    "path":"folders/Bonk/Overlap/Capsule.yy",
+    "path":"folders/Bonk/Manual Collisions/Overlap/Capsule.yy",
   },
   "resourceType":"GMScript",
   "resourceVersion":"2.0",
