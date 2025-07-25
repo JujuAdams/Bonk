@@ -1,3 +1,10 @@
+// Feather disable all
+
+/// Constructor that generates a line segment between two coordinates.
+/// 
+/// Using the `.Collide(otherShape)` method, this shape can collide with:
+/// - No shapes
+/// 
 /// @param x1
 /// @Param y1
 /// @param z1
@@ -66,5 +73,17 @@ function BonkLine(_x1, _y1, _z1, _x2, _y2, _z2) constructor
     {
         __BONK_VERIFY_UGG
         UggLine(x1, y1, z1, x2, y2, z2, _color, _thickness, _wireframe);
+    }
+    
+    static Collide = function(_otherPrimitive)
+    {
+        static _nullReaction = __Bonk().__nullReaction;
+        
+        if (BONK_STRICT_COLLISION_COMPATIBILITY)
+        {
+            __BonkError($"Collision not supported between \"{instanceof(self)}\" and \"{instanceof(_otherPrimitive)}\"");
+        }
+        
+        return _nullReaction;
     }
 }

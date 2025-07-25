@@ -5,8 +5,8 @@
   "isDnD":false,
   "name":"BonkAABBInSphere",
   "parent":{
-    "name":"Overlap",
-    "path":"folders/Bonk/Overlap.yy",
+    "name":"AABB",
+    "path":"folders/Bonk/Overlap/AABB.yy",
   },
   "resourceType":"GMScript",
   "resourceVersion":"2.0",

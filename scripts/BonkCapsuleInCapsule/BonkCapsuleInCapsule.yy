@@ -1,12 +1,12 @@
 {
   "$GMScript":"v1",
-  "%Name":"BonkSphereInSphere",
+  "%Name":"BonkCapsuleInCapsule",
   "isCompatibility":false,
   "isDnD":false,
-  "name":"BonkSphereInSphere",
+  "name":"BonkCapsuleInCapsule",
   "parent":{
-    "name":"Sphere",
-    "path":"folders/Bonk/Overlap/Sphere.yy",
+    "name":"Capsule",
+    "path":"folders/Bonk/Overlap/Capsule.yy",
   },
   "resourceType":"GMScript",
   "resourceVersion":"2.0",

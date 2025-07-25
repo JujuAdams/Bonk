@@ -1,3 +1,12 @@
+// Feather disable all
+
+/// Constructor that generates a quad.
+/// 
+/// Using the `.Collide(otherShape)` method, this shape can collide with:
+/// - CylinderExt
+/// - Capsule
+/// - Sphere
+/// 
 /// @param x1
 /// @param y1
 /// @param z1
@@ -34,9 +43,13 @@ function BonkQuad(_x1, _y1, _z1, _x2, _y2, _z2, _x3, _y3, _z3) constructor
     {
         static _nullReaction = __Bonk().__nullReaction;
         
-        if (is_instanceof(_otherPrimitive, BonkQuad))
+        if (is_instanceof(_otherPrimitive, BonkCapsule) || is_instanceof(_otherPrimitive, BonkCylinderExt))
         {
             return BonkCapsuleInQuad(_otherPrimitive, self).Reverse();
+        }
+        else if (is_instanceof(_otherPrimitive, BonkSphere))
+        {
+            return BonkSphereInQuad(_otherPrimitive, self).Reverse();
         }
         
         if (BONK_STRICT_COLLISION_COMPATIBILITY)

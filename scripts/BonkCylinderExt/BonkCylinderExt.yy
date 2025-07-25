@@ -1,12 +1,12 @@
 {
   "$GMScript":"v1",
-  "%Name":"BonkSphereInSphere",
+  "%Name":"BonkCylinderExt",
   "isCompatibility":false,
   "isDnD":false,
-  "name":"BonkSphereInSphere",
+  "name":"BonkCylinderExt",
   "parent":{
-    "name":"Sphere",
-    "path":"folders/Bonk/Overlap/Sphere.yy",
+    "name":"Shape Constructors",
+    "path":"folders/Bonk/Shape Constructors.yy",
   },
   "resourceType":"GMScript",
   "resourceVersion":"2.0",

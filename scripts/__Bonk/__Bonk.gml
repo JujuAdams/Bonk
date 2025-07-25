@@ -6,7 +6,7 @@
 #macro __BONK_VERIFY_UGG  static _uggPresent = __Bonk().__uggPresent;\
                           if (not _uggPresent)\
                           {\
-                              __BonkError("Cannot draw the primitive, Ugg has not been imported to your project\nPlease visit https://www.github.com/jujuadams/Ugg/");\
+                              __BonkError("Cannot draw shape, Ugg has not been imported to your project\nPlease visit https://www.github.com/jujuadams/Ugg/");\
                           }
 
 show_debug_message("Welcome to Bonk by Juju Adams! This is version " + __BONK_VERSION + " " + __BONK_DATE);

@@ -1,3 +1,13 @@
+// Feather disable all
+
+/// Constructor that generates an axis-aligned bounding box. Such a box cannot be rotated.
+/// 
+/// Using the `.Collide(otherShape)` method, this shape can collide with:
+/// - AABBs
+/// - Cylinder / CylinderExt
+/// - Capsule
+/// - Sphere
+/// 
 /// @param xCenter
 /// @param yCenter
 /// @param zCenter
@@ -61,9 +71,13 @@ function BonkAABB(_x, _y, _z, _xSize, _ySize, _zSize) constructor
         {
             return BonkAABBInAABB(self, _otherPrimitive);
         }
-        else if (is_instanceof(_otherPrimitive, BonkCylinder))
+        else if (is_instanceof(_otherPrimitive, BonkCylinder) || is_instanceof(_otherPrimitive, BonkCylinderExt))
         {
             return BonkAABBInCylinder(self, _otherPrimitive);
+        }
+        else if (is_instanceof(_otherPrimitive, BonkCapsule))
+        {
+            return BonkCapsuleInAABB(_otherPrimitive, self).Reverse();
         }
         else if (is_instanceof(_otherPrimitive, BonkSphere))
         {

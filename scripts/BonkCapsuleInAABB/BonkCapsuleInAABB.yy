@@ -5,8 +5,8 @@
   "isDnD":false,
   "name":"BonkCapsuleInAABB",
   "parent":{
-    "name":"Overlap",
-    "path":"folders/Bonk/Overlap.yy",
+    "name":"Capsule",
+    "path":"folders/Bonk/Overlap/Capsule.yy",
   },
   "resourceType":"GMScript",
   "resourceVersion":"2.0",

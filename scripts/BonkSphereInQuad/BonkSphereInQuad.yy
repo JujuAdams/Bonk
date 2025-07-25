@@ -5,8 +5,8 @@
   "isDnD":false,
   "name":"BonkSphereInQuad",
   "parent":{
-    "name":"Overlap",
-    "path":"folders/Bonk/Overlap.yy",
+    "name":"Sphere",
+    "path":"folders/Bonk/Overlap/Sphere.yy",
   },
   "resourceType":"GMScript",
   "resourceVersion":"2.0",

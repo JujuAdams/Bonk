@@ -1,6 +1,6 @@
 // Feather disable all
 
-/// Constructor that generates a sphere.
+/// Constructor that generates a z-aligned cylinder with additional collisions.
 /// 
 /// Using the `.Collide(otherShape)` method, this shape can collide with:
 /// - AABBs
@@ -10,17 +10,19 @@
 /// - Quad
 /// - Triangle
 /// 
-/// @param x
-/// @param y
-/// @param z
+/// @param xCenter
+/// @param yCenter
+/// @param zCenter
+/// @param height
 /// @param radius
 
-function BonkSphere(_x, _y, _z, _radius) constructor
+function BonkCylinderExt(_x, _y, _z, _height, _radius) constructor
 {
     x = _x;
     y = _y;
     z = _z;
     
+    height = _height;
     radius = _radius;
     
     
@@ -30,6 +32,13 @@ function BonkSphere(_x, _y, _z, _radius) constructor
         x = _x;
         y = _y;
         z = _z;
+        
+        return self;
+    }
+    
+    static SetHeight = function(_height = height)
+    {
+        height = _height;
         
         return self;
     }
@@ -46,17 +55,17 @@ function BonkSphere(_x, _y, _z, _radius) constructor
         return {
             x1: x - radius,
             y1: y - radius,
-            z1: z - radius,
+            z1: z - 0.5*height,
             x2: x + radius,
             y2: y + radius,
-            z2: z + radius,
+            z2: z + 0.5*height,
         };
     }
     
     static Draw = function(_color = undefined, _wireframe = undefined)
     {
         __BONK_VERIFY_UGG
-        UggSphere(x, y, z, radius, _color, _wireframe);
+        UggCylinder(x, y, z - height/2, height, radius, _color, _wireframe);
     }
     
     static Collide = function(_otherPrimitive)
@@ -65,27 +74,27 @@ function BonkSphere(_x, _y, _z, _radius) constructor
         
         if (is_instanceof(_otherPrimitive, BonkAABB))
         {
-            return BonkAABBInSphere(_otherPrimitive, self).Reverse();
+            return BonkAABBInCylinder(_otherPrimitive, self).Reverse();
         }
         else if (is_instanceof(_otherPrimitive, BonkCylinder) || is_instanceof(_otherPrimitive, BonkCylinderExt))
         {
-            return BonkCylinderInSphere(_otherPrimitive, self).Reverse();
+            return BonkCylinderInCylinder(self, _otherPrimitive);
         }
         else if (is_instanceof(_otherPrimitive, BonkCapsule))
         {
-            return BonkCapsuleInSphere(_otherPrimitive, self).Reverse();
+            return BonkCapsuleInCylinder(_otherPrimitive, self).Reverse();
         }
         else if (is_instanceof(_otherPrimitive, BonkSphere))
         {
-            return BonkSphereInSphere(self, _otherPrimitive);
+            return BonkCylinderInSphere(self, _otherPrimitive);
         }
         else if (is_instanceof(_otherPrimitive, BonkQuad))
         {
-            return BonkSphereInQuad(self, _otherPrimitive);
+            return BonkCapsuleInQuad(self, _otherPrimitive);
         }
         else if (is_instanceof(_otherPrimitive, BonkTriangle))
         {
-            return BonkSphereInTriangle(self, _otherPrimitive);
+            return BonkCapsuleInTriangle(self, _otherPrimitive);
         }
         
         if (BONK_STRICT_COLLISION_COMPATIBILITY)

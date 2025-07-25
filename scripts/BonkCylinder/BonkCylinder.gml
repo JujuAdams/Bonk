@@ -1,3 +1,13 @@
+// Feather disable all
+
+/// Constructor that generates a z-aligned cylinder.
+/// 
+/// Using the `.Collide(otherShape)` method, this shape can collide with:
+/// - AABBs
+/// - Cylinder / CylinderExt
+/// - Capsule
+/// - Sphere
+/// 
 /// @param xCenter
 /// @param yCenter
 /// @param zCenter
@@ -64,21 +74,17 @@ function BonkCylinder(_x, _y, _z, _height, _radius) constructor
         {
             return BonkAABBInCylinder(_otherPrimitive, self).Reverse();
         }
-        else if (is_instanceof(_otherPrimitive, BonkCylinder))
+        else if (is_instanceof(_otherPrimitive, BonkCylinder) || is_instanceof(_otherPrimitive, BonkCylinderExt))
         {
             return BonkCylinderInCylinder(self, _otherPrimitive);
+        }
+        else if (is_instanceof(_otherPrimitive, BonkCapsule))
+        {
+            return BonkCapsuleInCylinder(_otherPrimitive, self).Reverse();
         }
         else if (is_instanceof(_otherPrimitive, BonkSphere))
         {
             return BonkCylinderInSphere(self, _otherPrimitive);
-        }
-        else if (is_instanceof(_otherPrimitive, BonkQuad))
-        {
-            return BonkCapsuleInQuad(self, _otherPrimitive);
-        }
-        else if (is_instanceof(_otherPrimitive, BonkTriangle))
-        {
-            return BonkCapsuleInTriangle(self, _otherPrimitive);
         }
         
         if (BONK_STRICT_COLLISION_COMPATIBILITY)

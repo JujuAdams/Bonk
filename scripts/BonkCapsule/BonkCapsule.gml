@@ -1,3 +1,15 @@
+// Feather disable all
+
+/// Constructor that generates a z-aligned capsule.
+/// 
+/// Using the `.Collide(otherShape)` method, this shape can collide with:
+/// - AABBs
+/// - Cylinder / CylinderExt
+/// - Capsule
+/// - Sphere
+/// - Quad
+/// - Triangle
+/// 
 /// @param xCenter
 /// @param yCenter
 /// @param zCenter
@@ -67,6 +79,10 @@ function BonkCapsule(_x, _y, _z, _height, _radius) constructor
         else if (is_instanceof(_otherPrimitive, BonkCylinder))
         {
             return BonkCapsuleInCylinder(self, _otherPrimitive);
+        }
+        else if (is_instanceof(_otherPrimitive, BonkCapsule) || is_instanceof(_otherPrimitive, BonkCylinderExt))
+        {
+            return BonkCapsuleInCapsule(self, _otherPrimitive);
         }
         else if (is_instanceof(_otherPrimitive, BonkSphere))
         {
