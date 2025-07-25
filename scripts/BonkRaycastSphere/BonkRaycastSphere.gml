@@ -23,6 +23,7 @@ function BonkRaycastSphere(_sphere, _x1, _y1, _z1, _x2, _y2, _z2)
         var _dY = _y2 - _y1;
         var _dZ = _z2 - _z1;
         
+        //Set up a quadratic solution
         var _a = _dX*_dX + _dY*_dY + _dZ*_dZ;
         
         var _b = 2*_dX*(_x1 - _sphereX) + 2*_dY*(_y1 - _sphereY) + 2*_dZ*(_z1 - _sphereZ);
@@ -38,10 +39,13 @@ function BonkRaycastSphere(_sphere, _x1, _y1, _z1, _x2, _y2, _z2)
             return _nullCoordiante;
         }
         
-        var _t = (-_b - sqrt(_discriminant)) / (2*_a);
+        //Catch cases where the start of the ray is inside the sphere
+        _discriminant = sqrt(_discriminant);
+        if (-_b < _discriminant) _discriminant *= -1;
         
         with(_coordinate)
         {
+            var _t = (-_b - _discriminant) / (2*_a);
             x = _x1 + _t*_dX;
             y = _y1 + _t*_dY;
             z = _z1 + _t*_dZ;
