@@ -10,7 +10,7 @@
 
 function BonkRaycastCapsule(_capsule, _x1, _y1, _z1, _x2, _y2, _z2)
 {
-    static _nullCoordiante = __Bonk().__nullCoordiante;
+    static _nullCoordinate = __Bonk().__nullCoordiante;
     static _coordinate     = new __BonkClassCoordinate();
     
     with(_capsule)
@@ -47,7 +47,7 @@ function BonkRaycastCapsule(_capsule, _x1, _y1, _z1, _x2, _y2, _z2)
     var _c = _axisLengthSqr*_vectorLenSqr - _dotAxisV*_dotAxisV - _axisLengthSqr*_capsuleRadius*_capsuleRadius;
     
     var _discriminant = _b*_b - _a*_c;
-    if (_discriminant < 0) return _nullCoordiante;
+    if (_discriminant < 0) return _nullCoordinate;
     
     //Handle rays that start inside the capsule
     _discriminant = sqrt(_discriminant);
@@ -73,7 +73,7 @@ function BonkRaycastCapsule(_capsule, _x1, _y1, _z1, _x2, _y2, _z2)
         var _discriminant = _b*_b - _a*_c;
         if (_discriminant < 0)
         {
-            return _nullCoordiante;
+            return _nullCoordinate;
         }
         
         _t = (-_b - sqrt(_discriminant)) / _a;
@@ -81,7 +81,7 @@ function BonkRaycastCapsule(_capsule, _x1, _y1, _z1, _x2, _y2, _z2)
     
     if ((_t < 0) || (_t > 1))
     {
-        return _nullCoordiante;
+        return _nullCoordinate;
     }
     
     with(_coordinate)

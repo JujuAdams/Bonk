@@ -10,7 +10,7 @@
 
 function BonkRaycastAABB(_aabb, _x1, _y1, _z1, _x2, _y2, _z2)
 {
-    static _nullCoordiante = __Bonk().__nullCoordiante;
+    static _nullCoordinate = __Bonk().__nullCoordiante;
     static _coordinate     = new __BonkClassCoordinate();
     
     with(_aabb)
@@ -64,7 +64,7 @@ function BonkRaycastAABB(_aabb, _x1, _y1, _z1, _x2, _y2, _z2)
         
         if ((_tMax < 0) || (_tMax > 1) || (_tMin > _tMax))
         {
-            return _nullCoordiante;
+            return _nullCoordinate;
         }
         
         with(_coordinate)
@@ -79,5 +79,5 @@ function BonkRaycastAABB(_aabb, _x1, _y1, _z1, _x2, _y2, _z2)
         return _coordinate;
     }
     
-    return _nullCoordiante;
+    return _nullCoordinate;
 }
