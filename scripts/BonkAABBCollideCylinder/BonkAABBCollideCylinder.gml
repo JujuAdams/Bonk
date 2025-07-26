@@ -20,17 +20,17 @@ function BonkAABBCollideCylinder(_aabb, _cylinder)
     
     with(_aabb)
     {
-        if ((z - zHalfSize >= _maxZ) || (z + zHalfSize <= _minZ))
+        if ((z - 0.5*zSize >= _maxZ) || (z + 0.5*zSize <= _minZ))
         {
             return _nullReaction;
         }
         
-        var _left   = x - xHalfSize;
-        var _top    = y - yHalfSize;
-        var _below  = z - zHalfSize;
-        var _right  = x + xHalfSize;
-        var _bottom = y + yHalfSize;
-        var _above  = z + zHalfSize;
+        var _left   = x - 0.5*xSize;
+        var _top    = y - 0.5*ySize;
+        var _below  = z - 0.5*zSize;
+        var _right  = x + 0.5*xSize;
+        var _bottom = y + 0.5*ySize;
+        var _above  = z + 0.5*zSize;
         
         //2D collision check 
         if (not rectangle_in_circle(_left, _top, _right, _bottom, _cylinder.x, _cylinder.y, _cylinder.radius))

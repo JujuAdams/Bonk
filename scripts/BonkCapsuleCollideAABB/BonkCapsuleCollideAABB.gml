@@ -20,9 +20,9 @@ function BonkCapsuleCollideAABB(_capsule, _aabb)
     
     with(_aabb)
     {
-        var _aabbX = clamp(_capsuleX, x - xHalfSize, x + xHalfSize);
-        var _aabbY = clamp(_capsuleY, y - yHalfSize, y + yHalfSize);
-        var _aabbZ = clamp(_capsuleZ, z - zHalfSize, z + zHalfSize);
+        var _aabbX = clamp(_capsuleX, x - 0.5*xSize, x + 0.5*xSize);
+        var _aabbY = clamp(_capsuleY, y - 0.5*ySize, y + 0.5*ySize);
+        var _aabbZ = clamp(_capsuleZ, z - 0.5*zSize, z + 0.5*zSize);
     }
     
     var _capsuleClosestZ = clamp(_aabbZ, _capsuleZMin, _capsuleZMax);

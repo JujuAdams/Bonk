@@ -10,22 +10,22 @@ function BonkAABBCollideAABB(_aabb1, _aabb2)
     
     with(_aabb1)
     {
-        var _xMin1 = x - xHalfSize;
-        var _yMin1 = y - yHalfSize;
-        var _zMin1 = z - zHalfSize;
-        var _xMax1 = x + xHalfSize;
-        var _yMax1 = y + yHalfSize;
-        var _zMax1 = z + zHalfSize;
+        var _xMin1 = x - 0.5*xSize;
+        var _yMin1 = y - 0.5*ySize;
+        var _zMin1 = z - 0.5*zSize;
+        var _xMax1 = x + 0.5*xSize;
+        var _yMax1 = y + 0.5*ySize;
+        var _zMax1 = z + 0.5*zSize;
     }
     
     with(_aabb2)
     {
-        var _xMin2 = x - xHalfSize;
-        var _yMin2 = y - yHalfSize;
-        var _zMin2 = z - zHalfSize;
-        var _xMax2 = x + xHalfSize;
-        var _yMax2 = y + yHalfSize;
-        var _zMax2 = z + zHalfSize;
+        var _xMin2 = x - 0.5*xSize;
+        var _yMin2 = y - 0.5*ySize;
+        var _zMin2 = z - 0.5*zSize;
+        var _xMax2 = x + 0.5*xSize;
+        var _yMax2 = y + 0.5*ySize;
+        var _zMax2 = z + 0.5*zSize;
     }
     
     var _pushLeft  = _xMin2 - _xMax1;

@@ -10,12 +10,12 @@ function BonkAABBCollideSphere(_aabb, _sphere)
     
     with(_aabb)
     {
-        var _xMin = x - xHalfSize;
-        var _yMin = y - yHalfSize;
-        var _zMin = z - zHalfSize;
-        var _xMax = x + xHalfSize;
-        var _yMax = y + yHalfSize;
-        var _zMax = z + zHalfSize;
+        var _xMin = x - 0.5*xSize;
+        var _yMin = y - 0.5*ySize;
+        var _zMin = z - 0.5*zSize;
+        var _xMax = x + 0.5*xSize;
+        var _yMax = y + 0.5*ySize;
+        var _zMax = z + 0.5*zSize;
     }
     
     with(_sphere)

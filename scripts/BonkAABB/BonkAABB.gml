@@ -70,9 +70,9 @@ function BonkAABB(_x, _y, _z, _xSize, _ySize, _zSize) : __BonkClassShared() cons
     y = _y;
     z = _z;
     
-    xHalfSize = 0.5*_xSize;
-    yHalfSize = 0.5*_ySize;
-    zHalfSize = 0.5*_zSize;
+    xSize = _xSize;
+    ySize = _ySize;
+    zSize = _zSize;
     
     
     
@@ -85,11 +85,11 @@ function BonkAABB(_x, _y, _z, _xSize, _ySize, _zSize) : __BonkClassShared() cons
         return self;
     }
     
-    static SetSize = function(_x = 2*xHalfSize, _y = 2*yHalfSize, _z = 2*zHalfSize)
+    static SetSize = function(_x = xSize, _y = ySize, _z = zSize)
     {
-        xHalfSize = 0.5*_x;
-        yHalfSize = 0.5*_y;
-        zHalfSize = 0.5*_z;
+        xSize = _x;
+        ySize = _y;
+        zSize = _z;
         
         return self;
     }
@@ -97,18 +97,18 @@ function BonkAABB(_x, _y, _z, _xSize, _ySize, _zSize) : __BonkClassShared() cons
     static GetAABB = function()
     {
         return {
-            x1: x - xHalfSize,
-            y1: y - yHalfSize,
-            z1: z - zHalfSize,
-            x2: x + xHalfSize,
-            y2: y + yHalfSize,
-            z2: z + zHalfSize,
+            x1: x - 0.5*xSize,
+            y1: y - 0.5*ySize,
+            z1: z - 0.5*zSize,
+            x2: x + 0.5*xSize,
+            y2: y + 0.5*ySize,
+            z2: z + 0.5*zSize,
         };
     }
     
     static Draw = function(_color = undefined, _wireframe = undefined)
     {
         __BONK_VERIFY_UGG
-        UggAABB(x, y, z, 2*xHalfSize, 2*yHalfSize, 2*zHalfSize, _color, _wireframe);
+        UggAABB(x, y, z, xSize, ySize, zSize, _color, _wireframe);
     }
 }
