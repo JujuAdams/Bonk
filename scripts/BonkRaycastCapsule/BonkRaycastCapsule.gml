@@ -21,6 +21,8 @@ function BonkRaycastCapsule(_capsule, _x1, _y1, _z1, _x2, _y2, _z2)
         
         var _capsuleZMin = z - 0.5*height + radius;
         var _capsuleZMax = z + 0.5*height - radius;
+        
+        var _capsuleAxisLength = height - 2*radius;
     
         var _dX = _x2 - _x1;
         var _dY = _y2 - _y1;
@@ -96,45 +98,41 @@ function BonkRaycastCapsule(_capsule, _x1, _y1, _z1, _x2, _y2, _z2)
         }
         
         var _t = (-_b - _discriminant) / (2*_a);
-        var _z = _z1 + _t*_dZ;
         
-        if ((_t >= 0) && (_t <= 1) && (_z >= _capsuleZMin) && (_z <= _capsuleZMax))
+        var _z = _z1 + _t*_dZ;
+        if ((_z <= _capsuleZMin) || (_z >= _capsuleZMax))
         {
-            //We hit the body of the cylinder
-            with(_coordinate)
+            //Choose a sphere centre depending on which end of the capsule the ray is pointed at
+            var _sphereZ = (_z <= 0)? _capsuleZMin : _capsuleZMax;
+            
+            //Set up a quadratic solution
+            var _a = _dX*_dX + _dY*_dY + _dZ*_dZ;
+            
+            var _b = 2*_dX*(_x1 - _capsuleX) + 2*_dY*(_y1 - _capsuleY) + 2*_dZ*(_z1 - _sphereZ);
+            
+            var _c = _capsuleX*_capsuleX + _capsuleY*_capsuleY + _sphereZ*_sphereZ
+                   + _x1*_x1 + _y1*_y1 + _z1*_z1
+                   - 2*(_capsuleX*_x1 + _capsuleY*_y1 + _sphereZ*_z1)
+                   - _capsuleRadius*_capsuleRadius;
+            
+            var _discriminant = _b*_b - 4*_a*_c;
+            if (_discriminant < 0)
             {
-                x = _x1 + _t*_dX;
-                y = _y1 + _t*_dY;
-                z = _z;
+                return _nullCoordinate;
+            }
+        
+            //Handle rays that start inside the cylinder
+            _discriminant = sqrt(_discriminant);
+            
+            if (-_b < _discriminant)
+            {
+                _discriminant *= -1;
             }
             
-            return _coordinate;
+            _t = (-_b - _discriminant) / (2*_a);
         }
         
-        //If the ray has no change in z then it cannot hit either cap
-        if (_dZ == 0)
-        {
-            return _nullCoordinate;
-        }
-        
-        //Find the other t value for the intersection with the cylinder
-        var _tMin = _t;
-        var _tMax = (-_b + _discriminant) / (2*_a);
-        
-        //Find the t value where the ray intersects with the cap
-        if (_z > _capsuleZMax)
-        {
-            //Top cap
-            _t = (_capsuleZMax - _z1) / _dZ;
-        }
-        else
-        {
-            //Bottom cap
-            _t = (_capsuleZMin - _z1) / _dZ;
-        }
-        
-        //If this new t value is outside the cylinder then we have no solution
-        if ((_t < _tMin) || (_t > _tMax))
+        if ((_t < 0) || (_t > 1))
         {
             return _nullCoordinate;
         }

@@ -1,4 +1,4 @@
-capsule.Draw(c_white, true);
+capsule.Draw();
 
 var _func = function(_line)
 {
