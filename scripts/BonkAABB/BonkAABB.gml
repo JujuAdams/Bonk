@@ -7,6 +7,7 @@
 /// - Capsule
 /// - Cylinder / CylinderExt
 /// - Sphere
+/// 
 /// The `.Inside()` method returns either `true` or `false` indicating whether the two shapes
 /// overlap. `.Inside()` is usually a little faster than `.Collide()` (see below) and is easier to
 /// use.
@@ -16,7 +17,12 @@
 /// - Capsule
 /// - Cylinder / CylinderExt
 /// - Sphere
-/// The `.Collide()` method returns a "reaction" struct.
+/// 
+/// The `.Collide()` method returns a "reaction" struct (instanceof `__BonkClassHit`). This struct
+/// has four values:
+/// 
+/// `.collision`       Boolean, whether the shapes overlap.
+/// `.dX` `.dY` `.dZ`  Distance to push ourselves to escape the collision.
 /// 
 /// @param xCenter
 /// @param yCenter

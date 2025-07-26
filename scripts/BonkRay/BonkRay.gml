@@ -11,6 +11,14 @@
 /// - Sphere
 /// - Triangle
 /// 
+/// The `.Hit()` method returns a "hit" struct (instanceof `__BonkClassHit`). This struct contains
+/// four values:
+/// 
+/// `.collision`    Boolean, whether the line hit the target.
+/// `.x` `.y` `.z`  Coordinate of the point where the line hit the target.
+/// 
+/// If the line did *not* hit the other shape then `.x` `.y` `.z` will all be set to `0`.
+/// 
 /// @param x
 /// @param y
 /// @param z
@@ -85,7 +93,7 @@ function BonkRay(_x, _y, _z, _dX, _dY, _dZ) : __BonkClassShared() constructor
     
     static Hit = function(_otherShape)
     {
-        static _nullCoordinate = __Bonk().__nullCoordinate;
+        static _nullHit = __Bonk().__nullHit;
         
         var _hitFunc = _hitFuncLookup[_otherShape.bonkType];
         if (is_callable(_hitFunc))
@@ -100,6 +108,6 @@ function BonkRay(_x, _y, _z, _dX, _dY, _dZ) : __BonkClassShared() constructor
             }
         }
         
-        return _nullCoordinate;
+        return _nullHit;
     }
 }

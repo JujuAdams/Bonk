@@ -5,5 +5,5 @@
 
 function BonkAABBCollideCapsule(_aabb, _capsule)
 {
-    return BonkCapsuleCollideAABB(_capsule, _aabb).Reverse();
+    return BonkCapsuleCollideAABB(_capsule, _aabb).__Reverse();
 }

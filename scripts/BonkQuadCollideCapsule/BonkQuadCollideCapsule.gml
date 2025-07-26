@@ -5,5 +5,5 @@
 
 function BonkQuadCollideCapsule(_quad, _capsule)
 {
-    return BonkCapsuleCollideQuad(_capsule, _quad).Reverse();
+    return BonkCapsuleCollideQuad(_capsule, _quad).__Reverse();
 }

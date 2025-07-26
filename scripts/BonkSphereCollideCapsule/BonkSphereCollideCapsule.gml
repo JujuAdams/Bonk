@@ -5,5 +5,5 @@
 
 function BonkSphereCollideCapsule(_sphere, _capsule)
 {
-    return BonkCapsuleCollideSphere(_capsule, _sphere).Reverse();
+    return BonkCapsuleCollideSphere(_capsule, _sphere).__Reverse();
 }

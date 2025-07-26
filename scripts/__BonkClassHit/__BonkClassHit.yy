@@ -1,9 +1,9 @@
 {
   "$GMScript":"v1",
-  "%Name":"__BonkClassCoordinate",
+  "%Name":"__BonkClassHit",
   "isCompatibility":false,
   "isDnD":false,
-  "name":"__BonkClassCoordinate",
+  "name":"__BonkClassHit",
   "parent":{
     "name":"(System)",
     "path":"folders/Bonk/(System).yy",

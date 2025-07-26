@@ -5,5 +5,5 @@
 
 function BonkSphereCollideCylinder(_sphere, _cylinder)
 {
-    return BonkCylinderCollideSphere(_cylinder, _sphere).Reverse();
+    return BonkCylinderCollideSphere(_cylinder, _sphere).__Reverse();
 }

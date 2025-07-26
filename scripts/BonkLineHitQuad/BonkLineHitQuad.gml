@@ -10,8 +10,8 @@
 
 function BonkLineHitQuad(_quad, _x1, _y1, _z1, _x2, _y2, _z2)
 {
-    static _nullCoordinate = __Bonk().__nullCoordinate;
-    static _coordinate     = new __BonkClassCoordinate();
+    static _nullHit = __Bonk().__nullHit;
+    static _coordinate     = new __BonkClassHit();
     
     with(_quad)
     {
@@ -42,7 +42,7 @@ function BonkLineHitQuad(_quad, _x1, _y1, _z1, _x2, _y2, _z2)
         var _normalSqrLength = _normalX*_normalX + _normalY*_normalY + _normalZ*_normalZ
         if (_normalSqrLength <= 0)
         {
-            return _nullCoordinate;
+            return _nullHit;
         }
         
         var _length = sqrt(_normalSqrLength);
@@ -70,7 +70,7 @@ function BonkLineHitQuad(_quad, _x1, _y1, _z1, _x2, _y2, _z2)
         if (_dot == 0)
         {
             //Ray lies on plane
-            //TODO - This is excessive lol. We probably should return `_nullCoordinate` in all cases to avoid all this maths
+            //TODO - This is excessive lol. We probably should return `_nullHit` in all cases to avoid all this maths
             
             var _func = function(_x1, _y1, _z1,   _dX12, _dY12, _dZ12,   _x3, _y3, _z3,   _dX34, _dY34, _dZ34)
             {
@@ -98,7 +98,7 @@ function BonkLineHitQuad(_quad, _x1, _y1, _z1, _x2, _y2, _z2)
             if (is_infinity(_t))
             {
                 //Something went wrong
-                return _nullCoordinate;
+                return _nullHit;
             }
             
             with(_coordinate)
@@ -174,5 +174,5 @@ function BonkLineHitQuad(_quad, _x1, _y1, _z1, _x2, _y2, _z2)
         }
     }
     
-    return _nullCoordinate;
+    return _nullHit;
 }

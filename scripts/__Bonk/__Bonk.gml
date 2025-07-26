@@ -17,8 +17,11 @@ function __Bonk()
     _global = {};
     with(_global)
     {
-        __nullReaction   = (new __BonkClassReaction()).__NoCollision();
-        __nullCoordinate = (new __BonkClassCoordinate()).__NoCollision();
+        __nullReaction = new __BonkClassReaction();
+        __nullReaction.collision = false;
+        
+        __nullHit = new __BonkClassHit();
+        __nullHit.collision = false;
         
         try
         {

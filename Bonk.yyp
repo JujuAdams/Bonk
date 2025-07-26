@@ -92,7 +92,7 @@
     {"id":{"name":"oTestPlatformerTriangle","path":"objects/oTestPlatformerTriangle/oTestPlatformerTriangle.yy",},},
     {"id":{"name":"rmTest","path":"rooms/rmTest/rmTest.yy",},},
     {"id":{"name":"__Bonk","path":"scripts/__Bonk/__Bonk.yy",},},
-    {"id":{"name":"__BonkClassCoordinate","path":"scripts/__BonkClassCoordinate/__BonkClassCoordinate.yy",},},
+    {"id":{"name":"__BonkClassHit","path":"scripts/__BonkClassHit/__BonkClassHit.yy",},},
     {"id":{"name":"__BonkClassReaction","path":"scripts/__BonkClassReaction/__BonkClassReaction.yy",},},
     {"id":{"name":"__BonkClassShared","path":"scripts/__BonkClassShared/__BonkClassShared.yy",},},
     {"id":{"name":"__BonkConfig","path":"scripts/__BonkConfig/__BonkConfig.yy",},},

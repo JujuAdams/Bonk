@@ -5,5 +5,5 @@
 
 function BonkSphereCollideAABB(_sphere, _aabb)
 {
-    return BonkAABBCollideSphere(_aabb, _sphere).Reverse();
+    return BonkAABBCollideSphere(_aabb, _sphere).__Reverse();
 }

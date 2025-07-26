@@ -10,8 +10,8 @@
 
 function BonkLineHitCapsule(_capsule, _x1, _y1, _z1, _x2, _y2, _z2)
 {
-    static _nullCoordinate = __Bonk().__nullCoordinate;
-    static _coordinate     = new __BonkClassCoordinate();
+    static _nullHit = __Bonk().__nullHit;
+    static _coordinate     = new __BonkClassHit();
     
     with(_capsule)
     {
@@ -36,7 +36,7 @@ function BonkLineHitCapsule(_capsule, _x1, _y1, _z1, _x2, _y2, _z2)
         {
             if (_dZ == 0)
             {
-                return _nullCoordinate;
+                return _nullHit;
             }
             
             var _distSqr = _vX*_vX + _vY*_vY
@@ -44,7 +44,7 @@ function BonkLineHitCapsule(_capsule, _x1, _y1, _z1, _x2, _y2, _z2)
             if (_zSqr < 0)
             {
                 //Ray misses the circular cross-section of the cylinder
-                return _nullCoordinate;
+                return _nullHit;
             }
             
             //Ray starts below the capsule
@@ -53,7 +53,7 @@ function BonkLineHitCapsule(_capsule, _x1, _y1, _z1, _x2, _y2, _z2)
                 if (_dZ <= 0)
                 {
                     //Ray pointing the wrong direction, early out
-                    return _nullCoordinate;
+                    return _nullHit;
                 }
                 
                 var _hemisphereZ = _capsuleZMin;
@@ -64,7 +64,7 @@ function BonkLineHitCapsule(_capsule, _x1, _y1, _z1, _x2, _y2, _z2)
                 if (_dZ >= 0)
                 {
                     //Ray pointing the wrong direction, early out
-                    return _nullCoordinate;
+                    return _nullHit;
                 }
                 
                 var _hemisphereZ = _capsuleZMax;
@@ -87,7 +87,7 @@ function BonkLineHitCapsule(_capsule, _x1, _y1, _z1, _x2, _y2, _z2)
         var _c = (_vX*_vX + _vY*_vY) - _capsuleRadius*_capsuleRadius;
         
         var _discriminant = _b*_b - 4*_a*_c;
-        if (_discriminant < 0) return _nullCoordinate; //No solutions!
+        if (_discriminant < 0) return _nullHit; //No solutions!
         
         //Handle rays that start inside the cylinder
         _discriminant = sqrt(_discriminant);
@@ -118,7 +118,7 @@ function BonkLineHitCapsule(_capsule, _x1, _y1, _z1, _x2, _y2, _z2)
             var _discriminant = _b*_b - 4*_a*_c;
             if (_discriminant < 0)
             {
-                return _nullCoordinate;
+                return _nullHit;
             }
         
             //Handle rays that start inside the cylinder
@@ -134,7 +134,7 @@ function BonkLineHitCapsule(_capsule, _x1, _y1, _z1, _x2, _y2, _z2)
         
         if ((_t < 0) || (_t > 1))
         {
-            return _nullCoordinate;
+            return _nullHit;
         }
         
         with(_coordinate)

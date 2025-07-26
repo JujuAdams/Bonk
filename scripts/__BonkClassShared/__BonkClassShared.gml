@@ -42,13 +42,13 @@ function __BonkClassShared() constructor
     
     static Hit = function(_otherShape)
     {
-        static _nullCoordinate = __Bonk().__nullCoordinate;
+        static _nullHit = __Bonk().__nullHit;
         
         if (BONK_STRICT_COLLISION_COMPATIBILITY)
         {
             __BonkError($".Hit() not supported between \"{instanceof(self)}\" (type={bonkType}) and \"{instanceof(_otherShape)}\" (type={_otherShape.bonkType})");
         }
         
-        return _nullCoordinate;
+        return _nullHit;
     }
 }

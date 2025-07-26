@@ -7,17 +7,9 @@ function __BonkClassReaction() constructor
     dY = 0;
     dZ = 0;
     
-    static __NoCollision = function()
-    {
-        collision = false;
-        dX = 0;
-        dY = 0;
-        dZ = 0;
-        
-        return self;
-    }
     
-    static Reverse = function()
+    
+    static __Reverse = function()
     {
         dX = -dX;
         dY = -dY;

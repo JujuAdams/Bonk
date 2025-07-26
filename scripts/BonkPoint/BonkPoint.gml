@@ -8,6 +8,7 @@
 /// - Capsule
 /// - Cylinder / CylinderExt
 /// - Sphere
+/// 
 /// The `.Inside()` method returns either `true` or `false` indicating whether the two shapes
 /// overlap. `.Inside()` is usually a little faster than `.Collide()` (see below) and is easier to
 /// use.

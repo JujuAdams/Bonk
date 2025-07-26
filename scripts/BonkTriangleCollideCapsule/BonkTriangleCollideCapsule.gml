@@ -5,5 +5,5 @@
 
 function BonkTriangleCollideCapsule(_triangle, _capsule)
 {
-    return BonkCapsuleCollideTriangle(_capsule, _triangle).Reverse();
+    return BonkCapsuleCollideTriangle(_capsule, _triangle).__Reverse();
 }

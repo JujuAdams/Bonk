@@ -5,5 +5,5 @@
 
 function BonkCylinderCollideAABB(_cylinder, _aabb)
 {
-    return BonkAABBCollideCylinder(_aabb, _cylinder).Reverse();
+    return BonkAABBCollideCylinder(_aabb, _cylinder).__Reverse();
 }

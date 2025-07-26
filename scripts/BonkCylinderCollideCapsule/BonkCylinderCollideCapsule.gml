@@ -5,5 +5,5 @@
 
 function BonkCylinderCollideCapsule(_cylinder, _capsule)
 {
-    return BonkCapsuleCollideCylinder(_capsule, _cylinder).Reverse();
+    return BonkCapsuleCollideCylinder(_capsule, _cylinder).__Reverse();
 }

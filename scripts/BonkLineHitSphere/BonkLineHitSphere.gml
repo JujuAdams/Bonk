@@ -10,8 +10,8 @@
 
 function BonkLineHitSphere(_sphere, _x1, _y1, _z1, _x2, _y2, _z2)
 {
-    static _nullCoordinate = __Bonk().__nullCoordinate;
-    static _coordinate     = new __BonkClassCoordinate();
+    static _nullHit = __Bonk().__nullHit;
+    static _coordinate     = new __BonkClassHit();
     
     with(_sphere)
     {
@@ -35,7 +35,7 @@ function BonkLineHitSphere(_sphere, _x1, _y1, _z1, _x2, _y2, _z2)
         var _discriminant = _b*_b - 4*_a*_c;
         if (_discriminant < 0)
         {
-            return _nullCoordinate;
+            return _nullHit;
         }
         
         //Catch cases where the start of the ray is inside the sphere
@@ -45,7 +45,7 @@ function BonkLineHitSphere(_sphere, _x1, _y1, _z1, _x2, _y2, _z2)
         var _t = (-_b - _discriminant) / (2*_a);
         if (_t > 1)
         {
-            return _nullCoordinate;
+            return _nullHit;
         }
         
         with(_coordinate)
@@ -58,5 +58,5 @@ function BonkLineHitSphere(_sphere, _x1, _y1, _z1, _x2, _y2, _z2)
         return _coordinate;
     }
     
-    return _nullCoordinate;
+    return _nullHit;
 }

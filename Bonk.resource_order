@@ -61,7 +61,7 @@
     {"name":"oTestPlatformerSphere","order":5,"path":"objects/oTestPlatformerSphere/oTestPlatformerSphere.yy",},
     {"name":"oTestPlatformerTriangle","order":9,"path":"objects/oTestPlatformerTriangle/oTestPlatformerTriangle.yy",},
     {"name":"rmTest","order":3,"path":"rooms/rmTest/rmTest.yy",},
-    {"name":"__BonkClassCoordinate","order":3,"path":"scripts/__BonkClassCoordinate/__BonkClassCoordinate.yy",},
+    {"name":"__BonkClassHit","order":3,"path":"scripts/__BonkClassHit/__BonkClassHit.yy",},
     {"name":"__BonkClassReaction","order":2,"path":"scripts/__BonkClassReaction/__BonkClassReaction.yy",},
     {"name":"__BonkClassShared","order":4,"path":"scripts/__BonkClassShared/__BonkClassShared.yy",},
     {"name":"__BonkConstants","order":1,"path":"scripts/__BonkConstants/__BonkConstants.yy",},
