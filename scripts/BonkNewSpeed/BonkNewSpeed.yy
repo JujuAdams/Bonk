@@ -1,12 +1,12 @@
 {
   "$GMScript":"v1",
-  "%Name":"BonkVecProjectOntoPlane",
+  "%Name":"BonkNewSpeed",
   "isCompatibility":false,
   "isDnD":false,
-  "name":"BonkVecProjectOntoPlane",
+  "name":"BonkNewSpeed",
   "parent":{
-    "name":"(System)",
-    "path":"folders/Bonk/(System).yy",
+    "name":"Bonk",
+    "path":"folders/Bonk.yy",
   },
   "resourceType":"GMScript",
   "resourceVersion":"2.0",
