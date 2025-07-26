@@ -1,4 +1,4 @@
-capsule.Draw(c_white);
+capsule.Draw(c_white, true);
 
 var _func = function(_line)
 {
@@ -7,9 +7,9 @@ var _func = function(_line)
     if (_coordinate.collision) UggSphere(_coordinate.x, _coordinate.y, _coordinate.z, 2, c_red);
 }
  
-//_func(line1);
-//_func(line2);
-//_func(line3);
-//_func(line4);
-//_func(line5);
+_func(line1);
+_func(line2);
+_func(line3);
+_func(line4);
+_func(line5);
 _func(line6);
