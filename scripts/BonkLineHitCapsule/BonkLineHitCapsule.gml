@@ -8,7 +8,7 @@
 /// @param y2
 /// @param z2
 
-function BonkRaycastCapsule(_capsule, _x1, _y1, _z1, _x2, _y2, _z2)
+function BonkLineHitCapsule(_capsule, _x1, _y1, _z1, _x2, _y2, _z2)
 {
     static _nullCoordinate = __Bonk().__nullCoordiante;
     static _coordinate     = new __BonkClassCoordinate();

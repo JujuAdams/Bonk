@@ -2,7 +2,7 @@ triangle.Draw(c_white);
 
 var _func = function(_line)
 {
-    var _coordinate = BonkRaycastTriangle(triangle, _line.x1, _line.y1, _line.z1, _line.x2, _line.y2, _line.z2);
+    var _coordinate = BonkLineHitTriangle(triangle, _line.x1, _line.y1, _line.z1, _line.x2, _line.y2, _line.z2);
     _line.Draw(_coordinate.collision? c_red : c_white, true);
     if (_coordinate.collision) UggSphere(_coordinate.x, _coordinate.y, _coordinate.z, 2, c_red);
 }

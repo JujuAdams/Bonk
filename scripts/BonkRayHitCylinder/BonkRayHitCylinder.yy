@@ -1,9 +1,9 @@
 {
   "$GMScript":"v1",
-  "%Name":"BonkRaycastSphere",
+  "%Name":"BonkRayHitCylinder",
   "isCompatibility":false,
   "isDnD":false,
-  "name":"BonkRaycastSphere",
+  "name":"BonkRayHitCylinder",
   "parent":{
     "name":"Raycast",
     "path":"folders/Bonk/Manual Collisions/Raycast.yy",

@@ -1,9 +1,9 @@
 {
   "$GMScript":"v1",
-  "%Name":"BonkRaycastQuad",
+  "%Name":"BonkRayHitTriangle",
   "isCompatibility":false,
   "isDnD":false,
-  "name":"BonkRaycastQuad",
+  "name":"BonkRayHitTriangle",
   "parent":{
     "name":"Raycast",
     "path":"folders/Bonk/Manual Collisions/Raycast.yy",
