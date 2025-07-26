@@ -53,10 +53,6 @@ function BonkRay(_x, _y, _z, _dX, _dY, _dZ) : __BonkClassShared() constructor
     dY = _dY;
     dZ = _dZ;
     
-    x2 = _x + BONK_RAY_LENGTH*_dX;
-    y2 = _y + BONK_RAY_LENGTH*_dY;
-    z2 = _z + BONK_RAY_LENGTH*_dZ;
-    
     
     
     static SetOrigin = function(_x = x, _y = y, _z = z)
@@ -64,10 +60,6 @@ function BonkRay(_x, _y, _z, _dX, _dY, _dZ) : __BonkClassShared() constructor
         x1 = _x;
         y1 = _y;
         z1 = _z;
-        
-        x2 = x1 + BONK_RAY_LENGTH*dX;
-        y2 = y1 + BONK_RAY_LENGTH*dY;
-        z2 = z1 + BONK_RAY_LENGTH*dZ;
         
         return self;
     }
@@ -78,17 +70,13 @@ function BonkRay(_x, _y, _z, _dX, _dY, _dZ) : __BonkClassShared() constructor
         dY = _dY;
         dZ = _dZ;
         
-        x2 = x1 + BONK_RAY_LENGTH*dX;
-        y2 = y1 + BONK_RAY_LENGTH*dY;
-        z2 = z1 + BONK_RAY_LENGTH*dZ;
-        
         return self;
     }
     
     static Draw = function(_color = undefined, _thickness = undefined, _wireframe = undefined)
     {
         __BONK_VERIFY_UGG
-        UggArrow(x1, y1, z1, x2, y2, z2, undefined, _color, _thickness, _wireframe);
+        UggRayWithArrow(x1, y1, z1, dX, dY, dZ, _color, _thickness, _wireframe);
     }
     
     static Hit = function(_otherShape)

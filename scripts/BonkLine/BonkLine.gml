@@ -53,10 +53,6 @@ function BonkLine(_x1, _y1, _z1, _x2, _y2, _z2) : __BonkClassShared() constructo
     y2 = _y2;
     z2 = _z2;
     
-    dX = x2 - x1;
-    dY = y2 - y1;
-    dZ = z2 - z1;
-    
     
     
     static SetA = function(_x = x1, _y = y1, _z = z1)
@@ -64,10 +60,6 @@ function BonkLine(_x1, _y1, _z1, _x2, _y2, _z2) : __BonkClassShared() constructo
         x1 = _x;
         y1 = _y;
         z1 = _z;
-        
-        dX = x2 - x1;
-        dY = y2 - y1;
-        dZ = z2 - z1;
         
         return self;
     }
@@ -77,10 +69,6 @@ function BonkLine(_x1, _y1, _z1, _x2, _y2, _z2) : __BonkClassShared() constructo
         x2 = _x;
         y2 = _y;
         z2 = _z;
-        
-        dX = x2 - x1;
-        dY = y2 - y1;
-        dZ = z2 - z1;
         
         return self;
     }
