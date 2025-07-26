@@ -2,12 +2,12 @@
 
 /// Returns whether a coordinate lies inside a sphere.
 /// 
+/// @param sphere
 /// @param x
 /// @param y
 /// @param z
-/// @param sphere
 
-function BonkCoordInsideSphere(_x, _y, _z, _sphere)
+function BonkCoordInsideSphere(_sphere, _x, _y, _z)
 {
     with(_sphere)
     {

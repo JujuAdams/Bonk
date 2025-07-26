@@ -5,8 +5,8 @@
   "isDnD":false,
   "name":"BonkCoordInsideSphere",
   "parent":{
-    "name":"Coordinate Inside Getters",
-    "path":"folders/Bonk/Infinitesimals/Coordinate Inside Getters.yy",
+    "name":"Coordinate",
+    "path":"folders/Bonk/Volumes/Inside Getters/Coordinate.yy",
   },
   "resourceType":"GMScript",
   "resourceVersion":"2.0",

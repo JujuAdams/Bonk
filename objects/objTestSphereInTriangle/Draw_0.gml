@@ -1,7 +1,7 @@
 sphere.Draw(BonkSphereInsideTriangle(sphere, triangle)? c_lime : c_red, true);
 triangle.Draw(c_white, true);
 
-var _reaction = BonkSphereInTriangle(sphere, triangle);
+var _reaction = BonkSphereCollideTriangle(sphere, triangle);
 if (_reaction.collision)
 {
     UggSphere(sphere.x + _reaction.dX,

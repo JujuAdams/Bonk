@@ -6,7 +6,7 @@
   "name":"BonkCapsuleInsideQuad",
   "parent":{
     "name":"Capsule",
-    "path":"folders/Bonk/Volumes/Boolean Checkers/Capsule.yy",
+    "path":"folders/Bonk/Volumes/Inside Getters/Capsule.yy",
   },
   "resourceType":"GMScript",
   "resourceVersion":"2.0",

@@ -1,7 +1,7 @@
 //capsule.Draw(BonkCapsuleInsideSphere(capsule, sphere)? c_lime : c_red);
 sphere.Draw();
 
-var _reaction = BonkCapsuleInSphere(capsule, sphere);
+var _reaction = BonkCapsuleCollideSphere(capsule, sphere);
 if (_reaction.collision)
 {
     UggCapsule(capsule.x + _reaction.dX,

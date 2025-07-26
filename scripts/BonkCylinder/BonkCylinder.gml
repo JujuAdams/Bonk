@@ -14,9 +14,37 @@
 /// @param height
 /// @param radius
 
-function BonkCylinder(_x, _y, _z, _height, _radius) : __BonkClassShared(_x, _y, _z) constructor
+function BonkCylinder(_x, _y, _z, _height, _radius) : __BonkClassShared() constructor
 {
     static bonkType = BONK_TYPE_CYLINDER;
+    
+    static _collideFuncLookup = (function()
+    {
+        var _array = array_create(BONK_NUMBER_OF_TYPES, undefined);
+        _array[@ BONK_TYPE_AABB        ] = BonkCylinderCollideAABB;
+        _array[@ BONK_TYPE_CAPSULE     ] = BonkCylinderCollideCapsule;
+        _array[@ BONK_TYPE_CYLINDER    ] = BonkCylinderCollideCylinder;
+        _array[@ BONK_TYPE_CYLINDER_EXT] = BonkCylinderCollideCylinder;
+        _array[@ BONK_TYPE_SPHERE      ] = BonkCylinderCollideSphere;
+        return _array;
+    })();
+    
+    static _insideFuncLookup = (function()
+    {
+        var _array = array_create(BONK_NUMBER_OF_TYPES, undefined);
+        _array[@ BONK_TYPE_AABB        ] = BonkCylinderInsideAABB;
+        _array[@ BONK_TYPE_CAPSULE     ] = BonkCylinderInsideCapsule;
+        _array[@ BONK_TYPE_CYLINDER    ] = BonkCylinderInsideCylinder;
+        _array[@ BONK_TYPE_CYLINDER_EXT] = BonkCylinderInsideCylinder;
+        _array[@ BONK_TYPE_SPHERE      ] = BonkCylinderInsideSphere;
+        return _array;
+    })();
+    
+    
+    
+    x = _x;
+    y = _y;
+    z = _z;
     
     height = _height;
     radius = _radius;

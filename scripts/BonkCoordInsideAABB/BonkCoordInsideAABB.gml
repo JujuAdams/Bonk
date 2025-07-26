@@ -2,12 +2,12 @@
 
 /// Returns whether a coordinate lies inside an AABB.
 /// 
+/// @param aabb
 /// @param x
 /// @param y
 /// @param z
-/// @param aabb
 
-function BonkCoordInsideAABB(_x, _y, _z, _aabb)
+function BonkCoordInsideAABB(_aabb, _x, _y, _z)
 {
     with(_aabb)
     {

@@ -6,7 +6,7 @@
   "name":"BonkAABBInsideAABB",
   "parent":{
     "name":"AABB",
-    "path":"folders/Bonk/Volumes/Boolean Checkers/AABB.yy",
+    "path":"folders/Bonk/Volumes/Inside Getters/AABB.yy",
   },
   "resourceType":"GMScript",
   "resourceVersion":"2.0",

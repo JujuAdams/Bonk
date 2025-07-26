@@ -1,7 +1,7 @@
 capsule.Draw(BonkCapsuleInsideAABB(capsule, aabb)? c_lime : c_red, false);
 aabb.Draw(c_white, false);
 
-var _reaction = BonkCapsuleInAABB(capsule, aabb);
+var _reaction = BonkCapsuleCollideAABB(capsule, aabb);
 if (_reaction.collision)
 {
     UggCapsule(capsule.x + _reaction.dX,

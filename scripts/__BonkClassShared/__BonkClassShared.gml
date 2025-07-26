@@ -1,24 +1,30 @@
 // Feather disable all
 
-/// @param x
-/// @param y
-/// @param z
-
-function __BonkClassShared(_x, _y, _z) constructor
+function __BonkClassShared() constructor
 {
-    static _collideFuncLookup = __Bonk().__collideFuncLookup;
-    
-    x = _x;
-    y = _y;
-    z = _z;
-    
-    
+    static Inside = function(_otherShape)
+    {
+        var _insideFunc = _insideFuncLookup[_otherShape.bonkType];
+        if (is_callable(_insideFunc))
+        {
+            return _insideFunc(self, _otherShape);
+        }
+        else
+        {
+            if (BONK_STRICT_COLLISION_COMPATIBILITY)
+            {
+                __BonkError($".Inside() not supported between \"{instanceof(self)}\" (type={bonkType}) and \"{instanceof(_otherShape)}\" (type={_otherShape.bonkType})");
+            }
+        }
+        
+        return _nullReaction;
+    }
     
     static Collide = function(_otherShape)
     {
         static _nullReaction = __Bonk().__nullReaction;
         
-        var _collideFunc = _collideFuncLookup[bonkType][_otherShape.bonkType];
+        var _collideFunc = _collideFuncLookup[_otherShape.bonkType];
         if (is_callable(_collideFunc))
         {
             return _collideFunc(self, _otherShape);

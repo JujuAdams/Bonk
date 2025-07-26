@@ -2,12 +2,12 @@
 
 /// Returns whether a coordinate lies inside a cylinder.
 /// 
+/// @param capsule
 /// @param x
 /// @param y
 /// @param z
-/// @param capsule
 
-function BonkCoordInsideCapsule(_x, _y, _z, _capsule)
+function BonkCoordInsideCapsule(_capsule, _x, _y, _z)
 {
     with(_capsule)
     {

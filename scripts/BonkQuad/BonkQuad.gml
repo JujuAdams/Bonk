@@ -17,11 +17,29 @@
 /// @param y3
 /// @param z3
 
-function BonkQuad(_x1, _y1, _z1, _x2, _y2, _z2, _x3, _y3, _z3) constructor
+function BonkQuad(_x1, _y1, _z1, _x2, _y2, _z2, _x3, _y3, _z3) : __BonkClassShared() constructor
 {
-    static _collideFuncLookup = __Bonk().__collideFuncLookup;
-    
     static bonkType = BONK_TYPE_QUAD;
+    
+    static _collideFuncLookup = (function()
+    {
+        var _array = array_create(BONK_NUMBER_OF_TYPES, undefined);
+        _array[@ BONK_TYPE_CAPSULE     ] = BonkQuadCollideCapsule;
+        _array[@ BONK_TYPE_CYLINDER_EXT] = BonkQuadCollideCapsule;
+        _array[@ BONK_TYPE_SPHERE      ] = BonkQuadCollideSphere;
+        return _array;
+    })();
+    
+    static _insideFuncLookup = (function()
+    {
+        var _array = array_create(BONK_NUMBER_OF_TYPES, undefined);
+        _array[@ BONK_TYPE_CAPSULE     ] = BonkQuadInsideCapsule;
+        _array[@ BONK_TYPE_CYLINDER_EXT] = BonkQuadInsideCapsule;
+        _array[@ BONK_TYPE_SPHERE      ] = BonkQuadInsideSphere;
+        return _array;
+    })();
+    
+    
     
     x1 = _x1;
     y1 = _y1;
@@ -41,25 +59,5 @@ function BonkQuad(_x1, _y1, _z1, _x2, _y2, _z2, _x3, _y3, _z3) constructor
     {
         __BONK_VERIFY_UGG
         UggQuad(x1, y1, z1,   x2, y2, z2,   x3, y3, z3,   _color, _wireframe);
-    }
-    
-    static Collide = function(_otherShape)
-    {
-        static _nullReaction = __Bonk().__nullReaction;
-        
-        var _collideFunc = _collideFuncLookup[bonkType][_otherShape.bonkType];
-        if (is_callable(_collideFunc))
-        {
-            return _collideFunc(self, _otherShape);
-        }
-        else
-        {
-            if (BONK_STRICT_COLLISION_COMPATIBILITY)
-            {
-                __BonkError($".Collide() not supported between \"{instanceof(self)}\" (type={bonkType}) and \"{instanceof(_otherShape)}\" (type={_otherShape.bonkType})");
-            }
-        }
-        
-        return _nullReaction;
     }
 }

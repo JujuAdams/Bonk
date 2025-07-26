@@ -19,9 +19,41 @@
 /// @param height
 /// @param radius
 
-function BonkCylinderExt(_x, _y, _z, _height, _radius) : __BonkClassShared(_x, _y, _z) constructor
+function BonkCylinderExt(_x, _y, _z, _height, _radius) : __BonkClassShared() constructor
 {
     static bonkType = BONK_TYPE_CYLINDER_EXT;
+    
+    static _collideFuncLookup = (function()
+    {
+        var _array = array_create(BONK_NUMBER_OF_TYPES, undefined);
+        _array[@ BONK_TYPE_AABB        ] = BonkCylinderCollideAABB;
+        _array[@ BONK_TYPE_CAPSULE     ] = BonkCylinderCollideCapsule;
+        _array[@ BONK_TYPE_CYLINDER    ] = BonkCylinderCollideCylinder;
+        _array[@ BONK_TYPE_CYLINDER_EXT] = BonkCylinderCollideCylinder;
+        _array[@ BONK_TYPE_QUAD        ] = BonkCapsuleCollideQuad;
+        _array[@ BONK_TYPE_SPHERE      ] = BonkCylinderCollideSphere;
+        _array[@ BONK_TYPE_TRIANGLE    ] = BonkCapsuleCollideTriangle;
+        return _array;
+    })();
+    
+    static _insideFuncLookup = (function()
+    {
+        var _array = array_create(BONK_NUMBER_OF_TYPES, undefined);
+        _array[@ BONK_TYPE_AABB        ] = BonkCylinderInsideAABB;
+        _array[@ BONK_TYPE_CAPSULE     ] = BonkCylinderInsideCapsule;
+        _array[@ BONK_TYPE_CYLINDER    ] = BonkCylinderInsideCylinder;
+        _array[@ BONK_TYPE_CYLINDER_EXT] = BonkCylinderInsideCylinder;
+        _array[@ BONK_TYPE_QUAD        ] = BonkCapsuleInsideQuad;
+        _array[@ BONK_TYPE_SPHERE      ] = BonkCylinderInsideSphere;
+        _array[@ BONK_TYPE_TRIANGLE    ] = BonkCapsuleInsideTriangle;
+        return _array;
+    })();
+    
+    
+    
+    x = _x;
+    y = _y;
+    z = _z;
     
     height = _height;
     radius = _radius;

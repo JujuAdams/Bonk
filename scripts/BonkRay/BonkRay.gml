@@ -9,7 +9,7 @@
 /// @param dY
 /// @param dZ
 
-function BonkRay(_x, _y, _z, _dX, _dY, _dZ) constructor
+function BonkRay(_x, _y, _z, _dX, _dY, _dZ) : __BonkClassShared() constructor
 {
     static bonkType = BONK_TYPE_RAY;
     

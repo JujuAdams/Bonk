@@ -6,7 +6,7 @@
 /// @param y
 /// @param z
 
-function BonkPoint(_x, _y, _z) constructor
+function BonkPoint(_x, _y, _z) : __BonkClassShared() constructor
 {
     static bonkType = BONK_TYPE_POINT;
     
@@ -49,7 +49,7 @@ function BonkPoint(_x, _y, _z) constructor
         var _insideFunc = _insideFuncLookup[_otherShape.bonkType];
         if (is_callable(_insideFunc))
         {
-            return _insideFunc(x, y, z, _otherShape);
+            return _insideFunc(_otherShape, x, y, z);
         }
         else
         {

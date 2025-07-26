@@ -6,7 +6,7 @@
   "name":"BonkSphereInsideCylinder",
   "parent":{
     "name":"Sphere",
-    "path":"folders/Bonk/Volumes/Boolean Checkers/Sphere.yy",
+    "path":"folders/Bonk/Volumes/Inside Getters/Sphere.yy",
   },
   "resourceType":"GMScript",
   "resourceVersion":"2.0",

@@ -6,7 +6,7 @@
   "name":"BonkCylinderInsideCylinder",
   "parent":{
     "name":"Cylinder",
-    "path":"folders/Bonk/Volumes/Boolean Checkers/Cylinder.yy",
+    "path":"folders/Bonk/Volumes/Inside Getters/Cylinder.yy",
   },
   "resourceType":"GMScript",
   "resourceVersion":"2.0",

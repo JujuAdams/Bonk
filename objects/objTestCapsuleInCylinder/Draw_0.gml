@@ -1,7 +1,7 @@
 capsule.Draw(BonkCapsuleInsideCylinder(capsule, cylinder)? c_lime : c_red);
 cylinder.Draw();
 
-var _reaction = BonkCapsuleInCylinder(capsule, cylinder);
+var _reaction = BonkCapsuleCollideCylinder(capsule, cylinder);
 if (_reaction.collision)
 {
     UggCapsule(capsule.x + _reaction.dX,
