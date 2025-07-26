@@ -58,12 +58,14 @@ function BonkRaycastCylinder(_cylinder, _x1, _y1, _z1, _x2, _y2, _z2)
         return _coordinate;
     }
     
+    //Build a quadratic equation to solve the intersection between the line and an infinitely high
+    //cylinder
     var _a = _dX*_dX + _dY*_dY;
     var _b = 2*(_vX*_dX + _vY*_dY);
     var _c = (_vX*_vX + _vY*_vY) - _cylinderRadius*_cylinderRadius;
     
     var _discriminant = _b*_b - 4*_a*_c;
-    if (_discriminant < 0) return _nullCoordinate;
+    if (_discriminant < 0) return _nullCoordinate; //No solutions!
     
     //Handle rays that start inside the cylinder
     _discriminant = sqrt(_discriminant);
@@ -76,35 +78,30 @@ function BonkRaycastCylinder(_cylinder, _x1, _y1, _z1, _x2, _y2, _z2)
     var _t = (-_b - _discriminant) / (2*_a);
     var _z = _z1 + _t*_dZ;
     
-    if ((_t >= 0) && (_t <= 1))
+    if ((_t >= 0) && (_t <= 1) && (_z >= _cylinderZMin) && (_z <= _cylinderZMax))
     {
-        if ((_z >= _cylinderZMin) && (_z <= _cylinderZMax))
+        //We hit the body of the cylinder
+        with(_coordinate)
         {
-            //We hit the body of the cylinder
-            with(_coordinate)
-            {
-                x = _x1 + _t*_dX;
-                y = _y1 + _t*_dY;
-                z = _z;
-            }
-            
-            return _coordinate;
+            x = _x1 + _t*_dX;
+            y = _y1 + _t*_dY;
+            z = _z;
         }
+        
+        return _coordinate;
     }
     
+    //If the ray has no change in z then it cannot hit either cap
     if (_dZ == 0)
     {
         return _nullCoordinate;
     }
     
+    //Find the other t value for the intersection with the cylinder
     var _tMin = _t;
     var _tMax = (-_b + _discriminant) / (2*_a);
     
-    if (_tMax < _tMin)
-    {
-        return _nullCoordinate;
-    }
-    
+    //Find the t value where the ray intersects with the cap
     if (_z > _cylinderZMax)
     {
         //Top cap
@@ -116,6 +113,7 @@ function BonkRaycastCylinder(_cylinder, _x1, _y1, _z1, _x2, _y2, _z2)
         _t = (_cylinderZMin - _z1) / _dZ;
     }
     
+    //If this new t value is outside the cylinder then we have no solution
     if ((_t < _tMin) || (_t > _tMax))
     {
         return _nullCoordinate;
