@@ -8,5 +8,5 @@ if (_reaction.collision)
               sphere.y + _reaction.dY,
               sphere.z + _reaction.dZ,
               sphere.radius,
-              c_white);
+              c_white, true);
 }
