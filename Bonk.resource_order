@@ -100,7 +100,6 @@
     {"name":"BonkBoolCylinderInCylinder","order":1,"path":"scripts/BonkBoolCylinderInCylinder/BonkBoolCylinderInCylinder.yy",},
     {"name":"BonkBoolPointInAABB","order":1,"path":"scripts/BonkBoolPointInAABB/BonkBoolPointInAABB.yy",},
     {"name":"BonkBoolPointInCylinder","order":2,"path":"scripts/BonkBoolPointInCylinder/BonkBoolPointInCylinder.yy",},
-    {"name":"BonkBoolPointInPoint","order":4,"path":"scripts/BonkBoolPointInPoint/BonkBoolPointInPoint.yy",},
     {"name":"BonkBoolSphereInQuad","order":2,"path":"scripts/BonkBoolSphereInQuad/BonkBoolSphereInQuad.yy",},
     {"name":"BonkBoolSphereInTriangle","order":1,"path":"scripts/BonkBoolSphereInTriangle/BonkBoolSphereInTriangle.yy",},
     {"name":"BonkCapsule","order":5,"path":"scripts/BonkCapsule/BonkCapsule.yy",},

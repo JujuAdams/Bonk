@@ -7,10 +7,5 @@
 
 function BonkBoolPointInSphere(_point, _sphere)
 {
-    with(_point)
-    {
-        return (point_distance_3d(x, y, z, _sphere.x, _sphere.y, _sphere.z) < _sphere.radius);
-    }
-    
-    return false;
+    return BonkBoolCoordInSphere(_point.x, _point.y, _point.z, _sphere);
 }

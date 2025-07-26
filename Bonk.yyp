@@ -133,7 +133,6 @@
     {"id":{"name":"BonkBoolCylinderInSphere","path":"scripts/BonkBoolCylinderInSphere/BonkBoolCylinderInSphere.yy",},},
     {"id":{"name":"BonkBoolPointInAABB","path":"scripts/BonkBoolPointInAABB/BonkBoolPointInAABB.yy",},},
     {"id":{"name":"BonkBoolPointInCylinder","path":"scripts/BonkBoolPointInCylinder/BonkBoolPointInCylinder.yy",},},
-    {"id":{"name":"BonkBoolPointInPoint","path":"scripts/BonkBoolPointInPoint/BonkBoolPointInPoint.yy",},},
     {"id":{"name":"BonkBoolPointInSphere","path":"scripts/BonkBoolPointInSphere/BonkBoolPointInSphere.yy",},},
     {"id":{"name":"BonkBoolSphereInQuad","path":"scripts/BonkBoolSphereInQuad/BonkBoolSphereInQuad.yy",},},
     {"id":{"name":"BonkBoolSphereInSphere","path":"scripts/BonkBoolSphereInSphere/BonkBoolSphereInSphere.yy",},},

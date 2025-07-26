@@ -7,15 +7,5 @@
 
 function BonkBoolPointInAABB(_point, _aabb)
 {
-    with(_aabb)
-    {
-        var _x = _point.x;
-        var _y = _point.y;
-        var _z = _point.z;
-        
-        return ((_x >= x - xHalfSize) && (_y >= y - yHalfSize) && (_z >= z - zHalfSize)
-             && (_x <  x + xHalfSize) && (_y <  y + yHalfSize) && (_z <  z + zHalfSize));
-    }
-    
-    return false;
+    return BonkBoolCoordInAABB(_point.x, _point.y, _point.z, _aabb);
 }
