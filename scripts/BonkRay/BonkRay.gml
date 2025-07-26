@@ -1,6 +1,15 @@
 // Feather disable all
 
-/// Constructor that generates a ray starting at a point and extending out in a direction.
+/// Constructor that generates a ray that starts at a point and extending out in a direction.
+/// 
+/// This shape cannot use the `.Collide()` nor `.Inside()` methods. Instead, rays can use the
+/// special `.Intersects(otherShape)` method. This method is compatible with the following shapes:
+/// - AABB
+/// - Capsule
+/// - Cylinder / CylinderExt
+/// - Quad
+/// - Sphere
+/// - Triangle
 /// 
 /// @param x
 /// @param y

@@ -2,11 +2,21 @@
 
 /// Constructor that generates an axis-aligned bounding box. Such a box cannot be rotated.
 /// 
+/// Using the `.Inside(otherShape)` method, this shape can test for an overlap with these shapes:
+/// - AABB
+/// - Capsule
+/// - Cylinder / CylinderExt
+/// - Sphere
+/// The `.Inside()` method returns either `true` or `false` indicating whether the two shapes
+/// overlap. `.Inside()` is usually a little faster than `.Collide()` (see below) and is easier to
+/// use.
+/// 
 /// Using the `.Collide(otherShape)` method, this shape can collide with:
 /// - AABB
 /// - Capsule
 /// - Cylinder / CylinderExt
 /// - Sphere
+/// The `.Collide()` method returns a "reaction" struct.
 /// 
 /// @param xCenter
 /// @param yCenter

@@ -5,6 +5,17 @@
 /// helpful for moving characters where predictable motion at the edge of AABBs and cylinders is
 /// desired.
 /// 
+/// Using the `.Inside(otherShape)` method, this shape can test for an overlap with these shapes:
+/// - AABB
+/// - Capsule
+/// - Cylinder / CylinderExt
+/// - Quad
+/// - Sphere
+/// - Triangle
+/// The `.Inside()` method returns either `true` or `false` indicating whether the two shapes
+/// overlap. `.Inside()` is usually a little faster than `.Collide()` (see below) and is easier to
+/// use.
+/// 
 /// Using the `.Collide(otherShape)` method, this shape can collide with:
 /// - AABB
 /// - Capsule

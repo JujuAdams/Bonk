@@ -2,6 +2,15 @@
 
 /// Constructor that generates a line segment between two coordinates.
 /// 
+/// This shape cannot use the `.Collide()` nor `.Inside()` methods. Instead, lines can use the
+/// special `.Intersects(otherShape)` method. This method is compatible with the following shapes:
+/// - AABB
+/// - Capsule
+/// - Cylinder / CylinderExt
+/// - Quad
+/// - Sphere
+/// - Triangle
+/// 
 /// @param x1
 /// @param y1
 /// @param z1

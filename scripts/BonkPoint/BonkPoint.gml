@@ -2,6 +2,16 @@
 
 /// Constructor that generates an infinitesimal point.
 /// 
+/// This shape cannot use the `.Collide()` method. This shape can use `.Inside(otherShape)` method
+/// however and is compatible with the following shapes:
+/// - AABB
+/// - Capsule
+/// - Cylinder / CylinderExt
+/// - Sphere
+/// The `.Inside()` method returns either `true` or `false` indicating whether the two shapes
+/// overlap. `.Inside()` is usually a little faster than `.Collide()` (see below) and is easier to
+/// use.
+/// 
 /// @param x
 /// @param y
 /// @param z
