@@ -34,9 +34,11 @@ function BonkCapsuleCollideTriangle(_capsule, _triangle)
         var _dX12 = _triX2 - _triX1;
         var _dY12 = _triY2 - _triY1;
         var _dZ12 = _triZ2 - _triZ1;
+        
         var _dX23 = _triX3 - _triX2;
         var _dY23 = _triY3 - _triY2;
         var _dZ23 = _triZ3 - _triZ2;
+        
         var _dX31 = _triX1 - _triX3;
         var _dY31 = _triY1 - _triY3;
         var _dZ31 = _triZ1 - _triZ3;
