@@ -1,4 +1,4 @@
-capsule.Draw(BonkBoolCapsuleInAABB(capsule, aabb)? c_lime : c_red, false);
+capsule.Draw(BonkCapsuleInsideAABB(capsule, aabb)? c_lime : c_red, false);
 aabb.Draw(c_white, false);
 
 var _reaction = BonkCapsuleInAABB(capsule, aabb);

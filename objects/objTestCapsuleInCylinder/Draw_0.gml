@@ -1,4 +1,4 @@
-capsule.Draw(BonkBoolCapsuleInCylinder(capsule, cylinder)? c_lime : c_red);
+capsule.Draw(BonkCapsuleInsideCylinder(capsule, cylinder)? c_lime : c_red);
 cylinder.Draw();
 
 var _reaction = BonkCapsuleInCylinder(capsule, cylinder);
