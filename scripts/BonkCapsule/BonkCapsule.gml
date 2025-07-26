@@ -16,8 +16,10 @@
 /// @param height
 /// @param radius
 
-function BonkCapsule(_x, _y, _z, _height, _radius) constructor
+function BonkCapsule(_x, _y, _z, _height, _radius) : __BonkClassShared(_x, _y, _z) constructor
 {
+    static bonkType = BONK_TYPE_CYLINDER_EXT;
+    
     x = _x;
     y = _y;
     z = _z;
@@ -66,42 +68,5 @@ function BonkCapsule(_x, _y, _z, _height, _radius) constructor
     {
         __BONK_VERIFY_UGG
         UggCapsule(x, y, z - height/2, height, radius, _color, _wireframe);
-    }
-    
-    static Collide = function(_otherPrimitive)
-    {
-        static _nullReaction = __Bonk().__nullReaction;
-        
-        if (is_instanceof(_otherPrimitive, BonkAABB))
-        {
-            return BonkCapsuleInAABB(self, _otherPrimitive);
-        }
-        else if (is_instanceof(_otherPrimitive, BonkCylinder))
-        {
-            return BonkCapsuleInCylinder(self, _otherPrimitive);
-        }
-        else if (is_instanceof(_otherPrimitive, BonkCapsule) || is_instanceof(_otherPrimitive, BonkCylinderExt))
-        {
-            return BonkCapsuleInCapsule(self, _otherPrimitive);
-        }
-        else if (is_instanceof(_otherPrimitive, BonkSphere))
-        {
-            return BonkCapsuleInSphere(self, _otherPrimitive);
-        }
-        else if (is_instanceof(_otherPrimitive, BonkQuad))
-        {
-            return BonkCapsuleInQuad(self, _otherPrimitive);
-        }
-        else if (is_instanceof(_otherPrimitive, BonkTriangle))
-        {
-            return BonkCapsuleInTriangle(self, _otherPrimitive);
-        }
-        
-        if (BONK_STRICT_COLLISION_COMPATIBILITY)
-        {
-            __BonkError($"Collision not supported between \"{instanceof(self)}\" and \"{instanceof(_otherPrimitive)}\"");
-        }
-        
-        return _nullReaction;
     }
 }

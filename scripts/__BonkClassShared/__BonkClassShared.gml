@@ -1,47 +1,18 @@
 // Feather disable all
 
-/// Constructor that generates a triangle.
-/// 
-/// Using the `.Collide(otherShape)` method, this shape can collide with:
-/// - CylinderExt
-/// - Capsule
-/// - Sphere
-/// 
-/// @param x1
-/// @param y1
-/// @param z1
-/// @param x2
-/// @param y2
-/// @param z2
-/// @param x3
-/// @param y3
-/// @param z3
+/// @param x
+/// @param y
+/// @param z
 
-function BonkTriangle(_x1, _y1, _z1, _x2, _y2, _z2, _x3, _y3, _z3) constructor
+function __BonkClassShared(_x, _y, _z) constructor
 {
     static _collideFuncLookup = __Bonk().__collideFuncLookup;
     
-    static bonkType = BONK_TYPE_TRIANGLE;
-    
-    x1 = _x1;
-    y1 = _y1;
-    z1 = _z1;
-    
-    x2 = _x2;
-    y2 = _y2;
-    z2 = _z2;
-    
-    x3 = _x3;
-    y3 = _y3;
-    z3 = _z3;
+    x = _x;
+    y = _y;
+    z = _z;
     
     
-    
-    static Draw = function(_color = undefined, _wireframe = undefined)
-    {
-        __BONK_VERIFY_UGG
-        UggTriangle(x1, y1, z1,   x2, y2, z2,   x3, y3, z3,   _color, _wireframe);
-    }
     
     static Collide = function(_otherPrimitive)
     {

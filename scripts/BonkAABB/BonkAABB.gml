@@ -15,11 +15,9 @@
 /// @param ySize
 /// @param zSize
 
-function BonkAABB(_x, _y, _z, _xSize, _ySize, _zSize) constructor
+function BonkAABB(_x, _y, _z, _xSize, _ySize, _zSize) : __BonkClassShared(_x, _y, _z) constructor
 {
-    x = _x;
-    y = _y;
-    z = _z;
+    static bonkType = BONK_TYPE_AABB;
     
     xHalfSize = 0.5*_xSize;
     yHalfSize = 0.5*_ySize;
@@ -61,34 +59,5 @@ function BonkAABB(_x, _y, _z, _xSize, _ySize, _zSize) constructor
     {
         __BONK_VERIFY_UGG
         UggAABB(x, y, z, 2*xHalfSize, 2*yHalfSize, 2*zHalfSize, _color, _wireframe);
-    }
-    
-    static Collide = function(_otherPrimitive)
-    {
-        static _nullReaction = __Bonk().__nullReaction;
-        
-        if (is_instanceof(_otherPrimitive, BonkAABB))
-        {
-            return BonkAABBInAABB(self, _otherPrimitive);
-        }
-        else if (is_instanceof(_otherPrimitive, BonkCylinder) || is_instanceof(_otherPrimitive, BonkCylinderExt))
-        {
-            return BonkAABBInCylinder(self, _otherPrimitive);
-        }
-        else if (is_instanceof(_otherPrimitive, BonkCapsule))
-        {
-            return BonkCapsuleInAABB(_otherPrimitive, self).Reverse();
-        }
-        else if (is_instanceof(_otherPrimitive, BonkSphere))
-        {
-            return BonkAABBInSphere(self, _otherPrimitive);
-        }
-        
-        if (BONK_STRICT_COLLISION_COMPATIBILITY)
-        {
-            __BonkError($"Collision not supported between \"{instanceof(self)}\" and \"{instanceof(_otherPrimitive)}\"");
-        }
-        
-        return _nullReaction;
     }
 }

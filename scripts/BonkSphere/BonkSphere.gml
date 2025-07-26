@@ -15,8 +15,10 @@
 /// @param z
 /// @param radius
 
-function BonkSphere(_x, _y, _z, _radius) constructor
+function BonkSphere(_x, _y, _z, _radius) : __BonkClassShared(_x, _y, _z) constructor
 {
+    static bonkType = BONK_TYPE_SPHERE;
+    
     x = _x;
     y = _y;
     z = _z;
@@ -57,42 +59,5 @@ function BonkSphere(_x, _y, _z, _radius) constructor
     {
         __BONK_VERIFY_UGG
         UggSphere(x, y, z, radius, _color, _wireframe);
-    }
-    
-    static Collide = function(_otherPrimitive)
-    {
-        static _nullReaction = __Bonk().__nullReaction;
-        
-        if (is_instanceof(_otherPrimitive, BonkAABB))
-        {
-            return BonkAABBInSphere(_otherPrimitive, self).Reverse();
-        }
-        else if (is_instanceof(_otherPrimitive, BonkCylinder) || is_instanceof(_otherPrimitive, BonkCylinderExt))
-        {
-            return BonkCylinderInSphere(_otherPrimitive, self).Reverse();
-        }
-        else if (is_instanceof(_otherPrimitive, BonkCapsule))
-        {
-            return BonkCapsuleInSphere(_otherPrimitive, self).Reverse();
-        }
-        else if (is_instanceof(_otherPrimitive, BonkSphere))
-        {
-            return BonkSphereInSphere(self, _otherPrimitive);
-        }
-        else if (is_instanceof(_otherPrimitive, BonkQuad))
-        {
-            return BonkSphereInQuad(self, _otherPrimitive);
-        }
-        else if (is_instanceof(_otherPrimitive, BonkTriangle))
-        {
-            return BonkSphereInTriangle(self, _otherPrimitive);
-        }
-        
-        if (BONK_STRICT_COLLISION_COMPATIBILITY)
-        {
-            __BonkError($"Collision not supported between \"{instanceof(self)}\" and \"{instanceof(_otherPrimitive)}\"");
-        }
-        
-        return _nullReaction;
     }
 }

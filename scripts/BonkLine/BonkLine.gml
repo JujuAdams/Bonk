@@ -14,6 +14,10 @@
 
 function BonkLine(_x1, _y1, _z1, _x2, _y2, _z2) constructor
 {
+    static _collideFuncLookup = __Bonk().__collideFuncLookup;
+    
+    static bonkType = BONK_TYPE_LINE;
+    
     x1 = _x1;
     y1 = _y1;
     z1 = _z1;
@@ -79,9 +83,17 @@ function BonkLine(_x1, _y1, _z1, _x2, _y2, _z2) constructor
     {
         static _nullReaction = __Bonk().__nullReaction;
         
-        if (BONK_STRICT_COLLISION_COMPATIBILITY)
+        var _collideFunc = _collideFuncLookup[bonkType][_otherPrimitive.bonkType];
+        if (is_callable(_collideFunc))
         {
-            __BonkError($"Collision not supported between \"{instanceof(self)}\" and \"{instanceof(_otherPrimitive)}\"");
+            return _collideFunc(self, _otherPrimitive);
+        }
+        else
+        {
+            if (BONK_STRICT_COLLISION_COMPATIBILITY)
+            {
+                __BonkError($"Collision not supported between \"{instanceof(self)}\" (type={bonkType}) and \"{instanceof(_otherPrimitive)}\" (type={_otherPrimitive.bonkType})");
+            }
         }
         
         return _nullReaction;

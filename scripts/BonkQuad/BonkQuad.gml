@@ -19,6 +19,10 @@
 
 function BonkQuad(_x1, _y1, _z1, _x2, _y2, _z2, _x3, _y3, _z3) constructor
 {
+    static _collideFuncLookup = __Bonk().__collideFuncLookup;
+    
+    static bonkType = BONK_TYPE_QUAD;
+    
     x1 = _x1;
     y1 = _y1;
     z1 = _z1;
@@ -43,18 +47,17 @@ function BonkQuad(_x1, _y1, _z1, _x2, _y2, _z2, _x3, _y3, _z3) constructor
     {
         static _nullReaction = __Bonk().__nullReaction;
         
-        if (is_instanceof(_otherPrimitive, BonkCapsule) || is_instanceof(_otherPrimitive, BonkCylinderExt))
+        var _collideFunc = _collideFuncLookup[bonkType][_otherPrimitive.bonkType];
+        if (is_callable(_collideFunc))
         {
-            return BonkCapsuleInQuad(_otherPrimitive, self).Reverse();
+            return _collideFunc(self, _otherPrimitive);
         }
-        else if (is_instanceof(_otherPrimitive, BonkSphere))
+        else
         {
-            return BonkSphereInQuad(_otherPrimitive, self).Reverse();
-        }
-        
-        if (BONK_STRICT_COLLISION_COMPATIBILITY)
-        {
-            __BonkError($"Collision not supported between \"{instanceof(self)}\" and \"{instanceof(_otherPrimitive)}\"");
+            if (BONK_STRICT_COLLISION_COMPATIBILITY)
+            {
+                __BonkError($"Collision not supported between \"{instanceof(self)}\" (type={bonkType}) and \"{instanceof(_otherPrimitive)}\" (type={_otherPrimitive.bonkType})");
+            }
         }
         
         return _nullReaction;
