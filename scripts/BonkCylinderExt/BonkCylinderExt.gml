@@ -18,7 +18,7 @@
 
 function BonkCylinderExt(_x, _y, _z, _height, _radius) : __BonkClassShared(_x, _y, _z) constructor
 {
-    static bonkType = BONK_TYPE_CYLINDER;
+    static bonkType = BONK_TYPE_CYLINDER_EXT;
     
     x = _x;
     y = _y;
