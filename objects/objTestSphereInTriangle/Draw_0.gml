@@ -1,5 +1,5 @@
-sphere.Draw(BonkSphereInsideTriangle(sphere, triangle)? c_lime : c_red, true);
-triangle.Draw(c_white);
+sphere.Draw(BonkSphereInsideTriangle(sphere, triangle)? c_lime : c_red);
+triangle.Draw();
 
 var _reaction = BonkSphereCollideTriangle(sphere, triangle);
 if (_reaction.collision)

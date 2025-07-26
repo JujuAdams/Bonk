@@ -52,11 +52,9 @@ function BonkSphereCollideTriangle(_sphere, _triangle)
             return _nullReaction;
         }
         
-        _normalX /= _length
+        _normalX /= _length;
         _normalY /= _length;
         _normalZ /= _length;
-        
-        //UggArrow(_triX3, _triY3, _triZ3,   _triX3 + 20*_normalX, _triY3 + 20*_normalY, _triZ3 + 20*_normalZ,   undefined, undefined, undefined, true);
     }
     
     //Distance from the sphere's centre to the plane
