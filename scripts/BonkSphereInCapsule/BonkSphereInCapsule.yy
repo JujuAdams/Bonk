@@ -6,7 +6,7 @@
   "name":"BonkSphereInCapsule",
   "parent":{
     "name":"Sphere",
-    "path":"folders/Bonk/Manual Collisions/Overlap/Sphere.yy",
+    "path":"folders/Bonk/Volumes/Overlap Getters/Sphere.yy",
   },
   "resourceType":"GMScript",
   "resourceVersion":"2.0",

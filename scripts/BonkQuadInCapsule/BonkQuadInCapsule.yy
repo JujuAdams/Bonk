@@ -6,7 +6,7 @@
   "name":"BonkQuadInCapsule",
   "parent":{
     "name":"Quad",
-    "path":"folders/Bonk/Manual Collisions/Overlap/Quad.yy",
+    "path":"folders/Bonk/Volumes/Overlap Getters/Quad.yy",
   },
   "resourceType":"GMScript",
   "resourceVersion":"2.0",

@@ -6,7 +6,7 @@
   "name":"BonkCylinderInSphere",
   "parent":{
     "name":"Cylinder",
-    "path":"folders/Bonk/Manual Collisions/Overlap/Cylinder.yy",
+    "path":"folders/Bonk/Volumes/Overlap Getters/Cylinder.yy",
   },
   "resourceType":"GMScript",
   "resourceVersion":"2.0",

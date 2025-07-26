@@ -6,7 +6,7 @@
   "name":"BonkBoolAABBInSphere",
   "parent":{
     "name":"AABB",
-    "path":"folders/Bonk/Manual Collisions/Boolean/AABB.yy",
+    "path":"folders/Bonk/Volumes/Boolean Checkers/AABB.yy",
   },
   "resourceType":"GMScript",
   "resourceVersion":"2.0",

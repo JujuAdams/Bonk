@@ -5,8 +5,8 @@
   "isDnD":false,
   "name":"BonkPoint",
   "parent":{
-    "name":"Skinnies",
-    "path":"folders/Bonk/Shape Constructors/Skinnies.yy",
+    "name":"Constructors",
+    "path":"folders/Bonk/Infinitesimals/Constructors.yy",
   },
   "resourceType":"GMScript",
   "resourceVersion":"2.0",

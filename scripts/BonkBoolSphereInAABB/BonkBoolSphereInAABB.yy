@@ -6,7 +6,7 @@
   "name":"BonkBoolSphereInAABB",
   "parent":{
     "name":"Sphere",
-    "path":"folders/Bonk/Manual Collisions/Boolean/Sphere.yy",
+    "path":"folders/Bonk/Volumes/Boolean Checkers/Sphere.yy",
   },
   "resourceType":"GMScript",
   "resourceVersion":"2.0",

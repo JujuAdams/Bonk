@@ -5,8 +5,8 @@
   "isDnD":false,
   "name":"BonkBoolPointInAABB",
   "parent":{
-    "name":"Point",
-    "path":"folders/Bonk/Manual Collisions/Boolean/Point.yy",
+    "name":"Point Intersection Getters",
+    "path":"folders/Bonk/Infinitesimals/Point Intersection Getters.yy",
   },
   "resourceType":"GMScript",
   "resourceVersion":"2.0",

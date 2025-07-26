@@ -5,8 +5,8 @@
   "isDnD":false,
   "name":"BonkRayHitSphere",
   "parent":{
-    "name":"Raycast",
-    "path":"folders/Bonk/Manual Collisions/Raycast.yy",
+    "name":"Ray Intersection Getters",
+    "path":"folders/Bonk/Infinitesimals/Ray Intersection Getters.yy",
   },
   "resourceType":"GMScript",
   "resourceVersion":"2.0",

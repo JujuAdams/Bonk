@@ -6,7 +6,7 @@
   "name":"BonkTriangleInCapsule",
   "parent":{
     "name":"Triangle",
-    "path":"folders/Bonk/Manual Collisions/Overlap/Triangle.yy",
+    "path":"folders/Bonk/Volumes/Overlap Getters/Triangle.yy",
   },
   "resourceType":"GMScript",
   "resourceVersion":"2.0",

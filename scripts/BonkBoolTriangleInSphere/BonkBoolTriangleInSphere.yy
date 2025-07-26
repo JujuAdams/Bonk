@@ -6,7 +6,7 @@
   "name":"BonkBoolTriangleInSphere",
   "parent":{
     "name":"Triangle",
-    "path":"folders/Bonk/Manual Collisions/Boolean/Triangle.yy",
+    "path":"folders/Bonk/Volumes/Boolean Checkers/Triangle.yy",
   },
   "resourceType":"GMScript",
   "resourceVersion":"2.0",

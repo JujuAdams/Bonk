@@ -6,7 +6,7 @@
   "name":"BonkBoolCoordInSphere",
   "parent":{
     "name":"Coordinate",
-    "path":"folders/Bonk/Manual Collisions/Boolean/Coordinate.yy",
+    "path":"folders/Bonk/Volumes/Boolean Checkers/Coordinate.yy",
   },
   "resourceType":"GMScript",
   "resourceVersion":"2.0",
