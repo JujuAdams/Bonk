@@ -1,9 +1,9 @@
 {
   "$GMScript":"v1",
-  "%Name":"BonkLine",
+  "%Name":"BonkRay",
   "isCompatibility":false,
   "isDnD":false,
-  "name":"BonkLine",
+  "name":"BonkRay",
   "parent":{
     "name":"Skinnies",
     "path":"folders/Bonk/Shape Constructors/Skinnies.yy",

@@ -2,43 +2,55 @@
 
 /// Constructor that generates a line segment between two coordinates.
 /// 
-/// @param x1
-/// @param y1
-/// @param z1
-/// @param x2
-/// @param y2
-/// @param z2
+/// @param x
+/// @param y
+/// @param z
+/// @param dX
+/// @param dY
+/// @param dZ
 
-function BonkLine(_x1, _y1, _z1, _x2, _y2, _z2) constructor
+function BonkRay(_x, _y, _z, _dX, _dY, _dZ) constructor
 {
     static _collideFuncLookup = __Bonk().__collideFuncLookup;
     
-    static bonkType = BONK_TYPE_LINE;
+    static bonkType = BONK_TYPE_RAY;
     
-    x1 = _x1;
-    y1 = _y1;
-    z1 = _z1;
+    x1 = _x;
+    y1 = _y;
+    z1 = _z;
     
-    x2 = _x2;
-    y2 = _y2;
-    z2 = _z2;
+    dX = _dX;
+    dY = _dY;
+    dZ = _dZ;
+    
+    x2 = _x + BONK_RAY_LENGTH*_dX;
+    y2 = _y + BONK_RAY_LENGTH*_dY;
+    z2 = _z + BONK_RAY_LENGTH*_dZ;
     
     
     
-    static SetA = function(_x = x1, _y = y1, _z = z1)
+    static SetOrigin = function(_x = x, _y = y, _z = z)
     {
         x1 = _x;
         y1 = _y;
         z1 = _z;
         
+        x2 = x1 + BONK_RAY_LENGTH*dX;
+        y2 = y1 + BONK_RAY_LENGTH*dY;
+        z2 = z1 + BONK_RAY_LENGTH*dZ;
+        
         return self;
     }
     
-    static SetB = function(_x = x2, _y = y2, _z = z2)
+    static SetDirection = function(_dX = dX, _dY = dY, _dZ = dZ)
     {
-        x2 = _x;
-        y2 = _y;
-        z2 = _z;
+        dX = _dX;
+        dY = _dY;
+        dZ = _dZ;
+        
+        x2 = x1 + BONK_RAY_LENGTH*dX;
+        y2 = y1 + BONK_RAY_LENGTH*dY;
+        z2 = z1 + BONK_RAY_LENGTH*dZ;
         
         return self;
     }

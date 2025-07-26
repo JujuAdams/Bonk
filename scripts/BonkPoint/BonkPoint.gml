@@ -2,16 +2,17 @@
 
 /// Constructor that generates an infinitesimal point.
 /// 
-/// Using the `.Collide(otherShape)` method, points can collide with:
-/// - No shapes
-/// 
 /// @param x
 /// @param y
 /// @param z
 
-function BonkPoint(_x, _y, _z) : __BonkClassShared(_x, _y, _z) constructor
+function BonkPoint(_x, _y, _z) constructor
 {
     static bonkType = BONK_TYPE_POINT;
+    
+    x = _x;
+    y = _y;
+    z = _z;
     
     
     

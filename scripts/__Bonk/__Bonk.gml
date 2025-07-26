@@ -1,5 +1,3 @@
-#macro __BONK_VERY_LARGE  1000000
-
 #macro __BONK_VERIFY_UGG  static _uggPresent = __Bonk().__uggPresent;\
                           if (not _uggPresent)\
                           {\
@@ -42,6 +40,7 @@ function __Bonk()
         __collideFuncLookup[BONK_TYPE_AABB][BONK_TYPE_CYLINDER    ] = BonkAABBInCylinder;
         __collideFuncLookup[BONK_TYPE_AABB][BONK_TYPE_CYLINDER_EXT] = BonkAABBInCylinder;
         __collideFuncLookup[BONK_TYPE_AABB][BONK_TYPE_LINE        ] = undefined;
+        __collideFuncLookup[BONK_TYPE_AABB][BONK_TYPE_RAY         ] = undefined;
         __collideFuncLookup[BONK_TYPE_AABB][BONK_TYPE_POINT       ] = undefined;
         __collideFuncLookup[BONK_TYPE_AABB][BONK_TYPE_QUAD        ] = undefined;
         __collideFuncLookup[BONK_TYPE_AABB][BONK_TYPE_SPHERE      ] = BonkAABBInSphere;
@@ -52,6 +51,7 @@ function __Bonk()
         __collideFuncLookup[BONK_TYPE_CAPSULE][BONK_TYPE_CYLINDER    ] = BonkCapsuleInCylinder;
         __collideFuncLookup[BONK_TYPE_CAPSULE][BONK_TYPE_CYLINDER_EXT] = BonkCapsuleInCylinder;
         __collideFuncLookup[BONK_TYPE_CAPSULE][BONK_TYPE_LINE        ] = undefined;
+        __collideFuncLookup[BONK_TYPE_CAPSULE][BONK_TYPE_RAY         ] = undefined;
         __collideFuncLookup[BONK_TYPE_CAPSULE][BONK_TYPE_POINT       ] = undefined;
         __collideFuncLookup[BONK_TYPE_CAPSULE][BONK_TYPE_QUAD        ] = BonkCapsuleInQuad;
         __collideFuncLookup[BONK_TYPE_CAPSULE][BONK_TYPE_SPHERE      ] = BonkCapsuleInSphere;
@@ -62,6 +62,7 @@ function __Bonk()
         __collideFuncLookup[BONK_TYPE_CYLINDER][BONK_TYPE_CYLINDER    ] = BonkCylinderInCylinder;
         __collideFuncLookup[BONK_TYPE_CYLINDER][BONK_TYPE_CYLINDER_EXT] = BonkCylinderInCylinder;
         __collideFuncLookup[BONK_TYPE_CYLINDER][BONK_TYPE_LINE        ] = undefined;
+        __collideFuncLookup[BONK_TYPE_CYLINDER][BONK_TYPE_RAY         ] = undefined;
         __collideFuncLookup[BONK_TYPE_CYLINDER][BONK_TYPE_POINT       ] = undefined;
         __collideFuncLookup[BONK_TYPE_CYLINDER][BONK_TYPE_QUAD        ] = undefined;
         __collideFuncLookup[BONK_TYPE_CYLINDER][BONK_TYPE_SPHERE      ] = BonkCylinderInSphere;
@@ -72,6 +73,7 @@ function __Bonk()
         __collideFuncLookup[BONK_TYPE_CYLINDER_EXT][BONK_TYPE_CYLINDER    ] = BonkCylinderInCylinder;
         __collideFuncLookup[BONK_TYPE_CYLINDER_EXT][BONK_TYPE_CYLINDER_EXT] = BonkCylinderInCylinder;
         __collideFuncLookup[BONK_TYPE_CYLINDER_EXT][BONK_TYPE_LINE        ] = undefined;
+        __collideFuncLookup[BONK_TYPE_CYLINDER_EXT][BONK_TYPE_RAY         ] = undefined;
         __collideFuncLookup[BONK_TYPE_CYLINDER_EXT][BONK_TYPE_POINT       ] = undefined;
         __collideFuncLookup[BONK_TYPE_CYLINDER_EXT][BONK_TYPE_QUAD        ] = BonkCapsuleInQuad;
         __collideFuncLookup[BONK_TYPE_CYLINDER_EXT][BONK_TYPE_SPHERE      ] = BonkCylinderInSphere;
@@ -82,16 +84,29 @@ function __Bonk()
         __collideFuncLookup[BONK_TYPE_LINE][BONK_TYPE_CYLINDER    ] = undefined;
         __collideFuncLookup[BONK_TYPE_LINE][BONK_TYPE_CYLINDER_EXT] = undefined;
         __collideFuncLookup[BONK_TYPE_LINE][BONK_TYPE_LINE        ] = undefined;
+        __collideFuncLookup[BONK_TYPE_LINE][BONK_TYPE_RAY         ] = undefined;
         __collideFuncLookup[BONK_TYPE_LINE][BONK_TYPE_POINT       ] = undefined;
         __collideFuncLookup[BONK_TYPE_LINE][BONK_TYPE_QUAD        ] = undefined;
         __collideFuncLookup[BONK_TYPE_LINE][BONK_TYPE_SPHERE      ] = undefined;
         __collideFuncLookup[BONK_TYPE_LINE][BONK_TYPE_TRIANGLE    ] = undefined;
+        
+        __collideFuncLookup[BONK_TYPE_RAY][BONK_TYPE_AABB        ] = undefined;
+        __collideFuncLookup[BONK_TYPE_RAY][BONK_TYPE_CAPSULE     ] = undefined;
+        __collideFuncLookup[BONK_TYPE_RAY][BONK_TYPE_CYLINDER    ] = undefined;
+        __collideFuncLookup[BONK_TYPE_RAY][BONK_TYPE_CYLINDER_EXT] = undefined;
+        __collideFuncLookup[BONK_TYPE_RAY][BONK_TYPE_LINE        ] = undefined;
+        __collideFuncLookup[BONK_TYPE_RAY][BONK_TYPE_RAY         ] = undefined;
+        __collideFuncLookup[BONK_TYPE_RAY][BONK_TYPE_POINT       ] = undefined;
+        __collideFuncLookup[BONK_TYPE_RAY][BONK_TYPE_QUAD        ] = undefined;
+        __collideFuncLookup[BONK_TYPE_RAY][BONK_TYPE_SPHERE      ] = undefined;
+        __collideFuncLookup[BONK_TYPE_RAY][BONK_TYPE_TRIANGLE    ] = undefined;
         
         __collideFuncLookup[BONK_TYPE_POINT][BONK_TYPE_AABB        ] = undefined;
         __collideFuncLookup[BONK_TYPE_POINT][BONK_TYPE_CAPSULE     ] = undefined;
         __collideFuncLookup[BONK_TYPE_POINT][BONK_TYPE_CYLINDER    ] = undefined;
         __collideFuncLookup[BONK_TYPE_POINT][BONK_TYPE_CYLINDER_EXT] = undefined;
         __collideFuncLookup[BONK_TYPE_POINT][BONK_TYPE_LINE        ] = undefined;
+        __collideFuncLookup[BONK_TYPE_POINT][BONK_TYPE_RAY         ] = undefined;
         __collideFuncLookup[BONK_TYPE_POINT][BONK_TYPE_POINT       ] = undefined;
         __collideFuncLookup[BONK_TYPE_POINT][BONK_TYPE_QUAD        ] = undefined;
         __collideFuncLookup[BONK_TYPE_POINT][BONK_TYPE_SPHERE      ] = undefined;
@@ -102,6 +117,7 @@ function __Bonk()
         __collideFuncLookup[BONK_TYPE_QUAD][BONK_TYPE_CYLINDER    ] = undefined;
         __collideFuncLookup[BONK_TYPE_QUAD][BONK_TYPE_CYLINDER_EXT] = BonkQuadInCapsule;
         __collideFuncLookup[BONK_TYPE_QUAD][BONK_TYPE_LINE        ] = undefined;
+        __collideFuncLookup[BONK_TYPE_QUAD][BONK_TYPE_RAY         ] = undefined;
         __collideFuncLookup[BONK_TYPE_QUAD][BONK_TYPE_POINT       ] = undefined;
         __collideFuncLookup[BONK_TYPE_QUAD][BONK_TYPE_QUAD        ] = undefined;
         __collideFuncLookup[BONK_TYPE_QUAD][BONK_TYPE_SPHERE      ] = BonkQuadInSphere;
@@ -112,6 +128,7 @@ function __Bonk()
         __collideFuncLookup[BONK_TYPE_SPHERE][BONK_TYPE_CYLINDER    ] = BonkSphereInCylinder;
         __collideFuncLookup[BONK_TYPE_SPHERE][BONK_TYPE_CYLINDER_EXT] = BonkSphereInCylinder;
         __collideFuncLookup[BONK_TYPE_SPHERE][BONK_TYPE_LINE        ] = undefined;
+        __collideFuncLookup[BONK_TYPE_SPHERE][BONK_TYPE_RAY         ] = undefined;
         __collideFuncLookup[BONK_TYPE_SPHERE][BONK_TYPE_POINT       ] = undefined;
         __collideFuncLookup[BONK_TYPE_SPHERE][BONK_TYPE_QUAD        ] = BonkSphereInQuad;
         __collideFuncLookup[BONK_TYPE_SPHERE][BONK_TYPE_SPHERE      ] = BonkSphereInSphere;
@@ -122,6 +139,7 @@ function __Bonk()
         __collideFuncLookup[BONK_TYPE_TRIANGLE][BONK_TYPE_CYLINDER    ] = undefined;
         __collideFuncLookup[BONK_TYPE_TRIANGLE][BONK_TYPE_CYLINDER_EXT] = BonkTriangleInCapsule;
         __collideFuncLookup[BONK_TYPE_TRIANGLE][BONK_TYPE_LINE        ] = undefined;
+        __collideFuncLookup[BONK_TYPE_TRIANGLE][BONK_TYPE_RAY         ] = undefined;
         __collideFuncLookup[BONK_TYPE_TRIANGLE][BONK_TYPE_POINT       ] = undefined;
         __collideFuncLookup[BONK_TYPE_TRIANGLE][BONK_TYPE_QUAD        ] = undefined;
         __collideFuncLookup[BONK_TYPE_TRIANGLE][BONK_TYPE_SPHERE      ] = BonkTriangleInSphere;

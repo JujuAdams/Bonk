@@ -5,8 +5,8 @@
   "isDnD":false,
   "name":"BonkAABB",
   "parent":{
-    "name":"Shape Constructors",
-    "path":"folders/Bonk/Shape Constructors.yy",
+    "name":"Volumes",
+    "path":"folders/Bonk/Shape Constructors/Volumes.yy",
   },
   "resourceType":"GMScript",
   "resourceVersion":"2.0",
