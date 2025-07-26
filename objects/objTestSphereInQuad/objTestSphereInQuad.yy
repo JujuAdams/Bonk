@@ -10,8 +10,8 @@
   "name":"objTestSphereInQuad",
   "overriddenProperties":[],
   "parent":{
-    "name":"Basic Collision Tests",
-    "path":"folders/Test Cases/Basic Collision Tests.yy",
+    "name":"Sphere",
+    "path":"folders/Test Cases/Basic Collision Tests/Sphere.yy",
   },
   "parentObjectId":null,
   "persistent":false,

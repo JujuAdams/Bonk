@@ -43,20 +43,20 @@ function BonkQuad(_x1, _y1, _z1, _x2, _y2, _z2, _x3, _y3, _z3) constructor
         UggQuad(x1, y1, z1,   x2, y2, z2,   x3, y3, z3,   _color, _wireframe);
     }
     
-    static Collide = function(_otherPrimitive)
+    static Collide = function(_otherShape)
     {
         static _nullReaction = __Bonk().__nullReaction;
         
-        var _collideFunc = _collideFuncLookup[bonkType][_otherPrimitive.bonkType];
+        var _collideFunc = _collideFuncLookup[bonkType][_otherShape.bonkType];
         if (is_callable(_collideFunc))
         {
-            return _collideFunc(self, _otherPrimitive);
+            return _collideFunc(self, _otherShape);
         }
         else
         {
             if (BONK_STRICT_COLLISION_COMPATIBILITY)
             {
-                __BonkError($"Collision not supported between \"{instanceof(self)}\" (type={bonkType}) and \"{instanceof(_otherPrimitive)}\" (type={_otherPrimitive.bonkType})");
+                __BonkError($".Collide() not supported between \"{instanceof(self)}\" (type={bonkType}) and \"{instanceof(_otherShape)}\" (type={_otherShape.bonkType})");
             }
         }
         

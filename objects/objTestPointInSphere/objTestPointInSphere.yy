@@ -10,8 +10,8 @@
   "name":"objTestPointInSphere",
   "overriddenProperties":[],
   "parent":{
-    "name":"Basic Collision Tests",
-    "path":"folders/Test Cases/Basic Collision Tests.yy",
+    "name":"Point",
+    "path":"folders/Test Cases/Basic Collision Tests/Point.yy",
   },
   "parentObjectId":null,
   "persistent":false,

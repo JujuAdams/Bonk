@@ -7,7 +7,7 @@
 /// @param z
 /// @param sphere
 
-function BonkBoolCoordInSphere(_x, _y, _z, _sphere)
+function BonkCoordInsideSphere(_x, _y, _z, _sphere)
 {
     with(_sphere)
     {

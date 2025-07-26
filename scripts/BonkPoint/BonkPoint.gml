@@ -10,6 +10,19 @@ function BonkPoint(_x, _y, _z) constructor
 {
     static bonkType = BONK_TYPE_POINT;
     
+    static _insideFuncLookup = (function()
+    {
+        var _array = array_create(BONK_NUMBER_OF_TYPES, undefined);
+        _array[@ BONK_TYPE_AABB        ] = BonkCoordInsideAABB;
+        _array[@ BONK_TYPE_CAPSULE     ] = BonkCoordInsideCapsule;
+        _array[@ BONK_TYPE_CYLINDER    ] = BonkCoordInsideCylinder;
+        _array[@ BONK_TYPE_CYLINDER_EXT] = BonkCoordInsideCylinder;
+        _array[@ BONK_TYPE_SPHERE      ] = BonkCoordInsideSphere;
+        return _array;
+    })();
+    
+    
+    
     x = _x;
     y = _y;
     z = _z;
@@ -29,5 +42,23 @@ function BonkPoint(_x, _y, _z) constructor
     {
         __BONK_VERIFY_UGG
         UggPoint(x, y, z, _color, _wireframe);
+    }
+    
+    static Inside = function(_otherShape)
+    {
+        var _insideFunc = _insideFuncLookup[_otherShape.bonkType];
+        if (is_callable(_insideFunc))
+        {
+            return _insideFunc(x, y, z, _otherShape);
+        }
+        else
+        {
+            if (BONK_STRICT_COLLISION_COMPATIBILITY)
+            {
+                __BonkError($".Inside() not supported between \"{instanceof(self)}\" (type={bonkType}) and \"{instanceof(_otherShape)}\" (type={_otherShape.bonkType})");
+            }
+        }
+        
+        return false;
     }
 }

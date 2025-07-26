@@ -7,7 +7,7 @@
 /// @param z
 /// @param capsule
 
-function BonkBoolCoordInCapsule(_x, _y, _z, _capsule)
+function BonkCoordInsideCapsule(_x, _y, _z, _capsule)
 {
     with(_capsule)
     {

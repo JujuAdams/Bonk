@@ -7,7 +7,7 @@
 /// @param z
 /// @param aabb
 
-function BonkOverlapCoordInAABB(_x, _y, _z, _aabb)
+function BonkCoordInsideAABB(_x, _y, _z, _aabb)
 {
     with(_aabb)
     {

@@ -10,8 +10,8 @@
   "name":"objTestAABBInAABB",
   "overriddenProperties":[],
   "parent":{
-    "name":"Basic Collision Tests",
-    "path":"folders/Test Cases/Basic Collision Tests.yy",
+    "name":"AABB",
+    "path":"folders/Test Cases/Basic Collision Tests/AABB.yy",
   },
   "parentObjectId":null,
   "persistent":false,

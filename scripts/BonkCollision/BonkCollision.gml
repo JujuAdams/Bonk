@@ -4,9 +4,9 @@
 /// @param primitive
 /// @param otherPrimitive
 
-function BonkCollision(_speedContainer, _primitive, _otherPrimitive)
+function BonkCollision(_speedContainer, _primitive, _otherShape)
 {
-    var _reaction = _primitive.Collide(_otherPrimitive);
+    var _reaction = _primitive.Collide(_otherShape);
     if (_reaction.collision)
     {
         with(_primitive)

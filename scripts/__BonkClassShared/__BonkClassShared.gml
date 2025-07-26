@@ -14,20 +14,20 @@ function __BonkClassShared(_x, _y, _z) constructor
     
     
     
-    static Collide = function(_otherPrimitive)
+    static Collide = function(_otherShape)
     {
         static _nullReaction = __Bonk().__nullReaction;
         
-        var _collideFunc = _collideFuncLookup[bonkType][_otherPrimitive.bonkType];
+        var _collideFunc = _collideFuncLookup[bonkType][_otherShape.bonkType];
         if (is_callable(_collideFunc))
         {
-            return _collideFunc(self, _otherPrimitive);
+            return _collideFunc(self, _otherShape);
         }
         else
         {
             if (BONK_STRICT_COLLISION_COMPATIBILITY)
             {
-                __BonkError($"Collision not supported between \"{instanceof(self)}\" (type={bonkType}) and \"{instanceof(_otherPrimitive)}\" (type={_otherPrimitive.bonkType})");
+                __BonkError($".Collide() not supported between \"{instanceof(self)}\" (type={bonkType}) and \"{instanceof(_otherShape)}\" (type={_otherShape.bonkType})");
             }
         }
         

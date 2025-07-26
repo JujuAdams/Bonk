@@ -18,7 +18,7 @@ function __Bonk()
     with(_global)
     {
         __nullReaction   = (new __BonkClassReaction()).__NoCollision();
-        __nullCoordiante = (new __BonkClassCoordinate()).__NoCollision();
+        __nullCoordinate = (new __BonkClassCoordinate()).__NoCollision();
         
         try
         {

@@ -7,7 +7,7 @@
 /// @param z
 /// @param cylinder
 
-function BonkBoolCoordInCylinder(_x, _y, _z, _cylinder)
+function BonkCoordInsideCylinder(_x, _y, _z, _cylinder)
 {
     with(_cylinder)
     {

@@ -1,5 +1,3 @@
-UggSetWireframe(true);
-sphere.Draw();
-UggSetWireframe(false);
+sphere.Draw(c_white, true);
 
-point.Draw(BonkBoolPointInSphere(point, sphere)? c_red : c_lime);
+point.Draw(point.Inside(sphere)? c_red : c_lime);

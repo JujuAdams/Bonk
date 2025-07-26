@@ -11,9 +11,22 @@
 
 function BonkLine(_x1, _y1, _z1, _x2, _y2, _z2) constructor
 {
-    static _collideFuncLookup = __Bonk().__collideFuncLookup;
-    
     static bonkType = BONK_TYPE_LINE;
+    
+    static _intersectsFuncLookup = (function()
+    {
+        var _array = array_create(BONK_NUMBER_OF_TYPES, undefined);
+        _array[@ BONK_TYPE_AABB        ] = BonkRayHitAABB;
+        _array[@ BONK_TYPE_CAPSULE     ] = BonkRayHitCapsule;
+        _array[@ BONK_TYPE_CYLINDER    ] = BonkRayHitCylinder;
+        _array[@ BONK_TYPE_CYLINDER_EXT] = BonkRayHitCylinder;
+        _array[@ BONK_TYPE_QUAD        ] = BonkRayHitQuad;
+        _array[@ BONK_TYPE_SPHERE      ] = BonkRayHitSphere;
+        _array[@ BONK_TYPE_TRIANGLE    ] = BonkRayHitTriangle;
+        return _array;
+    })();
+    
+    
     
     x1 = _x1;
     y1 = _y1;
@@ -49,23 +62,23 @@ function BonkLine(_x1, _y1, _z1, _x2, _y2, _z2) constructor
         UggArrow(x1, y1, z1, x2, y2, z2, undefined, _color, _thickness, _wireframe);
     }
     
-    static Collide = function(_otherPrimitive)
+    static Intersects = function(_otherShape)
     {
-        static _nullReaction = __Bonk().__nullReaction;
+        static _nullCoordinate = __Bonk().__nullCoordinate;
         
-        var _collideFunc = _collideFuncLookup[bonkType][_otherPrimitive.bonkType];
-        if (is_callable(_collideFunc))
+        var _intersectsFunc = _intersectsFuncLookup[_otherShape.bonkType];
+        if (is_callable(_intersectsFunc))
         {
-            return _collideFunc(self, _otherPrimitive);
+            return _intersectsFunc(_otherShape, x1, y1, z1, x2, y2, z2);
         }
         else
         {
             if (BONK_STRICT_COLLISION_COMPATIBILITY)
             {
-                __BonkError($"Collision not supported between \"{instanceof(self)}\" (type={bonkType}) and \"{instanceof(_otherPrimitive)}\" (type={_otherPrimitive.bonkType})");
+                __BonkError($".Intersects() not supported between \"{instanceof(self)}\" (type={bonkType}) and \"{instanceof(_otherShape)}\" (type={_otherShape.bonkType})");
             }
         }
         
-        return _nullReaction;
+        return _nullCoordinate;
     }
 }

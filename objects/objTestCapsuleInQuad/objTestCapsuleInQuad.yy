@@ -10,8 +10,8 @@
   "name":"objTestCapsuleInQuad",
   "overriddenProperties":[],
   "parent":{
-    "name":"Basic Collision Tests",
-    "path":"folders/Test Cases/Basic Collision Tests.yy",
+    "name":"Capsule",
+    "path":"folders/Test Cases/Basic Collision Tests/Capsule.yy",
   },
   "parentObjectId":null,
   "persistent":false,

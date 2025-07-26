@@ -10,8 +10,8 @@
   "name":"objTestCylinderInSphere",
   "overriddenProperties":[],
   "parent":{
-    "name":"Basic Collision Tests",
-    "path":"folders/Test Cases/Basic Collision Tests.yy",
+    "name":"Cylinder",
+    "path":"folders/Test Cases/Basic Collision Tests/Cylinder.yy",
   },
   "parentObjectId":null,
   "persistent":false,

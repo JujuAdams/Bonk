@@ -9,8 +9,8 @@
   "name":"objTestRaycastCylinder",
   "overriddenProperties":[],
   "parent":{
-    "name":"Basic Collision Tests",
-    "path":"folders/Test Cases/Basic Collision Tests.yy",
+    "name":"Raycast",
+    "path":"folders/Test Cases/Basic Collision Tests/Raycast.yy",
   },
   "parentObjectId":null,
   "persistent":false,

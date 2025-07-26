@@ -10,7 +10,7 @@
 
 function BonkLineHitTriangle(_triangle, _x1, _y1, _z1, _x2, _y2, _z2)
 {
-    static _nullCoordinate = __Bonk().__nullCoordiante;
+    static _nullCoordinate = __Bonk().__nullCoordinate;
     static _coordinate     = new __BonkClassCoordinate();
     
     with(_triangle)
