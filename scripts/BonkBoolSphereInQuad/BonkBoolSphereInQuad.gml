@@ -36,6 +36,7 @@ function BonkBoolSphereInQuad(_sphere, _quad)
         var _dX12 = _quadX2 - _quadX1;
         var _dY12 = _quadY2 - _quadY1;
         var _dZ12 = _quadZ2 - _quadZ1;
+        
         var _dX41 = _quadX1 - _quadX4;
         var _dY41 = _quadY1 - _quadY4;
         var _dZ41 = _quadZ1 - _quadZ4;
