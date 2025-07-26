@@ -3,7 +3,7 @@
 /// @param shape
 /// @param otherShape
 
-function BonkMoveOut(_shape, _otherShape)
+function BonkGetDisplacement(_shape, _otherShape)
 {
     static _nullReaction = __Bonk().__nullReaction;
     

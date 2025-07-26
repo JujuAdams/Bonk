@@ -3,7 +3,7 @@
 /// @param zSpeed
 /// @param reactionStruct
 
-function BonkNewSpeed(_xSpeed, _ySpeed, _zSpeed, _reactionStruct)
+function BonkGetNewSpeed(_xSpeed, _ySpeed, _zSpeed, _reactionStruct)
 {
     static _result = {
         x: 0,

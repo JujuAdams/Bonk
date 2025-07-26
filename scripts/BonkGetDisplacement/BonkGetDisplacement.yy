@@ -1,9 +1,9 @@
 {
   "$GMScript":"v1",
-  "%Name":"BonkNewSpeed",
+  "%Name":"BonkGetDisplacement",
   "isCompatibility":false,
   "isDnD":false,
-  "name":"BonkNewSpeed",
+  "name":"BonkGetDisplacement",
   "parent":{
     "name":"Bonk",
     "path":"folders/Bonk.yy",
