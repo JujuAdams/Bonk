@@ -17,7 +17,7 @@ function __BonkClassShared() constructor
             }
         }
         
-        return _nullReaction;
+        return false;
     }
     
     static Collide = function(_otherShape)
@@ -38,5 +38,17 @@ function __BonkClassShared() constructor
         }
         
         return _nullReaction;
+    }
+    
+    static Hit = function(_otherShape)
+    {
+        static _nullCoordinate = __Bonk().__nullCoordinate;
+        
+        if (BONK_STRICT_COLLISION_COMPATIBILITY)
+        {
+            __BonkError($".Hit() not supported between \"{instanceof(self)}\" (type={bonkType}) and \"{instanceof(_otherShape)}\" (type={_otherShape.bonkType})");
+        }
+        
+        return _nullCoordinate;
     }
 }

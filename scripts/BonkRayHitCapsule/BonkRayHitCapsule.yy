@@ -5,8 +5,8 @@
   "isDnD":false,
   "name":"BonkRayHitCapsule",
   "parent":{
-    "name":"Ray Intersection Getters",
-    "path":"folders/Bonk/Infinitesimals/Ray Intersection Getters.yy",
+    "name":"Ray Hit",
+    "path":"folders/Bonk/Ray Hit.yy",
   },
   "resourceType":"GMScript",
   "resourceVersion":"2.0",

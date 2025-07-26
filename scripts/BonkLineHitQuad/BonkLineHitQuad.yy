@@ -5,8 +5,8 @@
   "isDnD":false,
   "name":"BonkLineHitQuad",
   "parent":{
-    "name":"Line Intersection Getters",
-    "path":"folders/Bonk/Infinitesimals/Line Intersection Getters.yy",
+    "name":"Line Hit",
+    "path":"folders/Bonk/Line Hit.yy",
   },
   "resourceType":"GMScript",
   "resourceVersion":"2.0",

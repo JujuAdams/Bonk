@@ -6,7 +6,7 @@
   "name":"BonkCapsuleCollideSphere",
   "parent":{
     "name":"Capsule",
-    "path":"folders/Bonk/Volumes/Collide Getters/Capsule.yy",
+    "path":"folders/Bonk/Collide/Capsule.yy",
   },
   "resourceType":"GMScript",
   "resourceVersion":"2.0",

@@ -6,7 +6,7 @@
   "name":"BonkCylinderInsideAABB",
   "parent":{
     "name":"Cylinder",
-    "path":"folders/Bonk/Volumes/Inside Getters/Cylinder.yy",
+    "path":"folders/Bonk/Inside/Cylinder.yy",
   },
   "resourceType":"GMScript",
   "resourceVersion":"2.0",

@@ -3,7 +3,7 @@
 /// Constructor that generates a line segment between two coordinates.
 /// 
 /// This shape cannot use the `.Collide()` nor `.Inside()` methods. Instead, lines can use the
-/// special `.Intersects(otherShape)` method. This method is compatible with the following shapes:
+/// special `.Hit(otherShape)` method. This method is compatible with the following shapes:
 /// - AABB
 /// - Capsule
 /// - Cylinder / CylinderExt
@@ -22,7 +22,7 @@ function BonkLine(_x1, _y1, _z1, _x2, _y2, _z2) : __BonkClassShared() constructo
 {
     static bonkType = BONK_TYPE_LINE;
     
-    static _intersectsFuncLookup = (function()
+    static _hitFuncLookup = (function()
     {
         var _array = array_create(BONK_NUMBER_OF_TYPES, undefined);
         _array[@ BONK_TYPE_AABB        ] = BonkRayHitAABB;
@@ -45,6 +45,10 @@ function BonkLine(_x1, _y1, _z1, _x2, _y2, _z2) : __BonkClassShared() constructo
     y2 = _y2;
     z2 = _z2;
     
+    dX = x2 - x1;
+    dY = y2 - y1;
+    dZ = z2 - z1;
+    
     
     
     static SetA = function(_x = x1, _y = y1, _z = z1)
@@ -52,6 +56,10 @@ function BonkLine(_x1, _y1, _z1, _x2, _y2, _z2) : __BonkClassShared() constructo
         x1 = _x;
         y1 = _y;
         z1 = _z;
+        
+        dX = x2 - x1;
+        dY = y2 - y1;
+        dZ = z2 - z1;
         
         return self;
     }
@@ -62,6 +70,10 @@ function BonkLine(_x1, _y1, _z1, _x2, _y2, _z2) : __BonkClassShared() constructo
         y2 = _y;
         z2 = _z;
         
+        dX = x2 - x1;
+        dY = y2 - y1;
+        dZ = z2 - z1;
+        
         return self;
     }
     
@@ -71,20 +83,20 @@ function BonkLine(_x1, _y1, _z1, _x2, _y2, _z2) : __BonkClassShared() constructo
         UggArrow(x1, y1, z1, x2, y2, z2, undefined, _color, _thickness, _wireframe);
     }
     
-    static Intersects = function(_otherShape)
+    static Hit = function(_otherShape)
     {
         static _nullCoordinate = __Bonk().__nullCoordinate;
         
-        var _intersectsFunc = _intersectsFuncLookup[_otherShape.bonkType];
-        if (is_callable(_intersectsFunc))
+        var _hitFunc = _hitFuncLookup[_otherShape.bonkType];
+        if (is_callable(_hitFunc))
         {
-            return _intersectsFunc(_otherShape, x1, y1, z1, x2, y2, z2);
+            return _hitFunc(_otherShape, x1, y1, z1, x2, y2, z2);
         }
         else
         {
             if (BONK_STRICT_COLLISION_COMPATIBILITY)
             {
-                __BonkError($".Intersects() not supported between \"{instanceof(self)}\" (type={bonkType}) and \"{instanceof(_otherShape)}\" (type={_otherShape.bonkType})");
+                __BonkError($".Hit() not supported between \"{instanceof(self)}\" (type={bonkType}) and \"{instanceof(_otherShape)}\" (type={_otherShape.bonkType})");
             }
         }
         

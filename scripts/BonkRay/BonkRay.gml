@@ -3,7 +3,7 @@
 /// Constructor that generates a ray that starts at a point and extending out in a direction.
 /// 
 /// This shape cannot use the `.Collide()` nor `.Inside()` methods. Instead, rays can use the
-/// special `.Intersects(otherShape)` method. This method is compatible with the following shapes:
+/// special `.Hit(otherShape)` method. This method is compatible with the following shapes:
 /// - AABB
 /// - Capsule
 /// - Cylinder / CylinderExt
@@ -22,7 +22,7 @@ function BonkRay(_x, _y, _z, _dX, _dY, _dZ) : __BonkClassShared() constructor
 {
     static bonkType = BONK_TYPE_RAY;
     
-    static _intersectsFuncLookup = (function()
+    static _hitFuncLookup = (function()
     {
         var _array = array_create(BONK_NUMBER_OF_TYPES, undefined);
         _array[@ BONK_TYPE_AABB        ] = BonkRayHitAABB;
@@ -83,14 +83,14 @@ function BonkRay(_x, _y, _z, _dX, _dY, _dZ) : __BonkClassShared() constructor
         UggArrow(x1, y1, z1, x2, y2, z2, undefined, _color, _thickness, _wireframe);
     }
     
-    static Intersects = function(_otherShape)
+    static Hit = function(_otherShape)
     {
         static _nullCoordinate = __Bonk().__nullCoordinate;
         
-        var _intersectsFunc = _intersectsFuncLookup[_otherShape.bonkType];
-        if (is_callable(_intersectsFunc))
+        var _hitFunc = _hitFuncLookup[_otherShape.bonkType];
+        if (is_callable(_hitFunc))
         {
-            return _intersectsFunc(_otherShape, x1, y1, z1, x2, y2, z2);
+            return _hitFunc(_otherShape, x1, y1, z1, dX, dY, dZ);
         }
         else
         {

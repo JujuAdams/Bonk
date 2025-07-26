@@ -6,7 +6,7 @@
   "name":"BonkSphereInsideTriangle",
   "parent":{
     "name":"Sphere",
-    "path":"folders/Bonk/Volumes/Inside Getters/Sphere.yy",
+    "path":"folders/Bonk/Inside/Sphere.yy",
   },
   "resourceType":"GMScript",
   "resourceVersion":"2.0",

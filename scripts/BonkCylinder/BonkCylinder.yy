@@ -5,8 +5,8 @@
   "isDnD":false,
   "name":"BonkCylinder",
   "parent":{
-    "name":"Constructors",
-    "path":"folders/Bonk/Volumes/Constructors.yy",
+    "name":"Shape Constructors",
+    "path":"folders/Bonk/Shape Constructors.yy",
   },
   "resourceType":"GMScript",
   "resourceVersion":"2.0",

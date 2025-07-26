@@ -6,7 +6,7 @@
   "name":"BonkQuadCollideCapsule",
   "parent":{
     "name":"Quad",
-    "path":"folders/Bonk/Volumes/Collide Getters/Quad.yy",
+    "path":"folders/Bonk/Collide/Quad.yy",
   },
   "resourceType":"GMScript",
   "resourceVersion":"2.0",

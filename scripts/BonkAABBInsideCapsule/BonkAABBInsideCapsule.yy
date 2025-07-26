@@ -6,7 +6,7 @@
   "name":"BonkAABBInsideCapsule",
   "parent":{
     "name":"AABB",
-    "path":"folders/Bonk/Volumes/Inside Getters/AABB.yy",
+    "path":"folders/Bonk/Inside/AABB.yy",
   },
   "resourceType":"GMScript",
   "resourceVersion":"2.0",

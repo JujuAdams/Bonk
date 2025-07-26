@@ -6,7 +6,7 @@
   "name":"BonkQuadInsideSphere",
   "parent":{
     "name":"Quad",
-    "path":"folders/Bonk/Volumes/Inside Getters/Quad.yy",
+    "path":"folders/Bonk/Inside/Quad.yy",
   },
   "resourceType":"GMScript",
   "resourceVersion":"2.0",
