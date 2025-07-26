@@ -3,9 +3,9 @@
 /// Constructor that generates an axis-aligned bounding box. Such a box cannot be rotated.
 /// 
 /// Using the `.Collide(otherShape)` method, this shape can collide with:
-/// - AABBs
-/// - Cylinder / CylinderExt
+/// - AABB
 /// - Capsule
+/// - Cylinder / CylinderExt
 /// - Sphere
 /// 
 /// @param xCenter

@@ -3,11 +3,11 @@
 /// Constructor that generates a z-aligned capsule.
 /// 
 /// Using the `.Collide(otherShape)` method, this shape can collide with:
-/// - AABBs
-/// - Cylinder / CylinderExt
+/// - AABB
 /// - Capsule
-/// - Sphere
+/// - Cylinder / CylinderExt
 /// - Quad
+/// - Sphere
 /// - Triangle
 /// 
 /// @param xCenter
@@ -19,10 +19,6 @@
 function BonkCapsule(_x, _y, _z, _height, _radius) : __BonkClassShared(_x, _y, _z) constructor
 {
     static bonkType = BONK_TYPE_CAPSULE;
-    
-    x = _x;
-    y = _y;
-    z = _z;
     
     height = _height;
     radius = _radius;

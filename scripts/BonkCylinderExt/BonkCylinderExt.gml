@@ -1,13 +1,16 @@
 // Feather disable all
 
-/// Constructor that generates a z-aligned cylinder with additional collisions.
+/// Constructor that generates a z-aligned cylinder with additional collisions. When colliding with
+/// quads and triangles, this shape will use a capsule-shaped collider. This makes `CylinderExt`
+/// helpful for moving characters where predictable motion at the edge of AABBs and cylinders is
+/// desired.
 /// 
 /// Using the `.Collide(otherShape)` method, this shape can collide with:
-/// - AABBs
-/// - Cylinder / CylinderExt
+/// - AABB
 /// - Capsule
-/// - Sphere
+/// - Cylinder / CylinderExt
 /// - Quad
+/// - Sphere
 /// - Triangle
 /// 
 /// @param xCenter
@@ -19,10 +22,6 @@
 function BonkCylinderExt(_x, _y, _z, _height, _radius) : __BonkClassShared(_x, _y, _z) constructor
 {
     static bonkType = BONK_TYPE_CYLINDER_EXT;
-    
-    x = _x;
-    y = _y;
-    z = _z;
     
     height = _height;
     radius = _radius;

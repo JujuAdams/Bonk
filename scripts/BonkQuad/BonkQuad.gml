@@ -3,8 +3,8 @@
 /// Constructor that generates a quad.
 /// 
 /// Using the `.Collide(otherShape)` method, this shape can collide with:
-/// - CylinderExt
 /// - Capsule
+/// - CylinderExt
 /// - Sphere
 /// 
 /// @param x1

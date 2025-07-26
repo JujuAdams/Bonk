@@ -3,8 +3,8 @@
 /// Constructor that generates a triangle.
 /// 
 /// Using the `.Collide(otherShape)` method, this shape can collide with:
-/// - CylinderExt
 /// - Capsule
+/// - CylinderExt
 /// - Sphere
 /// 
 /// @param x1
