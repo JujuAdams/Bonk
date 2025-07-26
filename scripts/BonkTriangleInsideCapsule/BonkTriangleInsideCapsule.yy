@@ -6,7 +6,7 @@
   "name":"BonkTriangleInsideCapsule",
   "parent":{
     "name":"Triangle",
-    "path":"folders/Bonk/Inside/Triangle.yy",
+    "path":"folders/Bonk/Getters/Inside/Triangle.yy",
   },
   "resourceType":"GMScript",
   "resourceVersion":"2.0",

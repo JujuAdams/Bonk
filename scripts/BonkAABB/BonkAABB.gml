@@ -2,6 +2,20 @@
 
 /// Constructor that generates an axis-aligned bounding box. Such a box cannot be rotated.
 /// 
+/// @param xCenter
+/// @param yCenter
+/// @param zCenter
+/// @param xSize
+/// @param ySize
+/// @param zSize
+/// 
+/// The struct created by the constructor contains the following values:
+/// `.x` `.y` `.z`  Coordinate of the centre of the AABB.
+/// `.x2` `.y2` `.z2`  Coordinate of the destination of the ray.
+/// 
+/// You may use the `.Draw(color, thickness, wireframe)` method to draw the shape, though this
+/// method requires installation of Ugg. Please see https://github.com/jujuadams/Ugg
+/// 
 /// Using the `.Inside(otherShape)` method, this shape can test for an overlap with these shapes:
 /// - AABB
 /// - Capsule
@@ -23,13 +37,6 @@
 /// 
 /// `.collision`       Boolean, whether the shapes overlap.
 /// `.dX` `.dY` `.dZ`  Distance to push ourselves to escape the collision.
-/// 
-/// @param xCenter
-/// @param yCenter
-/// @param zCenter
-/// @param xSize
-/// @param ySize
-/// @param zSize
 
 function BonkAABB(_x, _y, _z, _xSize, _ySize, _zSize) : __BonkClassShared() constructor
 {

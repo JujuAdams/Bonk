@@ -2,6 +2,16 @@
 
 /// Constructor that generates an infinitesimal point.
 /// 
+/// @param x
+/// @param y
+/// @param z
+/// 
+/// The struct created by the constructor contains the following values:
+/// `.x` `.y` `.z`  Coordinate of the point.
+/// 
+/// You may use the `.Draw(color, thickness, wireframe)` method to draw the shape, though this
+/// method requires installation of Ugg. Please see https://github.com/jujuadams/Ugg
+/// 
 /// This shape cannot use the `.Collide()` method. This shape can use `.Inside(otherShape)` method
 /// however and is compatible with the following shapes:
 /// - AABB
@@ -12,10 +22,6 @@
 /// The `.Inside()` method returns either `true` or `false` indicating whether the two shapes
 /// overlap. `.Inside()` is usually a little faster than `.Collide()` (see below) and is easier to
 /// use.
-/// 
-/// @param x
-/// @param y
-/// @param z
 
 function BonkPoint(_x, _y, _z) : __BonkClassShared() constructor
 {

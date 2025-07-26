@@ -6,7 +6,7 @@
   "name":"BonkCoordInsideCylinder",
   "parent":{
     "name":"Coordinate",
-    "path":"folders/Bonk/Inside/Coordinate.yy",
+    "path":"folders/Bonk/Getters/Inside/Coordinate.yy",
   },
   "resourceType":"GMScript",
   "resourceVersion":"2.0",

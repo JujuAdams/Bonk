@@ -6,7 +6,7 @@
   "name":"BonkCylinderInsideCapsule",
   "parent":{
     "name":"Cylinder",
-    "path":"folders/Bonk/Inside/Cylinder.yy",
+    "path":"folders/Bonk/Getters/Inside/Cylinder.yy",
   },
   "resourceType":"GMScript",
   "resourceVersion":"2.0",

@@ -6,7 +6,7 @@
   "name":"BonkAABBCollideCapsule",
   "parent":{
     "name":"AABB",
-    "path":"folders/Bonk/Collide/AABB.yy",
+    "path":"folders/Bonk/Getters/Collide/AABB.yy",
   },
   "resourceType":"GMScript",
   "resourceVersion":"2.0",

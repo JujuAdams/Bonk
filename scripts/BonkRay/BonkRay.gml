@@ -2,6 +2,20 @@
 
 /// Constructor that generates a ray that starts at a point and extending out in a direction.
 /// 
+/// @param x
+/// @param y
+/// @param z
+/// @param dX
+/// @param dY
+/// @param dZ
+/// 
+/// The struct created by the constructor contains the following values:
+///  `.x`  `.y`  `.z`  Coordinate of the origin of the ray.
+/// `.dX` `.dY` `.dZ`  Direction that the ray is pointed in.
+/// 
+/// You may use the `.Draw(color, thickness, wireframe)` method to draw the shape, though this
+/// method requires installation of Ugg. Please see https://github.com/jujuadams/Ugg
+/// 
 /// This shape cannot use the `.Collide()` nor `.Inside()` methods. Instead, rays can use the
 /// special `.Hit(otherShape)` method. This method is compatible with the following shapes:
 /// - AABB
@@ -18,13 +32,6 @@
 /// `.x` `.y` `.z`  Coordinate of the point where the line hit the target.
 /// 
 /// If the line did *not* hit the other shape then `.x` `.y` `.z` will all be set to `0`.
-/// 
-/// @param x
-/// @param y
-/// @param z
-/// @param dX
-/// @param dY
-/// @param dZ
 
 function BonkRay(_x, _y, _z, _dX, _dY, _dZ) : __BonkClassShared() constructor
 {
@@ -45,9 +52,9 @@ function BonkRay(_x, _y, _z, _dX, _dY, _dZ) : __BonkClassShared() constructor
     
     
     
-    x1 = _x;
-    y1 = _y;
-    z1 = _z;
+    x = _x;
+    y = _y;
+    z = _z;
     
     dX = _dX;
     dY = _dY;
@@ -57,9 +64,9 @@ function BonkRay(_x, _y, _z, _dX, _dY, _dZ) : __BonkClassShared() constructor
     
     static SetOrigin = function(_x = x, _y = y, _z = z)
     {
-        x1 = _x;
-        y1 = _y;
-        z1 = _z;
+        x = _x;
+        y = _y;
+        z = _z;
         
         return self;
     }
@@ -76,7 +83,7 @@ function BonkRay(_x, _y, _z, _dX, _dY, _dZ) : __BonkClassShared() constructor
     static Draw = function(_color = undefined, _thickness = undefined, _wireframe = undefined)
     {
         __BONK_VERIFY_UGG
-        UggRayWithArrow(x1, y1, z1, dX, dY, dZ, _color, _thickness, _wireframe);
+        UggRayWithArrow(x, y, z, dX, dY, dZ, _color, _thickness, _wireframe);
     }
     
     static Hit = function(_otherShape)
@@ -86,7 +93,7 @@ function BonkRay(_x, _y, _z, _dX, _dY, _dZ) : __BonkClassShared() constructor
         var _hitFunc = _hitFuncLookup[_otherShape.bonkType];
         if (is_callable(_hitFunc))
         {
-            return _hitFunc(_otherShape, x1, y1, z1, dX, dY, dZ);
+            return _hitFunc(_otherShape, x, y, z, dX, dY, dZ);
         }
         else
         {

@@ -6,7 +6,7 @@
   "name":"BonkLineHitQuad",
   "parent":{
     "name":"Line Hit",
-    "path":"folders/Bonk/Line Hit.yy",
+    "path":"folders/Bonk/Getters/Line Hit.yy",
   },
   "resourceType":"GMScript",
   "resourceVersion":"2.0",

@@ -6,7 +6,7 @@
   "name":"BonkAABBInsideSphere",
   "parent":{
     "name":"AABB",
-    "path":"folders/Bonk/Inside/AABB.yy",
+    "path":"folders/Bonk/Getters/Inside/AABB.yy",
   },
   "resourceType":"GMScript",
   "resourceVersion":"2.0",

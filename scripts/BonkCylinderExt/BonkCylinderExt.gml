@@ -1,10 +1,25 @@
 // Feather disable all
 
-/// Constructor that generates a z-aligned cylinder with additional collisions. When colliding with
-/// quads and triangles, this shape will use a capsule-shaped collider. This makes `CylinderExt`
-/// helpful for moving characters where predictable motion at the edge of AABBs and cylinders is
-/// desired. For all other purposes, a struct constructed by `BonkCylinderExt` is interchangeable
-/// with a struct constructed by `BonkCylinder`.
+/// Constructor that generates a z-aligned cylinder with additional collisions.
+/// 
+/// @param xCenter
+/// @param yCenter
+/// @param zCenter
+/// @param height
+/// @param radius
+/// 
+/// When colliding with quads and triangles, this shape will use a capsule-shaped collider. This
+/// makes `CylinderExt` helpful for moving characters where predictable motion at the edge of AABBs
+/// and cylinders is desired. For all other purposes, a struct constructed by `BonkCylinderExt` is
+/// interchangeable with a struct constructed by `BonkCylinder`.
+/// 
+/// The struct created by the constructor contains the following values:
+/// `.x` `.y` `.z`  Coordinate of the centre of the cylinder.
+/// `.height`       The total height of the cylinder.
+/// `.radius`       The radius of the cylinder (half the thickness of the cylinder).
+/// 
+/// You may use the `.Draw(color, thickness, wireframe)` method to draw the shape, though this
+/// method requires installation of Ugg. Please see https://github.com/jujuadams/Ugg
 /// 
 /// Using the `.Inside(otherShape)` method, this shape can test for an overlap with these shapes:
 /// - AABB
@@ -31,12 +46,6 @@
 /// 
 /// `.collision`       Boolean, whether the shapes overlap.
 /// `.dX` `.dY` `.dZ`  Distance to push ourselves to escape the collision.
-/// 
-/// @param xCenter
-/// @param yCenter
-/// @param zCenter
-/// @param height
-/// @param radius
 
 function BonkCylinderExt(_x, _y, _z, _height, _radius) : __BonkClassShared() constructor
 {

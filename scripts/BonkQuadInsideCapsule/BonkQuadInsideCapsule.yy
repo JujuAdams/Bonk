@@ -6,7 +6,7 @@
   "name":"BonkQuadInsideCapsule",
   "parent":{
     "name":"Quad",
-    "path":"folders/Bonk/Inside/Quad.yy",
+    "path":"folders/Bonk/Getters/Inside/Quad.yy",
   },
   "resourceType":"GMScript",
   "resourceVersion":"2.0",

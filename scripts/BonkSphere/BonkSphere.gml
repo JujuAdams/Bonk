@@ -2,6 +2,18 @@
 
 /// Constructor that generates a sphere.
 /// 
+/// @param x
+/// @param y
+/// @param z
+/// @param radius
+/// 
+/// The struct created by the constructor contains the following values:
+/// `.x` `.y` `.z`  Coordinate of the centre of the sphere.
+/// `.radius`       The radius of the sphere (half the thickness of the sphere).
+/// 
+/// You may use the `.Draw(color, thickness, wireframe)` method to draw the shape, though this
+/// method requires installation of Ugg. Please see https://github.com/jujuadams/Ugg
+/// 
 /// Using the `.Inside(otherShape)` method, this shape can test for an overlap with these shapes:
 /// - AABB
 /// - Capsule
@@ -27,11 +39,6 @@
 /// 
 /// `.collision`       Boolean, whether the shapes overlap.
 /// `.dX` `.dY` `.dZ`  Distance to push ourselves to escape the collision.
-/// 
-/// @param x
-/// @param y
-/// @param z
-/// @param radius
 
 function BonkSphere(_x, _y, _z, _radius) : __BonkClassShared() constructor
 {
