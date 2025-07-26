@@ -23,15 +23,14 @@ function BonkLineHitSphere(_sphere, _x1, _y1, _z1, _x2, _y2, _z2)
         var _dY = _y2 - _y1;
         var _dZ = _z2 - _z1;
         
+        var _vX = _sphereX - _x1;
+        var _vY = _sphereY - _y1;
+        var _vZ = _sphereZ - _z1;
+        
         //Set up a quadratic solution
         var _a = _dX*_dX + _dY*_dY + _dZ*_dZ;
-        
-        var _b = 2*_dX*(_x1 - _sphereX) + 2*_dY*(_y1 - _sphereY) + 2*_dZ*(_z1 - _sphereZ);
-        
-        var _c = _sphereX*_sphereX + _sphereY*_sphereY + _sphereZ*_sphereZ
-               + _x1*_x1 + _y1*_y1 + _z1*_z1
-               - 2*(_sphereX*_x1 + _sphereY*_y1 + _sphereZ*_z1)
-               - radius*radius;
+        var _b = -2*(_dX*_vX + _dY*_vY + _dZ*_vZ);
+        var _c = (_vX*_vX + _vY*_vY + _vZ*_vZ) - radius*radius;
         
         var _discriminant = _b*_b - 4*_a*_c;
         if (_discriminant < 0)
