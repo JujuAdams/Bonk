@@ -1,1 +1,1 @@
-primitive = new BonkSphere(x, y, 32,   32);
+shape = new BonkSphere(x, y, 32,   32);

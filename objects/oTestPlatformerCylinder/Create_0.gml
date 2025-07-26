@@ -1,1 +1,1 @@
-primitive = new BonkCylinder(x, y, 25,   50, 32);
+shape = new BonkCylinder(x, y, 25,   50, 32);

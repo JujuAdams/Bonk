@@ -2,9 +2,9 @@ if (not oCamera.mouseLock)
 {
     if (keyboard_check_pressed(ord("R")))
     {
-        primitive.x = xstart;
-        primitive.y = ystart;
-        primitive.z = 200;
+        shape.x = xstart;
+        shape.y = ystart;
+        shape.z = 200;
     }
     
     if (keyboard_check_pressed(vk_space)) zSpeed += 15;
@@ -28,37 +28,37 @@ zSpeed -= 1;
 var _steps = 1;
 repeat(_steps)
 {
-    primitive.x += xSpeed / _steps;
-    primitive.y += ySpeed / _steps;
-    primitive.z += zSpeed / _steps;
+    shape.x += xSpeed / _steps;
+    shape.y += ySpeed / _steps;
+    shape.z += zSpeed / _steps;
     
     with(oTestPlatformerFloor)
     {
-        BonkCollision(other, other.primitive, primitive);
+        BonkCollision(other, other.shape, shape);
     }
     
     with(oTestPlatformerAABB)
     {
-        BonkCollision(other, other.primitive, primitive);
+        BonkCollision(other, other.shape, shape);
     }
     
     with(oTestPlatformerCylinder)
     {
-        BonkCollision(other, other.primitive, primitive);
+        BonkCollision(other, other.shape, shape);
     }
     
     with(oTestPlatformerSphere)
     {
-        BonkCollision(other, other.primitive, primitive);
+        BonkCollision(other, other.shape, shape);
     }
     
     with(oTestPlatformerQuad)
     {
-        BonkCollision(other, other.primitive, primitive);
+        BonkCollision(other, other.shape, shape);
     }
     
     with(oTestPlatformerTriangle)
     {
-        BonkCollision(other, other.primitive, primitive);
+        BonkCollision(other, other.shape, shape);
     }
 }

@@ -1,1 +1,1 @@
-primitive = new BonkQuad(x, y, 0,   x + 64, y, 0,   x, y + 64, 50);
+shape = new BonkQuad(x, y, 0,   x + 64, y, 0,   x, y + 64, 50);

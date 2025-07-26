@@ -1,3 +1,3 @@
-primitive.Draw(c_lime);
+shape.Draw(c_lime);
 
-BonkCapsuleInsideQuad(primitive, oTestPlatformerQuad.primitive);
+BonkCapsuleInsideQuad(shape, oTestPlatformerQuad.shape);

@@ -1,15 +1,15 @@
 // Feather disable all
 
 /// @param speedContainer
-/// @param primitive
-/// @param otherPrimitive
+/// @param shape
+/// @param otherShape
 
-function BonkCollision(_speedContainer, _primitive, _otherShape)
+function BonkCollision(_speedContainer, _shape, _otherShape)
 {
-    var _reaction = _primitive.Collide(_otherShape);
+    var _reaction = _shape.Collide(_otherShape);
     if (_reaction.collision)
     {
-        with(_primitive)
+        with(_shape)
         {
             x += _reaction.dX;
             y += _reaction.dY;
