@@ -2,6 +2,7 @@
   "FolderOrderSettings":[
     {"name":"Bonk","order":1,"path":"folders/Bonk.yy",},
     {"name":"(System)","order":6,"path":"folders/Bonk/(System).yy",},
+    {"name":"Getters","order":8,"path":"folders/Bonk/Getters.yy",},
     {"name":"Collide","order":3,"path":"folders/Bonk/Getters/Collide.yy",},
     {"name":"Capsule","order":1,"path":"folders/Bonk/Getters/Collide/Capsule.yy",},
     {"name":"Cylinder","order":2,"path":"folders/Bonk/Getters/Collide/Cylinder.yy",},
@@ -17,7 +18,6 @@
     {"name":"Triangle","order":6,"path":"folders/Bonk/Getters/Inside/Triangle.yy",},
     {"name":"Ray Hit","order":1,"path":"folders/Bonk/Getters/Ray Hit.yy",},
     {"name":"Shape Constructors","order":7,"path":"folders/Bonk/Shape Constructors.yy",},
-    {"name":"Getters","order":8,"path":"folders/Bonk/Getters.yy",},
     {"name":"Misc","order":7,"path":"folders/Misc.yy",},
     {"name":"Test Cases","order":2,"path":"folders/Test Cases.yy",},
     {"name":"Capsule","order":1,"path":"folders/Test Cases/Basic Collision Tests/Capsule.yy",},
