@@ -1,0 +1,13 @@
+{
+  "$GMScript":"v1",
+  "%Name":"BonkPoleCollideCylinder",
+  "isCompatibility":false,
+  "isDnD":false,
+  "name":"BonkPoleCollideCylinder",
+  "parent":{
+    "name":"Pole",
+    "path":"folders/Bonk/Getters/Collide/Pole.yy",
+  },
+  "resourceType":"GMScript",
+  "resourceVersion":"2.0",
+}

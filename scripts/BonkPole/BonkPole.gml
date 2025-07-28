@@ -12,14 +12,16 @@ function BonkPole(_x, _y, _z, _height) : __BonkClassShared() constructor
     static _collideFuncLookup = (function()
     {
         var _array = array_create(BONK_NUMBER_OF_TYPES, undefined);
-        _array[@ BONK_TYPE_AABB] = BonkPoleCollideAABB;
+        _array[@ BONK_TYPE_AABB    ] = BonkPoleCollideAABB;
+        _array[@ BONK_TYPE_CYLINDER] = BonkPoleCollideCylinder;
         return _array;
     })();
     
     static _insideFuncLookup = (function()
     {
         var _array = array_create(BONK_NUMBER_OF_TYPES, undefined);
-        _array[@ BONK_TYPE_AABB] = BonkPoleInsideAABB;
+        _array[@ BONK_TYPE_AABB    ] = BonkPoleInsideAABB;
+        _array[@ BONK_TYPE_CYLINDER] = BonkPoleInsideCylinder;
         return _array;
     })();
     

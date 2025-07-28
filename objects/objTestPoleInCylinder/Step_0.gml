@@ -1,0 +1,1 @@
+pole.SetPosition(undefined, lerp(140, 270, 0.5 + 0.5*dsin(current_time/20)), undefined);
