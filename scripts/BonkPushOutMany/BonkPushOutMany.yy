@@ -1,12 +1,12 @@
 {
   "$GMScript":"v1",
-  "%Name":"BonkCapsule",
+  "%Name":"BonkPushOutMany",
   "isCompatibility":false,
   "isDnD":false,
-  "name":"BonkCapsule",
+  "name":"BonkPushOutMany",
   "parent":{
-    "name":"Shapes",
-    "path":"folders/Bonk/Constructors/Shapes.yy",
+    "name":"Bonk",
+    "path":"folders/Bonk.yy",
   },
   "resourceType":"GMScript",
   "resourceVersion":"2.0",

@@ -1,7 +1,4 @@
 world = new BonkWorld(room_width, room_height, 256, 64, 256);
 
 shape = new BonkCapsule(x, y, 200,   80, 25);
-
-xSpeed = 0;
-ySpeed = 0;
-zSpeed = 0;
+velocity = new BonkVelocity();

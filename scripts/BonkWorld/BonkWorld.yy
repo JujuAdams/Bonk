@@ -5,8 +5,8 @@
   "isDnD":false,
   "name":"BonkWorld",
   "parent":{
-    "name":"Bonk",
-    "path":"folders/Bonk.yy",
+    "name":"Constructors",
+    "path":"folders/Bonk/Constructors.yy",
   },
   "resourceType":"GMScript",
   "resourceVersion":"2.0",

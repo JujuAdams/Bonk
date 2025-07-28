@@ -1,12 +1,12 @@
 {
   "$GMScript":"v1",
-  "%Name":"BonkCollideAndRespondMany",
+  "%Name":"BonkVelocity",
   "isCompatibility":false,
   "isDnD":false,
-  "name":"BonkCollideAndRespondMany",
+  "name":"BonkVelocity",
   "parent":{
-    "name":"Bonk",
-    "path":"folders/Bonk.yy",
+    "name":"Constructors",
+    "path":"folders/Bonk/Constructors.yy",
   },
   "resourceType":"GMScript",
   "resourceVersion":"2.0",

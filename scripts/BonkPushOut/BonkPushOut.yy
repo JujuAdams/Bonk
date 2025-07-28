@@ -1,9 +1,9 @@
 {
   "$GMScript":"v1",
-  "%Name":"BonkCollideAndRespond",
+  "%Name":"BonkPushOut",
   "isCompatibility":false,
   "isDnD":false,
-  "name":"BonkCollideAndRespond",
+  "name":"BonkPushOut",
   "parent":{
     "name":"Bonk",
     "path":"folders/Bonk.yy",

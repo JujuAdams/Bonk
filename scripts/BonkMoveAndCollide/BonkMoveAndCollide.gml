@@ -1,13 +1,31 @@
 // Feather disable all
 
+/// @param velocityStruct
 /// @param subjectShape
 /// @param shapeArray
-/// @param [angleThreshold=36]
+/// @param [slopeThreshold=36]
+/// @param [updateVelocity=true]
 
-function BonkCollideAndRespondMany(_subjectShape, _shapeArray, _angleThreshold = 36)
+function BonkMoveAndCollide(_velocityStruct, _subjectShape, _shapeArray, _slopeThreshold = 36, _updateVelocity = true)
 {
+    if (not is_array(_shapeArray))
+    {
+        _shapeArray = [_shapeArray];
+    }
+    
     with(_subjectShape)
     {
+        if (_updateVelocity)
+        {
+            var _x = x;
+            var _y = y;
+            var _z = z;
+        }
+        
+        x += _velocityStruct.xSpeed;
+        y += _velocityStruct.ySpeed;
+        z += _velocityStruct.zSpeed;
+        
         var _i = 0;
         repeat(array_length(_shapeArray))
         {
@@ -19,7 +37,7 @@ function BonkCollideAndRespondMany(_subjectShape, _shapeArray, _angleThreshold =
                 var _dZ = _reaction.dZ;
                 
                 var _distance = sqrt(_dX*_dX + _dY*_dY + _dZ*_dZ);
-                if ((_dZ / _distance) > clamp(dcos(_angleThreshold), 0, 1))
+                if ((_dZ / _distance) > clamp(dcos(_slopeThreshold), 0, 1))
                 {
                     //If the slope is shallow enough, just move upwards
                     //This movement is approximate but good enough
@@ -35,6 +53,13 @@ function BonkCollideAndRespondMany(_subjectShape, _shapeArray, _angleThreshold =
             }
             
             ++_i;
+        }
+        
+        if (_updateVelocity)
+        {
+            _velocityStruct.xSpeed = x - _x;
+            _velocityStruct.ySpeed = y - _y;
+            _velocityStruct.zSpeed = z - _z;
         }
     }
 }

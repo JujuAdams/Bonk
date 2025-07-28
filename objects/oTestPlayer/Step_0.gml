@@ -5,36 +5,24 @@ if (not oCamera.mouseLock)
         shape.x = xstart;
         shape.y = ystart;
         shape.z = 200;
+        velocity.Reset();
     }
     
-    if (keyboard_check_pressed(vk_space)) zSpeed += 15;
+    if (keyboard_check_pressed(vk_space)) velocity.zSpeed += 15;
     
     var _para = 2*(keyboard_check(ord("W")) - keyboard_check(ord("S")));
     var _perp = 2*(keyboard_check(ord("A")) - keyboard_check(ord("D")));
     var _sin  = dsin(oCamera.camYaw);
     var _cos  = dcos(oCamera.camYaw);
-    
-    xSpeed =  _para*_cos - _perp*_sin;
-    ySpeed = -_para*_sin - _perp*_cos;
+    velocity.xSpeed =  _para*_cos - _perp*_sin;
+    velocity.ySpeed = -_para*_sin - _perp*_cos;
 }
 else
 {
-    xSpeed = 0;
-    ySpeed = 0;
+    velocity.xSpeed = 0;
+    velocity.ySpeed = 0;
 }
 
-zSpeed -= 1;
+velocity.zSpeed -= 1;
 
-var _x = shape.x;
-var _y = shape.y;
-var _z = shape.z;
-
-shape.x += xSpeed;
-shape.y += ySpeed;
-shape.z += zSpeed;
-
-BonkCollideAndRespondMany(shape, world.GetShapeArray(shape.x, shape.y, shape.z));
-
-xSpeed = shape.x - _x;
-ySpeed = shape.y - _y;
-zSpeed = shape.z - _z;
+world.MoveAndCollide(velocity, shape);

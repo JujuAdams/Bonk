@@ -10,37 +10,37 @@ shape.z += zSpeed;
 
 with(oTestFloor)
 {
-    BonkCollideAndRespond(other.shape, shape);
+    BonkPushOut(other.shape, shape);
 }
 
 with(oTestAABB)
 {
-    BonkCollideAndRespond(other.shape, shape);
+    BonkPushOut(other.shape, shape);
 }
 
 with(oTestAuto)
 {
-    BonkCollideAndRespond(other.shape, shape);
+    BonkPushOut(other.shape, shape);
 }
 
 with(oTestCylinder)
 {
-    BonkCollideAndRespond(other.shape, shape);
+    BonkPushOut(other.shape, shape);
 }
 
 with(oTestSphere)
 {
-    BonkCollideAndRespond(other.shape, shape);
+    BonkPushOut(other.shape, shape);
 }
 
 with(oTestQuad)
 {
-    BonkCollideAndRespond(other.shape, shape);
+    BonkPushOut(other.shape, shape);
 }
 
 with(oTestTriangle)
 {
-    BonkCollideAndRespond(other.shape, shape);
+    BonkPushOut(other.shape, shape);
 }
 
 xSpeed = shape.x - _x;

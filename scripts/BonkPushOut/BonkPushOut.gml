@@ -2,9 +2,9 @@
 
 /// @param subjectShape
 /// @param otherShape
-/// @param [angleThreshold=36]
+/// @param [slopeThreshold=36]
 
-function BonkCollideAndRespond(_subjectShape, _otherShape, _angleThreshold = 36)
+function BonkPushOut(_subjectShape, _otherShape, _slopeThreshold = 36)
 {
     with(_subjectShape)
     {
@@ -16,7 +16,7 @@ function BonkCollideAndRespond(_subjectShape, _otherShape, _angleThreshold = 36)
             var _dZ = _reaction.dZ;
             
             var _distance = sqrt(_dX*_dX + _dY*_dY + _dZ*_dZ);
-            if ((_dZ / _distance) > clamp(dcos(_angleThreshold), 0, 1))
+            if ((_dZ / _distance) > clamp(dcos(_slopeThreshold), 0, 1))
             {
                 //If the slope is shallow enough, just move upwards
                 //This movement is approximate but good enough
