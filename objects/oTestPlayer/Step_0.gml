@@ -1,3 +1,7 @@
+var _x = shape.x;
+var _y = shape.y;
+var _z = shape.z;
+
 if (not oCamera.mouseLock)
 {
     if (keyboard_check_pressed(ord("R")))
@@ -31,40 +35,44 @@ shape.z += zSpeed;
 
 with(oTestFloor)
 {
-    BonkCollideAndRespond(other.shape, shape, other);
+    BonkCollideAndRespond(other.shape, shape);
 }
 
 with(oTestAABB)
 {
-    BonkCollideAndRespond(other.shape, shape, other);
+    BonkCollideAndRespond(other.shape, shape);
 }
 
 with(oTestAuto)
 {
-    BonkCollideAndRespond(other.shape, shape, other);
+    BonkCollideAndRespond(other.shape, shape);
     
     if (shapeB != undefined)
     {
-        BonkCollideAndRespond(other.shape, shapeB, other);
+        BonkCollideAndRespond(other.shape, shapeB);
     }
 }
 
 with(oTestCylinder)
 {
-    BonkCollideAndRespond(other.shape, shape, other);
+    BonkCollideAndRespond(other.shape, shape);
 }
 
 with(oTestSphere)
 {
-    BonkCollideAndRespond(other.shape, shape, other);
+    BonkCollideAndRespond(other.shape, shape);
 }
 
 with(oTestQuad)
 {
-    BonkCollideAndRespond(other.shape, shape, other);
+    BonkCollideAndRespond(other.shape, shape);
 }
 
 with(oTestTriangle)
 {
-    BonkCollideAndRespond(other.shape, shape, other);
+    BonkCollideAndRespond(other.shape, shape);
 }
+
+xSpeed = shape.x - _x;
+ySpeed = shape.y - _y;
+zSpeed = shape.z - _z;
