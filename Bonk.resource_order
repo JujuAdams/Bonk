@@ -130,7 +130,6 @@
     {"name":"BonkLineHitTriangle","order":5,"path":"scripts/BonkLineHitTriangle/BonkLineHitTriangle.yy",},
     {"name":"BonkMoveAndCollide","order":4,"path":"scripts/BonkMoveAndCollide/BonkMoveAndCollide.yy",},
     {"name":"BonkPoint","order":5,"path":"scripts/BonkPoint/BonkPoint.yy",},
-    {"name":"BonkPushOut","order":2,"path":"scripts/BonkPushOut/BonkPushOut.yy",},
     {"name":"BonkPushOutMany","order":3,"path":"scripts/BonkPushOutMany/BonkPushOutMany.yy",},
     {"name":"BonkQuad","order":6,"path":"scripts/BonkQuad/BonkQuad.yy",},
     {"name":"BonkQuadCollideSphere","order":2,"path":"scripts/BonkQuadCollideSphere/BonkQuadCollideSphere.yy",},

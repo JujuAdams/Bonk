@@ -27,6 +27,17 @@ function BonkWorld(_xSize, _ySize, _zSize, _cellXYSize, _cellZSize) constructor
     
     
     
+    static PushOut = function(_subjectShape, _slopeThreshold)
+    {
+        var _shapeArray = GetShapeArray(_subjectShape.x, _subjectShape.y, _subjectShape.z);
+        var _i = 0;
+        repeat(array_length(_shapeArray))
+        {
+            _shapeArray[_i].PushOut(_subjectShape, _slopeThreshold);
+            ++_i;
+        }
+    }
+    
     static MoveAndCollide = function(_velocityStruct, _subjectShape, _slopeThreshold = 36, _updateVelocity = true)
     {
         with(_subjectShape)

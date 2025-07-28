@@ -174,7 +174,6 @@
     {"id":{"name":"BonkLineHitTriangle","path":"scripts/BonkLineHitTriangle/BonkLineHitTriangle.yy",},},
     {"id":{"name":"BonkMoveAndCollide","path":"scripts/BonkMoveAndCollide/BonkMoveAndCollide.yy",},},
     {"id":{"name":"BonkPoint","path":"scripts/BonkPoint/BonkPoint.yy",},},
-    {"id":{"name":"BonkPushOut","path":"scripts/BonkPushOut/BonkPushOut.yy",},},
     {"id":{"name":"BonkPushOutMany","path":"scripts/BonkPushOutMany/BonkPushOutMany.yy",},},
     {"id":{"name":"BonkQuad","path":"scripts/BonkQuad/BonkQuad.yy",},},
     {"id":{"name":"BonkQuadCollideCapsule","path":"scripts/BonkQuadCollideCapsule/BonkQuadCollideCapsule.yy",},},

@@ -25,4 +25,4 @@ else
 
 velocity.zSpeed -= 1;
 
-world.MoveAndCollide(velocity, shape);
+BonkMoveAndCollide(shape, velocity, world);
