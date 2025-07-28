@@ -3,10 +3,10 @@
 /// @param subjectShape
 /// @param velocityStruct
 /// @param shapeArray
-/// @param [slopeThreshold=36]
+/// @param [slopeThreshold=0]
 /// @param [updateVelocity=true]
 
-function BonkMoveAndCollide(_subjectShape, _velocityStruct, _shapeArray, _slopeThreshold = 36, _updateVelocity = true)
+function BonkMoveAndCollide(_subjectShape, _velocityStruct, _shapeArray, _slopeThreshold = 0, _updateVelocity = true)
 {
     if (not is_array(_shapeArray))
     {

@@ -20,7 +20,7 @@ function __BonkClassShared() constructor
         return false;
     }
     
-    static PushOut = function(_subjectShape, _slopeThreshold = 36)
+    static PushOut = function(_subjectShape, _slopeThreshold = 0)
     {
         with(_subjectShape)
         {
@@ -31,7 +31,7 @@ function __BonkClassShared() constructor
                 var _dY = _reaction.dY;
                 var _dZ = _reaction.dZ;
                 
-                var _distance = sqrt(_dX*_dX + _dY*_dY + _dZ*_dZ);
+                var _distance = max(0.00001, sqrt(_dX*_dX + _dY*_dY + _dZ*_dZ));
                 if ((_dZ / _distance) > clamp(dcos(_slopeThreshold), 0, 1))
                 {
                     //If the slope is shallow enough, just move upwards
