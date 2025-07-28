@@ -12,6 +12,8 @@
   "Folders":[
     {"$GMFolder":"","%Name":"Bonk","folderPath":"folders/Bonk.yy","name":"Bonk","resourceType":"GMFolder","resourceVersion":"2.0",},
     {"$GMFolder":"","%Name":"(System)","folderPath":"folders/Bonk/(System).yy","name":"(System)","resourceType":"GMFolder","resourceVersion":"2.0",},
+    {"$GMFolder":"","%Name":"Constructors","folderPath":"folders/Bonk/Constructors.yy","name":"Constructors","resourceType":"GMFolder","resourceVersion":"2.0",},
+    {"$GMFolder":"","%Name":"Shapes","folderPath":"folders/Bonk/Constructors/Shapes.yy","name":"Shapes","resourceType":"GMFolder","resourceVersion":"2.0",},
     {"$GMFolder":"","%Name":"Getters","folderPath":"folders/Bonk/Getters.yy","name":"Getters","resourceType":"GMFolder","resourceVersion":"2.0",},
     {"$GMFolder":"","%Name":"Collide","folderPath":"folders/Bonk/Getters/Collide.yy","name":"Collide","resourceType":"GMFolder","resourceVersion":"2.0",},
     {"$GMFolder":"","%Name":"AABB","folderPath":"folders/Bonk/Getters/Collide/AABB.yy","name":"AABB","resourceType":"GMFolder","resourceVersion":"2.0",},
@@ -30,8 +32,6 @@
     {"$GMFolder":"","%Name":"Triangle","folderPath":"folders/Bonk/Getters/Inside/Triangle.yy","name":"Triangle","resourceType":"GMFolder","resourceVersion":"2.0",},
     {"$GMFolder":"","%Name":"Line Hit","folderPath":"folders/Bonk/Getters/Line Hit.yy","name":"Line Hit","resourceType":"GMFolder","resourceVersion":"2.0",},
     {"$GMFolder":"","%Name":"Ray Hit","folderPath":"folders/Bonk/Getters/Ray Hit.yy","name":"Ray Hit","resourceType":"GMFolder","resourceVersion":"2.0",},
-    {"$GMFolder":"","%Name":"Shapes","folderPath":"folders/Bonk/Constructors/Shapes.yy","name":"Shapes","resourceType":"GMFolder","resourceVersion":"2.0",},
-    {"$GMFolder":"","%Name":"Constructors","folderPath":"folders/Bonk/Constructors.yy","name":"Constructors","resourceType":"GMFolder","resourceVersion":"2.0",},
     {"$GMFolder":"","%Name":"Misc","folderPath":"folders/Misc.yy","name":"Misc","resourceType":"GMFolder","resourceVersion":"2.0",},
     {"$GMFolder":"","%Name":"Test Cases","folderPath":"folders/Test Cases.yy","name":"Test Cases","resourceType":"GMFolder","resourceVersion":"2.0",},
     {"$GMFolder":"","%Name":"Basic Collision Tests","folderPath":"folders/Test Cases/Basic Collision Tests.yy","name":"Basic Collision Tests","resourceType":"GMFolder","resourceVersion":"2.0",},

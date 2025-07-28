@@ -2,6 +2,8 @@
   "FolderOrderSettings":[
     {"name":"Bonk","order":1,"path":"folders/Bonk.yy",},
     {"name":"(System)","order":7,"path":"folders/Bonk/(System).yy",},
+    {"name":"Constructors","order":8,"path":"folders/Bonk/Constructors.yy",},
+    {"name":"Shapes","order":2,"path":"folders/Bonk/Constructors/Shapes.yy",},
     {"name":"Getters","order":10,"path":"folders/Bonk/Getters.yy",},
     {"name":"Collide","order":3,"path":"folders/Bonk/Getters/Collide.yy",},
     {"name":"Capsule","order":1,"path":"folders/Bonk/Getters/Collide/Capsule.yy",},
@@ -17,8 +19,6 @@
     {"name":"Sphere","order":5,"path":"folders/Bonk/Getters/Inside/Sphere.yy",},
     {"name":"Triangle","order":6,"path":"folders/Bonk/Getters/Inside/Triangle.yy",},
     {"name":"Ray Hit","order":1,"path":"folders/Bonk/Getters/Ray Hit.yy",},
-    {"name":"Shapes","order":2,"path":"folders/Bonk/Constructors/Shapes.yy",},
-    {"name":"Constructors","order":8,"path":"folders/Bonk/Constructors.yy",},
     {"name":"Misc","order":7,"path":"folders/Misc.yy",},
     {"name":"Test Cases","order":2,"path":"folders/Test Cases.yy",},
     {"name":"Capsule","order":1,"path":"folders/Test Cases/Basic Collision Tests/Capsule.yy",},
