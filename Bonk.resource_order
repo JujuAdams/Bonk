@@ -120,8 +120,6 @@
     {"name":"BonkCylinderInsideCapsule","order":1,"path":"scripts/BonkCylinderInsideCapsule/BonkCylinderInsideCapsule.yy",},
     {"name":"BonkCylinderInsideCylinder","order":2,"path":"scripts/BonkCylinderInsideCylinder/BonkCylinderInsideCylinder.yy",},
     {"name":"BonkCylinderInsideSphere","order":3,"path":"scripts/BonkCylinderInsideSphere/BonkCylinderInsideSphere.yy",},
-    {"name":"BonkGetDisplacement","order":2,"path":"scripts/BonkGetDisplacement/BonkGetDisplacement.yy",},
-    {"name":"BonkGetNewSpeed","order":3,"path":"scripts/BonkGetNewSpeed/BonkGetNewSpeed.yy",},
     {"name":"BonkLine","order":4,"path":"scripts/BonkLine/BonkLine.yy",},
     {"name":"BonkLineHitCapsule","order":1,"path":"scripts/BonkLineHitCapsule/BonkLineHitCapsule.yy",},
     {"name":"BonkLineHitCylinder","order":2,"path":"scripts/BonkLineHitCylinder/BonkLineHitCylinder.yy",},
