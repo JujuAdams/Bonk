@@ -1,5 +1,5 @@
-#macro BONK_VERSION  "0.2.0"
-#macro BONK_DATE     "2024-01-28"
+#macro BONK_VERSION  "1.0.0"
+#macro BONK_DATE     "2025-07-28"
 
 #macro BONK_TYPE_AABB      0
 #macro BONK_TYPE_CAPSULE   1
