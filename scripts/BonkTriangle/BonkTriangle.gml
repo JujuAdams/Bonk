@@ -47,18 +47,16 @@ function BonkTriangle(_x1, _y1, _z1, _x2, _y2, _z2, _x3, _y3, _z3) : __BonkClass
     static _collideFuncLookup = (function()
     {
         var _array = array_create(BONK_NUMBER_OF_TYPES, undefined);
-        _array[@ BONK_TYPE_CAPSULE     ] = BonkTriangleCollideCapsule;
-        _array[@ BONK_TYPE_CYLINDER_EXT] = BonkTriangleCollideCapsule;
-        _array[@ BONK_TYPE_SPHERE      ] = BonkTriangleCollideSphere;
+        _array[@ BONK_TYPE_CAPSULE] = BonkTriangleCollideCapsule;
+        _array[@ BONK_TYPE_SPHERE ] = BonkTriangleCollideSphere;
         return _array;
     })();
     
     static _insideFuncLookup = (function()
     {
         var _array = array_create(BONK_NUMBER_OF_TYPES, undefined);
-        _array[@ BONK_TYPE_CAPSULE     ] = BonkTriangleInsideCapsule;
-        _array[@ BONK_TYPE_CYLINDER_EXT] = BonkTriangleInsideCapsule;
-        _array[@ BONK_TYPE_SPHERE      ] = BonkTriangleInsideSphere;
+        _array[@ BONK_TYPE_CAPSULE] = BonkTriangleInsideCapsule;
+        _array[@ BONK_TYPE_SPHERE ] = BonkTriangleInsideSphere;
         return _array;
     })();
     

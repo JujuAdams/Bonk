@@ -117,7 +117,6 @@
     {"name":"BonkCylinderCollideCapsule","order":1,"path":"scripts/BonkCylinderCollideCapsule/BonkCylinderCollideCapsule.yy",},
     {"name":"BonkCylinderCollideCylinder","order":2,"path":"scripts/BonkCylinderCollideCylinder/BonkCylinderCollideCylinder.yy",},
     {"name":"BonkCylinderCollideSphere","order":3,"path":"scripts/BonkCylinderCollideSphere/BonkCylinderCollideSphere.yy",},
-    {"name":"BonkCylinderExt","order":3,"path":"scripts/BonkCylinderExt/BonkCylinderExt.yy",},
     {"name":"BonkCylinderInsideCapsule","order":1,"path":"scripts/BonkCylinderInsideCapsule/BonkCylinderInsideCapsule.yy",},
     {"name":"BonkCylinderInsideCylinder","order":2,"path":"scripts/BonkCylinderInsideCylinder/BonkCylinderInsideCylinder.yy",},
     {"name":"BonkCylinderInsideSphere","order":3,"path":"scripts/BonkCylinderInsideSphere/BonkCylinderInsideSphere.yy",},

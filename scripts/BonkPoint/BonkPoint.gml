@@ -30,11 +30,10 @@ function BonkPoint(_x, _y, _z) : __BonkClassShared() constructor
     static _insideFuncLookup = (function()
     {
         var _array = array_create(BONK_NUMBER_OF_TYPES, undefined);
-        _array[@ BONK_TYPE_AABB        ] = BonkCoordInsideAABB;
-        _array[@ BONK_TYPE_CAPSULE     ] = BonkCoordInsideCapsule;
-        _array[@ BONK_TYPE_CYLINDER    ] = BonkCoordInsideCylinder;
-        _array[@ BONK_TYPE_CYLINDER_EXT] = BonkCoordInsideCylinder;
-        _array[@ BONK_TYPE_SPHERE      ] = BonkCoordInsideSphere;
+        _array[@ BONK_TYPE_AABB    ] = BonkCoordInsideAABB;
+        _array[@ BONK_TYPE_CAPSULE ] = BonkCoordInsideCapsule;
+        _array[@ BONK_TYPE_CYLINDER] = BonkCoordInsideCylinder;
+        _array[@ BONK_TYPE_SPHERE  ] = BonkCoordInsideSphere;
         return _array;
     })();
     

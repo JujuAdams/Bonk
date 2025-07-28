@@ -49,18 +49,16 @@ function BonkQuad(_x1, _y1, _z1, _x2, _y2, _z2, _x3, _y3, _z3) : __BonkClassShar
     static _collideFuncLookup = (function()
     {
         var _array = array_create(BONK_NUMBER_OF_TYPES, undefined);
-        _array[@ BONK_TYPE_CAPSULE     ] = BonkQuadCollideCapsule;
-        _array[@ BONK_TYPE_CYLINDER_EXT] = BonkQuadCollideCapsule;
-        _array[@ BONK_TYPE_SPHERE      ] = BonkQuadCollideSphere;
+        _array[@ BONK_TYPE_CAPSULE] = BonkQuadCollideCapsule;
+        _array[@ BONK_TYPE_SPHERE ] = BonkQuadCollideSphere;
         return _array;
     })();
     
     static _insideFuncLookup = (function()
     {
         var _array = array_create(BONK_NUMBER_OF_TYPES, undefined);
-        _array[@ BONK_TYPE_CAPSULE     ] = BonkQuadInsideCapsule;
-        _array[@ BONK_TYPE_CYLINDER_EXT] = BonkQuadInsideCapsule;
-        _array[@ BONK_TYPE_SPHERE      ] = BonkQuadInsideSphere;
+        _array[@ BONK_TYPE_CAPSULE] = BonkQuadInsideCapsule;
+        _array[@ BONK_TYPE_SPHERE ] = BonkQuadInsideSphere;
         return _array;
     })();
     

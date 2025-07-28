@@ -159,7 +159,6 @@
     {"id":{"name":"BonkCylinderCollideCapsule","path":"scripts/BonkCylinderCollideCapsule/BonkCylinderCollideCapsule.yy",},},
     {"id":{"name":"BonkCylinderCollideCylinder","path":"scripts/BonkCylinderCollideCylinder/BonkCylinderCollideCylinder.yy",},},
     {"id":{"name":"BonkCylinderCollideSphere","path":"scripts/BonkCylinderCollideSphere/BonkCylinderCollideSphere.yy",},},
-    {"id":{"name":"BonkCylinderExt","path":"scripts/BonkCylinderExt/BonkCylinderExt.yy",},},
     {"id":{"name":"BonkCylinderInsideAABB","path":"scripts/BonkCylinderInsideAABB/BonkCylinderInsideAABB.yy",},},
     {"id":{"name":"BonkCylinderInsideCapsule","path":"scripts/BonkCylinderInsideCapsule/BonkCylinderInsideCapsule.yy",},},
     {"id":{"name":"BonkCylinderInsideCylinder","path":"scripts/BonkCylinderInsideCylinder/BonkCylinderInsideCylinder.yy",},},

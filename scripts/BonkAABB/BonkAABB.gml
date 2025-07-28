@@ -45,22 +45,20 @@ function BonkAABB(_x, _y, _z, _xSize, _ySize, _zSize) : __BonkClassShared() cons
     static _collideFuncLookup = (function()
     {
         var _array = array_create(BONK_NUMBER_OF_TYPES, undefined);
-        _array[@ BONK_TYPE_AABB        ] = BonkAABBCollideAABB;
-        _array[@ BONK_TYPE_CAPSULE     ] = BonkAABBCollideCapsule;
-        _array[@ BONK_TYPE_CYLINDER    ] = BonkAABBCollideCylinder;
-        _array[@ BONK_TYPE_CYLINDER_EXT] = BonkAABBCollideCylinder;
-        _array[@ BONK_TYPE_SPHERE      ] = BonkAABBCollideSphere;
+        _array[@ BONK_TYPE_AABB    ] = BonkAABBCollideAABB;
+        _array[@ BONK_TYPE_CAPSULE ] = BonkAABBCollideCapsule;
+        _array[@ BONK_TYPE_CYLINDER] = BonkAABBCollideCylinder;
+        _array[@ BONK_TYPE_SPHERE  ] = BonkAABBCollideSphere;
         return _array;
     })();
     
     static _insideFuncLookup = (function()
     {
         var _array = array_create(BONK_NUMBER_OF_TYPES, undefined);
-        _array[@ BONK_TYPE_AABB        ] = BonkAABBInsideAABB;
-        _array[@ BONK_TYPE_CAPSULE     ] = BonkAABBInsideCapsule;
-        _array[@ BONK_TYPE_CYLINDER    ] = BonkAABBInsideCylinder;
-        _array[@ BONK_TYPE_CYLINDER_EXT] = BonkAABBInsideCylinder;
-        _array[@ BONK_TYPE_SPHERE      ] = BonkAABBInsideSphere;
+        _array[@ BONK_TYPE_AABB    ] = BonkAABBInsideAABB;
+        _array[@ BONK_TYPE_CAPSULE ] = BonkAABBInsideCapsule;
+        _array[@ BONK_TYPE_CYLINDER] = BonkAABBInsideCylinder;
+        _array[@ BONK_TYPE_SPHERE  ] = BonkAABBInsideSphere;
         return _array;
     })();
     
