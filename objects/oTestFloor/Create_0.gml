@@ -1,0 +1,1 @@
+shape = new BonkAABB(room_width/2, room_height/2, -10,   2*room_width, 2*room_height, 10);

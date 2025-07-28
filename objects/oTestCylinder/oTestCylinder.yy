@@ -1,12 +1,12 @@
 {
   "$GMObject":"",
-  "%Name":"oTestPlatformerQuad",
+  "%Name":"oTestCylinder",
   "eventList":[
     {"$GMEvent":"v1","%Name":"","collisionObjectId":null,"eventNum":0,"eventType":0,"isDnD":false,"name":"","resourceType":"GMEvent","resourceVersion":"2.0",},
     {"$GMEvent":"v1","%Name":"","collisionObjectId":null,"eventNum":0,"eventType":8,"isDnD":false,"name":"","resourceType":"GMEvent","resourceVersion":"2.0",},
   ],
   "managed":true,
-  "name":"oTestPlatformerQuad",
+  "name":"oTestCylinder",
   "overriddenProperties":[],
   "parent":{
     "name":"Test Cases",
@@ -31,8 +31,8 @@
   "resourceVersion":"2.0",
   "solid":false,
   "spriteId":{
-    "name":"sAABB",
-    "path":"sprites/sAABB/sAABB.yy",
+    "name":"sCylinder",
+    "path":"sprites/sCylinder/sCylinder.yy",
   },
   "spriteMaskId":null,
   "visible":true,

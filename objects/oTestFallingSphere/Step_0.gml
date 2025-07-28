@@ -4,32 +4,37 @@ shape.x += xSpeed;
 shape.y += ySpeed;
 shape.z += zSpeed;
 
-with(oTestPlatformerFloor)
+with(oTestFloor)
 {
     BonkCollideAndRespond(other.shape, shape, other);
 }
 
-with(oTestPlatformerAABB)
+with(oTestAABB)
 {
     BonkCollideAndRespond(other.shape, shape, other);
 }
 
-with(oTestPlatformerCylinder)
+with(oTestAuto)
 {
     BonkCollideAndRespond(other.shape, shape, other);
 }
 
-with(oTestPlatformerSphere)
+with(oTestCylinder)
 {
     BonkCollideAndRespond(other.shape, shape, other);
 }
 
-with(oTestPlatformerQuad)
+with(oTestSphere)
 {
     BonkCollideAndRespond(other.shape, shape, other);
 }
 
-with(oTestPlatformerTriangle)
+with(oTestQuad)
+{
+    BonkCollideAndRespond(other.shape, shape, other);
+}
+
+with(oTestTriangle)
 {
     BonkCollideAndRespond(other.shape, shape, other);
 }

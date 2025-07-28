@@ -1,1 +1,0 @@
-shape = new BonkCylinder(x, y, 25,   50, 32);
