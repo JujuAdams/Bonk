@@ -1,7 +1,3 @@
-var _x = shape.x;
-var _y = shape.y;
-var _z = shape.z;
-
 if (not oCamera.mouseLock)
 {
     if (keyboard_check_pressed(ord("R")))
@@ -28,6 +24,10 @@ else
 }
 
 zSpeed -= 1;
+
+var _x = shape.x;
+var _y = shape.y;
+var _z = shape.z;
 
 shape.x += xSpeed;
 shape.y += ySpeed;

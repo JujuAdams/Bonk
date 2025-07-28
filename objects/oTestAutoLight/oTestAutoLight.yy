@@ -1,12 +1,12 @@
 {
   "$GMObject":"",
-  "%Name":"oTestAuto",
+  "%Name":"oTestAutoLight",
   "eventList":[
     {"$GMEvent":"v1","%Name":"","collisionObjectId":null,"eventNum":0,"eventType":0,"isDnD":false,"name":"","resourceType":"GMEvent","resourceVersion":"2.0",},
     {"$GMEvent":"v1","%Name":"","collisionObjectId":null,"eventNum":0,"eventType":8,"isDnD":false,"name":"","resourceType":"GMEvent","resourceVersion":"2.0",},
   ],
   "managed":true,
-  "name":"oTestAuto",
+  "name":"oTestAutoLight",
   "overriddenProperties":[],
   "parent":{
     "name":"Test Cases",
@@ -34,8 +34,8 @@
   "resourceVersion":"2.0",
   "solid":false,
   "spriteId":{
-    "name":"sAuto",
-    "path":"sprites/sAuto/sAuto.yy",
+    "name":"sAutoLight",
+    "path":"sprites/sAutoLight/sAutoLight.yy",
   },
   "spriteMaskId":null,
   "visible":true,
