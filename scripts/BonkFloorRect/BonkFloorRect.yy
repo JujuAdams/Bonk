@@ -1,12 +1,12 @@
 {
   "$GMScript":"v1",
-  "%Name":"BonkPoint",
+  "%Name":"BonkFloorRect",
   "isCompatibility":false,
   "isDnD":false,
-  "name":"BonkPoint",
+  "name":"BonkFloorRect",
   "parent":{
-    "name":"Helpers",
-    "path":"folders/Bonk/Constructors/Helpers.yy",
+    "name":"Want",
+    "path":"folders/Bonk/Constructors/Want.yy",
   },
   "resourceType":"GMScript",
   "resourceVersion":"2.0",

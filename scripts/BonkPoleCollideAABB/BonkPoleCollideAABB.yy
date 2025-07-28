@@ -1,12 +1,12 @@
 {
   "$GMScript":"v1",
-  "%Name":"BonkPoint",
+  "%Name":"BonkPoleCollideAABB",
   "isCompatibility":false,
   "isDnD":false,
-  "name":"BonkPoint",
+  "name":"BonkPoleCollideAABB",
   "parent":{
-    "name":"Helpers",
-    "path":"folders/Bonk/Constructors/Helpers.yy",
+    "name":"Pole",
+    "path":"folders/Bonk/Getters/Collide/Pole.yy",
   },
   "resourceType":"GMScript",
   "resourceVersion":"2.0",

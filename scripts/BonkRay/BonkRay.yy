@@ -5,8 +5,8 @@
   "isDnD":false,
   "name":"BonkRay",
   "parent":{
-    "name":"Constructors",
-    "path":"folders/Bonk/Constructors.yy",
+    "name":"Helpers",
+    "path":"folders/Bonk/Constructors/Helpers.yy",
   },
   "resourceType":"GMScript",
   "resourceVersion":"2.0",
