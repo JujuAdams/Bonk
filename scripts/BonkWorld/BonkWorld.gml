@@ -12,6 +12,8 @@
 
 function BonkWorld(_xSize, _ySize, _zSize, _cellXSize, _cellYSize, _cellZSize) constructor
 {
+    static bonkType = BONK_TYPE_WORLD;
+    
     __xSize = _xSize;
     __ySize = _ySize;
     __zSize = _zSize;
@@ -106,6 +108,16 @@ function BonkWorld(_xSize, _ySize, _zSize, _cellXSize, _cellYSize, _cellZSize) c
     
     static Add = function(_shape)
     {
+        if ((_shape.bonkType == BONK_TYPE_LINE) || (_shape.bonkType == BONK_TYPE_RAY) || (_shape.bonkType = BONK_TYPE_POINT))
+        {
+            if (BONK_STRICT)
+            {
+                __BonkError($"Cannot add {instanceof(_shape)} to a `BonkWorld()`");
+            }
+            
+            return;
+        }
+        
         var _aabb = _shape.GetAABB();
         
         var _cellX = clamp(floor((_aabb.x1 / __cellXSize) - 0.5), 0, __cellXCount-1);

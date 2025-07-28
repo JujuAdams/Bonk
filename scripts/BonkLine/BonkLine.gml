@@ -108,7 +108,7 @@ function BonkLine(_x1, _y1, _z1, _x2, _y2, _z2) : __BonkClassShared() constructo
         }
         else
         {
-            if (BONK_STRICT_COLLISION_COMPATIBILITY)
+            if (BONK_STRICT)
             {
                 __BonkError($".Hit() not supported between \"{instanceof(self)}\" (type={bonkType}) and \"{instanceof(_otherShape)}\" (type={_otherShape.bonkType})");
             }

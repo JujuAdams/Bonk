@@ -81,7 +81,7 @@ function BonkPoint(_x, _y, _z) : __BonkClassShared() constructor
         }
         else
         {
-            if (BONK_STRICT_COLLISION_COMPATIBILITY)
+            if (BONK_STRICT)
             {
                 __BonkError($".Inside() not supported between \"{instanceof(self)}\" (type={bonkType}) and \"{instanceof(_otherShape)}\" (type={_otherShape.bonkType})");
             }

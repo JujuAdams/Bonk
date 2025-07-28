@@ -11,7 +11,7 @@ function __BonkClassShared() constructor
         }
         else
         {
-            if (BONK_STRICT_COLLISION_COMPATIBILITY)
+            if (BONK_STRICT)
             {
                 __BonkError($".Inside() not supported between \"{instanceof(self)}\" (type={bonkType}) and \"{instanceof(_otherShape)}\" (type={_otherShape.bonkType})");
             }
@@ -60,7 +60,7 @@ function __BonkClassShared() constructor
         }
         else
         {
-            if (BONK_STRICT_COLLISION_COMPATIBILITY)
+            if (BONK_STRICT)
             {
                 __BonkError($".Collide() not supported between \"{instanceof(self)}\" (type={bonkType}) and \"{instanceof(_otherShape)}\" (type={_otherShape.bonkType})");
             }
@@ -73,7 +73,7 @@ function __BonkClassShared() constructor
     {
         static _nullHit = __Bonk().__nullHit;
         
-        if (BONK_STRICT_COLLISION_COMPATIBILITY)
+        if (BONK_STRICT)
         {
             __BonkError($".Hit() not supported between \"{instanceof(self)}\" (type={bonkType}) and \"{instanceof(_otherShape)}\" (type={_otherShape.bonkType})");
         }

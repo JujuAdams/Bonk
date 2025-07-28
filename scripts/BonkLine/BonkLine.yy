@@ -5,8 +5,8 @@
   "isDnD":false,
   "name":"BonkLine",
   "parent":{
-    "name":"Shapes",
-    "path":"folders/Bonk/Constructors/Shapes.yy",
+    "name":"Constructors",
+    "path":"folders/Bonk/Constructors.yy",
   },
   "resourceType":"GMScript",
   "resourceVersion":"2.0",

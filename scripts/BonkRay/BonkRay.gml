@@ -108,7 +108,7 @@ function BonkRay(_x, _y, _z, _dX, _dY, _dZ) : __BonkClassShared() constructor
         }
         else
         {
-            if (BONK_STRICT_COLLISION_COMPATIBILITY)
+            if (BONK_STRICT)
             {
                 __BonkError($".Intersects() not supported between \"{instanceof(self)}\" (type={bonkType}) and \"{instanceof(_otherShape)}\" (type={_otherShape.bonkType})");
             }
