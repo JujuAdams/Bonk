@@ -78,6 +78,22 @@ function BonkQuad(_x1, _y1, _z1, _x2, _y2, _z2, _x3, _y3, _z3) : __BonkClassShar
     
     
     
+    static GetAABB = function()
+    {
+        var _x4 = x2 + (x3 - x1);
+        var _y4 = y2 + (y3 - y1);
+        var _z4 = z2 + (z3 - z1);
+        
+        return {
+            x1: min(x1, x2, x3, _x4),
+            y1: min(y1, y2, y3, _y4),
+            z1: min(z1, z2, z3, _z4),
+            x2: max(x1, x2, x3, _x4),
+            y2: max(y1, y2, y3, _y4),
+            z2: max(z1, z2, z3, _z4),
+        };
+    }
+    
     static Draw = function(_color = undefined, _wireframe = undefined)
     {
         __BONK_VERIFY_UGG

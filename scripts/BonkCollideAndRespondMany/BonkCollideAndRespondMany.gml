@@ -11,9 +11,7 @@ function BonkCollideAndRespondMany(_subjectShape, _shapeArray, _angleThreshold =
         var _i = 0;
         repeat(array_length(_shapeArray))
         {
-            var _otherShape = _shapeArray[_i];
-            
-            var _reaction = Collide(_otherShape);
+            var _reaction = Collide(_shapeArray[_i]);
             if (_reaction.collision)
             {
                 var _dX = _reaction.dX;

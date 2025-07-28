@@ -33,45 +33,7 @@ shape.x += xSpeed;
 shape.y += ySpeed;
 shape.z += zSpeed;
 
-with(oTestFloor)
-{
-    BonkCollideAndRespond(other.shape, shape);
-}
-
-with(oTestAABB)
-{
-    BonkCollideAndRespond(other.shape, shape);
-}
-
-with(oTestAuto)
-{
-    BonkCollideAndRespond(other.shape, shape);
-    
-    if (shapeB != undefined)
-    {
-        BonkCollideAndRespond(other.shape, shapeB);
-    }
-}
-
-with(oTestCylinder)
-{
-    BonkCollideAndRespond(other.shape, shape);
-}
-
-with(oTestSphere)
-{
-    BonkCollideAndRespond(other.shape, shape);
-}
-
-with(oTestQuad)
-{
-    BonkCollideAndRespond(other.shape, shape);
-}
-
-with(oTestTriangle)
-{
-    BonkCollideAndRespond(other.shape, shape);
-}
+BonkCollideAndRespondMany(shape, world.GetShapeArray(shape.x, shape.y, shape.z));
 
 xSpeed = shape.x - _x;
 ySpeed = shape.y - _y;

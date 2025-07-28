@@ -13,7 +13,10 @@
     "name":"Test Cases",
     "path":"folders/Test Cases.yy",
   },
-  "parentObjectId":null,
+  "parentObjectId":{
+    "name":"oTestParent",
+    "path":"objects/oTestParent/oTestParent.yy",
+  },
   "persistent":false,
   "physicsAngularDamping":0.1,
   "physicsDensity":0.5,

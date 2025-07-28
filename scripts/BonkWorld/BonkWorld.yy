@@ -1,0 +1,13 @@
+{
+  "$GMScript":"v1",
+  "%Name":"BonkWorld",
+  "isCompatibility":false,
+  "isDnD":false,
+  "name":"BonkWorld",
+  "parent":{
+    "name":"Bonk",
+    "path":"folders/Bonk.yy",
+  },
+  "resourceType":"GMScript",
+  "resourceVersion":"2.0",
+}

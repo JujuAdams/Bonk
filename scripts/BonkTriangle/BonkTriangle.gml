@@ -81,4 +81,16 @@ function BonkTriangle(_x1, _y1, _z1, _x2, _y2, _z2, _x3, _y3, _z3) : __BonkClass
         __BONK_VERIFY_UGG
         UggTriangle(x1, y1, z1,   x2, y2, z2,   x3, y3, z3,   _color, _wireframe);
     }
+    
+    static GetAABB = function()
+    {
+        return {
+            x1: min(x1, x2, x3),
+            y1: min(y1, y2, y3),
+            z1: min(z1, z2, z3),
+            x2: max(x1, x2, x3),
+            y2: max(y1, y2, y3),
+            z2: max(z1, z2, z3),
+        };
+    }
 }

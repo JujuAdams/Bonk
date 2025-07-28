@@ -32,7 +32,7 @@ function BonkCapsuleCollideAABB(_capsule, _aabb)
     var _dZ = _aabbZ - _capsuleClosestZ;
     
     var _dist = sqrt(_dX*_dX + _dY*_dY + _dZ*_dZ);
-    if (_dist >= _capsuleRadius)
+    if ((_dist <= 0) || (_dist >= _capsuleRadius))
     {
         return _nullReaction;
     }

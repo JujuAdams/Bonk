@@ -85,6 +85,18 @@ function BonkRay(_x, _y, _z, _dX, _dY, _dZ) : __BonkClassShared() constructor
         UggRayWithArrow(x, y, z, dX, dY, dZ, _color, _thickness, _wireframe);
     }
     
+    static GetAABB = function()
+    {
+        return {
+            x1: x,
+            y1: y,
+            z1: z,
+            x2: x,
+            y2: y,
+            z2: z,
+        };
+    }
+    
     static Hit = function(_otherShape)
     {
         static _nullHit = __Bonk().__nullHit;
