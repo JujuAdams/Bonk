@@ -70,18 +70,13 @@ function BonkRotatedBox(_x, _y, _z, _xSize, _ySize, _zSize, _zRotation) : __Bonk
     
     static GetAABB = function()
     {
-        var _cos =  dcos(zRotation);
-        var _sin = -dsin(zRotation);
-        
-        var _w = xSize*_cos - ySize*_sin;
-        var _h = xSize*_sin + ySize*_cos;
-        
+        //TODO - Do this properly
         return {
-            x1: x - 0.5*_w,
-            y1: y - 0.5*_h,
+            x1: x - sqrt(2)*max(xSize, ySize),
+            y1: y - sqrt(2)*max(xSize, ySize),
             z1: z - 0.5*zSize,
-            x2: x + 0.5*_w,
-            y2: y + 0.5*_h,
+            x2: x + sqrt(2)*max(xSize, ySize),
+            y2: y + sqrt(2)*max(xSize, ySize),
             z2: z + 0.5*zSize,
         };
     }

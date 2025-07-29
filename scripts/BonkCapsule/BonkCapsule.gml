@@ -50,6 +50,7 @@ function BonkCapsule(_x, _y, _z, _height, _radius) : __BonkClassShared() constru
     {
         var _array = array_create(BONK_NUMBER_OF_TYPES, undefined);
         _array[@ BONK_TYPE_AABB    ] = BonkCapsuleCollideAABB;
+        _array[@ BONK_TYPE_OBB     ] = BonkCapsuleCollideRotatedBox;
         _array[@ BONK_TYPE_CAPSULE ] = BonkCapsuleCollideCapsule;
         _array[@ BONK_TYPE_CYLINDER] = BonkCapsuleCollideCylinder;
         _array[@ BONK_TYPE_QUAD    ] = BonkCapsuleCollideQuad;
@@ -62,6 +63,7 @@ function BonkCapsule(_x, _y, _z, _height, _radius) : __BonkClassShared() constru
     {
         var _array = array_create(BONK_NUMBER_OF_TYPES, undefined);
         _array[@ BONK_TYPE_AABB    ] = BonkCapsuleInsideAABB;
+        _array[@ BONK_TYPE_OBB     ] = BonkCapsuleInsideRotatedBox;
         _array[@ BONK_TYPE_CAPSULE ] = BonkCapsuleInsideCapsule;
         _array[@ BONK_TYPE_CYLINDER] = BonkCapsuleInsideCylinder;
         _array[@ BONK_TYPE_QUAD    ] = BonkCapsuleInsideQuad;

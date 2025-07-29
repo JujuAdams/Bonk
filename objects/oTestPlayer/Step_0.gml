@@ -26,3 +26,22 @@ else
 velocity.zSpeed -= 1;
 
 BonkMoveAndCollide(shape, velocity, world, 40);
+
+/*
+var _x = shape.x;
+var _y = shape.y;
+var _z = shape.z;
+
+shape.x += velocity.xSpeed;
+shape.y += velocity.ySpeed;
+shape.z += velocity.zSpeed;
+
+with(oTestParent)
+{
+    shape.PushOut(other.shape, 40);
+}
+
+velocity.xSpeed = shape.x - _x;
+velocity.ySpeed = shape.y - _y;
+velocity.zSpeed = shape.z - _z;
+*/
