@@ -145,7 +145,6 @@
     {"id":{"name":"BonkCapsuleCollideAABB","path":"scripts/BonkCapsuleCollideAABB/BonkCapsuleCollideAABB.yy",},},
     {"id":{"name":"BonkCapsuleCollideCapsule","path":"scripts/BonkCapsuleCollideCapsule/BonkCapsuleCollideCapsule.yy",},},
     {"id":{"name":"BonkCapsuleCollideCylinder","path":"scripts/BonkCapsuleCollideCylinder/BonkCapsuleCollideCylinder.yy",},},
-    {"id":{"name":"BonkCapsuleCollideFloorQuad","path":"scripts/BonkCapsuleCollideFloorQuad/BonkCapsuleCollideFloorQuad.yy",},},
     {"id":{"name":"BonkCapsuleCollideQuad","path":"scripts/BonkCapsuleCollideQuad/BonkCapsuleCollideQuad.yy",},},
     {"id":{"name":"BonkCapsuleCollideSphere","path":"scripts/BonkCapsuleCollideSphere/BonkCapsuleCollideSphere.yy",},},
     {"id":{"name":"BonkCapsuleCollideTriangle","path":"scripts/BonkCapsuleCollideTriangle/BonkCapsuleCollideTriangle.yy",},},

@@ -74,7 +74,32 @@ function BonkTriangle(_x1, _y1, _z1, _x2, _y2, _z2, _x3, _y3, _z3) : __BonkClass
     y3 = _y3;
     z3 = _z3;
     
+    Refresh();
     
+    
+    
+    static Refresh = function()
+    {
+        dX12 = x2 - x1;
+        dY12 = y2 - y1;
+        dZ12 = z2 - z1;
+        
+        dX23 = x3 - x2;
+        dY23 = y3 - y2;
+        dZ23 = z3 - z2;
+        
+        dX31 = x1 - x3;
+        dY31 = y1 - y3;
+        dZ31 = z1 - z3;
+        
+        lengthSqr12 = dX12*dX12 + dY12*dY12 + dZ12*dZ12;
+        lengthSqr23 = dX23*dX23 + dY23*dY23 + dZ23*dZ23;
+        lengthSqr31 = dX31*dX31 + dY31*dY31 + dZ31*dZ31;
+        
+        normalX = dZ12*dY31 - dY12*dZ31;
+        normalY = dX12*dZ31 - dZ12*dX31;
+        normalZ = dY12*dX31 - dX12*dY31;
+    }
     
     static Draw = function(_color = undefined, _wireframe = undefined)
     {

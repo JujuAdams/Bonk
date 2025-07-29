@@ -76,21 +76,56 @@ function BonkQuad(_x1, _y1, _z1, _x2, _y2, _z2, _x3, _y3, _z3) : __BonkClassShar
     y3 = _y3;
     z3 = _z3;
     
+    Refresh();
     
+    
+    
+    static Refresh = function()
+    {
+        dX12 = x2 - x1;
+        dY12 = y2 - y1;
+        dZ12 = z2 - z1;
+        
+        dX31 = x1 - x3;
+        dY31 = y1 - y3;
+        dZ31 = z1 - z3;
+        
+        dX24 = -dX31;
+        dY24 = -dY31;
+        dZ24 = -dZ31;
+        
+        dX43 = -dX12;
+        dY43 = -dY12;
+        dZ43 = -dZ12;
+        
+        x4 = x2 + dX24;
+        y4 = y2 + dY24;
+        z4 = z2 + dZ24;
+        
+        lengthSqr12 = dX12*dX12 + dY12*dY12 + dZ12*dZ12;
+        lengthSqr31 = dX31*dX31 + dY31*dY31 + dZ31*dZ31;
+        lengthSqr24 = lengthSqr31;
+        lengthSqr43 = lengthSqr12;
+        
+        normalX = dZ12*dY31 - dY12*dZ31;
+        normalY = dX12*dZ31 - dZ12*dX31;
+        normalZ = dY12*dX31 - dX12*dY31;
+        
+        var _coeff = 1 / sqrt(normalX*normalX + normalY*normalY + normalZ*normalZ);
+        normalX *= _coeff;
+        normalY *= _coeff;
+        normalZ *= _coeff;
+    }
     
     static GetAABB = function()
     {
-        var _x4 = x2 + (x3 - x1);
-        var _y4 = y2 + (y3 - y1);
-        var _z4 = z2 + (z3 - z1);
-        
         return {
-            x1: min(x1, x2, x3, _x4),
-            y1: min(y1, y2, y3, _y4),
-            z1: min(z1, z2, z3, _z4),
-            x2: max(x1, x2, x3, _x4),
-            y2: max(y1, y2, y3, _y4),
-            z2: max(z1, z2, z3, _z4),
+            x1: min(x1, x2, x3, x4),
+            y1: min(y1, y2, y3, y4),
+            z1: min(z1, z2, z3, z4),
+            x2: max(x1, x2, x3, x4),
+            y2: max(y1, y2, y3, y4),
+            z2: max(z1, z2, z3, z4),
         };
     }
     
