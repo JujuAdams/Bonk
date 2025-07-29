@@ -51,7 +51,6 @@ function BonkAABBCollideCylinder(_aabb, _cylinder)
                 var _rPush = _right  - (_cylinderX - _cylinderR);
                 var _bPush = _bottom - (_cylinderY - _cylinderR);
                 
-                
                 var _pushDistance = min(_lPush, _tPush, _rPush, _bPush);
                 if (_lPush == _pushDistance) _pushX =  _lPush;
                 if (_tPush == _pushDistance) _pushY =  _tPush;

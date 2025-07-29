@@ -1,0 +1,1 @@
+rotatedBox.zRotation = current_time/40;
