@@ -30,31 +30,25 @@ function BonkSphereCollideTriangle(_sphere, _triangle)
         var _triY3 = y3;
         var _triZ3 = z3;
         
-        var _dX12 = _triX2 - _triX1;
-        var _dY12 = _triY2 - _triY1;
-        var _dZ12 = _triZ2 - _triZ1;
+        var _dX12 = dX12;
+        var _dY12 = dY12;
+        var _dZ12 = dZ12;
         
-        var _dX23 = _triX3 - _triX2;
-        var _dY23 = _triY3 - _triY2;
-        var _dZ23 = _triZ3 - _triZ2;
+        var _dX23 = dX23;
+        var _dY23 = dY23;
+        var _dZ23 = dZ23;
         
-        var _dX31 = _triX1 - _triX3;
-        var _dY31 = _triY1 - _triY3;
-        var _dZ31 = _triZ1 - _triZ3;
+        var _dX31 = dX31;
+        var _dY31 = dY31;
+        var _dZ31 = dZ31;
         
-        var _normalX = _dZ12*_dY31 - _dY12*_dZ31;
-        var _normalY = _dX12*_dZ31 - _dZ12*_dX31;
-        var _normalZ = _dY12*_dX31 - _dX12*_dY31;
+        var _normalX = normalX;
+        var _normalY = normalY;
+        var _normalZ = normalZ;
         
-        var _length = sqrt(_normalX*_normalX + _normalY*_normalY + _normalZ*_normalZ);
-        if (_length <= 0)
-        {
-            return _nullReaction;
-        }
-        
-        _normalX /= _length;
-        _normalY /= _length;
-        _normalZ /= _length;
+        var _edgeSqrLength12 = lengthSqr12;
+        var _edgeSqrLength23 = lengthSqr23;
+        var _edgeSqrLength31 = lengthSqr31;
     }
     
     //Distance from the sphere's centre to the plane
@@ -77,7 +71,7 @@ function BonkSphereCollideTriangle(_sphere, _triangle)
     var _tempY = _refY - _triY1;
     var _tempZ = _refZ - _triZ1;
     
-    var _edgeSqrLen = _dX12*_dX12 + _dY12*_dY12 + _dZ12*_dZ12;
+    var _edgeSqrLen = _edgeSqrLength12;
     var _edgeX = _dX12;
     var _edgeY = _dY12;
     var _edgeZ = _dZ12;
@@ -93,7 +87,7 @@ function BonkSphereCollideTriangle(_sphere, _triangle)
         var _tempY = _refY - _triY2;
         var _tempZ = _refZ - _triZ2;
         
-        var _edgeSqrLen = _dX23*_dX23 + _dY23*_dY23 + _dZ23*_dZ23;
+        var _edgeSqrLen = _edgeSqrLength23;
         var _edgeX = _dX23;
         var _edgeY = _dY23;
         var _edgeZ = _dZ23;
@@ -109,7 +103,7 @@ function BonkSphereCollideTriangle(_sphere, _triangle)
             var _tempY = _refY - _triY3;
             var _tempZ = _refZ - _triZ3;
             
-            var _edgeSqrLen = _dX31*_dX31 + _dY31*_dY31 + _dZ31*_dZ31;
+            var _edgeSqrLen = _edgeSqrLength31;
             var _edgeX = _dX31;
             var _edgeY = _dY31;
             var _edgeZ = _dZ31;
