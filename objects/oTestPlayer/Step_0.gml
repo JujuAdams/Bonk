@@ -25,4 +25,4 @@ else
 
 velocity.zSpeed -= 1;
 
-BonkMoveAndCollide(shape, velocity, world, 36);
+BonkMoveAndCollide(shape, velocity, world, 40);

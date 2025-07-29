@@ -10,37 +10,32 @@ shape.z += zSpeed;
 
 with(oTestFloor)
 {
-    BonkPushOut(other.shape, shape);
+    shape.PushOut(other.shape);
 }
 
 with(oTestAABB)
 {
-    BonkPushOut(other.shape, shape);
-}
-
-with(oTestAuto)
-{
-    BonkPushOut(other.shape, shape);
+    shape.PushOut(other.shape);
 }
 
 with(oTestCylinder)
 {
-    BonkPushOut(other.shape, shape);
+    shape.PushOut(other.shape);
 }
 
 with(oTestSphere)
 {
-    BonkPushOut(other.shape, shape);
+    shape.PushOut(other.shape);
 }
 
 with(oTestQuad)
 {
-    BonkPushOut(other.shape, shape);
+    shape.PushOut(other.shape);
 }
 
 with(oTestTriangle)
 {
-    BonkPushOut(other.shape, shape);
+    shape.PushOut(other.shape);
 }
 
 xSpeed = shape.x - _x;

@@ -14,7 +14,7 @@
 /// You will typically want to leave the slope threshold at `0` for any "physics objects" in your
 /// game; that is, objects that are intended move and roll around the environment freely. The
 /// player character and non-player characters alike will want a slope threshold of some kind. I
-/// personally like an angle of `36` degrees.
+/// personally like an angle of `40` degrees.
 /// 
 /// @param shapeArray
 /// @param subjectShape

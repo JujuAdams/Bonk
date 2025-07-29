@@ -75,7 +75,7 @@ function BonkCapsuleCollideQuad(_capsule, _quad)
     
     if (_normalZ == 0)
     {
-        var _penDepth = clamp(dot_product_3d(_quadX1 - _capsuleX, _quadY1 - _capsuleY, _quadZ1 - _capsuleZ, 0, 0, 1), 0, _capsuleHeight);
+        var _penDepth = clamp(_quadZ1 - _capsuleZ, 0, _capsuleHeight);
     }
     else
     {

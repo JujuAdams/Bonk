@@ -64,7 +64,7 @@ function BonkCapsuleCollideTriangle(_capsule, _triangle)
     
     if (_normalZ == 0)
     {
-        var _penDepth = clamp(dot_product_3d(_triX1 - _capsuleX, _triY1 - _capsuleY, _triZ1 - _capsuleZ, 0, 0, 1), 0, _capsuleHeight);
+        var _penDepth = clamp(_triZ1 - _capsuleZ, 0, _capsuleHeight);
     }
     else
     {
