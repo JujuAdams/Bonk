@@ -1,0 +1,13 @@
+{
+  "$GMScript":"v1",
+  "%Name":"BonkPoleInsideSphere",
+  "isCompatibility":false,
+  "isDnD":false,
+  "name":"BonkPoleInsideSphere",
+  "parent":{
+    "name":"Pole",
+    "path":"folders/Bonk/Getters/Inside/Pole.yy",
+  },
+  "resourceType":"GMScript",
+  "resourceVersion":"2.0",
+}
