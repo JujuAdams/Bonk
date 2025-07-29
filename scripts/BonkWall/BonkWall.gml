@@ -1,5 +1,7 @@
 // Feather disable all
 
+/// Helper function to create a vertical wall.
+/// 
 /// @param xBottomLeft
 /// @param yBottomLeft
 /// @param zBottomLeft
