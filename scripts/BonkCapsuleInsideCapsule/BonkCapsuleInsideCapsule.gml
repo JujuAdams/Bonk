@@ -18,6 +18,6 @@ function BonkCapsuleInsideCapsule(_capsule1, _capsule2)
         var _z1 = clamp(z, _capsuleZMin1, _capsuleZMax1);
         var _z2 = clamp(_z1, z - 0.5*height + radius, z + 0.5*height - radius);
         
-        return (point_distance_3d(_capsule1.x, _capsule1.y,   _z1, x, y, _z2) < radius + _capsule1.radius);
+        return (point_distance_3d(_capsule1.x, _capsule1.y, _z1,   x, y, _z2) < radius + _capsule1.radius);
     }
 }
