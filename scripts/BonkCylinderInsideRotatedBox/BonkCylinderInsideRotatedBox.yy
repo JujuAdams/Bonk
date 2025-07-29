@@ -5,8 +5,8 @@
   "isDnD":false,
   "name":"BonkCylinderInsideRotatedBox",
   "parent":{
-    "name":"Rotated Box",
-    "path":"folders/Bonk/Getters/Inside/Rotated Box.yy",
+    "name":"Cylinder",
+    "path":"folders/Bonk/Getters/Inside/Cylinder.yy",
   },
   "resourceType":"GMScript",
   "resourceVersion":"2.0",

@@ -5,8 +5,8 @@
   "isDnD":false,
   "name":"BonkCapsuleInsideRotatedBox",
   "parent":{
-    "name":"Rotated Box",
-    "path":"folders/Bonk/Getters/Inside/Rotated Box.yy",
+    "name":"Capsule",
+    "path":"folders/Bonk/Getters/Inside/Capsule.yy",
   },
   "resourceType":"GMScript",
   "resourceVersion":"2.0",

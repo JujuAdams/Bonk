@@ -5,8 +5,8 @@
   "isDnD":false,
   "name":"BonkSphereInsideRotatedBox",
   "parent":{
-    "name":"Rotated Box",
-    "path":"folders/Bonk/Getters/Inside/Rotated Box.yy",
+    "name":"Sphere",
+    "path":"folders/Bonk/Getters/Inside/Sphere.yy",
   },
   "resourceType":"GMScript",
   "resourceVersion":"2.0",

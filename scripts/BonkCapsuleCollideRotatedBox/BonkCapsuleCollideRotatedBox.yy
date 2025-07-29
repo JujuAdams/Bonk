@@ -5,8 +5,8 @@
   "isDnD":false,
   "name":"BonkCapsuleCollideRotatedBox",
   "parent":{
-    "name":"Rotated Box",
-    "path":"folders/Bonk/Getters/Collide/Rotated Box.yy",
+    "name":"Capsule",
+    "path":"folders/Bonk/Getters/Collide/Capsule.yy",
   },
   "resourceType":"GMScript",
   "resourceVersion":"2.0",
