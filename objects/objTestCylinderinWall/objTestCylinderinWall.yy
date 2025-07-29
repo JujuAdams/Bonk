@@ -1,17 +1,17 @@
 {
   "$GMObject":"",
-  "%Name":"objTestPoleInAABB",
+  "%Name":"objTestCylinderinWall",
   "eventList":[
     {"$GMEvent":"v1","%Name":"","collisionObjectId":null,"eventNum":0,"eventType":0,"isDnD":false,"name":"","resourceType":"GMEvent","resourceVersion":"2.0",},
     {"$GMEvent":"v1","%Name":"","collisionObjectId":null,"eventNum":0,"eventType":8,"isDnD":false,"name":"","resourceType":"GMEvent","resourceVersion":"2.0",},
     {"$GMEvent":"v1","%Name":"","collisionObjectId":null,"eventNum":0,"eventType":3,"isDnD":false,"name":"","resourceType":"GMEvent","resourceVersion":"2.0",},
   ],
   "managed":true,
-  "name":"objTestPoleInAABB",
+  "name":"objTestCylinderinWall",
   "overriddenProperties":[],
   "parent":{
-    "name":"Pole",
-    "path":"folders/Test Cases/Basic Collision Tests/Pole.yy",
+    "name":"Wall",
+    "path":"folders/Test Cases/Basic Collision Tests/Wall.yy",
   },
   "parentObjectId":null,
   "persistent":false,

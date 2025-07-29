@@ -1,0 +1,13 @@
+{
+  "$GMScript":"v1",
+  "%Name":"BonkCylinderCollideWall",
+  "isCompatibility":false,
+  "isDnD":false,
+  "name":"BonkCylinderCollideWall",
+  "parent":{
+    "name":"Wall",
+    "path":"folders/Bonk/Getters/Collide/Wall.yy",
+  },
+  "resourceType":"GMScript",
+  "resourceVersion":"2.0",
+}

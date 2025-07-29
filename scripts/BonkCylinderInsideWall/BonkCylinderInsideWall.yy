@@ -1,12 +1,12 @@
 {
   "$GMScript":"v1",
-  "%Name":"BonkPoleCollideCapsule",
+  "%Name":"BonkCylinderInsideWall",
   "isCompatibility":false,
   "isDnD":false,
-  "name":"BonkPoleCollideCapsule",
+  "name":"BonkCylinderInsideWall",
   "parent":{
-    "name":"Pole",
-    "path":"folders/Bonk/Getters/Collide/Pole.yy",
+    "name":"Wall",
+    "path":"folders/Bonk/Getters/Inside/Wall.yy",
   },
   "resourceType":"GMScript",
   "resourceVersion":"2.0",
