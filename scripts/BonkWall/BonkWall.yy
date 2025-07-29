@@ -5,8 +5,8 @@
   "isDnD":false,
   "name":"BonkWall",
   "parent":{
-    "name":"Want",
-    "path":"folders/Bonk/Constructors/Want.yy",
+    "name":"Shapes",
+    "path":"folders/Bonk/Constructors/Shapes.yy",
   },
   "resourceType":"GMScript",
   "resourceVersion":"2.0",
