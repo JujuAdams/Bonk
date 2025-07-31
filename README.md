@@ -53,7 +53,7 @@ Please note that cylinders and capsule are z-aligned and cannot be rotated. Addi
         <td align="center">✓</td>
         <td align="center">✓</td>
         <td align="center">☒</td>
-        <td align="center">☒</td>
+        <td align="center">✓</td>
         <td align="center">✓</td> 
         <td align="center">☒</td>
         <td align="center">✓</td>
@@ -75,7 +75,7 @@ Please note that cylinders and capsule are z-aligned and cannot be rotated. Addi
         <td align="right">Rotated Box</td>
         <td align="center">☒</td>
         <td align="center">✓</td>
-        <td align="center">☒</td>
+        <td align="center">✓</td>
         <td align="center">☒</td>
         <td align="center">☒</td>
         <td align="center">✓</td>
