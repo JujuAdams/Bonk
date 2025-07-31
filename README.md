@@ -49,7 +49,7 @@ Please note that cylinders and capsule are z-aligned and cannot be rotated. Addi
     </tr>
     <tr>
         <td align="right">Cylinder</td>
-        <td align="center">☒</td>
+        <td align="center">✓</td>
         <td align="center">✓</td>
         <td align="center">✓</td>
         <td align="center">☒</td>
