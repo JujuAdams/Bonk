@@ -65,12 +65,12 @@ function BonkPoint(_x, _y, _z) : __BonkClassShared() constructor
     static GetAABB = function()
     {
         return {
-            x1: x,
-            y1: y,
-            z1: z,
-            x2: x,
-            y2: y,
-            z2: z,
+            xMin: x,
+            yMin: y,
+            zMin: z,
+            xMax: x,
+            yMax: y,
+            zMax: z,
         };
     }
     

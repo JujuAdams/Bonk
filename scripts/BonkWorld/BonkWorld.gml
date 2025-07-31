@@ -43,7 +43,7 @@ function BonkWorld(_xSize, _ySize, _zSize, _cellXSize, _cellYSize, _cellZSize) c
         var _aabb = _subjectShape.GetAABB();
         with(_aabb)
         {
-            if ((x2 - x1 > 2*other.__cellXSize) || (y2 - y1 > 2*other.__cellYSize) || (z2 - z1 > 2*other.__cellZSize))
+            if ((xMax - xMin > 2*other.__cellXSize) || (yMax - yMin > 2*other.__cellYSize) || (zMax - zMin > 2*other.__cellZSize))
             {
                 _cheapVersion = false;
             }
@@ -120,13 +120,13 @@ function BonkWorld(_xSize, _ySize, _zSize, _cellXSize, _cellYSize, _cellZSize) c
         
         var _aabb = _shape.GetAABB();
         
-        var _cellX = clamp(floor((_aabb.x1 / __cellXSize) - 0.5), 0, __cellXCount-1);
-        var _cellY = clamp(floor((_aabb.y1 / __cellYSize) - 0.5), 0, __cellYCount-1);
-        var _cellZ = clamp(floor((_aabb.z1 / __cellZSize) - 0.5), 0, __cellZCount-1);
+        var _cellX = clamp(floor((_aabb.xMin / __cellXSize) - 0.5), 0, __cellXCount-1);
+        var _cellY = clamp(floor((_aabb.yMin / __cellYSize) - 0.5), 0, __cellYCount-1);
+        var _cellZ = clamp(floor((_aabb.zMin / __cellZSize) - 0.5), 0, __cellZCount-1);
         
-        var _cellXSize = 1 + clamp(floor((_aabb.x2 / __cellXSize) + 0.5), 0, __cellXCount-1) - _cellX;
-        var _cellYSize = 1 + clamp(floor((_aabb.y2 / __cellYSize) + 0.5), 0, __cellYCount-1) - _cellY;
-        var _cellZSize = 1 + clamp(floor((_aabb.z2 / __cellZSize) + 0.5), 0, __cellZCount-1) - _cellZ;
+        var _cellXSize = 1 + clamp(floor((_aabb.xMax / __cellXSize) + 0.5), 0, __cellXCount-1) - _cellX;
+        var _cellYSize = 1 + clamp(floor((_aabb.yMax / __cellYSize) + 0.5), 0, __cellYCount-1) - _cellY;
+        var _cellZSize = 1 + clamp(floor((_aabb.zMax / __cellZSize) + 0.5), 0, __cellZCount-1) - _cellZ;
         
         var _z = _cellZ;
         repeat(_cellZSize)

@@ -85,12 +85,12 @@ function BonkLine(_x1, _y1, _z1, _x2, _y2, _z2) : __BonkClassShared() constructo
     static GetAABB = function()
     {
         return {
-            x1: min(x1, x2),
-            y1: min(y1, y2),
-            z1: min(z1, z2),
-            x2: max(x1, x2),
-            y2: max(y1, y2),
-            z2: max(z1, z2),
+            xMin: min(x1, x2),
+            yMin: min(y1, y2),
+            zMin: min(z1, z2),
+            xMax: max(x1, x2),
+            yMax: max(y1, y2),
+            zMax: max(z1, z2),
         };
     }
     

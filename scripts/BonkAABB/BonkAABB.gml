@@ -84,12 +84,12 @@ function BonkAABB(_x, _y, _z, _xSize, _ySize, _zSize) : __BonkClassShared() cons
     static GetAABB = function()
     {
         return {
-            x1: x - 0.5*xSize,
-            y1: y - 0.5*ySize,
-            z1: z - 0.5*zSize,
-            x2: x + 0.5*xSize,
-            y2: y + 0.5*ySize,
-            z2: z + 0.5*zSize,
+            xMin: x - 0.5*xSize,
+            yMin: y - 0.5*ySize,
+            zMin: z - 0.5*zSize,
+            xMax: x + 0.5*xSize,
+            yMax: y + 0.5*ySize,
+            zMax: z + 0.5*zSize,
         };
     }
     

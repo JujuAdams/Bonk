@@ -94,12 +94,12 @@ function BonkCylinder(_x, _y, _z, _height, _radius) : __BonkClassShared() constr
     static GetAABB = function()
     {
         return {
-            x1: x - radius,
-            y1: y - radius,
-            z1: z - 0.5*height,
-            x2: x + radius,
-            y2: y + radius,
-            z2: z + 0.5*height,
+            xMin: x - radius,
+            yMin: y - radius,
+            zMin: z - 0.5*height,
+            xMax: x + radius,
+            yMax: y + radius,
+            zMax: z + 0.5*height,
         };
     }
     

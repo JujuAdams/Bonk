@@ -111,12 +111,12 @@ function BonkQuad(_x1, _y1, _z1, _x2, _y2, _z2, _x3, _y3, _z3) : __BonkClassShar
     static GetAABB = function()
     {
         return {
-            x1: min(x1, x2, x3, x4),
-            y1: min(y1, y2, y3, y4),
-            z1: min(z1, z2, z3, z4),
-            x2: max(x1, x2, x3, x4),
-            y2: max(y1, y2, y3, y4),
-            z2: max(z1, z2, z3, z4),
+            xMin: min(x1, x2, x3, x4),
+            yMin: min(y1, y2, y3, y4),
+            zMin: min(z1, z2, z3, z4),
+            xMax: max(x1, x2, x3, x4),
+            yMax: max(y1, y2, y3, y4),
+            zMax: max(z1, z2, z3, z4),
         };
     }
     

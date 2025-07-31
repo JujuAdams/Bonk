@@ -84,12 +84,12 @@ function BonkSphere(_x, _y, _z, _radius) : __BonkClassShared() constructor
     static GetAABB = function()
     {
         return {
-            x1: x - radius,
-            y1: y - radius,
-            z1: z - radius,
-            x2: x + radius,
-            y2: y + radius,
-            z2: z + radius,
+            xMin: x - radius,
+            yMin: y - radius,
+            zMin: z - radius,
+            xMax: x + radius,
+            yMax: y + radius,
+            zMax: z + radius,
         };
     }
     

@@ -106,12 +106,12 @@ function BonkTriangle(_x1, _y1, _z1, _x2, _y2, _z2, _x3, _y3, _z3) : __BonkClass
     static GetAABB = function()
     {
         return {
-            x1: min(x1, x2, x3),
-            y1: min(y1, y2, y3),
-            z1: min(z1, z2, z3),
-            x2: max(x1, x2, x3),
-            y2: max(y1, y2, y3),
-            z2: max(z1, z2, z3),
+            xMin: min(x1, x2, x3),
+            yMin: min(y1, y2, y3),
+            zMin: min(z1, z2, z3),
+            xMax: max(x1, x2, x3),
+            yMax: max(y1, y2, y3),
+            zMax: max(z1, z2, z3),
         };
     }
 }

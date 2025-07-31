@@ -98,12 +98,12 @@ function BonkRotatedBox(_x, _y, _z, _xSize, _ySize, _zSize, _zRotation) : __Bonk
     {
         //TODO - Do this properly
         return {
-            x1: x - sqrt(2)*max(xSize, ySize),
-            y1: y - sqrt(2)*max(xSize, ySize),
-            z1: z - 0.5*zSize,
-            x2: x + sqrt(2)*max(xSize, ySize),
-            y2: y + sqrt(2)*max(xSize, ySize),
-            z2: z + 0.5*zSize,
+            xMin: x - sqrt(2)*max(xSize, ySize),
+            yMin: y - sqrt(2)*max(xSize, ySize),
+            zMin: z - 0.5*zSize,
+            xMax: x + sqrt(2)*max(xSize, ySize),
+            yMax: y + sqrt(2)*max(xSize, ySize),
+            zMax: z + 0.5*zSize,
         };
     }
     
