@@ -38,7 +38,9 @@
 /// 
 /// `.PushOut(subjectShape, [slopeThreshold=0])`
 ///     Pushes the subject shape out of the scoped shape (provided that the two shapes can collide,
-///     see above).
+///     see above). The slope threshold will allow shapes to "stand" on slopes instead of sliding
+///     down them. The units of this parameter are degrees. An angle of `0` represents a perfectly
+///     horizontal floor plane. Increase this value to allow shapes to stand on steeper slopes.
 /// 
 /// The struct created by the constructor contains the following values:
 /// 
