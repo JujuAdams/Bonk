@@ -1,5 +1,5 @@
 sphere1.Draw(BonkSphereInsideRotatedBox(sphere1, rotatedBox)? c_lime : c_red);
-sphere2.Draw(BonkSphereInsideRotatedBox(sphere2, rotatedBox)? c_lime : c_red);
+sphere2.Draw(BonkSphereInsideRotatedBox(sphere2, rotatedBox)? c_lime : c_red, true);
 rotatedBox.Draw();
 
 var _reaction = BonkSphereCollideRotatedBox(sphere1, rotatedBox);
@@ -19,5 +19,5 @@ if (_reaction.collision)
               sphere2.y + _reaction.dY,
               sphere2.z + _reaction.dZ,
               sphere2.radius,
-              c_white, true);
+              c_white, false);
 }
