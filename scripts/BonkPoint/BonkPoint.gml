@@ -10,11 +10,11 @@
 ///     Draws the shape. This uses Ugg, please see https://github.com/jujuadams/Ugg
 /// 
 /// `.Inside(otherShape)`
-/// Checks whether the line hits another shape. You may check against the following shapes:
-///     Axis-Aligned Box
-///     Capsule
-///     Cylinder
-///     Sphere
+///     Checks whether the line hits another shape. You may check against the following shapes:
+///     - Axis-Aligned Box
+///     - Capsule
+///     - Cylinder
+///     - Sphere
 /// 
 /// The struct created by the constructor contains the following values:
 /// 
@@ -25,7 +25,7 @@
 /// @param y
 /// @param z
 
-function BonkPoint(_x, _y, _z) : __BonkClassShared() constructor
+function BonkPoint(_x, _y, _z) constructor
 {
     static bonkType = BONK_TYPE_POINT;
     
