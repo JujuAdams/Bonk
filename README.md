@@ -14,15 +14,31 @@ Bonk is a simple 3D collision library. It supports boolean intersection tests be
     <tr>
         <td align="center"></td>
         <td align="center">AABB</td>
+        <td align="center">Capsule</td>
         <td align="center">Cylinder</td>
+        <td align="center">Quad</td>
+        <td align="center">Rotated Box</td>
         <td align="center">Sphere</td>
-        <td align="center">Line</td>
-        <td align="center">Floor</td>
-        <td align="center">Wall</td>
+        <td align="center">Triangle</td>
+        <td align="center">Line / Ray</td>
         <td align="center">Point</td>
     </tr>
     <tr>
         <td align="right">AABB</td>
+        <td align="center">✓</td>
+        <td align="center">✓</td>
+        <td align="center">✓</td>
+        <td align="center">☒</td>
+        <td align="center">☒</td>
+        <td align="center">✓</td>
+        <td align="center">☒</td>
+        <td align="center">✓</td>
+        <td align="center">✓</td>
+    </tr>
+    <tr>
+        <td align="right">Capsule</td>
+        <td align="center">✓</td>
+        <td align="center">✓</td>
         <td align="center">✓</td>
         <td align="center">✓</td>
         <td align="center">✓</td>
@@ -33,13 +49,39 @@ Bonk is a simple 3D collision library. It supports boolean intersection tests be
     </tr>
     <tr>
         <td align="right">Cylinder</td>
+        <td align="center">☒</td>
         <td align="center">✓</td>
         <td align="center">✓</td>
+        <td align="center">☒</td>
+        <td align="center">☒</td>
+        <td align="center">✓</td> 
+        <td align="center">☒</td>
         <td align="center">✓</td>
         <td align="center">✓</td>
+    </tr>
+    <tr>
+        <td align="right">Quad</td>
+        <td align="center">☒</td>
         <td align="center">✓</td>
+        <td align="center">☒</td>
+        <td align="center">☒</td>
+        <td align="center">☒</td>
         <td align="center">✓</td>
+        <td align="center">☒</td>
         <td align="center">✓</td>
+        <td align="center">☒</td>
+    </tr>
+    <tr>
+        <td align="right">Rotated Box</td>
+        <td align="center">☒</td>
+        <td align="center">✓</td>
+        <td align="center">☒</td>
+        <td align="center">☒</td>
+        <td align="center">☒</td>
+        <td align="center">✓</td>
+        <td align="center">☒</td>
+        <td align="center">✓</td>
+        <td align="center">☒</td>
     </tr>
     <tr>
         <td align="right">Sphere</td>
@@ -50,46 +92,32 @@ Bonk is a simple 3D collision library. It supports boolean intersection tests be
         <td align="center">✓</td>
         <td align="center">✓</td>
         <td align="center">✓</td>
+        <td align="center">✓</td>
+        <td align="center">✓</td>
     </tr>
     <tr>
-        <td align="right">Line</td>
-        <td align="center">✓</td>
-        <td align="center">✓</td>
-        <td align="center">✓</td>
+        <td align="right">Triangle</td>
         <td align="center">☒</td>
-        <td align="center">✓</td>
-        <td align="center">✓</td>
-        <td align="center">☒</td>
-    </tr>
-    <tr>
-        <td align="right">Floor</td>
-        <td align="center">✓</td>
-        <td align="center">✓</td>
-        <td align="center">✓</td>
         <td align="center">✓</td>
         <td align="center">☒</td>
         <td align="center">☒</td>
+        <td align="center">☒</td>
+        <td align="center">✓</td>
+        <td align="center">☒</td>
+        <td align="center">✓</td>
         <td align="center">☒</td>
     </tr>
     <tr>
-        <td align="right">Wall</td>
+        <td align="right">Line / Ray / Point</td>
         <td align="center">✓</td>
         <td align="center">✓</td>
         <td align="center">✓</td>
         <td align="center">✓</td>
-        <td align="center">☒</td>
-        <td align="center">☒</td>
-        <td align="center">☒</td>
-    </tr>
-    <tr>
-        <td align="right">Point</td>
         <td align="center">✓</td>
         <td align="center">✓</td>
         <td align="center">✓</td>
         <td align="center">☒</td>
         <td align="center">☒</td>
-        <td align="center">☒</td>
-        <td align="center">✓</td>
     </tr>
 </table>
 
