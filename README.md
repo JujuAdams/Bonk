@@ -18,7 +18,7 @@ Bonk is a simple 3D collision library. It supports boolean intersection tests be
         <td align="center">Rotated Box</td>
         <td align="center">Sphere</td>
         <td align="center">Triangle</td>
-        <td align="center">Line / Ray</td>
+        <td align="center">Line/Ray</td>
         <td align="center">Point</td>
     </tr>
     <tr>
@@ -106,7 +106,7 @@ Bonk is a simple 3D collision library. It supports boolean intersection tests be
         <td align="center">☒</td>
     </tr>
     <tr>
-        <td align="right">Line / Ray / Point</td>
+        <td align="right">Line/Ray</td>
         <td align="center">✓</td>
         <td align="center">✓</td>
         <td align="center">✓</td>
@@ -114,6 +114,18 @@ Bonk is a simple 3D collision library. It supports boolean intersection tests be
         <td align="center">✓</td>
         <td align="center">✓</td>
         <td align="center">✓</td>
+        <td align="center">☒</td>
+        <td align="center">☒</td>
+    </tr>
+    <tr>
+        <td align="right">Point</td>
+        <td align="center">✓</td>
+        <td align="center">✓</td>
+        <td align="center">✓</td>
+        <td align="center">☒</td>
+        <td align="center">☒</td>
+        <td align="center">✓</td>
+        <td align="center">☒</td>
         <td align="center">☒</td>
         <td align="center">☒</td>
     </tr>
