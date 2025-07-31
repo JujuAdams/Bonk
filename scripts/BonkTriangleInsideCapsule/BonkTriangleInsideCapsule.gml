@@ -1,6 +1,6 @@
 // Feather disable all
 
-/// Returns whether a Bonk triangle lies inside a capsule.
+/// Returns whether a Bonk triangle and capsule overlap.
 /// 
 /// @param triangle
 /// @param capsule

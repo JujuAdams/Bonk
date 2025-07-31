@@ -1,5 +1,15 @@
 // Feather disable all
 
+/// Returns the point of impact where a line meets a Bonk triangle.
+/// 
+/// This function returns a struct containing the following variables:
+/// 
+/// `.collision`
+///     Whether a collision was found. If no collision is found, this variable is set to `false`.
+/// 
+/// `.x` `.y` `.z`
+///     The point of impact. If there is no collision, all three variables will be set to `0`.
+/// 
 /// @param triangle
 /// @param x1
 /// @param y1

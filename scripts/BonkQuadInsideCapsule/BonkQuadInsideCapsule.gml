@@ -1,6 +1,6 @@
 // Feather disable all
 
-/// Returns whether a Bonk quad lies inside a capsule.
+/// Returns whether a Bonk quad and capsule overlap.
 /// 
 /// @param quad
 /// @param capsule

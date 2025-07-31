@@ -1,9 +1,9 @@
 // Feather disable all
 
-/// Returns whether a Bonk rotated box lies inside a capsule.
+/// Returns whether a Bonk rotated box and cylinder overlap.
 /// 
 /// @param box
-/// @param capsule
+/// @param cylinder
 
 function BonkRotatedBoxInsideCylinder(_box, _cylinder)
 {

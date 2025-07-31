@@ -1,5 +1,7 @@
 // Feather disable all
 
+/// Returns whether a Bonk capsule and rotated box overlap.
+/// 
 /// @param capsule
 /// @param box
 

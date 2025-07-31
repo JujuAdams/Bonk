@@ -1,5 +1,7 @@
 // Feather disable all
 
+/// Returns whether a Bonk cylinder and rotated box overlap.
+/// 
 /// @param cylinder
 /// @param box
 

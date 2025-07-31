@@ -1,5 +1,7 @@
 // Feather disable all
 
+/// Returns whether a Bonk sphere and rotated box overlap.
+/// 
 /// @param sphere
 /// @param box
 
