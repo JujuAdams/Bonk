@@ -1,0 +1,13 @@
+{
+  "$GMScript":"v1",
+  "%Name":"BonkCoordInsideCylinder",
+  "isCompatibility":false,
+  "isDnD":false,
+  "name":"BonkCoordInsideCylinder",
+  "parent":{
+    "name":"Coordinate",
+    "path":"folders/Bonk/Getters/Inside/Coordinate.yy",
+  },
+  "resourceType":"GMScript",
+  "resourceVersion":"2.0",
+}

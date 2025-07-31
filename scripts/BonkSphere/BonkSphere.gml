@@ -1,34 +1,90 @@
-function BonkSphere() constructor
+// Feather disable all
+
+/// Constructor that generates a sphere.
+/// 
+/// @param x
+/// @param y
+/// @param z
+/// @param radius
+/// 
+/// The struct created by the constructor contains the following values:
+/// `.x` `.y` `.z`  Coordinate of the centre of the sphere.
+/// `.radius`       The radius of the sphere (half the thickness of the sphere).
+/// 
+/// You may use the `.Draw(color, thickness, wireframe)` method to draw the shape, though this
+/// method requires installation of Ugg. Please see https://github.com/jujuadams/Ugg
+/// 
+/// Using the `.Inside(otherShape)` method, this shape can test for an overlap with these shapes:
+/// - AABB
+/// - Capsule
+/// - Cylinder / CylinderExt
+/// - Quad
+/// - Sphere
+/// - Triangle
+/// 
+/// The `.Inside()` method returns either `true` or `false` indicating whether the two shapes
+/// overlap. `.Inside()` is usually a little faster than `.Collide()` (see below) and is easier to
+/// use.
+/// 
+/// Using the `.Collide(otherShape)` method, this shape can collide with:
+/// - AABB
+/// - Capsule
+/// - Cylinder / CylinderExt
+/// - Quad
+/// - Sphere
+/// - Triangle
+/// 
+/// The `.Collide()` method returns a "reaction" struct (instanceof `__BonkClassHit`). This struct
+/// has four values:
+/// 
+/// `.collision`       Boolean, whether the shapes overlap.
+/// `.dX` `.dY` `.dZ`  Distance to push ourselves to escape the collision.
+
+function BonkSphere(_x, _y, _z, _radius) : __BonkClassShared() constructor
 {
-    static toString = function()
+    static bonkType = BONK_TYPE_SPHERE;
+    
+    static _collideFuncLookup = (function()
     {
-        return "sphere";
-    }
+        var _array = array_create(BONK_NUMBER_OF_TYPES, undefined);
+        _array[@ BONK_TYPE_AABB    ] = BonkSphereCollideAABB;
+        _array[@ BONK_TYPE_OBB     ] = BonkSphereCollideRotatedBox;
+        _array[@ BONK_TYPE_CAPSULE ] = BonkSphereCollideCapsule;
+        _array[@ BONK_TYPE_CYLINDER] = BonkSphereCollideCylinder;
+        _array[@ BONK_TYPE_QUAD    ] = BonkSphereCollideQuad;
+        _array[@ BONK_TYPE_SPHERE  ] = BonkSphereCollideSphere;
+        _array[@ BONK_TYPE_TRIANGLE] = BonkSphereCollideTriangle;
+        return _array;
+    })();
     
-    x = 0;
-    y = 0;
-    z = 0;
+    static _insideFuncLookup = (function()
+    {
+        var _array = array_create(BONK_NUMBER_OF_TYPES, undefined);
+        _array[@ BONK_TYPE_AABB    ] = BonkSphereInsideAABB;
+        _array[@ BONK_TYPE_OBB     ] = BonkSphereInsideRotatedBox;
+        _array[@ BONK_TYPE_CAPSULE ] = BonkSphereInsideCapsule;
+        _array[@ BONK_TYPE_CYLINDER] = BonkSphereInsideCylinder;
+        _array[@ BONK_TYPE_QUAD    ] = BonkSphereInsideQuad;
+        _array[@ BONK_TYPE_SPHERE  ] = BonkSphereInsideSphere;
+        _array[@ BONK_TYPE_TRIANGLE] = BonkSphereInsideTriangle;
+        return _array;
+    })();
     
-    xPrevious = 0;
-    yPrevious = 0;
-    zPrevious = 0;
     
-    radius = 0;
+    
+    x = _x;
+    y = _y;
+    z = _z;
+    
+    radius = _radius;
     
     
     
     static SetPosition = function(_x = x, _y = y, _z = z)
     {
-        if ((x != _x) || (y != _y) || (z != _z))
-        {
-            xPrevious = x;
-            yPrevious = y;
-            zPrevious = z;
-            
-            x = _x;
-            y = _y;
-            z = _z;
-        }
+        x = _x;
+        y = _y;
+        z = _z;
         
         return self;
     }
@@ -38,20 +94,6 @@ function BonkSphere() constructor
         radius = _radius;
         
         return self;
-    }
-    
-    static GetPosition = function()
-    {
-        return {
-            x: x,
-            y: y,
-            z: z,
-        };
-    }
-    
-    static GetRadius = function()
-    {
-        return radius;
     }
     
     static GetAABB = function()
@@ -66,9 +108,9 @@ function BonkSphere() constructor
         };
     }
     
-    static Draw = function(_color = undefined)
+    static Draw = function(_color = undefined, _wireframe = undefined)
     {
         __BONK_VERIFY_UGG
-        UggSphere(x, y, z, radius, _color);
+        UggSphere(x, y, z, radius, _color, _wireframe);
     }
 }

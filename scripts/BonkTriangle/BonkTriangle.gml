@@ -1,139 +1,126 @@
-function BonkTriangle() constructor
+// Feather disable all
+
+/// Constructor that generates a triangle. Vertices must be defined in a clockwise order.
+/// 
+/// @param x1
+/// @param y1
+/// @param z1
+/// @param x2
+/// @param y2
+/// @param z2
+/// @param x3
+/// @param y3
+/// @param z3
+/// 
+/// The struct created by the constructor contains the following values:
+/// `.x1` `.y1` `.z1`  Coordinate of the first triangle vertex.
+/// `.x2` `.y2` `.z2`  Coordinate of the second triangle vertex.
+/// `.x3` `.y3` `.z3`  Coordinate of the third triangle vertex.
+/// 
+/// You may use the `.Draw(color, thickness, wireframe)` method to draw the shape, though this
+/// method requires installation of Ugg. Please see https://github.com/jujuadams/Ugg
+/// 
+/// Using the `.Inside(otherShape)` method, this shape can test for an overlap with these shapes:
+/// - Capsule
+/// - CylinderExt
+/// - Sphere
+/// 
+/// The `.Inside()` method returns either `true` or `false` indicating whether the two shapes
+/// overlap. `.Inside()` is usually a little faster than `.Collide()` (see below) and is easier to
+/// use.
+/// 
+/// Using the `.Collide(otherShape)` method, this shape can collide with:
+/// - Capsule
+/// - CylinderExt
+/// - Sphere
+/// 
+/// The `.Collide()` method returns a "reaction" struct (instanceof `__BonkClassHit`). This struct
+/// has four values:
+/// 
+/// `.collision`       Boolean, whether the shapes overlap.
+/// `.dX` `.dY` `.dZ`  Distance to push ourselves to escape the collision.
+
+function BonkTriangle(_x1, _y1, _z1, _x2, _y2, _z2, _x3, _y3, _z3) : __BonkClassShared() constructor
 {
-    static toString = function()
+    static bonkType = BONK_TYPE_TRIANGLE;
+    
+    static _collideFuncLookup = (function()
     {
-        return "triangle";
-    }
+        var _array = array_create(BONK_NUMBER_OF_TYPES, undefined);
+        _array[@ BONK_TYPE_CAPSULE] = BonkTriangleCollideCapsule;
+        _array[@ BONK_TYPE_SPHERE ] = BonkTriangleCollideSphere;
+        return _array;
+    })();
     
-    x1 = 0;
-    y1 = 0;
-    z1 = 0;
-    
-    x2 = 0;
-    y2 = 0;
-    z2 = 0;
-    
-    x3 = 0;
-    y3 = 0;
-    z3 = 0;
-    
-    normalX = 0;
-    normalY = 0;
-    normalZ = 0;
-    planeDistance = 0;
-    
-    dirty = false;
-    
-    
-    
-    static SetA = function(_x = x1, _y = y1, _z = z1)
+    static _insideFuncLookup = (function()
     {
-        if ((_x != x1) || (_y != y1) || (_z != z1)) dirty = true;
+        var _array = array_create(BONK_NUMBER_OF_TYPES, undefined);
+        _array[@ BONK_TYPE_CAPSULE] = BonkTriangleInsideCapsule;
+        _array[@ BONK_TYPE_SPHERE ] = BonkTriangleInsideSphere;
+        return _array;
+    })();
+    
+    
+    
+    x1 = _x1;
+    y1 = _y1;
+    z1 = _z1;
+    
+    x2 = _x2;
+    y2 = _y2;
+    z2 = _z2;
+    
+    x3 = _x3;
+    y3 = _y3;
+    z3 = _z3;
+    
+    Refresh();
+    
+    
+    
+    static Refresh = function()
+    {
+        dX12 = x2 - x1;
+        dY12 = y2 - y1;
+        dZ12 = z2 - z1;
         
-        x1 = _x;
-        y1 = _y;
-        z1 = _z;
+        dX23 = x3 - x2;
+        dY23 = y3 - y2;
+        dZ23 = z3 - z2;
         
-        return self;
-    }
-    
-    static SetB = function(_x = x2, _y = y2, _z = z2)
-    {
-        if ((_x != x2) || (_y != y2) || (_z != z2)) dirty = true;
+        dX31 = x1 - x3;
+        dY31 = y1 - y3;
+        dZ31 = z1 - z3;
         
-        x2 = _x;
-        y2 = _y;
-        z2 = _z;
+        lengthSqr12 = dX12*dX12 + dY12*dY12 + dZ12*dZ12;
+        lengthSqr23 = dX23*dX23 + dY23*dY23 + dZ23*dZ23;
+        lengthSqr31 = dX31*dX31 + dY31*dY31 + dZ31*dZ31;
         
-        return self;
-    }
-    
-    static SetC = function(_x = x3, _y = y3, _z = z3)
-    {
-        if ((_x != x3) || (_y != y3) || (_z != z3)) dirty = true;
+        normalX = dZ12*dY31 - dY12*dZ31;
+        normalY = dX12*dZ31 - dZ12*dX31;
+        normalZ = dY12*dX31 - dX12*dY31;
         
-        x3 = _x;
-        y3 = _y;
-        z3 = _z;
-        
-        return self;
+        var _coeff = 1 / sqrt(normalX*normalX + normalY*normalY + normalZ*normalZ);
+        normalX *= _coeff;
+        normalY *= _coeff;
+        normalZ *= _coeff;
     }
     
-    static GetA = function()
-    {
-        return {
-            x: x1,
-            y: y1,
-            z: z1,
-        };
-    }
-    
-    static GetB = function()
-    {
-        return {
-            x: x2,
-            y: y2,
-            z: z2,
-        };
-    }
-    
-    static GetC = function()
-    {
-        return {
-            x: x3,
-            y: y3,
-            z: z3,
-        };
-    }
-    
-    static __CalculateNormal = function()
-    {
-        if (dirty)
-        {
-            dirty = false;
-            
-            var _dx12 = x2 - x1;
-            var _dy12 = y2 - y1;
-            var _dz12 = z2 - z1;
-            
-            var _dx13 = x3 - x1;
-            var _dy13 = y3 - y1;
-            var _dz13 = z3 - z1;
-            
-            normalX = -(_dz12*_dy13 - _dy12*_dz13);
-            normalY = -(_dx12*_dz13 - _dz12*_dx13);
-            normalZ = -(_dy12*_dx13 - _dx12*_dy13);
-            
-            var _d = 1 / sqrt(normalX*normalX + normalY*normalY + normalZ*normalZ);
-            normalX *= _d;
-            normalY *= _d;
-            normalZ *= _d;
-            
-            planeDistance = x1*normalX + y1*normalY + z1*normalZ;
-        }
-    }
-    
-    static GetNormal = function()
-    {
-        __CalculateNormal();
-        
-        return {
-            x: normalX,
-            y: normalY,
-            z: normalZ,
-        };
-    }
-    
-    static GetPlaneDistance = function()
-    {
-        __CalculateNormal();
-        
-        return planeDistance;
-    }
-    
-    static Draw = function(_color = undefined)
+    static Draw = function(_color = undefined, _wireframe = undefined)
     {
         __BONK_VERIFY_UGG
-        UggTriangle(x1, y1, z1, x2, y2, z2, x3, y3, z3, _color);
+        UggTriangle(x1, y1, z1,   x2, y2, z2,   x3, y3, z3,   _color, _wireframe);
+    }
+    
+    static GetAABB = function()
+    {
+        return {
+            x1: min(x1, x2, x3),
+            y1: min(y1, y2, y3),
+            z1: min(z1, z2, z3),
+            x2: max(x1, x2, x3),
+            y2: max(y1, y2, y3),
+            z2: max(z1, z2, z3),
+        };
     }
 }

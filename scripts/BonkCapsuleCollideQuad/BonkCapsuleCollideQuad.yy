@@ -1,0 +1,13 @@
+{
+  "$GMScript":"v1",
+  "%Name":"BonkCapsuleCollideQuad",
+  "isCompatibility":false,
+  "isDnD":false,
+  "name":"BonkCapsuleCollideQuad",
+  "parent":{
+    "name":"Capsule",
+    "path":"folders/Bonk/Getters/Collide/Capsule.yy",
+  },
+  "resourceType":"GMScript",
+  "resourceVersion":"2.0",
+}

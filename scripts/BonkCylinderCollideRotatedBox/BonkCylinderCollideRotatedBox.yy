@@ -1,0 +1,13 @@
+{
+  "$GMScript":"v1",
+  "%Name":"BonkCylinderCollideRotatedBox",
+  "isCompatibility":false,
+  "isDnD":false,
+  "name":"BonkCylinderCollideRotatedBox",
+  "parent":{
+    "name":"Cylinder",
+    "path":"folders/Bonk/Getters/Collide/Cylinder.yy",
+  },
+  "resourceType":"GMScript",
+  "resourceVersion":"2.0",
+}

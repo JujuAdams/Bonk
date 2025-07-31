@@ -1,0 +1,105 @@
+// Feather disable all
+
+/// @param sphere
+/// @param box
+
+function BonkSphereCollideRotatedBox(_sphere, _box)
+{
+    static _nullReaction = __Bonk().__nullReaction;
+    static _reaction     = new __BonkClassReaction();
+    
+    with(_sphere)
+    {
+        var _sphereX = x;
+        var _sphereY = y;
+        var _sphereZ = z;
+        
+        var _sphereRadius = radius;
+    }
+    
+    with(_box)
+    {
+        var _left   = -0.5*xSize;
+        var _top    = -0.5*ySize;
+        var _below  = -0.5*zSize;
+        var _right  =  0.5*xSize;
+        var _bottom =  0.5*ySize;
+        var _above  =  0.5*zSize;
+        
+        var _dX = _sphereX - x;
+        var _dY = _sphereY - y;
+        var _dZ = _sphereZ - z;
+        
+        //Basis vectors
+        var _cos = dcos(zRotation);
+        var _sin = dsin(zRotation);
+        
+        var _iX =  _cos;
+        var _iY = -_sin;
+        
+        var _jX = -_iY;
+        var _jY =  _iX;
+        
+        //Coordinates of the centre of the sphere in the box's frame of reference
+        var _i = _dX*_iX + _dY*_iY;
+        var _j = _dX*_jX + _dY*_jY;
+        var _k = _dZ;
+        
+        var _pushI = 0;
+        var _pushJ = 0;
+        var _pushZ = 0;
+        
+        if ((_i >= _left ) && (_i <= _right )
+        &&  (_j >= _top  ) && (_j <= _bottom)
+        &&  (_k >= _below) && (_k <= _above ))
+        {
+            //Centre of sphere is inside the box
+            var _lPush     = (_i + _sphereRadius) - _left;
+            var _tPush     = (_j + _sphereRadius) - _top;
+            var _belowPush = (_k + _sphereRadius) - _below;
+            var _rPush     = _right  - (_i - _sphereRadius);
+            var _bPush     = _bottom - (_j - _sphereRadius);
+            var _abovePush = _above  - (_k - _sphereRadius);
+            
+            var _pushDistance = min(_lPush, _tPush, _belowPush, _rPush, _bPush, _abovePush);
+            if (_lPush     == _pushDistance) _pushI =  _lPush;
+            if (_tPush     == _pushDistance) _pushJ =  _tPush;
+            if (_belowPush == _pushDistance) _pushZ =  _belowPush;
+            if (_rPush     == _pushDistance) _pushI = -_rPush;
+            if (_bPush     == _pushDistance) _pushJ = -_bPush;
+            if (_abovePush == _pushDistance) _pushZ = -_abovePush;
+        }
+        else
+        {
+            var _dX = clamp(_i, _left,  _right ) - _i;
+            var _dY = clamp(_j, _top,   _bottom) - _j;
+            var _dZ = clamp(_k, _below, _above ) - _k;
+            var _d  = sqrt(_dX*_dX + _dY*_dY + _dZ*_dZ);
+            
+            if (_d >= _sphereRadius)
+            {
+                return _nullReaction;
+            }
+            
+            _pushDistance = _sphereRadius - _d;
+            var _coeff = _pushDistance / _d;
+            var _pushI = _coeff*_dX;
+            var _pushJ = _coeff*_dY;
+            var _pushZ = _coeff*_dZ;
+        }
+        
+        var _pushX = (_pushI*_iX + _pushJ*_jX);
+        var _pushY = (_pushI*_iY + _pushJ*_jY);
+        
+        with(_reaction)
+        {
+            dX = -_pushX;
+            dY = -_pushY;
+            dZ = -_pushZ;
+        }
+        
+        return _reaction;
+    }
+    
+    return _nullReaction;
+}

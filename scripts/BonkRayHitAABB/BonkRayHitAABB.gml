@@ -1,0 +1,17 @@
+// Feather disable all
+
+/// @param aabb
+/// @param rayX
+/// @param rayY
+/// @param rayZ
+/// @param dX
+/// @param dY
+/// @param dZ
+/// @param [length]
+
+function BonkRayHitAABB(_aabb, _rayX, _rayY, _rayZ, _dX, _dY, _dZ, _length = BONK_RAY_LENGTH)
+{
+    return BonkLineHitAABB(_aabb,
+                           _rayX, _rayY, _rayZ,
+                           _rayX + _length*_dX, _rayY + _length*_dY, _rayZ + _length*_dZ);
+}

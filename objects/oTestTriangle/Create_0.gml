@@ -1,0 +1,1 @@
+shape = new BonkTriangle(x, y, 32,   x + 64, y, 0,   x, y + 64, 0);

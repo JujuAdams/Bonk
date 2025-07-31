@@ -1,0 +1,13 @@
+{
+  "$GMScript":"v1",
+  "%Name":"BonkTriangleInsideSphere",
+  "isCompatibility":false,
+  "isDnD":false,
+  "name":"BonkTriangleInsideSphere",
+  "parent":{
+    "name":"Triangle",
+    "path":"folders/Bonk/Getters/Inside/Triangle.yy",
+  },
+  "resourceType":"GMScript",
+  "resourceVersion":"2.0",
+}

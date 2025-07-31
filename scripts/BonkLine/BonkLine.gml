@@ -1,19 +1,63 @@
-function BonkLine() constructor
+// Feather disable all
+
+/// Constructor that generates a line segment between two coordinates.
+/// 
+/// @param x1
+/// @param y1
+/// @param z1
+/// @param x2
+/// @param y2
+/// @param z2
+/// 
+/// The struct created by the constructor contains the following values:
+/// `.x1` `.y1` `.z1`  Coordinate of the origin of the ray.
+/// `.x2` `.y2` `.z2`  Coordinate of the destination of the ray.
+/// 
+/// You may use the `.Draw(color, thickness, wireframe)` method to draw the shape, though this
+/// method requires installation of Ugg. Please see https://github.com/jujuadams/Ugg
+/// 
+/// This shape cannot use the `.Collide()` nor `.Inside()` methods. Instead, lines can use the
+/// special `.Hit(otherShape)` method. This method is compatible with the following shapes:
+/// - AABB
+/// - Capsule
+/// - Cylinder / CylinderExt
+/// - Quad
+/// - Sphere
+/// - Triangle
+/// 
+/// The `.Hit()` method returns a "hit" struct (instanceof `__BonkClassHit`). This struct contains
+/// four values:
+/// 
+/// `.collision`    Boolean, whether the line hit the target.
+/// `.x` `.y` `.z`  Coordinate of the point where the line hit the target.
+/// 
+/// If the line did *not* hit the other shape then `.x` `.y` `.z` will all be set to `0`.
+
+function BonkLine(_x1, _y1, _z1, _x2, _y2, _z2) : __BonkClassShared() constructor
 {
-    static toString = function()
+    static bonkType = BONK_TYPE_LINE;
+    
+    static _hitFuncLookup = (function()
     {
-        return "point";
-    }
+        var _array = array_create(BONK_NUMBER_OF_TYPES, undefined);
+        _array[@ BONK_TYPE_AABB    ] = BonkRayHitAABB;
+        _array[@ BONK_TYPE_CAPSULE ] = BonkRayHitCapsule;
+        _array[@ BONK_TYPE_CYLINDER] = BonkRayHitCylinder;
+        _array[@ BONK_TYPE_QUAD    ] = BonkRayHitQuad;
+        _array[@ BONK_TYPE_SPHERE  ] = BonkRayHitSphere;
+        _array[@ BONK_TYPE_TRIANGLE] = BonkRayHitTriangle;
+        return _array;
+    })();
     
-    x1 = 0;
-    y1 = 0;
-    z1 = 0;
     
-    x2 = 0;
-    y2 = 0;
-    z2 = 0;
     
-    isSegment = false;
+    x1 = _x1;
+    y1 = _y1;
+    z1 = _z1;
+    
+    x2 = _x2;
+    y2 = _y2;
+    z2 = _z2;
     
     
     
@@ -22,13 +66,6 @@ function BonkLine() constructor
         x1 = _x;
         y1 = _y;
         z1 = _z;
-        
-        if (isSegment)
-        {
-            x2 = x1 + __BONK_VERY_LARGE*(x2 - x1);
-            y2 = y1 + __BONK_VERY_LARGE*(y2 - y1);
-            z2 = z1 + __BONK_VERY_LARGE*(z2 - z1);
-        }
         
         return self;
     }
@@ -39,53 +76,44 @@ function BonkLine() constructor
         y2 = _y;
         z2 = _z;
         
-        isSegment = true;
-        
         return self;
     }
     
-    static SetLine = function(_x, _y, _z, _dx, _dy, _dz)
-    {
-        x1 = _x;
-        y1 = _y;
-        z1 = _z;
-        
-        var _d = __BONK_VERY_LARGE / sqrt(_dx*_dx + _dy*_dy + _dz*_dz);
-        x2 = x1 + _d*_dx;
-        y2 = y1 + _d*_dy;
-        z2 = z1 + _d*_dz;
-        
-        isSegment = false;
-        
-        return self;
-    }
-    
-    static GetA = function()
+    static GetAABB = function()
     {
         return {
-            x: x1,
-            y: y1,
-            z: z1,
+            x1: min(x1, x2),
+            y1: min(y1, y2),
+            z1: min(z1, z2),
+            x2: max(x1, x2),
+            y2: max(y1, y2),
+            z2: max(z1, z2),
         };
     }
     
-    static GetB = function()
-    {
-        return {
-            x: x2,
-            y: y2,
-            z: z2,
-        };
-    }
-    
-    static GetSegment = function()
-    {
-        return isSegment;
-    }
-    
-    static Draw = function(_color = undefined, _thickness = undefined)
+    static Draw = function(_color = undefined, _thickness = undefined, _wireframe = undefined)
     {
         __BONK_VERIFY_UGG
-        UggLine(x1, y1, z1, x2, y2, z2, _color, _thickness);
+        UggArrow(x1, y1, z1, x2, y2, z2, undefined, _color, _thickness, _wireframe);
+    }
+    
+    static Hit = function(_otherShape)
+    {
+        static _nullHit = __Bonk().__nullHit;
+        
+        var _hitFunc = _hitFuncLookup[_otherShape.bonkType];
+        if (is_callable(_hitFunc))
+        {
+            return _hitFunc(_otherShape, x1, y1, z1, x2, y2, z2);
+        }
+        else
+        {
+            if (BONK_STRICT)
+            {
+                __BonkError($".Hit() not supported between \"{instanceof(self)}\" (type={bonkType}) and \"{instanceof(_otherShape)}\" (type={_otherShape.bonkType})");
+            }
+        }
+        
+        return _nullHit;
     }
 }

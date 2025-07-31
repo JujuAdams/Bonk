@@ -43,7 +43,7 @@ function __UggPrebuildWireframeAABB(_x1, _y1, _z1, _x2, _y2, _z2)
     vertex_position_3d(_vertexBuffer, _x2, _y2, _z2); vertex_color(_vertexBuffer, c_white, 1);
     
     vertex_end(_vertexBuffer);
-	vertex_freeze(_vertexBuffer);
+    vertex_freeze(_vertexBuffer);
     
     return _vertexBuffer;
 }

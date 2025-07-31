@@ -1,5 +1,3 @@
-UggSetWireframe(true);
-aabb.Draw();
-UggSetWireframe(false);
+aabb.Draw(c_white, true);
 
-point.Draw(BonkPointInAABB(point, aabb)? c_red : c_lime);
+point.Draw(point.Inside(aabb)? c_red : c_lime);

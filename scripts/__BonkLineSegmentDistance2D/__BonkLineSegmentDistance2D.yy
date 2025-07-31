@@ -1,11 +1,13 @@
 {
-  "resourceType": "GMScript",
-  "resourceVersion": "1.0",
-  "name": "__BonkLineSegmentDistance2D",
-  "isDnD": false,
-  "isCompatibility": false,
-  "parent": {
-    "name": "(System)",
-    "path": "folders/Bonk/(System).yy",
+  "$GMScript":"v1",
+  "%Name":"__BonkLineSegmentDistance2D",
+  "isCompatibility":false,
+  "isDnD":false,
+  "name":"__BonkLineSegmentDistance2D",
+  "parent":{
+    "name":"Misc",
+    "path":"folders/Misc.yy",
   },
+  "resourceType":"GMScript",
+  "resourceVersion":"2.0",
 }

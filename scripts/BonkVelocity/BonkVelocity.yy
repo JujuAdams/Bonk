@@ -1,0 +1,13 @@
+{
+  "$GMScript":"v1",
+  "%Name":"BonkVelocity",
+  "isCompatibility":false,
+  "isDnD":false,
+  "name":"BonkVelocity",
+  "parent":{
+    "name":"Helpers",
+    "path":"folders/Bonk/Constructors/Helpers.yy",
+  },
+  "resourceType":"GMScript",
+  "resourceVersion":"2.0",
+}

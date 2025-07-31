@@ -2,7 +2,7 @@
 
 function __BonkError()
 {
-    var _string = "Bonk:\n";
+    var _string = " \nBonk:\n";
     
     var _i = 0;
     repeat(argument_count)

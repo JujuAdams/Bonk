@@ -1,3 +1,7 @@
+// Feather disable all
+
+/// Draws an infinite plane. The plane will follow the camera.
+/// 
 /// @param x
 /// @param y
 /// @param z
@@ -5,83 +9,94 @@
 /// @param normalY
 /// @param normalZ
 /// @param [color]
+/// @param [wireframe}
 
-function UggPlane(_x, _y, _z, _normalX, _normalY, _normalZ, _color = UGG_DEFAULT_DIFFUSE_COLOR)
+function UggPlane(_x, _y, _z, _dx, _dy, _dz, _color = UGG_DEFAULT_DIFFUSE_COLOR, _wireframe = undefined)
 {
-    static _vertexFormat = __Ugg().__volumeVertexFormat;
+    __UGG_GLOBAL
     __UGG_COLOR_UNIFORMS
+    static _volumePlane    = _global.__volumePlane;
+    static _wireframePlane = _global.__wireframePlane;
+    static _nativePlane    = _global.__nativePlane;
+    static _staticMatrix   = matrix_build_identity();
     
-    //TODO - Optimise this and draw it relative to the camera's position
+    var _length = sqrt(_dx*_dx + _dy*_dy + _dz*_dz);
+    if (_length == 0) return false;
     
-    var _vertexBuffer = vertex_create_buffer();
-    vertex_begin( _vertexBuffer, _vertexFormat);
+    _dx /= _length;
+    _dy /= _length;
+    _dz /= _length;
     
-    //Ensure normalisation
-    var _factor = 1 / sqrt(_normalX*_normalX + _normalY*_normalY + _normalZ*_normalZ);
-    _normalX *= _factor;
-    _normalY *= _factor;
-    _normalZ *= _factor;
+    //TODO - Optimize
     
-    if ((_normalX == 0) && (_normalY == 0) && (abs(_normalZ) != 1))
+    var _invViewMatrix = matrix_inverse(matrix_get(matrix_view));
+    var _camX = _invViewMatrix[12];
+    var _camY = _invViewMatrix[13];
+    var _camZ = _invViewMatrix[14];
+    
+    var _distance = dot_product_3d(_dx, _dy, _dz, _camX, _camY, _camZ) - dot_product_3d(_dx, _dy, _dz, _x, _y, _z);
+    _x = _camX - _distance*_dx;
+    _y = _camY - _distance*_dy;
+    _z = _camZ - _distance*_dz;
+    
+    if ((_dx == 0) && (_dy == 0) && (abs(_dz) == 1))
     {
-        //tangent = cross(normal, [0, 0, 1])
-        var _tangentX = -_normalY;
-        var _tangentY = _normalX;
-        var _tangentZ = 0;
+        var _ux = 0;
+        var _uy = 1;
+        var _uz = 0;
     }
     else
     {
-        //tangent = cross(normal, [1, 0, 0])
-        var _tangentX = 0;
-        var _tangentY = -_normalZ;
-        var _tangentZ = _normalY;
+        var _ux = 0;
+        var _uy = 0;
+        var _uz = 1;
     }
     
-    //bitangent = cross(normal, tangent)
-    var _bitangentX = _normalZ*_tangentY - _normalY*_tangentZ;
-    var _bitangentY = _normalX*_tangentZ - _normalZ*_tangentX;
-    var _bitangentZ = _normalY*_tangentX - _normalX*_tangentY;
+    var _ix = _dz*_uy - _dy*_uz;
+    var _iy = _dx*_uz - _dz*_ux;
+    var _iz = _dy*_ux - _dx*_uy;
     
-    _tangentX *= UGG_PLANE_SIZE;
-    _tangentY *= UGG_PLANE_SIZE;
-    _tangentZ *= UGG_PLANE_SIZE;
+    var _jx = _dz*_iy - _dy*_iz;
+    var _jy = _dx*_iz - _dz*_ix;
+    var _jz = _dy*_ix - _dx*_iy;
     
-    _bitangentX *= UGG_PLANE_SIZE;
-    _bitangentY *= UGG_PLANE_SIZE;
-    _bitangentZ *= UGG_PLANE_SIZE;
+    _staticMatrix[@  0] = _jx;
+    _staticMatrix[@  1] = _jy;
+    _staticMatrix[@  2] = _jz;
     
-    var _x1 = _x + _tangentX + _bitangentX;
-    var _y1 = _y + _tangentY + _bitangentY;
-    var _z1 = _z + _tangentZ + _bitangentZ;
+    _staticMatrix[@  4] = _ix;
+    _staticMatrix[@  5] = _iy;
+    _staticMatrix[@  6] = _iz;
     
-    var _x2 = _x + _tangentX - _bitangentX;
-    var _y2 = _y + _tangentY - _bitangentY;
-    var _z2 = _z + _tangentZ - _bitangentZ;
+    _staticMatrix[@  8] = _dx;
+    _staticMatrix[@  9] = _dy;
+    _staticMatrix[@ 10] = _dz;
     
-    var _x3 = _x - _tangentX + _bitangentX;
-    var _y3 = _y - _tangentY + _bitangentY;
-    var _z3 = _z - _tangentZ + _bitangentZ;
+    _staticMatrix[@ 12] = _x;
+    _staticMatrix[@ 13] = _y;
+    _staticMatrix[@ 14] = _z;
     
-    var _x4 = _x - _tangentX - _bitangentX;
-    var _y4 = _y - _tangentY - _bitangentY;
-    var _z4 = _z - _tangentZ - _bitangentZ;
+    matrix_stack_push(_staticMatrix);
+    matrix_set(matrix_world, matrix_stack_top());
     
-    vertex_position_3d(_vertexBuffer, _x1, _y1, _z1); vertex_normal(_vertexBuffer, _normalX, _normalY, _normalZ);
-    vertex_position_3d(_vertexBuffer, _x2, _y2, _z2); vertex_normal(_vertexBuffer, _normalX, _normalY, _normalZ);
-    vertex_position_3d(_vertexBuffer, _x4, _y4, _z4); vertex_normal(_vertexBuffer, _normalX, _normalY, _normalZ);
+    if (_wireframe ?? __UGG_WIREFRAME)
+    {
+        __UGG_WIREFRAME_SHADER
+        vertex_submit(_wireframePlane, pr_linelist, -1);
+    }
+    else
+    {
+        var _oldCullmode = gpu_get_cullmode();
+        gpu_set_cullmode(cull_noculling);
+        
+        __UGG_VOLUME_SHADER
+        vertex_submit(__UGG_USE_SHADERS? _volumePlane : _nativePlane, pr_trianglelist, -1);
+        
+        gpu_set_cullmode(_oldCullmode);
+    }
     
-    vertex_position_3d(_vertexBuffer, _x1, _y1, _z1); vertex_normal(_vertexBuffer, _normalX, _normalY, _normalZ);
-    vertex_position_3d(_vertexBuffer, _x4, _y4, _z4); vertex_normal(_vertexBuffer, _normalX, _normalY, _normalZ);
-    vertex_position_3d(_vertexBuffer, _x3, _y3, _z3); vertex_normal(_vertexBuffer, _normalX, _normalY, _normalZ);
+    __UGG_RESET_SHADER
     
-    vertex_end(_vertexBuffer);
-    
-    shader_set(__shdUggVolume);
-    shader_set_uniform_f(_shdUggVolume_u_vColor, color_get_red(  _color)/255,
-                                           color_get_green(_color)/255,
-                                           color_get_blue( _color)/255);
-    vertex_submit(_vertexBuffer, pr_trianglelist, -1);
-    shader_reset();
-    
-    vertex_delete_buffer(_vertexBuffer);
+    matrix_stack_pop();
+    matrix_set(matrix_world, matrix_stack_top());
 }

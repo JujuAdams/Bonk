@@ -1,43 +1,63 @@
-function BonkPoint() constructor
+// Feather disable all
+
+/// Constructor that generates an infinitesimal point.
+/// 
+/// @param x
+/// @param y
+/// @param z
+/// 
+/// The struct created by the constructor contains the following values:
+/// `.x` `.y` `.z`  Coordinate of the point.
+/// 
+/// You may use the `.Draw(color, thickness, wireframe)` method to draw the shape, though this
+/// method requires installation of Ugg. Please see https://github.com/jujuadams/Ugg
+/// 
+/// This shape cannot use the `.Collide()` method. This shape can use `.Inside(otherShape)` method
+/// however and is compatible with the following shapes:
+/// - AABB
+/// - Capsule
+/// - Cylinder / CylinderExt
+/// - Sphere
+/// 
+/// The `.Inside()` method returns either `true` or `false` indicating whether the two shapes
+/// overlap. `.Inside()` is usually a little faster than `.Collide()` (see below) and is easier to
+/// use.
+
+function BonkPoint(_x, _y, _z) : __BonkClassShared() constructor
 {
-    static toString = function()
+    static bonkType = BONK_TYPE_POINT;
+    
+    static _insideFuncLookup = (function()
     {
-        return "point";
-    }
+        var _array = array_create(BONK_NUMBER_OF_TYPES, undefined);
+        _array[@ BONK_TYPE_AABB    ] = BonkCoordInsideAABB;
+        _array[@ BONK_TYPE_CAPSULE ] = BonkCoordInsideCapsule;
+        _array[@ BONK_TYPE_CYLINDER] = BonkCoordInsideCylinder;
+        _array[@ BONK_TYPE_SPHERE  ] = BonkCoordInsideSphere;
+        return _array;
+    })();
     
-    x = 0;
-    y = 0;
-    z = 0;
     
-    xPrevious = 0;
-    yPrevious = 0;
-    zPrevious = 0;
+    
+    x = _x;
+    y = _y;
+    z = _z;
     
     
     
     static SetPosition = function(_x = x, _y = y, _z = z)
     {
-        if ((x != _x) || (y != _y) || (z != _z))
-        {
-            xPrevious = x;
-            yPrevious = y;
-            zPrevious = z;
-            
-            x = _x;
-            y = _y;
-            z = _z;
-        }
+        x = _x;
+        y = _y;
+        z = _z;
         
         return self;
     }
     
-    static GetPosition = function()
+    static Draw = function(_color = undefined, _wireframe = undefined)
     {
-        return {
-            x: x,
-            y: y,
-            z: z,
-        };
+        __BONK_VERIFY_UGG
+        UggPoint(x, y, z, _color, _wireframe);
     }
     
     static GetAABB = function()
@@ -52,9 +72,21 @@ function BonkPoint() constructor
         };
     }
     
-    static Draw = function(_color = undefined)
+    static Inside = function(_otherShape)
     {
-        __BONK_VERIFY_UGG
-        UggPoint(x, y, z, _color);
+        var _insideFunc = _insideFuncLookup[_otherShape.bonkType];
+        if (is_callable(_insideFunc))
+        {
+            return _insideFunc(_otherShape, x, y, z);
+        }
+        else
+        {
+            if (BONK_STRICT)
+            {
+                __BonkError($".Inside() not supported between \"{instanceof(self)}\" (type={bonkType}) and \"{instanceof(_otherShape)}\" (type={_otherShape.bonkType})");
+            }
+        }
+        
+        return false;
     }
 }

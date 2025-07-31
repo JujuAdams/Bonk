@@ -1,0 +1,13 @@
+{
+  "$GMScript":"v1",
+  "%Name":"BonkSphereInsideSphere",
+  "isCompatibility":false,
+  "isDnD":false,
+  "name":"BonkSphereInsideSphere",
+  "parent":{
+    "name":"Sphere",
+    "path":"folders/Bonk/Getters/Inside/Sphere.yy",
+  },
+  "resourceType":"GMScript",
+  "resourceVersion":"2.0",
+}

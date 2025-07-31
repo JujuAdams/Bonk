@@ -1,0 +1,1 @@
+sphere.SetPosition(undefined, lerp(140, 320, 0.5 + 0.5*dsin(current_time/40)), undefined);

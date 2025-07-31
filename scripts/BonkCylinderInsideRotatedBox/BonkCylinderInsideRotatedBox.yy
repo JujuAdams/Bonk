@@ -1,0 +1,13 @@
+{
+  "$GMScript":"v1",
+  "%Name":"BonkCylinderInsideRotatedBox",
+  "isCompatibility":false,
+  "isDnD":false,
+  "name":"BonkCylinderInsideRotatedBox",
+  "parent":{
+    "name":"Cylinder",
+    "path":"folders/Bonk/Getters/Inside/Cylinder.yy",
+  },
+  "resourceType":"GMScript",
+  "resourceVersion":"2.0",
+}

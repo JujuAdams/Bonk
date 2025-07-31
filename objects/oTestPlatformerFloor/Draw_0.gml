@@ -1,1 +1,0 @@
-floor_.Draw(c_ltgray);

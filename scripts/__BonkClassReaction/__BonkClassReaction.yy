@@ -1,11 +1,13 @@
 {
-  "resourceType": "GMScript",
-  "resourceVersion": "1.0",
-  "name": "__BonkClassReaction",
-  "isDnD": false,
-  "isCompatibility": false,
-  "parent": {
-    "name": "(System)",
-    "path": "folders/Bonk/(System).yy",
+  "$GMScript":"v1",
+  "%Name":"__BonkClassReaction",
+  "isCompatibility":false,
+  "isDnD":false,
+  "name":"__BonkClassReaction",
+  "parent":{
+    "name":"(System)",
+    "path":"folders/Bonk/(System).yy",
   },
+  "resourceType":"GMScript",
+  "resourceVersion":"2.0",
 }

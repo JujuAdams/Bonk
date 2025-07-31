@@ -1,0 +1,13 @@
+{
+  "$GMScript":"v1",
+  "%Name":"BonkRay",
+  "isCompatibility":false,
+  "isDnD":false,
+  "name":"BonkRay",
+  "parent":{
+    "name":"Helpers",
+    "path":"folders/Bonk/Constructors/Helpers.yy",
+  },
+  "resourceType":"GMScript",
+  "resourceVersion":"2.0",
+}

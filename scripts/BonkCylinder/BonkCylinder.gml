@@ -1,16 +1,77 @@
-function BonkCylinder() constructor
+// Feather disable all
+
+/// Constructor that generates a z-aligned cylinder.
+/// 
+/// @param xCenter
+/// @param yCenter
+/// @param zCenter
+/// @param height
+/// @param radius
+/// 
+/// The struct created by the constructor contains the following values:
+/// `.x` `.y` `.z`  Coordinate of the centre of the cylinder.
+/// `.height`       The total height of the cylinder.
+/// `.radius`       The radius of the cylinder (half the thickness of the cylinder).
+/// 
+/// You may use the `.Draw(color, thickness, wireframe)` method to draw the shape, though this
+/// method requires installation of Ugg. Please see https://github.com/jujuadams/Ugg
+/// 
+/// Using the `.Inside(otherShape)` method, this shape can test for an overlap with these shapes:
+/// - AABB
+/// - Capsule
+/// - Cylinder / CylinderExt
+/// - Sphere
+/// 
+/// The `.Inside()` method returns either `true` or `false` indicating whether the two shapes
+/// overlap. `.Inside()` is usually a little faster than `.Collide()` (see below) and is easier to
+/// use.
+/// 
+/// Using the `.Collide(otherShape)` method, this shape can collide with:
+/// - AABB
+/// - Capsule
+/// - Cylinder / CylinderExt
+/// - Sphere
+/// 
+/// The `.Collide()` method returns a "reaction" struct (instanceof `__BonkClassHit`). This struct
+/// has four values:
+/// 
+/// `.collision`       Boolean, whether the shapes overlap.
+/// `.dX` `.dY` `.dZ`  Distance to push ourselves to escape the collision.
+
+function BonkCylinder(_x, _y, _z, _height, _radius) : __BonkClassShared() constructor
 {
-    static toString = function()
+    static bonkType = BONK_TYPE_CYLINDER;
+    
+    static _collideFuncLookup = (function()
     {
-        return "cylinder";
-    }
+        var _array = array_create(BONK_NUMBER_OF_TYPES, undefined);
+        _array[@ BONK_TYPE_AABB    ] = BonkCylinderCollideAABB;
+        _array[@ BONK_TYPE_OBB     ] = BonkCylinderCollideRotatedBox;
+        _array[@ BONK_TYPE_CAPSULE ] = BonkCylinderCollideCapsule;
+        _array[@ BONK_TYPE_CYLINDER] = BonkCylinderCollideCylinder;
+        _array[@ BONK_TYPE_SPHERE  ] = BonkCylinderCollideSphere;
+        return _array;
+    })();
     
-    x = 0;
-    y = 0;
-    z = 0;
+    static _insideFuncLookup = (function()
+    {
+        var _array = array_create(BONK_NUMBER_OF_TYPES, undefined);
+        _array[@ BONK_TYPE_AABB    ] = BonkCylinderInsideAABB;
+        _array[@ BONK_TYPE_OBB     ] = BonkCylinderInsideRotatedBox;
+        _array[@ BONK_TYPE_CAPSULE ] = BonkCylinderInsideCapsule;
+        _array[@ BONK_TYPE_CYLINDER] = BonkCylinderInsideCylinder;
+        _array[@ BONK_TYPE_SPHERE  ] = BonkCylinderInsideSphere;
+        return _array;
+    })();
     
-    height = 0;
-    radius = 0;
+    
+    
+    x = _x;
+    y = _y;
+    z = _z;
+    
+    height = _height;
+    radius = _radius;
     
     
     
@@ -37,25 +98,6 @@ function BonkCylinder() constructor
         return self;
     }
     
-    static GetPosition = function()
-    {
-        return {
-            x: x,
-            y: y,
-            z: z,
-        };
-    }
-    
-    static GetHeight = function()
-    {
-        return height;
-    }
-    
-    static GetRadius = function()
-    {
-        return radius;
-    }
-    
     static GetAABB = function()
     {
         return {
@@ -68,9 +110,9 @@ function BonkCylinder() constructor
         };
     }
     
-    static Draw = function(_color = undefined)
+    static Draw = function(_color = undefined, _wireframe = undefined)
     {
         __BONK_VERIFY_UGG
-        UggCylinder(x, y, z, height, radius, _color);
+        UggCylinder(x, y, z - height/2, height, radius, _color, _wireframe);
     }
 }

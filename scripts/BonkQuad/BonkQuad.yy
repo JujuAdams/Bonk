@@ -1,0 +1,13 @@
+{
+  "$GMScript":"v1",
+  "%Name":"BonkQuad",
+  "isCompatibility":false,
+  "isDnD":false,
+  "name":"BonkQuad",
+  "parent":{
+    "name":"Shapes",
+    "path":"folders/Bonk/Constructors/Shapes.yy",
+  },
+  "resourceType":"GMScript",
+  "resourceVersion":"2.0",
+}

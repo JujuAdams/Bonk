@@ -1,11 +1,13 @@
 {
-  "resourceType": "GMScript",
-  "resourceVersion": "1.0",
-  "name": "BonkAABB",
-  "isCompatibility": false,
-  "isDnD": false,
-  "parent": {
-    "name": "Primitives",
-    "path": "folders/Bonk/Primitives.yy",
+  "$GMScript":"v1",
+  "%Name":"BonkAABB",
+  "isCompatibility":false,
+  "isDnD":false,
+  "name":"BonkAABB",
+  "parent":{
+    "name":"Shapes",
+    "path":"folders/Bonk/Constructors/Shapes.yy",
   },
+  "resourceType":"GMScript",
+  "resourceVersion":"2.0",
 }

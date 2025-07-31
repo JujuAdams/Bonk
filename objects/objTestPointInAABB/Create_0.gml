@@ -1,2 +1,2 @@
-aabb = new BonkAABB().SetPosition(200, 200, 0).SetSize(50, 100, 150);
-point = new BonkPoint().SetPosition(0, 200, 60);
+aabb  = new BonkAABB(200, 200, 0,   50, 100, 150);
+point = new BonkPoint(200, 200, 60);

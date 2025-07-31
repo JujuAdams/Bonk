@@ -1,0 +1,13 @@
+{
+  "$GMScript":"v1",
+  "%Name":"BonkCoordInsideAABB",
+  "isCompatibility":false,
+  "isDnD":false,
+  "name":"BonkCoordInsideAABB",
+  "parent":{
+    "name":"Coordinate",
+    "path":"folders/Bonk/Getters/Inside/Coordinate.yy",
+  },
+  "resourceType":"GMScript",
+  "resourceVersion":"2.0",
+}

@@ -1,6 +1,4 @@
-UggSetWireframe(true);
-cylinder.Draw();
-UggSetWireframe(false);
+cylinder.Draw(c_white, true);
 
-pointA.Draw(BonkPointInCylinder(pointA, cylinder)? c_red : c_lime);
-pointB.Draw(BonkPointInCylinder(pointB, cylinder)? c_red : c_lime);
+pointA.Draw(pointA.Inside(cylinder)? c_red : c_lime);
+pointB.Draw(pointB.Inside(cylinder)? c_red : c_lime);

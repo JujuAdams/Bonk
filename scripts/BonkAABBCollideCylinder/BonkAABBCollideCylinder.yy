@@ -1,0 +1,13 @@
+{
+  "$GMScript":"v1",
+  "%Name":"BonkAABBCollideCylinder",
+  "isCompatibility":false,
+  "isDnD":false,
+  "name":"BonkAABBCollideCylinder",
+  "parent":{
+    "name":"AABB",
+    "path":"folders/Bonk/Getters/Collide/AABB.yy",
+  },
+  "resourceType":"GMScript",
+  "resourceVersion":"2.0",
+}

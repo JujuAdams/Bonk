@@ -1,11 +1,13 @@
 {
-  "resourceType": "GMScript",
-  "resourceVersion": "1.0",
-  "name": "UggFrustrum",
-  "isCompatibility": false,
-  "isDnD": false,
-  "parent": {
-    "name": "Ugg",
-    "path": "folders/Ugg.yy",
+  "$GMScript":"v1",
+  "%Name":"UggFrustrum",
+  "isCompatibility":false,
+  "isDnD":false,
+  "name":"UggFrustrum",
+  "parent":{
+    "name":"Shapes",
+    "path":"folders/Ugg/Shapes.yy",
   },
+  "resourceType":"GMScript",
+  "resourceVersion":"2.0",
 }

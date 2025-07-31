@@ -1,0 +1,13 @@
+{
+  "$GMScript":"v1",
+  "%Name":"BonkCapsuleCollideRotatedBox",
+  "isCompatibility":false,
+  "isDnD":false,
+  "name":"BonkCapsuleCollideRotatedBox",
+  "parent":{
+    "name":"Capsule",
+    "path":"folders/Bonk/Getters/Collide/Capsule.yy",
+  },
+  "resourceType":"GMScript",
+  "resourceVersion":"2.0",
+}
