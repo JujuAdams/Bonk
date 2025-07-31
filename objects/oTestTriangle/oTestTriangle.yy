@@ -34,8 +34,8 @@
   "resourceVersion":"2.0",
   "solid":false,
   "spriteId":{
-    "name":"sAABB",
-    "path":"sprites/sAABB/sAABB.yy",
+    "name":"sAAB",
+    "path":"sprites/sAAB/sAAB.yy",
   },
   "spriteMaskId":null,
   "visible":true,

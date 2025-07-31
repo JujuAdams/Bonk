@@ -1,6 +1,6 @@
 // Feather disable all
 
-/// Returns the "push out" vector that separates a Bonk AABB and capsule.
+/// Returns the "push out" vector that separates a Bonk AAB and capsule.
 /// 
 /// This function returns a struct containing the following variables:
 /// 
@@ -11,10 +11,10 @@
 ///     The vector that separates the two shapes. If there is no collision, all three variables
 ///     will be set to `0`.
 /// 
-/// @param aabb
+/// @param aab
 /// @param capsule
 
-function BonkAABBCollideCapsule(_aabb, _capsule)
+function BonkAABCollideCapsule(_aab, _capsule)
 {
-    return BonkCapsuleCollideAABB(_capsule, _aabb).__Reverse();
+    return BonkCapsuleCollideAAB(_capsule, _aab).__Reverse();
 }

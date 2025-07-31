@@ -13,7 +13,7 @@ with(oTestFloor)
     shape.PushOut(other.shape);
 }
 
-with(oTestAABB)
+with(oTestAAB)
 {
     shape.PushOut(other.shape);
 }

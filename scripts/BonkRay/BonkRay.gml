@@ -13,7 +13,7 @@
 /// 
 /// `.Hit(otherShape)`
 /// Checks whether the ray hits another shape. You may check against the following shapes:
-///     AABB
+///     Axis-Aligned Box
 ///     Capsule
 ///     Cylinder
 ///     Quad
@@ -42,7 +42,7 @@ function BonkRay(_x, _y, _z, _dX, _dY, _dZ) : __BonkClassShared() constructor
     static _hitFuncLookup = (function()
     {
         var _array = array_create(BONK_NUMBER_OF_TYPES, undefined);
-        _array[@ BONK_TYPE_AABB    ] = BonkRayHitAABB;
+        _array[@ BONK_TYPE_AAB     ] = BonkRayHitAAB;
         _array[@ BONK_TYPE_CAPSULE ] = BonkRayHitCapsule;
         _array[@ BONK_TYPE_CYLINDER] = BonkRayHitCylinder;
         _array[@ BONK_TYPE_QUAD    ] = BonkRayHitQuad;

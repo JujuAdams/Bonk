@@ -13,7 +13,7 @@
 /// 
 /// `.Hit(otherShape)`
 /// Checks whether the line hits another shape. You may check against the following shapes:
-///     AABB
+///     Axis-Aligned Box
 ///     Capsule
 ///     Cylinder
 ///     Quad
@@ -43,7 +43,7 @@ function BonkLine(_x1, _y1, _z1, _x2, _y2, _z2) : __BonkClassShared() constructo
     static _hitFuncLookup = (function()
     {
         var _array = array_create(BONK_NUMBER_OF_TYPES, undefined);
-        _array[@ BONK_TYPE_AABB    ] = BonkRayHitAABB;
+        _array[@ BONK_TYPE_AAB     ] = BonkRayHitAAB;
         _array[@ BONK_TYPE_CAPSULE ] = BonkRayHitCapsule;
         _array[@ BONK_TYPE_CYLINDER] = BonkRayHitCylinder;
         _array[@ BONK_TYPE_QUAD    ] = BonkRayHitQuad;

@@ -1,0 +1,13 @@
+{
+  "$GMScript":"v1",
+  "%Name":"BonkAABBCollideAAB",
+  "isCompatibility":false,
+  "isDnD":false,
+  "name":"BonkAABBCollideAAB",
+  "parent":{
+    "name":"AAB",
+    "path":"folders/Bonk/Getters/Collide/AAB.yy",
+  },
+  "resourceType":"GMScript",
+  "resourceVersion":"2.0",
+}

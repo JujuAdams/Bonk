@@ -1,0 +1,13 @@
+{
+  "$GMScript":"v1",
+  "%Name":"BonkCylinderInsideAAB",
+  "isCompatibility":false,
+  "isDnD":false,
+  "name":"BonkCylinderInsideAAB",
+  "parent":{
+    "name":"Cylinder",
+    "path":"folders/Bonk/Getters/Inside/Cylinder.yy",
+  },
+  "resourceType":"GMScript",
+  "resourceVersion":"2.0",
+}

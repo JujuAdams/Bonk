@@ -9,7 +9,7 @@ function Autoslope(_weight)
 
     var _func = function(_x, _y)
     {
-        if (instance_exists(instance_position(x+32 + 64*_x, y+32 + 64*_y, oTestAABB))) return 1;
+        if (instance_exists(instance_position(x+32 + 64*_x, y+32 + 64*_y, oTestAAB))) return 1;
         if (instance_exists(instance_position(x+32 + 64*_x, y+32 + 64*_y, oTestAutoHeavy))) return 1/2;
     
         return 0;

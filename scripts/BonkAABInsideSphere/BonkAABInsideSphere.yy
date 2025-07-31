@@ -1,0 +1,13 @@
+{
+  "$GMScript":"v1",
+  "%Name":"BonkAABInsideSphere",
+  "isCompatibility":false,
+  "isDnD":false,
+  "name":"BonkAABInsideSphere",
+  "parent":{
+    "name":"AAB",
+    "path":"folders/Bonk/Getters/Inside/AAB.yy",
+  },
+  "resourceType":"GMScript",
+  "resourceVersion":"2.0",
+}

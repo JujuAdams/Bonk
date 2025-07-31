@@ -5,8 +5,8 @@
   "isDnD":false,
   "name":"BonkAABBCollideCylinder",
   "parent":{
-    "name":"AABB",
-    "path":"folders/Bonk/Getters/Collide/AABB.yy",
+    "name":"AAB",
+    "path":"folders/Bonk/Getters/Collide/AAB.yy",
   },
   "resourceType":"GMScript",
   "resourceVersion":"2.0",

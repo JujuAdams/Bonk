@@ -32,7 +32,7 @@ function BonkSphere(_x, _y, _z, _radius) : __BonkClassShared() constructor
     static _collideFuncLookup = (function()
     {
         var _array = array_create(BONK_NUMBER_OF_TYPES, undefined);
-        _array[@ BONK_TYPE_AABB    ] = BonkSphereCollideAABB;
+        _array[@ BONK_TYPE_AAB     ] = BonkSphereCollideAAB;
         _array[@ BONK_TYPE_OBB     ] = BonkSphereCollideRotatedBox;
         _array[@ BONK_TYPE_CAPSULE ] = BonkSphereCollideCapsule;
         _array[@ BONK_TYPE_CYLINDER] = BonkSphereCollideCylinder;
@@ -45,7 +45,7 @@ function BonkSphere(_x, _y, _z, _radius) : __BonkClassShared() constructor
     static _insideFuncLookup = (function()
     {
         var _array = array_create(BONK_NUMBER_OF_TYPES, undefined);
-        _array[@ BONK_TYPE_AABB    ] = BonkSphereInsideAABB;
+        _array[@ BONK_TYPE_AAB     ] = BonkSphereInsideAAB;
         _array[@ BONK_TYPE_OBB     ] = BonkSphereInsideRotatedBox;
         _array[@ BONK_TYPE_CAPSULE ] = BonkSphereInsideCapsule;
         _array[@ BONK_TYPE_CYLINDER] = BonkSphereInsideCylinder;

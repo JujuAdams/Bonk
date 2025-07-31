@@ -1,7 +1,7 @@
 #macro BONK_VERSION  "1.1.0"
 #macro BONK_DATE     "2025-07-31"
 
-#macro BONK_TYPE_AABB       0
+#macro BONK_TYPE_AAB        0
 #macro BONK_TYPE_OBB        1
 #macro BONK_TYPE_CAPSULE    2
 #macro BONK_TYPE_CYLINDER   3

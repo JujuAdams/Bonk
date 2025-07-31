@@ -17,13 +17,13 @@
 /// The struct created by the constructor contains the following values:
 /// 
 /// `.x` `.y` `.z`
-///     Coordinate of the centre of the AABB.
+///     Coordinate of the centre of the box.
 /// 
 /// `.xSize` `.ySize` `.zSize`
-///     Size of the AABB in each axis.
+///     Size of the box in each axis.
 /// 
 /// `.zRotation`
-///     Rotation of the AABB around the z-axis.
+///     Rotation of the box around the z-axis.
 /// 
 /// @param xCenter
 /// @param yCenter

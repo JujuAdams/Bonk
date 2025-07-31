@@ -1,6 +1,6 @@
 // Feather disable all
 
-/// Returns the "push out" vector that separates a Bonk AABB and cylinder.
+/// Returns the "push out" vector that separates a Bonk AAB and cylinder.
 /// 
 /// This function returns a struct containing the following variables:
 /// 
@@ -11,10 +11,10 @@
 ///     The vector that separates the two shapes. If there is no collision, all three variables
 ///     will be set to `0`.
 /// 
-/// @param aabb
+/// @param aab
 /// @param cylinder
 
-function BonkAABBCollideCylinder(_aabb, _cylinder)
+function BonkAABCollideCylinder(_aab, _cylinder)
 {
     static _nullReaction = __Bonk().__nullReaction;
     static _reaction     = new __BonkClassReaction();
@@ -29,7 +29,7 @@ function BonkAABBCollideCylinder(_aabb, _cylinder)
         var _maxZ = z + 0.5*height;
     }
     
-    with(_aabb)
+    with(_aab)
     {
         if ((z - 0.5*zSize >= _maxZ) || (z + 0.5*zSize <= _minZ))
         {
@@ -56,7 +56,7 @@ function BonkAABBCollideCylinder(_aabb, _cylinder)
             
             if (point_in_rectangle(_cylinder.x, _cylinder.y, _left, _top, _right, _bottom))
             {
-                //Centre of cylinder is inside the AABB
+                //Centre of cylinder is inside the AAB
                 var _lPush = (_cylinderX + _cylinderR) - _left;
                 var _tPush = (_cylinderY + _cylinderR) - _top;
                 var _rPush = _right  - (_cylinderX - _cylinderR);

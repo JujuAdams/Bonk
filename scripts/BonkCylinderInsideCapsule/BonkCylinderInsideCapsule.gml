@@ -7,5 +7,5 @@
 
 function BonkCylinderInsideCapsule(_cylinder, _capsule)
 {
-    return BonkCapsuleInsideAABB(_capsule, _cylinder);
+    return BonkCapsuleInsideAAB(_capsule, _cylinder);
 }

@@ -1,6 +1,6 @@
 // Feather disable all
 
-/// Returns the "push out" vector that separates a Bonk AABB and sphere.
+/// Returns the "push out" vector that separates a Bonk AAB and sphere.
 /// 
 /// This function returns a struct containing the following variables:
 /// 
@@ -11,15 +11,15 @@
 ///     The vector that separates the two shapes. If there is no collision, all three variables
 ///     will be set to `0`.
 /// 
-/// @param aabb
+/// @param aab
 /// @param sphere
 
-function BonkAABBCollideSphere(_aabb, _sphere)
+function BonkAABCollideSphere(_aab, _sphere)
 {
     static _nullReaction = __Bonk().__nullReaction;
     static _reaction     = new __BonkClassReaction();
     
-    with(_aabb)
+    with(_aab)
     {
         var _xMin = x - 0.5*xSize;
         var _yMin = y - 0.5*ySize;
@@ -37,13 +37,13 @@ function BonkAABBCollideSphere(_aabb, _sphere)
         var _sphereRadius = radius;
     }
     
-    var _aabbClosestX = clamp(_sphere.x, _xMin, _xMax);
-    var _aabbClosestY = clamp(_sphere.y, _yMin, _yMax);
-    var _aabbClosestZ = clamp(_sphere.z, _zMin, _zMax);
+    var _aabClosestX = clamp(_sphere.x, _xMin, _xMax);
+    var _aabClosestY = clamp(_sphere.y, _yMin, _yMax);
+    var _aabClosestZ = clamp(_sphere.z, _zMin, _zMax);
     
-    var _dX = _aabbClosestX - _sphereX;
-    var _dY = _aabbClosestY - _sphereY;
-    var _dZ = _aabbClosestZ - _sphereZ;
+    var _dX = _aabClosestX - _sphereX;
+    var _dY = _aabClosestY - _sphereY;
+    var _dZ = _aabClosestZ - _sphereZ;
     
     var _dist = sqrt(_dX*_dX + _dY*_dY + _dZ*_dZ);
     if (_dist >= _sphereRadius)
@@ -58,9 +58,9 @@ function BonkAABBCollideSphere(_aabb, _sphere)
     
     with(_reaction)
     {
-        dX = _sphereClosestX - _aabbClosestX;
-        dY = _sphereClosestY - _aabbClosestY;
-        dZ = _sphereClosestZ - _aabbClosestZ;
+        dX = _sphereClosestX - _aabClosestX;
+        dY = _sphereClosestY - _aabClosestY;
+        dZ = _sphereClosestZ - _aabClosestZ;
     }
     
     return _reaction;
