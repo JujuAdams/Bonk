@@ -1,6 +1,6 @@
-<h1 align="center">Bonk</h1>
+<h1 align="center">Bonk 1.1.0</h1>
 
-<p align="center">3D collisions for GameMaker LTS 2022 by <a href="https://www.jujuadams.com/" target="_blank">Juju Adams</a></p>
+<p align="center">3D collisions for GameMaker 2024.11 by <a href="https://www.jujuadams.com/" target="_blank">Juju Adams</a></p>
 
 <p align="center"><a href="https://github.com/JujuAdams/bonk/releases/">Download the .yymps</a></p>
 
