@@ -6,7 +6,7 @@
 
 &nbsp;
 
-Bonk is a 3D collision library. It supports boolean "inside" tests between shapes as well as "push out" tests. Bonk also has functions for raycasting. The library contains basic collision mechanics suitable for most types of 3D games - shooters, platforms, RPGs etc.
+Bonk is a 3D collision library. It supports boolean "inside" tests between shapes as well as "push out" tests that return a vector that separates the two shapes. Bonk also has functions for raycasting. The library contains basic collision mechanics suitable for most types of 3D games - shooters, platforms, RPGs etc.  Bonk contains a very basic grid collision system that optimizes the number of shape-shape collision checks that need to be performed. This is helpful for situations where you have multiple shapes colliding (which is most situations!).
 
 Please note that cylinders and capsule are z-aligned and cannot be rotated. Additionally, rotated boxes can only be rotated around the z-axis.
 
