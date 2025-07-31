@@ -1,6 +1,24 @@
 // Feather disable all
 
-/// Constructor that generates an axis-aligned bounding box. Such a box cannot be rotated.
+/// Constructor that generates an axis-aligned box.
+/// 
+/// `.SetPosition([x], [y], [z])`
+/// 
+/// `.SetSize([dX], [dY], [dZ])`
+/// 
+/// `.GetAABB()`
+///     Returns a struct containing the bounding box for the shape.
+/// 
+/// `.Draw([color], [thickness], [wireframe])`
+///     Draws the shape. This uses Ugg, please see https://github.com/jujuadams/Ugg
+/// 
+/// The struct created by the constructor contains the following values:
+/// 
+/// `.x` `.y` `.z`
+///     Coordinate of the centre of the AABB.
+/// 
+/// `.xSize` `.ySize` `.zSize`
+///     Size of the AABB in each axis.
 /// 
 /// @param xCenter
 /// @param yCenter
@@ -8,35 +26,6 @@
 /// @param xSize
 /// @param ySize
 /// @param zSize
-/// 
-/// The struct created by the constructor contains the following values:
-/// `.x` `.y` `.z`  Coordinate of the centre of the AABB.
-/// `.x2` `.y2` `.z2`  Coordinate of the destination of the ray.
-/// 
-/// You may use the `.Draw(color, thickness, wireframe)` method to draw the shape, though this
-/// method requires installation of Ugg. Please see https://github.com/jujuadams/Ugg
-/// 
-/// Using the `.Inside(otherShape)` method, this shape can test for an overlap with these shapes:
-/// - AABB
-/// - Capsule
-/// - Cylinder / CylinderExt
-/// - Sphere
-/// 
-/// The `.Inside()` method returns either `true` or `false` indicating whether the two shapes
-/// overlap. `.Inside()` is usually a little faster than `.Collide()` (see below) and is easier to
-/// use.
-/// 
-/// Using the `.Collide(otherShape)` method, this shape can collide with:
-/// - AABB
-/// - Capsule
-/// - Cylinder / CylinderExt
-/// - Sphere
-/// 
-/// The `.Collide()` method returns a "reaction" struct (instanceof `__BonkClassHit`). This struct
-/// has four values:
-/// 
-/// `.collision`       Boolean, whether the shapes overlap.
-/// `.dX` `.dY` `.dZ`  Distance to push ourselves to escape the collision.
 
 function BonkAABB(_x, _y, _z, _xSize, _ySize, _zSize) : __BonkClassShared() constructor
 {

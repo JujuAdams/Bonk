@@ -2,26 +2,28 @@
 
 /// Constructor that generates an infinitesimal point.
 /// 
+/// `.SetPosition([x], [y], [z])`
+/// 
+/// `.GetAABB()`
+/// 
+/// `.Draw([color], [thickness], [wireframe])`
+///     Draws the shape. This uses Ugg, please see https://github.com/jujuadams/Ugg
+/// 
+/// `.Inside(otherShape)`
+/// Checks whether the line hits another shape. You may check against the following shapes:
+///     AABB
+///     Capsule
+///     Cylinder
+///     Sphere
+/// 
+/// The struct created by the constructor contains the following values:
+/// 
+/// `.x` `.y` `.z` 
+///     Coordinate of the point.
+/// 
 /// @param x
 /// @param y
 /// @param z
-/// 
-/// The struct created by the constructor contains the following values:
-/// `.x` `.y` `.z`  Coordinate of the point.
-/// 
-/// You may use the `.Draw(color, thickness, wireframe)` method to draw the shape, though this
-/// method requires installation of Ugg. Please see https://github.com/jujuadams/Ugg
-/// 
-/// This shape cannot use the `.Collide()` method. This shape can use `.Inside(otherShape)` method
-/// however and is compatible with the following shapes:
-/// - AABB
-/// - Capsule
-/// - Cylinder / CylinderExt
-/// - Sphere
-/// 
-/// The `.Inside()` method returns either `true` or `false` indicating whether the two shapes
-/// overlap. `.Inside()` is usually a little faster than `.Collide()` (see below) and is easier to
-/// use.
 
 function BonkPoint(_x, _y, _z) : __BonkClassShared() constructor
 {

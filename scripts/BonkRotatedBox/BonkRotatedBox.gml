@@ -1,6 +1,29 @@
 // Feather disable all
 
-/// Constructor that generates an axis-aligned bounding box. Such a box cannot be rotated.
+/// Constructor that generates a box that can be rotated around the z-axis.
+/// 
+/// `.SetPosition([x], [y], [z])`
+/// 
+/// `.SetSize([dX], [dY], [dZ])`
+/// 
+/// `.SetRotation([zRotation])`
+/// 
+/// `.GetAABB()`
+///     Returns a struct containing the bounding box for the shape.
+/// 
+/// `.Draw([color], [thickness], [wireframe])`
+///     Draws the shape. This uses Ugg, please see https://github.com/jujuadams/Ugg
+/// 
+/// The struct created by the constructor contains the following values:
+/// 
+/// `.x` `.y` `.z`
+///     Coordinate of the centre of the AABB.
+/// 
+/// `.xSize` `.ySize` `.zSize`
+///     Size of the AABB in each axis.
+/// 
+/// `.zRotation`
+///     Rotation of the AABB around the z-axis.
 /// 
 /// @param xCenter
 /// @param yCenter
@@ -60,6 +83,13 @@ function BonkRotatedBox(_x, _y, _z, _xSize, _ySize, _zSize, _zRotation) : __Bonk
         xSize = _x;
         ySize = _y;
         zSize = _z;
+        
+        return self;
+    }
+    
+    static SetRotation = function(_zRotation = zRotation)
+    {
+        zRotation = _zRotation;
         
         return self;
     }

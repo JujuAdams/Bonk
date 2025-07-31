@@ -2,36 +2,39 @@
 
 /// Constructor that generates a line segment between two coordinates.
 /// 
+/// `.SetA([x], [y], [z])`
+/// 
+/// `.SetB([x], [y], [z])`
+/// 
+/// `.GetAABB()`
+/// 
+/// `.Draw([color], [thickness], [wireframe])`
+///     Draws the shape. This uses Ugg, please see https://github.com/jujuadams/Ugg
+/// 
+/// `.Hit(otherShape)`
+/// Checks whether the line hits another shape. You may check against the following shapes:
+///     AABB
+///     Capsule
+///     Cylinder
+///     Quad
+///     Sphere
+///     Triangle
+/// 
+/// The struct created by the constructor contains the following values:
+/// 
+/// `.x1` `.y1` `.z1`
+///     Coordinate of the origin of the line.
+/// 
+/// `.x2` `.y2` `.z2`
+///     Coordinate of the destination of the line.
+/// 
+/// 
 /// @param x1
 /// @param y1
 /// @param z1
 /// @param x2
 /// @param y2
 /// @param z2
-/// 
-/// The struct created by the constructor contains the following values:
-/// `.x1` `.y1` `.z1`  Coordinate of the origin of the ray.
-/// `.x2` `.y2` `.z2`  Coordinate of the destination of the ray.
-/// 
-/// You may use the `.Draw(color, thickness, wireframe)` method to draw the shape, though this
-/// method requires installation of Ugg. Please see https://github.com/jujuadams/Ugg
-/// 
-/// This shape cannot use the `.Collide()` nor `.Inside()` methods. Instead, lines can use the
-/// special `.Hit(otherShape)` method. This method is compatible with the following shapes:
-/// - AABB
-/// - Capsule
-/// - Cylinder / CylinderExt
-/// - Quad
-/// - Sphere
-/// - Triangle
-/// 
-/// The `.Hit()` method returns a "hit" struct (instanceof `__BonkClassHit`). This struct contains
-/// four values:
-/// 
-/// `.collision`    Boolean, whether the line hit the target.
-/// `.x` `.y` `.z`  Coordinate of the point where the line hit the target.
-/// 
-/// If the line did *not* hit the other shape then `.x` `.y` `.z` will all be set to `0`.
 
 function BonkLine(_x1, _y1, _z1, _x2, _y2, _z2) : __BonkClassShared() constructor
 {

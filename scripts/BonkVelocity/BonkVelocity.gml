@@ -5,7 +5,7 @@
 /// `zSpeed`, that encode the three components of the velocity. You may get and set these variables
 /// as you see fit.
 /// 
-/// Structs created by this constructor has two methods:
+/// Structs created by this constructor have two methods:
 /// 
 /// `.GetSpeed()`
 ///     Return the scalar speed that the struct represents. This is the "length" of the velocity
@@ -13,6 +13,11 @@
 /// 
 /// `.Reset()`
 ///     Sets the x, y, and z components of the velocity to 0.
+/// 
+/// The struct created by the constructor contains the following values:
+/// 
+/// `.xSpeed` `.ySpeed` `.zSpeed`
+///     Components of the velocity vector.
 /// 
 /// @param [xSpeed=0]
 /// @param [ySpeed=0]

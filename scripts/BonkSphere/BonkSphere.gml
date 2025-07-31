@@ -2,43 +2,28 @@
 
 /// Constructor that generates a sphere.
 /// 
+/// `.SetPosition([x], [y], [z])`
+/// 
+/// `.SetRadius([radius])`
+/// 
+/// `.GetAABB()`
+///     Returns a struct containing the bounding box for the shape.
+/// 
+/// `.Draw([color], [thickness], [wireframe])`
+///     Draws the shape. This uses Ugg, please see https://github.com/jujuadams/Ugg
+/// 
+/// The struct created by the constructor contains the following values:
+/// 
+/// `.x` `.y` `.z`
+///     Coordinate of the centre of the sphere.
+/// 
+/// `.radius`
+///     Radius of the sphere.
+/// 
 /// @param x
 /// @param y
 /// @param z
 /// @param radius
-/// 
-/// The struct created by the constructor contains the following values:
-/// `.x` `.y` `.z`  Coordinate of the centre of the sphere.
-/// `.radius`       The radius of the sphere (half the thickness of the sphere).
-/// 
-/// You may use the `.Draw(color, thickness, wireframe)` method to draw the shape, though this
-/// method requires installation of Ugg. Please see https://github.com/jujuadams/Ugg
-/// 
-/// Using the `.Inside(otherShape)` method, this shape can test for an overlap with these shapes:
-/// - AABB
-/// - Capsule
-/// - Cylinder / CylinderExt
-/// - Quad
-/// - Sphere
-/// - Triangle
-/// 
-/// The `.Inside()` method returns either `true` or `false` indicating whether the two shapes
-/// overlap. `.Inside()` is usually a little faster than `.Collide()` (see below) and is easier to
-/// use.
-/// 
-/// Using the `.Collide(otherShape)` method, this shape can collide with:
-/// - AABB
-/// - Capsule
-/// - Cylinder / CylinderExt
-/// - Quad
-/// - Sphere
-/// - Triangle
-/// 
-/// The `.Collide()` method returns a "reaction" struct (instanceof `__BonkClassHit`). This struct
-/// has four values:
-/// 
-/// `.collision`       Boolean, whether the shapes overlap.
-/// `.dX` `.dY` `.dZ`  Distance to push ourselves to escape the collision.
 
 function BonkSphere(_x, _y, _z, _radius) : __BonkClassShared() constructor
 {

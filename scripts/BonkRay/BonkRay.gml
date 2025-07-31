@@ -2,36 +2,38 @@
 
 /// Constructor that generates a ray that starts at a point and extending out in a direction.
 /// 
+/// `.SetOrigin([x], [y], [z])`
+/// 
+/// `.SetDirection([dX], [dY], [dZ])`
+/// 
+/// `.GetAABB()`
+/// 
+/// `.Draw([color], [thickness], [wireframe])`
+///     Draws the shape. This uses Ugg, please see https://github.com/jujuadams/Ugg
+/// 
+/// `.Hit(otherShape)`
+/// Checks whether the ray hits another shape. You may check against the following shapes:
+///     AABB
+///     Capsule
+///     Cylinder
+///     Quad
+///     Sphere
+///     Triangle
+/// 
+/// The struct created by the constructor contains the following values:
+/// 
+/// `.x` `.y` `.z`
+///     Coordinate of the origin of the ray.
+/// 
+/// `.dX` `.dY` `.dZ`
+///     Direction that the ray is pointed in.
+/// 
 /// @param x
 /// @param y
 /// @param z
 /// @param dX
 /// @param dY
 /// @param dZ
-/// 
-/// The struct created by the constructor contains the following values:
-///  `.x`  `.y`  `.z`  Coordinate of the origin of the ray.
-/// `.dX` `.dY` `.dZ`  Direction that the ray is pointed in.
-/// 
-/// You may use the `.Draw(color, thickness, wireframe)` method to draw the shape, though this
-/// method requires installation of Ugg. Please see https://github.com/jujuadams/Ugg
-/// 
-/// This shape cannot use the `.Collide()` nor `.Inside()` methods. Instead, rays can use the
-/// special `.Hit(otherShape)` method. This method is compatible with the following shapes:
-/// - AABB
-/// - Capsule
-/// - Cylinder / CylinderExt
-/// - Quad
-/// - Sphere
-/// - Triangle
-/// 
-/// The `.Hit()` method returns a "hit" struct (instanceof `__BonkClassHit`). This struct contains
-/// four values:
-/// 
-/// `.collision`    Boolean, whether the line hit the target.
-/// `.x` `.y` `.z`  Coordinate of the point where the line hit the target.
-/// 
-/// If the line did *not* hit the other shape then `.x` `.y` `.z` will all be set to `0`.
 
 function BonkRay(_x, _y, _z, _dX, _dY, _dZ) : __BonkClassShared() constructor
 {
