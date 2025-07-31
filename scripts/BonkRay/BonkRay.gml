@@ -1,6 +1,13 @@
 // Feather disable all
 
-/// Constructor that generates a ray that starts at a point and extending out in a direction.
+/// Constructor that generates a ray that starts at a point and extending out in a direction. Rays
+/// can check against the following shapes:
+/// - Axis-Aligned Box
+/// - Capsule
+/// - Cylinder
+/// - Quad
+/// - Sphere
+/// - Triangle
 /// 
 /// `.SetOrigin([x], [y], [z])`
 /// 
@@ -12,13 +19,21 @@
 ///     Draws the shape. This uses Ugg, please see https://github.com/jujuadams/Ugg
 /// 
 /// `.Hit(otherShape)`
-/// Checks whether the ray hits another shape. You may check against the following shapes:
-///     Axis-Aligned Box
-///     Capsule
-///     Cylinder
-///     Quad
-///     Sphere
-///     Triangle
+///     Checks whether the ray hits another shape. You may check against the following shapes:
+///     - Axis-Aligned Box
+///     - Capsule
+///     - Cylinder
+///     - Quad
+///     - Sphere
+///     - Triangle
+///     
+///     This method returns a struct that contains the following variables:
+///     
+///     `.collision`
+///         Whether a collision was found. If no collision is found, this variable is set to `false`.
+///     
+///     `.x` `.y` `.z`
+///         The point of impact. If there is no collision, all three variables will be set to `0`.
 /// 
 /// The struct created by the constructor contains the following values:
 /// 
@@ -35,7 +50,7 @@
 /// @param dY
 /// @param dZ
 
-function BonkRay(_x, _y, _z, _dX, _dY, _dZ) : __BonkClassShared() constructor
+function BonkRay(_x, _y, _z, _dX, _dY, _dZ) constructor
 {
     static bonkType = BONK_TYPE_RAY;
     

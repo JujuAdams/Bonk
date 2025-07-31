@@ -4,6 +4,10 @@
 /// vertices need to be provided, the fourth coordinate is automatically generated using the
 /// following formulas `P4 = P2 + (P1 - P3)`.
 /// 
+/// Quads can check against the following shapes:
+/// - Capsule
+/// - Sphere
+/// 
 /// `.Refresh()`
 /// 
 /// `.GetAABB()`
@@ -11,6 +15,26 @@
 /// 
 /// `.Draw([color], [thickness], [wireframe])`
 ///     Draws the shape. This uses Ugg, please see https://github.com/jujuadams/Ugg
+/// 
+/// `.Inside(otherShape)`
+///     Returns whether the two shapes overlap. Not all shapes can be checked against, see above.
+/// 
+/// `.Collide(otherShape)`
+///     Returns the vector that separates two shapes overlap. Not all shapes can be checked
+///     against, see above. This method returns a struct that contains the following variables:
+///     
+///     `.collision`
+///         Whether a collision was found. If no collision is found, this variable is set to `false`.
+///     
+///     `.x` `.y` `.z`
+///         The vector that separates the two shapes. If there is no collision, all three variables
+///         will be set to `0`.
+/// 
+/// `.PushOut(subjectShape, [slopeThreshold=0])`
+///     Pushes the subject shape out of the scoped shape (provided that the two shapes can collide,
+///     see above). The slope threshold will allow shapes to "stand" on slopes instead of sliding
+///     down them. The units of this parameter are degrees. An angle of `0` represents a perfectly
+///     horizontal floor plane. Increase this value to allow shapes to stand on steeper slopes.
 /// 
 /// The struct created by the constructor contains the following values:
 /// 

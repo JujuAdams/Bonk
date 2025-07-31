@@ -3,6 +3,18 @@
 /// Constructor to make a struct that organizes a large group of Bonk shapes into a 3D grid for
 /// quick collision queries.
 /// 
+/// `.Add(shape)`
+///     Adds the shape permanently to the "world".
+/// 
+/// `.GetShapeArray(x, y, z)`
+///     Returns an array that contains shapes that may overlap with the specified point.
+/// 
+/// `.PushOut(subjectShape, [slopeThreshold=0])`
+///     Pushes the subject shape out of the shapes added to the world. The slope threshold will
+///     allow shapes to "stand" on slopes instead of sliding down them. The units of this parameter
+///     are degrees. An angle of `0` represents a perfectly horizontal floor plane. Increase this
+///     value to allow shapes to stand on steeper slopes.
+/// 
 /// @param xSize
 /// @param ySize
 /// @param zSize

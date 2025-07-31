@@ -12,13 +12,21 @@
 ///     Draws the shape. This uses Ugg, please see https://github.com/jujuadams/Ugg
 /// 
 /// `.Hit(otherShape)`
-/// Checks whether the line hits another shape. You may check against the following shapes:
-///     Axis-Aligned Box
-///     Capsule
-///     Cylinder
-///     Quad
-///     Sphere
-///     Triangle
+///     Checks whether the ray hits another shape. You may check against the following shapes:
+///     - Axis-Aligned Box
+///     - Capsule
+///     - Cylinder
+///     - Quad
+///     - Sphere
+///     - Triangle
+///     
+///     This method returns a struct that contains the following variables:
+///     
+///     `.collision`
+///         Whether a collision was found. If no collision is found, this variable is set to `false`.
+///     
+///     `.x` `.y` `.z`
+///         The point of impact. If there is no collision, all three variables will be set to `0`.
 /// 
 /// The struct created by the constructor contains the following values:
 /// 
@@ -28,7 +36,6 @@
 /// `.x2` `.y2` `.z2`
 ///     Coordinate of the destination of the line.
 /// 
-/// 
 /// @param x1
 /// @param y1
 /// @param z1
@@ -36,7 +43,7 @@
 /// @param y2
 /// @param z2
 
-function BonkLine(_x1, _y1, _z1, _x2, _y2, _z2) : __BonkClassShared() constructor
+function BonkLine(_x1, _y1, _z1, _x2, _y2, _z2) constructor
 {
     static bonkType = BONK_TYPE_LINE;
     
