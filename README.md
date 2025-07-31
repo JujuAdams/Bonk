@@ -13,7 +13,7 @@ Please note that cylinders and capsule are z-aligned and cannot be rotated. Addi
 <table>
     <tr>
         <td align="center"></td>
-        <td align="center">AABB</td>
+        <td align="center">Axis-Aligned Box</td>
         <td align="center">Capsule</td>
         <td align="center">Cylinder</td>
         <td align="center">Quad</td>
@@ -24,7 +24,7 @@ Please note that cylinders and capsule are z-aligned and cannot be rotated. Addi
         <td align="center">Point</td>
     </tr>
     <tr>
-        <td align="right">AABB</td>
+        <td align="right">Axis-Aligned Box</td>
         <td align="center">✓</td>
         <td align="center">✓</td>
         <td align="center">✓</td>
