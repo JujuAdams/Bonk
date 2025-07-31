@@ -28,10 +28,10 @@ Please note that cylinders and capsule are z-aligned and cannot be rotated. Addi
         <td align="center">✓</td>
         <td align="center">✓</td>
         <td align="center">✓</td>
-        <td align="center">☒</td>
-        <td align="center">☒</td>
+        <td align="center"></td>
+        <td align="center"></td>
         <td align="center">✓</td>
-        <td align="center">☒</td>
+        <td align="center"></td>
         <td align="center">✓</td>
         <td align="center">✓</td>
     </tr>
@@ -52,36 +52,36 @@ Please note that cylinders and capsule are z-aligned and cannot be rotated. Addi
         <td align="center">✓</td>
         <td align="center">✓</td>
         <td align="center">✓</td>
-        <td align="center">☒</td>
+        <td align="center"></td>
         <td align="center">✓</td>
         <td align="center">✓</td> 
-        <td align="center">☒</td>
+        <td align="center"></td>
         <td align="center">✓</td>
         <td align="center">✓</td>
     </tr>
     <tr>
         <td align="right">Quad</td>
-        <td align="center">☒</td>
+        <td align="center"></td>
         <td align="center">✓</td>
-        <td align="center">☒</td>
-        <td align="center">☒</td>
-        <td align="center">☒</td>
+        <td align="center"></td>
+        <td align="center"></td>
+        <td align="center"></td>
         <td align="center">✓</td>
-        <td align="center">☒</td>
+        <td align="center"></td>
         <td align="center">✓</td>
-        <td align="center">☒</td>
+        <td align="center"></td>
     </tr>
     <tr>
         <td align="right">Rotated Box</td>
-        <td align="center">☒</td>
+        <td align="center"></td>
         <td align="center">✓</td>
         <td align="center">✓</td>
-        <td align="center">☒</td>
-        <td align="center">☒</td>
+        <td align="center"></td>
+        <td align="center"></td>
         <td align="center">✓</td>
-        <td align="center">☒</td>
+        <td align="center"></td>
         <td align="center">✓</td>
-        <td align="center">☒</td>
+        <td align="center"></td>
     </tr>
     <tr>
         <td align="right">Sphere</td>
@@ -97,15 +97,15 @@ Please note that cylinders and capsule are z-aligned and cannot be rotated. Addi
     </tr>
     <tr>
         <td align="right">Triangle</td>
-        <td align="center">☒</td>
+        <td align="center"></td>
         <td align="center">✓</td>
-        <td align="center">☒</td>
-        <td align="center">☒</td>
-        <td align="center">☒</td>
+        <td align="center"></td>
+        <td align="center"></td>
+        <td align="center"></td>
         <td align="center">✓</td>
-        <td align="center">☒</td>
+        <td align="center"></td>
         <td align="center">✓</td>
-        <td align="center">☒</td>
+        <td align="center"></td>
     </tr>
     <tr>
         <td align="right">Line/Ray</td>
@@ -116,20 +116,20 @@ Please note that cylinders and capsule are z-aligned and cannot be rotated. Addi
         <td align="center">✓</td>
         <td align="center">✓</td>
         <td align="center">✓</td>
-        <td align="center">☒</td>
-        <td align="center">☒</td>
+        <td align="center"></td>
+        <td align="center"></td>
     </tr>
     <tr>
         <td align="right">Point</td>
         <td align="center">✓</td>
         <td align="center">✓</td>
         <td align="center">✓</td>
-        <td align="center">☒</td>
-        <td align="center">☒</td>
+        <td align="center"></td>
+        <td align="center"></td>
         <td align="center">✓</td>
-        <td align="center">☒</td>
-        <td align="center">☒</td>
-        <td align="center">☒</td>
+        <td align="center"></td>
+        <td align="center"></td>
+        <td align="center"></td>
     </tr>
 </table>
 
