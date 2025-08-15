@@ -93,7 +93,7 @@ function BonkCylinder(_x, _y, _z, _height, _radius) : __BonkClassShared() constr
     
     
     
-    static SetPosition = function(_x = x, _y = y, _z = z)
+    static __SetPositionFree = function(_x = x, _y = y, _z = z)
     {
         x = _x;
         y = _y;
@@ -101,6 +101,19 @@ function BonkCylinder(_x, _y, _z, _height, _radius) : __BonkClassShared() constr
         
         return self;
     }
+    
+    static __SetPositionInWorld = function(_x = x, _y = y, _z = z)
+    {
+        __world.__MoveShape(_x - x, _y - y, _z - z, self);
+        
+        x = _x;
+        y = _y;
+        z = _z;
+        
+        return self;
+    }
+    
+    SetPosition = __SetPositionFree;
     
     static SetHeight = function(_height = height)
     {

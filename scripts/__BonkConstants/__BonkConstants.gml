@@ -12,5 +12,6 @@
 #macro BONK_TYPE_SPHERE     8
 #macro BONK_TYPE_TRIANGLE   9
 #macro BONK_TYPE_WORLD     10
+#macro BONK_TYPE_POOL      11
 
 #macro BONK_NUMBER_OF_TYPES  11

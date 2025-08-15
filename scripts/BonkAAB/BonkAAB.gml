@@ -88,13 +88,35 @@ function BonkAAB(_x, _y, _z, _xSize, _ySize, _zSize) : __BonkClassShared() const
     
     
     
-    static SetPosition = function(_x = x, _y = y, _z = z)
+    static __SetPositionFree = function(_x = x, _y = y, _z = z)
     {
         x = _x;
         y = _y;
         z = _z;
         
         return self;
+    }
+    
+    static __SetPositionInWorld = function(_x = x, _y = y, _z = z)
+    {
+        __world.__MoveShape(_x - x, _y - y, _z - z, self);
+        
+        x = _x;
+        y = _y;
+        z = _z;
+        
+        return self;
+    }
+    
+    SetPosition = __SetPositionFree;
+    
+    static RemoveFromWorld = function()
+    {
+        if (__world != undefined)
+        {
+            __world.__RemoveShape(self);
+            SetPosition = __SetPositionFree;
+        }
     }
     
     static SetSize = function(_x = xSize, _y = ySize, _z = zSize)

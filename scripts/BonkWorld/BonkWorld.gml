@@ -120,7 +120,9 @@ function BonkWorld(_xSize, _ySize, _zSize, _cellXSize, _cellYSize, _cellZSize) c
     
     static Add = function(_shape)
     {
-        if ((_shape.bonkType == BONK_TYPE_LINE) || (_shape.bonkType == BONK_TYPE_RAY) || (_shape.bonkType = BONK_TYPE_POINT))
+        if ((_shape.bonkType == BONK_TYPE_LINE)
+        ||  (_shape.bonkType == BONK_TYPE_RAY)
+        ||  (_shape.bonkType == BONK_TYPE_POINT))
         {
             if (BONK_STRICT)
             {
@@ -129,6 +131,14 @@ function BonkWorld(_xSize, _ySize, _zSize, _cellXSize, _cellYSize, _cellZSize) c
             
             return;
         }
+        
+        if (_shape.__world != undefined)
+        {
+            _shape.RemoveFromWorld();
+        }
+        
+        _shape.__world = self;
+        _shape.SetPosition = __SetPositionInWorld;
         
         var _aabb = _shape.GetAABB();
         
@@ -148,6 +158,131 @@ function BonkWorld(_xSize, _ySize, _zSize, _cellXSize, _cellYSize, _cellZSize) c
             {
                 var _x = _cellX;
                 repeat(_cellXSize)
+                {
+                    array_push(__cellArray[_x + __cellXCount*(_y + __cellYCount*_z)], _shape);
+                    ++_x;
+                }
+                
+                ++_y;
+            }
+            
+            ++_z;
+        }
+    }
+    
+    static __RemoveShape = function(_shape)
+    {
+        var _aabb = _shape.GetAABB();
+        
+        var _cellX = clamp(floor((_aabb.xMin / __cellXSize) - 0.5), 0, __cellXCount-1);
+        var _cellY = clamp(floor((_aabb.yMin / __cellYSize) - 0.5), 0, __cellYCount-1);
+        var _cellZ = clamp(floor((_aabb.zMin / __cellZSize) - 0.5), 0, __cellZCount-1);
+        
+        var _cellXSize = 1 + clamp(floor((_aabb.xMax / __cellXSize) + 0.5), 0, __cellXCount-1) - _cellX;
+        var _cellYSize = 1 + clamp(floor((_aabb.yMax / __cellYSize) + 0.5), 0, __cellYCount-1) - _cellY;
+        var _cellZSize = 1 + clamp(floor((_aabb.zMax / __cellZSize) + 0.5), 0, __cellZCount-1) - _cellZ;
+        
+        var _z = _cellZ;
+        repeat(_cellZSize)
+        {
+            var _y = _cellY;
+            repeat(_cellYSize)
+            {
+                var _x = _cellX;
+                repeat(_cellXSize)
+                {
+                    var _array = __cellArray[_x + __cellXCount*(_y + __cellYCount*_z)];
+                    var _index = array_find_index(_array, _shape);
+                    if (_index >= 0)
+                    {
+                        array_delete(_array, _index, 1);
+                    }
+                    
+                    ++_x;
+                }
+                
+                ++_y;
+            }
+            
+            ++_z;
+        }
+    }
+    
+    static __MoveShape = function(_dX, _dY, _dZ, _shape)
+    {
+        var _aabb = _shape.GetAABB();
+        
+        //TODO - This is expensive. Is there a better way of doing this?
+        
+        var _cellX = clamp(floor((_aabb.xMin / __cellXSize) - 0.5), 0, __cellXCount-1);
+        var _cellY = clamp(floor((_aabb.yMin / __cellYSize) - 0.5), 0, __cellYCount-1);
+        var _cellZ = clamp(floor((_aabb.zMin / __cellZSize) - 0.5), 0, __cellZCount-1);
+        
+        var _cellXSize = 1 + clamp(floor((_aabb.xMax / __cellXSize) + 0.5), 0, __cellXCount-1) - _cellX;
+        var _cellYSize = 1 + clamp(floor((_aabb.yMax / __cellYSize) + 0.5), 0, __cellYCount-1) - _cellY;
+        var _cellZSize = 1 + clamp(floor((_aabb.zMax / __cellZSize) + 0.5), 0, __cellZCount-1) - _cellZ;
+        
+        with(_aabb)
+        {
+            xMin += _dX;
+            yMin += _dY;
+            zMin += _dZ;
+            
+            xMax += _dX;
+            yMax += _dY;
+            zMax += _dZ;
+        }
+        
+        var _cellX2 = clamp(floor((_aabb.xMin / __cellXSize) - 0.5), 0, __cellXCount-1);
+        var _cellY2 = clamp(floor((_aabb.yMin / __cellYSize) - 0.5), 0, __cellYCount-1);
+        var _cellZ2 = clamp(floor((_aabb.zMin / __cellZSize) - 0.5), 0, __cellZCount-1);
+        
+        var _cellXSize2 = 1 + clamp(floor((_aabb.xMax / __cellXSize) + 0.5), 0, __cellXCount-1) - _cellX;
+        var _cellYSize2 = 1 + clamp(floor((_aabb.yMax / __cellYSize) + 0.5), 0, __cellYCount-1) - _cellY;
+        var _cellZSize2 = 1 + clamp(floor((_aabb.zMax / __cellZSize) + 0.5), 0, __cellZCount-1) - _cellZ;
+        
+        if ((_cellX == _cellX2) && (_cellY == _cellY2) && (_cellZ == _cellZ2)
+        &&  (_cellXSize == _cellXSize2) && (_cellYSize == _cellYSize2) && (_cellZSize == _cellZSize2))
+        {
+            //Hasn't move far enough for any changes to be made
+            return;
+        }
+        
+        //Remove from the previous zone
+        var _z = _cellZ;
+        repeat(_cellZSize)
+        {
+            var _y = _cellY;
+            repeat(_cellYSize)
+            {
+                var _x = _cellX;
+                repeat(_cellXSize)
+                {
+                    var _array = __cellArray[_x + __cellXCount*(_y + __cellYCount*_z)];
+                    var _index = array_find_index(_array, _shape);
+                    if (_index >= 0)
+                    {
+                        array_delete(_array, _index, 1);
+                    }
+                    
+                    ++_x;
+                }
+                
+                ++_y;
+            }
+            
+            ++_z;
+        }
+        
+        //Add to the next zone
+        var _z = _cellZ2;
+        repeat(_cellZSize2)
+        {
+            var _y = _cellY2;
+            repeat(_cellYSize2)
+            {
+                var _x = _cellX2;
+                repeat(_cellXSize2)
                 {
                     array_push(__cellArray[_x + __cellXCount*(_y + __cellYCount*_z)], _shape);
                     ++_x;

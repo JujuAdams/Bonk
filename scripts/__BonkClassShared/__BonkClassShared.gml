@@ -2,6 +2,10 @@
 
 function __BonkClassShared() constructor
 {
+    __world = undefined;
+    
+    
+    
     static Inside = function(_otherShape)
     {
         var _insideFunc = _insideFuncLookup[_otherShape.bonkType];
