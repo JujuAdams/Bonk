@@ -5,8 +5,8 @@
   "isDnD":false,
   "name":"Autoslope",
   "parent":{
-    "name":"Test Cases",
-    "path":"folders/Test Cases.yy",
+    "name":"Physics",
+    "path":"folders/Test Cases/Physics.yy",
   },
   "resourceType":"GMScript",
   "resourceVersion":"2.0",

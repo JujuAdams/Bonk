@@ -8,8 +8,8 @@
   "name":"oTestAutoHeavy",
   "overriddenProperties":[],
   "parent":{
-    "name":"Test Cases",
-    "path":"folders/Test Cases.yy",
+    "name":"Physics",
+    "path":"folders/Test Cases/Physics.yy",
   },
   "parentObjectId":{
     "name":"oTestAutoLight",

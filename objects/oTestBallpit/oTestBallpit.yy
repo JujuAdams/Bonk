@@ -1,21 +1,19 @@
 {
   "$GMObject":"",
-  "%Name":"oTestTriangle",
+  "%Name":"oTestBallpit",
   "eventList":[
     {"$GMEvent":"v1","%Name":"","collisionObjectId":null,"eventNum":0,"eventType":0,"isDnD":false,"name":"","resourceType":"GMEvent","resourceVersion":"2.0",},
     {"$GMEvent":"v1","%Name":"","collisionObjectId":null,"eventNum":0,"eventType":8,"isDnD":false,"name":"","resourceType":"GMEvent","resourceVersion":"2.0",},
+    {"$GMEvent":"v1","%Name":"","collisionObjectId":null,"eventNum":0,"eventType":3,"isDnD":false,"name":"","resourceType":"GMEvent","resourceVersion":"2.0",},
   ],
   "managed":true,
-  "name":"oTestTriangle",
+  "name":"oTestBallpit",
   "overriddenProperties":[],
   "parent":{
-    "name":"Physics",
-    "path":"folders/Test Cases/Physics.yy",
+    "name":"Ballpit",
+    "path":"folders/Test Cases/Ballpit.yy",
   },
-  "parentObjectId":{
-    "name":"oTestParent",
-    "path":"objects/oTestParent/oTestParent.yy",
-  },
+  "parentObjectId":null,
   "persistent":false,
   "physicsAngularDamping":0.1,
   "physicsDensity":0.5,
@@ -33,10 +31,7 @@
   "resourceType":"GMObject",
   "resourceVersion":"2.0",
   "solid":false,
-  "spriteId":{
-    "name":"sAAB",
-    "path":"sprites/sAAB/sAAB.yy",
-  },
+  "spriteId":null,
   "spriteMaskId":null,
   "visible":true,
 }
