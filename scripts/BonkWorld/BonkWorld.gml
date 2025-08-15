@@ -46,6 +46,11 @@ function BonkWorld(_xSize, _ySize, _zSize, _cellXSize, _cellYSize, _cellZSize) c
     
     
     
+    static __SetPositionFree = function() {}
+    static __SetPositionInWorld = function() {}
+    
+    SetPosition = __SetPositionFree;
+    
     static PushOut = function(_subjectShape, _slopeThreshold = 0)
     {
         static _map = ds_map_create();
@@ -138,7 +143,7 @@ function BonkWorld(_xSize, _ySize, _zSize, _cellXSize, _cellYSize, _cellZSize) c
         }
         
         _shape.__world = self;
-        _shape.SetPosition = __SetPositionInWorld;
+        _shape.SetPosition = _shape.__SetPositionInWorld;
         
         var _aabb = _shape.GetAABB();
         

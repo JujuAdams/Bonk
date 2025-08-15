@@ -92,6 +92,11 @@ function BonkTriangle(_x1, _y1, _z1, _x2, _y2, _z2, _x3, _y3, _z3) : __BonkClass
     
     
     
+    static __SetPositionFree = function() {}
+    static __SetPositionInWorld = function() {}
+    
+    SetPosition = __SetPositionFree;
+    
     static Refresh = function()
     {
         dX12 = x2 - x1;
