@@ -7,4 +7,5 @@ quadRight.Draw(c_white, true);
 quadBottom.Draw(c_white, true);
 quadAbove.Draw(c_white, true);
 
-sphere.Draw();
+sphereA.Draw();
+sphereB.Draw();
