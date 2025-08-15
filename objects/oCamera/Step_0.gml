@@ -60,3 +60,5 @@ viewMatrix = matrix_build_lookat(camX, camY, camZ,
                                  camX+camDX, camY+camDY, camZ+camDZ,
                                  0, 0, 1);
 projectionMatrix = matrix_build_projection_perspective_fov(90, room_width/room_height, 1, 3000);
+
+fpsRealSmoothed = lerp(fpsRealSmoothed, fps_real, 0.05);

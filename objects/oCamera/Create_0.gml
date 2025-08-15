@@ -14,3 +14,5 @@ camDZ    =  dsin(camPitch);
 
 //F1 toggles the info panel
 showInfo = true;
+
+fpsRealSmoothed = 100;

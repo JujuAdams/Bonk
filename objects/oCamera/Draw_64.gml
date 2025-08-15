@@ -9,7 +9,9 @@ if (showInfo)
         _string += "WASD/shift/space to move\n";
         _string += "F1 to toggle this panel\n";
         _string += "Left click to toggle mouselook\n";
-        _string += "F4 to toggle fullscreen";
+        _string += "F4 to toggle fullscreen\n"
+        _string += "\n";
+        _string += "CPU time: " + string(1000 / fpsRealSmoothed) + "ms\n";
     
     draw_set_colour(c_black);
     draw_set_alpha(0.5);
