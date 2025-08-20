@@ -3,8 +3,8 @@ if (showInfo)
     var _string  = "Bonk " + BONK_VERSION + "\n";
         _string += "Juju Adams " + BONK_DATE + "\n";
         _string += "\n";
-        _string += "Camera position = " + string(camX) + ", " + string(camY) + ", " + string(camZ) + "\n";
-        _string += "Camera yaw/pitch = " + string(camYaw) + ", " + string(camPitch) + "\n";
+        _string += "camera position = " + string(camera.x) + ", " + string(camera.y) + ", " + string(camera.z) + "\n";
+        _string += "camera yaw/pitch = " + string(camera.yaw) + ", " + string(camera.pitch) + "\n";
         _string += "\n";
         _string += "WASD/shift/space to move\n";
         _string += "F1 to toggle this panel\n";

@@ -233,6 +233,7 @@
     {"id":{"name":"BonkVelocity","path":"scripts/BonkVelocity/BonkVelocity.yy",},},
     {"id":{"name":"BonkWall","path":"scripts/BonkWall/BonkWall.yy",},},
     {"id":{"name":"BonkWorld","path":"scripts/BonkWorld/BonkWorld.yy",},},
+    {"id":{"name":"ClassCamera","path":"scripts/ClassCamera/ClassCamera.yy",},},
     {"id":{"name":"D2LineSegmentDistance","path":"scripts/D2LineSegmentDistance/D2LineSegmentDistance.yy",},},
     {"id":{"name":"D3FrustrumLine","path":"scripts/D3FrustrumLine/D3FrustrumLine.yy",},},
     {"id":{"name":"D3FrustrumRay","path":"scripts/D3FrustrumRay/D3FrustrumRay.yy",},},

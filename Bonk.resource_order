@@ -175,6 +175,7 @@
     {"name":"BonkTriangleInsideSphere","order":1,"path":"scripts/BonkTriangleInsideSphere/BonkTriangleInsideSphere.yy",},
     {"name":"BonkWall","order":7,"path":"scripts/BonkWall/BonkWall.yy",},
     {"name":"BonkWorld","order":1,"path":"scripts/BonkWorld/BonkWorld.yy",},
+    {"name":"ClassCamera","order":9,"path":"scripts/ClassCamera/ClassCamera.yy",},
     {"name":"D3FrustrumLine","order":2,"path":"scripts/D3FrustrumLine/D3FrustrumLine.yy",},
     {"name":"D3FrustrumRay","order":3,"path":"scripts/D3FrustrumRay/D3FrustrumRay.yy",},
     {"name":"D3RandomVector","order":1,"path":"scripts/D3RandomVector/D3RandomVector.yy",},

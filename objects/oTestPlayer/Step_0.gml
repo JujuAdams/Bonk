@@ -1,4 +1,4 @@
-if (not oCamera.mouseLock)
+if (not oCamera.camera.GetMouseLock())
 {
     if (keyboard_check_pressed(ord("R")))
     {
@@ -12,8 +12,8 @@ if (not oCamera.mouseLock)
     
     var _para = 2*(keyboard_check(ord("W")) - keyboard_check(ord("S")));
     var _perp = 2*(keyboard_check(ord("A")) - keyboard_check(ord("D")));
-    var _sin  = dsin(oCamera.camYaw);
-    var _cos  = dcos(oCamera.camYaw);
+    var _sin  = dsin(oCamera.camera.yaw);
+    var _cos  = dcos(oCamera.camera.yaw);
     velocity.xSpeed =  _para*_cos - _perp*_sin;
     velocity.ySpeed = -_para*_sin - _perp*_cos;
 }
