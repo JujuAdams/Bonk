@@ -61,10 +61,20 @@ function UggArrow(_x1, _y1, _z1, _x2, _y2, _z2, _arrowSize = undefined, _color =
     var _ix = _dz*_uy - _dy*_uz;
     var _iy = _dx*_uz - _dz*_ux;
     var _iz = _dy*_ux - _dx*_uy;
+    //Make sure this is normalized so we don't get any deformation
+    var _iLength = sqrt(_ix*_ix + _iy*_iy + _iz*_iz);
+    _ix /= _iLength;
+    _iy /= _iLength;
+    _iz /= _iLength;
     
     var _jx = _dz*_iy - _dy*_iz;
     var _jy = _dx*_iz - _dz*_ix;
     var _jz = _dy*_ix - _dx*_iy;
+    //Make sure this is normalized so we don't get any deformation
+    var _jLength = sqrt(_jx*_jx + _jy*_jy + _jz*_jz);
+    _jx /= _jLength;
+    _jy /= _jLength;
+    _jz /= _jLength;
     
     _vectorMatrix[@  0] = _jx;
     _vectorMatrix[@  1] = _jy;

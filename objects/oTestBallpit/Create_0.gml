@@ -13,7 +13,7 @@ sphereArray = array_create_ext(50, function()
 {
     var _sphere = new BonkSphere(0, 0, 0,   20);
     
-    var _vector = __BonkRandomVector();
+    var _vector = D3RandomVector();
     with(_sphere)
     {
         xSpeed = 4*_vector.x;

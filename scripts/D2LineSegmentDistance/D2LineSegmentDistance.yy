@@ -1,9 +1,9 @@
 {
   "$GMScript":"v1",
-  "%Name":"__BonkRandomVector",
+  "%Name":"D2LineSegmentDistance",
   "isCompatibility":false,
   "isDnD":false,
-  "name":"__BonkRandomVector",
+  "name":"D2LineSegmentDistance",
   "parent":{
     "name":"Misc",
     "path":"folders/Misc.yy",

@@ -1,6 +1,6 @@
 // Feather disable all
 
-function __BonkRandomVector()
+function D3RandomVector()
 {
     static _result = {
         x: 0,

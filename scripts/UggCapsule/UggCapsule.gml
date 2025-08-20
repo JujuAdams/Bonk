@@ -28,13 +28,13 @@ function UggCapsule(_x, _y, _z, _height, _radius, _color = UGG_DEFAULT_DIFFUSE_C
     {
         __UGG_WIREFRAME_SHADER
         
-        var _shape = pr_linelist;
+        var _primitive = pr_linelist;
         var _cap       = _wireframeCap;
         var _body      = _wireframeBody;
     }
     else
     {
-        var _shape = pr_trianglelist;
+        var _primitive = pr_trianglelist;
         
         __UGG_VOLUME_SHADER
         
@@ -59,7 +59,7 @@ function UggCapsule(_x, _y, _z, _height, _radius, _color = UGG_DEFAULT_DIFFUSE_C
     
     matrix_stack_push(_staticMatrix);
     matrix_set(matrix_world, matrix_stack_top());
-    vertex_submit(_cap, _shape, -1);
+    vertex_submit(_cap, _primitive, -1);
     matrix_stack_pop();
     
     _staticMatrix[@  0] =  _radius;
@@ -71,7 +71,7 @@ function UggCapsule(_x, _y, _z, _height, _radius, _color = UGG_DEFAULT_DIFFUSE_C
     
     matrix_stack_push(_staticMatrix);
     matrix_set(matrix_world, matrix_stack_top());
-    vertex_submit(_cap, _shape, -1);
+    vertex_submit(_cap, _primitive, -1);
     matrix_stack_pop();
     
     _staticMatrix[@  0] = _radius;
@@ -83,7 +83,7 @@ function UggCapsule(_x, _y, _z, _height, _radius, _color = UGG_DEFAULT_DIFFUSE_C
     
     matrix_stack_push(_staticMatrix);
     matrix_set(matrix_world, matrix_stack_top());
-    vertex_submit(_body, _shape, -1);
+    vertex_submit(_body, _primitive, -1);
     matrix_stack_pop();
     
     matrix_set(matrix_world, matrix_stack_top());

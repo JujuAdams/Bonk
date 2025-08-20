@@ -1,4 +1,4 @@
-function __BonkLineSegmentDistance2D(_xA0, _yA0,   _xA1, _yA1,   _xB0, _yB0,   _xB1, _yB1)
+function D2LineSegmentDistance(_xA0, _yA0,   _xA1, _yA1,   _xB0, _yB0,   _xB1, _yB1)
 {
     static _result = {};
     

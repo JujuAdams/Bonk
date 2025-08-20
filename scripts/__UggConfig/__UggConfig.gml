@@ -34,10 +34,10 @@
 #macro UGG_LIGHT_DIRECTION_Z      -0.8
 
 //Number of facets on smooth shapes. Higher numbers are smoother, lower numbers are faser.
-#macro UGG_SPHERE_STEPS    32
+#macro UGG_SPHERE_STEPS    12
 #macro UGG_CYLINDER_STEPS  16
 #macro UGG_CONE_STEPS      16
-#macro UGG_CAPSULE_STEPS   32
+#macro UGG_CAPSULE_STEPS   12
 #macro UGG_CIRCLE_STEPS    24
 
 //Size of `UggPlane()`. Planes will follow the camera; this value will usually want to be equal to
