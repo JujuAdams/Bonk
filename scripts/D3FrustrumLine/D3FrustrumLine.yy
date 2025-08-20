@@ -1,0 +1,13 @@
+{
+  "$GMScript":"v1",
+  "%Name":"D3FrustrumLine",
+  "isCompatibility":false,
+  "isDnD":false,
+  "name":"D3FrustrumLine",
+  "parent":{
+    "name":"Misc",
+    "path":"folders/Misc.yy",
+  },
+  "resourceType":"GMScript",
+  "resourceVersion":"2.0",
+}
