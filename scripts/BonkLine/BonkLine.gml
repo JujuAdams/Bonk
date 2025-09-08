@@ -27,6 +27,10 @@
 ///     
 ///     `.x` `.y` `.z`
 ///         The point of impact. If there is no collision, all three variables will be set to `0`.
+///     
+///     N.B. The returned struct is statically allocated. Reusing `.Hit()` may cause the same struct
+///          to be returned.
+/// 
 /// 
 /// The struct created by the constructor contains the following values:
 /// 

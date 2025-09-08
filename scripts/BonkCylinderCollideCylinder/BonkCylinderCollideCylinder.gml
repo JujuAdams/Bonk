@@ -11,6 +11,9 @@
 ///     The vector that separates the two shapes. If there is no collision, all three variables
 ///     will be set to `0`.
 /// 
+/// N.B. The returned struct is statically allocated. Reusing this function may cause the same struct
+///      to be returned.
+/// 
 /// @param cylinder1
 /// @param cylinder2
 

@@ -10,6 +10,9 @@
 /// `.x` `.y` `.z`
 ///     The point of impact. If there is no collision, all three variables will be set to `0`.
 /// 
+/// N.B. The returned struct is statically allocated. Reusing this function may cause the same struct
+///      to be returned.
+/// 
 /// @param box
 /// @param x1
 /// @param y1

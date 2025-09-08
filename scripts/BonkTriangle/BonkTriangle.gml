@@ -27,6 +27,9 @@
 ///         The vector that separates the two shapes. If there is no collision, all three variables
 ///         will be set to `0`.
 /// 
+///     N.B. The returned struct is statically allocated. Reusing `.Collide()` may cause the same struct
+///          to be returned.
+/// 
 /// `.PushOut(subjectShape, [slopeThreshold=0])`
 ///     Pushes the subject shape out of the scoped shape (provided that the two shapes can collide,
 ///     see above). The slope threshold will allow shapes to "stand" on slopes instead of sliding
