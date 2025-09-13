@@ -1,5 +1,5 @@
-#macro BONK_VERSION  "1.1.2.1"
-#macro BONK_DATE     "2025-09-08"
+#macro BONK_VERSION  "1.2.0"
+#macro BONK_DATE     "2025-09-13"
 
 #macro BONK_TYPE_AAB        0
 #macro BONK_TYPE_OBB        1
@@ -12,6 +12,5 @@
 #macro BONK_TYPE_SPHERE     8
 #macro BONK_TYPE_TRIANGLE   9
 #macro BONK_TYPE_WORLD     10
-#macro BONK_TYPE_POOL      11
 
 #macro BONK_NUMBER_OF_TYPES  11
