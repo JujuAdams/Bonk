@@ -1,0 +1,13 @@
+{
+  "$GMScript":"v1",
+  "%Name":"DotobjSetTransformOnLoad",
+  "isCompatibility":false,
+  "isDnD":false,
+  "name":"DotobjSetTransformOnLoad",
+  "parent":{
+    "name":"Settings",
+    "path":"folders/dotobj/Settings.yy",
+  },
+  "resourceType":"GMScript",
+  "resourceVersion":"2.0",
+}

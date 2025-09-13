@@ -1,0 +1,13 @@
+{
+  "$GMScript":"v1",
+  "%Name":"__DotobjConfig",
+  "isCompatibility":false,
+  "isDnD":false,
+  "name":"__DotobjConfig",
+  "parent":{
+    "name":"dotobj",
+    "path":"folders/dotobj.yy",
+  },
+  "resourceType":"GMScript",
+  "resourceVersion":"2.0",
+}

@@ -1,0 +1,13 @@
+{
+  "$GMScript":"v1",
+  "%Name":"DotobjClassTexture",
+  "isCompatibility":false,
+  "isDnD":false,
+  "name":"DotobjClassTexture",
+  "parent":{
+    "name":"(System)",
+    "path":"folders/dotobj/(System).yy",
+  },
+  "resourceType":"GMScript",
+  "resourceVersion":"2.0",
+}

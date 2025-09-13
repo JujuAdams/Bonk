@@ -1,0 +1,13 @@
+{
+  "$GMScript":"v1",
+  "%Name":"DotobjSetFlipTexcoordV",
+  "isCompatibility":false,
+  "isDnD":false,
+  "name":"DotobjSetFlipTexcoordV",
+  "parent":{
+    "name":"Settings",
+    "path":"folders/dotobj/Settings.yy",
+  },
+  "resourceType":"GMScript",
+  "resourceVersion":"2.0",
+}
