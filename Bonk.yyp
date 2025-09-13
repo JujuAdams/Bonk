@@ -63,6 +63,7 @@
   ],
   "IncludedFiles":[
     {"$GMIncludedFile":"","%Name":"bonk_license.txt","CopyToMask":-1,"filePath":"datafiles","name":"bonk_license.txt","resourceType":"GMIncludedFile","resourceVersion":"2.0",},
+    {"$GMIncludedFile":"","%Name":"FoxyBar.obj","CopyToMask":-1,"filePath":"datafiles","name":"FoxyBar.obj","resourceType":"GMIncludedFile","resourceVersion":"2.0",},
     {"$GMIncludedFile":"","%Name":"ugg_license.txt","CopyToMask":-1,"filePath":"datafiles","name":"ugg_license.txt","resourceType":"GMIncludedFile","resourceVersion":"2.0",},
   ],
   "isEcma":false,
@@ -108,6 +109,7 @@
     {"id":{"name":"oTestCylinder","path":"objects/oTestCylinder/oTestCylinder.yy",},},
     {"id":{"name":"oTestFallingSphere","path":"objects/oTestFallingSphere/oTestFallingSphere.yy",},},
     {"id":{"name":"oTestFloor","path":"objects/oTestFloor/oTestFloor.yy",},},
+    {"id":{"name":"oTestMesh","path":"objects/oTestMesh/oTestMesh.yy",},},
     {"id":{"name":"oTestParent","path":"objects/oTestParent/oTestParent.yy",},},
     {"id":{"name":"oTestPlayer","path":"objects/oTestPlayer/oTestPlayer.yy",},},
     {"id":{"name":"oTestQuad","path":"objects/oTestQuad/oTestQuad.yy",},},
