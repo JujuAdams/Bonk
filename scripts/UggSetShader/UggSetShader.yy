@@ -1,0 +1,13 @@
+{
+  "$GMScript":"v1",
+  "%Name":"UggSetShader",
+  "isCompatibility":false,
+  "isDnD":false,
+  "name":"UggSetShader",
+  "parent":{
+    "name":"Misc",
+    "path":"folders/Ugg/Misc.yy",
+  },
+  "resourceType":"GMScript",
+  "resourceVersion":"2.0",
+}
