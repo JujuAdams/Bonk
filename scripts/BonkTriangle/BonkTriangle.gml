@@ -122,10 +122,14 @@ function BonkTriangle(_x1, _y1, _z1, _x2, _y2, _z2, _x3, _y3, _z3) : __BonkClass
         normalY = dX12*dZ31 - dZ12*dX31;
         normalZ = dY12*dX31 - dX12*dY31;
         
-        var _coeff = 1 / sqrt(normalX*normalX + normalY*normalY + normalZ*normalZ);
-        normalX *= _coeff;
-        normalY *= _coeff;
-        normalZ *= _coeff;
+        var _length = sqrt(normalX*normalX + normalY*normalY + normalZ*normalZ);
+        if (_length > 0)
+        {
+            var _coeff = 1 / _length;
+            normalX *= _coeff;
+            normalY *= _coeff;
+            normalZ *= _coeff;
+        }
     }
     
     static Draw = function(_color = undefined, _wireframe = undefined)
