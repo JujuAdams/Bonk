@@ -15,6 +15,18 @@
 ///     are degrees. An angle of `0` represents a perfectly horizontal floor plane. Increase this
 ///     value to allow shapes to stand on steeper slopes.
 /// 
+/// `.GetShapeArrayn(x, y, z)`
+///     Returns an array of shapes that will be checked against at the given world coordinate.
+/// 
+/// `.AddVertexBuffer(vertexBufferOrArray, vertexFormat, [matrix])`
+///     Adds triangles from a vertex buffer as collidable shapes to the world. The vertex buffer
+///     must be formatted as a triangle list (`pr_trianglelist`). You may provide an array of
+///     vertex buffers instead of a single vertex buffer. You may provide a matrix to transform
+///     vertices.
+///     
+///     N.B.  This method is slow in itself and, in general, you should avoid mesh collisions as
+///           much as possible because collisions with triangles is also slow.
+/// 
 /// @param xSize
 /// @param ySize
 /// @param zSize
@@ -305,7 +317,7 @@ function BonkWorld(_xSize, _ySize, _zSize, _cellXSize, _cellYSize, _cellZSize) c
         return __cellArray[clamp(floor(_x / __cellXSize), 0, __cellXCount-1) + __cellXCount*(clamp(floor(_y / __cellYSize), 0, __cellYCount-1) + __cellYCount*clamp(floor(_z / __cellZSize ), 0, __cellZCount-1))];
     }
     
-    static AddVertexBuffer = function(_vertexBufferArray, _vertexFormat, _matrix)
+    static AddVertexBuffer = function(_vertexBufferArray, _vertexFormat, _matrix = undefined)
     {
         if (not is_array(_vertexBufferArray))
         {
@@ -371,13 +383,23 @@ function BonkWorld(_xSize, _ySize, _zSize, _cellXSize, _cellYSize, _cellZSize) c
                 
                 buffer_seek(_buffer, buffer_seek_relative, _vertexStride - 12);
                 
-                var _a = matrix_transform_vertex(_matrix, _x1, _y1, _z1, 1);
-                var _b = matrix_transform_vertex(_matrix, _x2, _y2, _z2, 1);
-                var _c = matrix_transform_vertex(_matrix, _x3, _y3, _z3, 1);
+                if (_matrix != undefined)
+                {
+                    var _a = matrix_transform_vertex(_matrix, _x1, _y1, _z1, 1);
+                    var _b = matrix_transform_vertex(_matrix, _x2, _y2, _z2, 1);
+                    var _c = matrix_transform_vertex(_matrix, _x3, _y3, _z3, 1);
+                    
+                    var _bonkTri = new BonkTriangle(_a[0], _a[1], _a[2],
+                                                    _b[0], _b[1], _b[2],
+                                                    _c[0], _c[1], _c[2]);
+                }
+                else
+                {
+                    var _bonkTri = new BonkTriangle(_x1, _y1, _z1,
+                                                    _x2, _y2, _z2,
+                                                    _x3, _y3, _z3);
+                }
                 
-                var _bonkTri = new BonkTriangle(_a[0], _a[1], _a[2],
-                                                _b[0], _b[1], _b[2],
-                                                _c[0], _c[1], _c[2]);
                 Add(_bonkTri);
             }
             
