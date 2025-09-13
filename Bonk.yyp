@@ -254,6 +254,7 @@
     {"id":{"name":"DotobjClassMesh","path":"scripts/DotobjClassMesh/DotobjClassMesh.yy",},},
     {"id":{"name":"DotobjClassModel","path":"scripts/DotobjClassModel/DotobjClassModel.yy",},},
     {"id":{"name":"DotobjClassTexture","path":"scripts/DotobjClassTexture/DotobjClassTexture.yy",},},
+    {"id":{"name":"DotobjGetVertexFormat","path":"scripts/DotobjGetVertexFormat/DotobjGetVertexFormat.yy",},},
     {"id":{"name":"DotobjMaterialCreate","path":"scripts/DotobjMaterialCreate/DotobjMaterialCreate.yy",},},
     {"id":{"name":"DotobjMaterialLoad","path":"scripts/DotobjMaterialLoad/DotobjMaterialLoad.yy",},},
     {"id":{"name":"DotobjMaterialLoadFile","path":"scripts/DotobjMaterialLoadFile/DotobjMaterialLoadFile.yy",},},

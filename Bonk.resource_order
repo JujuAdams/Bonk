@@ -193,6 +193,7 @@
     {"name":"DotobjClassMesh","order":3,"path":"scripts/DotobjClassMesh/DotobjClassMesh.yy",},
     {"name":"DotobjClassModel","order":4,"path":"scripts/DotobjClassModel/DotobjClassModel.yy",},
     {"name":"DotobjClassTexture","order":5,"path":"scripts/DotobjClassTexture/DotobjClassTexture.yy",},
+    {"name":"DotobjGetVertexFormat","order":5,"path":"scripts/DotobjGetVertexFormat/DotobjGetVertexFormat.yy",},
     {"name":"DotobjMaterialLoadFile","order":1,"path":"scripts/DotobjMaterialLoadFile/DotobjMaterialLoadFile.yy",},
     {"name":"DotobjModelLoad","order":2,"path":"scripts/DotobjModelLoad/DotobjModelLoad.yy",},
     {"name":"DotobjModelLoadFile","order":3,"path":"scripts/DotobjModelLoadFile/DotobjModelLoadFile.yy",},

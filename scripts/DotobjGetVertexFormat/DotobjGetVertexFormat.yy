@@ -1,0 +1,13 @@
+{
+  "$GMScript":"v1",
+  "%Name":"DotobjGetVertexFormat",
+  "isCompatibility":false,
+  "isDnD":false,
+  "name":"DotobjGetVertexFormat",
+  "parent":{
+    "name":"Settings",
+    "path":"folders/dotobj/Settings.yy",
+  },
+  "resourceType":"GMScript",
+  "resourceVersion":"2.0",
+}
