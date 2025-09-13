@@ -9,8 +9,8 @@
   "name":"oTestMesh",
   "overriddenProperties":[],
   "parent":{
-    "name":"Physics",
-    "path":"folders/Test Cases/Physics.yy",
+    "name":"Mesh Collision",
+    "path":"folders/Test Cases/Mesh Collision.yy",
   },
   "parentObjectId":null,
   "persistent":false,
