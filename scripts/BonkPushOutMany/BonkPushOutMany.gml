@@ -39,7 +39,7 @@ function BonkPushOutMany(_shapeArray, _subjectShape, _slopeThreshold = 0)
                 if (_depth > _largestDepth)
                 {
                     _largestDepth = _depth;
-                    _returnReaction = variable_clone(_reaction);
+                    _returnReaction = _reaction.Clone();
                 }
             }
         }

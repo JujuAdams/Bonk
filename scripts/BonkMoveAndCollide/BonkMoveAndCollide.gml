@@ -43,7 +43,7 @@ function BonkMoveAndCollide(_subjectShape, _velocityStruct, _shapeArray, _slopeT
                     if (_depth > _largestDepth)
                     {
                         _largestDepth = _depth;
-                        _returnReaction = variable_clone(_reaction);
+                        _returnReaction = _reaction.Clone();
                     }
                 }
             }

@@ -97,7 +97,7 @@ function BonkWorld(_xSize, _ySize, _zSize, _cellXSize, _cellYSize, _cellZSize) c
                         if (_depth > _largestDepth)
                         {
                             _largestDepth = _depth;
-                            _returnReaction = variable_clone(_reaction);
+                            _returnReaction = _reaction.Clone();
                         }
                     }
                 }
@@ -143,7 +143,7 @@ function BonkWorld(_xSize, _ySize, _zSize, _cellXSize, _cellYSize, _cellZSize) c
                                         if (_depth > _largestDepth)
                                         {
                                             _largestDepth = _depth;
-                                            _returnReaction = variable_clone(_reaction);
+                                            _returnReaction = _reaction.Clone();
                                         }
                                     }
                                 }
