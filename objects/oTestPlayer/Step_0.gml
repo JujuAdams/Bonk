@@ -8,7 +8,7 @@ if (not oCamera.camera.GetMouseLock())
         velocity.Reset();
     }
     
-    if (keyboard_check_pressed(vk_space)) velocity.zSpeed += 15;
+    if (keyboard_check_pressed(vk_space)) velocity.zSpeed += 7;
     
     var _para = 2*(keyboard_check(ord("W")) - keyboard_check(ord("S")));
     var _perp = 2*(keyboard_check(ord("A")) - keyboard_check(ord("D")));
@@ -23,9 +23,13 @@ else
     velocity.ySpeed = 0;
 }
 
-velocity.zSpeed -= 1;
+velocity.zSpeed -= gravAccel;
 
-BonkMoveAndCollide(shape, velocity, world, 40);
+var _pushOutReaction = BonkMoveAndCollide(shape, velocity, world, 40);
+if (_pushOutReaction.pushOutType == BONK_PUSH_OUT_GRIPPY)
+{
+    velocity.zSpeed = min(-gravAccel, velocity.zSpeed);
+}
 
 /*
 var _x = shape.x;
