@@ -120,8 +120,8 @@
     {"id":{"name":"rmTestMesh","path":"rooms/rmTestMesh/rmTestMesh.yy",},},
     {"id":{"name":"rmTestPlayground","path":"rooms/rmTestPlayground/rmTestPlayground.yy",},},
     {"id":{"name":"__Bonk","path":"scripts/__Bonk/__Bonk.yy",},},
+    {"id":{"name":"__BonkClassCollideReaction","path":"scripts/__BonkClassCollideReaction/__BonkClassCollideReaction.yy",},},
     {"id":{"name":"__BonkClassHit","path":"scripts/__BonkClassHit/__BonkClassHit.yy",},},
-    {"id":{"name":"__BonkClassReaction","path":"scripts/__BonkClassReaction/__BonkClassReaction.yy",},},
     {"id":{"name":"__BonkClassShared","path":"scripts/__BonkClassShared/__BonkClassShared.yy",},},
     {"id":{"name":"__BonkConfig","path":"scripts/__BonkConfig/__BonkConfig.yy",},},
     {"id":{"name":"__BonkConstants","path":"scripts/__BonkConstants/__BonkConstants.yy",},},
@@ -311,8 +311,8 @@
   "resourceType":"GMProject",
   "resourceVersion":"2.0",
   "RoomOrderNodes":[
-    {"roomId":{"name":"rmTestMesh","path":"rooms/rmTestMesh/rmTestMesh.yy",},},
     {"roomId":{"name":"rmTestPlayground","path":"rooms/rmTestPlayground/rmTestPlayground.yy",},},
+    {"roomId":{"name":"rmTestMesh","path":"rooms/rmTestMesh/rmTestMesh.yy",},},
   ],
   "templateType":null,
   "TextureGroups":[

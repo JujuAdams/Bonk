@@ -1,9 +1,9 @@
 {
   "$GMScript":"v1",
-  "%Name":"__BonkClassReaction",
+  "%Name":"__BonkClassCollideReaction",
   "isCompatibility":false,
   "isDnD":false,
-  "name":"__BonkClassReaction",
+  "name":"__BonkClassCollideReaction",
   "parent":{
     "name":"(System)",
     "path":"folders/Bonk/(System).yy",

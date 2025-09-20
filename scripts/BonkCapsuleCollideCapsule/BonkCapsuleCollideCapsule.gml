@@ -19,8 +19,8 @@
 
 function BonkCapsuleCollideCapsule(_capsule1, _capsule2)
 {
-    static _nullReaction = __Bonk().__nullReaction;
-    static _reaction     = new __BonkClassReaction();
+    static _nullReaction = __Bonk().__nullCollisionReaction;
+    static _reaction     = new __BonkClassCollideReaction();
     
     with(_capsule1)
     {

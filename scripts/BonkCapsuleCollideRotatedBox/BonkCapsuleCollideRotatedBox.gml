@@ -19,8 +19,8 @@
 
 function BonkCapsuleCollideRotatedBox(_capsule, _box)
 {
-    static _nullReaction = __Bonk().__nullReaction;
-    static _reaction     = new __BonkClassReaction();
+    static _nullReaction = __Bonk().__nullCollisionReaction;
+    static _reaction     = new __BonkClassCollideReaction();
     
     with(_capsule)
     {
