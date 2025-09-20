@@ -20,6 +20,8 @@ function __Bonk()
         __nullCollisionReaction = new __BonkClassCollideReaction();
         __nullCollisionReaction.collision = false;
         
+        __nullPushOutReaction = new __BonkClassPushOutReaction();
+        
         __nullHit = new __BonkClassHit();
         __nullHit.collision = false;
         

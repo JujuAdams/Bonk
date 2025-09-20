@@ -14,3 +14,7 @@
 #macro BONK_TYPE_WORLD     10
 
 #macro BONK_NUMBER_OF_TYPES  11
+
+#macro BONK_PUSH_OUT_NONE      0
+#macro BONK_PUSH_OUT_SLIPPERY  1
+#macro BONK_PUSH_OUT_GRIPPY    2

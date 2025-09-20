@@ -22,10 +22,30 @@
 
 function BonkPushOutMany(_shapeArray, _subjectShape, _slopeThreshold = 0)
 {
+    static _nullPushOutReaction = __Bonk().__nullPushOutReaction;
+    
+    var _returnReaction = undefined;
+    var _largestDepth = 0;
+    
     var _i = 0;
     repeat(array_length(_shapeArray))
     {
-        _shapeArray[_i].PushOut(_subjectShape, _slopeThreshold);
+        var _reaction = _shapeArray[_i].PushOut(_subjectShape, _slopeThreshold);
+        if (_reaction.pushOutType != BONK_PUSH_OUT_NONE)
+        {
+            with(_reaction.collisionReaction)
+            {
+                var _depth = dX*dX + dY*dY + dZ*dZ;
+                if (_depth > _largestDepth)
+                {
+                    _largestDepth = _depth;
+                    _returnReaction = variable_clone(_reaction);
+                }
+            }
+        }
+        
         ++_i;
     }
+    
+    return _returnReaction ?? _nullPushOutReaction;
 }

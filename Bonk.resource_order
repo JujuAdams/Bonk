@@ -84,6 +84,7 @@
     {"name":"rmTestPlayground","order":4,"path":"rooms/rmTestPlayground/rmTestPlayground.yy",},
     {"name":"__BonkClassCollideReaction","order":2,"path":"scripts/__BonkClassCollideReaction/__BonkClassCollideReaction.yy",},
     {"name":"__BonkClassHit","order":4,"path":"scripts/__BonkClassHit/__BonkClassHit.yy",},
+    {"name":"__BonkClassPushOutReaction","order":3,"path":"scripts/__BonkClassPushOutReaction/__BonkClassPushOutReaction.yy",},
     {"name":"__BonkClassShared","order":5,"path":"scripts/__BonkClassShared/__BonkClassShared.yy",},
     {"name":"__BonkConstants","order":1,"path":"scripts/__BonkConstants/__BonkConstants.yy",},
     {"name":"__BonkCrossProduct","order":6,"path":"scripts/__BonkCrossProduct/__BonkCrossProduct.yy",},

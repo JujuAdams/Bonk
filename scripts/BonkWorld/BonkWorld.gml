@@ -66,6 +66,10 @@ function BonkWorld(_xSize, _ySize, _zSize, _cellXSize, _cellYSize, _cellZSize) c
     static PushOut = function(_subjectShape, _slopeThreshold = 0)
     {
         static _map = ds_map_create();
+        static _nullPushOutReaction = __Bonk().__nullPushOutReaction;
+        
+        var _returnReaction = undefined;
+        var _largestDepth = 0;
         
         var _cheapVersion = true;
         
@@ -84,7 +88,20 @@ function BonkWorld(_xSize, _ySize, _zSize, _cellXSize, _cellYSize, _cellZSize) c
             var _i = 0;
             repeat(array_length(_shapeArray))
             {
-                _shapeArray[_i].PushOut(_subjectShape, _slopeThreshold);
+                var _reaction = _shapeArray[_i].PushOut(_subjectShape, _slopeThreshold);
+                if (_reaction.pushOutType != BONK_PUSH_OUT_NONE)
+                {
+                    with(_reaction.collisionReaction)
+                    {
+                        var _depth = dX*dX + dY*dY + dZ*dZ;
+                        if (_depth > _largestDepth)
+                        {
+                            _largestDepth = _depth;
+                            _returnReaction = variable_clone(_reaction);
+                        }
+                    }
+                }
+                
                 ++_i;
             }
         }
@@ -116,7 +133,20 @@ function BonkWorld(_xSize, _ySize, _zSize, _cellXSize, _cellYSize, _cellZSize) c
                             if (not ds_map_exists(_map, _shape))
                             {
                                 _map[? _shape] = true;
-                                _shape.PushOut(_subjectShape, _slopeThreshold);
+                                
+                                var _reaction = _shape.PushOut(_subjectShape, _slopeThreshold);
+                                if (_reaction.pushOutType != BONK_PUSH_OUT_NONE)
+                                {
+                                    with(_reaction.collisionReaction)
+                                    {
+                                        var _depth = dX*dX + dY*dY + dZ*dZ;
+                                        if (_depth > _largestDepth)
+                                        {
+                                            _largestDepth = _depth;
+                                            _returnReaction = variable_clone(_reaction);
+                                        }
+                                    }
+                                }
                             }
                             
                             ++_i;
@@ -133,6 +163,8 @@ function BonkWorld(_xSize, _ySize, _zSize, _cellXSize, _cellYSize, _cellZSize) c
             
             ds_map_clear(_map);
         }
+        
+        return _returnReaction ?? _nullPushOutReaction;
     }
     
     static Add = function(_shape)
