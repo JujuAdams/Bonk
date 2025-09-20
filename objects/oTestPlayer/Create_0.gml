@@ -3,4 +3,5 @@ world = new BonkWorld(room_width, room_height, 256,   32, 32, 256);
 shape = new BonkCapsule(x, y, 200,   80, 25);
 velocity = new BonkVelocity();
 
-gravAccel = 0.2;
+gravAccel = 0.1;
+onGroundFrames = 0;
