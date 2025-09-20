@@ -68,7 +68,7 @@ function BonkWorld(_xSize, _ySize, _zSize, _cellXSize, _cellYSize, _cellZSize) c
         static _map = ds_map_create();
         static _nullPushOutReaction = __Bonk().__nullPushOutReaction;
         
-        var _returnReaction = undefined;
+        var _returnReaction = _nullPushOutReaction;
         var _largestDepth = 0;
         
         var _cheapVersion = true;
@@ -94,7 +94,7 @@ function BonkWorld(_xSize, _ySize, _zSize, _cellXSize, _cellYSize, _cellZSize) c
                     with(_reaction.collisionReaction)
                     {
                         var _depth = dX*dX + dY*dY + dZ*dZ;
-                        if (_depth > _largestDepth)
+                        if ((_depth > _largestDepth) && (_reaction.pushOutType >= _returnReaction.pushOutType))
                         {
                             _largestDepth = _depth;
                             _returnReaction = _reaction.Clone();
@@ -140,7 +140,7 @@ function BonkWorld(_xSize, _ySize, _zSize, _cellXSize, _cellYSize, _cellZSize) c
                                     with(_reaction.collisionReaction)
                                     {
                                         var _depth = dX*dX + dY*dY + dZ*dZ;
-                                        if (_depth > _largestDepth)
+                                        if ((_depth > _largestDepth) && (_reaction.pushOutType >= _returnReaction.pushOutType))
                                         {
                                             _largestDepth = _depth;
                                             _returnReaction = _reaction.Clone();
@@ -164,7 +164,7 @@ function BonkWorld(_xSize, _ySize, _zSize, _cellXSize, _cellYSize, _cellZSize) c
             ds_map_clear(_map);
         }
         
-        return _returnReaction ?? _nullPushOutReaction;
+        return _returnReaction;
     }
     
     static Add = function(_shape)

@@ -24,7 +24,7 @@ function BonkPushOutMany(_shapeArray, _subjectShape, _slopeThreshold = 0)
 {
     static _nullPushOutReaction = __Bonk().__nullPushOutReaction;
     
-    var _returnReaction = undefined;
+    var _returnReaction = _nullPushOutReaction;
     var _largestDepth = 0;
     
     var _i = 0;
@@ -36,7 +36,7 @@ function BonkPushOutMany(_shapeArray, _subjectShape, _slopeThreshold = 0)
             with(_reaction.collisionReaction)
             {
                 var _depth = dX*dX + dY*dY + dZ*dZ;
-                if (_depth > _largestDepth)
+                if ((_depth > _largestDepth) && (_reaction.pushOutType >= _returnReaction.pushOutType))
                 {
                     _largestDepth = _depth;
                     _returnReaction = _reaction.Clone();
@@ -47,5 +47,5 @@ function BonkPushOutMany(_shapeArray, _subjectShape, _slopeThreshold = 0)
         ++_i;
     }
     
-    return _returnReaction ?? _nullPushOutReaction;
+    return _returnReaction;
 }

@@ -15,6 +15,9 @@ function BonkMoveAndCollide(_subjectShape, _velocityStruct, _shapeArray, _slopeT
         _shapeArray = [_shapeArray];
     }
     
+    var _returnReaction = _nullPushOutReaction;
+    var _largestDepth = 0;
+    
     with(_subjectShape)
     {
         if (_updateVelocity)
@@ -28,9 +31,6 @@ function BonkMoveAndCollide(_subjectShape, _velocityStruct, _shapeArray, _slopeT
         y += _velocityStruct.ySpeed;
         z += _velocityStruct.zSpeed;
         
-        var _returnReaction = undefined;
-        var _largestDepth = 0;
-        
         var _i = 0;
         repeat(array_length(_shapeArray))
         {
@@ -40,7 +40,7 @@ function BonkMoveAndCollide(_subjectShape, _velocityStruct, _shapeArray, _slopeT
                 with(_reaction.collisionReaction)
                 {
                     var _depth = dX*dX + dY*dY + dZ*dZ;
-                    if (_depth > _largestDepth)
+                    if ((_depth > _largestDepth) && (_reaction.pushOutType >= _returnReaction.pushOutType))
                     {
                         _largestDepth = _depth;
                         _returnReaction = _reaction.Clone();
@@ -57,9 +57,7 @@ function BonkMoveAndCollide(_subjectShape, _velocityStruct, _shapeArray, _slopeT
             _velocityStruct.ySpeed = y - _y;
             _velocityStruct.zSpeed = z - _z;
         }
-        
-        return _returnReaction ?? _nullPushOutReaction;
     }
     
-    return _nullPushOutReaction;
+    return _returnReaction;
 }
