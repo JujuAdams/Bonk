@@ -545,7 +545,7 @@ function BonkWorld(_xSize, _ySize, _zSize, _cellXSize, _cellYSize, _cellZSize) c
         }
     }
     
-    static Draw = function()
+    static Draw = function(_wireframe = undefined)
     {
         static _map = ds_map_create();
         
@@ -567,7 +567,7 @@ function BonkWorld(_xSize, _ySize, _zSize, _cellXSize, _cellYSize, _cellZSize) c
                         if (not ds_map_exists(_map, _shape))
                         {
                             _map[? _shape] = true;    
-                            _shape.Draw();
+                            _shape.Draw(undefined, _wireframe);
                         }
                         
                         ++_i;
