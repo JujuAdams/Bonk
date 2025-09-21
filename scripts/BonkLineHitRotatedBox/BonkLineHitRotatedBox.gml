@@ -96,15 +96,30 @@ function BonkLineHitRotatedBox(_box, _x1, _y1, _z1, _x2, _y2, _z2)
         var _tMin = max(min(_t1, _t2), min(_t3, _t4), min(_t5, _t6));
         var _tMax = min(max(_t1, _t2), max(_t3, _t4), max(_t5, _t6));
         
-        if ((_tMax < 0) || (_tMax > 1) || (_tMin > _tMax))
+        if ((_tMax < 0) || (_tMin > 1) || (_tMin > _tMax))
         {
             return _nullHit;
         }
         
         var _t = (_tMin < 0)? _tMax : _tMin;
+        
         var _pI = _i1 + _t*_dI;
+        if (abs(_pI) > 0.5*xSize)
+        {
+            return _nullHit;
+        }
+        
         var _pJ = _j1 + _t*_dJ;
+        if (abs(_pJ) > 0.5*ySize)
+        {
+            return _nullHit;
+        }
+        
         var _pZ = _z1 + _t*_dZ;
+        if (abs(_pZ - z) > 0.5*zSize)
+        {
+            return _nullHit;
+        }
         
         var _pX = x + _pI*_iX + _pJ*_jX;
         var _pY = y + _pI*_iY + _pJ*_jY;
