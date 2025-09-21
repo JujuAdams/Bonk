@@ -58,6 +58,7 @@
 function BonkAAB(_x, _y, _z, _xSize, _ySize, _zSize) : __BonkClassShared() constructor
 {
     static bonkType = BONK_TYPE_AAB;
+    static lineHitFunction = BonkLineHitAAB;
     
     static _collideFuncLookup = (function()
     {

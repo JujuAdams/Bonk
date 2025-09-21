@@ -28,6 +28,7 @@
 function BonkPoint(_x, _y, _z) constructor
 {
     static bonkType = BONK_TYPE_POINT;
+    static lineHitFunction = undefined;
     
     static _insideFuncLookup = (function()
     {

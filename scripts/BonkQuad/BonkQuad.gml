@@ -63,6 +63,7 @@
 function BonkQuad(_x1, _y1, _z1, _x2, _y2, _z2, _x3, _y3, _z3) : __BonkClassShared() constructor
 {
     static bonkType = BONK_TYPE_QUAD;
+    static lineHitFunction = BonkLineHitQuad;
     
     static _collideFuncLookup = (function()
     {

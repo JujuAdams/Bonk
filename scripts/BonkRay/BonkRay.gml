@@ -57,6 +57,7 @@
 function BonkRay(_x, _y, _z, _dX, _dY, _dZ) constructor
 {
     static bonkType = BONK_TYPE_RAY;
+    static lineHitFunction = undefined;
     
     static _hitFuncLookup = (function()
     {
@@ -67,6 +68,7 @@ function BonkRay(_x, _y, _z, _dX, _dY, _dZ) constructor
         _array[@ BONK_TYPE_QUAD    ] = BonkRayHitQuad;
         _array[@ BONK_TYPE_SPHERE  ] = BonkRayHitSphere;
         _array[@ BONK_TYPE_TRIANGLE] = BonkRayHitTriangle;
+        _array[@ BONK_TYPE_WORLD   ] = BonkRayHitWorld;
         return _array;
     })();
     
@@ -131,7 +133,7 @@ function BonkRay(_x, _y, _z, _dX, _dY, _dZ) constructor
         {
             if (BONK_STRICT)
             {
-                __BonkError($".Intersects() not supported between \"{instanceof(self)}\" (type={bonkType}) and \"{instanceof(_otherShape)}\" (type={_otherShape.bonkType})");
+                __BonkError($".Hit() not supported between \"{instanceof(self)}\" (type={bonkType}) and \"{instanceof(_otherShape)}\" (type={_otherShape.bonkType})");
             }
         }
         

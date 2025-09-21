@@ -58,6 +58,7 @@
 function BonkSphere(_x, _y, _z, _radius) : __BonkClassShared() constructor
 {
     static bonkType = BONK_TYPE_SPHERE;
+    static lineHitFunction = BonkLineHitSphere;
     
     static _collideFuncLookup = (function()
     {
