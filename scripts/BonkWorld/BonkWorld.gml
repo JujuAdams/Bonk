@@ -66,9 +66,9 @@ function BonkWorld(_xSize, _ySize, _zSize, _cellXSize, _cellYSize, _cellZSize) c
     
     static CellInside = function(_x, _y, _z)
     {
-        return ((_x > 0) && (_x < __xSize)
-             && (_y > 0) && (_y < __ySize)
-             && (_z > 0) && (_z < __zSize));
+        return ((_x >= 0) && (_x < __xSize)
+             && (_y >= 0) && (_y < __ySize)
+             && (_z >= 0) && (_z < __zSize));
     }
     
     static PushOut = function(_subjectShape, _slopeThreshold = 0)
@@ -92,7 +92,7 @@ function BonkWorld(_xSize, _ySize, _zSize, _cellXSize, _cellYSize, _cellZSize) c
         
         if (_cheapVersion)
         {
-            var _shapeArray = GetShapeArray(_subjectShape.x, _subjectShape.y, _subjectShape.z);
+            var _shapeArray = GetShapeArrayFromPoint(_subjectShape.x, _subjectShape.y, _subjectShape.z);
             var _i = 0;
             repeat(array_length(_shapeArray))
             {
@@ -352,9 +352,14 @@ function BonkWorld(_xSize, _ySize, _zSize, _cellXSize, _cellYSize, _cellZSize) c
         }
     }
     
-    static GetShapeArray = function(_x, _y, _z)
+    static GetShapeArrayFromPoint = function(_x, _y, _z)
     {
         return __cellArray[clamp(floor(_x / __cellXSize), 0, __cellXCount-1) + __cellXCount*(clamp(floor(_y / __cellYSize), 0, __cellYCount-1) + __cellYCount*clamp(floor(_z / __cellZSize), 0, __cellZCount-1))];
+    }
+    
+    static GetShapeArrayFromCell = function(_x, _y, _z)
+    {
+        return __cellArray[clamp(_x, 0, __cellXCount-1) + __cellXCount*(clamp(_y, 0, __cellYCount-1) + __cellYCount*clamp(_z, 0, __cellZCount-1))];
     }
     
     static AddVertexBuffer = function(_vertexBufferArray, _vertexFormat, _matrix = undefined)

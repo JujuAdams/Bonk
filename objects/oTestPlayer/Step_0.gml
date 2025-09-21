@@ -41,6 +41,13 @@ if (onGroundFrames > 0)
     velocity.zSpeed = min(-0.3, velocity.zSpeed);
 }
 
+line.x1 = shape.x;
+line.y1 = shape.y;
+line.z1 = shape.z + 0.5*shape.height;
+line.x2 = shape.x;
+line.y2 = shape.y;
+line.z2 = shape.z - 0.5*shape.height - 50;
+
 /*
 var _x = shape.x;
 var _y = shape.y;

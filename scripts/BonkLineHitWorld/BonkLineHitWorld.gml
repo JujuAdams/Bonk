@@ -70,18 +70,21 @@ function BonkLineHitWorld(_world, _x1, _y1, _z1, _x2, _y2, _z2)
             }
         }
         
-        var _shapeArray = _world.GetShapeArray(_x, _y, _z);
+        var _shapeArray = _world.GetShapeArrayFromCell(_x, _y, _z);
         var _j = 0;
         repeat(array_length(_shapeArray))
         {
-            var _shape = _shapeArray[_i];
+            var _shape = _shapeArray[_j];
             var _func = _shape.lineHitFunction; //FIXME - Make this more efficient
             if (is_callable(_func))
             {
                 var _hit = _func(_shape, _x1, _y1, _z1, _x2, _y2, _z2);
                 if (_hit.collision)
                 {
-                    var _distance = point_distance_3d(0,0,0, _hit.x, _hit.y, _hit.z);
+                    var _distance = point_distance_3d(_x1, _y1, _z1, _hit.x, _hit.y, _hit.z);
+                    
+                    UggSphere(_hit.x, _hit.y, _hit.z,   10, c_red, true);
+                    
                     if (_distance < _closestDistance)
                     {
                         _closestDistance = _distance;

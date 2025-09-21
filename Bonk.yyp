@@ -318,8 +318,8 @@
   "resourceType":"GMProject",
   "resourceVersion":"2.0",
   "RoomOrderNodes":[
-    {"roomId":{"name":"rmTestRaycast","path":"rooms/rmTestRaycast/rmTestRaycast.yy",},},
     {"roomId":{"name":"rmTestPlayground","path":"rooms/rmTestPlayground/rmTestPlayground.yy",},},
+    {"roomId":{"name":"rmTestRaycast","path":"rooms/rmTestRaycast/rmTestRaycast.yy",},},
     {"roomId":{"name":"rmTestMesh","path":"rooms/rmTestMesh/rmTestMesh.yy",},},
   ],
   "templateType":null,
