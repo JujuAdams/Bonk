@@ -16,3 +16,9 @@ pointArrayA = Supercover3D(lineA.x1, lineA.y1, lineA.z1,   lineA.x2, lineA.y2, l
 
 show_debug_message(lineA);
 show_debug_message(pointArrayA);
+
+world = new BonkWorld(640, 640, 640, 64, 64, 64);
+world.Add(new BonkAAB(100, 100, 100, 64, 64, 64));
+world.Add(new BonkAAB(room_width/2, room_height/2, -10,   room_width, room_height, 10));
+
+lineB = new BonkLine(100, 100, 150,   100, 100, 0);

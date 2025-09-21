@@ -19,3 +19,12 @@ repeat(array_length(pointArrayA) div 3)
 UggArrow(gridScale*lineA.x1, gridScale*lineA.y1, gridScale*lineA.z1,
          gridScale*lineA.x2, gridScale*lineA.y2, gridScale*lineA.z2,
          undefined, c_yellow);
+
+world.Draw();
+lineB.Draw();
+
+hit = lineB.Hit(world);
+if (hit.collision)
+{
+    UggSphere(hit.x, hit.y, hit.z, 3, c_red);
+}

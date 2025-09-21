@@ -448,4 +448,44 @@ function BonkWorld(_xSize, _ySize, _zSize, _cellXSize, _cellYSize, _cellZSize) c
             ++_i;
         }
     }
+    
+    static Draw = function()
+    {
+        static _map = ds_map_create();
+        
+        var _z = 0;
+        repeat(__cellZCount)
+        {
+            var _y = 0;
+            repeat(__cellYCount)
+            {
+                var _x = 0;
+                repeat(__cellXCount)
+                {
+                    var _shapeArray = __cellArray[_x + __cellXCount*(_y + __cellYCount*_z)];
+                        
+                    var _i = 0;
+                    repeat(array_length(_shapeArray))
+                    {
+                        var _shape = _shapeArray[_i];
+                        if (not ds_map_exists(_map, _shape))
+                        {
+                            _map[? _shape] = true;    
+                            _shape.Draw();
+                        }
+                        
+                        ++_i;
+                    }
+                    
+                    ++_x;
+                }
+                
+                ++_y;
+            }
+            
+            ++_z;
+        }
+        
+        ds_map_clear(_map);
+    }
 }

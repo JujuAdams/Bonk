@@ -81,7 +81,7 @@ function BonkLineHitWorld(_world, _x1, _y1, _z1, _x2, _y2, _z2)
                 var _hit = _func(_shape, _x1, _y1, _z1, _x2, _y2, _z2);
                 if (_hit.collision)
                 {
-                    var _distance = point_distance_3d(0,0,0, _newHit.x, _newHit.y, _newHit.z);
+                    var _distance = point_distance_3d(0,0,0, _hit.x, _hit.y, _hit.z);
                     if (_distance < _closestDistance)
                     {
                         _closestDistance = _distance;
