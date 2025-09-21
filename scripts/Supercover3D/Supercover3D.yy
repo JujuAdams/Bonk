@@ -1,0 +1,13 @@
+{
+  "$GMScript":"v1",
+  "%Name":"Supercover3D",
+  "isCompatibility":false,
+  "isDnD":false,
+  "name":"Supercover3D",
+  "parent":{
+    "name":"Misc",
+    "path":"folders/Misc.yy",
+  },
+  "resourceType":"GMScript",
+  "resourceVersion":"2.0",
+}
