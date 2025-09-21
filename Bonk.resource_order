@@ -91,6 +91,7 @@
     {"name":"__BonkConstants","order":1,"path":"scripts/__BonkConstants/__BonkConstants.yy",},
     {"name":"__BonkCrossProduct","order":6,"path":"scripts/__BonkCrossProduct/__BonkCrossProduct.yy",},
     {"name":"__BonkError","order":1,"path":"scripts/__BonkError/__BonkError.yy",},
+    {"name":"__BonkReturnNullHit","order":7,"path":"scripts/__BonkReturnNullHit/__BonkReturnNullHit.yy",},
     {"name":"__DotobjConfig","order":6,"path":"scripts/__DotobjConfig/__DotobjConfig.yy",},
     {"name":"__Ugg","order":5,"path":"scripts/__Ugg/__Ugg.yy",},
     {"name":"__UggConfig","order":5,"path":"scripts/__UggConfig/__UggConfig.yy",},

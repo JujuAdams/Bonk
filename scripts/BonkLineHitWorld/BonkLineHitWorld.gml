@@ -23,6 +23,7 @@
 
 function BonkLineHitWorld(_world, _x1, _y1, _z1, _x2, _y2, _z2)
 {
+    static _map = ds_map_create();
     static _nullHit = __Bonk().__nullHit;
     
     with(_world)
@@ -75,16 +76,14 @@ function BonkLineHitWorld(_world, _x1, _y1, _z1, _x2, _y2, _z2)
         repeat(array_length(_shapeArray))
         {
             var _shape = _shapeArray[_j];
-            var _func = _shape.lineHitFunction; //FIXME - Make this more efficient
-            if (is_callable(_func))
+            if (not ds_map_exists(_map, _shape))
             {
-                var _hit = _func(_shape, _x1, _y1, _z1, _x2, _y2, _z2);
+                _map[? _shape] = true;
+                
+                var _hit = _shape.lineHitFunction(_shape, _x1, _y1, _z1, _x2, _y2, _z2);
                 if (_hit.collision)
                 {
                     var _distance = point_distance_3d(_x1, _y1, _z1, _hit.x, _hit.y, _hit.z);
-                    
-                    UggSphere(_hit.x, _hit.y, _hit.z,   10, c_red, true);
-                    
                     if (_distance < _closestDistance)
                     {
                         _closestDistance = _distance;
@@ -98,11 +97,13 @@ function BonkLineHitWorld(_world, _x1, _y1, _z1, _x2, _y2, _z2)
         
         if (_closestHit != undefined)
         {
+            ds_map_clear(_map);
             return _closestHit;
         }
         
         _i += 3;
     }
     
+    ds_map_clear(_map);
     return _nullHit;
 }

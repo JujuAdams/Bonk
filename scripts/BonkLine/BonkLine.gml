@@ -50,7 +50,7 @@
 function BonkLine(_x1, _y1, _z1, _x2, _y2, _z2) constructor
 {
     static bonkType = BONK_TYPE_LINE;
-    static lineHitFunction = undefined;
+    static lineHitFunction = __BonkReturnNullHit;
     
     static _hitFuncLookup = (function()
     {
