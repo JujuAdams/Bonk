@@ -107,7 +107,6 @@ function BonkLineHitAAB(_aab, _x1, _y1, _z1, _x2, _y2, _z2)
             z = _hitZ;
         }
         
-        
         return _coordinate;
     }
     

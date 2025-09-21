@@ -64,6 +64,11 @@ function BonkWorld(_xSize, _ySize, _zSize, _cellXSize, _cellYSize, _cellZSize) c
     
     SetPosition = __SetPositionFree;
     
+    static PointInside = function(_x, _y, _z)
+    {
+        return CellInside(_x/__cellXSize, _y/__cellYSize, _z/__cellZSize);
+    }
+    
     static CellInside = function(_x, _y, _z)
     {
         return ((_x >= 0) && (_x < __xSize)
