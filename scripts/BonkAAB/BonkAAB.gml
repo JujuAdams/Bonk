@@ -21,7 +21,7 @@
 ///     Returns whether the two shapes overlap. Not all shapes can be checked against, see above.
 /// 
 /// `.Collide(otherShape)`
-///     Returns the vector that separates two shapes overlap. Not all shapes can be checked
+///     Returns the vector that separates two overlapping shapes. Not all shapes can be checked
 ///     against, see above. This method returns a struct that contains the following variables:
 ///     
 ///     `.collision`

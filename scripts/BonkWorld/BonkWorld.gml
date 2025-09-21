@@ -6,8 +6,25 @@
 /// `.Add(shape)`
 ///     Adds the shape permanently to the "world".
 /// 
-/// `.GetShapeArray(x, y, z)`
-///     Returns an array that contains shapes that may overlap with the specified point.
+/// `.PointInside(x, y, z)`
+///     Returns whether the given point in space is inside the world's axis-aligned bounding box.
+/// 
+/// `.CellInside(x, y, z)`
+///     Returns whether the given cell is inside the world's axis-aligned bounding box.
+/// 
+/// `.Collide(subjectShape)`
+///     Returns the vector that separates the subject shape from any collision in the target world.
+///     This method returns a struct that contains the following variables:
+///     
+///     `.collision`
+///         Whether a collision was found. If no collision is found, this variable is set to `false`.
+///     
+///     `.x` `.y` `.z`
+///         The vector that separates the two shapes. If there is no collision, all three variables
+///         will be set to `0`.
+/// 
+///     N.B. The returned struct is statically allocated. Reusing `.Collide()` may cause the same struct
+///          to be returned.
 /// 
 /// `.PushOut(subjectShape, [slopeThreshold=0])`
 ///     Pushes the subject shape out of the shapes added to the world. The slope threshold will
@@ -15,8 +32,11 @@
 ///     are degrees. An angle of `0` represents a perfectly horizontal floor plane. Increase this
 ///     value to allow shapes to stand on steeper slopes.
 /// 
-/// `.GetShapeArrayn(x, y, z)`
-///     Returns an array of shapes that will be checked against at the given world coordinate.
+/// `.GetShapeArrayFromPoint(x, y, z)`
+///     Returns an array that contains shapes that may overlap with the specified point.
+/// 
+/// `.GetShapeArrayFromCell(x, y, z)`
+///     Returns an array that contains shapes that may overlap with the specified cell.
 /// 
 /// `.AddVertexBuffer(vertexBufferOrArray, vertexFormat, [matrix])`
 ///     Adds triangles from a vertex buffer as collidable shapes to the world. The vertex buffer
@@ -26,6 +46,11 @@
 ///     
 ///     N.B.  This method is slow in itself and, in general, you should avoid mesh collisions as
 ///           much as possible because collisions with triangles is also slow.
+/// 
+/// `.Draw([wireframe])`
+///     Draws all shapes added to the world. This uses Ugg, please see https://github.com/jujuadams/Ugg
+///     
+///     N.B.  This method should only be used for debugging.
 /// 
 /// @param xSize
 /// @param ySize
