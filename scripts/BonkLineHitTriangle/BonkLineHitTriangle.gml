@@ -120,6 +120,11 @@ function BonkLineHitTriangle(_triangle, _x1, _y1, _z1, _x2, _y2, _z2)
         var _vZ = _triZ1 - _z1;
         
         var _coeff = dot_product_3d(_vX, _vY, _vZ, _normalX, _normalY, _normalZ) / _dot;
+        if ((_coeff < 0) || (_coeff > 1))
+        {
+            return _nullHit;
+        }
+        
         var _traceX = _x1 + _coeff*_rX;
         var _traceY = _y1 + _coeff*_rY;
         var _traceZ = _z1 + _coeff*_rZ;
