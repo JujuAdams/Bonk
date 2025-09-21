@@ -76,6 +76,92 @@ function BonkWorld(_xSize, _ySize, _zSize, _cellXSize, _cellYSize, _cellZSize) c
              && (_z >= 0) && (_z < __zSize));
     }
     
+    static Collide = function(_subjectShape)
+    {
+        static _map = ds_map_create();
+        static _nullCollisionReaction = __Bonk().__nullCollisionReaction;
+        
+        var _cheapVersion = true;
+        
+        var _aabb = _subjectShape.GetAABB();
+        with(_aabb)
+        {
+            if ((xMax - xMin > 2*other.__cellXSize) || (yMax - yMin > 2*other.__cellYSize) || (zMax - zMin > 2*other.__cellZSize))
+            {
+                _cheapVersion = false;
+            }
+        }
+        
+        if (_cheapVersion)
+        {
+            var _shapeArray = GetShapeArrayFromPoint(_subjectShape.x, _subjectShape.y, _subjectShape.z);
+            var _i = 0;
+            repeat(array_length(_shapeArray))
+            {
+                var _reaction = _shapeArray[_i].Collide(_subjectShape);
+                if (_reaction.collision)
+                {
+                    return _reaction;
+                }
+                
+                ++_i;
+            }
+        }
+        else
+        {
+            var _cellX = clamp(floor(_aabb.x1 / __cellXSize), 0, __cellXCount-1);
+            var _cellY = clamp(floor(_aabb.y1 / __cellYSize), 0, __cellYCount-1);
+            var _cellZ = clamp(floor(_aabb.z1 / __cellZSize), 0, __cellZCount-1);
+            
+            var _cellXSize = 1 + clamp(floor(_aabb.x2 / __cellXSize), 0, __cellXCount-1) - _cellX;
+            var _cellYSize = 1 + clamp(floor(_aabb.y2 / __cellYSize), 0, __cellYCount-1) - _cellY;
+            var _cellZSize = 1 + clamp(floor(_aabb.z2 / __cellZSize), 0, __cellZCount-1) - _cellZ;
+            
+            var _z = _cellZ;
+            repeat(_cellZSize)
+            {
+                var _y = _cellY;
+                repeat(_cellYSize)
+                {
+                    var _x = _cellX;
+                    repeat(_cellXSize)
+                    {
+                        var _shapeArray = __cellArray[_x + __cellXCount*(_y + __cellYCount*_z)];
+                        
+                        var _i = 0;
+                        repeat(array_length(_shapeArray))
+                        {
+                            var _shape = _shapeArray[_i];
+                            if (not ds_map_exists(_map, _shape))
+                            {
+                                _map[? _shape] = true;
+                                
+                                var _reaction = _shape.Collide(_subjectShape);
+                                if (_reaction.collision)
+                                {
+                                    ds_map_clear(_map);
+                                    return _reaction;
+                                }
+                            }
+                            
+                            ++_i;
+                        }
+                        
+                        ++_x;
+                    }
+                    
+                    ++_y;
+                }
+                
+                ++_z;
+            }
+            
+            ds_map_clear(_map);
+        }
+        
+        return _nullCollisionReaction;
+    }
+    
     static PushOut = function(_subjectShape, _slopeThreshold = 0)
     {
         static _map = ds_map_create();
