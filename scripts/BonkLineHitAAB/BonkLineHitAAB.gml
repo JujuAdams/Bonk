@@ -75,17 +75,36 @@ function BonkLineHitAAB(_aab, _x1, _y1, _z1, _x2, _y2, _z2)
         var _tMin = max(min(_t1, _t2), min(_t3, _t4), min(_t5, _t6));
         var _tMax = min(max(_t1, _t2), max(_t3, _t4), max(_t5, _t6));
         
-        if ((_tMax < 0) || (_tMax > 1) || (_tMin > _tMax))
+        if ((_tMax < 0) || (_tMin > 1) || (_tMin > _tMax))
+        {
+            return _nullHit;
+        }
+        
+        var _t = (_tMin < 0)? _tMax : _tMin;
+        
+        var _hitX = _x1 + _t*_dX;
+        if (abs(_hitX - x) > 0.5*xSize)
+        {
+            return _nullHit;
+        }
+        
+        var _hitY = _y1 + _t*_dY;
+        if (abs(_hitY - y) > 0.5*ySize)
+        {
+            return _nullHit;
+        }
+        
+        var _hitZ = _z1 + _t*_dZ;
+        if (abs(_hitZ - z) > 0.5*zSize)
         {
             return _nullHit;
         }
         
         with(_coordinate)
         {
-            var _t = (_tMin < 0)? _tMax : _tMin;
-            x = _x1 + _t*_dX;
-            y = _y1 + _t*_dY;
-            z = _z1 + _t*_dZ;
+            x = _hitX;
+            y = _hitY;
+            z = _hitZ;
         }
         
         
