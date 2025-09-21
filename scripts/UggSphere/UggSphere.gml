@@ -7,7 +7,7 @@
 /// @param z
 /// @param radius
 /// @param [color]
-/// @param [wireframe}
+/// @param [wireframe]
 
 function UggSphere(_x, _y, _z, _radius, _color = UGG_DEFAULT_DIFFUSE_COLOR, _wireframe = undefined)
 {

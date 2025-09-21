@@ -8,7 +8,7 @@
 /// @param height
 /// @param radius
 /// @param [color]
-/// @param [wireframe}
+/// @param [wireframe]
 
 function UggCapsule(_x, _y, _z, _height, _radius, _color = UGG_DEFAULT_DIFFUSE_COLOR, _wireframe = undefined)
 {

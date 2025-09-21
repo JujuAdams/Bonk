@@ -10,7 +10,7 @@
 /// @param dZ
 /// @param [color]
 /// @param [thickness]
-/// @param [wireframe}
+/// @param [wireframe]
 
 function UggRay(_x, _y, _z, _dX, _dY, _dZ, _color = UGG_DEFAULT_DIFFUSE_COLOR, _thickness = UGG_LINE_THICKNESS, _wireframe = undefined)
 {

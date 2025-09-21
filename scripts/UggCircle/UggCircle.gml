@@ -11,7 +11,7 @@
 /// @param normalY
 /// @param normalZ
 /// @param [color]
-/// @param [wireframe}
+/// @param [wireframe]
 
 function UggCircle(_x, _y, _z, _radius, _normalX, _normalY, _normalZ, _color = UGG_DEFAULT_DIFFUSE_COLOR, _wireframe = undefined)
 {

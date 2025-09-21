@@ -9,7 +9,7 @@
 /// @param normalY
 /// @param normalZ
 /// @param [color]
-/// @param [wireframe}
+/// @param [wireframe]
 
 function UggPlane(_x, _y, _z, _dx, _dy, _dz, _color = UGG_DEFAULT_DIFFUSE_COLOR, _wireframe = undefined)
 {

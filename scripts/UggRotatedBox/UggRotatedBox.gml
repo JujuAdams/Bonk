@@ -10,7 +10,7 @@
 /// @param zSize
 /// @param [zRotation=0]
 /// @param [color]
-/// @param [wireframe}
+/// @param [wireframe]
 
 function UggRotatedBox(_x, _y, _z, _xSize, _ySize, _zSize, _zRotation = 0, _color = UGG_DEFAULT_DIFFUSE_COLOR, _wireframe = undefined)
 {

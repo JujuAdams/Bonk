@@ -10,7 +10,7 @@
 /// @param z2
 /// @param [color]
 /// @param [thickness]
-/// @param [wireframe}
+/// @param [wireframe]
 
 function UggLine(_x1, _y1, _z1, _x2, _y2, _z2, _color = UGG_DEFAULT_DIFFUSE_COLOR, _thickness = UGG_LINE_THICKNESS, _wireframe = undefined)
 {
