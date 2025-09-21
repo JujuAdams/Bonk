@@ -8,7 +8,7 @@
 /// @param projectionMatrix
 /// @param [color]
 /// @param [thickness]
-/// @param [wireframe}
+/// @param [wireframe]
 
 function UggFrustrum(_viewMatrix, _projectionMatrix, _color = undefined, _thickness = undefined, _wireframe = undefined)
 {

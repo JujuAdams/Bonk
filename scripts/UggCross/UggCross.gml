@@ -9,7 +9,7 @@
 /// @param radius
 /// @param [color]
 /// @param [thickness=1]
-/// @param [wireframe}
+/// @param [wireframe]
 
 function UggCross(_x, _y, _z, _radius, _color = c_white, _thickness = 1, _wireframe = undefined)
 {

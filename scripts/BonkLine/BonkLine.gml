@@ -50,16 +50,18 @@
 function BonkLine(_x1, _y1, _z1, _x2, _y2, _z2) constructor
 {
     static bonkType = BONK_TYPE_LINE;
+    static lineHitFunction = __BonkReturnNullHit;
     
     static _hitFuncLookup = (function()
     {
         var _array = array_create(BONK_NUMBER_OF_TYPES, undefined);
-        _array[@ BONK_TYPE_AAB     ] = BonkRayHitAAB;
-        _array[@ BONK_TYPE_CAPSULE ] = BonkRayHitCapsule;
-        _array[@ BONK_TYPE_CYLINDER] = BonkRayHitCylinder;
-        _array[@ BONK_TYPE_QUAD    ] = BonkRayHitQuad;
-        _array[@ BONK_TYPE_SPHERE  ] = BonkRayHitSphere;
-        _array[@ BONK_TYPE_TRIANGLE] = BonkRayHitTriangle;
+        _array[@ BONK_TYPE_AAB     ] = BonkLineHitAAB;
+        _array[@ BONK_TYPE_CAPSULE ] = BonkLineHitCapsule;
+        _array[@ BONK_TYPE_CYLINDER] = BonkLineHitCylinder;
+        _array[@ BONK_TYPE_QUAD    ] = BonkLineHitQuad;
+        _array[@ BONK_TYPE_SPHERE  ] = BonkLineHitSphere;
+        _array[@ BONK_TYPE_TRIANGLE] = BonkLineHitTriangle;
+        _array[@ BONK_TYPE_WORLD   ] = BonkLineHitWorld;
         return _array;
     })();
     

@@ -7,7 +7,7 @@
 /// @param y
 /// @param z
 /// @param [color]
-/// @param [wireframe}
+/// @param [wireframe]
 
 function UggPoint(_x, _y, _z, _color = UGG_DEFAULT_DIFFUSE_COLOR, _wireframe = undefined)
 {

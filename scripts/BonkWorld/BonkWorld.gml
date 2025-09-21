@@ -37,6 +37,7 @@
 function BonkWorld(_xSize, _ySize, _zSize, _cellXSize, _cellYSize, _cellZSize) constructor
 {
     static bonkType = BONK_TYPE_WORLD;
+    static lineHitFunction = BonkLineHitWorld;
     
     __xSize = _xSize;
     __ySize = _ySize;
@@ -63,6 +64,13 @@ function BonkWorld(_xSize, _ySize, _zSize, _cellXSize, _cellYSize, _cellZSize) c
     
     SetPosition = __SetPositionFree;
     
+    static CellInside = function(_x, _y, _z)
+    {
+        return ((_x >= 0) && (_x < __xSize)
+             && (_y >= 0) && (_y < __ySize)
+             && (_z >= 0) && (_z < __zSize));
+    }
+    
     static PushOut = function(_subjectShape, _slopeThreshold = 0)
     {
         static _map = ds_map_create();
@@ -84,7 +92,7 @@ function BonkWorld(_xSize, _ySize, _zSize, _cellXSize, _cellYSize, _cellZSize) c
         
         if (_cheapVersion)
         {
-            var _shapeArray = GetShapeArray(_subjectShape.x, _subjectShape.y, _subjectShape.z);
+            var _shapeArray = GetShapeArrayFromPoint(_subjectShape.x, _subjectShape.y, _subjectShape.z);
             var _i = 0;
             repeat(array_length(_shapeArray))
             {
@@ -344,9 +352,14 @@ function BonkWorld(_xSize, _ySize, _zSize, _cellXSize, _cellYSize, _cellZSize) c
         }
     }
     
-    static GetShapeArray = function(_x, _y, _z)
+    static GetShapeArrayFromPoint = function(_x, _y, _z)
     {
-        return __cellArray[clamp(floor(_x / __cellXSize), 0, __cellXCount-1) + __cellXCount*(clamp(floor(_y / __cellYSize), 0, __cellYCount-1) + __cellYCount*clamp(floor(_z / __cellZSize ), 0, __cellZCount-1))];
+        return __cellArray[clamp(floor(_x / __cellXSize), 0, __cellXCount-1) + __cellXCount*(clamp(floor(_y / __cellYSize), 0, __cellYCount-1) + __cellYCount*clamp(floor(_z / __cellZSize), 0, __cellZCount-1))];
+    }
+    
+    static GetShapeArrayFromCell = function(_x, _y, _z)
+    {
+        return __cellArray[clamp(_x, 0, __cellXCount-1) + __cellXCount*(clamp(_y, 0, __cellYCount-1) + __cellYCount*clamp(_z, 0, __cellZCount-1))];
     }
     
     static AddVertexBuffer = function(_vertexBufferArray, _vertexFormat, _matrix = undefined)
@@ -439,5 +452,45 @@ function BonkWorld(_xSize, _ySize, _zSize, _cellXSize, _cellYSize, _cellZSize) c
             
             ++_i;
         }
+    }
+    
+    static Draw = function()
+    {
+        static _map = ds_map_create();
+        
+        var _z = 0;
+        repeat(__cellZCount)
+        {
+            var _y = 0;
+            repeat(__cellYCount)
+            {
+                var _x = 0;
+                repeat(__cellXCount)
+                {
+                    var _shapeArray = __cellArray[_x + __cellXCount*(_y + __cellYCount*_z)];
+                        
+                    var _i = 0;
+                    repeat(array_length(_shapeArray))
+                    {
+                        var _shape = _shapeArray[_i];
+                        if (not ds_map_exists(_map, _shape))
+                        {
+                            _map[? _shape] = true;    
+                            _shape.Draw();
+                        }
+                        
+                        ++_i;
+                    }
+                    
+                    ++_x;
+                }
+                
+                ++_y;
+            }
+            
+            ++_z;
+        }
+        
+        ds_map_clear(_map);
     }
 }

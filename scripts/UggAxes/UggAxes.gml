@@ -8,7 +8,7 @@
 /// @param [z=0]
 /// @param [length=100]
 /// @param [thickness=3]
-/// @param [wireframe}
+/// @param [wireframe]
 
 function UggAxes(_x = 0, _y = 0, _z = 0, _length = 100, _thickness = 3, _wireframe = undefined)
 {

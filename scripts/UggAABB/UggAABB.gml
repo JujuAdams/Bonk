@@ -9,7 +9,7 @@
 /// @param ySize
 /// @param zSize
 /// @param [color]
-/// @param [wireframe}
+/// @param [wireframe]
 
 function UggAABB(_x, _y, _z, _xSize, _ySize, _zSize, _color = UGG_DEFAULT_DIFFUSE_COLOR, _wireframe = undefined)
 {
