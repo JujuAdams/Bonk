@@ -1,6 +1,8 @@
 #macro BONK_VERSION  "1.4.0"
 #macro BONK_DATE     "2025-09-21"
 
+#macro BONK_RUNNING_FROM_IDE  (GM_build_type == "run")
+
 #macro BONK_TYPE_AAB        0
 #macro BONK_TYPE_OBB        1
 #macro BONK_TYPE_CAPSULE    2
@@ -18,3 +20,6 @@
 #macro BONK_PUSH_OUT_NONE      0
 #macro BONK_PUSH_OUT_SLIPPERY  1
 #macro BONK_PUSH_OUT_GRIPPY    2
+
+#macro BONK_WORLD_CELL_MIN  -1000
+#macro BONK_WORLD_CELL_MAX   1000

@@ -42,8 +42,8 @@ function BonkLineHitWorld(_world, _x1, _y1, _z1, _x2, _y2, _z2)
         }
         else
         {
-            var _t1 = (-_x1) / _dX;
-            var _t2 = (__xSize - _x1) / _dX;
+            var _t1 = (__minCellX - _x1) / _dX;
+            var _t2 = (__maxCellX - _x1) / _dX;
         }
         
         if (_dY == 0)
@@ -53,8 +53,8 @@ function BonkLineHitWorld(_world, _x1, _y1, _z1, _x2, _y2, _z2)
         }
         else
         {
-            var _t3 = (-_y1) / _dY;
-            var _t4 = (__ySize - _y1) / _dY;
+            var _t3 = (__minCellY - _y1) / _dY;
+            var _t4 = (__maxCellY - _y1) / _dY;
         }
         
         if (_dZ == 0)
@@ -64,8 +64,8 @@ function BonkLineHitWorld(_world, _x1, _y1, _z1, _x2, _y2, _z2)
         }
         else
         {
-            var _t5 = (-_z1) / _dZ;
-            var _t6 = (__zSize - _z1) / _dZ;
+            var _t5 = (__minCellZ - _z1) / _dZ;
+            var _t6 = (__maxCellZ - _z1) / _dZ;
         }
         
         var _tMin = max(min(_t1, _t2), min(_t3, _t4), min(_t5, _t6));
@@ -82,19 +82,19 @@ function BonkLineHitWorld(_world, _x1, _y1, _z1, _x2, _y2, _z2)
         var _t = (_tMin < 0)? _tMax : _tMin;
         
         var _hitX = _x1 + _t*_dX;
-        if ((_hitX < 0) || (_hitX >= __xSize))
+        if ((_hitX < __minCellX) || (_hitX >= __maxCellX))
         {
             return _nullHit;
         }
         
         var _hitY = _y1 + _t*_dY;
-        if ((_hitY < 0) || (_hitY >= __ySize))
+        if ((_hitY < __minCellY) || (_hitY >= __maxCellY))
         {
             return _nullHit;
         }
         
         var _hitZ = _z1 + _t*_dZ;
-        if ((_hitZ < 0) || (_hitZ >= __zSize))
+        if ((_hitZ < __minCellZ) || (_hitZ >= __maxCellZ))
         {
             return _nullHit;
         }
