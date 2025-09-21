@@ -111,8 +111,8 @@ function BonkLineHitWorld(_world, _x1, _y1, _z1, _x2, _y2, _z2)
         var _cellYSize = __cellYSize;
         var _cellZSize = __cellZSize;
         
-        var _pointArray = Supercover3D(_clampedX1/_cellXSize, _clampedY1/_cellYSize, _clampedZ1/_cellZSize,
-                                       _clampedX2/_cellXSize, _clampedY2/_cellYSize, _clampedZ2/_cellZSize);
+        var _pointArray = __BonkSupercover(_clampedX1/_cellXSize, _clampedY1/_cellYSize, _clampedZ1/_cellZSize,
+                                           _clampedX2/_cellXSize, _clampedY2/_cellYSize, _clampedZ2/_cellZSize);
         
         var _i = 0;
         repeat(array_length(_pointArray) div 3)

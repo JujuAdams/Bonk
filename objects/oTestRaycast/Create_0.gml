@@ -12,7 +12,7 @@ gridScale = 64;
 //lineA = new BonkLine(4.5, 4.5, 4.5,   4.5 + irandom_range(-4, 4), 4.5 + irandom_range(-4, 4), 4.5 + irandom_range(-4, 4)); //random
 
 lineA = new BonkLine(4.5, 4.5, 4.5,   3.5, 7.5, 2.5); //test case
-pointArrayA = Supercover3D(lineA.x1, lineA.y1, lineA.z1,   lineA.x2, lineA.y2, lineA.z2);
+pointArrayA = __BonkSupercover(lineA.x1, lineA.y1, lineA.z1,   lineA.x2, lineA.y2, lineA.z2);
 
 show_debug_message(lineA);
 show_debug_message(pointArrayA);
