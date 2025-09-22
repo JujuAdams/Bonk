@@ -75,44 +75,45 @@ function BonkLineHitTriangle(_triangle, _x1, _y1, _z1, _x2, _y2, _z2)
         if (_dot == 0)
         {
             //Ray lies on plane
-            //TODO - This is excessive lol. We probably should return `_nullHit` in all cases to avoid all this maths
             
-            var _func = function(_x1, _y1, _z1,   _dX12, _dY12, _dZ12,   _x3, _y3, _z3,   _dX34, _dY34, _dZ34)
-            {
-                var _dot13_21 = (_x1 - _x3)*_dX12 + (_y1 - _y3)*_dY12 + (_z1 - _z3)*_dZ12;
-                var _dot13_43 = (_x1 - _x3)*_dX34 + (_y1 - _y3)*_dY34 + (_z1 - _z3)*_dZ34;
-                var _dot21_21 = _dX12*_dX12 + _dY12*_dY12 + _dZ12*_dZ12;
-                var _dot43_21 = _dX34*_dX12 + _dY34*_dY12 + _dZ34*_dZ12;
-                var _dot43_43 = _dX34*_dX34 + _dY34*_dY34 + _dZ34*_dZ34;
-                
-                var _denominator = _dot21_21*_dot43_43 - _dot43_21*_dot43_21;
-                if (_denominator == 0) return infinity;
-                
-                return (_dot13_43*_dot43_21 - _dot13_21*_dot43_43) / _denominator;
-                // t34 = (_dot13_43 + _t12*_dot43_21) / _dot43_43;
-                
-                return ((_t < 0) || (_t > 1))? infinity : _t;
-            }
+            return _nullHit;
             
-            var _t = infinity;
-            _t = min(_t, _func(_x1, _y1, _z1,   _rX, _rY, _rZ,   _triX1, _triY1, _triZ1,   _dX12, _dY12, _dZ12));
-            _t = min(_t, _func(_x1, _y1, _z1,   _rX, _rY, _rZ,   _triX2, _triY2, _triZ2,   _dX23, _dY23, _dZ23));
-            _t = min(_t, _func(_x1, _y1, _z1,   _rX, _rY, _rZ,   _triX3, _triY3, _triZ3,   _dX31, _dY31, _dZ31));
-            
-            if (is_infinity(_t))
-            {
-                //Something went wrong
-                return _nullHit;
-            }
-            
-            with(_coordinate)
-            {
-                x = _x1 + _t*_rX;
-                y = _y1 + _t*_rY;
-                z = _z1 + _t*_rZ;
-            }
-            
-            return _coordinate;
+            //var _func = function(_x1, _y1, _z1,   _dX12, _dY12, _dZ12,   _x3, _y3, _z3,   _dX34, _dY34, _dZ34)
+            //{
+            //    var _dot13_21 = (_x1 - _x3)*_dX12 + (_y1 - _y3)*_dY12 + (_z1 - _z3)*_dZ12;
+            //    var _dot13_43 = (_x1 - _x3)*_dX34 + (_y1 - _y3)*_dY34 + (_z1 - _z3)*_dZ34;
+            //    var _dot21_21 = _dX12*_dX12 + _dY12*_dY12 + _dZ12*_dZ12;
+            //    var _dot43_21 = _dX34*_dX12 + _dY34*_dY12 + _dZ34*_dZ12;
+            //    var _dot43_43 = _dX34*_dX34 + _dY34*_dY34 + _dZ34*_dZ34;
+            //    
+            //    var _denominator = _dot21_21*_dot43_43 - _dot43_21*_dot43_21;
+            //    if (_denominator == 0) return infinity;
+            //    
+            //    return (_dot13_43*_dot43_21 - _dot13_21*_dot43_43) / _denominator;
+            //    // t34 = (_dot13_43 + _t12*_dot43_21) / _dot43_43;
+            //    
+            //    return ((_t < 0) || (_t > 1))? infinity : _t;
+            //}
+            //
+            //var _t = infinity;
+            //_t = min(_t, _func(_x1, _y1, _z1,   _rX, _rY, _rZ,   _triX1, _triY1, _triZ1,   _dX12, _dY12, _dZ12));
+            //_t = min(_t, _func(_x1, _y1, _z1,   _rX, _rY, _rZ,   _triX2, _triY2, _triZ2,   _dX23, _dY23, _dZ23));
+            //_t = min(_t, _func(_x1, _y1, _z1,   _rX, _rY, _rZ,   _triX3, _triY3, _triZ3,   _dX31, _dY31, _dZ31));
+            //
+            //if (is_infinity(_t))
+            //{
+            //    //Something went wrong
+            //    return _nullHit;
+            //}
+            //
+            //with(_coordinate)
+            //{
+            //    x = _x1 + _t*_rX;
+            //    y = _y1 + _t*_rY;
+            //    z = _z1 + _t*_rZ;
+            //}
+            //
+            //return _coordinate;
         }
         
         var _vX = _triX1 - _x1;
