@@ -52,21 +52,21 @@
 ///     
 ///     N.B.  This method should only be used for debugging.
 /// 
-/// @param xCenter
-/// @param yCenter
-/// @param zCenter
 /// @param cellXSize
 /// @param cellYSize
 /// @param cellZSize
+/// @param [x=0]
+/// @param [y=0]
+/// @param [z=0]
 
-function BonkWorld(_xCenter, _yCenter, _zCenter, _cellXSize, _cellYSize, _cellZSize) constructor
+function BonkWorld(_cellXSize, _cellYSize, _cellZSize, _x = 0, _y = 0, _z = 0) constructor
 {
     static bonkType = BONK_TYPE_WORLD;
     static lineHitFunction = BonkLineHitWorld;
     
-    __xCenter = _xCenter;
-    __yCenter = _yCenter;
-    __zCenter = _zCenter;
+    __xOffset = _x;
+    __yOffset = _y;
+    __zOffset = _z;
     
     __cellXSize = _cellXSize;
     __cellYSize = _cellYSize;
@@ -487,9 +487,9 @@ function BonkWorld(_xCenter, _yCenter, _zCenter, _cellXSize, _cellYSize, _cellZS
     
     static GetShapeArrayFromPoint = function(_x, _y, _z)
     {
-        return GetShapeArrayFromCell((_x - __xCenter) / __cellXSize,
-                                     (_y - __yCenter) / __cellYSize,
-                                     (_z - __zCenter) / __cellZSize);
+        return GetShapeArrayFromCell((_x - __xOffset) / __cellXSize,
+                                     (_y - __yOffset) / __cellYSize,
+                                     (_z - __zOffset) / __cellZSize);
     }
     
     static GetShapeArrayFromCell = function(_x, _y, _z)
@@ -620,18 +620,47 @@ function BonkWorld(_xCenter, _yCenter, _zCenter, _cellXSize, _cellYSize, _cellZS
         }
     }
     
-    static Draw = function(_wireframe = undefined)
+    static GetAABB = function()
+    {
+        return {
+            xMin: __xOffset + __cellXSize*__minCellX,
+            yMin: __yOffset + __cellYSize*__minCellY,
+            zMin: __zOffset + __cellZSize*__minCellZ,
+            xMax: __xOffset + __cellXSize*(__maxCellX+1),
+            yMax: __yOffset + __cellYSize*(__maxCellY+1),
+            zMax: __zOffset + __cellZSize*(__maxCellZ+1),
+        };
+    }
+    
+    static DrawAABB = function(_color = undefined, _wireframe = true)
+    {
+        with(GetAABB())
+        {
+            UggAABB(0.5*(xMin + xMax), 0.5*(yMin + yMax), 0.5*(zMin + zMax),
+                    xMax - xMin, yMax - yMin, zMax - zMin,
+                    _color, _wireframe);
+        }
+    }
+    
+    static DrawRangeShapes = function(_struct, _color, _wireframe)
     {
         static _map = ds_map_create();
         
-        var _z = __minCellZ;
-        repeat(1 + __maxCellZ - __minCellZ)
+        var _xMin = floor(clamp(_struct.xMin / __cellXSize, __minCellX, __maxCellX));
+        var _yMin = floor(clamp(_struct.yMin / __cellYSize, __minCellY, __maxCellY));
+        var _zMin = floor(clamp(_struct.zMin / __cellZSize, __minCellZ, __maxCellZ));
+        var _xMax = floor(clamp(_struct.xMax / __cellXSize, __minCellX, __maxCellX));
+        var _yMax = floor(clamp(_struct.yMax / __cellYSize, __minCellY, __maxCellY));
+        var _zMax = floor(clamp(_struct.zMax / __cellZSize, __minCellZ, __maxCellZ));
+        
+        var _z = _zMin;
+        repeat(1 + _zMax - _zMin)
         {
-            var _y = __minCellY;
-            repeat(1 + __maxCellY - __minCellY)
+            var _y = _yMin;
+            repeat(1 + _yMax - _yMin)
             {
-                var _x = __minCellX;
-                repeat(1 + __maxCellX - __minCellX)
+                var _x = _xMin;
+                repeat(1 + _xMax - _xMin)
                 {
                     var _shapeArray = __GetShapeArrayFromCellUnsafe(_x, _y, _z);
                         
@@ -658,5 +687,60 @@ function BonkWorld(_xCenter, _yCenter, _zCenter, _cellXSize, _cellYSize, _cellZS
         }
         
         ds_map_clear(_map);
+    }
+    
+    static DrawAllShapes = function(_color = undefined, _wireframe = undefined)
+    {
+        return DrawRangeShapes(GetAABB(), _color, _wireframe);
+    }
+    
+    static DrawRangeVoxels = function(_struct, _color = undefined, _wireframe = true, _checkerboard = false)
+    {
+        var _xOffset = __xOffset;
+        var _yOffset = __yOffset;
+        var _zOffset = __zOffset;
+        
+        var _cellXSize = __cellXSize;
+        var _cellYSize = __cellYSize;
+        var _cellZSize = __cellZSize;
+        
+        var _xMin = floor(clamp(_struct.xMin / _cellXSize, __minCellX, __maxCellX));
+        var _yMin = floor(clamp(_struct.yMin / _cellYSize, __minCellY, __maxCellY));
+        var _zMin = floor(clamp(_struct.zMin / _cellZSize, __minCellZ, __maxCellZ));
+        var _xMax = floor(clamp(_struct.xMax / _cellXSize, __minCellX, __maxCellX));
+        var _yMax = floor(clamp(_struct.yMax / _cellYSize, __minCellY, __maxCellY));
+        var _zMax = floor(clamp(_struct.zMax / _cellZSize, __minCellZ, __maxCellZ));
+        
+        var _z = _zMin;
+        repeat(1 + _zMax - _zMin)
+        {
+            var _y = _yMin;
+            repeat(1 + _yMax - _yMin)
+            {
+                var _x = _xMin;
+                repeat(1 + _xMax - _xMin)
+                {
+                    if ((not _checkerboard) || ((abs(_x + _y + _z) mod 2) == 1))
+                    {
+                        UggAABB(_xOffset + _cellXSize*(_x + 0.5),
+                                _yOffset + _cellYSize*(_y + 0.5),
+                                _zOffset + _cellZSize*(_z + 0.5),
+                                _cellXSize, _cellYSize, _cellZSize,
+                                _color, _wireframe);
+                    }
+                    
+                    ++_x;
+                }
+                
+                ++_y;
+            }
+            
+            ++_z;
+        }
+    }
+    
+    static DrawAllVoxels = function(_color = undefined, _wireframe = true, _checkerboard = true)
+    {
+        return DrawRangeVoxels(GetAABB(), _color, _wireframe, _checkerboard);
     }
 }
