@@ -671,7 +671,7 @@ function BonkWorld(_cellXSize, _cellYSize, _cellZSize, _x = 0, _y = 0, _z = 0) c
                         if (not ds_map_exists(_map, _shape))
                         {
                             _map[? _shape] = true;    
-                            _shape.Draw(undefined, _wireframe);
+                            _shape.Draw(_color, _wireframe);
                         }
                         
                         ++_i;
