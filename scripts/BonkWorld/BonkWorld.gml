@@ -642,7 +642,7 @@ function BonkWorld(_cellXSize, _cellYSize, _cellZSize, _x = 0, _y = 0, _z = 0) c
         }
     }
     
-    static DrawRangeShapes = function(_struct, _color, _wireframe)
+    static DrawRangeShapes = function(_struct, _color = undefined, _wireframe = undefined)
     {
         static _map = ds_map_create();
         
@@ -663,7 +663,6 @@ function BonkWorld(_cellXSize, _cellYSize, _cellZSize, _x = 0, _y = 0, _z = 0) c
                 repeat(1 + _xMax - _xMin)
                 {
                     var _shapeArray = __GetShapeArrayFromCellUnsafe(_x, _y, _z);
-                        
                     var _i = 0;
                     repeat(array_length(_shapeArray))
                     {
@@ -689,9 +688,81 @@ function BonkWorld(_cellXSize, _cellYSize, _cellZSize, _x = 0, _y = 0, _z = 0) c
         ds_map_clear(_map);
     }
     
+    static DrawCellsShapes = function(_array, _color = undefined, _wireframe = undefined)
+    {
+        static _map = ds_map_create();
+        
+        var _minCellX = __minCellX;
+        var _maxCellX = __maxCellX;
+        var _minCellY = __minCellY;
+        var _maxCellY = __maxCellY;
+        var _minCellZ = __minCellZ;
+        var _maxCellZ = __maxCellZ;
+        
+        var _j = 0;
+        repeat(array_length(_array) div 3)
+        {
+            var _x = floor(clamp(_array[_j  ], _minCellX, _maxCellX));
+            var _y = floor(clamp(_array[_j+1], _minCellY, _maxCellY));
+            var _z = floor(clamp(_array[_j+2], _minCellZ, _maxCellZ));
+            
+            var _shapeArray = __GetShapeArrayFromCellUnsafe(_x, _y, _z);
+            var _i = 0;
+            repeat(array_length(_shapeArray))
+            {
+                var _shape = _shapeArray[_i];
+                if (not ds_map_exists(_map, _shape))
+                {
+                    _map[? _shape] = true;    
+                    _shape.Draw(_color, _wireframe);
+                }
+                
+                ++_i;
+            }
+            
+            _j += 3;
+        }
+        
+        ds_map_clear(_map);
+    }
+    
     static DrawAllShapes = function(_color = undefined, _wireframe = undefined)
     {
         return DrawRangeShapes(GetAABB(), _color, _wireframe);
+    }
+    
+    static DrawCellsVoxels = function(_array, _color = undefined, _wireframe = true)
+    {
+        var _xOffset = __xOffset;
+        var _yOffset = __yOffset;
+        var _zOffset = __zOffset;
+        
+        var _cellXSize = __cellXSize;
+        var _cellYSize = __cellYSize;
+        var _cellZSize = __cellZSize;
+        
+        var _minCellX = __minCellX;
+        var _maxCellX = __maxCellX;
+        var _minCellY = __minCellY;
+        var _maxCellY = __maxCellY;
+        var _minCellZ = __minCellZ;
+        var _maxCellZ = __maxCellZ;
+        
+        var _i = 0;
+        repeat(array_length(_array) div 3)
+        {
+            var _x = floor(clamp(_array[_i  ], _minCellX, _maxCellX));
+            var _y = floor(clamp(_array[_i+1], _minCellY, _maxCellY));
+            var _z = floor(clamp(_array[_i+2], _minCellZ, _maxCellZ));
+            
+            UggAABB(_xOffset + _cellXSize*(_x + 0.5),
+                    _yOffset + _cellYSize*(_y + 0.5),
+                    _zOffset + _cellZSize*(_z + 0.5),
+                    _cellXSize, _cellYSize, _cellZSize,
+                    _color, _wireframe);
+            
+            _i += 3;
+        }
     }
     
     static DrawRangeVoxels = function(_struct, _color = undefined, _wireframe = true, _checkerboard = false)
@@ -742,5 +813,98 @@ function BonkWorld(_cellXSize, _cellYSize, _cellZSize, _x = 0, _y = 0, _z = 0) c
     static DrawAllVoxels = function(_color = undefined, _wireframe = true, _checkerboard = true)
     {
         return DrawRangeVoxels(GetAABB(), _color, _wireframe, _checkerboard);
+    }
+    
+    static GetLineCells = function(_x1, _y1, _z1, _x2, _y2, _z2)
+    {
+        _x1 -= __xOffset;
+        _y1 -= __yOffset;
+        _z1 -= __zOffset;
+        _x2 -= __xOffset;
+        _y2 -= __yOffset;
+        _z2 -= __zOffset;
+        
+        var _dX = _x2 - _x1;
+        var _dY = _y2 - _y1;
+        var _dZ = _z2 - _z1;
+        
+        if (_dX == 0)
+        {
+            var _t1 = -infinity;
+            var _t2 =  infinity;
+        }
+        else
+        {
+            var _t1 = (__minCellX - _x1) / _dX;
+            var _t2 = (__maxCellX - _x1) / _dX;
+        }
+        
+        if (_dY == 0)
+        {
+            var _t3 = -infinity;
+            var _t4 =  infinity;
+        }
+        else
+        {
+            var _t3 = (__minCellY - _y1) / _dY;
+            var _t4 = (__maxCellY - _y1) / _dY;
+        }
+        
+        if (_dZ == 0)
+        {
+            var _t5 = -infinity;
+            var _t6 =  infinity;
+        }
+        else
+        {
+            var _t5 = (__minCellZ - _z1) / _dZ;
+            var _t6 = (__maxCellZ - _z1) / _dZ;
+        }
+        
+        var _tMin = max(min(_t1, _t2), min(_t3, _t4), min(_t5, _t6));
+        var _tMax = min(max(_t1, _t2), max(_t3, _t4), max(_t5, _t6));
+        
+        if ((_tMax < 0) || (_tMin > 1) || (_tMin > _tMax))
+        {
+            return [];
+        }
+        
+        _tMin = clamp(_tMin, 0, 1);
+        _tMax = clamp(_tMax, 0, 1);
+        
+        var _t = (_tMin < 0)? _tMax : _tMin;
+        
+        var _cellXSize = __cellXSize;
+        var _cellYSize = __cellYSize;
+        var _cellZSize = __cellZSize;
+        
+        var _hitX = _x1 + _t*_dX;
+        if ((_hitX < __minCellX*_cellXSize) || (_hitX > (__maxCellX+1)*_cellXSize))
+        {
+            return [];
+        }
+        
+        var _hitY = _y1 + _t*_dY;
+        if ((_hitY < __minCellY*_cellYSize) || (_hitY >= (__maxCellY+1)*_cellYSize))
+        {
+            return [];
+        }
+        
+        var _hitZ = _z1 + _t*_dZ;
+        if ((_hitZ < __minCellZ*_cellZSize) || (_hitZ >= (__maxCellZ+1)*_cellZSize))
+        {
+            return [];
+        }
+        
+        var _clampedX1 = _x1 + _tMin*_dX;
+        var _clampedY1 = _y1 + _tMin*_dY;
+        var _clampedZ1 = _z1 + _tMin*_dZ;
+        
+        var _clampedX2 = _x1 + _tMax*_dX;
+        var _clampedY2 = _y1 + _tMax*_dY;
+        var _clampedZ2 = _z1 + _tMax*_dZ;
+        
+        return __BonkSupercover(_clampedX1/_cellXSize, _clampedY1/_cellYSize, _clampedZ1/_cellZSize,
+                                _clampedX2/_cellXSize, _clampedY2/_cellYSize, _clampedZ2/_cellZSize);
     }
 }
