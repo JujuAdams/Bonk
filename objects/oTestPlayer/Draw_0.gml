@@ -8,10 +8,11 @@ if (_hit.collision)
 }
 
 var _aabb = shape.GetAABB();
-world.DrawRangeVoxels(_aabb);
+world.DrawCellsFromRange(_aabb);
+world.DrawAABB();
 
 gpu_set_ztestenable(false);
 gpu_set_zwriteenable(false);
-world.DrawRangeShapes(_aabb, c_red, true);
+world.DrawShapesFromRange(_aabb, c_red, true);
 gpu_set_ztestenable(true);
 gpu_set_zwriteenable(true);

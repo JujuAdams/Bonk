@@ -38,12 +38,12 @@
 /// `.GetShapeArrayFromCell(x, y, z)`
 ///     Returns an array that contains shapes that may overlap with the specified cell.
 /// 
-/// `.GetShapeCells(shape)`
+/// `.GetCellsFromShape(shape)`
 ///     Returns an array of cells that a line or ray shape intersects. This array can be empty if the
 ///     line doesn't intersect any cells. The array is one-dimensional and ordered with sequential
 ///     triplets for the x/y/z position of each cell.
 /// 
-/// `.GetLineCells(x1, y1, z1, x2, y2, z2)`
+/// `.GetCellsFromLine(x1, y1, z1, x2, y2, z2)`
 ///     Returns an array of cells that the line segment intersects. This array can be empty if the line
 ///     doesn't intersect any cells. The array is one-dimensional and ordered with sequential triplets
 ///     for the x/y/z position of each cell.
@@ -68,31 +68,31 @@
 /// `.DrawAABB([color], [wireframe=true])`
 ///     Draws the axis-aligned bounding box for the BonkWorld.
 /// 
-/// `.DrawCellsShapes(array, [color], [wireframe=true])`
+/// `.DrawShapesFromArray(array, [color], [wireframe=true])`
 ///     Draws shapes that are assigned to cells taken from an array. The array of cells should be one-
 ///     dimensional and structured with each cell  position appearing as consecutive x/y/z values. This
-///     is the same format as returned by `.GetShapeCells()` and `.GetLineCells()`.
+///     is the same format as returned by `.GetCellsFromShape()` and `.GetCellsFromLine()`.
 /// 
 /// `.DrawRangeVShapes(struct, [color], [wireframe=true])`
 ///     Draws shapes that are assigned to cells in the range determined by the input struct. The struct
 ///     should be formatted in the same way as the `.GetAABB()` getter for BonkWorld (and other Bonk
 ///     shapes) i.e. it should include `.xMin` `.xMax` etc.
 /// 
-/// `.DrawAllShapes([color], [wireframe=true])`
+/// `.DrawShapes([color], [wireframe=true])`
 ///     Draws all shapes in the BonkWorld.
 /// 
-/// `.DrawCellsVoxels(array, [color], [wireframe=true])`
+/// `.DrawCellsFromArray(array, [color], [wireframe=true])`
 ///     Draws cells from an array. The array should be one-dimensional and structured with each cell
 ///     position appearing as consecutive x/y/z values. This is the same format as returned by
-///     `.GetShapeCells()` and `.GetLineCells()`.
+///     `.GetCellsFromShape()` and `.GetCellsFromLine()`.
 /// 
-/// `.DrawRangeVoxels(struct, [color], [wireframe=true], [checkerboard=false])`
+/// `.DrawCellsFromRange(struct, [color], [wireframe=true], [checkerboard=false])`
 ///     Draws cells in the range determined by the input struct. The struct should be formatted in the
 ///     same way as the `.GetAABB()` getter for BonkWorld (and other Bonk shapes) i.e. it should include
 ///     `.xMin` `.xMax` etc.  The checkerboard argument, when set to `true`, will skip drawing of every
 ///     other voxel to improve performance.
 /// 
-/// `.DrawAllVoxels([color], [wireframe=true], [checkerboard=true])`
+/// `.DrawCells([color], [wireframe=true], [checkerboard=true])`
 ///     Draws all cells (voxels) in the BonkWorld. The checkerboard argument, when set to `true`, will
 ///     skip drawing of every other voxel to improve performance.
 ///     
@@ -686,7 +686,7 @@ function BonkWorld(_cellXSize, _cellYSize, _cellZSize, _x = 0, _y = 0, _z = 0) c
         }
     }
     
-    static DrawRangeShapes = function(_struct, _color = undefined, _wireframe = undefined)
+    static DrawShapesFromRange = function(_struct, _color = undefined, _wireframe = undefined)
     {
         static _map = ds_map_create();
         
@@ -732,7 +732,7 @@ function BonkWorld(_cellXSize, _cellYSize, _cellZSize, _x = 0, _y = 0, _z = 0) c
         ds_map_clear(_map);
     }
     
-    static DrawCellsShapes = function(_array, _color = undefined, _wireframe = undefined)
+    static DrawShapesFromArray = function(_array, _color = undefined, _wireframe = undefined)
     {
         static _map = ds_map_create();
         
@@ -770,12 +770,12 @@ function BonkWorld(_cellXSize, _cellYSize, _cellZSize, _x = 0, _y = 0, _z = 0) c
         ds_map_clear(_map);
     }
     
-    static DrawAllShapes = function(_color = undefined, _wireframe = undefined)
+    static DrawShapes = function(_color = undefined, _wireframe = undefined)
     {
-        return DrawRangeShapes(GetAABB(), _color, _wireframe);
+        return DrawShapesFromRange(GetAABB(), _color, _wireframe);
     }
     
-    static DrawCellsVoxels = function(_array, _color = undefined, _wireframe = true)
+    static DrawCellsFromArray = function(_array, _color = undefined, _wireframe = true)
     {
         var _xOffset = __xOffset;
         var _yOffset = __yOffset;
@@ -809,7 +809,7 @@ function BonkWorld(_cellXSize, _cellYSize, _cellZSize, _x = 0, _y = 0, _z = 0) c
         }
     }
     
-    static DrawRangeVoxels = function(_struct, _color = undefined, _wireframe = true, _checkerboard = false)
+    static DrawCellsFromRange = function(_struct, _color = undefined, _wireframe = true, _checkerboard = false)
     {
         var _xOffset = __xOffset;
         var _yOffset = __yOffset;
@@ -854,22 +854,22 @@ function BonkWorld(_cellXSize, _cellYSize, _cellZSize, _x = 0, _y = 0, _z = 0) c
         }
     }
     
-    static DrawAllVoxels = function(_color = undefined, _wireframe = true, _checkerboard = true)
+    static DrawCells = function(_color = undefined, _wireframe = true, _checkerboard = true)
     {
-        return DrawRangeVoxels(GetAABB(), _color, _wireframe, _checkerboard);
+        return DrawCellsFromRange(GetAABB(), _color, _wireframe, _checkerboard);
     }
     
-    static GetShapeCells = function(_lineShape)
+    static GetCellsFromShape = function(_lineShape)
     {
         with(_lineShape)
         {
             if (bonkType == BONK_TYPE_LINE)
             {
-                return other.GetLineCells(x1, y1, z1,   x2, y2, z2);
+                return other.GetCellsFromLine(x1, y1, z1,   x2, y2, z2);
             }
             else if (bonkType == BONK_TYPE_RAY)
             {
-                return other.GetLineCells(x, y, z,   x + BONK_RAY_LENGTH*dx, y + BONK_RAY_LENGTH*dy, z + BONK_RAY_LENGTH*dz);
+                return other.GetCellsFromLine(x, y, z,   x + BONK_RAY_LENGTH*dx, y + BONK_RAY_LENGTH*dy, z + BONK_RAY_LENGTH*dz);
             }
             else
             {
@@ -880,7 +880,7 @@ function BonkWorld(_cellXSize, _cellYSize, _cellZSize, _x = 0, _y = 0, _z = 0) c
         return [];
     }
     
-    static GetLineCells = function(_x1, _y1, _z1, _x2, _y2, _z2)
+    static GetCellsFromLine = function(_x1, _y1, _z1, _x2, _y2, _z2)
     {
         _x1 -= __xOffset;
         _y1 -= __yOffset;

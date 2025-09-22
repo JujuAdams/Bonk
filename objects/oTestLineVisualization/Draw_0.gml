@@ -4,6 +4,6 @@ line.Draw(c_aqua);
 
 with(oTestPlayer)
 {
-    var _pointsArray = world.GetShapeCells(other.line);
-    world.DrawCellsVoxels(_pointsArray);
+    var _pointsArray = world.GetCellsFromShape(other.line);
+    world.DrawCellsFromArray(_pointsArray);
 }
