@@ -81,20 +81,24 @@ function BonkLineHitWorld(_world, _x1, _y1, _z1, _x2, _y2, _z2)
         
         var _t = (_tMin < 0)? _tMax : _tMin;
         
+        var _cellXSize = __cellXSize;
+        var _cellYSize = __cellYSize;
+        var _cellZSize = __cellZSize;
+        
         var _hitX = _x1 + _t*_dX;
-        if ((_hitX < __minCellX) || (_hitX >= __maxCellX))
+        if ((_hitX < __minCellX*_cellXSize) || (_hitX > (__maxCellX+1)*_cellXSize))
         {
             return _nullHit;
         }
         
         var _hitY = _y1 + _t*_dY;
-        if ((_hitY < __minCellY) || (_hitY >= __maxCellY))
+        if ((_hitY < __minCellY*_cellYSize) || (_hitY >= (__maxCellY+1)*_cellYSize))
         {
             return _nullHit;
         }
         
         var _hitZ = _z1 + _t*_dZ;
-        if ((_hitZ < __minCellZ) || (_hitZ >= __maxCellZ))
+        if ((_hitZ < __minCellZ*_cellZSize) || (_hitZ >= (__maxCellZ+1)*_cellZSize))
         {
             return _nullHit;
         }
@@ -106,10 +110,6 @@ function BonkLineHitWorld(_world, _x1, _y1, _z1, _x2, _y2, _z2)
         var _clampedX2 = _x1 + _tMax*_dX;
         var _clampedY2 = _y1 + _tMax*_dY;
         var _clampedZ2 = _z1 + _tMax*_dZ;
-        
-        var _cellXSize = __cellXSize;
-        var _cellYSize = __cellYSize;
-        var _cellZSize = __cellZSize;
         
         //TODO - Replace with incremental algo
         var _pointArray = __BonkSupercover(_clampedX1/_cellXSize, _clampedY1/_cellYSize, _clampedZ1/_cellZSize,
