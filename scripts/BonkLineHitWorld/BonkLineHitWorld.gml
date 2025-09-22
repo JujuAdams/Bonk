@@ -35,6 +35,14 @@ function BonkLineHitWorld(_world, _x1, _y1, _z1, _x2, _y2, _z2)
         var _dY = _y2 - _y1;
         var _dZ = _z2 - _z1;
         
+        //FIXME - Calculate these values when changing bounds
+        var _xMin = __minCellX*__cellXSize;
+        var _yMin = __minCellY*__cellYSize;
+        var _zMin = __minCellZ*__cellZSize;
+        var _xMax = (__maxCellX+1)*__cellXSize;
+        var _yMax = (__maxCellY+1)*__cellYSize;
+        var _zMax = (__maxCellZ+1)*__cellZSize;
+        
         if (_dX == 0)
         {
             var _t1 = -infinity;
@@ -42,8 +50,8 @@ function BonkLineHitWorld(_world, _x1, _y1, _z1, _x2, _y2, _z2)
         }
         else
         {
-            var _t1 = (__minCellX - _x1) / _dX;
-            var _t2 = (__maxCellX - _x1) / _dX;
+            var _t1 = (_xMin - _x1) / _dX;
+            var _t2 = (_xMax - _x1) / _dX;
         }
         
         if (_dY == 0)
@@ -53,8 +61,8 @@ function BonkLineHitWorld(_world, _x1, _y1, _z1, _x2, _y2, _z2)
         }
         else
         {
-            var _t3 = (__minCellY - _y1) / _dY;
-            var _t4 = (__maxCellY - _y1) / _dY;
+            var _t3 = (_yMin - _y1) / _dY;
+            var _t4 = (_yMax - _y1) / _dY;
         }
         
         if (_dZ == 0)
@@ -64,8 +72,8 @@ function BonkLineHitWorld(_world, _x1, _y1, _z1, _x2, _y2, _z2)
         }
         else
         {
-            var _t5 = (__minCellZ - _z1) / _dZ;
-            var _t6 = (__maxCellZ - _z1) / _dZ;
+            var _t5 = (_zMin - _z1) / _dZ;
+            var _t6 = (_zMax - _z1) / _dZ;
         }
         
         var _tMin = max(min(_t1, _t2), min(_t3, _t4), min(_t5, _t6));
@@ -86,19 +94,19 @@ function BonkLineHitWorld(_world, _x1, _y1, _z1, _x2, _y2, _z2)
         var _cellZSize = __cellZSize;
         
         var _hitX = _x1 + _t*_dX;
-        if ((_hitX < __minCellX*_cellXSize) || (_hitX > (__maxCellX+1)*_cellXSize))
+        if ((_hitX < _xMin) || (_hitX > _xMax))
         {
             return _nullHit;
         }
         
         var _hitY = _y1 + _t*_dY;
-        if ((_hitY < __minCellY*_cellYSize) || (_hitY >= (__maxCellY+1)*_cellYSize))
+        if ((_hitY < _yMin) || (_hitY >= _yMax))
         {
             return _nullHit;
         }
         
         var _hitZ = _z1 + _t*_dZ;
-        if ((_hitZ < __minCellZ*_cellZSize) || (_hitZ >= (__maxCellZ+1)*_cellZSize))
+        if ((_hitZ < _zMin) || (_hitZ >= _zMax))
         {
             return _nullHit;
         }

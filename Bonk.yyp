@@ -111,6 +111,7 @@
     {"id":{"name":"oTestCylinder","path":"objects/oTestCylinder/oTestCylinder.yy",},},
     {"id":{"name":"oTestFallingSphere","path":"objects/oTestFallingSphere/oTestFallingSphere.yy",},},
     {"id":{"name":"oTestFloor","path":"objects/oTestFloor/oTestFloor.yy",},},
+    {"id":{"name":"oTestLineVisualization","path":"objects/oTestLineVisualization/oTestLineVisualization.yy",},},
     {"id":{"name":"oTestMesh","path":"objects/oTestMesh/oTestMesh.yy",},},
     {"id":{"name":"oTestParent","path":"objects/oTestParent/oTestParent.yy",},},
     {"id":{"name":"oTestPlayer","path":"objects/oTestPlayer/oTestPlayer.yy",},},

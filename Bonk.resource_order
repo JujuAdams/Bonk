@@ -76,6 +76,7 @@
     {"name":"oTestCylinder","order":4,"path":"objects/oTestCylinder/oTestCylinder.yy",},
     {"name":"oTestFallingSphere","order":6,"path":"objects/oTestFallingSphere/oTestFallingSphere.yy",},
     {"name":"oTestFloor","order":7,"path":"objects/oTestFloor/oTestFloor.yy",},
+    {"name":"oTestLineVisualization","order":13,"path":"objects/oTestLineVisualization/oTestLineVisualization.yy",},
     {"name":"oTestParent","order":1,"path":"objects/oTestParent/oTestParent.yy",},
     {"name":"oTestQuad","order":8,"path":"objects/oTestQuad/oTestQuad.yy",},
     {"name":"oTestRotatedBox","order":3,"path":"objects/oTestRotatedBox/oTestRotatedBox.yy",},
