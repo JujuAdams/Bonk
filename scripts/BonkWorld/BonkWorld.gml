@@ -318,9 +318,9 @@ function BonkWorld(_xCenter, _yCenter, _zCenter, _cellXSize, _cellYSize, _cellZS
         var _cellY = clamp(floor((_aabb.yMin / __cellYSize) - 0.5), BONK_WORLD_CELL_MIN, BONK_WORLD_CELL_MAX);
         var _cellZ = clamp(floor((_aabb.zMin / __cellZSize) - 0.5), BONK_WORLD_CELL_MIN, BONK_WORLD_CELL_MAX);
         
-        var _cellX2 = clamp(floor((_aabb.xMax / __cellXSize) - 0.5), BONK_WORLD_CELL_MIN, BONK_WORLD_CELL_MAX);
-        var _cellY2 = clamp(floor((_aabb.yMax / __cellYSize) - 0.5), BONK_WORLD_CELL_MIN, BONK_WORLD_CELL_MAX);
-        var _cellZ2 = clamp(floor((_aabb.zMax / __cellZSize) - 0.5), BONK_WORLD_CELL_MIN, BONK_WORLD_CELL_MAX);
+        var _cellX2 = clamp(floor((_aabb.xMax / __cellXSize) + 0.5), BONK_WORLD_CELL_MIN, BONK_WORLD_CELL_MAX);
+        var _cellY2 = clamp(floor((_aabb.yMax / __cellYSize) + 0.5), BONK_WORLD_CELL_MIN, BONK_WORLD_CELL_MAX);
+        var _cellZ2 = clamp(floor((_aabb.zMax / __cellZSize) + 0.5), BONK_WORLD_CELL_MIN, BONK_WORLD_CELL_MAX);
         
         __minCellX = min(__minCellX, _cellX, _cellX2);
         __maxCellX = max(__maxCellX, _cellX, _cellX2);
@@ -500,12 +500,7 @@ function BonkWorld(_xCenter, _yCenter, _zCenter, _cellXSize, _cellYSize, _cellZS
         _y = floor(clamp(_y, BONK_WORLD_CELL_MIN, BONK_WORLD_CELL_MAX));
         _z = floor(clamp(_z, BONK_WORLD_CELL_MIN, BONK_WORLD_CELL_MAX));
         
-        if (_z < 0)
-        {
-            show_debug_message("!");
-        }
-        
-        return __debugDict[$ $"{_x},{_y},{_z}"]; //struct_get_from_hash(__spatialDict, (_x + BONK_WORLD_CELL_MIN) + ((_y + BONK_WORLD_CELL_MIN) << 11) + ((_z + BONK_WORLD_CELL_MIN) << 22)) ?? _emptyArray;
+        return struct_get_from_hash(__spatialDict, (_x + BONK_WORLD_CELL_MIN) + ((_y + BONK_WORLD_CELL_MIN) << 11) + ((_z + BONK_WORLD_CELL_MIN) << 22)) ?? _emptyArray;
     }
     
     static __GetShapeArrayFromCellUnsafe = function(_x, _y, _z)
