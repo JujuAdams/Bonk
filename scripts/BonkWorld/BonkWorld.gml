@@ -38,6 +38,19 @@
 /// `.GetShapeArrayFromCell(x, y, z)`
 ///     Returns an array that contains shapes that may overlap with the specified cell.
 /// 
+/// `.GetShapeCells(shape)`
+///     Returns an array of cells that a line or ray shape intersects. This array can be empty if the
+///     line doesn't intersect any cells. The array is one-dimensional and ordered with sequential
+///     triplets for the x/y/z position of each cell.
+/// 
+/// `.GetLineCells(x1, y1, z1, x2, y2, z2)`
+///     Returns an array of cells that the line segment intersects. This array can be empty if the line
+///     doesn't intersect any cells. The array is one-dimensional and ordered with sequential triplets
+///     for the x/y/z position of each cell.
+/// 
+/// `.GetAABB()`
+///     Returns a struct containing the bounding box for the BonkWorld.
+/// 
 /// `.AddVertexBuffer(vertexBufferOrArray, vertexFormat, [matrix])`
 ///     Adds triangles from a vertex buffer as collidable shapes to the world. The vertex buffer
 ///     must be formatted as a triangle list (`pr_trianglelist`). You may provide an array of
@@ -52,6 +65,37 @@
 ///     
 ///     N.B.  This method should only be used for debugging.
 /// 
+/// `.DrawAABB([color], [wireframe=true])`
+///     Draws the axis-aligned bounding box for the BonkWorld.
+/// 
+/// `.DrawCellsShapes(array, [color], [wireframe=true])`
+///     Draws shapes that are assigned to cells taken from an array. The array of cells should be one-
+///     dimensional and structured with each cell  position appearing as consecutive x/y/z values. This
+///     is the same format as returned by `.GetShapeCells()` and `.GetLineCells()`.
+/// 
+/// `.DrawRangeVShapes(struct, [color], [wireframe=true])`
+///     Draws shapes that are assigned to cells in the range determined by the input struct. The struct
+///     should be formatted in the same way as the `.GetAABB()` getter for BonkWorld (and other Bonk
+///     shapes) i.e. it should include `.xMin` `.xMax` etc.
+/// 
+/// `.DrawAllShapes([color], [wireframe=true])`
+///     Draws all shapes in the BonkWorld.
+/// 
+/// `.DrawCellsVoxels(array, [color], [wireframe=true])`
+///     Draws cells from an array. The array should be one-dimensional and structured with each cell
+///     position appearing as consecutive x/y/z values. This is the same format as returned by
+///     `.GetShapeCells()` and `.GetLineCells()`.
+/// 
+/// `.DrawRangeVoxels(struct, [color], [wireframe=true], [checkerboard=false])`
+///     Draws cells in the range determined by the input struct. The struct should be formatted in the
+///     same way as the `.GetAABB()` getter for BonkWorld (and other Bonk shapes) i.e. it should include
+///     `.xMin` `.xMax` etc.  The checkerboard argument, when set to `true`, will skip drawing of every
+///     other voxel to improve performance.
+/// 
+/// `.DrawAllVoxels([color], [wireframe=true], [checkerboard=true])`
+///     Draws all cells (voxels) in the BonkWorld. The checkerboard argument, when set to `true`, will
+///     skip drawing of every other voxel to improve performance.
+///     
 /// @param cellXSize
 /// @param cellYSize
 /// @param cellZSize
