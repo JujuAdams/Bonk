@@ -120,6 +120,7 @@
     {"id":{"name":"oTestRotatedBox","path":"objects/oTestRotatedBox/oTestRotatedBox.yy",},},
     {"id":{"name":"oTestSphere","path":"objects/oTestSphere/oTestSphere.yy",},},
     {"id":{"name":"oTestTriangle","path":"objects/oTestTriangle/oTestTriangle.yy",},},
+    {"id":{"name":"rmTestBasics","path":"rooms/rmTestBasics/rmTestBasics.yy",},},
     {"id":{"name":"rmTestMesh","path":"rooms/rmTestMesh/rmTestMesh.yy",},},
     {"id":{"name":"rmTestPlayground","path":"rooms/rmTestPlayground/rmTestPlayground.yy",},},
     {"id":{"name":"rmTestRaycast","path":"rooms/rmTestRaycast/rmTestRaycast.yy",},},
@@ -322,6 +323,7 @@
   "resourceVersion":"2.0",
   "RoomOrderNodes":[
     {"roomId":{"name":"rmTestPlayground","path":"rooms/rmTestPlayground/rmTestPlayground.yy",},},
+    {"roomId":{"name":"rmTestBasics","path":"rooms/rmTestBasics/rmTestBasics.yy",},},
     {"roomId":{"name":"rmTestMesh","path":"rooms/rmTestMesh/rmTestMesh.yy",},},
     {"roomId":{"name":"rmTestRaycast","path":"rooms/rmTestRaycast/rmTestRaycast.yy",},},
   ],
