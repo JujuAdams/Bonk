@@ -132,15 +132,15 @@ function BonkLineHitRotatedBox(_box, _x1, _y1, _z1, _x2, _y2, _z2)
             
             if ((_t == _t1) || (_t == _t2))
             {
-                var _sign = sign(_hitX - other.x);
+                var _sign = sign(_hitI);
                 normalX = _sign*_iX;
-                normalY = _sign*_jX;
+                normalY = _sign*_iY;
                 normalZ = 0;
             }
             else if ((_t == _t3) || (_t == _t4))
             {
-                var _sign = sign(_hitY - other.y);
-                normalX = _sign*_iY;
+                var _sign = sign(_hitJ);
+                normalX = _sign*_jX;
                 normalY = _sign*_jY;
                 normalZ = 0;
             }

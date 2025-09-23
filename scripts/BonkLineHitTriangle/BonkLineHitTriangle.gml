@@ -166,7 +166,7 @@ function BonkLineHitTriangle(_triangle, _x1, _y1, _z1, _x2, _y2, _z2)
                         y = _traceY;
                         z = _traceZ;
                         
-                        var _sign = sign(_dot);
+                        var _sign = -sign(_dot);
                         normalX = _sign*_normalX;
                         normalY = _sign*_normalY;
                         normalZ = _sign*_normalZ;
