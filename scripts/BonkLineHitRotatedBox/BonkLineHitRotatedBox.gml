@@ -103,32 +103,53 @@ function BonkLineHitRotatedBox(_box, _x1, _y1, _z1, _x2, _y2, _z2)
         
         var _t = (_tMin < 0)? _tMax : _tMin;
         
-        var _pI = _i1 + _t*_dI;
-        if (abs(_pI) > 0.5*xSize)
+        var _hitI = _i1 + _t*_dI;
+        if (abs(_hitI) > 0.5*xSize)
         {
             return _nullHit;
         }
         
-        var _pJ = _j1 + _t*_dJ;
-        if (abs(_pJ) > 0.5*ySize)
+        var _hitJ = _j1 + _t*_dJ;
+        if (abs(_hitJ) > 0.5*ySize)
         {
             return _nullHit;
         }
         
-        var _pZ = _z1 + _t*_dZ;
-        if (abs(_pZ - z) > 0.5*zSize)
+        var _hitZ = _z1 + _t*_dZ;
+        if (abs(_hitZ - z) > 0.5*zSize)
         {
             return _nullHit;
         }
         
-        var _pX = x + _pI*_iX + _pJ*_jX;
-        var _pY = y + _pI*_iY + _pJ*_jY;
+        var _hitX = x + _hitI*_iX + _hitJ*_jX;
+        var _hitY = y + _hitI*_iY + _hitJ*_jY;
         
         with(_coordinate)
         {
-            x = _pX;
-            y = _pY;
-            z = _pZ;
+            x = _hitX;
+            y = _hitY;
+            z = _hitZ;
+            
+            if ((_t == _t1) || (_t == _t2))
+            {
+                var _sign = sign(_hitX - other.x);
+                normalX = _sign*_iX;
+                normalY = _sign*_jX;
+                normalZ = 0;
+            }
+            else if ((_t == _t3) || (_t == _t4))
+            {
+                var _sign = sign(_hitY - other.y);
+                normalX = _sign*_iY;
+                normalY = _sign*_jY;
+                normalZ = 0;
+            }
+            else if ((_t == _t5) || (_t == _t6))
+            {
+                normalX = 0;
+                normalY = 0;
+                normalZ = sign(_hitZ - other.z);
+            }
         }
         
         return _coordinate;

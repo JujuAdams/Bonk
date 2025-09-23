@@ -184,6 +184,11 @@ function BonkLineHitQuad(_quad, _x1, _y1, _z1, _x2, _y2, _z2)
                             x = _traceX;
                             y = _traceY;
                             z = _traceZ;
+                            
+                            var _sign = sign(_dot);
+                            normalX = _sign*_normalX;
+                            normalY = _sign*_normalY;
+                            normalZ = _sign*_normalZ;
                         }
                         
                         return _coordinate;

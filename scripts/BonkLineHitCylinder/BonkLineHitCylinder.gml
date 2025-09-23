@@ -66,6 +66,10 @@ function BonkLineHitCylinder(_cylinder, _x1, _y1, _z1, _x2, _y2, _z2)
             x = _x1;
             y = _y1;
             z = _z1 + _t*_dZ;
+            
+            normalX = 0;
+            normalY = 0;
+            normalZ = sign(z - _cylinder.z);
         }
         
         return _coordinate;
@@ -94,50 +98,73 @@ function BonkLineHitCylinder(_cylinder, _x1, _y1, _z1, _x2, _y2, _z2)
     if ((_t >= 0) && (_t <= 1) && (_z >= _cylinderZMin) && (_z <= _cylinderZMax))
     {
         //We hit the body of the cylinder
+        
+        var _hitX = _x1 + _t*_dX;
+        var _hitY = _y1 + _t*_dY;
+        
+        var _normalX = _hitX - _cylinderX;
+        var _normalY = _hitY - _cylinderY;
+        
+        var _coeff = 1 / sqrt(_normalX*_normalX + _normalY*_normalY);
+        _normalX *= _coeff;
+        _normalY *= _coeff;
+        
         with(_coordinate)
         {
-            x = _x1 + _t*_dX;
-            y = _y1 + _t*_dY;
+            x = _hitX;
+            y = _hitY;
             z = _z;
+            
+            normalX = _normalX;
+            normalY = _normalY;
+            normalZ = 0;
         }
         
         return _coordinate;
     }
-    
-    //If the ray has no change in z then it cannot hit either cap
-    if (_dZ == 0)
-    {
-        return _nullHit;
-    }
-    
-    //Find the other t value for the intersection with the cylinder
-    var _tMin = _t;
-    var _tMax = (-_b + _discriminant) / (2*_a);
-    
-    //Find the t value where the ray intersects with the cap
-    if (_z > _cylinderZMax)
-    {
-        //Top cap
-        _t = (_cylinderZMax - _z1) / _dZ;
-    }
     else
     {
-        //Bottom cap
-        _t = (_cylinderZMin - _z1) / _dZ;
+        //We probably hit a cap
+        
+        //If the ray has no change in z then it cannot hit either cap
+        if (_dZ == 0)
+        {
+            return _nullHit;
+        }
+        
+        //Find the other t value for the intersection with the cylinder
+        var _tMin = _t;
+        var _tMax = (-_b + _discriminant) / (2*_a);
+        
+        //Find the t value where the ray intersects with the cap
+        if (_z > _cylinderZMax)
+        {
+            //Top cap
+            _t = (_cylinderZMax - _z1) / _dZ;
+        }
+        else
+        {
+            //Bottom cap
+            _t = (_cylinderZMin - _z1) / _dZ;
+        }
+        
+        //If this new t value is outside the cylinder then we have no solution
+        if ((_t < _tMin) || (_t > _tMax))
+        {
+            return _nullHit;
+        }
+        
+        with(_coordinate)
+        {
+            x = _x1 + _t*_dX;
+            y = _y1 + _t*_dY;
+            z = _z1 + _t*_dZ;
+            
+            normalX = 0;
+            normalY = 0;
+            normalZ = sign(z - _cylinder.z);
+        }
+        
+        return _coordinate;
     }
-    
-    //If this new t value is outside the cylinder then we have no solution
-    if ((_t < _tMin) || (_t > _tMax))
-    {
-        return _nullHit;
-    }
-    
-    with(_coordinate)
-    {
-        x = _x1 + _t*_dX;
-        y = _y1 + _t*_dY;
-        z = _z1 + _t*_dZ;
-    }
-    
-    return _coordinate;
 }

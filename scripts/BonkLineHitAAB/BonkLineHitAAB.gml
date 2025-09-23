@@ -105,6 +105,25 @@ function BonkLineHitAAB(_aab, _x1, _y1, _z1, _x2, _y2, _z2)
             x = _hitX;
             y = _hitY;
             z = _hitZ;
+            
+            if ((_t == _t1) || (_t == _t2))
+            {
+                normalX = sign(_hitX - other.x);
+                normalY = 0;
+                normalZ = 0;
+            }
+            else if ((_t == _t3) || (_t == _t4))
+            {
+                normalX = 0;
+                normalY = sign(_hitY - other.y);
+                normalZ = 0;
+            }
+            else if ((_t == _t5) || (_t == _t6))
+            {
+                normalX = 0;
+                normalY = 0;
+                normalZ = sign(_hitZ - other.z);
+            }
         }
         
         return _coordinate;
