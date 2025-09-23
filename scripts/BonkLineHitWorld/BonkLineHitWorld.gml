@@ -10,8 +10,12 @@
 /// `.x` `.y` `.z`
 ///     The point of impact. If there is no collision, all three variables will be set to `0`.
 /// 
-/// N.B. The returned struct is statically allocated. Reusing this function may cause the same struct
-///      to be returned.
+/// `.normalX` `.normalY` `.normalZ`
+///     The normal of the surface at the point of impact. If there is no collision, a normal of
+///     `{0, 0, 1}` will be returned.
+/// 
+/// N.B. The returned struct is statically allocated. Reusing this function may cause the same
+///      struct to be returned.
 /// 
 /// @param world
 /// @param x1
