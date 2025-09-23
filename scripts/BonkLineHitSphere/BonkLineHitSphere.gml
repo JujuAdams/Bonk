@@ -10,8 +10,12 @@
 /// `.x` `.y` `.z`
 ///     The point of impact. If there is no collision, all three variables will be set to `0`.
 /// 
-/// N.B. The returned struct is statically allocated. Reusing this function may cause the same struct
-///      to be returned.
+/// `.normalX` `.normalY` `.normalZ`
+///     The normal of the surface at the point of impact. If there is no collision, a normal of
+///     `{0, 0, 1}` will be returned.
+/// 
+/// N.B. The returned struct is statically allocated. Reusing this function may cause the same
+///      struct to be returned.
 /// 
 /// @param sphere
 /// @param x1
@@ -61,11 +65,28 @@ function BonkLineHitSphere(_sphere, _x1, _y1, _z1, _x2, _y2, _z2)
             return _nullHit;
         }
         
+        var _hitX = _x1 + _t*_dX;
+        var _hitY = _y1 + _t*_dY;
+        var _hitZ = _z1 + _t*_dZ;
+        
+        var _normalX = _hitX - _sphereX;
+        var _normalY = _hitY - _sphereY;
+        var _normalZ = _hitZ - _sphereZ;
+        
+        var _coeff = 1/sqrt(_normalX*_normalX + _normalY*_normalY + _normalZ*_normalZ);
+        _normalX *= _coeff;
+        _normalY *= _coeff;
+        _normalZ *= _coeff;
+        
         with(_coordinate)
         {
-            x = _x1 + _t*_dX;
-            y = _y1 + _t*_dY;
-            z = _z1 + _t*_dZ;
+            x = _hitX;
+            y = _hitY;
+            z = _hitZ;
+            
+            normalX = _normalX;
+            normalY = _normalY;
+            normalZ = _normalZ;
         }
         
         return _coordinate;

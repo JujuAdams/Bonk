@@ -60,11 +60,6 @@
 ///     N.B.  This method is slow in itself and, in general, you should avoid mesh collisions as
 ///           much as possible because collisions with triangles is also slow.
 /// 
-/// `.Draw([wireframe])`
-///     Draws all shapes added to the world. This uses Ugg, please see https://github.com/jujuadams/Ugg
-///     
-///     N.B.  This method should only be used for debugging.
-/// 
 /// `.DrawAABB([color], [wireframe=true])`
 ///     Draws the axis-aligned bounding box for the BonkWorld.
 /// 
@@ -73,7 +68,7 @@
 ///     dimensional and structured with each cell  position appearing as consecutive x/y/z values. This
 ///     is the same format as returned by `.GetCellsFromShape()` and `.GetCellsFromLine()`.
 /// 
-/// `.DrawRangeVShapes(struct, [color], [wireframe=true])`
+/// `.DrawShapesFromRange(struct, [color], [wireframe=true])`
 ///     Draws shapes that are assigned to cells in the range determined by the input struct. The struct
 ///     should be formatted in the same way as the `.GetAABB()` getter for BonkWorld (and other Bonk
 ///     shapes) i.e. it should include `.xMin` `.xMax` etc.

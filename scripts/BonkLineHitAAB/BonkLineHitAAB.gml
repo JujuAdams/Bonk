@@ -10,8 +10,12 @@
 /// `.x` `.y` `.z`
 ///     The point of impact. If there is no collision, all three variables will be set to `0`.
 /// 
-/// N.B. The returned struct is statically allocated. Reusing this function may cause the same struct
-///      to be returned.
+/// `.normalX` `.normalY` `.normalZ`
+///     The normal of the surface at the point of impact. If there is no collision, a normal of
+///     `{0, 0, 1}` will be returned.
+/// 
+/// N.B. The returned struct is statically allocated. Reusing this function may cause the same
+///      struct to be returned.
 /// 
 /// @param aab
 /// @param x1
@@ -105,6 +109,25 @@ function BonkLineHitAAB(_aab, _x1, _y1, _z1, _x2, _y2, _z2)
             x = _hitX;
             y = _hitY;
             z = _hitZ;
+            
+            if ((_t == _t1) || (_t == _t2))
+            {
+                normalX = sign(_hitX - other.x);
+                normalY = 0;
+                normalZ = 0;
+            }
+            else if ((_t == _t3) || (_t == _t4))
+            {
+                normalX = 0;
+                normalY = sign(_hitY - other.y);
+                normalZ = 0;
+            }
+            else if ((_t == _t5) || (_t == _t6))
+            {
+                normalX = 0;
+                normalY = 0;
+                normalZ = sign(_hitZ - other.z);
+            }
         }
         
         return _coordinate;

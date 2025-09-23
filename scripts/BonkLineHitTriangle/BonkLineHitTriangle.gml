@@ -10,8 +10,12 @@
 /// `.x` `.y` `.z`
 ///     The point of impact. If there is no collision, all three variables will be set to `0`.
 /// 
-/// N.B. The returned struct is statically allocated. Reusing this function may cause the same struct
-///      to be returned.
+/// `.normalX` `.normalY` `.normalZ`
+///     The normal of the surface at the point of impact. If there is no collision, a normal of
+///     `{0, 0, 1}` will be returned.
+/// 
+/// N.B. The returned struct is statically allocated. Reusing this function may cause the same
+///      struct to be returned.
 /// 
 /// @param triangle
 /// @param x1
@@ -24,7 +28,7 @@
 function BonkLineHitTriangle(_triangle, _x1, _y1, _z1, _x2, _y2, _z2)
 {
     static _nullHit = __Bonk().__nullHit;
-    static _coordinate     = new __BonkClassHit();
+    static _coordinate = new __BonkClassHit();
     
     with(_triangle)
     {
@@ -165,6 +169,11 @@ function BonkLineHitTriangle(_triangle, _x1, _y1, _z1, _x2, _y2, _z2)
                         x = _traceX;
                         y = _traceY;
                         z = _traceZ;
+                        
+                        var _sign = -sign(_dot);
+                        normalX = _sign*_normalX;
+                        normalY = _sign*_normalY;
+                        normalZ = _sign*_normalZ;
                     }
                 
                     return _coordinate;

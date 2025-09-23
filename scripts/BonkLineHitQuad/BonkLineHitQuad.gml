@@ -10,8 +10,12 @@
 /// `.x` `.y` `.z`
 ///     The point of impact. If there is no collision, all three variables will be set to `0`.
 /// 
-/// N.B. The returned struct is statically allocated. Reusing this function may cause the same struct
-///      to be returned.
+/// `.normalX` `.normalY` `.normalZ`
+///     The normal of the surface at the point of impact. If there is no collision, a normal of
+///     `{0, 0, 1}` will be returned.
+/// 
+/// N.B. The returned struct is statically allocated. Reusing this function may cause the same
+///      struct to be returned.
 /// 
 /// @param quad
 /// @param x1
@@ -160,9 +164,9 @@ function BonkLineHitQuad(_quad, _x1, _y1, _z1, _x2, _y2, _z2)
                                _normalX, _normalY, _normalZ) > 0)
             {
                 //Check the reference point is on the inner side of the edge 3->4
-                _vX = _traceX - _quadX4;
-                _vY = _traceY - _quadY4;
-                _vZ = _traceZ - _quadZ4;
+                _vX = _traceX - _quadX3;
+                _vY = _traceY - _quadY3;
+                _vZ = _traceZ - _quadZ3;
                 
                 if (dot_product_3d(_vZ*_dY34 - _vY*_dZ34,
                                    _vX*_dZ34 - _vZ*_dX34,
@@ -184,6 +188,11 @@ function BonkLineHitQuad(_quad, _x1, _y1, _z1, _x2, _y2, _z2)
                             x = _traceX;
                             y = _traceY;
                             z = _traceZ;
+                            
+                            var _sign = -sign(_dot);
+                            normalX = _sign*_normalX;
+                            normalY = _sign*_normalY;
+                            normalZ = _sign*_normalZ;
                         }
                         
                         return _coordinate;
