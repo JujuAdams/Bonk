@@ -160,9 +160,9 @@ function BonkLineHitQuad(_quad, _x1, _y1, _z1, _x2, _y2, _z2)
                                _normalX, _normalY, _normalZ) > 0)
             {
                 //Check the reference point is on the inner side of the edge 3->4
-                _vX = _traceX - _quadX4;
-                _vY = _traceY - _quadY4;
-                _vZ = _traceZ - _quadZ4;
+                _vX = _traceX - _quadX3;
+                _vY = _traceY - _quadY3;
+                _vZ = _traceZ - _quadZ3;
                 
                 if (dot_product_3d(_vZ*_dY34 - _vY*_dZ34,
                                    _vX*_dZ34 - _vZ*_dX34,
