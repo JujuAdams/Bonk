@@ -256,7 +256,9 @@ function BonkWorld(_cellXSize, _cellYSize, _cellZSize, _x = 0, _y = 0, _z = 0) c
                     with(_reaction.collisionReaction)
                     {
                         var _depth = dX*dX + dY*dY + dZ*dZ;
-                        if ((_depth > _largestDepth) && (_reaction.pushOutType >= _returnReaction.pushOutType))
+                        
+                        if ((_reaction.pushOutType > _returnReaction.pushOutType)
+                        ||  ((_depth > _largestDepth) && (_reaction.pushOutType == _returnReaction.pushOutType)))
                         {
                             _largestDepth = _depth;
                             _returnReaction = _reaction.Clone();
@@ -302,7 +304,9 @@ function BonkWorld(_cellXSize, _cellYSize, _cellZSize, _x = 0, _y = 0, _z = 0) c
                                     with(_reaction.collisionReaction)
                                     {
                                         var _depth = dX*dX + dY*dY + dZ*dZ;
-                                        if ((_depth > _largestDepth) && (_reaction.pushOutType >= _returnReaction.pushOutType))
+                                        
+                                        if ((_reaction.pushOutType > _returnReaction.pushOutType)
+                                        ||  ((_depth > _largestDepth) && (_reaction.pushOutType == _returnReaction.pushOutType)))
                                         {
                                             _largestDepth = _depth;
                                             _returnReaction = _reaction.Clone();

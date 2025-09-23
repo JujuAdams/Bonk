@@ -33,7 +33,7 @@ velocity.zSpeed -= gravAccel;
 var _pushOutReaction = BonkMoveAndCollide(shape, velocity, world, 40);
 if (_pushOutReaction.pushOutType == BONK_PUSH_OUT_GRIPPY)
 {
-    onGroundFrames = 5;
+    onGroundFrames = 30;
 }
 
 if (onGroundFrames > 0)
