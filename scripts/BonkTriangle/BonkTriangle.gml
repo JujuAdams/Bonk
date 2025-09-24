@@ -92,6 +92,14 @@ function BonkTriangle(_x1, _y1, _z1, _x2, _y2, _z2, _x3, _y3, _z3) : __BonkClass
     y3 = _y3;
     z3 = _z3;
     
+    __instanceXY = instance_create_depth(_x1, _y1, 0, __BonkShapeSurrogateXY);
+    __instanceXY.__shape = self;
+    __instanceXY.sprite_index = __BonkMaskAAB;
+    
+    __instanceXZ = instance_create_depth(_x1, _z1, 0, __BonkShapeSurrogateXZ);
+    __instanceXZ.__shape = self;
+    __instanceXZ.sprite_index = __BonkMaskAAB;
+    
     Refresh();
     
     
@@ -131,6 +139,18 @@ function BonkTriangle(_x1, _y1, _z1, _x2, _y2, _z2, _x3, _y3, _z3) : __BonkClass
             normalY *= _coeff;
             normalZ *= _coeff;
         }
+        
+        var _bbox = GetAABB();
+        
+        __instanceXY.x = 0.5*(_bbox.xMin + _bbox.xMax);
+        __instanceXY.y = 0.5*(_bbox.yMin + _bbox.yMax);
+        __instanceXY.image_xscale = (_bbox.xMax - _bbox.xMin) / __BONK_MASK_SIZE;
+        __instanceXY.image_yscale = (_bbox.yMax - _bbox.yMin) / __BONK_MASK_SIZE;
+        
+        __instanceXZ.x = 0.5*(_bbox.xMin + _bbox.xMax);
+        __instanceXZ.y = 0.5*(_bbox.zMin + _bbox.zMax);
+        __instanceXZ.image_xscale = (_bbox.xMax - _bbox.xMin) / __BONK_MASK_SIZE;
+        __instanceXZ.image_yscale = (_bbox.zMax - _bbox.zMin) / __BONK_MASK_SIZE;
     }
     
     static Draw = function(_color = undefined, _wireframe = undefined)

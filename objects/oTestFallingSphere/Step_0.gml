@@ -4,9 +4,7 @@ var _z = shape.z;
 
 zSpeed -= 1;
 
-shape.x += xSpeed;
-shape.y += ySpeed;
-shape.z += zSpeed;
+shape.AddPosition(xSpeed, ySpeed, zSpeed);
 
 with(oTestFloor)
 {

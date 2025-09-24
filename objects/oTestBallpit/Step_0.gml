@@ -6,9 +6,7 @@ repeat(array_length(sphereArray))
     var _shapeA = sphereArray[_j];
     with(_shapeA)
     {
-        x += xSpeed;
-        y += ySpeed;
-        z += zSpeed;
+        AddPosition(xSpeed, ySpeed, zSpeed);
     }
     
     var _i = _j+1;

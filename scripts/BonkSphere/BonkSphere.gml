@@ -94,6 +94,18 @@ function BonkSphere(_x, _y, _z, _radius) : __BonkClassShared() constructor
     
     radius = _radius;
     
+    __instanceXY = instance_create_depth(_x, _y, 0, __BonkShapeSurrogateXY);
+    __instanceXY.__shape = self;
+    __instanceXY.sprite_index = __BonkMaskCircle;
+    __instanceXY.image_xscale = 2*_radius / __BONK_MASK_SIZE;
+    __instanceXY.image_yscale = 2*_radius / __BONK_MASK_SIZE;
+    
+    __instanceXZ = instance_create_depth(_x, _y, 0, __BonkShapeSurrogateXZ);
+    __instanceXZ.__shape = self;
+    __instanceXZ.sprite_index = __BonkMaskCircle;
+    __instanceXZ.image_xscale = 2*_radius / __BONK_MASK_SIZE;
+    __instanceXZ.image_yscale = 2*_radius / __BONK_MASK_SIZE;
+    
     
     
     static __SetPositionFree = function(_x = x, _y = y, _z = z)
@@ -101,6 +113,11 @@ function BonkSphere(_x, _y, _z, _radius) : __BonkClassShared() constructor
         x = _x;
         y = _y;
         z = _z;
+        
+        __instanceXY.x = _x;
+        __instanceXY.y = _y;
+        __instanceXZ.x = _x;
+        __instanceXZ.y = _z;
         
         return self;
     }
@@ -113,6 +130,11 @@ function BonkSphere(_x, _y, _z, _radius) : __BonkClassShared() constructor
         y = _y;
         z = _z;
         
+        __instanceXY.x = _x;
+        __instanceXY.y = _y;
+        __instanceXZ.x = _x;
+        __instanceXZ.y = _z;
+        
         return self;
     }
     
@@ -121,6 +143,11 @@ function BonkSphere(_x, _y, _z, _radius) : __BonkClassShared() constructor
     static SetRadius = function(_radius = radius)
     {
         radius = _radius;
+        
+        __instanceXY.image_xscale = 2*_radius / __BONK_MASK_SIZE;
+        __instanceXY.image_yscale = 2*_radius / __BONK_MASK_SIZE;
+        __instanceXZ.image_xscale = 2*_radius / __BONK_MASK_SIZE;
+        __instanceXZ.image_yscale = 2*_radius / __BONK_MASK_SIZE;
         
         return self;
     }

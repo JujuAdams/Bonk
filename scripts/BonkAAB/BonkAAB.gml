@@ -90,6 +90,18 @@ function BonkAAB(_x, _y, _z, _xSize, _ySize, _zSize) : __BonkClassShared() const
     ySize = _ySize;
     zSize = _zSize;
     
+    __instanceXY = instance_create_depth(_x, _y, 0, __BonkShapeSurrogateXY);
+    __instanceXY.__shape = self;
+    __instanceXY.sprite_index = __BonkMaskAAB;
+    __instanceXY.image_xscale = _xSize / __BONK_MASK_SIZE;
+    __instanceXY.image_yscale = _ySize / __BONK_MASK_SIZE;
+    
+    __instanceXZ = instance_create_depth(_x, _z, 0, __BonkShapeSurrogateXZ);
+    __instanceXZ.__shape = self;
+    __instanceXZ.sprite_index = __BonkMaskAAB;
+    __instanceXZ.image_xscale = _xSize / __BONK_MASK_SIZE;
+    __instanceXZ.image_yscale = _zSize / __BONK_MASK_SIZE;
+    
     
     
     static __SetPositionFree = function(_x = x, _y = y, _z = z)
@@ -97,6 +109,11 @@ function BonkAAB(_x, _y, _z, _xSize, _ySize, _zSize) : __BonkClassShared() const
         x = _x;
         y = _y;
         z = _z;
+        
+        __instanceXY.x = _x;
+        __instanceXY.y = _y;
+        __instanceXZ.x = _x;
+        __instanceXZ.y = _z;
         
         return self;
     }
@@ -108,6 +125,11 @@ function BonkAAB(_x, _y, _z, _xSize, _ySize, _zSize) : __BonkClassShared() const
         x = _x;
         y = _y;
         z = _z;
+        
+        __instanceXY.x = _x;
+        __instanceXY.y = _y;
+        __instanceXZ.x = _x;
+        __instanceXZ.y = _z;
         
         return self;
     }
@@ -128,6 +150,11 @@ function BonkAAB(_x, _y, _z, _xSize, _ySize, _zSize) : __BonkClassShared() const
         xSize = _x;
         ySize = _y;
         zSize = _z;
+        
+        __instanceXY.image_xscale = _x / __BONK_MASK_SIZE;
+        __instanceXY.image_yscale = _y / __BONK_MASK_SIZE;
+        __instanceXZ.image_xscale = _x / __BONK_MASK_SIZE;
+        __instanceXZ.image_yscale = _z / __BONK_MASK_SIZE;
         
         return self;
     }

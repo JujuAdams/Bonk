@@ -95,6 +95,19 @@ function BonkRotatedBox(_x, _y, _z, _xSize, _ySize, _zSize, _zRotation) : __Bonk
     
     zRotation = _zRotation;
     
+    __instanceXY = instance_create_depth(_x, _y, 0, __BonkShapeSurrogateXY);
+    __instanceXY.__shape = self;
+    __instanceXY.sprite_index = __BonkMaskRotatedBox;
+    __instanceXY.image_xscale = _xSize / __BONK_MASK_SIZE;
+    __instanceXY.image_yscale = _ySize / __BONK_MASK_SIZE;
+    __instanceXY.image_angle  = _zRotation;
+    
+    __instanceXZ = instance_create_depth(_x, _z, 0, __BonkShapeSurrogateXZ);
+    __instanceXZ.__shape = self;
+    __instanceXZ.sprite_index = __BonkMaskAAB;
+    __instanceXZ.image_xscale = _xSize / __BONK_MASK_SIZE;
+    __instanceXZ.image_yscale = _zSize / __BONK_MASK_SIZE;
+    
     
     
     static __SetPositionFree = function(_x = x, _y = y, _z = z)
@@ -102,6 +115,11 @@ function BonkRotatedBox(_x, _y, _z, _xSize, _ySize, _zSize, _zRotation) : __Bonk
         x = _x;
         y = _y;
         z = _z;
+        
+        __instanceXY.x = _x;
+        __instanceXY.y = _y;
+        __instanceXZ.x = _x;
+        __instanceXZ.y = _z;
         
         return self;
     }
@@ -114,6 +132,11 @@ function BonkRotatedBox(_x, _y, _z, _xSize, _ySize, _zSize, _zRotation) : __Bonk
         y = _y;
         z = _z;
         
+        __instanceXY.x = _x;
+        __instanceXY.y = _y;
+        __instanceXZ.x = _x;
+        __instanceXZ.y = _z;
+        
         return self;
     }
     
@@ -125,12 +148,19 @@ function BonkRotatedBox(_x, _y, _z, _xSize, _ySize, _zSize, _zRotation) : __Bonk
         ySize = _y;
         zSize = _z;
         
+        __instanceXY.image_xscale = _x / __BONK_MASK_SIZE;
+        __instanceXY.image_yscale = _y / __BONK_MASK_SIZE;
+        __instanceXZ.image_xscale = _x / __BONK_MASK_SIZE;
+        __instanceXZ.image_yscale = _z / __BONK_MASK_SIZE;
+        
         return self;
     }
     
     static SetRotation = function(_zRotation = zRotation)
     {
         zRotation = _zRotation;
+        
+        __instanceXY.image_angle = _zRotation;
         
         return self;
     }

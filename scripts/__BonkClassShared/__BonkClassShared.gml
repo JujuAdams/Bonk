@@ -3,8 +3,14 @@
 function __BonkClassShared() constructor
 {
     __world = undefined;
+    __instanceXY = noone;
     
     
+    
+    static AddPosition = function(_dX, _dY, _dZ)
+    {
+        SetPosition(x + _dX, y + _dY, z + _dZ);
+    }
     
     static Inside = function(_otherShape)
     {
@@ -45,16 +51,14 @@ function __BonkClassShared() constructor
                 {
                     //If the slope is shallow enough, just move upwards
                     //This movement is approximate but good enough
-                    z += _distance;
+                    AddPosition(0, 0, _distance);
                     
                     _reaction.pushOutType = BONK_PUSH_OUT_GRIPPY;
                 }
                 else
                 {
                     //Otherwise move out as usual which will typically slide the subject down slopes
-                    x += _dX;
-                    y += _dY;
-                    z += _dZ;
+                    AddPosition(_dX, _dY, _dZ);
                     
                     _reaction.pushOutType = BONK_PUSH_OUT_SLIPPERY;
                 }
