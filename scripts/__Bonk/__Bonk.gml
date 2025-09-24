@@ -6,6 +6,7 @@
 
 show_debug_message("Welcome to Bonk by Juju Adams! This is version " + BONK_VERSION + " " + BONK_DATE);
 
+#macro __BONK_MIN_THICKNESS  1
 #macro __BONK_MASK_SIZE  99
 
 

@@ -39,29 +39,26 @@ with(shape.__instanceXY)
                         __BonkShapeSurrogateXY, _listXY, false);
 }
 
-with(shape.__instanceXZ)
-{
-    instance_place_list(x + other.velocity.xSpeed,
-                        y + other.velocity.zSpeed,
-                        __BonkShapeSurrogateXZ, _listXZ, false);
-}
+//with(shape.__instanceXZ)
+//{
+//    instance_place_list(x + other.velocity.xSpeed,
+//                        y + other.velocity.zSpeed,
+//                        __BonkShapeSurrogateXZ, _listXZ, false);
+//}
 
 var _i = 0;
 repeat(ds_list_size(_listXY))
 {
     var _shape = _listXY[| _i].__shape;
     
-    var _index = ds_list_find_index(_listXZ, _shape.__instanceXZ);
-    if (_index >= 0)
+    //var _index = ds_list_find_index(_listXZ, _shape.__instanceXZ);
+    //if (_index >= 0)
     {
         array_push(_array, _shape);
     }
     
     ++_i;
 }
-
-ds_list_destroy(_listXY);
-ds_list_destroy(_listXZ);
 
 var _pushOutReaction = BonkMoveAndCollide(shape, velocity, _array, 40);
 if (_pushOutReaction.pushOutType == BONK_PUSH_OUT_GRIPPY)
@@ -80,3 +77,6 @@ line.z1 = shape.z + 0.5*shape.height;
 line.x2 = shape.x;
 line.y2 = shape.y;
 line.z2 = shape.z - 0.5*shape.height - 50;
+
+ds_list_destroy(_listXY);
+ds_list_destroy(_listXZ);
