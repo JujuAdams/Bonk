@@ -639,13 +639,13 @@ function BonkWorld(_cellXSize, _cellYSize, _cellZSize, _x = 0, _y = 0, _z = 0) c
                     var _b = matrix_transform_vertex(_matrix, _x2, _y2, _z2, 1);
                     var _c = matrix_transform_vertex(_matrix, _x3, _y3, _z3, 1);
                     
-                    var _bonkTri = new BonkTriangle(_a[0], _a[1], _a[2],
+                    var _bonkTri = new BonkConstrTriangle(_a[0], _a[1], _a[2],
                                                     _b[0], _b[1], _b[2],
                                                     _c[0], _c[1], _c[2]);
                 }
                 else
                 {
-                    var _bonkTri = new BonkTriangle(_x1, _y1, _z1,
+                    var _bonkTri = new BonkConstrTriangle(_x1, _y1, _z1,
                                                     _x2, _y2, _z2,
                                                     _x3, _y3, _z3);
                 }

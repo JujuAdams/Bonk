@@ -1,1 +1,1 @@
-shape = new BonkSphere(x, y, 32,   32);
+shape = new BonkConstrSphere(x, y, 32,   32);

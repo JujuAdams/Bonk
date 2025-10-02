@@ -59,7 +59,7 @@
 /// @param height
 /// @param radius
 
-function BonkCylinder(_x, _y, _z, _height, _radius) : __BonkClassShared() constructor
+function BonkConstrCylinder(_x, _y, _z, _height, _radius) : __BonkClassShared() constructor
 {
     static bonkType = BONK_TYPE_CYLINDER;
     static lineHitFunction = BonkLineHitCylinder;

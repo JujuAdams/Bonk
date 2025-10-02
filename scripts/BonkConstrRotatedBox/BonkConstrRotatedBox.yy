@@ -1,9 +1,9 @@
 {
   "$GMScript":"v1",
-  "%Name":"BonkAAB",
+  "%Name":"BonkConstrRotatedBox",
   "isCompatibility":false,
   "isDnD":false,
-  "name":"BonkAAB",
+  "name":"BonkConstrRotatedBox",
   "parent":{
     "name":"Shapes",
     "path":"folders/Bonk/Constructors/Shapes.yy",

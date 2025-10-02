@@ -1,2 +1,2 @@
-shape = new BonkRotatedBox(x, y, 32,
+shape = new BonkConstrRotatedBox(x, y, 32,
                            sprite_width, sprite_height, 64,   image_angle);
