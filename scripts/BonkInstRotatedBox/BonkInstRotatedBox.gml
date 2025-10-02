@@ -10,7 +10,7 @@
 /// @param [objectXY]
 /// @param [objectXZ]
 
-function BonkInstAAB(_x, _y, _z, _xSize, _ySize, _zSize, _zRotation, _objectXY = BonkMaskXY, _objectXZ = __BonkMaskXZ)
+function BonkInstRotatedBox(_x, _y, _z, _xSize, _ySize, _zSize, _zRotation, _objectXY = BonkMaskXY, _objectXZ = __BonkMaskXZ)
 {
     with(instance_create_depth(_x, _y, 0, _objectXY))
     {

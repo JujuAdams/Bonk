@@ -3,7 +3,9 @@
 /// @param xCenter
 /// @param yCenter
 /// @param zCenter
-/// @param radius
+/// @param xSize
+/// @param ySize
+/// @param zSize
 /// @param [objectXY]
 /// @param [objectXZ]
 
@@ -11,32 +13,26 @@ function BonkInstAAB(_x, _y, _z, _xSize, _ySize, _zSize, _objectXY = BonkMaskXY,
 {
     with(instance_create_depth(_x, _y, 0, _objectXY))
     {
-        bonkType = BONK_TYPE_SPHERE;
-        lineHitFunction = BonkLineHitSphere;
+        bonkType = BONK_TYPE_AAB;
+        lineHitFunction = BonkLineHitAAB;
         
         static _collideFuncLookup = (function()
         {
             var _array = array_create(BONK_NUMBER_OF_TYPES, undefined);
-            _array[@ BONK_TYPE_AAB     ] = BonkSphereCollideAAB;
-            _array[@ BONK_TYPE_OBB     ] = BonkSphereCollideRotatedBox;
-            _array[@ BONK_TYPE_CAPSULE ] = BonkSphereCollideCapsule;
-            _array[@ BONK_TYPE_CYLINDER] = BonkSphereCollideCylinder;
-            _array[@ BONK_TYPE_QUAD    ] = BonkSphereCollideQuad;
-            _array[@ BONK_TYPE_SPHERE  ] = BonkSphereCollideSphere;
-            _array[@ BONK_TYPE_TRIANGLE] = BonkSphereCollideTriangle;
+            _array[@ BONK_TYPE_AAB     ] = BonkAABCollideAAB;
+            _array[@ BONK_TYPE_CAPSULE ] = BonkAABCollideCapsule;
+            _array[@ BONK_TYPE_CYLINDER] = BonkAABCollideCylinder;
+            _array[@ BONK_TYPE_SPHERE  ] = BonkAABCollideSphere;
             return _array;
         })();
         
         static _insideFuncLookup = (function()
         {
             var _array = array_create(BONK_NUMBER_OF_TYPES, undefined);
-            _array[@ BONK_TYPE_AAB     ] = BonkSphereInsideAAB;
-            _array[@ BONK_TYPE_OBB     ] = BonkSphereInsideRotatedBox;
-            _array[@ BONK_TYPE_CAPSULE ] = BonkSphereInsideCapsule;
-            _array[@ BONK_TYPE_CYLINDER] = BonkSphereInsideCylinder;
-            _array[@ BONK_TYPE_QUAD    ] = BonkSphereInsideQuad;
-            _array[@ BONK_TYPE_SPHERE  ] = BonkSphereInsideSphere;
-            _array[@ BONK_TYPE_TRIANGLE] = BonkSphereInsideTriangle;
+            _array[@ BONK_TYPE_AAB     ] = BonkAABInsideAAB;
+            _array[@ BONK_TYPE_CAPSULE ] = BonkAABInsideCapsule;
+            _array[@ BONK_TYPE_CYLINDER] = BonkAABInsideCylinder;
+            _array[@ BONK_TYPE_SPHERE  ] = BonkAABInsideSphere;
             return _array;
         })();
         
