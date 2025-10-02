@@ -1,8 +1,8 @@
 // Feather disable all
 
-/// @param x
-/// @param y
-/// @param z
+/// @param xCenter
+/// @param yCenter
+/// @param zCenter
 /// @param radius
 /// @param [objectXY]
 /// @param [objectYZ]
@@ -91,11 +91,11 @@ function BonkInstSphere(_x, _y, _z, _radius, _objectXY = BonkMaskXY, _objectXZ =
         GetAABB = function()
         {
             return {
-                xMin: x - radius,
-                yMin: y - radius,
+                xMin: bbox_left,
+                yMin: bbox_top,
                 zMin: z - radius,
-                xMax: x + radius,
-                yMax: y + radius,
+                xMax: bbox_right,
+                yMax: bbox_bottom,
                 zMax: z + radius,
             };
         }

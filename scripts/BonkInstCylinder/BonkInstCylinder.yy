@@ -1,0 +1,13 @@
+{
+  "$GMScript":"v1",
+  "%Name":"BonkInstCylinder",
+  "isCompatibility":false,
+  "isDnD":false,
+  "name":"BonkInstCylinder",
+  "parent":{
+    "name":"Instances",
+    "path":"folders/Bonk/Instances.yy",
+  },
+  "resourceType":"GMScript",
+  "resourceVersion":"2.0",
+}

@@ -3,11 +3,14 @@
 /// @param xCenter
 /// @param yCenter
 /// @param zCenter
-/// @param radius
+/// @param xSize
+/// @param ySize
+/// @param zSize
+/// @param zRotation
 /// @param [objectXY]
 /// @param [objectXZ]
 
-function BonkInstAAB(_x, _y, _z, _xSize, _ySize, _zSize, _objectXY = BonkMaskXY, _objectXZ = __BonkMaskXZ)
+function BonkInstAAB(_x, _y, _z, _xSize, _ySize, _zSize, _zRotation, _objectXY = BonkMaskXY, _objectXZ = __BonkMaskXZ)
 {
     with(instance_create_depth(_x, _y, 0, _objectXY))
     {
@@ -17,26 +20,18 @@ function BonkInstAAB(_x, _y, _z, _xSize, _ySize, _zSize, _objectXY = BonkMaskXY,
         static _collideFuncLookup = (function()
         {
             var _array = array_create(BONK_NUMBER_OF_TYPES, undefined);
-            _array[@ BONK_TYPE_AAB     ] = BonkSphereCollideAAB;
-            _array[@ BONK_TYPE_OBB     ] = BonkSphereCollideRotatedBox;
-            _array[@ BONK_TYPE_CAPSULE ] = BonkSphereCollideCapsule;
-            _array[@ BONK_TYPE_CYLINDER] = BonkSphereCollideCylinder;
-            _array[@ BONK_TYPE_QUAD    ] = BonkSphereCollideQuad;
-            _array[@ BONK_TYPE_SPHERE  ] = BonkSphereCollideSphere;
-            _array[@ BONK_TYPE_TRIANGLE] = BonkSphereCollideTriangle;
+            _array[@ BONK_TYPE_CAPSULE ] = BonkRotatedBoxCollideCapsule;
+            _array[@ BONK_TYPE_CYLINDER] = BonkRotatedBoxCollideCylinder;
+            _array[@ BONK_TYPE_SPHERE  ] = BonkRotatedBoxCollideSphere;
             return _array;
         })();
         
         static _insideFuncLookup = (function()
         {
             var _array = array_create(BONK_NUMBER_OF_TYPES, undefined);
-            _array[@ BONK_TYPE_AAB     ] = BonkSphereInsideAAB;
-            _array[@ BONK_TYPE_OBB     ] = BonkSphereInsideRotatedBox;
-            _array[@ BONK_TYPE_CAPSULE ] = BonkSphereInsideCapsule;
-            _array[@ BONK_TYPE_CYLINDER] = BonkSphereInsideCylinder;
-            _array[@ BONK_TYPE_QUAD    ] = BonkSphereInsideQuad;
-            _array[@ BONK_TYPE_SPHERE  ] = BonkSphereInsideSphere;
-            _array[@ BONK_TYPE_TRIANGLE] = BonkSphereInsideTriangle;
+            _array[@ BONK_TYPE_CAPSULE ] = BonkRotatedBoxInsideCapsule;
+            _array[@ BONK_TYPE_CYLINDER] = BonkRotatedBoxInsideCylinder;
+            _array[@ BONK_TYPE_SPHERE  ] = BonkRotatedBoxInsideSphere;
             return _array;
         })();
         
@@ -51,11 +46,14 @@ function BonkInstAAB(_x, _y, _z, _xSize, _ySize, _zSize, _objectXY = BonkMaskXY,
         ySize = _ySize;
         zSize = _zSize;
         
+        zRotation = _zRotation;
         
         
-        sprite_index = BonkMaskAAB;
+        
+        sprite_index = BonkMaskRotatedBox;
         image_xscale = BONK_MASK_SIZE / _xSize;
         image_yscale = BONK_MASK_SIZE / _ySize;
+        image_angle  = _zRotation;
         
         if (BONK_INSTANCE_XZ)
         {
@@ -65,7 +63,7 @@ function BonkInstAAB(_x, _y, _z, _xSize, _ySize, _zSize, _objectXY = BonkMaskXY,
                 __instanceXY = other;
                 
                 sprite_index = BonkMaskAAB;
-                image_xscale = BONK_MASK_SIZE / _xSize;
+                image_xscale = BONK_MASK_SIZE / max(abs(_xSize*dcos(_zRotation)), abs(_ySize*dsin(_zRotation)));
                 image_yscale = BONK_MASK_SIZE / _zSize;
             }
         }
@@ -104,6 +102,20 @@ function BonkInstAAB(_x, _y, _z, _xSize, _ySize, _zSize, _objectXY = BonkMaskXY,
         
             return self;
         }
+    
+        static SetRotation = function(_zRotation = zRotation)
+        {
+            zRotation = _zRotation;
+            
+            image_angle = _zRotation;
+            
+            if (BONK_INSTANCE_XZ)
+            {
+                __instanceXZ.image_xscale = BONK_MASK_SIZE / max(abs(xSize*dcos(_zRotation)), abs(ySize*dsin(_zRotation)));
+            }
+            
+            return self;
+        }
         
         GetAABB = function()
         {
@@ -120,7 +132,7 @@ function BonkInstAAB(_x, _y, _z, _xSize, _ySize, _zSize, _objectXY = BonkMaskXY,
         Draw = function(_color = undefined, _wireframe = undefined)
         {
             __BONK_VERIFY_UGG
-            UggAABB(x, y, z, xSize, ySize, zSize, _color, _wireframe);
+            UggRotatedBox(x, y, z, xSize, ySize, zSize, zRotation, _color, _wireframe);
         }
         
         

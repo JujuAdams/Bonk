@@ -8,36 +8,32 @@
 /// @param [objectXY]
 /// @param [objectXZ]
 
-function BonkInstCapsule(_x, _y, _z, _height, _radius, _objectXY = BonkMaskXY, _objectXZ = __BonkMaskXZ)
+function BonkInstCylinder(_x, _y, _z, _height, _radius, _objectXY = BonkMaskXY, _objectXZ = __BonkMaskXZ)
 {
     with(instance_create_depth(_x, _y, 0, _objectXY))
     {
-        bonkType = BONK_TYPE_CAPSULE;
-        lineHitFunction = BonkLineHitCapsule;
+        bonkType = BONK_TYPE_CYLINDER;
+        lineHitFunction = BonkLineHitCylinder;
         
         static _collideFuncLookup = (function()
         {
             var _array = array_create(BONK_NUMBER_OF_TYPES, undefined);
-            _array[@ BONK_TYPE_AAB     ] = BonkCapsuleCollideAAB;
-            _array[@ BONK_TYPE_OBB     ] = BonkCapsuleCollideRotatedBox;
-            _array[@ BONK_TYPE_CAPSULE ] = BonkCapsuleCollideCapsule;
-            _array[@ BONK_TYPE_CYLINDER] = BonkCapsuleCollideCylinder;
-            _array[@ BONK_TYPE_QUAD    ] = BonkCapsuleCollideQuad;
-            _array[@ BONK_TYPE_SPHERE  ] = BonkCapsuleCollideSphere;
-            _array[@ BONK_TYPE_TRIANGLE] = BonkCapsuleCollideTriangle;
+            _array[@ BONK_TYPE_AAB     ] = BonkCylinderCollideAAB;
+            _array[@ BONK_TYPE_OBB     ] = BonkCylinderCollideRotatedBox;
+            _array[@ BONK_TYPE_CAPSULE ] = BonkCylinderCollideCapsule;
+            _array[@ BONK_TYPE_CYLINDER] = BonkCylinderCollideCylinder;
+            _array[@ BONK_TYPE_SPHERE  ] = BonkCylinderCollideSphere;
             return _array;
         })();
         
         static _insideFuncLookup = (function()
         {
             var _array = array_create(BONK_NUMBER_OF_TYPES, undefined);
-            _array[@ BONK_TYPE_AAB     ] = BonkCapsuleInsideAAB;
-            _array[@ BONK_TYPE_OBB     ] = BonkCapsuleInsideRotatedBox;
-            _array[@ BONK_TYPE_CAPSULE ] = BonkCapsuleInsideCapsule;
-            _array[@ BONK_TYPE_CYLINDER] = BonkCapsuleInsideCylinder;
-            _array[@ BONK_TYPE_QUAD    ] = BonkCapsuleInsideQuad;
-            _array[@ BONK_TYPE_SPHERE  ] = BonkCapsuleInsideSphere;
-            _array[@ BONK_TYPE_TRIANGLE] = BonkCapsuleInsideTriangle;
+            _array[@ BONK_TYPE_AAB     ] = BonkCylinderInsideAAB;
+            _array[@ BONK_TYPE_OBB     ] = BonkCylinderInsideRotatedBox;
+            _array[@ BONK_TYPE_CAPSULE ] = BonkCylinderInsideCapsule;
+            _array[@ BONK_TYPE_CYLINDER] = BonkCylinderInsideCylinder;
+            _array[@ BONK_TYPE_SPHERE  ] = BonkCylinderInsideSphere;
             return _array;
         })();
         
@@ -129,7 +125,7 @@ function BonkInstCapsule(_x, _y, _z, _height, _radius, _objectXY = BonkMaskXY, _
         Draw = function(_color = undefined, _wireframe = undefined)
         {
             __BONK_VERIFY_UGG
-            UggCapsule(x, y, z - height/2, height, radius, _color, _wireframe);
+            UggCylinder(x, y, z - height/2, height, radius, _color, _wireframe);
         }
         
         
