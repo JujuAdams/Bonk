@@ -62,7 +62,7 @@ function BonkConstrTriangle(_x1, _y1, _z1, _x2, _y2, _z2, _x3, _y3, _z3) : __Bon
     static bonkType = BONK_TYPE_TRIANGLE;
     static lineHitFunction = BonkLineHitTriangle;
     
-    static _collideFuncLookup = (function()
+    static __collideFuncLookup = (function()
     {
         var _array = array_create(BONK_NUMBER_OF_TYPES, undefined);
         _array[@ BONK_TYPE_CAPSULE] = BonkTriangleCollideCapsule;
@@ -70,7 +70,7 @@ function BonkConstrTriangle(_x1, _y1, _z1, _x2, _y2, _z2, _x3, _y3, _z3) : __Bon
         return _array;
     })();
     
-    static _insideFuncLookup = (function()
+    static __insideFuncLookup = (function()
     {
         var _array = array_create(BONK_NUMBER_OF_TYPES, undefined);
         _array[@ BONK_TYPE_CAPSULE] = BonkTriangleInsideCapsule;

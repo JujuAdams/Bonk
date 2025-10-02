@@ -60,7 +60,7 @@ function BonkConstrAAB(_x, _y, _z, _xSize, _ySize, _zSize) : __BonkClassShared()
     static bonkType = BONK_TYPE_AAB;
     static lineHitFunction = BonkLineHitAAB;
     
-    static _collideFuncLookup = (function()
+    static __collideFuncLookup = (function()
     {
         var _array = array_create(BONK_NUMBER_OF_TYPES, undefined);
         _array[@ BONK_TYPE_AAB     ] = BonkAABCollideAAB;
@@ -70,7 +70,7 @@ function BonkConstrAAB(_x, _y, _z, _xSize, _ySize, _zSize) : __BonkClassShared()
         return _array;
     })();
     
-    static _insideFuncLookup = (function()
+    static __insideFuncLookup = (function()
     {
         var _array = array_create(BONK_NUMBER_OF_TYPES, undefined);
         _array[@ BONK_TYPE_AAB     ] = BonkAABInsideAAB;

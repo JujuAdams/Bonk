@@ -67,7 +67,7 @@ function BonkConstrCapsule(_x, _y, _z, _height, _radius) : __BonkClassShared() c
     static bonkType = BONK_TYPE_CAPSULE;
     static lineHitFunction = BonkLineHitCapsule;
     
-    static _collideFuncLookup = (function()
+    static __collideFuncLookup = (function()
     {
         var _array = array_create(BONK_NUMBER_OF_TYPES, undefined);
         _array[@ BONK_TYPE_AAB     ] = BonkCapsuleCollideAAB;
@@ -80,7 +80,7 @@ function BonkConstrCapsule(_x, _y, _z, _height, _radius) : __BonkClassShared() c
         return _array;
     })();
     
-    static _insideFuncLookup = (function()
+    static __insideFuncLookup = (function()
     {
         var _array = array_create(BONK_NUMBER_OF_TYPES, undefined);
         _array[@ BONK_TYPE_AAB     ] = BonkCapsuleInsideAAB;

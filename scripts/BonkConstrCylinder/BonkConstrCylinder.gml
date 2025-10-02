@@ -64,7 +64,7 @@ function BonkConstrCylinder(_x, _y, _z, _height, _radius) : __BonkClassShared() 
     static bonkType = BONK_TYPE_CYLINDER;
     static lineHitFunction = BonkLineHitCylinder;
     
-    static _collideFuncLookup = (function()
+    static __collideFuncLookup = (function()
     {
         var _array = array_create(BONK_NUMBER_OF_TYPES, undefined);
         _array[@ BONK_TYPE_AAB     ] = BonkCylinderCollideAAB;
@@ -75,7 +75,7 @@ function BonkConstrCylinder(_x, _y, _z, _height, _radius) : __BonkClassShared() 
         return _array;
     })();
     
-    static _insideFuncLookup = (function()
+    static __insideFuncLookup = (function()
     {
         var _array = array_create(BONK_NUMBER_OF_TYPES, undefined);
         _array[@ BONK_TYPE_AAB     ] = BonkCylinderInsideAAB;

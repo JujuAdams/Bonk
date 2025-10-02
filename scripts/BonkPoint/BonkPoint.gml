@@ -30,7 +30,7 @@ function BonkPoint(_x, _y, _z) constructor
     static bonkType = BONK_TYPE_POINT;
     static lineHitFunction = __BonkReturnNullHit;
     
-    static _insideFuncLookup = (function()
+    static __insideFuncLookup = (function()
     {
         var _array = array_create(BONK_NUMBER_OF_TYPES, undefined);
         _array[@ BONK_TYPE_AAB     ] = BonkCoordInsideAAB;
@@ -77,7 +77,7 @@ function BonkPoint(_x, _y, _z) constructor
     
     static Inside = function(_otherShape)
     {
-        var _insideFunc = _insideFuncLookup[_otherShape.bonkType];
+        var _insideFunc = __insideFuncLookup[_otherShape.bonkType];
         if (is_callable(_insideFunc))
         {
             return _insideFunc(_otherShape, x, y, z);

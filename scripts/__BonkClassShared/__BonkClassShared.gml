@@ -8,7 +8,7 @@ function __BonkClassShared() constructor
     
     static Inside = function(_otherShape)
     {
-        var _insideFunc = _insideFuncLookup[_otherShape.bonkType];
+        var _insideFunc = __insideFuncLookup[_otherShape.bonkType];
         if (is_callable(_insideFunc))
         {
             return _insideFunc(self, _otherShape);
@@ -81,7 +81,7 @@ function __BonkClassShared() constructor
     {
         static _nullCollisionReaction = __Bonk().__nullCollisionReaction;
         
-        var _collideFunc = _collideFuncLookup[_otherShape.bonkType];
+        var _collideFunc = __collideFuncLookup[_otherShape.bonkType];
         if (is_callable(_collideFunc))
         {
             return _collideFunc(self, _otherShape);

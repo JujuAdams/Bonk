@@ -65,7 +65,7 @@ function BonkConstrRotatedBox(_x, _y, _z, _xSize, _ySize, _zSize, _zRotation) : 
     static bonkType = BONK_TYPE_OBB;
     static lineHitFunction = BonkLineHitRotatedBox;
     
-    static _collideFuncLookup = (function()
+    static __collideFuncLookup = (function()
     {
         var _array = array_create(BONK_NUMBER_OF_TYPES, undefined);
         _array[@ BONK_TYPE_CAPSULE ] = BonkRotatedBoxCollideCapsule;
@@ -74,7 +74,7 @@ function BonkConstrRotatedBox(_x, _y, _z, _xSize, _ySize, _zSize, _zRotation) : 
         return _array;
     })();
     
-    static _insideFuncLookup = (function()
+    static __insideFuncLookup = (function()
     {
         var _array = array_create(BONK_NUMBER_OF_TYPES, undefined);
         _array[@ BONK_TYPE_CAPSULE ] = BonkRotatedBoxInsideCapsule;

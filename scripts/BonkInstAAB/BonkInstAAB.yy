@@ -1,0 +1,13 @@
+{
+  "$GMScript":"v1",
+  "%Name":"BonkInstAAB",
+  "isCompatibility":false,
+  "isDnD":false,
+  "name":"BonkInstAAB",
+  "parent":{
+    "name":"Instances",
+    "path":"folders/Bonk/Instances.yy",
+  },
+  "resourceType":"GMScript",
+  "resourceVersion":"2.0",
+}
