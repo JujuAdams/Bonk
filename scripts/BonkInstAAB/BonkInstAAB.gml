@@ -51,11 +51,47 @@ function BonkInstAAB(_x, _y, _z, _xSize, _ySize, _zSize, _objectXY = BonkMaskXY,
 {
     with(instance_create_depth(_x, _y, 0, _objectXY))
     {
+        bonkType = BONK_TYPE_SPHERE;
+        lineHitFunction = BonkLineHitSphere;
+        
+        static _collideFuncLookup = (function()
+        {
+            var _array = array_create(BONK_NUMBER_OF_TYPES, undefined);
+            _array[@ BONK_TYPE_AAB     ] = BonkSphereCollideAAB;
+            _array[@ BONK_TYPE_OBB     ] = BonkSphereCollideRotatedBox;
+            _array[@ BONK_TYPE_CAPSULE ] = BonkSphereCollideCapsule;
+            _array[@ BONK_TYPE_CYLINDER] = BonkSphereCollideCylinder;
+            _array[@ BONK_TYPE_QUAD    ] = BonkSphereCollideQuad;
+            _array[@ BONK_TYPE_SPHERE  ] = BonkSphereCollideSphere;
+            _array[@ BONK_TYPE_TRIANGLE] = BonkSphereCollideTriangle;
+            return _array;
+        })();
+        
+        static _insideFuncLookup = (function()
+        {
+            var _array = array_create(BONK_NUMBER_OF_TYPES, undefined);
+            _array[@ BONK_TYPE_AAB     ] = BonkSphereInsideAAB;
+            _array[@ BONK_TYPE_OBB     ] = BonkSphereInsideRotatedBox;
+            _array[@ BONK_TYPE_CAPSULE ] = BonkSphereInsideCapsule;
+            _array[@ BONK_TYPE_CYLINDER] = BonkSphereInsideCylinder;
+            _array[@ BONK_TYPE_QUAD    ] = BonkSphereInsideQuad;
+            _array[@ BONK_TYPE_SPHERE  ] = BonkSphereInsideSphere;
+            _array[@ BONK_TYPE_TRIANGLE] = BonkSphereInsideTriangle;
+            return _array;
+        })();
+        
+        __collideFuncLookup = _collideFuncLookup;
+        __insideFuncLookup  = _insideFuncLookup;
+        
+        
+        
         z = _z;
         
         xSize = _xSize;
         ySize = _ySize;
         zSize = _zSize;
+        
+        
         
         sprite_index = BonkMaskAAB;
         image_xscale = BONK_MASK_SIZE / _xSize;
@@ -73,6 +109,8 @@ function BonkInstAAB(_x, _y, _z, _xSize, _ySize, _zSize, _objectXY = BonkMaskXY,
                 image_yscale = BONK_MASK_SIZE / _zSize;
             }
         }
+        
+        
         
         SetPosition = function(_x = x, _y = y, _z = z)
         {
@@ -125,34 +163,7 @@ function BonkInstAAB(_x, _y, _z, _xSize, _ySize, _zSize, _objectXY = BonkMaskXY,
             UggAABB(x, y, z, xSize, ySize, zSize, _color, _wireframe);
         }
         
-        bonkType = BONK_TYPE_SPHERE;
-        lineHitFunction = BonkLineHitSphere;
         
-        __collideFuncLookup = (function()
-        {
-            var _array = array_create(BONK_NUMBER_OF_TYPES, undefined);
-            _array[@ BONK_TYPE_AAB     ] = BonkSphereCollideAAB;
-            _array[@ BONK_TYPE_OBB     ] = BonkSphereCollideRotatedBox;
-            _array[@ BONK_TYPE_CAPSULE ] = BonkSphereCollideCapsule;
-            _array[@ BONK_TYPE_CYLINDER] = BonkSphereCollideCylinder;
-            _array[@ BONK_TYPE_QUAD    ] = BonkSphereCollideQuad;
-            _array[@ BONK_TYPE_SPHERE  ] = BonkSphereCollideSphere;
-            _array[@ BONK_TYPE_TRIANGLE] = BonkSphereCollideTriangle;
-            return _array;
-        })();
-        
-        __insideFuncLookup = (function()
-        {
-            var _array = array_create(BONK_NUMBER_OF_TYPES, undefined);
-            _array[@ BONK_TYPE_AAB     ] = BonkSphereInsideAAB;
-            _array[@ BONK_TYPE_OBB     ] = BonkSphereInsideRotatedBox;
-            _array[@ BONK_TYPE_CAPSULE ] = BonkSphereInsideCapsule;
-            _array[@ BONK_TYPE_CYLINDER] = BonkSphereInsideCylinder;
-            _array[@ BONK_TYPE_QUAD    ] = BonkSphereInsideQuad;
-            _array[@ BONK_TYPE_SPHERE  ] = BonkSphereInsideSphere;
-            _array[@ BONK_TYPE_TRIANGLE] = BonkSphereInsideTriangle;
-            return _array;
-        })();
         
         return self;
     }
