@@ -6,8 +6,8 @@
   "name":"__BonkMaskXZ",
   "overriddenProperties":[],
   "parent":{
-    "name":"Mask Sprites",
-    "path":"folders/Bonk/Mask Sprites.yy",
+    "name":"(System)",
+    "path":"folders/Bonk/(System).yy",
   },
   "parentObjectId":null,
   "persistent":false,

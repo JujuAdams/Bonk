@@ -57,10 +57,20 @@ function BonkCapsuleCollideCapsule(_capsule1, _capsule2)
     
     with(_reaction)
     {
-        var _coeff = (_capsuleRadius1 + _capsuleRadius2) / _dist;
-        dX = -_coeff*_dX + _capsuleX2 - _capsuleX1;
-        dY = -_coeff*_dY + _capsuleY2 - _capsuleY1;
-        dZ = -_coeff*_dZ + _capsuleClosestZ2 - _capsuleClosestZ1;
+        if (_dist != 0)
+        {
+            var _coeff = (_capsuleRadius1 + _capsuleRadius2) / _dist;
+            dX = -_coeff*_dX + _capsuleX2 - _capsuleX1;
+            dY = -_coeff*_dY + _capsuleY2 - _capsuleY1;
+            dZ = -_coeff*_dZ + _capsuleClosestZ2 - _capsuleClosestZ1;
+        }
+        else
+        {
+            //Panic! Pick a randomish direction to push out in
+            dX = 1 - 2*floor(abs(_capsuleX1) mod 2);
+            dY = 1 - 2*floor(abs(_capsuleY1) mod 2);
+            dZ = 1 - 2*floor(abs(_capsuleZ1) mod 2);
+        }
     }
     
     return _reaction;

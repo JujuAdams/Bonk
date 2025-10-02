@@ -1,5 +1,10 @@
 // Feather disable all
 
+AddPosition = function(_dX, _dY, _dZ)
+{
+    SetPosition(x + _dX, y + _dY, z + _dZ);
+}
+
 Inside = function(_otherShape)
 {
     var _insideFunc = __insideFuncLookup[_otherShape.bonkType];

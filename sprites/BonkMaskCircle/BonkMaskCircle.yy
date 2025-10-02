@@ -25,8 +25,8 @@
   "nineSlice":null,
   "origin":4,
   "parent":{
-    "name":"Mask Sprites",
-    "path":"folders/Bonk/Mask Sprites.yy",
+    "name":"Masks",
+    "path":"folders/Bonk/Masks.yy",
   },
   "preMultiplyAlpha":false,
   "resourceType":"GMSprite",

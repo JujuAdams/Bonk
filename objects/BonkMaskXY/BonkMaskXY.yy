@@ -8,8 +8,8 @@
   "name":"BonkMaskXY",
   "overriddenProperties":[],
   "parent":{
-    "name":"Mask Sprites",
-    "path":"folders/Bonk/Mask Sprites.yy",
+    "name":"Masks",
+    "path":"folders/Bonk/Masks.yy",
   },
   "parentObjectId":null,
   "persistent":false,

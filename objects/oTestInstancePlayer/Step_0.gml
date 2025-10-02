@@ -30,7 +30,8 @@ else
 velocity.zSpeed -= gravAccel;
 --onGroundFrames;
 
-var _pushOutReaction = BonkMoveAndCollide(shape, velocity, oTestInstanceFloor.shape, 40);
+var _array = BonkInstanceOverlapsVelocity(shape, velocity);
+var _pushOutReaction = BonkMoveAndCollide(shape, velocity, _array, 40);
 if (_pushOutReaction.pushOutType == BONK_PUSH_OUT_GRIPPY)
 {
     onGroundFrames = 5;

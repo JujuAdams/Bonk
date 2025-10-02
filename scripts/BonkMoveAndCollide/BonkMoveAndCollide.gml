@@ -27,9 +27,7 @@ function BonkMoveAndCollide(_subjectShape, _velocityStruct, _shapeArray, _slopeT
             var _z = z;
         }
         
-        x += _velocityStruct.xSpeed;
-        y += _velocityStruct.ySpeed;
-        z += _velocityStruct.zSpeed;
+        AddPosition(_velocityStruct.xSpeed, _velocityStruct.ySpeed, _velocityStruct.zSpeed);
         
         var _i = 0;
         repeat(array_length(_shapeArray))
