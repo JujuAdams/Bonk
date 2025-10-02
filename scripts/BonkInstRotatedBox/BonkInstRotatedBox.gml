@@ -63,7 +63,7 @@ function BonkInstRotatedBox(_x, _y, _z, _xSize, _ySize, _zSize, _zRotation, _obj
                 __instanceXY = other;
                 
                 sprite_index = BonkMaskAAB;
-                image_xscale = max(abs(_xSize*dcos(_zRotation)), abs(_ySize*dsin(_zRotation))) / BONK_MASK_SIZE;
+                image_xscale = (bbox_right - bbox_left) / BONK_MASK_SIZE;
                 image_yscale = _zSize / BONK_MASK_SIZE;
             }
         }
@@ -111,7 +111,7 @@ function BonkInstRotatedBox(_x, _y, _z, _xSize, _ySize, _zSize, _zRotation, _obj
             
             if (BONK_INSTANCE_XZ)
             {
-                __instanceXZ.image_xscale = max(abs(xSize*dcos(_zRotation)), abs(ySize*dsin(_zRotation))) / BONK_MASK_SIZE;
+                __instanceXZ.image_xscale = (bbox_right - bbox_left) / BONK_MASK_SIZE;
             }
             
             return self;
