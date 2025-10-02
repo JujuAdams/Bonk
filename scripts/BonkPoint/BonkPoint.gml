@@ -28,7 +28,7 @@
 function BonkPoint(_x, _y, _z) constructor
 {
     static bonkType = BONK_TYPE_POINT;
-    static lineHitFunction = __BonkReturnNullHit;
+    static __lineHitFunction = __BonkReturnNullHit;
     
     static __insideFuncLookup = (function()
     {

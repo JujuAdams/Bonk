@@ -57,7 +57,7 @@
 function BonkRay(_x, _y, _z, _dX, _dY, _dZ) constructor
 {
     static bonkType = BONK_TYPE_RAY;
-    static lineHitFunction = __BonkReturnNullHit;
+    static __lineHitFunction = __BonkReturnNullHit;
     
     static _hitFuncLookup = (function()
     {

@@ -15,7 +15,7 @@ function BonkInstRotatedBox(_x, _y, _z, _xSize, _ySize, _zSize, _zRotation, _obj
     with(instance_create_depth(_x, _y, 0, _objectXY))
     {
         bonkType = BONK_TYPE_OBB;
-        lineHitFunction = BonkLineHitRotatedBox;
+        __lineHitFunction = BonkLineHitRotatedBox;
         
         static _collideFuncLookup = (function()
         {

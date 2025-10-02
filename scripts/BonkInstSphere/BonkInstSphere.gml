@@ -12,7 +12,7 @@ function BonkInstSphere(_x, _y, _z, _radius, _objectXY = BonkMaskXY, _objectXZ =
     with(instance_create_depth(_x, _y, 0, _objectXY))
     {
         bonkType = BONK_TYPE_SPHERE;
-        lineHitFunction = BonkLineHitSphere;
+        __lineHitFunction = BonkLineHitSphere;
         
         static _collideFuncLookup = (function()
         {

@@ -13,7 +13,7 @@ function BonkInstCapsule(_x, _y, _z, _height, _radius, _objectXY = BonkMaskXY, _
     with(instance_create_depth(_x, _y, 0, _objectXY))
     {
         bonkType = BONK_TYPE_CAPSULE;
-        lineHitFunction = BonkLineHitCapsule;
+        __lineHitFunction = BonkLineHitCapsule;
         
         static _collideFuncLookup = (function()
         {

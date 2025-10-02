@@ -1,51 +1,32 @@
 // Feather disable all
 
-/// @param shape
-/// @param dX
-/// @param dY
-/// @param dZ
+/// @param x1
+/// @param y1
+/// @param z1
+/// @param x2
+/// @param y2
+/// @param z2
 /// @param [array]
 /// @param [objectXY]
 /// @param [objectXZ]
 
-function BonkInstanceOverlaps(_shape, _dX, _dY, _dZ, _array = undefined, _objectXY = BonkMaskXY, _objectXZ = __BonkMaskXZ)
+function BonkLineOverlaps(_x1, _y1, _z1, _x2, _y2, _z2, _array = undefined, _objectXY = BonkMaskXY, _objectXZ = __BonkMaskXZ)
 {
     static _staticArray = [];
     _array ??= _staticArray;
-    
-    if (not variable_instance_exists(_shape, "id"))
-    {
-        __BonkError("Can only use BonkInstanceOverlaps() with instances");
-    }
     
     static _listXYStatic = ds_list_create();
     static _listXZStatic = ds_list_create();
     
     var _listXY = _listXYStatic;
-    
-    with(_shape)
-    {
-        var _countXY = instance_place_list(x + _dX, y + _dY, _objectXY, _listXY, false);
-        
-        //Remove self-collision
-        var _index = ds_list_find_index(_listXY, id);
-        if (_index >= 0)
-        {
-            ds_list_delete(_listXY, _index);
-            --_countXY;
-        }
-    }
+    var _countXY = collision_line_list(_x1, _y1, _x2, _y2, _objectXY, false, false, _listXY, false);
     
     if (BONK_INSTANCE_XZ)
     {
         array_resize(_array, 0);
         
         var _listXZ = _listXZStatic;
-        
-        with(_shape.__instanceXZ)
-        {
-            instance_place_list(x + _dX, y + _dZ, _objectXZ, _listXZ, false);
-        }
+        collision_line_list(_x1, _z1, _x2, _z2, _objectXZ, false, false, _listXZ, false);
         
         var _i = 0;
         repeat(_countXY)

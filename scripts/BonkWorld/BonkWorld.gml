@@ -101,7 +101,7 @@
 function BonkWorld(_cellXSize, _cellYSize, _cellZSize, _x = 0, _y = 0, _z = 0) constructor
 {
     static bonkType = BONK_TYPE_WORLD;
-    static lineHitFunction = BonkLineHitWorld;
+    static __lineHitFunction = BonkLineHitWorld;
     
     __xOffset = _x;
     __yOffset = _y;

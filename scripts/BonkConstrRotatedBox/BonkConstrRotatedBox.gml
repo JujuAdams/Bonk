@@ -63,7 +63,7 @@
 function BonkConstrRotatedBox(_x, _y, _z, _xSize, _ySize, _zSize, _zRotation) : __BonkClassShared() constructor
 {
     static bonkType = BONK_TYPE_OBB;
-    static lineHitFunction = BonkLineHitRotatedBox;
+    static __lineHitFunction = BonkLineHitRotatedBox;
     
     static __collideFuncLookup = (function()
     {

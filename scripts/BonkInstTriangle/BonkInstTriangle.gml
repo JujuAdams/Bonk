@@ -17,7 +17,7 @@ function BonkInstTriangle(_x1, _y1, _z1, _x2, _y2, _z2, _x3, _y3, _z3, _objectXY
     with(instance_create_depth(0, 0, 0, _objectXY))
     {
         bonkType = BONK_TYPE_TRIANGLE;
-        lineHitFunction = BonkLineHitTriangle;
+        __lineHitFunction = BonkLineHitTriangle;
         
         static _collideFuncLookup = (function()
         {

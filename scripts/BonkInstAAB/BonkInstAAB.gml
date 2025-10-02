@@ -14,7 +14,7 @@ function BonkInstAAB(_x, _y, _z, _xSize, _ySize, _zSize, _objectXY = BonkMaskXY,
     with(instance_create_depth(_x, _y, 0, _objectXY))
     {
         bonkType = BONK_TYPE_AAB;
-        lineHitFunction = BonkLineHitAAB;
+        __lineHitFunction = BonkLineHitAAB;
         
         static _collideFuncLookup = (function()
         {

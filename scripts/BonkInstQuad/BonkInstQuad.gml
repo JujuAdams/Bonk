@@ -17,7 +17,7 @@ function BonkInstQuad(_x1, _y1, _z1, _x2, _y2, _z2, _x3, _y3, _z3, _objectXY = B
     with(instance_create_depth(0, 0, 0, _objectXY))
     {
         bonkType = BONK_TYPE_QUAD;
-        lineHitFunction = BonkLineHitQuad;
+        __lineHitFunction = BonkLineHitQuad;
         
         static _collideFuncLookup = (function()
         {

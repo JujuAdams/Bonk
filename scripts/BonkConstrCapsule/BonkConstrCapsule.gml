@@ -65,7 +65,7 @@
 function BonkConstrCapsule(_x, _y, _z, _height, _radius) : __BonkClassShared() constructor
 {
     static bonkType = BONK_TYPE_CAPSULE;
-    static lineHitFunction = BonkLineHitCapsule;
+    static __lineHitFunction = BonkLineHitCapsule;
     
     static __collideFuncLookup = (function()
     {

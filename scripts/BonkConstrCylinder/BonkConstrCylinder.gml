@@ -62,7 +62,7 @@
 function BonkConstrCylinder(_x, _y, _z, _height, _radius) : __BonkClassShared() constructor
 {
     static bonkType = BONK_TYPE_CYLINDER;
-    static lineHitFunction = BonkLineHitCylinder;
+    static __lineHitFunction = BonkLineHitCylinder;
     
     static __collideFuncLookup = (function()
     {

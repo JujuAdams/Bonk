@@ -53,7 +53,7 @@ function BonkLineHitWorld(_world, _x1, _y1, _z1, _x2, _y2, _z2)
                 {
                     _map[? _shape] = true;
                     
-                    var _hit = _shape.lineHitFunction(_shape, _x1, _y1, _z1, _x2, _y2, _z2);
+                    var _hit = _shape.__lineHitFunction(_shape, _x1, _y1, _z1, _x2, _y2, _z2);
                     if (_hit.collision)
                     {
                         var _distance = point_distance_3d(_x1, _y1, _z1, _hit.x, _hit.y, _hit.z);

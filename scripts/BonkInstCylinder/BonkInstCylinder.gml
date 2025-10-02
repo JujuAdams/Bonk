@@ -13,7 +13,7 @@ function BonkInstCylinder(_x, _y, _z, _height, _radius, _objectXY = BonkMaskXY, 
     with(instance_create_depth(_x, _y, 0, _objectXY))
     {
         bonkType = BONK_TYPE_CYLINDER;
-        lineHitFunction = BonkLineHitCylinder;
+        __lineHitFunction = BonkLineHitCylinder;
         
         static _collideFuncLookup = (function()
         {
