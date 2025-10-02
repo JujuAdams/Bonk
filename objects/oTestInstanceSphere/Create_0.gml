@@ -1,0 +1,1 @@
+shape = BonkInstSphere(x, y, 32,   32);

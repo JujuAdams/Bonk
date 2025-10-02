@@ -56,7 +56,7 @@ function BonkInstanceOverlaps(_shape, _dX, _dY, _dZ, _array = undefined, _object
         }
         
         var _i = 0;
-        repeat(_countXZ)
+        repeat(_countXY)
         {
             var _otherShape = _listXY[| _i];
             

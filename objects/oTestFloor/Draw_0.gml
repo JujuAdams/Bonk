@@ -1,1 +1,1 @@
-shape.Draw(c_ltgray);
+//shape.Draw(c_ltgray);

@@ -1,0 +1,1 @@
+shape = BonkInstAAB(0.5*(bbox_left + bbox_right), 0.5*(bbox_top + bbox_bottom), 16,   sprite_width, sprite_height, 32);

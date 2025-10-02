@@ -58,7 +58,7 @@ function BonkInstQuad(_x1, _y1, _z1, _x2, _y2, _z2, _x3, _y3, _z3, _objectXY = B
         
         if (BONK_INSTANCE_XZ)
         {
-            __instanceXZ = instance_create_depth(_x, _z, 0, _objectXZ);
+            __instanceXZ = instance_create_depth(0, 0, 0, _objectXZ);
             with(__instanceXZ)
             {
                 __instanceXY = other;
@@ -124,6 +124,8 @@ function BonkInstQuad(_x1, _y1, _z1, _x2, _y2, _z2, _x3, _y3, _z3, _objectXY = B
             
             if (BONK_INSTANCE_XZ)
             {
+                __instanceXZ.x = x;
+                __instanceXZ.y = z;
                 __instanceXZ.image_xscale = image_xscale;
                 __instanceXZ.image_yscale = (_maxZ - _minZ) / BONK_MASK_SIZE;
             }
