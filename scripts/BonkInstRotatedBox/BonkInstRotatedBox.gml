@@ -51,8 +51,8 @@ function BonkInstRotatedBox(_x, _y, _z, _xSize, _ySize, _zSize, _zRotation, _obj
         
         
         sprite_index = BonkMaskRotatedBox;
-        image_xscale = BONK_MASK_SIZE / _xSize;
-        image_yscale = BONK_MASK_SIZE / _ySize;
+        image_xscale = _xSize / BONK_MASK_SIZE;
+        image_yscale = _ySize / BONK_MASK_SIZE;
         image_angle  = _zRotation;
         
         if (BONK_INSTANCE_XZ)
@@ -63,8 +63,8 @@ function BonkInstRotatedBox(_x, _y, _z, _xSize, _ySize, _zSize, _zRotation, _obj
                 __instanceXY = other;
                 
                 sprite_index = BonkMaskAAB;
-                image_xscale = BONK_MASK_SIZE / max(abs(_xSize*dcos(_zRotation)), abs(_ySize*dsin(_zRotation)));
-                image_yscale = BONK_MASK_SIZE / _zSize;
+                image_xscale = max(abs(_xSize*dcos(_zRotation)), abs(_ySize*dsin(_zRotation))) / BONK_MASK_SIZE;
+                image_yscale = _zSize / BONK_MASK_SIZE;
             }
         }
         
@@ -91,13 +91,13 @@ function BonkInstRotatedBox(_x, _y, _z, _xSize, _ySize, _zSize, _zRotation, _obj
             ySize = _y;
             zSize = _z;
             
-            image_xscale = BONK_MASK_SIZE / xSize;
-            image_yscale = BONK_MASK_SIZE / ySize;
+            image_xscale = xSize / BONK_MASK_SIZE;
+            image_yscale = ySize / BONK_MASK_SIZE;
             
             if (BONK_INSTANCE_XZ)
             {
-                __instanceXZ.image_xscale = BONK_MASK_SIZE / xSize;
-                __instanceXZ.image_yscale = BONK_MASK_SIZE / zSize;
+                __instanceXZ.image_xscale = image_xscale;
+                __instanceXZ.image_yscale = zSize / BONK_MASK_SIZE;
             }
         
             return self;
@@ -111,7 +111,7 @@ function BonkInstRotatedBox(_x, _y, _z, _xSize, _ySize, _zSize, _zRotation, _obj
             
             if (BONK_INSTANCE_XZ)
             {
-                __instanceXZ.image_xscale = BONK_MASK_SIZE / max(abs(xSize*dcos(_zRotation)), abs(ySize*dsin(_zRotation)));
+                __instanceXZ.image_xscale = max(abs(xSize*dcos(_zRotation)), abs(ySize*dsin(_zRotation))) / BONK_MASK_SIZE;
             }
             
             return self;

@@ -54,8 +54,8 @@ function BonkInstCapsule(_x, _y, _z, _height, _radius, _objectXY = BonkMaskXY, _
         
         
         sprite_index = BonkMaskCircle;
-        image_xscale = BONK_MASK_SIZE / (2*_radius);
-        image_yscale = BONK_MASK_SIZE / (2*_radius);
+        image_xscale = 2*_radius / BONK_MASK_SIZE;
+        image_yscale = 2*_radius / BONK_MASK_SIZE;
         
         if (BONK_INSTANCE_XZ)
         {
@@ -65,8 +65,8 @@ function BonkInstCapsule(_x, _y, _z, _height, _radius, _objectXY = BonkMaskXY, _
                 __instanceXY = other;
                 
                 sprite_index = BonkMaskAAB;
-                image_xscale = BONK_MASK_SIZE / (2*_radius);
-                image_yscale = BONK_MASK_SIZE / _height;
+                image_xscale = other.image_xscale;
+                image_yscale = _height / BONK_MASK_SIZE;
             }
         }
         
@@ -93,7 +93,7 @@ function BonkInstCapsule(_x, _y, _z, _height, _radius, _objectXY = BonkMaskXY, _
             
             if (BONK_INSTANCE_XZ)
             {
-                __instanceXZ.image_yscale = BONK_MASK_SIZE / height;
+                __instanceXZ.image_yscale = height / BONK_MASK_SIZE;
             }
         
             return self;
@@ -115,12 +115,12 @@ function BonkInstCapsule(_x, _y, _z, _height, _radius, _objectXY = BonkMaskXY, _
         {
             radius = _radius;
             
-            image_xscale = BONK_MASK_SIZE / (2*radius);
-            image_yscale = BONK_MASK_SIZE / (2*radius);
+            image_xscale = 2*radius / BONK_MASK_SIZE;
+            image_yscale = 2*radius / BONK_MASK_SIZE;
             
             if (BONK_INSTANCE_XZ)
             {
-                __instanceXZ.image_xscale = BONK_MASK_SIZE / (2*radius);
+                __instanceXZ.image_xscale = image_xscale;
             }
             
             return self;

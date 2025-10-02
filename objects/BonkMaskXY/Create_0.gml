@@ -107,3 +107,19 @@ Hit = function(_otherShape)
     
     return _nullHit;
 }
+
+DrawXY = function(_color = c_white)
+{
+    draw_sprite_ext(sprite_index, 0, x, y, image_xscale, image_yscale, image_angle, _color, 1);
+}
+
+DrawXZ = function(_color = c_white)
+{
+    if (BONK_INSTANCE_XZ)
+    {
+        with(__instanceXZ)
+        {
+            draw_sprite_ext(sprite_index, 0, x, -y, image_xscale, image_yscale, image_angle, _color, 1);
+        }
+    }
+}

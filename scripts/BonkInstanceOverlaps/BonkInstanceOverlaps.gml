@@ -18,30 +18,49 @@ function BonkInstanceOverlaps(_shape, _dX, _dY, _dZ, _array = undefined, _object
         __BonkError("Can only use BonkInstanceOverlaps() with instances");
     }
     
-    static _listXY = ds_list_create();
-    static _listXZ = ds_list_create();
+    static _listXYStatic = ds_list_create();
+    static _listXZStatic = ds_list_create();
     
-    var _countXY = instance_place_list(_shape.x + _dX, _shape.y + _dY, _objectXY, _listXY, false);
+    var _listXY = _listXYStatic;
     
-    var _index = ds_list_find_index(_listXY, _shape.id);
-    if (_index >= 0)
+    with(_shape)
     {
-        ds_list_delete(_listXY, _index);
-        --_countXY;
+        var _countXY = instance_place_list(x + _dX, y + _dY, _objectXY, _listXY, false);
+        
+        //Remove self-collision
+        var _index = ds_list_find_index(_listXY, id);
+        if (_index >= 0)
+        {
+            ds_list_delete(_listXY, _index);
+            --_countXY;
+        }
     }
     
     if (BONK_INSTANCE_XZ)
     {
         array_resize(_array, 0);
         
-        instance_place_list(_shape.x + _dX, _shape.z + _dZ, _objectXZ, _listXZ, false);
+        var _listXZ = _listXZStatic;
+        
+        with(_shape.__instanceXZ)
+        {
+            var _countXZ = instance_place_list(x + _dX, y + _dZ, _objectXZ, _listXZ, false);
+            
+            //Remove self-collision
+            var _index = ds_list_find_index(_listXZ, id);
+            if (_index >= 0)
+            {
+                ds_list_delete(_listXZ, _index);
+                --_countXZ;
+            }
+        }
         
         var _i = 0;
-        repeat(_countXY)
+        repeat(_countXZ)
         {
             var _otherShape = _listXY[| _i];
             
-            var _index = ds_list_find_index(_listXZ, _otherShape);
+            var _index = ds_list_find_index(_listXZ, _otherShape.__instanceXZ);
             if (_index >= 0)
             {
                 array_push(_array, _otherShape);

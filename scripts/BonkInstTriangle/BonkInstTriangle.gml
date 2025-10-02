@@ -110,13 +110,13 @@ function BonkInstTriangle(_x1, _y1, _z1, _x2, _y2, _z2, _x3, _y3, _z3, _objectXY
             y = 0.5*(_minY + _maxY);
             z = 0.5*(_minZ + _maxZ);
             
-            image_xscale = BONK_MASK_SIZE / (_maxX - _minX);
-            image_yscale = BONK_MASK_SIZE / (_maxY - _minY);
+            image_xscale = (_maxX - _minX) / BONK_MASK_SIZE;
+            image_yscale = (_maxY - _minY) / BONK_MASK_SIZE;
             
             if (BONK_INSTANCE_XZ)
             {
                 __instanceXZ.image_xscale = image_xscale;
-                __instanceXZ.image_yscale = BONK_MASK_SIZE / (_maxZ - _minZ);
+                __instanceXZ.image_yscale = (_maxZ - _minZ) / BONK_MASK_SIZE;
             }
         }
         
