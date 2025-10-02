@@ -9,8 +9,8 @@
   "name":"oTestQuad",
   "overriddenProperties":[],
   "parent":{
-    "name":"Physics",
-    "path":"folders/Test Cases/Physics.yy",
+    "name":"Constructor Playground",
+    "path":"folders/Test Cases/Constructor Playground.yy",
   },
   "parentObjectId":{
     "name":"oTestParent",
