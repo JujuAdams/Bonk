@@ -49,7 +49,7 @@ function BonkInstCylinder(_x, _y, _z, _height, _radius, _objectXY = BonkMaskXY, 
         
         
         
-        sprite_index = BonkMaskCircle;
+        sprite_index = __BonkMaskCircle;
         image_xscale = 2*_radius / BONK_MASK_SIZE;
         image_yscale = 2*_radius / BONK_MASK_SIZE;
         
@@ -60,7 +60,7 @@ function BonkInstCylinder(_x, _y, _z, _height, _radius, _objectXY = BonkMaskXY, 
             {
                 __instanceXY = other;
                 
-                sprite_index = BonkMaskAAB;
+                sprite_index = __BonkMaskAAB;
                 image_xscale = other.image_xscale;
                 image_yscale = _height / BONK_MASK_SIZE;
             }

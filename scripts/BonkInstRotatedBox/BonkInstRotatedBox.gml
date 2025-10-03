@@ -50,7 +50,7 @@ function BonkInstRotatedBox(_x, _y, _z, _xSize, _ySize, _zSize, _zRotation, _obj
         
         
         
-        sprite_index = BonkMaskRotatedBox;
+        sprite_index = __BonkMaskRotatedBox;
         image_xscale = _xSize / BONK_MASK_SIZE;
         image_yscale = _ySize / BONK_MASK_SIZE;
         image_angle  = _zRotation;
@@ -62,7 +62,7 @@ function BonkInstRotatedBox(_x, _y, _z, _xSize, _ySize, _zSize, _zRotation, _obj
             {
                 __instanceXY = other;
                 
-                sprite_index = BonkMaskAAB;
+                sprite_index = __BonkMaskAAB;
                 image_xscale = (bbox_right - bbox_left) / BONK_MASK_SIZE;
                 image_yscale = _zSize / BONK_MASK_SIZE;
             }
