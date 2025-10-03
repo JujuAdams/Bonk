@@ -412,7 +412,47 @@ function BonkWorld(_cellXSize, _cellYSize, _cellZSize, _x = 0, _y = 0, _z = 0) c
         return _nullCollisionReaction;
     }
     
+    static GetAABB = function()
+    {
+        return {
+            xMin: __xOffset + __cellXSize*__minCellX,
+            yMin: __yOffset + __cellYSize*__minCellY,
+            zMin: __zOffset + __cellZSize*__minCellZ,
+            xMax: __xOffset + __cellXSize*(__maxCellX+1),
+            yMax: __yOffset + __cellYSize*(__maxCellY+1),
+            zMax: __zOffset + __cellZSize*(__maxCellZ+1),
+        };
+    }
+    
     static Add = function(_shape)
+    {
+        if (is_handle(_shape))
+        {
+            if (BONK_STRICT)
+            {
+                __BonkError("Cannot add instances to a BonkWorld");
+            }
+            
+            return;
+        }
+        else if (not is_struct(_shape))
+        {
+            return;
+        }
+        else if (instance_exists(_shape))
+        {
+            if (BONK_STRICT)
+            {
+                __BonkError("Cannot add instances to a BonkWorld");
+            }
+            
+            return;
+        }
+        
+        __Add(_shape);
+    }
+    
+    static __Add = function(_shape)
     {
         if ((_shape.bonkType == BONK_TYPE_LINE)
         ||  (_shape.bonkType == BONK_TYPE_RAY)
@@ -733,25 +773,13 @@ function BonkWorld(_cellXSize, _cellYSize, _cellZSize, _x = 0, _y = 0, _z = 0) c
                                                     _x3, _y3, _z3);
                 }
                 
-                Add(_bonkTri);
+                __Add(_bonkTri); //Use the internal version to avoid expensive instance checks
             }
             
             buffer_delete(_buffer);
             
             ++_i;
         }
-    }
-    
-    static GetAABB = function()
-    {
-        return {
-            xMin: __xOffset + __cellXSize*__minCellX,
-            yMin: __yOffset + __cellYSize*__minCellY,
-            zMin: __zOffset + __cellZSize*__minCellZ,
-            xMax: __xOffset + __cellXSize*(__maxCellX+1),
-            yMax: __yOffset + __cellYSize*(__maxCellY+1),
-            zMax: __zOffset + __cellZSize*(__maxCellZ+1),
-        };
     }
     
     static DrawAABB = function(_color = undefined, _wireframe = true)
