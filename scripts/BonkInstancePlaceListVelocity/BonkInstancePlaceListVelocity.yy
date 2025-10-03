@@ -1,0 +1,13 @@
+{
+  "$GMScript":"v1",
+  "%Name":"BonkInstancePlaceListVelocity",
+  "isCompatibility":false,
+  "isDnD":false,
+  "name":"BonkInstancePlaceListVelocity",
+  "parent":{
+    "name":"Functions",
+    "path":"folders/Bonk/Functions.yy",
+  },
+  "resourceType":"GMScript",
+  "resourceVersion":"2.0",
+}

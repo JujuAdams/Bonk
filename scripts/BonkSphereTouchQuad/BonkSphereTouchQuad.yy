@@ -6,7 +6,7 @@
   "name":"BonkSphereTouchQuad",
   "parent":{
     "name":"Sphere",
-    "path":"folders/Bonk/Getters/Touch/Sphere.yy",
+    "path":"folders/Bonk/Direct Control/Touch/Sphere.yy",
   },
   "resourceType":"GMScript",
   "resourceVersion":"2.0",

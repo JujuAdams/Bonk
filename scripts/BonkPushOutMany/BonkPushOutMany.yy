@@ -5,8 +5,8 @@
   "isDnD":false,
   "name":"BonkPushOutMany",
   "parent":{
-    "name":"Bonk",
-    "path":"folders/Bonk.yy",
+    "name":"Functions",
+    "path":"folders/Bonk/Functions.yy",
   },
   "resourceType":"GMScript",
   "resourceVersion":"2.0",

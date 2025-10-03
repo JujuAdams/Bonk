@@ -6,7 +6,7 @@
   "name":"BonkCoordTouchCapsule",
   "parent":{
     "name":"Coordinate",
-    "path":"folders/Bonk/Getters/Touch/Coordinate.yy",
+    "path":"folders/Bonk/Direct Control/Touch/Coordinate.yy",
   },
   "resourceType":"GMScript",
   "resourceVersion":"2.0",

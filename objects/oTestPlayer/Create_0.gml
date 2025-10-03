@@ -1,4 +1,4 @@
-world = new BonkWorld(32, 32, 100);
+world = new BonkStructWorld(32, 32, 100);
 
 shape = new BonkStructCapsule(x, y, 200,   80, 25);
 velocity = new BonkVelocity();

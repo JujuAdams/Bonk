@@ -5,8 +5,8 @@
   "isDnD":false,
   "name":"BonkStructQuad",
   "parent":{
-    "name":"Shapes",
-    "path":"folders/Bonk/Structs/Shapes.yy",
+    "name":"Shape Constructors",
+    "path":"folders/Bonk/Direct Control/Shape Constructors.yy",
   },
   "resourceType":"GMScript",
   "resourceVersion":"2.0",

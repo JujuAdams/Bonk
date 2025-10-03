@@ -6,7 +6,7 @@
   "name":"BonkSphereCollideTriangle",
   "parent":{
     "name":"Sphere",
-    "path":"folders/Bonk/Getters/Collide/Sphere.yy",
+    "path":"folders/Bonk/Direct Control/Collide/Sphere.yy",
   },
   "resourceType":"GMScript",
   "resourceVersion":"2.0",

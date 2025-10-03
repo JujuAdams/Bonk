@@ -1,12 +1,12 @@
 {
   "$GMScript":"v1",
-  "%Name":"BonkRayOverlaps",
+  "%Name":"BonkInstancePlaceList",
   "isCompatibility":false,
   "isDnD":false,
-  "name":"BonkRayOverlaps",
+  "name":"BonkInstancePlaceList",
   "parent":{
-    "name":"Bonk",
-    "path":"folders/Bonk.yy",
+    "name":"Functions",
+    "path":"folders/Bonk/Functions.yy",
   },
   "resourceType":"GMScript",
   "resourceVersion":"2.0",

@@ -11,7 +11,7 @@
 /// @param [objectXY]
 /// @param [objectXZ]
 
-function BonkLineOverlaps(_x1, _y1, _z1, _x2, _y2, _z2, _exclude = undefined, _array = undefined, _objectXY = BonkMaskXY, _objectXZ = BonkMaskXZ)
+function BonkCollisionLineList(_x1, _y1, _z1, _x2, _y2, _z2, _exclude = undefined, _array = undefined, _objectXY = BonkMaskXY, _objectXZ = BonkMaskXZ)
 {
     static _staticArray = [];
     _array ??= _staticArray;

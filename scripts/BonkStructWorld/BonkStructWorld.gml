@@ -49,7 +49,7 @@
 ///     for the x/y/z position of each cell.
 /// 
 /// `.GetAABB()`
-///     Returns a struct containing the bounding box for the BonkWorld.
+///     Returns a struct containing the bounding box for the BonkStructWorld.
 /// 
 /// `.AddVertexBuffer(vertexBufferOrArray, vertexFormat, [matrix])`
 ///     Adds triangles from a vertex buffer as collidable shapes to the world. The vertex buffer
@@ -61,7 +61,7 @@
 ///           much as possible because collisions with triangles is also slow.
 /// 
 /// `.DrawAABB([color], [wireframe=true])`
-///     Draws the axis-aligned bounding box for the BonkWorld.
+///     Draws the axis-aligned bounding box for the BonkStructWorld.
 /// 
 /// `.DrawShapesFromArray(array, [color], [wireframe=true])`
 ///     Draws shapes that are assigned to cells taken from an array. The array of cells should be one-
@@ -70,11 +70,11 @@
 /// 
 /// `.DrawShapesFromRange(struct, [color], [wireframe=true])`
 ///     Draws shapes that are assigned to cells in the range determined by the input struct. The struct
-///     should be formatted in the same way as the `.GetAABB()` getter for BonkWorld (and other Bonk
+///     should be formatted in the same way as the `.GetAABB()` getter for BonkStructWorld (and other Bonk
 ///     shapes) i.e. it should include `.xMin` `.xMax` etc.
 /// 
 /// `.DrawShapes([color], [wireframe=true])`
-///     Draws all shapes in the BonkWorld.
+///     Draws all shapes in the BonkStructWorld.
 /// 
 /// `.DrawCellsFromArray(array, [color], [wireframe=true])`
 ///     Draws cells from an array. The array should be one-dimensional and structured with each cell
@@ -83,12 +83,12 @@
 /// 
 /// `.DrawCellsFromRange(struct, [color], [wireframe=true], [checkerboard=false])`
 ///     Draws cells in the range determined by the input struct. The struct should be formatted in the
-///     same way as the `.GetAABB()` getter for BonkWorld (and other Bonk shapes) i.e. it should include
+///     same way as the `.GetAABB()` getter for BonkStructWorld (and other Bonk shapes) i.e. it should include
 ///     `.xMin` `.xMax` etc.  The checkerboard argument, when set to `true`, will skip drawing of every
 ///     other voxel to improve performance.
 /// 
 /// `.DrawCells([color], [wireframe=true], [checkerboard=true])`
-///     Draws all cells (voxels) in the BonkWorld. The checkerboard argument, when set to `true`, will
+///     Draws all cells (voxels) in the BonkStructWorld. The checkerboard argument, when set to `true`, will
 ///     skip drawing of every other voxel to improve performance.
 ///     
 /// @param cellXSize
@@ -98,7 +98,7 @@
 /// @param [y=0]
 /// @param [z=0]
 
-function BonkWorld(_cellXSize, _cellYSize, _cellZSize, _x = 0, _y = 0, _z = 0) constructor
+function BonkStructWorld(_cellXSize, _cellYSize, _cellZSize, _x = 0, _y = 0, _z = 0) constructor
 {
     static bonkType = BONK_TYPE_WORLD;
     static __lineHitFunction = BonkLineHitWorld;
@@ -430,7 +430,7 @@ function BonkWorld(_cellXSize, _cellYSize, _cellZSize, _x = 0, _y = 0, _z = 0) c
         {
             if (BONK_STRICT)
             {
-                __BonkError("Cannot add instances to a BonkWorld");
+                __BonkError("Cannot add instances to a BonkStructWorld");
             }
             
             return;
@@ -443,7 +443,7 @@ function BonkWorld(_cellXSize, _cellYSize, _cellZSize, _x = 0, _y = 0, _z = 0) c
         {
             if (BONK_STRICT)
             {
-                __BonkError("Cannot add instances to a BonkWorld");
+                __BonkError("Cannot add instances to a BonkStructWorld");
             }
             
             return;
@@ -460,7 +460,7 @@ function BonkWorld(_cellXSize, _cellYSize, _cellZSize, _x = 0, _y = 0, _z = 0) c
         {
             if (BONK_STRICT)
             {
-                __BonkError($"Cannot add {instanceof(_shape)} to a `BonkWorld()`");
+                __BonkError($"Cannot add {instanceof(_shape)} to a `BonkStructWorld()`");
             }
             
             return;

@@ -6,7 +6,7 @@
   "name":"BonkAABTouchSphere",
   "parent":{
     "name":"AAB",
-    "path":"folders/Bonk/Getters/Touch/AAB.yy",
+    "path":"folders/Bonk/Direct Control/Touch/AAB.yy",
   },
   "resourceType":"GMScript",
   "resourceVersion":"2.0",

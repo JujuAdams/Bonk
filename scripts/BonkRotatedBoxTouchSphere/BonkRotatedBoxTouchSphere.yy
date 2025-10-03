@@ -6,7 +6,7 @@
   "name":"BonkRotatedBoxTouchSphere",
   "parent":{
     "name":"Rotated Box",
-    "path":"folders/Bonk/Getters/Touch/Rotated Box.yy",
+    "path":"folders/Bonk/Direct Control/Touch/Rotated Box.yy",
   },
   "resourceType":"GMScript",
   "resourceVersion":"2.0",

@@ -6,7 +6,7 @@
   "name":"BonkRayHitSphere",
   "parent":{
     "name":"Ray Hit",
-    "path":"folders/Bonk/Getters/Ray Hit.yy",
+    "path":"folders/Bonk/Direct Control/Ray Hit.yy",
   },
   "resourceType":"GMScript",
   "resourceVersion":"2.0",

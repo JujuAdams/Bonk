@@ -6,7 +6,7 @@
   "name":"BonkTriangleTouchSphere",
   "parent":{
     "name":"Triangle",
-    "path":"folders/Bonk/Getters/Touch/Triangle.yy",
+    "path":"folders/Bonk/Direct Control/Touch/Triangle.yy",
   },
   "resourceType":"GMScript",
   "resourceVersion":"2.0",

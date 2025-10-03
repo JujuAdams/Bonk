@@ -6,7 +6,7 @@
   "name":"BonkCylinderTouchSphere",
   "parent":{
     "name":"Cylinder",
-    "path":"folders/Bonk/Getters/Touch/Cylinder.yy",
+    "path":"folders/Bonk/Direct Control/Touch/Cylinder.yy",
   },
   "resourceType":"GMScript",
   "resourceVersion":"2.0",

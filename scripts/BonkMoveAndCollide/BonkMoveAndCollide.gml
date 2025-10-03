@@ -34,16 +34,19 @@ function BonkMoveAndCollide(_subjectShape, _velocityStruct, _shapeArray, _slopeT
             var _i = 0;
             repeat(array_length(_shapeArray))
             {
-                var _reaction = _shapeArray[_i].PushOut(_subjectShape, _slopeThreshold);
-                if (_reaction.pushOutType != BONK_PUSH_OUT_NONE)
+                with(_shapeArray[_i]) //Use `with()` here to support iterating over objects
                 {
-                    with(_reaction.collisionReaction)
+                    var _reaction = PushOut(_subjectShape, _slopeThreshold);
+                    if (_reaction.pushOutType != BONK_PUSH_OUT_NONE)
                     {
-                        var _depth = dX*dX + dY*dY + dZ*dZ;
-                        if ((_depth > _largestDepth) && (_reaction.pushOutType >= _returnReaction.pushOutType))
+                        with(_reaction.collisionReaction)
                         {
-                            _largestDepth = _depth;
-                            _returnReaction = _reaction.Clone();
+                            var _depth = dX*dX + dY*dY + dZ*dZ;
+                            if ((_depth > _largestDepth) && (_reaction.pushOutType >= _returnReaction.pushOutType))
+                            {
+                                _largestDepth = _depth;
+                                _returnReaction = _reaction.Clone();
+                            }
                         }
                     }
                 }
@@ -56,16 +59,19 @@ function BonkMoveAndCollide(_subjectShape, _velocityStruct, _shapeArray, _slopeT
             var _i = 0;
             repeat(ds_list_size(_shapeArray))
             {
-                var _reaction = _shapeArray[| _i].PushOut(_subjectShape, _slopeThreshold);
-                if (_reaction.pushOutType != BONK_PUSH_OUT_NONE)
+                with(_shapeArray[| _i]) //Use `with()` here to support iterating over objects
                 {
-                    with(_reaction.collisionReaction)
+                    var _reaction = PushOut(_subjectShape, _slopeThreshold);
+                    if (_reaction.pushOutType != BONK_PUSH_OUT_NONE)
                     {
-                        var _depth = dX*dX + dY*dY + dZ*dZ;
-                        if ((_depth > _largestDepth) && (_reaction.pushOutType >= _returnReaction.pushOutType))
+                        with(_reaction.collisionReaction)
                         {
-                            _largestDepth = _depth;
-                            _returnReaction = _reaction.Clone();
+                            var _depth = dX*dX + dY*dY + dZ*dZ;
+                            if ((_depth > _largestDepth) && (_reaction.pushOutType >= _returnReaction.pushOutType))
+                            {
+                                _largestDepth = _depth;
+                                _returnReaction = _reaction.Clone();
+                            }
                         }
                     }
                 }

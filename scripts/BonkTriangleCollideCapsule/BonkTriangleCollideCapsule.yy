@@ -6,7 +6,7 @@
   "name":"BonkTriangleCollideCapsule",
   "parent":{
     "name":"Triangle",
-    "path":"folders/Bonk/Getters/Collide/Triangle.yy",
+    "path":"folders/Bonk/Direct Control/Collide/Triangle.yy",
   },
   "resourceType":"GMScript",
   "resourceVersion":"2.0",

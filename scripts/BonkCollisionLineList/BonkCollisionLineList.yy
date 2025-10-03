@@ -1,12 +1,12 @@
 {
   "$GMScript":"v1",
-  "%Name":"BonkInstanceOverlaps",
+  "%Name":"BonkCollisionLineList",
   "isCompatibility":false,
   "isDnD":false,
-  "name":"BonkInstanceOverlaps",
+  "name":"BonkCollisionLineList",
   "parent":{
-    "name":"Bonk",
-    "path":"folders/Bonk.yy",
+    "name":"Functions",
+    "path":"folders/Bonk/Functions.yy",
   },
   "resourceType":"GMScript",
   "resourceVersion":"2.0",

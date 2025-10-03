@@ -5,8 +5,8 @@
   "isDnD":false,
   "name":"BonkCreateRotatedBox",
   "parent":{
-    "name":"Create",
-    "path":"folders/Bonk/Instances/Create.yy",
+    "name":"Creators",
+    "path":"folders/Bonk/Instances/Creators.yy",
   },
   "resourceType":"GMScript",
   "resourceVersion":"2.0",

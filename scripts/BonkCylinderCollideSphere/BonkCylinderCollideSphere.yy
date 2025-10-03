@@ -6,7 +6,7 @@
   "name":"BonkCylinderCollideSphere",
   "parent":{
     "name":"Cylinder",
-    "path":"folders/Bonk/Getters/Collide/Cylinder.yy",
+    "path":"folders/Bonk/Direct Control/Collide/Cylinder.yy",
   },
   "resourceType":"GMScript",
   "resourceVersion":"2.0",

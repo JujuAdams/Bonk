@@ -6,7 +6,7 @@
   "name":"BonkCapsuleCollideRotatedBox",
   "parent":{
     "name":"Capsule",
-    "path":"folders/Bonk/Getters/Collide/Capsule.yy",
+    "path":"folders/Bonk/Direct Control/Collide/Capsule.yy",
   },
   "resourceType":"GMScript",
   "resourceVersion":"2.0",

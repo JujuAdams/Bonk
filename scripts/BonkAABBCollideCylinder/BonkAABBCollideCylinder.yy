@@ -6,7 +6,7 @@
   "name":"BonkAABBCollideCylinder",
   "parent":{
     "name":"AAB",
-    "path":"folders/Bonk/Getters/Collide/AAB.yy",
+    "path":"folders/Bonk/Direct Control/Collide/AAB.yy",
   },
   "resourceType":"GMScript",
   "resourceVersion":"2.0",
