@@ -1,9 +1,9 @@
 {
   "$GMScript":"v1",
-  "%Name":"BonkConstrSphere",
+  "%Name":"BonkStructAAB",
   "isCompatibility":false,
   "isDnD":false,
-  "name":"BonkConstrSphere",
+  "name":"BonkStructAAB",
   "parent":{
     "name":"Shapes",
     "path":"folders/Bonk/Constructors/Shapes.yy",

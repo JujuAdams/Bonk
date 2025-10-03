@@ -1,8 +1,7 @@
 // Feather disable all
 
-/// Constructor that generates an axis-aligned box. Axis-aligned boxes can check against the
-/// following shapes:
-/// - AAB
+/// Constructor that generates a box that can be rotated around the z-axis. Rotated boxes can check
+/// against the following shapes:
 /// - Capsule
 /// - Cylinder
 /// - Sphere
@@ -10,6 +9,8 @@
 /// `.SetPosition([x], [y], [z])`
 /// 
 /// `.SetSize([dX], [dY], [dZ])`
+/// 
+/// `.SetRotation([zRotation])`
 /// 
 /// `.GetAABB()`
 ///     Returns a struct containing the bounding box for the shape.
@@ -48,35 +49,37 @@
 /// `.xSize` `.ySize` `.zSize`
 ///     Size of the box in each axis.
 /// 
+/// `.zRotation`
+///     Rotation of the box around the z-axis.
+/// 
 /// @param xCenter
 /// @param yCenter
 /// @param zCenter
 /// @param xSize
 /// @param ySize
 /// @param zSize
+/// @param zRotation
 
-function BonkConstrAAB(_x, _y, _z, _xSize, _ySize, _zSize) : __BonkClassShared() constructor
+function BonkStructRotatedBox(_x, _y, _z, _xSize, _ySize, _zSize, _zRotation) : __BonkClassShared() constructor
 {
-    static bonkType = BONK_TYPE_AAB;
-    static __lineHitFunction = BonkLineHitAAB;
+    static bonkType = BONK_TYPE_OBB;
+    static __lineHitFunction = BonkLineHitRotatedBox;
     
     static __collideFuncLookup = (function()
     {
         var _array = array_create(BONK_NUMBER_OF_TYPES, undefined);
-        _array[@ BONK_TYPE_AAB     ] = BonkAABCollideAAB;
-        _array[@ BONK_TYPE_CAPSULE ] = BonkAABCollideCapsule;
-        _array[@ BONK_TYPE_CYLINDER] = BonkAABCollideCylinder;
-        _array[@ BONK_TYPE_SPHERE  ] = BonkAABCollideSphere;
+        _array[@ BONK_TYPE_CAPSULE ] = BonkRotatedBoxCollideCapsule;
+        _array[@ BONK_TYPE_CYLINDER] = BonkRotatedBoxCollideCylinder;
+        _array[@ BONK_TYPE_SPHERE  ] = BonkRotatedBoxCollideSphere;
         return _array;
     })();
     
     static __insideFuncLookup = (function()
     {
         var _array = array_create(BONK_NUMBER_OF_TYPES, undefined);
-        _array[@ BONK_TYPE_AAB     ] = BonkAABInsideAAB;
-        _array[@ BONK_TYPE_CAPSULE ] = BonkAABInsideCapsule;
-        _array[@ BONK_TYPE_CYLINDER] = BonkAABInsideCylinder;
-        _array[@ BONK_TYPE_SPHERE  ] = BonkAABInsideSphere;
+        _array[@ BONK_TYPE_CAPSULE ] = BonkRotatedBoxInsideCapsule;
+        _array[@ BONK_TYPE_CYLINDER] = BonkRotatedBoxInsideCylinder;
+        _array[@ BONK_TYPE_SPHERE  ] = BonkRotatedBoxInsideSphere;
         return _array;
     })();
     
@@ -89,6 +92,8 @@ function BonkConstrAAB(_x, _y, _z, _xSize, _ySize, _zSize) : __BonkClassShared()
     xSize = _xSize;
     ySize = _ySize;
     zSize = _zSize;
+    
+    zRotation = _zRotation;
     
     
     
@@ -114,15 +119,6 @@ function BonkConstrAAB(_x, _y, _z, _xSize, _ySize, _zSize) : __BonkClassShared()
     
     SetPosition = __SetPositionFree;
     
-    static RemoveFromWorld = function()
-    {
-        if (__world != undefined)
-        {
-            __world.__RemoveShape(self);
-            SetPosition = __SetPositionFree;
-        }
-    }
-    
     static SetSize = function(_x = xSize, _y = ySize, _z = zSize)
     {
         xSize = _x;
@@ -132,14 +128,22 @@ function BonkConstrAAB(_x, _y, _z, _xSize, _ySize, _zSize) : __BonkClassShared()
         return self;
     }
     
+    static SetRotation = function(_zRotation = zRotation)
+    {
+        zRotation = _zRotation;
+        
+        return self;
+    }
+    
     static GetAABB = function()
     {
+        //TODO - Do this properly
         return {
-            xMin: x - 0.5*xSize,
-            yMin: y - 0.5*ySize,
+            xMin: x - sqrt(2)*max(xSize, ySize),
+            yMin: y - sqrt(2)*max(xSize, ySize),
             zMin: z - 0.5*zSize,
-            xMax: x + 0.5*xSize,
-            yMax: y + 0.5*ySize,
+            xMax: x + sqrt(2)*max(xSize, ySize),
+            yMax: y + sqrt(2)*max(xSize, ySize),
             zMax: z + 0.5*zSize,
         };
     }
@@ -147,6 +151,6 @@ function BonkConstrAAB(_x, _y, _z, _xSize, _ySize, _zSize) : __BonkClassShared()
     static Draw = function(_color = undefined, _wireframe = undefined)
     {
         __BONK_VERIFY_UGG
-        UggAABB(x, y, z, xSize, ySize, zSize, _color, _wireframe);
+        UggRotatedBox(x, y, z,   xSize, ySize, zSize,  zRotation,   _color, _wireframe);
     }
 }

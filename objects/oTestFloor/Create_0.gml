@@ -1,1 +1,1 @@
-shape = new BonkConstrAAB(room_width/2, room_height/2, -10,   room_width, room_height, 20);
+shape = new BonkStructAAB(room_width/2, room_height/2, -10,   room_width, room_height, 20);

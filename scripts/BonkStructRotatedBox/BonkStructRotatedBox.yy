@@ -1,9 +1,9 @@
 {
   "$GMScript":"v1",
-  "%Name":"BonkConstrTriangle",
+  "%Name":"BonkStructRotatedBox",
   "isCompatibility":false,
   "isDnD":false,
-  "name":"BonkConstrTriangle",
+  "name":"BonkStructRotatedBox",
   "parent":{
     "name":"Shapes",
     "path":"folders/Bonk/Constructors/Shapes.yy",

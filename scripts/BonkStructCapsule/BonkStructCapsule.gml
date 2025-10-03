@@ -62,7 +62,7 @@
 /// @param height
 /// @param radius
 
-function BonkConstrCapsule(_x, _y, _z, _height, _radius) : __BonkClassShared() constructor
+function BonkStructCapsule(_x, _y, _z, _height, _radius) : __BonkClassShared() constructor
 {
     static bonkType = BONK_TYPE_CAPSULE;
     static __lineHitFunction = BonkLineHitCapsule;

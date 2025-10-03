@@ -1,12 +1,12 @@
 {
   "$GMScript":"v1",
-  "%Name":"BonkConstrCylinder",
+  "%Name":"BonkCollideMany",
   "isCompatibility":false,
   "isDnD":false,
-  "name":"BonkConstrCylinder",
+  "name":"BonkCollideMany",
   "parent":{
-    "name":"Shapes",
-    "path":"folders/Bonk/Constructors/Shapes.yy",
+    "name":"Bonk",
+    "path":"folders/Bonk.yy",
   },
   "resourceType":"GMScript",
   "resourceVersion":"2.0",

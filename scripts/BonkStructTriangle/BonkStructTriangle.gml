@@ -1,10 +1,7 @@
 // Feather disable all
 
-/// Constructor that generates a quad. Vertices must be defined in a clockwise order. Only three
-/// vertices need to be provided, the fourth coordinate is automatically generated using the
-/// following formulas `P4 = P2 + (P1 - P3)`.
-/// 
-/// Quads can check against the following shapes:
+/// Constructor that generates a triangle. Vertices must be defined in a clockwise order. Triangles
+/// can check against the following shapes:
 /// - Capsule
 /// - Sphere
 /// 
@@ -42,13 +39,13 @@
 /// The struct created by the constructor contains the following values:
 /// 
 /// `.x1` `.y1` `.z1`
-///     Coordinate of the first coordinate of the quad.
+///     Coordinate of the first coordinate of the triangle.
 /// 
 /// `.x2` `.y2` `.z2`
-///     Coordinate of the second coordinate of the quad.
+///     Coordinate of the second coordinate of the triangle.
 /// 
 /// `.x3` `.y3` `.z3`
-///     Coordinate of the third coordinate of the quad.
+///     Coordinate of the third coordinate of the triangle.
 /// 
 /// @param x1
 /// @param y1
@@ -60,24 +57,24 @@
 /// @param y3
 /// @param z3
 
-function BonkConstrQuad(_x1, _y1, _z1, _x2, _y2, _z2, _x3, _y3, _z3) : __BonkClassShared() constructor
+function BonkStructTriangle(_x1, _y1, _z1, _x2, _y2, _z2, _x3, _y3, _z3) : __BonkClassShared() constructor
 {
-    static bonkType = BONK_TYPE_QUAD;
-    static __lineHitFunction = BonkLineHitQuad;
+    static bonkType = BONK_TYPE_TRIANGLE;
+    static __lineHitFunction = BonkLineHitTriangle;
     
     static __collideFuncLookup = (function()
     {
         var _array = array_create(BONK_NUMBER_OF_TYPES, undefined);
-        _array[@ BONK_TYPE_CAPSULE] = BonkQuadCollideCapsule;
-        _array[@ BONK_TYPE_SPHERE ] = BonkQuadCollideSphere;
+        _array[@ BONK_TYPE_CAPSULE] = BonkTriangleCollideCapsule;
+        _array[@ BONK_TYPE_SPHERE ] = BonkTriangleCollideSphere;
         return _array;
     })();
     
     static __insideFuncLookup = (function()
     {
         var _array = array_create(BONK_NUMBER_OF_TYPES, undefined);
-        _array[@ BONK_TYPE_CAPSULE] = BonkQuadInsideCapsule;
-        _array[@ BONK_TYPE_SPHERE ] = BonkQuadInsideSphere;
+        _array[@ BONK_TYPE_CAPSULE] = BonkTriangleInsideCapsule;
+        _array[@ BONK_TYPE_SPHERE ] = BonkTriangleInsideSphere;
         return _array;
     })();
     
@@ -110,26 +107,17 @@ function BonkConstrQuad(_x1, _y1, _z1, _x2, _y2, _z2, _x3, _y3, _z3) : __BonkCla
         dY12 = y2 - y1;
         dZ12 = z2 - z1;
         
+        dX23 = x3 - x2;
+        dY23 = y3 - y2;
+        dZ23 = z3 - z2;
+        
         dX31 = x1 - x3;
         dY31 = y1 - y3;
         dZ31 = z1 - z3;
         
-        dX24 = -dX31;
-        dY24 = -dY31;
-        dZ24 = -dZ31;
-        
-        dX43 = -dX12;
-        dY43 = -dY12;
-        dZ43 = -dZ12;
-        
-        x4 = x2 + dX24;
-        y4 = y2 + dY24;
-        z4 = z2 + dZ24;
-        
         lengthSqr12 = dX12*dX12 + dY12*dY12 + dZ12*dZ12;
+        lengthSqr23 = dX23*dX23 + dY23*dY23 + dZ23*dZ23;
         lengthSqr31 = dX31*dX31 + dY31*dY31 + dZ31*dZ31;
-        lengthSqr24 = lengthSqr31;
-        lengthSqr43 = lengthSqr12;
         
         normalX = dZ12*dY31 - dY12*dZ31;
         normalY = dX12*dZ31 - dZ12*dX31;
@@ -145,21 +133,21 @@ function BonkConstrQuad(_x1, _y1, _z1, _x2, _y2, _z2, _x3, _y3, _z3) : __BonkCla
         }
     }
     
-    static GetAABB = function()
-    {
-        return {
-            xMin: min(x1, x2, x3, x4),
-            yMin: min(y1, y2, y3, y4),
-            zMin: min(z1, z2, z3, z4),
-            xMax: max(x1, x2, x3, x4),
-            yMax: max(y1, y2, y3, y4),
-            zMax: max(z1, z2, z3, z4),
-        };
-    }
-    
     static Draw = function(_color = undefined, _wireframe = undefined)
     {
         __BONK_VERIFY_UGG
-        UggQuad(x1, y1, z1,   x2, y2, z2,   x3, y3, z3,   _color, _wireframe);
+        UggTriangle(x1, y1, z1,   x2, y2, z2,   x3, y3, z3,   _color, _wireframe);
+    }
+    
+    static GetAABB = function()
+    {
+        return {
+            xMin: min(x1, x2, x3),
+            yMin: min(y1, y2, y3),
+            zMin: min(z1, z2, z3),
+            xMax: max(x1, x2, x3),
+            yMax: max(y1, y2, y3),
+            zMax: max(z1, z2, z3),
+        };
     }
 }

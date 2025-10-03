@@ -1,0 +1,13 @@
+{
+  "$GMScript":"v1",
+  "%Name":"BonkStructTriangle",
+  "isCompatibility":false,
+  "isDnD":false,
+  "name":"BonkStructTriangle",
+  "parent":{
+    "name":"Shapes",
+    "path":"folders/Bonk/Constructors/Shapes.yy",
+  },
+  "resourceType":"GMScript",
+  "resourceVersion":"2.0",
+}

@@ -1,7 +1,7 @@
 // Feather disable all
 
-/// Constructor that generates a z-aligned cylinder. Cylinders can check against the following
-/// shapes:
+/// Constructor that generates an axis-aligned box. Axis-aligned boxes can check against the
+/// following shapes:
 /// - AAB
 /// - Capsule
 /// - Cylinder
@@ -9,9 +9,7 @@
 /// 
 /// `.SetPosition([x], [y], [z])`
 /// 
-/// `.SetHeight([height])`
-/// 
-/// `.SetRadius([radius])`
+/// `.SetSize([dX], [dY], [dZ])`
 /// 
 /// `.GetAABB()`
 ///     Returns a struct containing the bounding box for the shape.
@@ -45,44 +43,40 @@
 /// The struct created by the constructor contains the following values:
 /// 
 /// `.x` `.y` `.z`
-///     Coordinate of the centre of the cylinder.
+///     Coordinate of the centre of the box.
 /// 
-/// `.height`
-///     Total height of the cylinder.
-/// 
-/// `.radius`
-///     Radius of the cylinder.
+/// `.xSize` `.ySize` `.zSize`
+///     Size of the box in each axis.
 /// 
 /// @param xCenter
 /// @param yCenter
 /// @param zCenter
-/// @param height
-/// @param radius
+/// @param xSize
+/// @param ySize
+/// @param zSize
 
-function BonkConstrCylinder(_x, _y, _z, _height, _radius) : __BonkClassShared() constructor
+function BonkStructAAB(_x, _y, _z, _xSize, _ySize, _zSize) : __BonkClassShared() constructor
 {
-    static bonkType = BONK_TYPE_CYLINDER;
-    static __lineHitFunction = BonkLineHitCylinder;
+    static bonkType = BONK_TYPE_AAB;
+    static __lineHitFunction = BonkLineHitAAB;
     
     static __collideFuncLookup = (function()
     {
         var _array = array_create(BONK_NUMBER_OF_TYPES, undefined);
-        _array[@ BONK_TYPE_AAB     ] = BonkCylinderCollideAAB;
-        _array[@ BONK_TYPE_OBB     ] = BonkCylinderCollideRotatedBox;
-        _array[@ BONK_TYPE_CAPSULE ] = BonkCylinderCollideCapsule;
-        _array[@ BONK_TYPE_CYLINDER] = BonkCylinderCollideCylinder;
-        _array[@ BONK_TYPE_SPHERE  ] = BonkCylinderCollideSphere;
+        _array[@ BONK_TYPE_AAB     ] = BonkAABCollideAAB;
+        _array[@ BONK_TYPE_CAPSULE ] = BonkAABCollideCapsule;
+        _array[@ BONK_TYPE_CYLINDER] = BonkAABCollideCylinder;
+        _array[@ BONK_TYPE_SPHERE  ] = BonkAABCollideSphere;
         return _array;
     })();
     
     static __insideFuncLookup = (function()
     {
         var _array = array_create(BONK_NUMBER_OF_TYPES, undefined);
-        _array[@ BONK_TYPE_AAB     ] = BonkCylinderInsideAAB;
-        _array[@ BONK_TYPE_OBB     ] = BonkCylinderInsideRotatedBox;
-        _array[@ BONK_TYPE_CAPSULE ] = BonkCylinderInsideCapsule;
-        _array[@ BONK_TYPE_CYLINDER] = BonkCylinderInsideCylinder;
-        _array[@ BONK_TYPE_SPHERE  ] = BonkCylinderInsideSphere;
+        _array[@ BONK_TYPE_AAB     ] = BonkAABInsideAAB;
+        _array[@ BONK_TYPE_CAPSULE ] = BonkAABInsideCapsule;
+        _array[@ BONK_TYPE_CYLINDER] = BonkAABInsideCylinder;
+        _array[@ BONK_TYPE_SPHERE  ] = BonkAABInsideSphere;
         return _array;
     })();
     
@@ -92,8 +86,9 @@ function BonkConstrCylinder(_x, _y, _z, _height, _radius) : __BonkClassShared() 
     y = _y;
     z = _z;
     
-    height = _height;
-    radius = _radius;
+    xSize = _xSize;
+    ySize = _ySize;
+    zSize = _zSize;
     
     
     
@@ -119,16 +114,20 @@ function BonkConstrCylinder(_x, _y, _z, _height, _radius) : __BonkClassShared() 
     
     SetPosition = __SetPositionFree;
     
-    static SetHeight = function(_height = height)
+    static RemoveFromWorld = function()
     {
-        height = _height;
-        
-        return self;
+        if (__world != undefined)
+        {
+            __world.__RemoveShape(self);
+            SetPosition = __SetPositionFree;
+        }
     }
     
-    static SetRadius = function(_radius = radius)
+    static SetSize = function(_x = xSize, _y = ySize, _z = zSize)
     {
-        radius = _radius;
+        xSize = _x;
+        ySize = _y;
+        zSize = _z;
         
         return self;
     }
@@ -136,18 +135,18 @@ function BonkConstrCylinder(_x, _y, _z, _height, _radius) : __BonkClassShared() 
     static GetAABB = function()
     {
         return {
-            xMin: x - radius,
-            yMin: y - radius,
-            zMin: z - 0.5*height,
-            xMax: x + radius,
-            yMax: y + radius,
-            zMax: z + 0.5*height,
+            xMin: x - 0.5*xSize,
+            yMin: y - 0.5*ySize,
+            zMin: z - 0.5*zSize,
+            xMax: x + 0.5*xSize,
+            yMax: y + 0.5*ySize,
+            zMax: z + 0.5*zSize,
         };
     }
     
     static Draw = function(_color = undefined, _wireframe = undefined)
     {
         __BONK_VERIFY_UGG
-        UggCylinder(x, y, z - height/2, height, radius, _color, _wireframe);
+        UggAABB(x, y, z, xSize, ySize, zSize, _color, _wireframe);
     }
 }
