@@ -113,11 +113,6 @@ function BonkLine(_x1, _y1, _z1, _x2, _y2, _z2) constructor
         UggArrow(x1, y1, z1, x2, y2, z2, undefined, _color, _thickness, _wireframe);
     }
     
-    static OverlapInstances = function(_array = undefined, _objectXY = undefined, _objectXZ = undefined)
-    {
-        return BonkCollisionLineList(x1, y1, z1, x2, y2, z2, _array, _objectXY, _objectXZ);
-    }
-    
     static Hit = function(_otherShape)
     {
         static _nullHit = __Bonk().__nullHit;

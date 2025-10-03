@@ -55,8 +55,8 @@
 /// @param ySize
 /// @param zSize
 
-var _once = new BonkStructAAB(0, 0, 0, 1, 1, 1);
-with(static_get(_once))
+//Set up statics
+with(static_get(BonkStructAAB))
 {
     __BonkCommonAAB();
 }

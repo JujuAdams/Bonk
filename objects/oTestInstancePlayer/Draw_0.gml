@@ -1,7 +1,7 @@
 shape.Draw(c_lime, true);
 line.Draw(c_yellow);
 
-var _hit = line.HitFirst(line.OverlapInstances(shape));
+var _hit = line.HitFirst(line.CollisionList());
 if (_hit.collision)
 {
     UggSphere(_hit.x, _hit.y, _hit.z, 3, c_red);

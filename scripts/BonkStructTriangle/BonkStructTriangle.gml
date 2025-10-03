@@ -57,29 +57,14 @@
 /// @param y3
 /// @param z3
 
+//Set up statics
+with(static_get(BonkStructTriangle))
+{
+    __BonkCommonTriangle();
+}
+
 function BonkStructTriangle(_x1, _y1, _z1, _x2, _y2, _z2, _x3, _y3, _z3) : __BonkClassShared() constructor
 {
-    static bonkType = BONK_TYPE_TRIANGLE;
-    static __lineHitFunction = BonkLineHitTriangle;
-    
-    static __collideFuncLookup = (function()
-    {
-        var _array = array_create(BONK_NUMBER_OF_TYPES, undefined);
-        _array[@ BONK_TYPE_CAPSULE] = BonkTriangleCollideCapsule;
-        _array[@ BONK_TYPE_SPHERE ] = BonkTriangleCollideSphere;
-        return _array;
-    })();
-    
-    static __insideFuncLookup = (function()
-    {
-        var _array = array_create(BONK_NUMBER_OF_TYPES, undefined);
-        _array[@ BONK_TYPE_CAPSULE] = BonkTriangleTouchCapsule;
-        _array[@ BONK_TYPE_SPHERE ] = BonkTriangleTouchSphere;
-        return _array;
-    })();
-    
-    
-    
     x1 = _x1;
     y1 = _y1;
     z1 = _z1;

@@ -60,31 +60,14 @@
 /// @param zSize
 /// @param zRotation
 
+//Set up statics
+with(static_get(BonkStructRotatedBox))
+{
+    __BonkCommonRotatedBox();
+}
+
 function BonkStructRotatedBox(_x, _y, _z, _xSize, _ySize, _zSize, _zRotation) : __BonkClassShared() constructor
 {
-    static bonkType = BONK_TYPE_OBB;
-    static __lineHitFunction = BonkLineHitRotatedBox;
-    
-    static __collideFuncLookup = (function()
-    {
-        var _array = array_create(BONK_NUMBER_OF_TYPES, undefined);
-        _array[@ BONK_TYPE_CAPSULE ] = BonkRotatedBoxCollideCapsule;
-        _array[@ BONK_TYPE_CYLINDER] = BonkRotatedBoxCollideCylinder;
-        _array[@ BONK_TYPE_SPHERE  ] = BonkRotatedBoxCollideSphere;
-        return _array;
-    })();
-    
-    static __insideFuncLookup = (function()
-    {
-        var _array = array_create(BONK_NUMBER_OF_TYPES, undefined);
-        _array[@ BONK_TYPE_CAPSULE ] = BonkRotatedBoxTouchCapsule;
-        _array[@ BONK_TYPE_CYLINDER] = BonkRotatedBoxTouchCylinder;
-        _array[@ BONK_TYPE_SPHERE  ] = BonkRotatedBoxTouchSphere;
-        return _array;
-    })();
-    
-    
-    
     x = _x;
     y = _y;
     z = _z;

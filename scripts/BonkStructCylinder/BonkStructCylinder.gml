@@ -59,35 +59,14 @@
 /// @param height
 /// @param radius
 
+//Set up statics
+with(static_get(BonkStructCylinder))
+{
+    __BonkCommonCylinder();
+}
+
 function BonkStructCylinder(_x, _y, _z, _height, _radius) : __BonkClassShared() constructor
 {
-    static bonkType = BONK_TYPE_CYLINDER;
-    static __lineHitFunction = BonkLineHitCylinder;
-    
-    static __collideFuncLookup = (function()
-    {
-        var _array = array_create(BONK_NUMBER_OF_TYPES, undefined);
-        _array[@ BONK_TYPE_AAB     ] = BonkCylinderCollideAAB;
-        _array[@ BONK_TYPE_OBB     ] = BonkCylinderCollideRotatedBox;
-        _array[@ BONK_TYPE_CAPSULE ] = BonkCylinderCollideCapsule;
-        _array[@ BONK_TYPE_CYLINDER] = BonkCylinderCollideCylinder;
-        _array[@ BONK_TYPE_SPHERE  ] = BonkCylinderCollideSphere;
-        return _array;
-    })();
-    
-    static __insideFuncLookup = (function()
-    {
-        var _array = array_create(BONK_NUMBER_OF_TYPES, undefined);
-        _array[@ BONK_TYPE_AAB     ] = BonkCylinderTouchAAB;
-        _array[@ BONK_TYPE_OBB     ] = BonkCylinderTouchRotatedBox;
-        _array[@ BONK_TYPE_CAPSULE ] = BonkCylinderTouchCapsule;
-        _array[@ BONK_TYPE_CYLINDER] = BonkCylinderTouchCylinder;
-        _array[@ BONK_TYPE_SPHERE  ] = BonkCylinderTouchSphere;
-        return _array;
-    })();
-    
-    
-    
     x = _x;
     y = _y;
     z = _z;

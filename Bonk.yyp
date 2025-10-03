@@ -380,8 +380,8 @@
   "resourceType":"GMProject",
   "resourceVersion":"2.0",
   "RoomOrderNodes":[
-    {"roomId":{"name":"rmTestConstructorPlayground","path":"rooms/rmTestConstructorPlayground/rmTestConstructorPlayground.yy",},},
     {"roomId":{"name":"rmTestInstancePlayground","path":"rooms/rmTestInstancePlayground/rmTestInstancePlayground.yy",},},
+    {"roomId":{"name":"rmTestConstructorPlayground","path":"rooms/rmTestConstructorPlayground/rmTestConstructorPlayground.yy",},},
     {"roomId":{"name":"rmTestBasics","path":"rooms/rmTestBasics/rmTestBasics.yy",},},
     {"roomId":{"name":"rmTestMesh","path":"rooms/rmTestMesh/rmTestMesh.yy",},},
     {"roomId":{"name":"rmTestRaycast","path":"rooms/rmTestRaycast/rmTestRaycast.yy",},},

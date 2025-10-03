@@ -91,6 +91,7 @@ function BonkLineHitCapsule(_capsule, _x1, _y1, _z1, _x2, _y2, _z2)
                 //Ray starts inside the capsule
                 
                 var _hemisphereZ = (sign(_dZ) > 0)? _capsuleZMax : _capsuleZMin;
+                _dZ *= -1;
             }
             
             var _hitX = _x1;

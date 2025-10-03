@@ -60,29 +60,14 @@
 /// @param y3
 /// @param z3
 
+//Set up statics
+with(static_get(BonkStructQuad))
+{
+    __BonkCommonQuad();
+}
+
 function BonkStructQuad(_x1, _y1, _z1, _x2, _y2, _z2, _x3, _y3, _z3) : __BonkClassShared() constructor
 {
-    static bonkType = BONK_TYPE_QUAD;
-    static __lineHitFunction = BonkLineHitQuad;
-    
-    static __collideFuncLookup = (function()
-    {
-        var _array = array_create(BONK_NUMBER_OF_TYPES, undefined);
-        _array[@ BONK_TYPE_CAPSULE] = BonkQuadCollideCapsule;
-        _array[@ BONK_TYPE_SPHERE ] = BonkQuadCollideSphere;
-        return _array;
-    })();
-    
-    static __insideFuncLookup = (function()
-    {
-        var _array = array_create(BONK_NUMBER_OF_TYPES, undefined);
-        _array[@ BONK_TYPE_CAPSULE] = BonkQuadTouchCapsule;
-        _array[@ BONK_TYPE_SPHERE ] = BonkQuadTouchSphere;
-        return _array;
-    })();
-    
-    
-    
     x1 = _x1;
     y1 = _y1;
     z1 = _z1;
