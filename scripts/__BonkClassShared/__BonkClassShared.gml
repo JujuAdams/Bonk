@@ -101,16 +101,4 @@ function __BonkClassShared() constructor
         
         return _nullCollisionReaction;
     }
-    
-    static Hit = function(_otherShape)
-    {
-        static _nullHit = __Bonk().__nullHit;
-        
-        if (BONK_STRICT)
-        {
-            __BonkError($".Hit() not supported between \"{instanceof(self)}\" (type={bonkType}) and \"{instanceof(_otherShape)}\" (type={_otherShape.bonkType})");
-        }
-        
-        return _nullHit;
-    }
 }

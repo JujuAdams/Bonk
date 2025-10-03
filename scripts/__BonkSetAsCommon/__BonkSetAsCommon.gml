@@ -113,18 +113,6 @@ function __BonkSetAsCommon()
         return _nullCollisionReaction;
     }
 
-    Hit = function(_otherShape)
-    {
-        static _nullHit = __Bonk().__nullHit;
-    
-        if (BONK_STRICT)
-        {
-            __BonkError($".Hit() not supported between \"{instanceof(self)}\" (type={bonkType}) and \"{instanceof(_otherShape)}\" (type={_otherShape.bonkType})");
-        }
-    
-        return _nullHit;
-    }
-
     DrawXY = function(_color = c_white)
     {
         draw_sprite_ext(mask_index, 0, x, y, image_xscale, image_yscale, image_angle, _color, 1);

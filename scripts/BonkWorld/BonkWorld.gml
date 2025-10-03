@@ -139,10 +139,9 @@ function BonkWorld(_cellXSize, _cellYSize, _cellZSize, _x = 0, _y = 0, _z = 0) c
              && (_z >= __minCellZ) && (_z <= __maxCellZ));
     }
     
-    static Collide = function(_subjectShape)
+    static Touch = function(_subjectShape)
     {
         static _map = ds_map_create();
-        static _nullCollisionReaction = __Bonk().__nullCollisionReaction;
         
         var _cheapVersion = true;
         
@@ -161,10 +160,9 @@ function BonkWorld(_cellXSize, _cellYSize, _cellZSize, _x = 0, _y = 0, _z = 0) c
             var _i = 0;
             repeat(array_length(_shapeArray))
             {
-                var _reaction = _shapeArray[_i].Collide(_subjectShape);
-                if (_reaction.collision)
+                if (_shapeArray[_i].Touch(_subjectShape))
                 {
-                    return _reaction;
+                    return true;
                 }
                 
                 ++_i;
@@ -199,11 +197,10 @@ function BonkWorld(_cellXSize, _cellYSize, _cellZSize, _x = 0, _y = 0, _z = 0) c
                             {
                                 _map[? _shape] = true;
                                 
-                                var _reaction = _shape.Collide(_subjectShape);
-                                if (_reaction.collision)
+                                if (_shapeArray[_i].Touch(_subjectShape))
                                 {
                                     ds_map_clear(_map);
-                                    return _reaction;
+                                    return true;
                                 }
                             }
                             
@@ -222,7 +219,7 @@ function BonkWorld(_cellXSize, _cellYSize, _cellZSize, _x = 0, _y = 0, _z = 0) c
             ds_map_clear(_map);
         }
         
-        return _nullCollisionReaction;
+        return false;
     }
     
     static PushOut = function(_subjectShape, _slopeThreshold = 0)
@@ -327,6 +324,92 @@ function BonkWorld(_cellXSize, _cellYSize, _cellZSize, _x = 0, _y = 0, _z = 0) c
         }
         
         return _returnReaction;
+    }
+    
+    static Collide = function(_subjectShape)
+    {
+        static _map = ds_map_create();
+        static _nullCollisionReaction = __Bonk().__nullCollisionReaction;
+        
+        var _cheapVersion = true;
+        
+        var _aabb = _subjectShape.GetAABB();
+        with(_aabb)
+        {
+            if ((xMax - xMin > 2*other.__cellXSize) || (yMax - yMin > 2*other.__cellYSize) || (zMax - zMin > 2*other.__cellZSize))
+            {
+                _cheapVersion = false;
+            }
+        }
+        
+        if (_cheapVersion)
+        {
+            var _shapeArray = GetShapeArrayFromPoint(_subjectShape.x, _subjectShape.y, _subjectShape.z);
+            var _i = 0;
+            repeat(array_length(_shapeArray))
+            {
+                var _reaction = _shapeArray[_i].Collide(_subjectShape);
+                if (_reaction.collision)
+                {
+                    return _reaction;
+                }
+                
+                ++_i;
+            }
+        }
+        else
+        {
+            var _cellX = clamp(floor(_aabb.x1 / __cellXSize), BONK_WORLD_CELL_MIN, BONK_WORLD_CELL_MAX);
+            var _cellY = clamp(floor(_aabb.y1 / __cellYSize), BONK_WORLD_CELL_MIN, BONK_WORLD_CELL_MAX);
+            var _cellZ = clamp(floor(_aabb.z1 / __cellZSize), BONK_WORLD_CELL_MIN, BONK_WORLD_CELL_MAX);
+            
+            var _cellXSize = 1 + clamp(floor(_aabb.x2 / __cellXSize), BONK_WORLD_CELL_MIN, BONK_WORLD_CELL_MAX) - _cellX;
+            var _cellYSize = 1 + clamp(floor(_aabb.y2 / __cellYSize), BONK_WORLD_CELL_MIN, BONK_WORLD_CELL_MAX) - _cellY;
+            var _cellZSize = 1 + clamp(floor(_aabb.z2 / __cellZSize), BONK_WORLD_CELL_MIN, BONK_WORLD_CELL_MAX) - _cellZ;
+            
+            var _z = _cellZ;
+            repeat(_cellZSize)
+            {
+                var _y = _cellY;
+                repeat(_cellYSize)
+                {
+                    var _x = _cellX;
+                    repeat(_cellXSize)
+                    {
+                        var _shapeArray = __GetShapeArrayFromCellUnsafe(_x, _y, _z);
+                        
+                        var _i = 0;
+                        repeat(array_length(_shapeArray))
+                        {
+                            var _shape = _shapeArray[_i];
+                            if (not ds_map_exists(_map, _shape))
+                            {
+                                _map[? _shape] = true;
+                                
+                                var _reaction = _shape.Collide(_subjectShape);
+                                if (_reaction.collision)
+                                {
+                                    ds_map_clear(_map);
+                                    return _reaction;
+                                }
+                            }
+                            
+                            ++_i;
+                        }
+                        
+                        ++_x;
+                    }
+                    
+                    ++_y;
+                }
+                
+                ++_z;
+            }
+            
+            ds_map_clear(_map);
+        }
+        
+        return _nullCollisionReaction;
     }
     
     static Add = function(_shape)
