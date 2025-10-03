@@ -9,6 +9,10 @@ function __BonkCommonFunctions()
         array_pop(__bonkOrigin);
     }
     
+    bonkGroup = 0x00;
+    
+    
+    
     CleanUp = function()
     {
         if (BONK_INSTANCE_XZ)

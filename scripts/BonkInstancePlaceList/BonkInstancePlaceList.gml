@@ -4,11 +4,12 @@
 /// @param dX
 /// @param dY
 /// @param dZ
+/// @param [groupFilter]
 /// @param [list]
 /// @param [objectXY]
 /// @param [objectXZ]
 
-function BonkInstancePlaceList(_bonkInstance, _dX, _dY, _dZ, _list = undefined, _objectXY = BonkMaskXY, _objectXZ = BonkMaskXZ)
+function BonkInstancePlaceList(_bonkInstance, _dX, _dY, _dZ, _groupFilter = undefined, _list = undefined, _objectXY = BonkMaskXY, _objectXZ = BonkMaskXZ)
 {
     static _listStatic = ds_list_create();
     static _listXZStatic = ds_list_create();
@@ -58,6 +59,20 @@ function BonkInstancePlaceList(_bonkInstance, _dX, _dY, _dZ, _list = undefined, 
         }
         
         ds_list_clear(_listXZ);
+    }
+    
+    if (_groupFilter != undefined)
+    {
+        var _i = ds_list_size(_list)-1;
+        repeat(_i+1 - _listStart)
+        {
+            if (_list[| _i].bonkGroup | _groupFilter)
+            {
+                ds_list_delete(_list, _i);
+            }
+            
+            --_i;
+        }
     }
     
     return _list;
