@@ -57,7 +57,7 @@ function BonkSetAsCapsule(_instance, _x, _y, _z, _height, _radius, _objectXZ = B
         
         
         
-        sprite_index = __BonkMaskCircle;
+        mask_index = __BonkMaskCircle;
         image_xscale = 2*_radius / BONK_MASK_SIZE;
         image_yscale = 2*_radius / BONK_MASK_SIZE;
         
@@ -68,7 +68,7 @@ function BonkSetAsCapsule(_instance, _x, _y, _z, _height, _radius, _objectXZ = B
             {
                 __instanceXY = other;
                 
-                sprite_index = __BonkMaskAAB;
+                mask_index = __BonkMaskAAB;
                 image_xscale = other.image_xscale;
                 image_yscale = _height / BONK_MASK_SIZE;
             }

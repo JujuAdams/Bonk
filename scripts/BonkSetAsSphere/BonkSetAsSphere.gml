@@ -52,7 +52,7 @@ function BonkSetAsSphere(_instance, _x, _y, _z, _radius, _objectXZ = BonkMaskXZ)
         
         
         
-        sprite_index = __BonkMaskCircle;
+        mask_index = __BonkMaskCircle;
         image_xscale = 2*_radius / BONK_MASK_SIZE;
         image_yscale = 2*_radius / BONK_MASK_SIZE;
         
@@ -63,7 +63,7 @@ function BonkSetAsSphere(_instance, _x, _y, _z, _radius, _objectXZ = BonkMaskXZ)
             {
                 __instanceXY = other;
                 
-                sprite_index = __BonkMaskCircle;
+                mask_index = __BonkMaskCircle;
                 image_xscale = other.image_xscale;
                 image_yscale = 2*_radius / BONK_MASK_SIZE;
             }

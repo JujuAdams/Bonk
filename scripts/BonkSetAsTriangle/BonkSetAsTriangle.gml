@@ -56,7 +56,7 @@ function BonkSetAsTriangle(_instance, _x1, _y1, _z1, _x2, _y2, _z2, _x3, _y3, _z
         
         
         
-        sprite_index = __BonkMaskAAB;
+        mask_index = __BonkMaskAAB;
         
         if (BONK_INSTANCE_XZ)
         {
@@ -64,7 +64,7 @@ function BonkSetAsTriangle(_instance, _x1, _y1, _z1, _x2, _y2, _z2, _x3, _y3, _z
             with(__instanceXZ)
             {
                 __instanceXY = other;
-                sprite_index = __BonkMaskAAB;
+                mask_index = __BonkMaskAAB;
             }
         }
         

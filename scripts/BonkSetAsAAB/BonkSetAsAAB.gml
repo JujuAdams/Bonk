@@ -53,7 +53,7 @@ function BonkSetAsAAB(_instance, _x, _y, _z, _xSize, _ySize, _zSize, _objectXZ =
         
         
         
-        sprite_index = __BonkMaskAAB;
+        mask_index = __BonkMaskAAB;
         image_xscale = _xSize / BONK_MASK_SIZE;
         image_yscale = _ySize / BONK_MASK_SIZE;
         
@@ -64,7 +64,7 @@ function BonkSetAsAAB(_instance, _x, _y, _z, _xSize, _ySize, _zSize, _objectXZ =
             {
                 __instanceXY = other;
                 
-                sprite_index = __BonkMaskAAB;
+                mask_index = __BonkMaskAAB;
                 image_xscale = other.image_xscale;
                 image_yscale = _zSize / BONK_MASK_SIZE;
             }
