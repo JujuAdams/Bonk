@@ -139,4 +139,14 @@ function BonkRay(_x, _y, _z, _dX, _dY, _dZ) constructor
         
         return _nullHit;
     }
+    
+    static HitFirst = function()
+    {
+        //TODO
+    }
+    
+    static OverlapInstances = function()
+    {
+        //TODO
+    }
 }

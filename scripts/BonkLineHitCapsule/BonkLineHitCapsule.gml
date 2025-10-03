@@ -62,9 +62,10 @@ function BonkLineHitCapsule(_capsule, _x1, _y1, _z1, _x2, _y2, _z2)
                 return _nullHit;
             }
             
-            //Ray starts below the capsule
             if (_z1 < _capsuleZMin - radius)
             {
+                //Ray starts below the capsule
+                
                 if (_dZ <= 0)
                 {
                     //Ray pointing the wrong direction, early out
@@ -73,9 +74,10 @@ function BonkLineHitCapsule(_capsule, _x1, _y1, _z1, _x2, _y2, _z2)
                 
                 var _hemisphereZ = _capsuleZMin;
             }
-            
-            if (_z1 > _capsuleZMax + radius)
+            else if (_z1 > _capsuleZMax + radius)
             {
+                //Ray starts above the capsule
+                
                 if (_dZ >= 0)
                 {
                     //Ray pointing the wrong direction, early out
@@ -83,6 +85,12 @@ function BonkLineHitCapsule(_capsule, _x1, _y1, _z1, _x2, _y2, _z2)
                 }
                 
                 var _hemisphereZ = _capsuleZMax;
+            }
+            else
+            {
+                //Ray starts inside the capsule
+                
+                var _hemisphereZ = (sign(_dZ) > 0)? _capsuleZMax : _capsuleZMin;
             }
             
             var _hitX = _x1;

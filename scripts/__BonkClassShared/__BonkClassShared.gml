@@ -6,6 +6,11 @@ function __BonkClassShared() constructor
     
     
     
+    static AddPosition = function(_dX, _dY, _dZ)
+    {
+        SetPosition(x + _dX, y + _dY, z + _dZ);
+    }
+    
     static Inside = function(_otherShape)
     {
         var _insideFunc = __insideFuncLookup[_otherShape.bonkType];

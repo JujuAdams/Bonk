@@ -1,14 +1,11 @@
 shape.Draw(c_lime, true);
 line.Draw(c_yellow);
 
-
-// TODO - Implement a "hit many"
-
-//var _hit = line.Hit(world);
-//if (_hit.collision)
-//{
-//    UggSphere(_hit.x, _hit.y, _hit.z, 3, c_red);
-//}
+var _hit = line.HitFirst(line.OverlapInstances(shape));
+if (_hit.collision)
+{
+    UggSphere(_hit.x, _hit.y, _hit.z, 3, c_red);
+}
 
 //var _aabb = shape.GetAABB();
 //world.DrawCellsFromRange(_aabb);

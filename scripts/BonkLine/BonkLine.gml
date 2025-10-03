@@ -113,6 +113,11 @@ function BonkLine(_x1, _y1, _z1, _x2, _y2, _z2) constructor
         UggArrow(x1, y1, z1, x2, y2, z2, undefined, _color, _thickness, _wireframe);
     }
     
+    static OverlapInstances = function(_exclude = undefined, _array = undefined, _objectXY = undefined, _objectXZ = undefined)
+    {
+        return BonkLineOverlaps(x1, y1, z1, x2, y2, z2, _exclude, _array, _objectXY, _objectXZ);
+    }
+    
     static Hit = function(_otherShape)
     {
         static _nullHit = __Bonk().__nullHit;
@@ -130,6 +135,58 @@ function BonkLine(_x1, _y1, _z1, _x2, _y2, _z2) constructor
             }
         }
         
+        return _nullHit;
+    }
+    
+    static HitFirst = function(_arrayOrObject)
+    {
+        static _map = ds_map_create();
+        static _nullHit = __Bonk().__nullHit;
+        
+        var _x1 = x1;
+        var _y1 = y1;
+        var _z1 = z1;
+        
+        var _x2 = x2;
+        var _y2 = y2;
+        var _z2 = z2;
+        
+        var _closestHit      = undefined;
+        var _closestDistance = infinity;
+        
+        var _targetArray = is_array(_arrayOrObject)? _arrayOrObject : [_arrayOrObject];
+        var _j = 0;
+        repeat(array_length(_targetArray))
+        {
+            with(_targetArray[_j])
+            {
+                if (not ds_map_exists(_map, self))
+                {
+                    _map[? self] = true;
+                    
+                    var _hit = __lineHitFunction(self, _x1, _y1, _z1, _x2, _y2, _z2);
+                    if (_hit.collision)
+                    {
+                        var _distance = point_distance_3d(_x1, _y1, _z1, _hit.x, _hit.y, _hit.z);
+                        if (_distance < _closestDistance)
+                        {
+                            _closestDistance = _distance;
+                            _closestHit = variable_clone(_hit);
+                        }
+                    }
+                }
+            }
+            
+            ++_j;
+        }
+        
+        if (_closestHit != undefined)
+        {
+            ds_map_clear(_map);
+            return _closestHit;
+        }
+        
+        ds_map_clear(_map);
         return _nullHit;
     }
 }
