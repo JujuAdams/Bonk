@@ -1,5 +1,5 @@
-cylinder1.Draw(BonkCylinderInsideRotatedBox(cylinder1, rotatedBox)? c_lime : c_red);
-cylinder2.Draw(BonkCylinderInsideRotatedBox(cylinder2, rotatedBox)? c_lime : c_red);
+cylinder1.Draw(BonkCylinderTouchRotatedBox(cylinder1, rotatedBox)? c_lime : c_red);
+cylinder2.Draw(BonkCylinderTouchRotatedBox(cylinder2, rotatedBox)? c_lime : c_red);
 rotatedBox.Draw(c_white);
 
 var _reaction = BonkCylinderCollideRotatedBox(cylinder1, rotatedBox);

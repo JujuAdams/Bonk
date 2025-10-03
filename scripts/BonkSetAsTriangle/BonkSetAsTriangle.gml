@@ -32,8 +32,8 @@ function BonkSetAsTriangle(_instance, _x1, _y1, _z1, _x2, _y2, _z2, _x3, _y3, _z
         static _insideFuncLookup = (function()
         {
             var _array = array_create(BONK_NUMBER_OF_TYPES, undefined);
-            _array[@ BONK_TYPE_CAPSULE] = BonkTriangleInsideCapsule;
-            _array[@ BONK_TYPE_SPHERE ] = BonkTriangleInsideSphere;
+            _array[@ BONK_TYPE_CAPSULE] = BonkTriangleTouchCapsule;
+            _array[@ BONK_TYPE_SPHERE ] = BonkTriangleTouchSphere;
             return _array;
         })();
         

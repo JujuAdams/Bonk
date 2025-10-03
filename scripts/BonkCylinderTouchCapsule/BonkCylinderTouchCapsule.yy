@@ -1,0 +1,13 @@
+{
+  "$GMScript":"v1",
+  "%Name":"BonkCylinderTouchCapsule",
+  "isCompatibility":false,
+  "isDnD":false,
+  "name":"BonkCylinderTouchCapsule",
+  "parent":{
+    "name":"Cylinder",
+    "path":"folders/Bonk/Getters/Touch/Cylinder.yy",
+  },
+  "resourceType":"GMScript",
+  "resourceVersion":"2.0",
+}

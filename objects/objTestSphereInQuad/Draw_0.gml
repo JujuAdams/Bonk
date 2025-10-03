@@ -1,4 +1,4 @@
-sphere.Draw(BonkSphereInsideQuad(sphere, quad)? c_lime : c_red);
+sphere.Draw(BonkSphereTouchQuad(sphere, quad)? c_lime : c_red);
 quad.Draw();
 
 var _reaction = BonkSphereCollideQuad(sphere, quad);

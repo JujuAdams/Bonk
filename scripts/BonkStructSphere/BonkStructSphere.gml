@@ -19,7 +19,7 @@
 /// `.Draw([color], [thickness], [wireframe])`
 ///     Draws the shape. This uses Ugg, please see https://github.com/jujuadams/Ugg
 /// 
-/// `.Inside(otherShape)`
+/// `.Touch(otherShape)`
 ///     Returns whether the two shapes overlap. Not all shapes can be checked against, see above.
 /// 
 /// `.Collide(otherShape)`
@@ -76,13 +76,13 @@ function BonkStructSphere(_x, _y, _z, _radius) : __BonkClassShared() constructor
     static __insideFuncLookup = (function()
     {
         var _array = array_create(BONK_NUMBER_OF_TYPES, undefined);
-        _array[@ BONK_TYPE_AAB     ] = BonkSphereInsideAAB;
-        _array[@ BONK_TYPE_OBB     ] = BonkSphereInsideRotatedBox;
-        _array[@ BONK_TYPE_CAPSULE ] = BonkSphereInsideCapsule;
-        _array[@ BONK_TYPE_CYLINDER] = BonkSphereInsideCylinder;
-        _array[@ BONK_TYPE_QUAD    ] = BonkSphereInsideQuad;
-        _array[@ BONK_TYPE_SPHERE  ] = BonkSphereInsideSphere;
-        _array[@ BONK_TYPE_TRIANGLE] = BonkSphereInsideTriangle;
+        _array[@ BONK_TYPE_AAB     ] = BonkSphereTouchAAB;
+        _array[@ BONK_TYPE_OBB     ] = BonkSphereTouchRotatedBox;
+        _array[@ BONK_TYPE_CAPSULE ] = BonkSphereTouchCapsule;
+        _array[@ BONK_TYPE_CYLINDER] = BonkSphereTouchCylinder;
+        _array[@ BONK_TYPE_QUAD    ] = BonkSphereTouchQuad;
+        _array[@ BONK_TYPE_SPHERE  ] = BonkSphereTouchSphere;
+        _array[@ BONK_TYPE_TRIANGLE] = BonkSphereTouchTriangle;
         return _array;
     })();
     

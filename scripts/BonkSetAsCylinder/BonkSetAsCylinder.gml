@@ -31,11 +31,11 @@ function BonkSetAsCylinder(_instance, _x, _y, _z, _height, _radius, _objectXZ = 
         static _insideFuncLookup = (function()
         {
             var _array = array_create(BONK_NUMBER_OF_TYPES, undefined);
-            _array[@ BONK_TYPE_AAB     ] = BonkCylinderInsideAAB;
-            _array[@ BONK_TYPE_OBB     ] = BonkCylinderInsideRotatedBox;
-            _array[@ BONK_TYPE_CAPSULE ] = BonkCylinderInsideCapsule;
-            _array[@ BONK_TYPE_CYLINDER] = BonkCylinderInsideCylinder;
-            _array[@ BONK_TYPE_SPHERE  ] = BonkCylinderInsideSphere;
+            _array[@ BONK_TYPE_AAB     ] = BonkCylinderTouchAAB;
+            _array[@ BONK_TYPE_OBB     ] = BonkCylinderTouchRotatedBox;
+            _array[@ BONK_TYPE_CAPSULE ] = BonkCylinderTouchCapsule;
+            _array[@ BONK_TYPE_CYLINDER] = BonkCylinderTouchCylinder;
+            _array[@ BONK_TYPE_SPHERE  ] = BonkCylinderTouchSphere;
             return _array;
         })();
         

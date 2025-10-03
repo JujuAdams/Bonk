@@ -31,10 +31,10 @@ function BonkSetAsAAB(_instance, _x, _y, _z, _xSize, _ySize, _zSize, _objectXZ =
         static _insideFuncLookup = (function()
         {
             var _array = array_create(BONK_NUMBER_OF_TYPES, undefined);
-            _array[@ BONK_TYPE_AAB     ] = BonkAABInsideAAB;
-            _array[@ BONK_TYPE_CAPSULE ] = BonkAABInsideCapsule;
-            _array[@ BONK_TYPE_CYLINDER] = BonkAABInsideCylinder;
-            _array[@ BONK_TYPE_SPHERE  ] = BonkAABInsideSphere;
+            _array[@ BONK_TYPE_AAB     ] = BonkAABTouchAAB;
+            _array[@ BONK_TYPE_CAPSULE ] = BonkAABTouchCapsule;
+            _array[@ BONK_TYPE_CYLINDER] = BonkAABTouchCylinder;
+            _array[@ BONK_TYPE_SPHERE  ] = BonkAABTouchSphere;
             return _array;
         })();
         

@@ -32,13 +32,13 @@ function BonkSetAsSphere(_instance, _x, _y, _z, _radius, _objectXZ = BonkMaskXZ)
         static _insideFuncLookup = (function()
         {
             var _array = array_create(BONK_NUMBER_OF_TYPES, undefined);
-            _array[@ BONK_TYPE_AAB     ] = BonkSphereInsideAAB;
-            _array[@ BONK_TYPE_OBB     ] = BonkSphereInsideRotatedBox;
-            _array[@ BONK_TYPE_CAPSULE ] = BonkSphereInsideCapsule;
-            _array[@ BONK_TYPE_CYLINDER] = BonkSphereInsideCylinder;
-            _array[@ BONK_TYPE_QUAD    ] = BonkSphereInsideQuad;
-            _array[@ BONK_TYPE_SPHERE  ] = BonkSphereInsideSphere;
-            _array[@ BONK_TYPE_TRIANGLE] = BonkSphereInsideTriangle;
+            _array[@ BONK_TYPE_AAB     ] = BonkSphereTouchAAB;
+            _array[@ BONK_TYPE_OBB     ] = BonkSphereTouchRotatedBox;
+            _array[@ BONK_TYPE_CAPSULE ] = BonkSphereTouchCapsule;
+            _array[@ BONK_TYPE_CYLINDER] = BonkSphereTouchCylinder;
+            _array[@ BONK_TYPE_QUAD    ] = BonkSphereTouchQuad;
+            _array[@ BONK_TYPE_SPHERE  ] = BonkSphereTouchSphere;
+            _array[@ BONK_TYPE_TRIANGLE] = BonkSphereTouchTriangle;
             return _array;
         })();
         

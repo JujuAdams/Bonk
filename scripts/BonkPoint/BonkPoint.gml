@@ -9,7 +9,7 @@
 /// `.Draw([color], [thickness], [wireframe])`
 ///     Draws the shape. This uses Ugg, please see https://github.com/jujuadams/Ugg
 /// 
-/// `.Inside(otherShape)`
+/// `.Touch(otherShape)`
 ///     Checks whether the line hits another shape. You may check against the following shapes:
 ///     - Axis-Aligned Box
 ///     - Capsule
@@ -33,10 +33,10 @@ function BonkPoint(_x, _y, _z) constructor
     static __insideFuncLookup = (function()
     {
         var _array = array_create(BONK_NUMBER_OF_TYPES, undefined);
-        _array[@ BONK_TYPE_AAB     ] = BonkCoordInsideAAB;
-        _array[@ BONK_TYPE_CAPSULE ] = BonkCoordInsideCapsule;
-        _array[@ BONK_TYPE_CYLINDER] = BonkCoordInsideCylinder;
-        _array[@ BONK_TYPE_SPHERE  ] = BonkCoordInsideSphere;
+        _array[@ BONK_TYPE_AAB     ] = BonkCoordTouchAAB;
+        _array[@ BONK_TYPE_CAPSULE ] = BonkCoordTouchCapsule;
+        _array[@ BONK_TYPE_CYLINDER] = BonkCoordTouchCylinder;
+        _array[@ BONK_TYPE_SPHERE  ] = BonkCoordTouchSphere;
         return _array;
     })();
     
@@ -75,7 +75,7 @@ function BonkPoint(_x, _y, _z) constructor
         };
     }
     
-    static Inside = function(_otherShape)
+    static Touch = function(_otherShape)
     {
         var _insideFunc = __insideFuncLookup[_otherShape.bonkType];
         if (is_callable(_insideFunc))
@@ -86,7 +86,7 @@ function BonkPoint(_x, _y, _z) constructor
         {
             if (BONK_STRICT)
             {
-                __BonkError($".Inside() not supported between \"{instanceof(self)}\" (type={bonkType}) and \"{instanceof(_otherShape)}\" (type={_otherShape.bonkType})");
+                __BonkError($".Touch() not supported between \"{instanceof(self)}\" (type={bonkType}) and \"{instanceof(_otherShape)}\" (type={_otherShape.bonkType})");
             }
         }
         

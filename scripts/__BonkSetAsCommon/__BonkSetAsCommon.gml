@@ -22,7 +22,7 @@ function __BonkSetAsCommon()
         SetPosition(x + _dX, y + _dY, z + _dZ);
     }
 
-    Inside = function(_otherShape)
+    Touch = function(_otherShape)
     {
         var _insideFunc = __insideFuncLookup[_otherShape.bonkType];
         if (is_callable(_insideFunc))
@@ -33,7 +33,7 @@ function __BonkSetAsCommon()
         {
             if (BONK_STRICT)
             {
-                __BonkError($".Inside() not supported between \"{instanceof(self)}\" (type={bonkType}) and \"{instanceof(_otherShape)}\" (type={_otherShape.bonkType})");
+                __BonkError($".Touch() not supported between \"{instanceof(self)}\" (type={bonkType}) and \"{instanceof(_otherShape)}\" (type={_otherShape.bonkType})");
             }
         }
     

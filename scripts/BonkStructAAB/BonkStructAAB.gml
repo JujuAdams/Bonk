@@ -17,7 +17,7 @@
 /// `.Draw([color], [thickness], [wireframe])`
 ///     Draws the shape. This uses Ugg, please see https://github.com/jujuadams/Ugg
 /// 
-/// `.Inside(otherShape)`
+/// `.Touch(otherShape)`
 ///     Returns whether the two shapes overlap. Not all shapes can be checked against, see above.
 /// 
 /// `.Collide(otherShape)`
@@ -73,10 +73,10 @@ function BonkStructAAB(_x, _y, _z, _xSize, _ySize, _zSize) : __BonkClassShared()
     static __insideFuncLookup = (function()
     {
         var _array = array_create(BONK_NUMBER_OF_TYPES, undefined);
-        _array[@ BONK_TYPE_AAB     ] = BonkAABInsideAAB;
-        _array[@ BONK_TYPE_CAPSULE ] = BonkAABInsideCapsule;
-        _array[@ BONK_TYPE_CYLINDER] = BonkAABInsideCylinder;
-        _array[@ BONK_TYPE_SPHERE  ] = BonkAABInsideSphere;
+        _array[@ BONK_TYPE_AAB     ] = BonkAABTouchAAB;
+        _array[@ BONK_TYPE_CAPSULE ] = BonkAABTouchCapsule;
+        _array[@ BONK_TYPE_CYLINDER] = BonkAABTouchCylinder;
+        _array[@ BONK_TYPE_SPHERE  ] = BonkAABTouchSphere;
         return _array;
     })();
     

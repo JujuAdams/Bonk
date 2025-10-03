@@ -6,10 +6,10 @@
 /// `.Add(shape)`
 ///     Adds the shape permanently to the "world".
 /// 
-/// `.PointInside(x, y, z)`
+/// `.PointTouch(x, y, z)`
 ///     Returns whether the given point in space is inside the world's axis-aligned bounding box.
 /// 
-/// `.CellInside(x, y, z)`
+/// `.CellTouch(x, y, z)`
 ///     Returns whether the given cell is inside the world's axis-aligned bounding box.
 /// 
 /// `.Collide(subjectShape)`
@@ -132,7 +132,7 @@ function BonkWorld(_cellXSize, _cellYSize, _cellZSize, _x = 0, _y = 0, _z = 0) c
     
     SetPosition = __SetPositionFree;
     
-    static CellInside = function(_x, _y, _z)
+    static CellTouch = function(_x, _y, _z)
     {
         return ((_x >= __minCellX) && (_x <= __maxCellX)
              && (_y >= __minCellY) && (_y <= __maxCellY)

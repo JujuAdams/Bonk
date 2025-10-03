@@ -1,0 +1,13 @@
+{
+  "$GMScript":"v1",
+  "%Name":"BonkCoordTouchSphere",
+  "isCompatibility":false,
+  "isDnD":false,
+  "name":"BonkCoordTouchSphere",
+  "parent":{
+    "name":"Coordinate",
+    "path":"folders/Bonk/Getters/Touch/Coordinate.yy",
+  },
+  "resourceType":"GMScript",
+  "resourceVersion":"2.0",
+}

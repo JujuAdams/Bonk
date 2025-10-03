@@ -16,7 +16,7 @@
 /// `.Draw([color], [thickness], [wireframe])`
 ///     Draws the shape. This uses Ugg, please see https://github.com/jujuadams/Ugg
 /// 
-/// `.Inside(otherShape)`
+/// `.Touch(otherShape)`
 ///     Returns whether the two shapes overlap. Not all shapes can be checked against, see above.
 /// 
 /// `.Collide(otherShape)`
@@ -76,8 +76,8 @@ function BonkStructQuad(_x1, _y1, _z1, _x2, _y2, _z2, _x3, _y3, _z3) : __BonkCla
     static __insideFuncLookup = (function()
     {
         var _array = array_create(BONK_NUMBER_OF_TYPES, undefined);
-        _array[@ BONK_TYPE_CAPSULE] = BonkQuadInsideCapsule;
-        _array[@ BONK_TYPE_SPHERE ] = BonkQuadInsideSphere;
+        _array[@ BONK_TYPE_CAPSULE] = BonkQuadTouchCapsule;
+        _array[@ BONK_TYPE_SPHERE ] = BonkQuadTouchSphere;
         return _array;
     })();
     

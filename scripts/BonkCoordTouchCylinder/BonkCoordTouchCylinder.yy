@@ -1,0 +1,13 @@
+{
+  "$GMScript":"v1",
+  "%Name":"BonkCoordTouchCylinder",
+  "isCompatibility":false,
+  "isDnD":false,
+  "name":"BonkCoordTouchCylinder",
+  "parent":{
+    "name":"Coordinate",
+    "path":"folders/Bonk/Getters/Touch/Coordinate.yy",
+  },
+  "resourceType":"GMScript",
+  "resourceVersion":"2.0",
+}

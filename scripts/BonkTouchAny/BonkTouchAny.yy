@@ -1,0 +1,13 @@
+{
+  "$GMScript":"v1",
+  "%Name":"BonkTouchAny",
+  "isCompatibility":false,
+  "isDnD":false,
+  "name":"BonkTouchAny",
+  "parent":{
+    "name":"Bonk",
+    "path":"folders/Bonk.yy",
+  },
+  "resourceType":"GMScript",
+  "resourceVersion":"2.0",
+}

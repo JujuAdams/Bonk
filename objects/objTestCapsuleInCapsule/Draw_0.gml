@@ -1,4 +1,4 @@
-capsule1.Draw(BonkCapsuleInsideCapsule(capsule1, capsule2)? c_lime : c_red);
+capsule1.Draw(BonkCapsuleTouchCapsule(capsule1, capsule2)? c_lime : c_red);
 capsule2.Draw();
 
 var _reaction = BonkCapsuleCollideCapsule(capsule1, capsule2);

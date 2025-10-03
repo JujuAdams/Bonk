@@ -31,9 +31,9 @@ function BonkSetAsRotatedBox(_instance, _x, _y, _z, _xSize, _ySize, _zSize, _zRo
         static _insideFuncLookup = (function()
         {
             var _array = array_create(BONK_NUMBER_OF_TYPES, undefined);
-            _array[@ BONK_TYPE_CAPSULE ] = BonkRotatedBoxInsideCapsule;
-            _array[@ BONK_TYPE_CYLINDER] = BonkRotatedBoxInsideCylinder;
-            _array[@ BONK_TYPE_SPHERE  ] = BonkRotatedBoxInsideSphere;
+            _array[@ BONK_TYPE_CAPSULE ] = BonkRotatedBoxTouchCapsule;
+            _array[@ BONK_TYPE_CYLINDER] = BonkRotatedBoxTouchCylinder;
+            _array[@ BONK_TYPE_SPHERE  ] = BonkRotatedBoxTouchSphere;
             return _array;
         })();
         

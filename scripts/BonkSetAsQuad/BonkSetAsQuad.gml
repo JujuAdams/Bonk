@@ -32,8 +32,8 @@ function BonkSetAsQuad(_instance, _x1, _y1, _z1, _x2, _y2, _z2, _x3, _y3, _z3, _
         static _insideFuncLookup = (function()
         {
             var _array = array_create(BONK_NUMBER_OF_TYPES, undefined);
-            _array[@ BONK_TYPE_CAPSULE] = BonkQuadInsideCapsule;
-            _array[@ BONK_TYPE_SPHERE ] = BonkQuadInsideSphere;
+            _array[@ BONK_TYPE_CAPSULE] = BonkQuadTouchCapsule;
+            _array[@ BONK_TYPE_SPHERE ] = BonkQuadTouchSphere;
             return _array;
         })();
         

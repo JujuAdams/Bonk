@@ -1,4 +1,4 @@
-capsule.Draw(BonkCapsuleInsideAAB(capsule, aab)? c_lime : c_red, false);
+capsule.Draw(BonkCapsuleTouchAAB(capsule, aab)? c_lime : c_red, false);
 aab.Draw(c_white, false);
 
 var _reaction = BonkCapsuleCollideAAB(capsule, aab);

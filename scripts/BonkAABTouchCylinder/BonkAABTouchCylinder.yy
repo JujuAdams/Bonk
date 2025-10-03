@@ -1,0 +1,13 @@
+{
+  "$GMScript":"v1",
+  "%Name":"BonkAABTouchCylinder",
+  "isCompatibility":false,
+  "isDnD":false,
+  "name":"BonkAABTouchCylinder",
+  "parent":{
+    "name":"AAB",
+    "path":"folders/Bonk/Getters/Touch/AAB.yy",
+  },
+  "resourceType":"GMScript",
+  "resourceVersion":"2.0",
+}
