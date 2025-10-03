@@ -55,33 +55,14 @@
 /// @param ySize
 /// @param zSize
 
+var _once = new BonkStructAAB(0, 0, 0, 1, 1, 1);
+with(static_get(_once))
+{
+    __BonkCommonAAB();
+}
+
 function BonkStructAAB(_x, _y, _z, _xSize, _ySize, _zSize) : __BonkClassShared() constructor
 {
-    static bonkType = BONK_TYPE_AAB;
-    static __lineHitFunction = BonkLineHitAAB;
-    
-    static __collideFuncLookup = (function()
-    {
-        var _array = array_create(BONK_NUMBER_OF_TYPES, undefined);
-        _array[@ BONK_TYPE_AAB     ] = BonkAABCollideAAB;
-        _array[@ BONK_TYPE_CAPSULE ] = BonkAABCollideCapsule;
-        _array[@ BONK_TYPE_CYLINDER] = BonkAABCollideCylinder;
-        _array[@ BONK_TYPE_SPHERE  ] = BonkAABCollideSphere;
-        return _array;
-    })();
-    
-    static __insideFuncLookup = (function()
-    {
-        var _array = array_create(BONK_NUMBER_OF_TYPES, undefined);
-        _array[@ BONK_TYPE_AAB     ] = BonkAABTouchAAB;
-        _array[@ BONK_TYPE_CAPSULE ] = BonkAABTouchCapsule;
-        _array[@ BONK_TYPE_CYLINDER] = BonkAABTouchCylinder;
-        _array[@ BONK_TYPE_SPHERE  ] = BonkAABTouchSphere;
-        return _array;
-    })();
-    
-    
-    
     x = _x;
     y = _y;
     z = _z;

@@ -29,7 +29,7 @@ function BonkMoveAndDeflect(_subjectShape, _velocityStruct, _shapeArray, _slopeT
         
         AddPosition(_velocityStruct.xSpeed, _velocityStruct.ySpeed, _velocityStruct.zSpeed);
         
-        if (is_array(_shapeArray))
+        if (is_array(_shapeArray)) //We were given an array
         {
             var _i = 0;
             repeat(array_length(_shapeArray))
@@ -37,12 +37,12 @@ function BonkMoveAndDeflect(_subjectShape, _velocityStruct, _shapeArray, _slopeT
                 with(_shapeArray[_i]) //Use `with()` here to support iterating over objects
                 {
                     var _reaction = Deflect(_subjectShape, _slopeThreshold);
-                    if (_reaction.pushOutType != BONK_PUSH_OUT_NONE)
+                    if (_reaction.deflectType != BONK_DEFLECT_NONE)
                     {
                         with(_reaction.collisionData)
                         {
                             var _depth = dX*dX + dY*dY + dZ*dZ;
-                            if ((_depth > _largestDepth) && (_reaction.pushOutType >= _returnData.pushOutType))
+                            if ((_depth > _largestDepth) && (_reaction.deflectType >= _returnData.deflectType))
                             {
                                 _largestDepth = _depth;
                                 _returnData = _reaction.Clone();
@@ -54,7 +54,7 @@ function BonkMoveAndDeflect(_subjectShape, _velocityStruct, _shapeArray, _slopeT
                 ++_i;
             }
         }
-        else if (ds_exists(_shapeArray, ds_type_list))
+        else if (ds_exists(_shapeArray, ds_type_list)) //We were given a list
         {
             var _i = 0;
             repeat(ds_list_size(_shapeArray))
@@ -62,12 +62,12 @@ function BonkMoveAndDeflect(_subjectShape, _velocityStruct, _shapeArray, _slopeT
                 with(_shapeArray[| _i]) //Use `with()` here to support iterating over objects
                 {
                     var _reaction = Deflect(_subjectShape, _slopeThreshold);
-                    if (_reaction.pushOutType != BONK_PUSH_OUT_NONE)
+                    if (_reaction.deflectType != BONK_DEFLECT_NONE)
                     {
                         with(_reaction.collisionData)
                         {
                             var _depth = dX*dX + dY*dY + dZ*dZ;
-                            if ((_depth > _largestDepth) && (_reaction.pushOutType >= _returnData.pushOutType))
+                            if ((_depth > _largestDepth) && (_reaction.deflectType >= _returnData.deflectType))
                             {
                                 _largestDepth = _depth;
                                 _returnData = _reaction.Clone();
@@ -77,6 +77,25 @@ function BonkMoveAndDeflect(_subjectShape, _velocityStruct, _shapeArray, _slopeT
                 }
                 
                 ++_i;
+            }
+        }
+        else
+        {
+            with(_shapeArray[| _i]) //Use `with()` here to support iterating over objects
+            {
+                var _reaction = Deflect(_subjectShape, _slopeThreshold);
+                if (_reaction.deflectType != BONK_DEFLECT_NONE)
+                {
+                    with(_reaction.collisionData)
+                    {
+                        var _depth = dX*dX + dY*dY + dZ*dZ;
+                        if ((_depth > _largestDepth) && (_reaction.deflectType >= _returnData.deflectType))
+                        {
+                            _largestDepth = _depth;
+                            _returnData = _reaction.Clone();
+                        }
+                    }
+                }
             }
         }
         

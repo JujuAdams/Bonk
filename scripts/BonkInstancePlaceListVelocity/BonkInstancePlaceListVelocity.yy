@@ -5,8 +5,8 @@
   "isDnD":false,
   "name":"BonkInstancePlaceListVelocity",
   "parent":{
-    "name":"Functions",
-    "path":"folders/Bonk/Functions.yy",
+    "name":"General Functions",
+    "path":"folders/Bonk/General Functions.yy",
   },
   "resourceType":"GMScript",
   "resourceVersion":"2.0",

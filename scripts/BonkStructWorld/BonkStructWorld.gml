@@ -248,12 +248,12 @@ function BonkStructWorld(_cellXSize, _cellYSize, _cellZSize, _x = 0, _y = 0, _z 
             repeat(array_length(_shapeArray))
             {
                 var _reaction = _shapeArray[_i].Deflect(_subjectShape, _slopeThreshold);
-                if (_reaction.pushOutType != BONK_PUSH_OUT_NONE)
+                if (_reaction.deflectType != BONK_DEFLECT_NONE)
                 {
                     with(_reaction.collisionData)
                     {
                         var _depth = dX*dX + dY*dY + dZ*dZ;
-                        if ((_depth > _largestDepth) && (_reaction.pushOutType >= _returnData.pushOutType))
+                        if ((_depth > _largestDepth) && (_reaction.deflectType >= _returnData.deflectType))
                         {
                             _largestDepth = _depth;
                             _returnData = _reaction.Clone();
@@ -294,12 +294,12 @@ function BonkStructWorld(_cellXSize, _cellYSize, _cellZSize, _x = 0, _y = 0, _z 
                                 _map[? _shape] = true;
                                 
                                 var _reaction = _shape.Deflect(_subjectShape, _slopeThreshold);
-                                if (_reaction.pushOutType != BONK_PUSH_OUT_NONE)
+                                if (_reaction.deflectType != BONK_DEFLECT_NONE)
                                 {
                                     with(_reaction.collisionData)
                                     {
                                         var _depth = dX*dX + dY*dY + dZ*dZ;
-                                        if ((_depth > _largestDepth) && (_reaction.pushOutType >= _returnData.pushOutType))
+                                        if ((_depth > _largestDepth) && (_reaction.deflectType >= _returnData.deflectType))
                                         {
                                             _largestDepth = _depth;
                                             _returnData = _reaction.Clone();

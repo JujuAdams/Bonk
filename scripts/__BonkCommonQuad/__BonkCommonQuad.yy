@@ -1,12 +1,12 @@
 {
   "$GMScript":"v1",
-  "%Name":"__BonkInstanceCommon",
+  "%Name":"__BonkCommonQuad",
   "isCompatibility":false,
   "isDnD":false,
-  "name":"__BonkInstanceCommon",
+  "name":"__BonkCommonQuad",
   "parent":{
-    "name":"(System)",
-    "path":"folders/Bonk/(System).yy",
+    "name":"Common Values",
+    "path":"folders/Bonk/(System)/Common Values.yy",
   },
   "resourceType":"GMScript",
   "resourceVersion":"2.0",

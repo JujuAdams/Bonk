@@ -140,13 +140,115 @@ function BonkRay(_x, _y, _z, _dX, _dY, _dZ) constructor
         return _nullHit;
     }
     
-    static HitFirst = function()
+    static HitFirst = function(_targetArray)
     {
-        //TODO
+        static _map = ds_map_create();
+        static _nullHit = __Bonk().__nullHit;
+        
+        var _x = x1;
+        var _y = y1;
+        var _z = z1;
+        
+        var _dX = dX;
+        var _dY = dY;
+        var _dZ = dZ;
+        
+        var _closestHit      = undefined;
+        var _closestDistance = infinity;
+        
+        if (is_array(_targetArray))
+        {
+            var _i = 0;
+            repeat(array_length(_targetArray))
+            {
+                with(_targetArray[_i])
+                {
+                    if (not ds_map_exists(_map, self))
+                    {
+                        _map[? self] = true;
+                        
+                        var _hit = __lineHitFunction(self, _x, _y, _z, _dX, _dY, _dZ);
+                        if (_hit.collision)
+                        {
+                            var _distance = point_distance_3d(_x, _y, _z, _hit.x, _hit.y, _hit.z);
+                            if (_distance < _closestDistance)
+                            {
+                                _closestDistance = _distance;
+                                _closestHit = variable_clone(_hit);
+                            }
+                        }
+                    }
+                }
+                
+                ++_i;
+            }
+        }
+        else if (ds_exists(_targetArray, ds_type_list))
+        {
+            var _i = 0;
+            repeat(ds_list_size(_targetArray))
+            {
+                with(_targetArray[| _i])
+                {
+                    if (not ds_map_exists(_map, self))
+                    {
+                        _map[? self] = true;
+                        
+                        var _hit = __lineHitFunction(self, _x, _y, _z, _dX, _dY, _dZ);
+                        if (_hit.collision)
+                        {
+                            var _distance = point_distance_3d(_x, _y, _z, _hit.x, _hit.y, _hit.z);
+                            if (_distance < _closestDistance)
+                            {
+                                _closestDistance = _distance;
+                                _closestHit = variable_clone(_hit);
+                            }
+                        }
+                    }
+                }
+                
+                ++_i;
+            }
+        }
+        else
+        {
+            with(_targetArray)
+            {
+                if (not ds_map_exists(_map, self))
+                {
+                    _map[? self] = true;
+                    
+                    var _hit = __lineHitFunction(self, _x, _y, _z, _dX, _dY, _dZ);
+                    if (_hit.collision)
+                    {
+                        var _distance = point_distance_3d(_x, _y, _z, _hit.x, _hit.y, _hit.z);
+                        if (_distance < _closestDistance)
+                        {
+                            _closestDistance = _distance;
+                            _closestHit = variable_clone(_hit);
+                        }
+                    }
+                }
+            }
+        }
+        
+        if (_closestHit != undefined)
+        {
+            ds_map_clear(_map);
+            return _closestHit;
+        }
+        
+        ds_map_clear(_map);
+        return _nullHit;
     }
     
     static OverlapInstances = function()
     {
         //TODO
+    }
+    
+    static CollisionList = function(_list = undefined, _objectXY = BonkMaskXY, _objectXZ = BonkMaskXZ)
+    {
+        return BonkCollisionLineList(x, y, z, x + dX, y + dY, z + dZ, _list, _objectXY, _objectXZ);
     }
 }

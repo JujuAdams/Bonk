@@ -4,7 +4,7 @@ function __BonkClassDeflectData() constructor
 {
     targetShape       = undefined;
     collisionData = undefined;
-    pushOutType       = BONK_PUSH_OUT_NONE;
+    deflectType       = BONK_DEFLECT_NONE;
     
     static Clone = function()
     {
@@ -12,7 +12,7 @@ function __BonkClassDeflectData() constructor
         
         _new.targetShape       = targetShape;
         _new.collisionData = variable_clone(collisionData);
-        _new.pushOutType       = pushOutType;
+        _new.deflectType       = deflectType;
          
         return _new;
     }

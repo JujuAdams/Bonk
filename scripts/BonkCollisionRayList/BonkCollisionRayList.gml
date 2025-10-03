@@ -6,7 +6,6 @@
 /// @param dX
 /// @param dY
 /// @param dZ
-/// @param [exclude]
 /// @param [list]
 /// @param [objectXY]
 /// @param [objectXZ]

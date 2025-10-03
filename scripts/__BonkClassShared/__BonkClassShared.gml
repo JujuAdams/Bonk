@@ -52,7 +52,7 @@ function __BonkClassShared() constructor
                     //This movement is approximate but good enough
                     z += _distance;
                     
-                    _reaction.pushOutType = BONK_PUSH_OUT_GRIPPY;
+                    _reaction.deflectType = BONK_DEFLECT_GRIPPY;
                 }
                 else
                 {
@@ -61,13 +61,13 @@ function __BonkClassShared() constructor
                     y += _dY;
                     z += _dZ;
                     
-                    _reaction.pushOutType = BONK_PUSH_OUT_SLIPPERY;
+                    _reaction.deflectType = BONK_DEFLECT_SLIPPERY;
                 }
             }
             else
             {
                 //No collision
-                _reaction.pushOutType = BONK_PUSH_OUT_NONE;
+                _reaction.deflectType = BONK_DEFLECT_NONE;
             }
             
             _reaction.collisionData = _collisionData;
@@ -77,7 +77,7 @@ function __BonkClassShared() constructor
         
         //Subject shape was `undefined`
         _reaction.collisionData = _nullCollisionData;
-        _reaction.pushOutType       = BONK_PUSH_OUT_NONE;
+        _reaction.deflectType       = BONK_DEFLECT_NONE;
         
         return _reaction;
     }
@@ -100,5 +100,10 @@ function __BonkClassShared() constructor
         }
         
         return _nullCollisionData;
+    }
+    
+    static CollisionList = function(_dX, _dY, _dZ, _list = undefined, _objectXY = BonkMaskXY, _objectXZ = BonkMaskXZ)
+    {
+        return BonkInstancePlaceList(self,   _dX, _dY, _dZ,   _list, _objectXY, _objectXZ);
     }
 }

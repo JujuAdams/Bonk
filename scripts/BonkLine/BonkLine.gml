@@ -138,7 +138,7 @@ function BonkLine(_x1, _y1, _z1, _x2, _y2, _z2) constructor
         return _nullHit;
     }
     
-    static HitFirst = function(_arrayOrObject)
+    static HitFirst = function(_targetArray)
     {
         static _map = ds_map_create();
         static _nullHit = __Bonk().__nullHit;
@@ -154,11 +154,63 @@ function BonkLine(_x1, _y1, _z1, _x2, _y2, _z2) constructor
         var _closestHit      = undefined;
         var _closestDistance = infinity;
         
-        var _targetArray = is_array(_arrayOrObject)? _arrayOrObject : [_arrayOrObject];
-        var _j = 0;
-        repeat(array_length(_targetArray))
+        if (is_array(_targetArray))
         {
-            with(_targetArray[_j])
+            var _i = 0;
+            repeat(array_length(_targetArray))
+            {
+                with(_targetArray[_i])
+                {
+                    if (not ds_map_exists(_map, self))
+                    {
+                        _map[? self] = true;
+                        
+                        var _hit = __lineHitFunction(self, _x1, _y1, _z1, _x2, _y2, _z2);
+                        if (_hit.collision)
+                        {
+                            var _distance = point_distance_3d(_x1, _y1, _z1, _hit.x, _hit.y, _hit.z);
+                            if (_distance < _closestDistance)
+                            {
+                                _closestDistance = _distance;
+                                _closestHit = variable_clone(_hit);
+                            }
+                        }
+                    }
+                }
+                
+                ++_i;
+            }
+        }
+        else if (ds_exists(_targetArray, ds_type_list))
+        {
+            var _i = 0;
+            repeat(ds_list_size(_targetArray))
+            {
+                with(_targetArray[| _i])
+                {
+                    if (not ds_map_exists(_map, self))
+                    {
+                        _map[? self] = true;
+                        
+                        var _hit = __lineHitFunction(self, _x1, _y1, _z1, _x2, _y2, _z2);
+                        if (_hit.collision)
+                        {
+                            var _distance = point_distance_3d(_x1, _y1, _z1, _hit.x, _hit.y, _hit.z);
+                            if (_distance < _closestDistance)
+                            {
+                                _closestDistance = _distance;
+                                _closestHit = variable_clone(_hit);
+                            }
+                        }
+                    }
+                }
+                
+                ++_i;
+            }
+        }
+        else
+        {
+            with(_targetArray)
             {
                 if (not ds_map_exists(_map, self))
                 {
@@ -176,8 +228,6 @@ function BonkLine(_x1, _y1, _z1, _x2, _y2, _z2) constructor
                     }
                 }
             }
-            
-            ++_j;
         }
         
         if (_closestHit != undefined)
@@ -188,5 +238,10 @@ function BonkLine(_x1, _y1, _z1, _x2, _y2, _z2) constructor
         
         ds_map_clear(_map);
         return _nullHit;
+    }
+    
+    static CollisionList = function(_list = undefined, _objectXY = BonkMaskXY, _objectXZ = BonkMaskXZ)
+    {
+        return BonkCollisionLineList(x1, y1, z1, x2, y2, z2, _list, _objectXY, _objectXZ);
     }
 }

@@ -16,29 +16,8 @@ function BonkSetAsQuad(_instance, _x1, _y1, _z1, _x2, _y2, _z2, _x3, _y3, _z3, _
 {
     with(_instance)
     {
-        __BonkSetAsCommon();
-        
-        bonkType = BONK_TYPE_QUAD;
-        __lineHitFunction = BonkLineHitQuad;
-        
-        static _collideFuncLookup = (function()
-        {
-            var _array = array_create(BONK_NUMBER_OF_TYPES, undefined);
-            _array[@ BONK_TYPE_CAPSULE] = BonkQuadCollideCapsule;
-            _array[@ BONK_TYPE_SPHERE ] = BonkQuadCollideSphere;
-            return _array;
-        })();
-        
-        static _insideFuncLookup = (function()
-        {
-            var _array = array_create(BONK_NUMBER_OF_TYPES, undefined);
-            _array[@ BONK_TYPE_CAPSULE] = BonkQuadTouchCapsule;
-            _array[@ BONK_TYPE_SPHERE ] = BonkQuadTouchSphere;
-            return _array;
-        })();
-        
-        __collideFuncLookup = _collideFuncLookup;
-        __insideFuncLookup  = _insideFuncLookup;
+        __BonkCommonFunctions();
+        __BonkCommonQuad();
         
         
         

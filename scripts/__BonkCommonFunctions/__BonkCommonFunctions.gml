@@ -1,6 +1,6 @@
 // Feather disable all
 
-function __BonkSetAsCommon()
+function __BonkCommonFunctions()
 {
     if (BONK_DEBUG_INSTANCES)
     {
@@ -63,7 +63,7 @@ function __BonkSetAsCommon()
                     //This movement is approximate but good enough
                     z += _distance;
                 
-                    _reaction.pushOutType = BONK_PUSH_OUT_GRIPPY;
+                    _reaction.deflectType = BONK_DEFLECT_GRIPPY;
                 }
                 else
                 {
@@ -72,13 +72,13 @@ function __BonkSetAsCommon()
                     y += _dY;
                     z += _dZ;
                 
-                    _reaction.pushOutType = BONK_PUSH_OUT_SLIPPERY;
+                    _reaction.deflectType = BONK_DEFLECT_SLIPPERY;
                 }
             }
             else
             {
                 //No collision
-                _reaction.pushOutType = BONK_PUSH_OUT_NONE;
+                _reaction.deflectType = BONK_DEFLECT_NONE;
             }
         
             _reaction.collisionData = _collisionData;
@@ -88,7 +88,7 @@ function __BonkSetAsCommon()
     
         //Subject shape was `undefined`
         _reaction.collisionData = _nullCollisionData;
-        _reaction.pushOutType       = BONK_PUSH_OUT_NONE;
+        _reaction.deflectType       = BONK_DEFLECT_NONE;
     
         return _reaction;
     }

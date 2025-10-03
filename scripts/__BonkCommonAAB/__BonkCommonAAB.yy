@@ -1,12 +1,12 @@
 {
   "$GMScript":"v1",
-  "%Name":"BonkCollideMany",
+  "%Name":"__BonkCommonAAB",
   "isCompatibility":false,
   "isDnD":false,
-  "name":"BonkCollideMany",
+  "name":"__BonkCommonAAB",
   "parent":{
-    "name":"Functions",
-    "path":"folders/Bonk/Functions.yy",
+    "name":"Common Values",
+    "path":"folders/Bonk/(System)/Common Values.yy",
   },
   "resourceType":"GMScript",
   "resourceVersion":"2.0",

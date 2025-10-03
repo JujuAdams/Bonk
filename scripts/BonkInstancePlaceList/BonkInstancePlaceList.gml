@@ -1,6 +1,6 @@
 // Feather disable all
 
-/// @param shape
+/// @param bonkInstance
 /// @param dX
 /// @param dY
 /// @param dZ
@@ -8,20 +8,28 @@
 /// @param [objectXY]
 /// @param [objectXZ]
 
-function BonkInstancePlaceList(_shape, _dX, _dY, _dZ, _list = undefined, _objectXY = BonkMaskXY, _objectXZ = BonkMaskXZ)
+function BonkInstancePlaceList(_bonkInstance, _dX, _dY, _dZ, _list = undefined, _objectXY = BonkMaskXY, _objectXZ = BonkMaskXZ)
 {
     static _listStatic = ds_list_create();
     static _listXZStatic = ds_list_create();
     
-    _list ??= _listStatic;
-    ds_list_clear(_list);
-    
-    if (not variable_instance_exists(_shape, "id"))
+    if (not instance_exists(_bonkInstance))
     {
         __BonkError("Can only use BonkInstancePlaceList() with instances");
     }
     
-    with(_shape)
+    if (_list == undefined)
+    {
+        _list = _listStatic;
+        ds_list_clear(_list);
+        var _listStart = 0;
+    }
+    else
+    {
+        var _listStart = ds_list_size(_list);
+    }
+    
+    with(_bonkInstance)
     {
         var _countXY = instance_place_list(x + _dX, y + _dY, _objectXY, _list, false);
     }
@@ -32,13 +40,13 @@ function BonkInstancePlaceList(_shape, _dX, _dY, _dZ, _list = undefined, _object
         
         var _listXZ = _listXZStatic;
         
-        with(_shape.__instanceXZ)
+        with(_bonkInstance.__instanceXZ)
         {
             instance_place_list(x + _dX, y + _dZ, _objectXZ, _listXZ, false);
         }
         
         var _i = _countXY-1;
-        repeat(_countXY)
+        repeat(_countXY - _listStart)
         {
             var _index = ds_list_find_index(_listXZ, _list[| _i].__instanceXZ);
             if (_index < 0)
