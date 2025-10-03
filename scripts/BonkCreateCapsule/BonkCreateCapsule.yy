@@ -1,0 +1,13 @@
+{
+  "$GMScript":"v1",
+  "%Name":"BonkCreateCapsule",
+  "isCompatibility":false,
+  "isDnD":false,
+  "name":"BonkCreateCapsule",
+  "parent":{
+    "name":"Create",
+    "path":"folders/Bonk/Instances/Create.yy",
+  },
+  "resourceType":"GMScript",
+  "resourceVersion":"2.0",
+}

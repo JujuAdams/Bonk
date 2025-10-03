@@ -1,0 +1,13 @@
+{
+  "$GMScript":"v1",
+  "%Name":"BonkCreateRotatedBox",
+  "isCompatibility":false,
+  "isDnD":false,
+  "name":"BonkCreateRotatedBox",
+  "parent":{
+    "name":"Create",
+    "path":"folders/Bonk/Instances/Create.yy",
+  },
+  "resourceType":"GMScript",
+  "resourceVersion":"2.0",
+}

@@ -1,5 +1,5 @@
 // Feather disable all
 
-function __BonkInstanceCommon()
+function __BonkCreateanceCommon()
 {
 }

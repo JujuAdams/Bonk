@@ -64,24 +64,24 @@ function AutoslopeInstances(_weight)
             {
                 if (_collisionBR >= 1)
                 {
-                    shape = BonkInstQuad(x, y, height,   x+64, y, height,   x, y+64, height);
+                    shape = BonkCreateQuad(x, y, height,   x+64, y, height,   x, y+64, height);
                 }
                 else
                 {
-                    shape  = BonkInstTriangle(x, y, height,   x+64, y, height,   x, y+64, height);
-                    shapeB = BonkInstTriangle(x, y+64, height,   x+64, y, height,   x+64, y+64, 0);
+                    shape  = BonkCreateTriangle(x, y, height,   x+64, y, height,   x, y+64, height);
+                    shapeB = BonkCreateTriangle(x, y+64, height,   x+64, y, height,   x+64, y+64, 0);
                 }
             }
             else
             {
                 if (_collisionBR >= 1)
                 {
-                    shape  = BonkInstTriangle(x, y, height,   x+64, y, height,   x+64, y+64, height);
-                    shapeB = BonkInstTriangle(x, y, height,   x+64, y+64, height,   x, y+64, 0);
+                    shape  = BonkCreateTriangle(x, y, height,   x+64, y, height,   x+64, y+64, height);
+                    shapeB = BonkCreateTriangle(x, y, height,   x+64, y+64, height,   x, y+64, 0);
                 }
                 else
                 {
-                    shape = BonkInstQuad(x, y, height,   x+64, y, height,   x, y+64, 0);
+                    shape = BonkCreateQuad(x, y, height,   x+64, y, height,   x, y+64, 0);
                 }
             }
         }
@@ -91,25 +91,25 @@ function AutoslopeInstances(_weight)
             {
                 if (_collisionBR >= 1)
                 {
-                    shape  = BonkInstTriangle(x, y, height,   x+64, y+64, height,   x, y+64, height);
-                    shapeB = BonkInstTriangle(x, y, height,   x+64, y, 0,    x+64, y+64, height);
+                    shape  = BonkCreateTriangle(x, y, height,   x+64, y+64, height,   x, y+64, height);
+                    shapeB = BonkCreateTriangle(x, y, height,   x+64, y, 0,    x+64, y+64, height);
                 }
                 else
                 {
-                    shape = BonkInstQuad(x, y, height,   x+64, y, 0,   x, y+64, height);
+                    shape = BonkCreateQuad(x, y, height,   x+64, y, 0,   x, y+64, height);
                 }
             }
             else
             {
                 if (_collisionBR >= 1)
                 {
-                    shape  = BonkInstTriangle(x, y, height,   x+64, y, 0,   x, y+64, 0);
-                    shapeB = BonkInstTriangle(x, y+64, 0,   x+64, y, 0,   x+64, y+64, height);
+                    shape  = BonkCreateTriangle(x, y, height,   x+64, y, 0,   x, y+64, 0);
+                    shapeB = BonkCreateTriangle(x, y+64, 0,   x+64, y, 0,   x+64, y+64, height);
                 }
                 else
                 {
                     //Only top-left
-                    shape = BonkInstTriangle(x, y, height,   x+64, y, 0,   x, y+64, 0);
+                    shape = BonkCreateTriangle(x, y, height,   x+64, y, 0,   x, y+64, 0);
                 }
             }
         }
@@ -122,25 +122,25 @@ function AutoslopeInstances(_weight)
             {
                 if (_collisionBR >= 1)
                 {
-                    shape  = BonkInstTriangle(x, y+64, height,   x+64, y, height,   x+64, y+64, height);
-                    shapeB = BonkInstTriangle(x, y, 0,   x+64, y, height,   x, y+64, height);
+                    shape  = BonkCreateTriangle(x, y+64, height,   x+64, y, height,   x+64, y+64, height);
+                    shapeB = BonkCreateTriangle(x, y, 0,   x+64, y, height,   x, y+64, height);
                 }
                 else
                 {
-                    shape  = BonkInstTriangle(x, y, 0,   x+64, y, height,   x, y+64, height);
-                    shapeB = BonkInstTriangle(x+64, y, height,   x+64, y+64, 0,   x, y+64, height);
+                    shape  = BonkCreateTriangle(x, y, 0,   x+64, y, height,   x, y+64, height);
+                    shapeB = BonkCreateTriangle(x+64, y, height,   x+64, y+64, 0,   x, y+64, height);
                 }
             }
             else
             {
                 if (_collisionBR >= 1)
                 {
-                    shape = BonkInstQuad(x, y, 0,   x+64, y, height,   x, y+64, 0);
+                    shape = BonkCreateQuad(x, y, 0,   x+64, y, height,   x, y+64, 0);
                 }
                 else
                 {
                     //Only top-right
-                    shape = BonkInstTriangle(x, y, 0,   x+64, y, height,   x+64, y+64, 0);
+                    shape = BonkCreateTriangle(x, y, 0,   x+64, y, height,   x+64, y+64, 0);
                 }
             }
         }
@@ -150,12 +150,12 @@ function AutoslopeInstances(_weight)
             {
                 if (_collisionBR >= 1)
                 {
-                    shape = BonkInstQuad(x, y, 0,   x+64, y, 0,   x, y+64, height);
+                    shape = BonkCreateQuad(x, y, 0,   x+64, y, 0,   x, y+64, height);
                 }
                 else
                 {
                     //Only bottom-left
-                    shape = BonkInstTriangle(x, y, 0,   x+64, y+64, 0,   x, y+64, height);
+                    shape = BonkCreateTriangle(x, y, 0,   x+64, y+64, 0,   x, y+64, height);
                 }
             }
             else
@@ -163,7 +163,7 @@ function AutoslopeInstances(_weight)
                 if (_collisionBR >= 1)
                 {
                     //Only bottom-right
-                    shape = BonkInstTriangle(x, y+64, 0,   x+64, y, 0,   x+64, y+64, height);
+                    shape = BonkCreateTriangle(x, y+64, 0,   x+64, y, 0,   x+64, y+64, height);
                 }
                 else
                 {

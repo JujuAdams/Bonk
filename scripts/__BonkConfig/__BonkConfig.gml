@@ -5,3 +5,5 @@
 #macro BONK_RAY_LENGTH  100_000
 
 #macro BONK_INSTANCE_XZ  true
+
+#macro BONK_DEBUG_INSTANCES  true

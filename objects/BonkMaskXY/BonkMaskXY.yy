@@ -2,14 +2,14 @@
   "$GMObject":"",
   "%Name":"BonkMaskXY",
   "eventList":[
-    {"$GMEvent":"v1","%Name":"","collisionObjectId":null,"eventNum":0,"eventType":0,"isDnD":false,"name":"","resourceType":"GMEvent","resourceVersion":"2.0",},
+    {"$GMEvent":"v1","%Name":"","collisionObjectId":null,"eventNum":0,"eventType":12,"isDnD":false,"name":"","resourceType":"GMEvent","resourceVersion":"2.0",},
   ],
   "managed":true,
   "name":"BonkMaskXY",
   "overriddenProperties":[],
   "parent":{
-    "name":"(System)",
-    "path":"folders/Bonk/(System).yy",
+    "name":"Bonk",
+    "path":"folders/Bonk.yy",
   },
   "parentObjectId":null,
   "persistent":false,

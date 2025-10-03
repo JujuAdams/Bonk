@@ -8,7 +8,7 @@
 /// @param [objectXY]
 /// @param [objectXZ]
 
-function BonkInstanceOverlaps(_shape, _dX, _dY, _dZ, _list = undefined, _objectXY = BonkMaskXY, _objectXZ = __BonkMaskXZ)
+function BonkCreateanceOverlaps(_shape, _dX, _dY, _dZ, _list = undefined, _objectXY = BonkMaskXY, _objectXZ = BonkMaskXZ)
 {
     static _listStatic = ds_list_create();
     static _listXZStatic = ds_list_create();
@@ -18,7 +18,7 @@ function BonkInstanceOverlaps(_shape, _dX, _dY, _dZ, _list = undefined, _objectX
     
     if (not variable_instance_exists(_shape, "id"))
     {
-        __BonkError("Can only use BonkInstanceOverlaps() with instances");
+        __BonkError("Can only use BonkCreateanceOverlaps() with instances");
     }
     
     with(_shape)
