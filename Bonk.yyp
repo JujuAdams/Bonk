@@ -226,6 +226,7 @@
     {"id":{"name":"BonkCylinderInsideCylinder","path":"scripts/BonkCylinderInsideCylinder/BonkCylinderInsideCylinder.yy",},},
     {"id":{"name":"BonkCylinderInsideRotatedBox","path":"scripts/BonkCylinderInsideRotatedBox/BonkCylinderInsideRotatedBox.yy",},},
     {"id":{"name":"BonkCylinderInsideSphere","path":"scripts/BonkCylinderInsideSphere/BonkCylinderInsideSphere.yy",},},
+    {"id":{"name":"BonkInsideAny","path":"scripts/BonkInsideAny/BonkInsideAny.yy",},},
     {"id":{"name":"BonkInstanceOverlaps","path":"scripts/BonkInstanceOverlaps/BonkInstanceOverlaps.yy",},},
     {"id":{"name":"BonkInstanceOverlapsVelocity","path":"scripts/BonkInstanceOverlapsVelocity/BonkInstanceOverlapsVelocity.yy",},},
     {"id":{"name":"BonkLine","path":"scripts/BonkLine/BonkLine.yy",},},
