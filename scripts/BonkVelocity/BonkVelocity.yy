@@ -5,8 +5,8 @@
   "isDnD":false,
   "name":"BonkVelocity",
   "parent":{
-    "name":"Helpers",
-    "path":"folders/Bonk/Constructors/Helpers.yy",
+    "name":"Others",
+    "path":"folders/Bonk/Structs/Others.yy",
   },
   "resourceType":"GMScript",
   "resourceVersion":"2.0",

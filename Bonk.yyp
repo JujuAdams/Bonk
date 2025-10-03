@@ -12,9 +12,9 @@
   "Folders":[
     {"$GMFolder":"","%Name":"Bonk","folderPath":"folders/Bonk.yy","name":"Bonk","resourceType":"GMFolder","resourceVersion":"2.0",},
     {"$GMFolder":"","%Name":"(System)","folderPath":"folders/Bonk/(System).yy","name":"(System)","resourceType":"GMFolder","resourceVersion":"2.0",},
-    {"$GMFolder":"","%Name":"Constructors","folderPath":"folders/Bonk/Constructors.yy","name":"Constructors","resourceType":"GMFolder","resourceVersion":"2.0",},
-    {"$GMFolder":"","%Name":"Helpers","folderPath":"folders/Bonk/Constructors/Helpers.yy","name":"Helpers","resourceType":"GMFolder","resourceVersion":"2.0",},
-    {"$GMFolder":"","%Name":"Shapes","folderPath":"folders/Bonk/Constructors/Shapes.yy","name":"Shapes","resourceType":"GMFolder","resourceVersion":"2.0",},
+    {"$GMFolder":"","%Name":"Structs","folderPath":"folders/Bonk/Structs.yy","name":"Structs","resourceType":"GMFolder","resourceVersion":"2.0",},
+    {"$GMFolder":"","%Name":"Others","folderPath":"folders/Bonk/Structs/Others.yy","name":"Others","resourceType":"GMFolder","resourceVersion":"2.0",},
+    {"$GMFolder":"","%Name":"Shapes","folderPath":"folders/Bonk/Structs/Shapes.yy","name":"Shapes","resourceType":"GMFolder","resourceVersion":"2.0",},
     {"$GMFolder":"","%Name":"Getters","folderPath":"folders/Bonk/Getters.yy","name":"Getters","resourceType":"GMFolder","resourceVersion":"2.0",},
     {"$GMFolder":"","%Name":"Collide","folderPath":"folders/Bonk/Getters/Collide.yy","name":"Collide","resourceType":"GMFolder","resourceVersion":"2.0",},
     {"$GMFolder":"","%Name":"AAB","folderPath":"folders/Bonk/Getters/Collide/AAB.yy","name":"AAB","resourceType":"GMFolder","resourceVersion":"2.0",},

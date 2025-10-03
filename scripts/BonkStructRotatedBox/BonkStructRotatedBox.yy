@@ -6,7 +6,7 @@
   "name":"BonkStructRotatedBox",
   "parent":{
     "name":"Shapes",
-    "path":"folders/Bonk/Constructors/Shapes.yy",
+    "path":"folders/Bonk/Structs/Shapes.yy",
   },
   "resourceType":"GMScript",
   "resourceVersion":"2.0",
