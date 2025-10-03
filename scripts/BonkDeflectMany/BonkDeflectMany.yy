@@ -1,12 +1,12 @@
 {
   "$GMScript":"v1",
-  "%Name":"__BonkClassCollideReaction",
+  "%Name":"BonkDeflectMany",
   "isCompatibility":false,
   "isDnD":false,
-  "name":"__BonkClassCollideReaction",
+  "name":"BonkDeflectMany",
   "parent":{
-    "name":"(System)",
-    "path":"folders/Bonk/(System).yy",
+    "name":"Functions",
+    "path":"folders/Bonk/Functions.yy",
   },
   "resourceType":"GMScript",
   "resourceVersion":"2.0",

@@ -20,16 +20,16 @@
 /// @param subjectShape
 /// @param [slopeThreshold=0]
 
-function BonkPushOutMany(_shapeArray, _subjectShape, _slopeThreshold = 0)
+function BonkDeflectMany(_shapeArray, _subjectShape, _slopeThreshold = 0)
 {
-    static _nullPushOutReaction = __Bonk().__nullPushOutReaction;
+    static _nullDeflectData = __Bonk().__nullDeflectData;
     
     if ((not is_array(_shapeArray)) && (not ds_exists(_shapeArray, ds_type_list)))
     {
         _shapeArray = [_shapeArray];
     }
     
-    var _returnReaction = _nullPushOutReaction;
+    var _returnData = _nullDeflectData;
     var _largestDepth = 0;
     
     if (is_array(_shapeArray))
@@ -39,16 +39,16 @@ function BonkPushOutMany(_shapeArray, _subjectShape, _slopeThreshold = 0)
         {
             with(_shapeArray[_i]) //Use `with()` here to support iterating over objects
             {
-                var _reaction = PushOut(_subjectShape, _slopeThreshold);
+                var _reaction = Deflect(_subjectShape, _slopeThreshold);
                 if (_reaction.pushOutType != BONK_PUSH_OUT_NONE)
                 {
-                    with(_reaction.collisionReaction)
+                    with(_reaction.collisionData)
                     {
                         var _depth = dX*dX + dY*dY + dZ*dZ;
-                        if ((_depth > _largestDepth) && (_reaction.pushOutType >= _returnReaction.pushOutType))
+                        if ((_depth > _largestDepth) && (_reaction.pushOutType >= _returnData.pushOutType))
                         {
                             _largestDepth = _depth;
-                            _returnReaction = _reaction.Clone();
+                            _returnData = _reaction.Clone();
                         }
                     }
                 }
@@ -64,16 +64,16 @@ function BonkPushOutMany(_shapeArray, _subjectShape, _slopeThreshold = 0)
         {
             with(_shapeArray[| _i]) //Use `with()` here to support iterating over objects
             {
-                var _reaction = PushOut(_subjectShape, _slopeThreshold);
+                var _reaction = Deflect(_subjectShape, _slopeThreshold);
                 if (_reaction.pushOutType != BONK_PUSH_OUT_NONE)
                 {
-                    with(_reaction.collisionReaction)
+                    with(_reaction.collisionData)
                     {
                         var _depth = dX*dX + dY*dY + dZ*dZ;
-                        if ((_depth > _largestDepth) && (_reaction.pushOutType >= _returnReaction.pushOutType))
+                        if ((_depth > _largestDepth) && (_reaction.pushOutType >= _returnData.pushOutType))
                         {
                             _largestDepth = _depth;
-                            _returnReaction = _reaction.Clone();
+                            _returnData = _reaction.Clone();
                         }
                     }
                 }
@@ -83,5 +83,5 @@ function BonkPushOutMany(_shapeArray, _subjectShape, _slopeThreshold = 0)
         }
     }
     
-    return _returnReaction;
+    return _returnData;
 }

@@ -19,8 +19,8 @@
 
 function BonkCylinderCollideCylinder(_cylinder1, _cylinder2)
 {
-    static _nullReaction = __Bonk().__nullCollisionReaction;
-    static _reaction     = new __BonkClassCollideReaction();
+    static _nullData = __Bonk().__nullCollisionData;
+    static _reaction     = new __BonkClassCollideData();
     
     with(_cylinder1)
     {
@@ -35,7 +35,7 @@ function BonkCylinderCollideCylinder(_cylinder1, _cylinder2)
         
         if ((_pushBelow >= 0) && (_pushAbove <= 0))
         {
-            return _nullReaction;
+            return _nullData;
         }
         
         var _dX = x - _cylinder2.x;
@@ -58,7 +58,7 @@ function BonkCylinderCollideCylinder(_cylinder1, _cylinder2)
         var _pushXY = (radius + _cylinder2.radius) - _xyDist;
         if (_pushXY <= 0)
         {
-            return _nullReaction;
+            return _nullData;
         }
         
         with(_reaction)
@@ -82,5 +82,5 @@ function BonkCylinderCollideCylinder(_cylinder1, _cylinder2)
         return _reaction;
     }
     
-    return _nullReaction;
+    return _nullData;
 }

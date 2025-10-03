@@ -19,8 +19,8 @@
 
 function BonkAABCollideAAB(_aab1, _aab2)
 {
-    static _nullReaction = __Bonk().__nullCollisionReaction;
-    static _reaction     = new __BonkClassCollideReaction();
+    static _nullData = __Bonk().__nullCollisionData;
+    static _reaction     = new __BonkClassCollideData();
     
     with(_aab1)
     {
@@ -53,7 +53,7 @@ function BonkAABCollideAAB(_aab1, _aab2)
     
     if ((_pushLeft >= 0) || (_pushRight <= 0) || (_pushUp >= 0) || (_pushDown <= 0) || (_pushBelow >= 0) || (_pushAbove <= 0))
     {
-        return _nullReaction;
+        return _nullData;
     }
     
     with(_reaction)

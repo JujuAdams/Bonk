@@ -30,8 +30,8 @@ else
 velocity.zSpeed -= gravAccel;
 --onGroundFrames;
 
-var _pushOutReaction = BonkMoveAndCollide(shape, velocity, world, 40);
-if (_pushOutReaction.pushOutType == BONK_PUSH_OUT_GRIPPY)
+var _pushOutData = BonkMoveAndDeflect(shape, velocity, world, 40);
+if (_pushOutData.pushOutType == BONK_PUSH_OUT_GRIPPY)
 {
     onGroundFrames = 5;
 }
@@ -59,7 +59,7 @@ shape.z += velocity.zSpeed;
 
 with(oTestParent)
 {
-    shape.PushOut(other.shape, 40);
+    shape.Deflect(other.shape, 40);
 }
 
 velocity.xSpeed = shape.x - _x;

@@ -19,8 +19,8 @@
 
 function BonkCapsuleCollideTriangle(_capsule, _triangle)
 {
-    static _nullReaction = __Bonk().__nullCollisionReaction;
-    static _reaction     = new __BonkClassCollideReaction();
+    static _nullData = __Bonk().__nullCollisionData;
+    static _reaction     = new __BonkClassCollideData();
     
     with(_capsule)
     {
@@ -168,7 +168,7 @@ function BonkCapsuleCollideTriangle(_capsule, _triangle)
     
         //Sneaky distance-to-plane check as an early-out
         var _refToPlaneDist = dot_product_3d(_tempX, _tempY, _tempZ, _normalX, _normalY, _normalZ);
-        if (abs(_refToPlaneDist) > _capsuleRadius) return _nullReaction;
+        if (abs(_refToPlaneDist) > _capsuleRadius) return _nullData;
     
     _edgeSqrLen = _edgeSqrLength12;
     _edgeX = _dX12;
@@ -266,12 +266,12 @@ function BonkCapsuleCollideTriangle(_capsule, _triangle)
     if (_pushLength == 0)
     {
         //TODO - Handle this edge case
-        return _nullReaction;
+        return _nullData;
     }
     
     if (_pushLength >= _capsuleRadius)
     {
-        return _nullReaction;
+        return _nullData;
     }
     
     with(_reaction)

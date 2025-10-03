@@ -26,7 +26,7 @@
 ///     N.B. The returned struct is statically allocated. Reusing `.Collide()` may cause the same struct
 ///          to be returned.
 /// 
-/// `.PushOut(subjectShape, [slopeThreshold=0])`
+/// `.Deflect(subjectShape, [slopeThreshold=0])`
 ///     Pushes the subject shape out of the shapes added to the world. The slope threshold will
 ///     allow shapes to "stand" on slopes instead of sliding down them. The units of this parameter
 ///     are degrees. An angle of `0` represents a perfectly horizontal floor plane. Increase this
@@ -222,12 +222,12 @@ function BonkStructWorld(_cellXSize, _cellYSize, _cellZSize, _x = 0, _y = 0, _z 
         return false;
     }
     
-    static PushOut = function(_subjectShape, _slopeThreshold = 0)
+    static Deflect = function(_subjectShape, _slopeThreshold = 0)
     {
         static _map = ds_map_create();
-        static _nullPushOutReaction = __Bonk().__nullPushOutReaction;
+        static _nullDeflectData = __Bonk().__nullDeflectData;
         
-        var _returnReaction = _nullPushOutReaction;
+        var _returnData = _nullDeflectData;
         var _largestDepth = 0;
         
         var _cheapVersion = true;
@@ -247,16 +247,16 @@ function BonkStructWorld(_cellXSize, _cellYSize, _cellZSize, _x = 0, _y = 0, _z 
             var _i = 0;
             repeat(array_length(_shapeArray))
             {
-                var _reaction = _shapeArray[_i].PushOut(_subjectShape, _slopeThreshold);
+                var _reaction = _shapeArray[_i].Deflect(_subjectShape, _slopeThreshold);
                 if (_reaction.pushOutType != BONK_PUSH_OUT_NONE)
                 {
-                    with(_reaction.collisionReaction)
+                    with(_reaction.collisionData)
                     {
                         var _depth = dX*dX + dY*dY + dZ*dZ;
-                        if ((_depth > _largestDepth) && (_reaction.pushOutType >= _returnReaction.pushOutType))
+                        if ((_depth > _largestDepth) && (_reaction.pushOutType >= _returnData.pushOutType))
                         {
                             _largestDepth = _depth;
-                            _returnReaction = _reaction.Clone();
+                            _returnData = _reaction.Clone();
                         }
                     }
                 }
@@ -293,16 +293,16 @@ function BonkStructWorld(_cellXSize, _cellYSize, _cellZSize, _x = 0, _y = 0, _z 
                             {
                                 _map[? _shape] = true;
                                 
-                                var _reaction = _shape.PushOut(_subjectShape, _slopeThreshold);
+                                var _reaction = _shape.Deflect(_subjectShape, _slopeThreshold);
                                 if (_reaction.pushOutType != BONK_PUSH_OUT_NONE)
                                 {
-                                    with(_reaction.collisionReaction)
+                                    with(_reaction.collisionData)
                                     {
                                         var _depth = dX*dX + dY*dY + dZ*dZ;
-                                        if ((_depth > _largestDepth) && (_reaction.pushOutType >= _returnReaction.pushOutType))
+                                        if ((_depth > _largestDepth) && (_reaction.pushOutType >= _returnData.pushOutType))
                                         {
                                             _largestDepth = _depth;
-                                            _returnReaction = _reaction.Clone();
+                                            _returnData = _reaction.Clone();
                                         }
                                     }
                                 }
@@ -323,13 +323,13 @@ function BonkStructWorld(_cellXSize, _cellYSize, _cellZSize, _x = 0, _y = 0, _z 
             ds_map_clear(_map);
         }
         
-        return _returnReaction;
+        return _returnData;
     }
     
     static Collide = function(_subjectShape)
     {
         static _map = ds_map_create();
-        static _nullCollisionReaction = __Bonk().__nullCollisionReaction;
+        static _nullCollisionData = __Bonk().__nullCollisionData;
         
         var _cheapVersion = true;
         
@@ -409,7 +409,7 @@ function BonkStructWorld(_cellXSize, _cellYSize, _cellZSize, _x = 0, _y = 0, _z 
             ds_map_clear(_map);
         }
         
-        return _nullCollisionReaction;
+        return _nullCollisionData;
     }
     
     static GetAABB = function()

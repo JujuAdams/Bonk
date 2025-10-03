@@ -19,8 +19,8 @@
 
 function BonkSphereCollideSphere(_sphere1, _sphere2)
 {
-    static _nullReaction = __Bonk().__nullCollisionReaction;
-    static _reaction     = new __BonkClassCollideReaction();
+    static _nullData = __Bonk().__nullCollisionData;
+    static _reaction     = new __BonkClassCollideData();
     
     var _dX = _sphere1.x - _sphere2.x;
     var _dY = _sphere1.y - _sphere2.y;
@@ -43,7 +43,7 @@ function BonkSphereCollideSphere(_sphere1, _sphere2)
     var _push = (_sphere1.radius + _sphere2.radius) - _dist;
     if (_push <= 0)
     {
-        return _nullReaction;
+        return _nullData;
     }
     
     with(_reaction)

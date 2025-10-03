@@ -17,10 +17,10 @@ function __Bonk()
     _global = {};
     with(_global)
     {
-        __nullCollisionReaction = new __BonkClassCollideReaction();
-        __nullCollisionReaction.collision = false;
+        __nullCollisionData = new __BonkClassCollideData();
+        __nullCollisionData.collision = false;
         
-        __nullPushOutReaction = new __BonkClassPushOutReaction();
+        __nullDeflectData = new __BonkClassDeflectData();
         
         __nullHit = new __BonkClassHit();
         __nullHit.collision = false;

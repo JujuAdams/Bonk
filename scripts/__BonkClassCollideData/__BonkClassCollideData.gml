@@ -1,6 +1,6 @@
 // Feather disable all
 
-function __BonkClassCollideReaction() constructor
+function __BonkClassCollideData() constructor
 {
     collision = true;
     dX = 0;

@@ -1,9 +1,9 @@
 {
   "$GMScript":"v1",
-  "%Name":"BonkPushOutMany",
+  "%Name":"BonkMoveAndDeflect",
   "isCompatibility":false,
   "isDnD":false,
-  "name":"BonkPushOutMany",
+  "name":"BonkMoveAndDeflect",
   "parent":{
     "name":"Functions",
     "path":"folders/Bonk/Functions.yy",

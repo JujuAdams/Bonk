@@ -19,8 +19,8 @@
 
 function BonkCapsuleCollideCapsule(_capsule1, _capsule2)
 {
-    static _nullReaction = __Bonk().__nullCollisionReaction;
-    static _reaction     = new __BonkClassCollideReaction();
+    static _nullData = __Bonk().__nullCollisionData;
+    static _reaction     = new __BonkClassCollideData();
     
     with(_capsule1)
     {
@@ -52,7 +52,7 @@ function BonkCapsuleCollideCapsule(_capsule1, _capsule2)
     var _dist = sqrt(_dX*_dX + _dY*_dY + _dZ*_dZ);
     if (_dist >= _capsuleRadius1 + _capsuleRadius2)
     {
-        return _nullReaction;
+        return _nullData;
     }
     
     with(_reaction)

@@ -1,9 +1,9 @@
 {
   "$GMScript":"v1",
-  "%Name":"__BonkClassPushOutReaction",
+  "%Name":"__BonkClassCollideData",
   "isCompatibility":false,
   "isDnD":false,
-  "name":"__BonkClassPushOutReaction",
+  "name":"__BonkClassCollideData",
   "parent":{
     "name":"(System)",
     "path":"folders/Bonk/(System).yy",

@@ -19,8 +19,8 @@
 
 function BonkCapsuleCollideAAB(_capsule, _aab)
 {
-    static _nullReaction = __Bonk().__nullCollisionReaction;
-    static _reaction     = new __BonkClassCollideReaction();
+    static _nullData = __Bonk().__nullCollisionData;
+    static _reaction     = new __BonkClassCollideData();
     
     with(_capsule)
     {
@@ -48,7 +48,7 @@ function BonkCapsuleCollideAAB(_capsule, _aab)
     var _dist = sqrt(_dX*_dX + _dY*_dY + _dZ*_dZ);
     if ((_dist <= 0) || (_dist >= _capsuleRadius))
     {
-        return _nullReaction;
+        return _nullData;
     }
     
     var _coeff = _capsuleRadius / _dist;

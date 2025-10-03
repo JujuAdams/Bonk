@@ -40,21 +40,21 @@ function __BonkSetAsCommon()
         return false;
     }
     
-    PushOut = function(_subjectShape, _slopeThreshold = 0)
+    Deflect = function(_subjectShape, _slopeThreshold = 0)
     {
-        static _reaction = new __BonkClassPushOutReaction();
-        static _nullCollisionReaction = __Bonk().__nullCollisionReaction;
+        static _reaction = new __BonkClassDeflectData();
+        static _nullCollisionData = __Bonk().__nullCollisionData;
     
         _reaction.targetShape = self;
     
         with(_subjectShape)
         {
-            var _collisionReaction = Collide(other);
-            if (_collisionReaction.collision)
+            var _collisionData = Collide(other);
+            if (_collisionData.collision)
             {
-                var _dX = _collisionReaction.dX;
-                var _dY = _collisionReaction.dY;
-                var _dZ = _collisionReaction.dZ;
+                var _dX = _collisionData.dX;
+                var _dY = _collisionData.dY;
+                var _dZ = _collisionData.dZ;
             
                 var _distance = max(0.00001, sqrt(_dX*_dX + _dY*_dY + _dZ*_dZ));
                 if ((_dZ / _distance) > clamp(dcos(_slopeThreshold), 0, 1))
@@ -81,13 +81,13 @@ function __BonkSetAsCommon()
                 _reaction.pushOutType = BONK_PUSH_OUT_NONE;
             }
         
-            _reaction.collisionReaction = _collisionReaction;
+            _reaction.collisionData = _collisionData;
         
             return _reaction;
         }
     
         //Subject shape was `undefined`
-        _reaction.collisionReaction = _nullCollisionReaction;
+        _reaction.collisionData = _nullCollisionData;
         _reaction.pushOutType       = BONK_PUSH_OUT_NONE;
     
         return _reaction;
@@ -95,7 +95,7 @@ function __BonkSetAsCommon()
     
     Collide = function(_otherShape)
     {
-        static _nullCollisionReaction = __Bonk().__nullCollisionReaction;
+        static _nullCollisionData = __Bonk().__nullCollisionData;
     
         var _collideFunc = __collideFuncLookup[_otherShape.bonkType];
         if (is_callable(_collideFunc))
@@ -110,7 +110,7 @@ function __BonkSetAsCommon()
             }
         }
     
-        return _nullCollisionReaction;
+        return _nullCollisionData;
     }
 
     DrawXY = function(_color = c_white)

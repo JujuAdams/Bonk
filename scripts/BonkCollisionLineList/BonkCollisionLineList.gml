@@ -11,7 +11,7 @@
 /// @param [objectXY]
 /// @param [objectXZ]
 
-function BonkCollisionLineList(_x1, _y1, _z1, _x2, _y2, _z2, _exclude = undefined, _array = undefined, _objectXY = BonkMaskXY, _objectXZ = BonkMaskXZ)
+function BonkCollisionLineList(_x1, _y1, _z1, _x2, _y2, _z2, _array = undefined, _objectXY = BonkMaskXY, _objectXZ = BonkMaskXZ)
 {
     static _staticArray = [];
     _array ??= _staticArray;
@@ -21,13 +21,6 @@ function BonkCollisionLineList(_x1, _y1, _z1, _x2, _y2, _z2, _exclude = undefine
     
     var _listXY = _listXYStatic;
     var _countXY = collision_line_list(_x1, _y1, _x2, _y2, _objectXY, false, false, _listXY, false);
-    
-    var _index = ds_list_find_index(_listXY, _exclude.id);
-    if (_index >= 0)
-    {
-        ds_list_delete(_listXY, _index);
-        --_countXY;
-    }
     
     if (BONK_INSTANCE_XZ)
     {

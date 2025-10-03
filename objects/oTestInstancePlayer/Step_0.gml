@@ -30,8 +30,8 @@ else
 velocity.zSpeed -= gravAccel;
 --onGroundFrames;
 
-var _pushOutReaction = BonkMoveAndCollide(shape, velocity, BonkInstancePlaceListVelocity(shape, velocity), 40);
-if (_pushOutReaction.pushOutType == BONK_PUSH_OUT_GRIPPY)
+var _pushOutData = BonkMoveAndDeflect(shape, velocity, BonkInstancePlaceListVelocity(shape, velocity), 40);
+if (_pushOutData.pushOutType == BONK_PUSH_OUT_GRIPPY)
 {
     onGroundFrames = 5;
 }

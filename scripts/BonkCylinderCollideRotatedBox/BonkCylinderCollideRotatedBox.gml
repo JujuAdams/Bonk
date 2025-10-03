@@ -19,8 +19,8 @@
 
 function BonkCylinderCollideRotatedBox(_cylinder, _box)
 {
-    static _nullReaction = __Bonk().__nullCollisionReaction;
-    static _reaction     = new __BonkClassCollideReaction();
+    static _nullData = __Bonk().__nullCollisionData;
+    static _reaction     = new __BonkClassCollideData();
     
     with(_cylinder)
     {
@@ -40,7 +40,7 @@ function BonkCylinderCollideRotatedBox(_cylinder, _box)
         //Cylinder and box don't overlap in the z axis
         if ((_boxZMin > _cylinderZMax) && (_boxZMax < _cylinderZMin))
         {
-            return _nullReaction;
+            return _nullData;
         }
         
         var _left   = -0.5*xSize;
@@ -67,7 +67,7 @@ function BonkCylinderCollideRotatedBox(_cylinder, _box)
         
         if (not rectangle_in_circle(_left, _top, _right, _bottom, _i, _j, _cylinderRadius))
         {
-            return _nullReaction;
+            return _nullData;
         }
         
         var _pushI = 0;
@@ -132,5 +132,5 @@ function BonkCylinderCollideRotatedBox(_cylinder, _box)
         return _reaction;
     }
     
-    return _nullReaction;
+    return _nullData;
 }

@@ -19,8 +19,8 @@
 
 function BonkSphereCollideRotatedBox(_sphere, _box)
 {
-    static _nullReaction = __Bonk().__nullCollisionReaction;
-    static _reaction     = new __BonkClassCollideReaction();
+    static _nullData = __Bonk().__nullCollisionData;
+    static _reaction     = new __BonkClassCollideData();
     
     with(_sphere)
     {
@@ -92,7 +92,7 @@ function BonkSphereCollideRotatedBox(_sphere, _box)
             
             if (_d >= _sphereRadius)
             {
-                return _nullReaction;
+                return _nullData;
             }
             
             _pushDistance = _sphereRadius - _d;
@@ -115,5 +115,5 @@ function BonkSphereCollideRotatedBox(_sphere, _box)
         return _reaction;
     }
     
-    return _nullReaction;
+    return _nullData;
 }

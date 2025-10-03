@@ -5,14 +5,14 @@
 
 function BonkCollideMany(_shapeArray, _subjectShape)
 {
-    static _nullCollisionReaction = __Bonk().__nullCollisionReaction;
+    static _nullCollisionData = __Bonk().__nullCollisionData;
     
     if ((not is_array(_shapeArray)) && (not ds_exists(_shapeArray, ds_type_list)))
     {
         _shapeArray = [_shapeArray];
     }
     
-    var _returnReaction = _nullCollisionReaction;
+    var _returnData = _nullCollisionData;
     var _largestDepth = 0;
     
     if (is_array(_shapeArray))
@@ -25,13 +25,13 @@ function BonkCollideMany(_shapeArray, _subjectShape)
                 var _reaction = Collide(_subjectShape);
                 if (_reaction.collision)
                 {
-                    with(_reaction.collisionReaction)
+                    with(_reaction.collisionData)
                     {
                         var _depth = dX*dX + dY*dY + dZ*dZ;
                         if (_depth > _largestDepth)
                         {
                             _largestDepth = _depth;
-                            _returnReaction = _reaction.Clone();
+                            _returnData = _reaction.Clone();
                         }
                     }
                 }
@@ -50,13 +50,13 @@ function BonkCollideMany(_shapeArray, _subjectShape)
                 var _reaction = Collide(_subjectShape);
                 if (_reaction.collision)
                 {
-                    with(_reaction.collisionReaction)
+                    with(_reaction.collisionData)
                     {
                         var _depth = dX*dX + dY*dY + dZ*dZ;
                         if (_depth > _largestDepth)
                         {
                             _largestDepth = _depth;
-                            _returnReaction = _reaction.Clone();
+                            _returnData = _reaction.Clone();
                         }
                     }
                 }
@@ -66,5 +66,5 @@ function BonkCollideMany(_shapeArray, _subjectShape)
         }
     }
     
-    return _returnReaction;
+    return _returnData;
 }

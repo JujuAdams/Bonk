@@ -1,12 +1,12 @@
 {
   "$GMScript":"v1",
-  "%Name":"BonkMoveAndCollide",
+  "%Name":"__BonkClassDeflectData",
   "isCompatibility":false,
   "isDnD":false,
-  "name":"BonkMoveAndCollide",
+  "name":"__BonkClassDeflectData",
   "parent":{
-    "name":"Functions",
-    "path":"folders/Bonk/Functions.yy",
+    "name":"(System)",
+    "path":"folders/Bonk/(System).yy",
   },
   "resourceType":"GMScript",
   "resourceVersion":"2.0",

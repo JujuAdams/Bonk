@@ -19,8 +19,8 @@
 
 function BonkCapsuleCollideRotatedBox(_capsule, _box)
 {
-    static _nullReaction = __Bonk().__nullCollisionReaction;
-    static _reaction     = new __BonkClassCollideReaction();
+    static _nullData = __Bonk().__nullCollisionData;
+    static _reaction     = new __BonkClassCollideData();
     
     with(_capsule)
     {
@@ -95,7 +95,7 @@ function BonkCapsuleCollideRotatedBox(_capsule, _box)
             
             if (_d >= _capsuleRadius)
             {
-                return _nullReaction;
+                return _nullData;
             }
             
             _pushDistance = _capsuleRadius - _d;
@@ -118,5 +118,5 @@ function BonkCapsuleCollideRotatedBox(_capsule, _box)
         return _reaction;
     }
     
-    return _nullReaction;
+    return _nullData;
 }

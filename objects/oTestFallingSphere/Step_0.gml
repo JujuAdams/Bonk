@@ -10,32 +10,32 @@ shape.z += zSpeed;
 
 with(oTestFloor)
 {
-    shape.PushOut(other.shape);
+    shape.Deflect(other.shape);
 }
 
 with(oTestAAB)
 {
-    shape.PushOut(other.shape);
+    shape.Deflect(other.shape);
 }
 
 with(oTestCylinder)
 {
-    shape.PushOut(other.shape);
+    shape.Deflect(other.shape);
 }
 
 with(oTestSphere)
 {
-    shape.PushOut(other.shape);
+    shape.Deflect(other.shape);
 }
 
 with(oTestQuad)
 {
-    shape.PushOut(other.shape);
+    shape.Deflect(other.shape);
 }
 
 with(oTestTriangle)
 {
-    shape.PushOut(other.shape);
+    shape.Deflect(other.shape);
 }
 
 xSpeed = shape.x - _x;

@@ -1,17 +1,17 @@
 // Feather disable all
 
-function __BonkClassPushOutReaction() constructor
+function __BonkClassDeflectData() constructor
 {
     targetShape       = undefined;
-    collisionReaction = undefined;
+    collisionData = undefined;
     pushOutType       = BONK_PUSH_OUT_NONE;
     
     static Clone = function()
     {
-        var _new = new __BonkClassPushOutReaction();
+        var _new = new __BonkClassDeflectData();
         
         _new.targetShape       = targetShape;
-        _new.collisionReaction = variable_clone(collisionReaction);
+        _new.collisionData = variable_clone(collisionData);
         _new.pushOutType       = pushOutType;
          
         return _new;

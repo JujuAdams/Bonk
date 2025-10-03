@@ -19,8 +19,8 @@
 
 function BonkSphereCollideQuad(_sphere, _quad)
 {
-    static _nullReaction = __Bonk().__nullCollisionReaction;
-    static _reaction     = new __BonkClassCollideReaction();
+    static _nullData = __Bonk().__nullCollisionData;
+    static _reaction     = new __BonkClassCollideData();
     
     with(_sphere)
     {
@@ -80,7 +80,7 @@ function BonkSphereCollideQuad(_sphere, _quad)
     //Early out if the sphere is too far away from the plane
     if ((_refToPlaneDist < -_sphereRadius) || (_refToPlaneDist > _sphereRadius))
     {
-        return _nullReaction;
+        return _nullData;
     }
     
     //Point on the plane closest to the sphere's centre
@@ -181,12 +181,12 @@ function BonkSphereCollideQuad(_sphere, _quad)
     if (_pushLength == 0)
     {
         //TODO - Handle this edge case
-        return _nullReaction;
+        return _nullData;
     }
     
     if (_pushLength >= _sphereRadius)
     {
-        return _nullReaction;
+        return _nullData;
     }
     
     with(_reaction)

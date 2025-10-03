@@ -19,8 +19,8 @@
 
 function BonkCylinderCollideSphere(_cylinder, _sphere)
 {
-    static _nullReaction = __Bonk().__nullCollisionReaction;
-    static _reaction     = new __BonkClassCollideReaction();
+    static _nullData = __Bonk().__nullCollisionData;
+    static _reaction     = new __BonkClassCollideData();
     
     with(_cylinder)
     {
@@ -64,7 +64,7 @@ function BonkCylinderCollideSphere(_cylinder, _sphere)
     var _dist = sqrt(_dX*_dX + _dY*_dY + _dZ*_dZ);
     if (_dist >= _sphereRadius)
     {
-        return _nullReaction;
+        return _nullData;
     }
     
     var _coeff = _sphereRadius / _dist;
