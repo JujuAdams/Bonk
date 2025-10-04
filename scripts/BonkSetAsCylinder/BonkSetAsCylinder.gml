@@ -1,5 +1,7 @@
 // Feather disable all
 
+/// Sets the currently scoped instance as a Bonk instance of the cylinder type.
+/// 
 /// @param xCenter
 /// @param yCenter
 /// @param zCenter
@@ -9,6 +11,11 @@
 
 function BonkSetAsCylinder(_x, _y, _z, _height, _radius, _groupVector = BONK_DEFAULT_GROUP)
 {
+    if (not __BonkIsInstance())
+    {
+        __BonkError("Must only be called on an object instance");
+    }
+    
     __BonkCommonFunctions(_groupVector);
     __BonkCommonCylinder();
     

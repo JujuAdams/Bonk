@@ -1,7 +1,7 @@
 // Feather disable all
 
-/// Helper function to create a vertical wall. The wall is an implementation of `BonkCreateQuad()` with a
-/// friendlier argument order.
+/// Helper function to create a vertical wall which is, in reality, a special case of the "quad"
+/// Bonk instance type. Please see `BonkSetAsQuad()` for more details.
 /// 
 /// @param xBottomLeft
 /// @param yBottomLeft

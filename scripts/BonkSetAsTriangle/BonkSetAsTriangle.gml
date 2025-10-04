@@ -1,5 +1,7 @@
 // Feather disable all
 
+/// Sets the currently scoped instance as a Bonk instance of the triangle type.
+/// 
 /// @param x1
 /// @param y1
 /// @param z1
@@ -14,6 +16,11 @@
 
 function BonkSetAsTriangle(_x1, _y1, _z1, _x2, _y2, _z2, _x3, _y3, _z3, _groupVector = BONK_DEFAULT_GROUP)
 {
+    if (not __BonkIsInstance())
+    {
+        __BonkError("Must only be called on an object instance");
+    }
+    
     __BonkCommonFunctions(_groupVector);
     __BonkCommonTriangle();
     

@@ -122,6 +122,7 @@
     {"name":"__BonkCommonWorld","order":8,"path":"scripts/__BonkCommonWorld/__BonkCommonWorld.yy",},
     {"name":"__BonkConstants","order":1,"path":"scripts/__BonkConstants/__BonkConstants.yy",},
     {"name":"__BonkError","order":1,"path":"scripts/__BonkError/__BonkError.yy",},
+    {"name":"__BonkIsInstance","order":18,"path":"scripts/__BonkIsInstance/__BonkIsInstance.yy",},
     {"name":"__BonkReturnNullHit","order":7,"path":"scripts/__BonkReturnNullHit/__BonkReturnNullHit.yy",},
     {"name":"__BonkSupercover","order":8,"path":"scripts/__BonkSupercover/__BonkSupercover.yy",},
     {"name":"__DotobjConfig","order":6,"path":"scripts/__DotobjConfig/__DotobjConfig.yy",},

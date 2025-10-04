@@ -167,6 +167,7 @@
     {"id":{"name":"__BonkConfig","path":"scripts/__BonkConfig/__BonkConfig.yy",},},
     {"id":{"name":"__BonkConstants","path":"scripts/__BonkConstants/__BonkConstants.yy",},},
     {"id":{"name":"__BonkError","path":"scripts/__BonkError/__BonkError.yy",},},
+    {"id":{"name":"__BonkIsInstance","path":"scripts/__BonkIsInstance/__BonkIsInstance.yy",},},
     {"id":{"name":"__BonkReturnNullHit","path":"scripts/__BonkReturnNullHit/__BonkReturnNullHit.yy",},},
     {"id":{"name":"__BonkSupercover","path":"scripts/__BonkSupercover/__BonkSupercover.yy",},},
     {"id":{"name":"__DotobjConfig","path":"scripts/__DotobjConfig/__DotobjConfig.yy",},},

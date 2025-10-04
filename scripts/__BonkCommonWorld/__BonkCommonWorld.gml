@@ -401,7 +401,7 @@ function __BonkCommonWorld(_cellXSize, _cellYSize, _cellZSize)
         __minCellZ = min(__minCellZ, _cellZ, _cellZ2);
         __maxCellZ = max(__maxCellZ, _cellZ, _cellZ2);
         
-        if (instance_exists(self))
+        if (__BonkIsInstance())
         {
             var _left   = __cellXSize*__minCellX;
             var _top    = __cellYSize*__minCellY;
