@@ -6,9 +6,9 @@
 /// @param zCenter
 /// @param height
 /// @param radius
-/// @param [objectXZ]
 
-function BonkSetAsCylinder(_instance, _x, _y, _z, _height, _radius, _objectXZ = BonkObjectXZ)
+
+function BonkSetAsCylinder(_instance, _x, _y, _z, _height, _radius)
 {
     with(_instance)
     {
@@ -29,19 +29,6 @@ function BonkSetAsCylinder(_instance, _x, _y, _z, _height, _radius, _objectXZ = 
         image_xscale = 2*_radius / BONK_MASK_SIZE;
         image_yscale = 2*_radius / BONK_MASK_SIZE;
         
-        if (BONK_INSTANCE_XZ)
-        {
-            __instanceXZ = instance_create_depth(_x, _z, 0, _objectXZ);
-            with(__instanceXZ)
-            {
-                __instanceXY = other;
-                
-                mask_index = __BonkMaskAAB;
-                image_xscale = other.image_xscale;
-                image_yscale = _height / BONK_MASK_SIZE;
-            }
-        }
-        
         
         
         SetPosition = function(_x = x, _y = y, _z = z)
@@ -50,23 +37,12 @@ function BonkSetAsCylinder(_instance, _x, _y, _z, _height, _radius, _objectXZ = 
             y = _y;
             z = _z;
             
-            if (BONK_INSTANCE_XZ)
-            {
-                __instanceXZ.x = x;
-                __instanceXZ.y = z;
-            }
-            
             return self;
         }
         
         SetHeight = function(_height = height)
         {
             height = _height;
-            
-            if (BONK_INSTANCE_XZ)
-            {
-                __instanceXZ.image_yscale = height / BONK_MASK_SIZE;
-            }
         
             return self;
         }
@@ -89,11 +65,6 @@ function BonkSetAsCylinder(_instance, _x, _y, _z, _height, _radius, _objectXZ = 
             
             image_xscale = 2*radius / BONK_MASK_SIZE;
             image_yscale = 2*radius / BONK_MASK_SIZE;
-            
-            if (BONK_INSTANCE_XZ)
-            {
-                __instanceXZ.image_xscale = image_xscale;
-            }
             
             return self;
         }

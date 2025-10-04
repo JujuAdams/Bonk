@@ -10,9 +10,9 @@
 /// @param x3
 /// @param y3
 /// @param z3
-/// @param [objectXZ]
 
-function BonkSetAsQuad(_instance, _x1, _y1, _z1, _x2, _y2, _z2, _x3, _y3, _z3, _objectXZ = BonkObjectXZ)
+
+function BonkSetAsQuad(_instance, _x1, _y1, _z1, _x2, _y2, _z2, _x3, _y3, _z3)
 {
     with(_instance)
     {
@@ -36,16 +36,6 @@ function BonkSetAsQuad(_instance, _x1, _y1, _z1, _x2, _y2, _z2, _x3, _y3, _z3, _
         
         
         mask_index = __BonkMaskAAB;
-        
-        if (BONK_INSTANCE_XZ)
-        {
-            __instanceXZ = instance_create_depth(0, 0, 0, _objectXZ);
-            with(__instanceXZ)
-            {
-                __instanceXY = other;
-                mask_index = __BonkMaskAAB;
-            }
-        }
         
         
         
@@ -102,14 +92,6 @@ function BonkSetAsQuad(_instance, _x1, _y1, _z1, _x2, _y2, _z2, _x3, _y3, _z3, _
             
             image_xscale = max(BONK_INSTANCE_MIN_SIZE, _maxX - _minX) / BONK_MASK_SIZE;
             image_yscale = max(BONK_INSTANCE_MIN_SIZE, _maxY - _minY) / BONK_MASK_SIZE;
-            
-            if (BONK_INSTANCE_XZ)
-            {
-                __instanceXZ.x = x;
-                __instanceXZ.y = z;
-                __instanceXZ.image_xscale = image_xscale;
-                __instanceXZ.image_yscale = max(BONK_INSTANCE_MIN_SIZE, _maxZ - _minZ) / BONK_MASK_SIZE;
-            }
         }
         
         Refresh();

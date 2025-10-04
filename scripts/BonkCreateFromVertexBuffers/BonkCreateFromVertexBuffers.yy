@@ -5,8 +5,8 @@
   "isDnD":false,
   "name":"BonkCreateFromVertexBuffers",
   "parent":{
-    "name":"Instances",
-    "path":"folders/Bonk/Instances.yy",
+    "name":"Instance Creators",
+    "path":"folders/Bonk/Instances/Instance Creators.yy",
   },
   "resourceType":"GMScript",
   "resourceVersion":"2.0",

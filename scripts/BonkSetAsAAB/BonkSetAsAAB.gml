@@ -7,9 +7,9 @@
 /// @param xSize
 /// @param ySize
 /// @param zSize
-/// @param [objectXZ]
 
-function BonkSetAsAAB(_instance, _x, _y, _z, _xSize, _ySize, _zSize, _objectXZ = BonkObjectXZ)
+
+function BonkSetAsAAB(_instance, _x, _y, _z, _xSize, _ySize, _zSize)
 {
     with(_instance)
     {
@@ -31,19 +31,6 @@ function BonkSetAsAAB(_instance, _x, _y, _z, _xSize, _ySize, _zSize, _objectXZ =
         image_xscale = _xSize / BONK_MASK_SIZE;
         image_yscale = _ySize / BONK_MASK_SIZE;
         
-        if (BONK_INSTANCE_XZ)
-        {
-            __instanceXZ = instance_create_depth(_x, _z, 0, _objectXZ).id;
-            with(__instanceXZ)
-            {
-                __instanceXY = other;
-                
-                mask_index = __BonkMaskAAB;
-                image_xscale = other.image_xscale;
-                image_yscale = _zSize / BONK_MASK_SIZE;
-            }
-        }
-        
         
         
         SetPosition = function(_x = x, _y = y, _z = z)
@@ -51,12 +38,6 @@ function BonkSetAsAAB(_instance, _x, _y, _z, _xSize, _ySize, _zSize, _objectXZ =
             x = _x;
             y = _y;
             z = _z;
-            
-            if (BONK_INSTANCE_XZ)
-            {
-                __instanceXZ.x = x;
-                __instanceXZ.y = z;
-            }
             
             return self;
         }
@@ -69,12 +50,6 @@ function BonkSetAsAAB(_instance, _x, _y, _z, _xSize, _ySize, _zSize, _objectXZ =
             
             image_xscale = xSize / BONK_MASK_SIZE;
             image_yscale = ySize / BONK_MASK_SIZE;
-            
-            if (BONK_INSTANCE_XZ)
-            {
-                __instanceXZ.image_xscale = image_xscale;
-                __instanceXZ.image_yscale = zSize / BONK_MASK_SIZE;
-            }
         
             return self;
         }

@@ -2,10 +2,9 @@
 
 /// @param bonkInstance
 /// @param [groupFilter]
-/// @param [objectXY]
-/// @param [objectXZ]
+/// @param [object]
 
-function BonkInstanceCollideDeepest(_bonkInstance, _groupFilter = undefined, _objectXY = BonkObjectXY, _objectXZ = BonkObjectXZ)
+function BonkInstanceCollideDeepest(_bonkInstance, _groupFilter = undefined, _object = BonkObject)
 {
-    return BonkCollideDeepest(_bonkInstance, BonkInstancePlaceList(_bonkInstance, 0, 0, 0, _groupFilter, undefined, _objectXY, _objectXZ));
+    return BonkCollideDeepest(_bonkInstance, BonkInstancePlaceList(_bonkInstance, 0, 0, 0, _groupFilter, undefined, _object));
 }

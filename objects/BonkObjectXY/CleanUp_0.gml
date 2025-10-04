@@ -1,3 +1,0 @@
-// Feather disable all
-
-CleanUp();

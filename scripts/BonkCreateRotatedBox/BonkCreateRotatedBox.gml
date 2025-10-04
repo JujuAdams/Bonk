@@ -7,12 +7,11 @@
 /// @param ySize
 /// @param zSize
 /// @param zRotation
-/// @param [objectXY]
-/// @param [objectXZ]
+/// @param [object]
 
-function BonkCreateRotatedBox(_x, _y, _z, _xSize, _ySize, _zSize, _zRotation, _objectXY = BonkObjectXY, _objectXZ = BonkObjectXZ)
+function BonkCreateRotatedBox(_x, _y, _z, _xSize, _ySize, _zSize, _zRotation, _object = BonkObject)
 {
-    var _instance = instance_create_depth(0, 0, 0, _objectXY);
-    BonkSetAsRotatedBox(_instance,   _x, _y, _z,   _xSize, _ySize, _zSize,   _zRotation,  _objectXZ);
+    var _instance = instance_create_depth(0, 0, 0, _object);
+    BonkSetAsRotatedBox(_instance,   _x, _y, _z,   _xSize, _ySize, _zSize,   _zRotation);
     return _instance;
 }

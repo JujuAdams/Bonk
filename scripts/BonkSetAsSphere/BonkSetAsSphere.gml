@@ -5,9 +5,9 @@
 /// @param yCenter
 /// @param zCenter
 /// @param radius
-/// @param [objectXZ]
 
-function BonkSetAsSphere(_instance, _x, _y, _z, _radius, _objectXZ = BonkObjectXZ)
+
+function BonkSetAsSphere(_instance, _x, _y, _z, _radius)
 {
     with(_instance)
     {
@@ -24,19 +24,6 @@ function BonkSetAsSphere(_instance, _x, _y, _z, _radius, _objectXZ = BonkObjectX
         mask_index = __BonkMaskCircle;
         image_xscale = 2*_radius / BONK_MASK_SIZE;
         image_yscale = 2*_radius / BONK_MASK_SIZE;
-        
-        if (BONK_INSTANCE_XZ)
-        {
-            __instanceXZ = instance_create_depth(_x, _z, 0, _objectXZ);
-            with(__instanceXZ)
-            {
-                __instanceXY = other;
-                
-                mask_index = __BonkMaskCircle;
-                image_xscale = other.image_xscale;
-                image_yscale = 2*_radius / BONK_MASK_SIZE;
-            }
-        }
         
         
         
@@ -55,12 +42,6 @@ function BonkSetAsSphere(_instance, _x, _y, _z, _radius, _objectXZ = BonkObjectX
             
             image_xscale = 2*radius / BONK_MASK_SIZE;
             image_yscale = 2*radius / BONK_MASK_SIZE;
-            
-            if (BONK_INSTANCE_XZ)
-            {
-                __instanceXZ.image_xscale = image_xscale;
-                __instanceXZ.image_yscale = 2*radius / BONK_MASK_SIZE;
-            }
             
             return self;
         }

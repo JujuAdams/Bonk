@@ -1,13 +1,13 @@
 {
   "$GMObject":"",
-  "%Name":"BonkObjectXZ",
+  "%Name":"BonkObject",
   "eventList":[],
   "managed":true,
-  "name":"BonkObjectXZ",
+  "name":"BonkObject",
   "overriddenProperties":[],
   "parent":{
-    "name":"Objects",
-    "path":"folders/Bonk/Instances/Objects.yy",
+    "name":"Instances",
+    "path":"folders/Bonk/Instances.yy",
   },
   "parentObjectId":null,
   "persistent":false,

@@ -10,9 +10,9 @@
 /// @param xTopRight
 /// @param yTopRight
 /// @param zTopRight
-/// @param [objectXZ]
 
-function BonkSetAsWall(_instance, _x1, _y1, _z1, _x2, _y2, _z2, _objectXZ = undefined)
+
+function BonkSetAsWall(_instance, _x1, _y1, _z1, _x2, _y2, _z2)
 {
-    return BonkSetAsQuad(_instance,   _x1, _y1, _z1,   _x2, _y2, _z2,   _x2, _y2, _z1,   _objectXZ);
+    return BonkSetAsQuad(_instance,   _x1, _y1, _z1,   _x2, _y2, _z2,   _x2, _y2, _z1);
 }

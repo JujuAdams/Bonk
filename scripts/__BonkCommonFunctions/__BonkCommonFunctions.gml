@@ -13,14 +13,6 @@ function __BonkCommonFunctions()
     
     
     
-    CleanUp = function()
-    {
-        if (BONK_INSTANCE_XZ)
-        {
-            instance_destroy(__instanceXZ);
-        }
-    }
-    
     AddPosition = function(_dX, _dY, _dZ)
     {
         SetPosition(x + _dX, y + _dY, z + _dZ);
@@ -121,16 +113,5 @@ function __BonkCommonFunctions()
     DrawXY = function(_color = c_white)
     {
         draw_sprite_ext(mask_index, 0, x, y, image_xscale, image_yscale, image_angle, _color, 1);
-    }
-
-    DrawXZ = function(_color = c_white)
-    {
-        if (BONK_INSTANCE_XZ)
-        {
-            with(__instanceXZ)
-            {
-                draw_sprite_ext(mask_index, 0, x, -y, image_xscale, image_yscale, image_angle, _color, 1);
-            }
-        }
     }
 }

@@ -5,12 +5,11 @@
 /// @param zCenter
 /// @param height
 /// @param radius
-/// @param [objectXY]
-/// @param [objectXZ]
+/// @param [object]
 
-function BonkCreateCylinder(_x, _y, _z, _height, _radius, _objectXY = BonkObjectXY, _objectXZ = BonkObjectXZ)
+function BonkCreateCylinder(_x, _y, _z, _height, _radius, _object = BonkObject)
 {
-    var _instance = instance_create_depth(0, 0, 0, _objectXY);
-    BonkSetAsCylinder(_instance,   _x, _y, _z,  _height, _radius,   _objectXZ);
+    var _instance = instance_create_depth(0, 0, 0, _object);
+    BonkSetAsCylinder(_instance,   _x, _y, _z,  _height, _radius);
     return _instance;
 }

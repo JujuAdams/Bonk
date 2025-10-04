@@ -9,9 +9,9 @@
 /// 
 /// That's quite a lot to take in so here are some examples of use:
 /// 
-/// `BonkTouchAny(shape, BonkObjectXY);`
-///   Will check if the subject shape touches any instance of the `BonkObjectXY` object or are
-///   instances of objects that inherit from `BonkObjectXY`. The subject shape can be a Bonk struct
+/// `BonkTouchAny(shape, BonkObject);`
+///   Will check if the subject shape touches any instance of the `BonkObject` object or are
+///   instances of objects that inherit from `BonkObject`. The subject shape can be a Bonk struct
 ///   or Bonk instance.
 /// 
 /// `BonkTouchAny(shape, [oColliderWater, oColliderLava]);`

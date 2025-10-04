@@ -2,10 +2,9 @@
 
 /// @param bonkInstance
 /// @param [groupFilter]
-/// @param [objectXY]
-/// @param [objectXZ]
+/// @param [object]
 
-function BonkInstanceDeflectMany(_bonkInstance, _groupFilter = undefined, _objectXY = BonkObjectXY, _objectXZ = BonkObjectXZ)
+function BonkInstanceDeflectMany(_bonkInstance, _groupFilter = undefined, _object = BonkObject)
 {
-    return BonkDeflectMany(_bonkInstance, BonkInstancePlaceList(_bonkInstance, 0, 0, 0, _groupFilter, undefined, _objectXY, _objectXZ));
+    return BonkDeflectMany(_bonkInstance, BonkInstancePlaceList(_bonkInstance, 0, 0, 0, _groupFilter, undefined, _object));
 }

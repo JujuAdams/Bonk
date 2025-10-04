@@ -8,9 +8,9 @@
 /// @param ySize
 /// @param zSize
 /// @param zRotation
-/// @param [objectXZ]
 
-function BonkSetAsRotatedBox(_instance, _x, _y, _z, _xSize, _ySize, _zSize, _zRotation, _objectXZ = BonkObjectXZ)
+
+function BonkSetAsRotatedBox(_instance, _x, _y, _z, _xSize, _ySize, _zSize, _zRotation)
 {
     with(_instance)
     {
@@ -36,19 +36,6 @@ function BonkSetAsRotatedBox(_instance, _x, _y, _z, _xSize, _ySize, _zSize, _zRo
         image_yscale = _ySize / BONK_MASK_SIZE;
         image_angle  = _zRotation;
         
-        if (BONK_INSTANCE_XZ)
-        {
-            __instanceXZ = instance_create_depth(_x, _z, 0, _objectXZ);
-            with(__instanceXZ)
-            {
-                __instanceXY = other;
-                
-                mask_index = __BonkMaskAAB;
-                image_xscale = (bbox_right - bbox_left) / BONK_MASK_SIZE;
-                image_yscale = _zSize / BONK_MASK_SIZE;
-            }
-        }
-        
         
         
         SetPosition = function(_x = x, _y = y, _z = z)
@@ -56,12 +43,6 @@ function BonkSetAsRotatedBox(_instance, _x, _y, _z, _xSize, _ySize, _zSize, _zRo
             x = _x;
             y = _y;
             z = _z;
-            
-            if (BONK_INSTANCE_XZ)
-            {
-                __instanceXZ.x = x;
-                __instanceXZ.y = z;
-            }
             
             return self;
         }
@@ -74,12 +55,6 @@ function BonkSetAsRotatedBox(_instance, _x, _y, _z, _xSize, _ySize, _zSize, _zRo
             
             image_xscale = xSize / BONK_MASK_SIZE;
             image_yscale = ySize / BONK_MASK_SIZE;
-            
-            if (BONK_INSTANCE_XZ)
-            {
-                __instanceXZ.image_xscale = image_xscale;
-                __instanceXZ.image_yscale = zSize / BONK_MASK_SIZE;
-            }
         
             return self;
         }
@@ -89,11 +64,6 @@ function BonkSetAsRotatedBox(_instance, _x, _y, _z, _xSize, _ySize, _zSize, _zRo
             zRotation = _zRotation;
             
             image_angle = _zRotation;
-            
-            if (BONK_INSTANCE_XZ)
-            {
-                __instanceXZ.image_xscale = (bbox_right - bbox_left) / BONK_MASK_SIZE;
-            }
             
             return self;
         }
