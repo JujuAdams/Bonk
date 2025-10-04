@@ -5,8 +5,8 @@
   "isDnD":false,
   "name":"BonkCollisionRayList",
   "parent":{
-    "name":"General Functions",
-    "path":"folders/Bonk/General Functions.yy",
+    "name":"Broad Phase",
+    "path":"folders/Bonk/Direct Control/Broad Phase.yy",
   },
   "resourceType":"GMScript",
   "resourceVersion":"2.0",

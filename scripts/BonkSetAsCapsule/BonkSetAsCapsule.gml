@@ -8,7 +8,7 @@
 /// @param radius
 /// @param [objectXZ]
 
-function BonkSetAsCapsule(_instance, _x, _y, _z, _height, _radius, _objectXZ = BonkMaskXZ)
+function BonkSetAsCapsule(_instance, _x, _y, _z, _height, _radius, _objectXZ = BonkObjectXZ)
 {
     with(_instance)
     {

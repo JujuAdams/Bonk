@@ -8,7 +8,7 @@
 /// @param radius
 /// @param [objectXZ]
 
-function BonkSetAsCylinder(_instance, _x, _y, _z, _height, _radius, _objectXZ = BonkMaskXZ)
+function BonkSetAsCylinder(_instance, _x, _y, _z, _height, _radius, _objectXZ = BonkObjectXZ)
 {
     with(_instance)
     {

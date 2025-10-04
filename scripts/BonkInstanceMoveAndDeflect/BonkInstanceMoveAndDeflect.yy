@@ -1,9 +1,9 @@
 {
   "$GMScript":"v1",
-  "%Name":"BonkInstancePlaceListVelocity",
+  "%Name":"BonkInstanceMoveAndDeflect",
   "isCompatibility":false,
   "isDnD":false,
-  "name":"BonkInstancePlaceListVelocity",
+  "name":"BonkInstanceMoveAndDeflect",
   "parent":{
     "name":"Broad Phase",
     "path":"folders/Bonk/Direct Control/Broad Phase.yy",

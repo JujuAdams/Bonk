@@ -10,7 +10,7 @@
 /// @param zRotation
 /// @param [objectXZ]
 
-function BonkSetAsRotatedBox(_instance, _x, _y, _z, _xSize, _ySize, _zSize, _zRotation, _objectXZ = BonkMaskXZ)
+function BonkSetAsRotatedBox(_instance, _x, _y, _z, _xSize, _ySize, _zSize, _zRotation, _objectXZ = BonkObjectXZ)
 {
     with(_instance)
     {

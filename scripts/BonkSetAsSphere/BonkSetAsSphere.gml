@@ -7,7 +7,7 @@
 /// @param radius
 /// @param [objectXZ]
 
-function BonkSetAsSphere(_instance, _x, _y, _z, _radius, _objectXZ = BonkMaskXZ)
+function BonkSetAsSphere(_instance, _x, _y, _z, _radius, _objectXZ = BonkObjectXZ)
 {
     with(_instance)
     {

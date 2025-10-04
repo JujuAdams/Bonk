@@ -242,7 +242,7 @@ function BonkRay(_x, _y, _z, _dX, _dY, _dZ) constructor
         return _nullHit;
     }
     
-    static CollisionList = function(_groupFilter = undefined, _list = undefined, _objectXY = BonkMaskXY, _objectXZ = BonkMaskXZ)
+    static CollisionList = function(_groupFilter = undefined, _list = undefined, _objectXY = BonkObjectXY, _objectXZ = BonkObjectXZ)
     {
         return BonkCollisionLineList(x, y, z, x + dX, y + dY, z + dZ, _groupFilter, _list, _objectXY, _objectXZ);
     }

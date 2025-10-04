@@ -235,7 +235,7 @@ function BonkLine(_x1, _y1, _z1, _x2, _y2, _z2) constructor
         return _nullHit;
     }
     
-    static CollisionList = function(_groupFilter = undefined, _list = undefined, _objectXY = BonkMaskXY, _objectXZ = BonkMaskXZ)
+    static CollisionList = function(_groupFilter = undefined, _list = undefined, _objectXY = BonkObjectXY, _objectXZ = BonkObjectXZ)
     {
         return BonkCollisionLineList(x1, y1, z1, x2, y2, z2, _groupFilter, _list, _objectXY, _objectXZ);
     }

@@ -1,12 +1,12 @@
 {
   "$GMScript":"v1",
-  "%Name":"__BonkCrossProduct",
+  "%Name":"BonkInstanceTouchAny",
   "isCompatibility":false,
   "isDnD":false,
-  "name":"__BonkCrossProduct",
+  "name":"BonkInstanceTouchAny",
   "parent":{
-    "name":"(System)",
-    "path":"folders/Bonk/(System).yy",
+    "name":"Instances",
+    "path":"folders/Bonk/Instances.yy",
   },
   "resourceType":"GMScript",
   "resourceVersion":"2.0",

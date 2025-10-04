@@ -12,7 +12,7 @@
 /// @param z3
 /// @param [objectXZ]
 
-function BonkSetAsTriangle(_instance, _x1, _y1, _z1, _x2, _y2, _z2, _x3, _y3, _z3, _objectXZ = BonkMaskXZ)
+function BonkSetAsTriangle(_instance, _x1, _y1, _z1, _x2, _y2, _z2, _x3, _y3, _z3, _objectXZ = BonkObjectXZ)
 {
     with(_instance)
     {

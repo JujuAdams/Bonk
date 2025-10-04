@@ -7,7 +7,7 @@
 /// @param [objectXY]
 /// @param [objectXZ]
 
-function BonkInstancePlaceListVelocity(_shape, _velocity, _groupFilter = undefined, _list = undefined, _objectXY = BonkMaskXY, _objectXZ = BonkMaskXZ)
+function BonkInstancePlaceListVelocity(_shape, _velocity, _groupFilter = undefined, _list = undefined, _objectXY = BonkObjectXY, _objectXZ = BonkObjectXZ)
 {
     return BonkInstancePlaceList(_shape, _velocity.xSpeed, _velocity.ySpeed, _velocity.zSpeed, _groupFilter, _list, _objectXY, _objectXZ);
 }

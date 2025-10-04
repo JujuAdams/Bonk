@@ -1,15 +1,15 @@
 {
   "$GMObject":"",
-  "%Name":"BonkMaskXY",
+  "%Name":"BonkObjectXY",
   "eventList":[
     {"$GMEvent":"v1","%Name":"","collisionObjectId":null,"eventNum":0,"eventType":12,"isDnD":false,"name":"","resourceType":"GMEvent","resourceVersion":"2.0",},
   ],
   "managed":true,
-  "name":"BonkMaskXY",
+  "name":"BonkObjectXY",
   "overriddenProperties":[],
   "parent":{
-    "name":"Mask Objects",
-    "path":"folders/Bonk/Mask Objects.yy",
+    "name":"Objects",
+    "path":"folders/Bonk/Instances/Objects.yy",
   },
   "parentObjectId":null,
   "persistent":false,

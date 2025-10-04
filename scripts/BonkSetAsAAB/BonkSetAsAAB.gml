@@ -9,7 +9,7 @@
 /// @param zSize
 /// @param [objectXZ]
 
-function BonkSetAsAAB(_instance, _x, _y, _z, _xSize, _ySize, _zSize, _objectXZ = BonkMaskXZ)
+function BonkSetAsAAB(_instance, _x, _y, _z, _xSize, _ySize, _zSize, _objectXZ = BonkObjectXZ)
 {
     with(_instance)
     {

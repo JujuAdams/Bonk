@@ -12,7 +12,7 @@
 /// @param [objectXY]
 /// @param [objectXZ]
 
-function BonkCreateQuad(_x1, _y1, _z1, _x2, _y2, _z2, _x3, _y3, _z3, _objectXY = BonkMaskXY, _objectXZ = BonkMaskXZ)
+function BonkCreateQuad(_x1, _y1, _z1, _x2, _y2, _z2, _x3, _y3, _z3, _objectXY = BonkObjectXY, _objectXZ = BonkObjectXZ)
 {
     var _instance = instance_create_depth(0, 0, 0, _objectXY);
     BonkSetAsQuad(_instance,   _x1, _y1, _z1,   _x2, _y2, _z2,   _x3, _y3, _z3,   _objectXZ);
