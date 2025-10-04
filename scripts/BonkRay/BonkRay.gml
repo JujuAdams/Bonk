@@ -140,110 +140,18 @@ function BonkRay(_x, _y, _z, _dX, _dY, _dZ) constructor
         return _nullHit;
     }
     
-    static HitFirst = function(_targetShapes)
-    {
-        static _map = ds_map_create();
-        static _nullHit = __Bonk().__nullHit;
-        
-        var _x = x1;
-        var _y = y1;
-        var _z = z1;
-        
-        var _dX = dX;
-        var _dY = dY;
-        var _dZ = dZ;
-        
-        var _closestHit      = undefined;
-        var _closestDistance = infinity;
-        
-        if (is_array(_targetShapes))
-        {
-            var _i = 0;
-            repeat(array_length(_targetShapes))
-            {
-                with(_targetShapes[_i])
-                {
-                    if (not ds_map_exists(_map, self))
-                    {
-                        _map[? self] = true;
-                        
-                        var _hit = __lineHitFunction(self, _x, _y, _z, _dX, _dY, _dZ);
-                        if (_hit.collision)
-                        {
-                            var _distance = point_distance_3d(_x, _y, _z, _hit.x, _hit.y, _hit.z);
-                            if (_distance < _closestDistance)
-                            {
-                                _closestDistance = _distance;
-                                _closestHit = variable_clone(_hit);
-                            }
-                        }
-                    }
-                }
-                
-                ++_i;
-            }
-        }
-        else if (ds_exists(_targetShapes, ds_type_list))
-        {
-            var _i = 0;
-            repeat(ds_list_size(_targetShapes))
-            {
-                with(_targetShapes[| _i])
-                {
-                    if (not ds_map_exists(_map, self))
-                    {
-                        _map[? self] = true;
-                        
-                        var _hit = __lineHitFunction(self, _x, _y, _z, _dX, _dY, _dZ);
-                        if (_hit.collision)
-                        {
-                            var _distance = point_distance_3d(_x, _y, _z, _hit.x, _hit.y, _hit.z);
-                            if (_distance < _closestDistance)
-                            {
-                                _closestDistance = _distance;
-                                _closestHit = variable_clone(_hit);
-                            }
-                        }
-                    }
-                }
-                
-                ++_i;
-            }
-        }
-        else
-        {
-            with(_targetShapes)
-            {
-                if (not ds_map_exists(_map, self))
-                {
-                    _map[? self] = true;
-                    
-                    var _hit = __lineHitFunction(self, _x, _y, _z, _dX, _dY, _dZ);
-                    if (_hit.collision)
-                    {
-                        var _distance = point_distance_3d(_x, _y, _z, _hit.x, _hit.y, _hit.z);
-                        if (_distance < _closestDistance)
-                        {
-                            _closestDistance = _distance;
-                            _closestHit = variable_clone(_hit);
-                        }
-                    }
-                }
-            }
-        }
-        
-        if (_closestHit != undefined)
-        {
-            ds_map_clear(_map);
-            return _closestHit;
-        }
-        
-        ds_map_clear(_map);
-        return _nullHit;
-    }
-    
     static CollisionList = function(_groupFilter = undefined, _list = undefined, _objectXY = BonkObjectXY, _objectXZ = BonkObjectXZ)
     {
-        return BonkCollisionLineList(x, y, z, x + dX, y + dY, z + dZ, _groupFilter, _list, _objectXY, _objectXZ);
+        return BonkCollisionLineList(x, y, z, x + BONK_RAY_LENGTH*dX, y + BONK_RAY_LENGTH*dY, z + BONK_RAY_LENGTH*dZ, _groupFilter, _list, _objectXY, _objectXZ);
+    }
+    
+    static HitFirst = function(_targetShapes)
+    {
+        return BonkRayHitFirst(_targetShapes, x, y, z, dX, dY, dZ);
+    }
+    
+    static HitFirstInstance = function(_groupFilter = undefined, _objectXY = BonkObjectXY, _objectXZ = BonkObjectXZ)
+    {
+        return BonkRayHitFirst(CollisionList(_groupFilter, undefined, _objectXY, _objectXZ), x, y, z, dX, dY, dZ);
     }
 }

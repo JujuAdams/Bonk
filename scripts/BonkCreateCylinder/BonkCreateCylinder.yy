@@ -5,8 +5,8 @@
   "isDnD":false,
   "name":"BonkCreateCylinder",
   "parent":{
-    "name":"Creators",
-    "path":"folders/Bonk/Instances/Creators.yy",
+    "name":"Instance Creators",
+    "path":"folders/Bonk/Instances/Instance Creators.yy",
   },
   "resourceType":"GMScript",
   "resourceVersion":"2.0",

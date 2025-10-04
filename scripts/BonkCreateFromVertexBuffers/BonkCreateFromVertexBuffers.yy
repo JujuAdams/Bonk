@@ -1,0 +1,13 @@
+{
+  "$GMScript":"v1",
+  "%Name":"BonkCreateFromVertexBuffers",
+  "isCompatibility":false,
+  "isDnD":false,
+  "name":"BonkCreateFromVertexBuffers",
+  "parent":{
+    "name":"Instances",
+    "path":"folders/Bonk/Instances.yy",
+  },
+  "resourceType":"GMScript",
+  "resourceVersion":"2.0",
+}
