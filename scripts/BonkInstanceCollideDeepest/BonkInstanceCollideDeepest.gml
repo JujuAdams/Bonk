@@ -1,10 +1,10 @@
 // Feather disable all
 
-/// @param bonkInstance
-/// @param [object=BonkObject]
+/// @param subjectInstance
+/// @param [objectOrArray=BonkObject]
 /// @param [groupFilter]
 
-function BonkInstanceCollideDeepest(_bonkInstance, _object = BonkObject, _groupFilter = -1)
+function BonkInstanceCollideDeepest(_subjectInstance, _objectOrArray = BonkObject, _groupFilter = -1)
 {
-    return BonkCollideDeepest(_bonkInstance, BonkInstancePlaceList(_bonkInstance, 0, 0, _object), _groupFilter);
+    return BonkCollideDeepest(_subjectInstance, BonkInstancePlaceList(_subjectInstance, 0, 0, _objectOrArray), _groupFilter);
 }

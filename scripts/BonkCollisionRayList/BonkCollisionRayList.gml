@@ -8,12 +8,12 @@
 /// @param y1
 /// @param dX
 /// @param dY
-/// @param [object=BonkObject]
+/// @param [objectOrArray=BonkObject]
 /// @param [groupFilter]
 /// @param [list]
 /// @param [length]
 
-function BonkCollisionRayList(_x1, _y1, _dX, _dY, _object = BonkObject, _groupFilter = -1, _list = undefined, _length = BONK_RAY_LENGTH)
+function BonkCollisionRayList(_x1, _y1, _dX, _dY, _objectOrArray = BonkObject, _groupFilter = -1, _list = undefined, _length = BONK_RAY_LENGTH)
 {
-    return BonkCollisionLineList(_x1, _y1, _x1 + _length*_dX, _y1 + _length*_dY, _object, _groupFilter, _list);
+    return BonkCollisionLineList(_x1, _y1, _x1 + _length*_dX, _y1 + _length*_dY, _objectOrArray, _groupFilter, _list);
 }

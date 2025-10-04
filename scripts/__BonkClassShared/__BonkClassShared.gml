@@ -161,8 +161,8 @@ function __BonkClassShared(_groupVector) constructor
         return _nullCollisionData;
     }
     
-    static InstancePlaceList = function(_dX, _dY, _groupFilter = -1, _list = undefined, _object = BonkObject)
+    static InstancePlaceList = function(_dX, _dY, _objectOrArray = BonkObject, _groupFilter = -1, _list = undefined)
     {
-        return BonkInstancePlaceList(self, _dX, _dY, _object, _groupFilter, _list);
+        return BonkInstancePlaceList(self, _dX, _dY, _objectOrArray, _groupFilter, _list);
     }
 }

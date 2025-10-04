@@ -83,7 +83,6 @@
   "resources":[
     {"id":{"name":"Bonk - About Direct Control","path":"notes/Bonk - About Direct Control/Bonk - About Direct Control.yy",},},
     {"id":{"name":"Bonk - About Helper Constructors","path":"notes/Bonk - About Helper Constructors/Bonk - About Helper Constructors.yy",},},
-    {"id":{"name":"Bonk - About Instance Broad Phase","path":"notes/Bonk - About Instance Broad Phase/Bonk - About Instance Broad Phase.yy",},},
     {"id":{"name":"Bonk - About Instances","path":"notes/Bonk - About Instances/Bonk - About Instances.yy",},},
     {"id":{"name":"Bonk - About Multi Functions","path":"notes/Bonk - About Multi Functions/Bonk - About Multi Functions.yy",},},
     {"id":{"name":"BonkObject","path":"objects/BonkObject/BonkObject.yy",},},

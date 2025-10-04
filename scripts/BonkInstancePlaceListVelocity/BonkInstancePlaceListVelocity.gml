@@ -6,11 +6,11 @@
 /// 
 /// @param shape
 /// @param velocityStruct
-/// @param [object=BonkObject]
+/// @param [objectOrArray=BonkObject]
 /// @param [groupFilter]
 /// @param [list]
 
-function BonkInstancePlaceListVelocity(_shape, _velocity, _object = BonkObject, _groupFilter = -1, _list = undefined)
+function BonkInstancePlaceListVelocity(_shape, _velocity, _objectOrArray = BonkObject, _groupFilter = -1, _list = undefined)
 {
-    return BonkInstancePlaceList(_shape, _velocity.xSpeed, _velocity.ySpeed, _object, _groupFilter, _list);
+    return BonkInstancePlaceList(_shape, _velocity.xSpeed, _velocity.ySpeed, _objectOrArray, _groupFilter, _list);
 }

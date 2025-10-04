@@ -1,10 +1,10 @@
 // Feather disable all
 
-/// @param bonkInstance
-/// @param [object=BonkObject]
+/// @param subjectInstance
+/// @param [objectOrArray=BonkObject]
 /// @param [groupFilter]
 
-function BonkInstanceCollideMany(_bonkInstance, _object = BonkObject, _groupFilter = -1)
+function BonkInstanceCollideMany(_subjectInstance, _objectOrArray = BonkObject, _groupFilter = -1)
 {
-    return BonkCollideMany(_bonkInstance, BonkInstancePlaceList(_bonkInstance, 0, 0, _object), _groupFilter);
+    return BonkCollideMany(_subjectInstance, BonkInstancePlaceList(_subjectInstance, 0, 0, _objectOrArray), _groupFilter);
 }

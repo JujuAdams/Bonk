@@ -1,10 +1,10 @@
 // Feather disable all
 
-/// @param bonkInstance
-/// @param [object=BonkObject]
+/// @param subjectInstance
+/// @param [objectOrArray=BonkObject]
 /// @param [groupFilter]
 
-function BonkInstanceDeflectMany(_bonkInstance, _object = BonkObject, _groupFilter = -1)
+function BonkInstanceDeflectMany(_subjectInstance, _objectOrArray = BonkObject, _groupFilter = -1)
 {
-    return BonkDeflectMany(_bonkInstance, BonkInstancePlaceList(_bonkInstance, 0, 0, _object), _groupFilter);
+    return BonkDeflectMany(_subjectInstance, BonkInstancePlaceList(_subjectInstance, 0, 0, _objectOrArray), _groupFilter);
 }

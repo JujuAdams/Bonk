@@ -11,18 +11,18 @@
 /// subject Bonk instance in a different position to where its `x` and `y` position would otherwise
 /// indicate.
 /// 
-/// @param bonkInstance
+/// @param subjectInstance
 /// @param dX
 /// @param dY
-/// @param [object=BonkObject]
+/// @param [objectOrArray=BonkObject]
 /// @param [groupFilter]
 /// @param [list]
 
-function BonkInstancePlaceList(_bonkInstance, _dX, _dY, _object = BonkObject, _groupFilter = -1, _list = undefined)
+function BonkInstancePlaceList(_subjectInstance, _dX, _dY, _objectOrArray = BonkObject, _groupFilter = -1, _list = undefined)
 {
     static _listStatic = ds_list_create();
     
-    if (not instance_exists(_bonkInstance))
+    if (not instance_exists(_subjectInstance))
     {
         __BonkError("Can only use BonkInstancePlaceList() with instances");
     }
@@ -38,9 +38,21 @@ function BonkInstancePlaceList(_bonkInstance, _dX, _dY, _object = BonkObject, _g
         var _listStart = ds_list_size(_list);
     }
     
-    with(_bonkInstance)
+    with(_subjectInstance)
     {
-        instance_place_list(x + _dX, y + _dY, _object, _list, false);
+        if (is_array(_objectOrArray))
+        {
+            var _i = 0;
+            repeat(array_length(_objectOrArray))
+            {
+                instance_place_list(x + _dX, y + _dY, _objectOrArray[_i], _list, false);
+                ++_i;
+            }
+        }
+        else
+        {
+            instance_place_list(x + _dX, y + _dY, _objectOrArray, _list, false);
+        }
     }
     
     if (_groupFilter >= 0)
