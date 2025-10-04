@@ -113,8 +113,8 @@ function BonkStructWorld(_cellXSize, _cellYSize, _cellZSize, _x = 0, _y = 0, _z 
     
     __minCellX = 0;
     __maxCellX = 0;
-    __maxCellY = 0;
     __minCellY = 0;
+    __maxCellY = 0;
     __minCellZ = 0;
     __maxCellZ = 0;
     
