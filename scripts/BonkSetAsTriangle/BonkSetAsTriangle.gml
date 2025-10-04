@@ -10,13 +10,14 @@
 /// @param x3
 /// @param y3
 /// @param z3
+/// @param [groupVector=BONK_DEFAULT_GROUP]
 
 
-function BonkSetAsTriangle(_instance, _x1, _y1, _z1, _x2, _y2, _z2, _x3, _y3, _z3)
+function BonkSetAsTriangle(_instance, _x1, _y1, _z1, _x2, _y2, _z2, _x3, _y3, _z3, _groupVector = BONK_DEFAULT_GROUP)
 {
     with(_instance)
     {
-        __BonkCommonFunctions();
+        __BonkCommonFunctions(_groupVector);
         __BonkCommonTriangle();
         
         

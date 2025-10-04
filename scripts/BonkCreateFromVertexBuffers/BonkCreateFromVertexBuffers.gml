@@ -3,7 +3,8 @@
 /// @param vertexBufferArray
 /// @param vertexFormat
 /// @param [matrix]
-/// @param [object]
+/// @param [object=BonkObject]
+/// @param [groupVector=BONK_DEFAULT_GROUP]
 
 function BonkCreateFromVertexBuffers(_vertexBufferArray, _vertexFormat, _matrix = undefined, _object = BonkObject)
 {
@@ -80,14 +81,14 @@ function BonkCreateFromVertexBuffers(_vertexBufferArray, _vertexFormat, _matrix 
                     BonkCreateTriangle(_a[0], _a[1], _a[2],
                                        _b[0], _b[1], _b[2],
                                        _c[0], _c[1], _c[2],
-                                       _object);
+                                       _object, _groupVector);
                 }
                 else
                 {
                     BonkCreateTriangle(_x1, _y1, _z1,
                                        _x2, _y2, _z2,
                                        _x3, _y3, _z3,
-                                       _object);
+                                       _object, _groupVector);
                 }
             }
             

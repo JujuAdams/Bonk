@@ -3,7 +3,7 @@
 /// @param cellXSize
 /// @param cellYSize
 /// @param cellZSize
-/// @param [object]
+/// @param [object=BonkObject]
 
 function BonkCreateWorld(_cellXSize, _cellYSize, _cellZSize, _object = BonkObject)
 {

@@ -9,10 +9,10 @@
 /// @param xTopRight
 /// @param yTopRight
 /// @param zTopRight
-/// @param [object]
+/// @param [object=BonkObject]
+/// @param [groupVector=BONK_DEFAULT_GROUP]
 
-
-function BonkCreateWall(_x1, _y1, _z1, _x2, _y2, _z2, _object = undefined)
+function BonkCreateWall(_x1, _y1, _z1, _x2, _y2, _z2, _object = undefined, _groupVector = BONK_DEFAULT_GROUP)
 {
-    return BonkCreateQuad(_x1, _y1, _z1,   _x2, _y2, _z2,   _x2, _y2, _z1,   _object);
+    return BonkCreateQuad(_x1, _y1, _z1,   _x2, _y2, _z2,   _x2, _y2, _z1,   _object, _groupVector);
 }

@@ -8,9 +8,9 @@
 /// @param z2
 /// @param [groupFilter]
 /// @param [list]
-/// @param [object]
+/// @param [object=BonkObject]
 
-function BonkCollisionLineList(_x1, _y1, _z1, _x2, _y2, _z2, _groupFilter = -1, _list = undefined, _object = BonkObject)
+function BonkCollisionLineList(_x1, _y1, _z1, _x2, _y2, _z2, _object = BonkObject, _groupFilter = -1, _list = undefined)
 {
     static _listStatic   = ds_list_create();
     static _listXZStatic = ds_list_create();

@@ -3,10 +3,10 @@
 /// @param bonkInstance
 /// @param velocityStruct
 /// @param [slopeThreshold=0]
+/// @param [object=BonkObject]
 /// @param [groupFilter]
-/// @param [object]
 
-function BonkInstanceMoveAndDeflect(_bonkInstance, _velocityStruct, _slopeThreshold = 0, _groupFilter = undefined, _object = BonkObject)
+function BonkInstanceMoveAndDeflect(_bonkInstance, _velocityStruct, _slopeThreshold = 0, _object = BonkObject, _groupFilter = undefined)
 {
-    return BonkMoveAndDeflect(_bonkInstance, _velocityStruct, BonkInstancePlaceListVelocity(_bonkInstance, _velocityStruct, _groupFilter, undefined, _object), _slopeThreshold);
+    return BonkMoveAndDeflect(_bonkInstance, _velocityStruct, BonkInstancePlaceListVelocity(_bonkInstance, _velocityStruct, _object, _groupFilter), _slopeThreshold);
 }

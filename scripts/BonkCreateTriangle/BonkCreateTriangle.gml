@@ -9,11 +9,12 @@
 /// @param x3
 /// @param y3
 /// @param z3
-/// @param [object]
+/// @param [object=BonkObject]
+/// @param [groupVector=BONK_DEFAULT_GROUP]
 
-function BonkCreateTriangle(_x1, _y1, _z1, _x2, _y2, _z2, _x3, _y3, _z3, _object = BonkObject)
+function BonkCreateTriangle(_x1, _y1, _z1, _x2, _y2, _z2, _x3, _y3, _z3, _object = BonkObject, _groupVector = BONK_DEFAULT_GROUP)
 {
     var _instance = instance_create_depth(0, 0, 0, _object);
-    BonkSetAsTriangle(_instance,   _x1, _y1, _z1,   _x2, _y2, _z2,   _x3, _y3, _z3);
+    BonkSetAsTriangle(_instance,   _x1, _y1, _z1,   _x2, _y2, _z2,   _x3, _y3, _z3,   _groupVector);
     return _instance;
 }

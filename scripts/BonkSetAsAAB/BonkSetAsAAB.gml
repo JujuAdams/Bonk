@@ -7,13 +7,13 @@
 /// @param xSize
 /// @param ySize
 /// @param zSize
+/// @param [groupVector=BONK_DEFAULT_GROUP]
 
-
-function BonkSetAsAAB(_instance, _x, _y, _z, _xSize, _ySize, _zSize)
+function BonkSetAsAAB(_instance, _x, _y, _z, _xSize, _ySize, _zSize, _groupVector = BONK_DEFAULT_GROUP)
 {
     with(_instance)
     {
-        __BonkCommonFunctions();
+        __BonkCommonFunctions(_groupVector);
         __BonkCommonAAB();
         
         

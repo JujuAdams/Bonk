@@ -4,11 +4,11 @@
 /// @param dX
 /// @param dY
 /// @param dZ
+/// @param [object=BonkObject]
 /// @param [groupFilter]
 /// @param [list]
-/// @param [object]
 
-function BonkInstancePlaceList(_bonkInstance, _dX, _dY, _dZ, _groupFilter = -1, _list = undefined, _object = BonkObject)
+function BonkInstancePlaceList(_bonkInstance, _dX, _dY, _dZ, _object = BonkObject, _groupFilter = -1, _list = undefined)
 {
     static _listStatic = ds_list_create();
     static _listXZStatic = ds_list_create();

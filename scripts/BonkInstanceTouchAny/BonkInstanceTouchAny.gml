@@ -1,10 +1,10 @@
 // Feather disable all
 
 /// @param bonkInstance
+/// @param [object=BonkObject]
 /// @param [groupFilter]
-/// @param [object]
 
-function BonkInstanceTouchAny(_bonkInstance, _groupFilter = undefined, _object = BonkObject)
+function BonkInstanceTouchAny(_bonkInstance, _object = BonkObject, _groupFilter = undefined)
 {
-    return BonkTouchAny(_bonkInstance, BonkInstancePlaceList(_bonkInstance, 0, 0, 0, _groupFilter, undefined, _object));
+    return BonkTouchAny(_bonkInstance, BonkInstancePlaceList(_bonkInstance, 0, 0, 0, _object, _groupFilter));
 }

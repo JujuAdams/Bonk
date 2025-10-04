@@ -8,7 +8,6 @@
 /// @param radius
 /// @param [groupVector=BONK_DEFAULT_GROUP]
 
-
 function BonkSetAsCapsule(_instance, _x, _y, _z, _height, _radius, _groupVector = BONK_DEFAULT_GROUP)
 {
     with(_instance)

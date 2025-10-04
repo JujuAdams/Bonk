@@ -5,7 +5,7 @@
 /// @param zCenter
 /// @param height
 /// @param radius
-/// @param [object]
+/// @param [object=BonkObject]
 /// @param [groupVector=BONK_DEFAULT_GROUP]
 
 function BonkCreateCapsule(_x, _y, _z, _height, _radius, _object = BonkObject, _groupVector = BONK_DEFAULT_GROUP)

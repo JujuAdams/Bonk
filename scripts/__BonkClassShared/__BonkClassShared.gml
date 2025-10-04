@@ -120,6 +120,6 @@ function __BonkClassShared() constructor
     
     static CollisionList = function(_dX, _dY, _dZ, _groupFilter = undefined, _list = undefined, _object = BonkObject)
     {
-        return BonkInstancePlaceList(self, _dX, _dY, _dZ, _groupFilter, _list, _object);
+        return BonkInstancePlaceList(self, _dX, _dY, _dZ, _object, _groupFilter, _list);
     }
 }

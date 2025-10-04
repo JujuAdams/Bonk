@@ -5,13 +5,14 @@
 /// @param yCenter
 /// @param zCenter
 /// @param radius
+/// @param [groupVector=BONK_DEFAULT_GROUP]
 
 
-function BonkSetAsSphere(_instance, _x, _y, _z, _radius)
+function BonkSetAsSphere(_instance, _x, _y, _z, _radius, _groupVector = BONK_DEFAULT_GROUP)
 {
     with(_instance)
     {
-        __BonkCommonFunctions();
+        __BonkCommonFunctions(_groupVector);
         __BonkCommonSphere();
         
         

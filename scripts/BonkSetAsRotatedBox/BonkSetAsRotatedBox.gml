@@ -8,13 +8,14 @@
 /// @param ySize
 /// @param zSize
 /// @param zRotation
+/// @param [groupVector=BONK_DEFAULT_GROUP]
 
 
-function BonkSetAsRotatedBox(_instance, _x, _y, _z, _xSize, _ySize, _zSize, _zRotation)
+function BonkSetAsRotatedBox(_instance, _x, _y, _z, _xSize, _ySize, _zSize, _zRotation, _groupVector = BONK_DEFAULT_GROUP)
 {
     with(_instance)
     {
-        __BonkCommonFunctions();
+        __BonkCommonFunctions(_groupVector);
         __BonkCommonRotatedBox();
         
         
