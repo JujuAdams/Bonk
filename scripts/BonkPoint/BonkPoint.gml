@@ -33,10 +33,10 @@ function BonkPoint(_x, _y, _z) constructor
     static __insideFuncLookup = (function()
     {
         var _array = array_create(BONK_NUMBER_OF_TYPES, undefined);
-        _array[@ BONK_TYPE_AAB     ] = BonkCoordTouchAAB;
-        _array[@ BONK_TYPE_CAPSULE ] = BonkCoordTouchCapsule;
-        _array[@ BONK_TYPE_CYLINDER] = BonkCoordTouchCylinder;
-        _array[@ BONK_TYPE_SPHERE  ] = BonkCoordTouchSphere;
+        _array[@ BONK_TYPE_AAB     ] = BonkPointTouchAAB;
+        _array[@ BONK_TYPE_CAPSULE ] = BonkPointTouchCapsule;
+        _array[@ BONK_TYPE_CYLINDER] = BonkPointTouchCylinder;
+        _array[@ BONK_TYPE_SPHERE  ] = BonkPointTouchSphere;
         return _array;
     })();
     

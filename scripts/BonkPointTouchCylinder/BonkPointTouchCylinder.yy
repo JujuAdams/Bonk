@@ -1,9 +1,9 @@
 {
   "$GMScript":"v1",
-  "%Name":"BonkCoordTouchAAB",
+  "%Name":"BonkPointTouchCylinder",
   "isCompatibility":false,
   "isDnD":false,
-  "name":"BonkCoordTouchAAB",
+  "name":"BonkPointTouchCylinder",
   "parent":{
     "name":"Coordinate",
     "path":"folders/Bonk/Direct Control/Touch/Coordinate.yy",

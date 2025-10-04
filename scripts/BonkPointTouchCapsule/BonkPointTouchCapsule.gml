@@ -7,7 +7,7 @@
 /// @param y
 /// @param z
 
-function BonkCoordTouchCapsule(_capsule, _x, _y, _z)
+function BonkPointTouchCapsule(_capsule, _x, _y, _z)
 {
     with(_capsule)
     {

@@ -7,7 +7,7 @@
 /// @param y
 /// @param z
 
-function BonkCoordTouchAAB(_aab, _x, _y, _z)
+function BonkPointTouchAAB(_aab, _x, _y, _z)
 {
     with(_aab)
     {

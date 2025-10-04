@@ -7,7 +7,7 @@
 /// @param y
 /// @param z
 
-function BonkCoordTouchSphere(_sphere, _x, _y, _z)
+function BonkPointTouchSphere(_sphere, _x, _y, _z)
 {
     with(_sphere)
     {

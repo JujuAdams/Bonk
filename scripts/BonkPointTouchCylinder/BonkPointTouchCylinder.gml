@@ -7,7 +7,7 @@
 /// @param y
 /// @param z
 
-function BonkCoordTouchCylinder(_cylinder, _x, _y, _z)
+function BonkPointTouchCylinder(_cylinder, _x, _y, _z)
 {
     with(_cylinder)
     {
