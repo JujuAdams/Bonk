@@ -19,8 +19,9 @@
 /// @param subjectShape
 /// @param targetShapes
 /// @param [slopeThreshold=0]
+/// @parma [groupFilter]
 
-function BonkDeflectMany(_subjectShape, _targetShapes, _slopeThreshold = 0)
+function BonkDeflectMany(_subjectShape, _targetShapes, _slopeThreshold = 0, _groupFilter = undefined)
 {
     static _nullDeflectData = __Bonk().__nullDeflectData;
     
@@ -34,16 +35,19 @@ function BonkDeflectMany(_subjectShape, _targetShapes, _slopeThreshold = 0)
         {
             with(_targetShapes[_i]) //Use `with()` here to support iterating over objects
             {
-                var _reaction = Deflect(_subjectShape, _slopeThreshold);
-                if (_reaction.deflectType != BONK_DEFLECT_NONE)
+                if ((_groupFilter == undefined) || FilterTest(_groupFilter))
                 {
-                    with(_reaction.collisionData)
+                    var _reaction = Deflect(_subjectShape, _slopeThreshold);
+                    if (_reaction.deflectType != BONK_DEFLECT_NONE)
                     {
-                        var _depth = dX*dX + dY*dY + dZ*dZ;
-                        if ((_depth > _largestDepth) && (_reaction.deflectType >= _returnData.deflectType))
+                        with(_reaction.collisionData)
                         {
-                            _largestDepth = _depth;
-                            _returnData = _reaction.Clone();
+                            var _depth = dX*dX + dY*dY + dZ*dZ;
+                            if ((_depth > _largestDepth) && (_reaction.deflectType >= _returnData.deflectType))
+                            {
+                                _largestDepth = _depth;
+                                _returnData = _reaction.Clone();
+                            }
                         }
                     }
                 }
@@ -59,16 +63,19 @@ function BonkDeflectMany(_subjectShape, _targetShapes, _slopeThreshold = 0)
         {
             with(_targetShapes[| _i]) //Use `with()` here to support iterating over objects
             {
-                var _reaction = Deflect(_subjectShape, _slopeThreshold);
-                if (_reaction.deflectType != BONK_DEFLECT_NONE)
+                if ((_groupFilter == undefined) || FilterTest(_groupFilter))
                 {
-                    with(_reaction.collisionData)
+                    var _reaction = Deflect(_subjectShape, _slopeThreshold);
+                    if (_reaction.deflectType != BONK_DEFLECT_NONE)
                     {
-                        var _depth = dX*dX + dY*dY + dZ*dZ;
-                        if ((_depth > _largestDepth) && (_reaction.deflectType >= _returnData.deflectType))
+                        with(_reaction.collisionData)
                         {
-                            _largestDepth = _depth;
-                            _returnData = _reaction.Clone();
+                            var _depth = dX*dX + dY*dY + dZ*dZ;
+                            if ((_depth > _largestDepth) && (_reaction.deflectType >= _returnData.deflectType))
+                            {
+                                _largestDepth = _depth;
+                                _returnData = _reaction.Clone();
+                            }
                         }
                     }
                 }
@@ -81,16 +88,19 @@ function BonkDeflectMany(_subjectShape, _targetShapes, _slopeThreshold = 0)
     {
         with(_targetShapes) //Use `with()` here to support iterating over objects
         {
-            var _reaction = Deflect(_subjectShape, _slopeThreshold);
-            if (_reaction.deflectType != BONK_DEFLECT_NONE)
+            if ((_groupFilter == undefined) || FilterTest(_groupFilter))
             {
-                with(_reaction.collisionData)
+                var _reaction = Deflect(_subjectShape, _slopeThreshold);
+                if (_reaction.deflectType != BONK_DEFLECT_NONE)
                 {
-                    var _depth = dX*dX + dY*dY + dZ*dZ;
-                    if ((_depth > _largestDepth) && (_reaction.deflectType >= _returnData.deflectType))
+                    with(_reaction.collisionData)
                     {
-                        _largestDepth = _depth;
-                        _returnData = _reaction.Clone();
+                        var _depth = dX*dX + dY*dY + dZ*dZ;
+                        if ((_depth > _largestDepth) && (_reaction.deflectType >= _returnData.deflectType))
+                        {
+                            _largestDepth = _depth;
+                            _returnData = _reaction.Clone();
+                        }
                     }
                 }
             }

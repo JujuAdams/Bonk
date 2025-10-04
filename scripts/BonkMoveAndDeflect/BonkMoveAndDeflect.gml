@@ -4,8 +4,9 @@
 /// @param velocityStruct
 /// @param targetShapes
 /// @param [slopeThreshold=0]
+/// @param [groupFilter]
 
-function BonkMoveAndDeflect(_subjectShape, _velocityStruct, _targetShapes, _slopeThreshold = 0)
+function BonkMoveAndDeflect(_subjectShape, _velocityStruct, _targetShapes, _slopeThreshold = 0, _groupFilter = undefined)
 {
     static _nullDeflectData = __Bonk().__nullDeflectData;
     var _returnData = _nullDeflectData;
@@ -17,7 +18,7 @@ function BonkMoveAndDeflect(_subjectShape, _velocityStruct, _targetShapes, _slop
         var _z = z;
         
         AddVelocity(_velocityStruct);
-        _returnData = BonkDeflectMany(_subjectShape, _targetShapes, _slopeThreshold);
+        _returnData = BonkDeflectMany(_subjectShape, _targetShapes, _slopeThreshold, _groupFilter);
         
         _velocityStruct.xSpeed = x - _x;
         _velocityStruct.ySpeed = y - _y;

@@ -2,8 +2,9 @@
 
 /// @param subjectShape
 /// @param targetShapes
+/// @param [groupFilter]
 
-function BonkCollideMany(_subjectShape, _targetShapes)
+function BonkCollideMany(_subjectShape, _targetShapes, _groupFilter = undefined)
 {
     static _returnData = [];
     array_resize(_returnData, 0);
@@ -15,10 +16,13 @@ function BonkCollideMany(_subjectShape, _targetShapes)
         {
             with(_targetShapes[_i]) //Use `with()` here to support iterating over objects
             {
-                var _reaction = Collide(_subjectShape);
-                if (_reaction.collision)
+                if ((_groupFilter == undefined) || FilterTest(_groupFilter))
                 {
-                    array_push(_returnData, _reaction.Clone());
+                    var _reaction = Collide(_subjectShape);
+                    if (_reaction.collision)
+                    {
+                        array_push(_returnData, _reaction.Clone());
+                    }
                 }
             }
             
@@ -32,10 +36,13 @@ function BonkCollideMany(_subjectShape, _targetShapes)
         {
             with(_targetShapes[| _i]) //Use `with()` here to support iterating over objects
             {
-                var _reaction = Collide(_subjectShape);
-                if (_reaction.collision)
+                if ((_groupFilter == undefined) || FilterTest(_groupFilter))
                 {
-                    array_push(_returnData, _reaction.Clone());
+                    var _reaction = Collide(_subjectShape);
+                    if (_reaction.collision)
+                    {
+                        array_push(_returnData, _reaction.Clone());
+                    }
                 }
             }
             
@@ -46,10 +53,13 @@ function BonkCollideMany(_subjectShape, _targetShapes)
     {
         with(_targetShapes) //Use `with()` here to support iterating over objects
         {
-            var _reaction = Collide(_subjectShape);
-            if (_reaction.collision)
+            if ((_groupFilter == undefined) || FilterTest(_groupFilter))
             {
-                array_push(_returnData, _reaction.Clone());
+                var _reaction = Collide(_subjectShape);
+                if (_reaction.collision)
+                {
+                    array_push(_returnData, _reaction.Clone());
+                }
             }
         }
     }

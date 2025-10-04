@@ -18,13 +18,34 @@ function __BonkClassShared() constructor
     
     static FilterTest = function(_filter)
     {
-        var _andVector = (_filter >> 20) & 0xFFFFF;
-        var _norVector = (_filter >> 40) & 0xFFFFF;
+        if (_filter < 0)
+        {
+            return true;
+        }
         
-        var _orVector = _filter & 0xFFFFF;
-        return (((bonkGroup & (_filter & 0xFFFFF))
-             || ((bonkGroup & _andVector) == _andVector))
-            && (not (bonkGroup & _norVector)))
+        var _bonkGroup = bonkGroup;
+        
+        //Filter out shapes that conflict with the NOT vector (if in use)
+        var _notVector = (_filter >> 40) & 0xFFFFF;
+        if ((_notVector > 0) && (_bonkGroup & _notVector))
+        {
+            return false;
+        }
+        
+        //Accept shapes that hit the OR vector
+        if (_bonkGroup & (_filter & 0xFFFFF))
+        {
+            return true;
+        }
+        
+        //Accept shapes the hit all of the AND vector (if in use)
+        var _andVector = (_filter >> 20) & 0xFFFFF;
+        if ((_andVector > 0) && ((_bonkGroup & _andVector) == _andVector))
+        {
+            return true;
+        }
+        
+        return false;
     }
     
     static Touch = function(_otherShape)

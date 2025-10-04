@@ -23,8 +23,13 @@ function __BonkCommonFunctions(_groupVector = BONK_DEFAULT_GROUP)
         SetPosition(x + _velocityStruct.xSpeed, y + _velocityStruct.ySpeed, z + _velocityStruct.zSpeed);
     }
     
-    FilterTest = function(_filter)
+    FilterTest = function(_filter = -1)
     {
+        if (_filter < 0)
+        {
+            return true;
+        }
+        
         var _bonkGroup = bonkGroup;
         
         //Filter out shapes that conflict with the NOT vector (if in use)

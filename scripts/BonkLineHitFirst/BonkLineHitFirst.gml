@@ -7,8 +7,9 @@
 /// @param x2
 /// @param y2
 /// @param z2
+/// @param [groupFilter]
 
-function BonkLineHitFirst(_targetShapes, _x1, _y1, _z1, _x2, _y2, _z2)
+function BonkLineHitFirst(_targetShapes, _x1, _y1, _z1, _x2, _y2, _z2, _groupFilter = undefined)
 {
     static _map = ds_map_create();
     static _nullHit = __Bonk().__nullHit;
@@ -27,14 +28,17 @@ function BonkLineHitFirst(_targetShapes, _x1, _y1, _z1, _x2, _y2, _z2)
                 {
                     _map[? self] = true;
                     
-                    var _hit = __lineHitFunction(self, _x1, _y1, _z1, _x2, _y2, _z2);
-                    if (_hit.collision)
+                    if ((_groupFilter == undefined) || FilterTest(_groupFilter))
                     {
-                        var _distance = point_distance_3d(_x1, _y1, _z1, _hit.x, _hit.y, _hit.z);
-                        if (_distance < _closestDistance)
+                        var _hit = __lineHitFunction(self, _x1, _y1, _z1, _x2, _y2, _z2);
+                        if (_hit.collision)
                         {
-                            _closestDistance = _distance;
-                            _closestHit = variable_clone(_hit);
+                            var _distance = point_distance_3d(_x1, _y1, _z1, _hit.x, _hit.y, _hit.z);
+                            if (_distance < _closestDistance)
+                            {
+                                _closestDistance = _distance;
+                                _closestHit = variable_clone(_hit);
+                            }
                         }
                     }
                 }
@@ -54,14 +58,17 @@ function BonkLineHitFirst(_targetShapes, _x1, _y1, _z1, _x2, _y2, _z2)
                 {
                     _map[? self] = true;
                     
-                    var _hit = __lineHitFunction(self, _x1, _y1, _z1, _x2, _y2, _z2);
-                    if (_hit.collision)
+                    if ((_groupFilter == undefined) || FilterTest(_groupFilter))
                     {
-                        var _distance = point_distance_3d(_x1, _y1, _z1, _hit.x, _hit.y, _hit.z);
-                        if (_distance < _closestDistance)
+                        var _hit = __lineHitFunction(self, _x1, _y1, _z1, _x2, _y2, _z2);
+                        if (_hit.collision)
                         {
-                            _closestDistance = _distance;
-                            _closestHit = variable_clone(_hit);
+                            var _distance = point_distance_3d(_x1, _y1, _z1, _hit.x, _hit.y, _hit.z);
+                            if (_distance < _closestDistance)
+                            {
+                                _closestDistance = _distance;
+                                _closestHit = variable_clone(_hit);
+                            }
                         }
                     }
                 }
@@ -78,14 +85,17 @@ function BonkLineHitFirst(_targetShapes, _x1, _y1, _z1, _x2, _y2, _z2)
             {
                 _map[? self] = true;
                 
-                var _hit = __lineHitFunction(self, _x1, _y1, _z1, _x2, _y2, _z2);
-                if (_hit.collision)
+                if ((_groupFilter == undefined) || FilterTest(_groupFilter))
                 {
-                    var _distance = point_distance_3d(_x1, _y1, _z1, _hit.x, _hit.y, _hit.z);
-                    if (_distance < _closestDistance)
+                    var _hit = __lineHitFunction(self, _x1, _y1, _z1, _x2, _y2, _z2);
+                    if (_hit.collision)
                     {
-                        _closestDistance = _distance;
-                        _closestHit = variable_clone(_hit);
+                        var _distance = point_distance_3d(_x1, _y1, _z1, _hit.x, _hit.y, _hit.z);
+                        if (_distance < _closestDistance)
+                        {
+                            _closestDistance = _distance;
+                            _closestHit = variable_clone(_hit);
+                        }
                     }
                 }
             }
