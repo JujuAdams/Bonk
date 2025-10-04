@@ -54,6 +54,7 @@
 /// @param xSize
 /// @param ySize
 /// @param zSize
+/// @param [groupVector=BONK_DEFAULT_GROUP]
 
 //Set up statics
 with(static_get(BonkStructAAB))
@@ -61,7 +62,7 @@ with(static_get(BonkStructAAB))
     __BonkCommonAAB();
 }
 
-function BonkStructAAB(_x, _y, _z, _xSize, _ySize, _zSize) : __BonkClassShared() constructor
+function BonkStructAAB(_x, _y, _z, _xSize, _ySize, _zSize, _groupVector = BONK_DEFAULT_GROUP) : __BonkClassShared(_groupVector) constructor
 {
     x = _x;
     y = _y;

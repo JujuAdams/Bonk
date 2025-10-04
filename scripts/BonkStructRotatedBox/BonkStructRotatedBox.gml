@@ -59,6 +59,7 @@
 /// @param ySize
 /// @param zSize
 /// @param zRotation
+/// @param [groupVector=BONK_DEFAULT_GROUP]
 
 //Set up statics
 with(static_get(BonkStructRotatedBox))
@@ -66,7 +67,7 @@ with(static_get(BonkStructRotatedBox))
     __BonkCommonRotatedBox();
 }
 
-function BonkStructRotatedBox(_x, _y, _z, _xSize, _ySize, _zSize, _zRotation) : __BonkClassShared() constructor
+function BonkStructRotatedBox(_x, _y, _z, _xSize, _ySize, _zSize, _zRotation, _groupVector = BONK_DEFAULT_GROUP) : __BonkClassShared(_groupVector) constructor
 {
     x = _x;
     y = _y;

@@ -132,6 +132,11 @@ function BonkStructWorld(_cellXSize, _cellYSize, _cellZSize, _x = 0, _y = 0, _z 
     
     SetPosition = __SetPositionFree;
     
+    static FilterTest = function()
+    {
+        return true;
+    }
+    
     static CellInside = function(_x, _y, _z)
     {
         return ((_x >= __minCellX) && (_x <= __maxCellX)

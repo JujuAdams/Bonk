@@ -1,8 +1,11 @@
 // Feather disable all
 
-function __BonkClassShared() constructor
+/// @param groupVector
+
+function __BonkClassShared(_groupVector) constructor
 {
     __world = undefined;
+    bonkGroup = _groupVector;
     
     
     

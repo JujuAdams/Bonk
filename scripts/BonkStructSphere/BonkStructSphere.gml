@@ -54,6 +54,7 @@
 /// @param y
 /// @param z
 /// @param radius
+/// @param [groupVector=BONK_DEFAULT_GROUP]
 
 //Set up statics
 with(static_get(BonkStructSphere))
@@ -61,7 +62,7 @@ with(static_get(BonkStructSphere))
     __BonkCommonSphere();
 }
 
-function BonkStructSphere(_x, _y, _z, _radius) : __BonkClassShared() constructor
+function BonkStructSphere(_x, _y, _z, _radius, _groupVector = BONK_DEFAULT_GROUP) : __BonkClassShared(_groupVector) constructor
 {
     x = _x;
     y = _y;

@@ -9,8 +9,9 @@
 /// @param xTopRight
 /// @param yTopRight
 /// @param zTopRight
+/// @param [groupVector=BONK_DEFAULT_GROUP]
 
-function BonkStructWall(_x1, _y1, _z1, _x2, _y2, _z2) : BonkStructQuad(_x1, _y1, _z1, _x2, _y2, _z2, _x2, _y2, _z1) constructor
+function BonkStructWall(_x1, _y1, _z1, _x2, _y2, _z2, _groupVector = BONK_DEFAULT_GROUP) : BonkStructQuad(_x1, _y1, _z1, _x2, _y2, _z2, _x2, _y2, _z1, _groupVector) constructor
 {
     
 }

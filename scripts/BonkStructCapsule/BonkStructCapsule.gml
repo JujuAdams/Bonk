@@ -61,6 +61,7 @@
 /// @param zCenter
 /// @param height
 /// @param radius
+/// @param [groupVector=BONK_DEFAULT_GROUP]
 
 //Set up statics
 with(static_get(BonkStructCapsule))
@@ -68,7 +69,7 @@ with(static_get(BonkStructCapsule))
     __BonkCommonCapsule();
 }
 
-function BonkStructCapsule(_x, _y, _z, _height, _radius) : __BonkClassShared() constructor
+function BonkStructCapsule(_x, _y, _z, _height, _radius, _groupVector = BONK_DEFAULT_GROUP) : __BonkClassShared(_groupVector) constructor
 {
     x = _x;
     y = _y;

@@ -59,6 +59,7 @@
 /// @param x3
 /// @param y3
 /// @param z3
+/// @param [groupVector=BONK_DEFAULT_GROUP]
 
 //Set up statics
 with(static_get(BonkStructQuad))
@@ -66,7 +67,7 @@ with(static_get(BonkStructQuad))
     __BonkCommonQuad();
 }
 
-function BonkStructQuad(_x1, _y1, _z1, _x2, _y2, _z2, _x3, _y3, _z3) : __BonkClassShared() constructor
+function BonkStructQuad(_x1, _y1, _z1, _x2, _y2, _z2, _x3, _y3, _z3, _groupVector = BONK_DEFAULT_GROUP) : __BonkClassShared(_groupVector) constructor
 {
     x1 = _x1;
     y1 = _y1;
