@@ -141,7 +141,7 @@ function __BonkCommonFunctions(_groupVector = BONK_DEFAULT_GROUP)
     
         return _nullCollisionData;
     }
-
+    
     DrawXY = function(_color = c_white)
     {
         draw_sprite_ext(mask_index, 0, x, y, image_xscale, image_yscale, image_angle, _color, 1);
