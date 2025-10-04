@@ -2,9 +2,9 @@
 
 function __BonkClassDeflectData() constructor
 {
-    targetShape       = undefined;
+    targetShape   = undefined;
     collisionData = undefined;
-    deflectType       = BONK_DEFLECT_NONE;
+    deflectType   = BONK_DEFLECT_NONE;
     
     static Clone = function()
     {

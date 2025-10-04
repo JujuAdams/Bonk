@@ -7,8 +7,6 @@ function __BonkClassCollideData() constructor
     dY = 0;
     dZ = 0;
     
-    
-    
     static __Reverse = function()
     {
         dX = -dX;
@@ -16,5 +14,17 @@ function __BonkClassCollideData() constructor
         dZ = -dZ;
         
         return self;
+    }
+    
+    static Clone = function()
+    {
+        var _new = new __BonkClassCollideData();
+        
+        _new.collision = collision;
+        _new.dX = dX;
+        _new.dY = dY;
+        _new.dZ = dZ;
+         
+        return _new;
     }
 }

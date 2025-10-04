@@ -9,7 +9,7 @@ quadRight  = new BonkStructAAB( 0.5*size,         0,         0,    10, size, siz
 quadBottom = new BonkStructAAB(        0,  0.5*size,         0,    size, 10, size);
 quadAbove  = new BonkStructAAB(        0,         0,  0.5*size,    size, size, 10);
 
-sphereArray = array_create_ext(50, function()
+sphereArray = array_create_ext(100, function()
 {
     var _sphere = new BonkStructSphere(0, 0, 0,   20);
     
