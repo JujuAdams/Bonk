@@ -18,19 +18,16 @@ function BonkCollideDeepest(_subjectShape, _targetShapes, _groupFilter = -1)
         {
             with(_targetShapes[_i]) //Use `with()` here to support iterating over objects
             {
-                if ((_groupFilter < 0) || FilterTest(_groupFilter))
+                var _reaction = Collide(_subjectShape, _groupFilter);
+                if (_reaction.collision)
                 {
-                    var _reaction = Collide(_subjectShape);
-                    if (_reaction.collision)
+                    with(_reaction.collisionData)
                     {
-                        with(_reaction.collisionData)
+                        var _depth = dX*dX + dY*dY + dZ*dZ;
+                        if (_depth > _largestDepth)
                         {
-                            var _depth = dX*dX + dY*dY + dZ*dZ;
-                            if (_depth > _largestDepth)
-                            {
-                                _largestDepth = _depth;
-                                _returnData = _reaction.Clone();
-                            }
+                            _largestDepth = _depth;
+                            _returnData = _reaction.Clone();
                         }
                     }
                 }
@@ -46,19 +43,16 @@ function BonkCollideDeepest(_subjectShape, _targetShapes, _groupFilter = -1)
         {
             with(_targetShapes[| _i]) //Use `with()` here to support iterating over objects
             {
-                if ((_groupFilter < 0) || FilterTest(_groupFilter))
+                var _reaction = Collide(_subjectShape, _groupFilter);
+                if (_reaction.collision)
                 {
-                    var _reaction = Collide(_subjectShape);
-                    if (_reaction.collision)
+                    with(_reaction.collisionData)
                     {
-                        with(_reaction.collisionData)
+                        var _depth = dX*dX + dY*dY + dZ*dZ;
+                        if (_depth > _largestDepth)
                         {
-                            var _depth = dX*dX + dY*dY + dZ*dZ;
-                            if (_depth > _largestDepth)
-                            {
-                                _largestDepth = _depth;
-                                _returnData = _reaction.Clone();
-                            }
+                            _largestDepth = _depth;
+                            _returnData = _reaction.Clone();
                         }
                     }
                 }
@@ -71,19 +65,16 @@ function BonkCollideDeepest(_subjectShape, _targetShapes, _groupFilter = -1)
     {
         with(_targetShapes) //Use `with()` here to support iterating over objects
         {
-            if ((_groupFilter < 0) || FilterTest(_groupFilter))
+            var _reaction = Collide(_subjectShape, _groupFilter);
+            if (_reaction.collision)
             {
-                var _reaction = Collide(_subjectShape);
-                if (_reaction.collision)
+                with(_reaction.collisionData)
                 {
-                    with(_reaction.collisionData)
+                    var _depth = dX*dX + dY*dY + dZ*dZ;
+                    if (_depth > _largestDepth)
                     {
-                        var _depth = dX*dX + dY*dY + dZ*dZ;
-                        if (_depth > _largestDepth)
-                        {
-                            _largestDepth = _depth;
-                            _returnData = _reaction.Clone();
-                        }
+                        _largestDepth = _depth;
+                        _returnData = _reaction.Clone();
                     }
                 }
             }

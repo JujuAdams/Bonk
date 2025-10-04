@@ -35,7 +35,7 @@ function __BonkCommonWorld(_cellXSize, _cellYSize, _cellZSize)
     AddPosition = function() {};
     AddVelocity = function() {};
     
-    Touch = function(_subjectShape)
+    Touch = function(_subjectShape, _groupFilter = -1)
     {
         static _map = ds_map_create();
         
@@ -56,7 +56,7 @@ function __BonkCommonWorld(_cellXSize, _cellYSize, _cellZSize)
             var _i = 0;
             repeat(array_length(_shapeArray))
             {
-                if (_shapeArray[_i].Touch(_subjectShape))
+                if (_shapeArray[_i].Touch(_subjectShape, _groupFilter))
                 {
                     return true;
                 }
@@ -93,7 +93,7 @@ function __BonkCommonWorld(_cellXSize, _cellYSize, _cellZSize)
                             {
                                 _map[? _shape] = true;
                                 
-                                if (_shapeArray[_i].Touch(_subjectShape))
+                                if (_shapeArray[_i].Touch(_subjectShape, _groupFilter))
                                 {
                                     ds_map_clear(_map);
                                     return true;
@@ -118,7 +118,7 @@ function __BonkCommonWorld(_cellXSize, _cellYSize, _cellZSize)
         return false;
     }
     
-    Deflect = function(_subjectShape, _slopeThreshold = 0)
+    Deflect = function(_subjectShape, _slopeThreshold = 0, _groupFilter = -1)
     {
         static _map = ds_map_create();
         static _nullDeflectData = __Bonk().__nullDeflectData;
@@ -143,7 +143,7 @@ function __BonkCommonWorld(_cellXSize, _cellYSize, _cellZSize)
             var _i = 0;
             repeat(array_length(_shapeArray))
             {
-                var _reaction = _shapeArray[_i].Deflect(_subjectShape, _slopeThreshold);
+                var _reaction = _shapeArray[_i].Deflect(_subjectShape, _slopeThreshold, _groupFilter);
                 if (_reaction.deflectType != BONK_DEFLECT_NONE)
                 {
                     with(_reaction.collisionData)
@@ -189,7 +189,7 @@ function __BonkCommonWorld(_cellXSize, _cellYSize, _cellZSize)
                             {
                                 _map[? _shape] = true;
                                 
-                                var _reaction = _shape.Deflect(_subjectShape, _slopeThreshold);
+                                var _reaction = _shape.Deflect(_subjectShape, _slopeThreshold, _groupFilter);
                                 if (_reaction.deflectType != BONK_DEFLECT_NONE)
                                 {
                                     with(_reaction.collisionData)
@@ -222,7 +222,7 @@ function __BonkCommonWorld(_cellXSize, _cellYSize, _cellZSize)
         return _returnData;
     }
     
-    Collide = function(_subjectShape)
+    Collide = function(_subjectShape, _groupFilter = -1)
     {
         static _map = ds_map_create();
         static _nullCollisionData = __Bonk().__nullCollisionData;
@@ -244,7 +244,7 @@ function __BonkCommonWorld(_cellXSize, _cellYSize, _cellZSize)
             var _i = 0;
             repeat(array_length(_shapeArray))
             {
-                var _reaction = _shapeArray[_i].Collide(_subjectShape);
+                var _reaction = _shapeArray[_i].Collide(_subjectShape, _groupFilter);
                 if (_reaction.collision)
                 {
                     return _reaction;
@@ -282,7 +282,7 @@ function __BonkCommonWorld(_cellXSize, _cellYSize, _cellZSize)
                             {
                                 _map[? _shape] = true;
                                 
-                                var _reaction = _shape.Collide(_subjectShape);
+                                var _reaction = _shape.Collide(_subjectShape, _groupFilter);
                                 if (_reaction.collision)
                                 {
                                     ds_map_clear(_map);

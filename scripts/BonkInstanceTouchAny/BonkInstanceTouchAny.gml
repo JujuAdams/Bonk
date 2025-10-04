@@ -6,5 +6,5 @@
 
 function BonkInstanceTouchAny(_bonkInstance, _object = BonkObject, _groupFilter = -1)
 {
-    return BonkTouchAny(_bonkInstance, BonkInstancePlaceList(_bonkInstance, 0, 0, 0, _object, _groupFilter));
+    return BonkTouchAny(_bonkInstance, BonkInstancePlaceList(_bonkInstance, 0, 0, 0, _object), _groupFilter);
 }

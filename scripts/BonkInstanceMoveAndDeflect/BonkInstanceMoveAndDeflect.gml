@@ -8,5 +8,5 @@
 
 function BonkInstanceMoveAndDeflect(_bonkInstance, _velocityStruct, _slopeThreshold = 0, _object = BonkObject, _groupFilter = -1)
 {
-    return BonkMoveAndDeflect(_bonkInstance, _velocityStruct, BonkInstancePlaceListVelocity(_bonkInstance, _velocityStruct, _object, _groupFilter), _slopeThreshold);
+    return BonkMoveAndDeflect(_bonkInstance, _velocityStruct, BonkInstancePlaceListVelocity(_bonkInstance, _velocityStruct, _object), _slopeThreshold, _groupFilter);
 }

@@ -16,13 +16,10 @@ function BonkCollideMany(_subjectShape, _targetShapes, _groupFilter = -1)
         {
             with(_targetShapes[_i]) //Use `with()` here to support iterating over objects
             {
-                if ((_groupFilter < 0) || FilterTest(_groupFilter))
+                var _reaction = Collide(_subjectShape, _groupFilter);
+                if (_reaction.collision)
                 {
-                    var _reaction = Collide(_subjectShape);
-                    if (_reaction.collision)
-                    {
-                        array_push(_returnData, _reaction.Clone());
-                    }
+                    array_push(_returnData, _reaction.Clone());
                 }
             }
             
@@ -36,13 +33,10 @@ function BonkCollideMany(_subjectShape, _targetShapes, _groupFilter = -1)
         {
             with(_targetShapes[| _i]) //Use `with()` here to support iterating over objects
             {
-                if ((_groupFilter < 0) || FilterTest(_groupFilter))
+                var _reaction = Collide(_subjectShape, _groupFilter);
+                if (_reaction.collision)
                 {
-                    var _reaction = Collide(_subjectShape);
-                    if (_reaction.collision)
-                    {
-                        array_push(_returnData, _reaction.Clone());
-                    }
+                    array_push(_returnData, _reaction.Clone());
                 }
             }
             
@@ -53,13 +47,10 @@ function BonkCollideMany(_subjectShape, _targetShapes, _groupFilter = -1)
     {
         with(_targetShapes) //Use `with()` here to support iterating over objects
         {
-            if ((_groupFilter < 0) || FilterTest(_groupFilter))
+            var _reaction = Collide(_subjectShape, _groupFilter);
+            if (_reaction.collision)
             {
-                var _reaction = Collide(_subjectShape);
-                if (_reaction.collision)
-                {
-                    array_push(_returnData, _reaction.Clone());
-                }
+                array_push(_returnData, _reaction.Clone());
             }
         }
     }

@@ -41,12 +41,9 @@ function BonkTouchAny(_subjectShape, _targetShapes, _groupFilter = -1)
         {
             with(_targetShapes[_i]) //Use `with()` here to support iterating over objects
             {
-                if ((_groupFilter < 0) || FilterTest(_groupFilter))
+                if (Touch(_subjectShape, _groupFilter))
                 {
-                    if (Touch(_subjectShape))
-                    {
-                        return true;
-                    }
+                    return true;
                 }
             }
             
@@ -60,12 +57,9 @@ function BonkTouchAny(_subjectShape, _targetShapes, _groupFilter = -1)
         {
             with(_targetShapes[| _i]) //Use `with()` here to support iterating over objects
             {
-                if ((_groupFilter < 0) || FilterTest(_groupFilter))
+                if (Touch(_subjectShape, _groupFilter))
                 {
-                    if (Touch(_subjectShape))
-                    {
-                        return true;
-                    }
+                    return true;
                 }
             }
             
@@ -76,12 +70,9 @@ function BonkTouchAny(_subjectShape, _targetShapes, _groupFilter = -1)
     {
         with(_targetShapes) //Use `with()` here to support iterating over objects
         {
-            if ((_groupFilter < 0) || FilterTest(_groupFilter))
+            if (Touch(_subjectShape, _groupFilter))
             {
-                if (Touch(_subjectShape))
-                {
-                    return true;
-                }
+                return true;
             }
         }
     }
