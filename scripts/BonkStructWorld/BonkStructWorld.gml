@@ -168,13 +168,13 @@ function BonkStructWorld(_cellXSize, _cellYSize, _cellZSize) constructor
         }
         else
         {
-            var _cellX = clamp(floor(_aabb.x1 / __cellXSize), BONK_WORLD_CELL_MIN, BONK_WORLD_CELL_MAX);
-            var _cellY = clamp(floor(_aabb.y1 / __cellYSize), BONK_WORLD_CELL_MIN, BONK_WORLD_CELL_MAX);
-            var _cellZ = clamp(floor(_aabb.z1 / __cellZSize), BONK_WORLD_CELL_MIN, BONK_WORLD_CELL_MAX);
+            var _cellX = clamp(floor(_aabb.xMin / __cellXSize), BONK_WORLD_CELL_MIN, BONK_WORLD_CELL_MAX);
+            var _cellY = clamp(floor(_aabb.yMin / __cellYSize), BONK_WORLD_CELL_MIN, BONK_WORLD_CELL_MAX);
+            var _cellZ = clamp(floor(_aabb.zMin / __cellZSize), BONK_WORLD_CELL_MIN, BONK_WORLD_CELL_MAX);
             
-            var _cellXSize = 1 + clamp(floor(_aabb.x2 / __cellXSize), BONK_WORLD_CELL_MIN, BONK_WORLD_CELL_MAX) - _cellX;
-            var _cellYSize = 1 + clamp(floor(_aabb.y2 / __cellYSize), BONK_WORLD_CELL_MIN, BONK_WORLD_CELL_MAX) - _cellY;
-            var _cellZSize = 1 + clamp(floor(_aabb.z2 / __cellZSize), BONK_WORLD_CELL_MIN, BONK_WORLD_CELL_MAX) - _cellZ;
+            var _cellXSize = 1 + clamp(floor(_aabb.xMax / __cellXSize), BONK_WORLD_CELL_MIN, BONK_WORLD_CELL_MAX) - _cellX;
+            var _cellYSize = 1 + clamp(floor(_aabb.yMax / __cellYSize), BONK_WORLD_CELL_MIN, BONK_WORLD_CELL_MAX) - _cellY;
+            var _cellZSize = 1 + clamp(floor(_aabb.zMax / __cellZSize), BONK_WORLD_CELL_MIN, BONK_WORLD_CELL_MAX) - _cellZ;
             
             var _z = _cellZ;
             repeat(_cellZSize)
@@ -264,13 +264,13 @@ function BonkStructWorld(_cellXSize, _cellYSize, _cellZSize) constructor
         }
         else
         {
-            var _cellX = clamp(floor(_aabb.x1 / __cellXSize), BONK_WORLD_CELL_MIN, BONK_WORLD_CELL_MAX);
-            var _cellY = clamp(floor(_aabb.y1 / __cellYSize), BONK_WORLD_CELL_MIN, BONK_WORLD_CELL_MAX);
-            var _cellZ = clamp(floor(_aabb.z1 / __cellZSize), BONK_WORLD_CELL_MIN, BONK_WORLD_CELL_MAX);
+            var _cellX = clamp(floor(_aabb.xMin / __cellXSize), BONK_WORLD_CELL_MIN, BONK_WORLD_CELL_MAX);
+            var _cellY = clamp(floor(_aabb.yMin / __cellYSize), BONK_WORLD_CELL_MIN, BONK_WORLD_CELL_MAX);
+            var _cellZ = clamp(floor(_aabb.zMin / __cellZSize), BONK_WORLD_CELL_MIN, BONK_WORLD_CELL_MAX);
             
-            var _cellXSize = 1 + clamp(floor(_aabb.x2 / __cellXSize), BONK_WORLD_CELL_MIN, BONK_WORLD_CELL_MAX) - _cellX;
-            var _cellYSize = 1 + clamp(floor(_aabb.y2 / __cellYSize), BONK_WORLD_CELL_MIN, BONK_WORLD_CELL_MAX) - _cellY;
-            var _cellZSize = 1 + clamp(floor(_aabb.z2 / __cellZSize), BONK_WORLD_CELL_MIN, BONK_WORLD_CELL_MAX) - _cellZ;
+            var _cellXSize = 1 + clamp(floor(_aabb.xMax / __cellXSize), BONK_WORLD_CELL_MIN, BONK_WORLD_CELL_MAX) - _cellX;
+            var _cellYSize = 1 + clamp(floor(_aabb.yMax / __cellYSize), BONK_WORLD_CELL_MIN, BONK_WORLD_CELL_MAX) - _cellY;
+            var _cellZSize = 1 + clamp(floor(_aabb.zMax / __cellZSize), BONK_WORLD_CELL_MIN, BONK_WORLD_CELL_MAX) - _cellZ;
             
             var _z = _cellZ;
             repeat(_cellZSize)
@@ -357,13 +357,13 @@ function BonkStructWorld(_cellXSize, _cellYSize, _cellZSize) constructor
         }
         else
         {
-            var _cellX = clamp(floor(_aabb.x1 / __cellXSize), BONK_WORLD_CELL_MIN, BONK_WORLD_CELL_MAX);
-            var _cellY = clamp(floor(_aabb.y1 / __cellYSize), BONK_WORLD_CELL_MIN, BONK_WORLD_CELL_MAX);
-            var _cellZ = clamp(floor(_aabb.z1 / __cellZSize), BONK_WORLD_CELL_MIN, BONK_WORLD_CELL_MAX);
+            var _cellX = clamp(floor(_aabb.xMin / __cellXSize), BONK_WORLD_CELL_MIN, BONK_WORLD_CELL_MAX);
+            var _cellY = clamp(floor(_aabb.yMin / __cellYSize), BONK_WORLD_CELL_MIN, BONK_WORLD_CELL_MAX);
+            var _cellZ = clamp(floor(_aabb.zMin / __cellZSize), BONK_WORLD_CELL_MIN, BONK_WORLD_CELL_MAX);
             
-            var _cellXSize = 1 + clamp(floor(_aabb.x2 / __cellXSize), BONK_WORLD_CELL_MIN, BONK_WORLD_CELL_MAX) - _cellX;
-            var _cellYSize = 1 + clamp(floor(_aabb.y2 / __cellYSize), BONK_WORLD_CELL_MIN, BONK_WORLD_CELL_MAX) - _cellY;
-            var _cellZSize = 1 + clamp(floor(_aabb.z2 / __cellZSize), BONK_WORLD_CELL_MIN, BONK_WORLD_CELL_MAX) - _cellZ;
+            var _cellXSize = 1 + clamp(floor(_aabb.xMax / __cellXSize), BONK_WORLD_CELL_MIN, BONK_WORLD_CELL_MAX) - _cellX;
+            var _cellYSize = 1 + clamp(floor(_aabb.yMax / __cellYSize), BONK_WORLD_CELL_MIN, BONK_WORLD_CELL_MAX) - _cellY;
+            var _cellZSize = 1 + clamp(floor(_aabb.zMax / __cellZSize), BONK_WORLD_CELL_MIN, BONK_WORLD_CELL_MAX) - _cellZ;
             
             var _z = _cellZ;
             repeat(_cellZSize)
