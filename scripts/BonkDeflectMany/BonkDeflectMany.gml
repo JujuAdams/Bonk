@@ -20,7 +20,7 @@
 /// @param subjectShape
 /// @param [slopeThreshold=0]
 
-function BonkDeflectDeepest(_shapeArray, _subjectShape, _slopeThreshold = 0)
+function BonkDeflectMany(_shapeArray, _subjectShape, _slopeThreshold = 0)
 {
     static _nullDeflectData = __Bonk().__nullDeflectData;
     

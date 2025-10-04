@@ -65,17 +65,13 @@ function __BonkCommonFunctions()
                 {
                     //If the slope is shallow enough, just move upwards
                     //This movement is approximate but good enough
-                    z += _distance;
-                
+                    AddPosition(0, 0, _distance);
                     _reaction.deflectType = BONK_DEFLECT_GRIPPY;
                 }
                 else
                 {
                     //Otherwise move out as usual which will typically slide the subject down slopes
-                    x += _dX;
-                    y += _dY;
-                    z += _dZ;
-                
+                    AddPosition(_dX, _dY, _dZ);
                     _reaction.deflectType = BONK_DEFLECT_SLIPPERY;
                 }
             }
@@ -92,7 +88,7 @@ function __BonkCommonFunctions()
     
         //Subject shape was `undefined`
         _reaction.collisionData = _nullCollisionData;
-        _reaction.deflectType       = BONK_DEFLECT_NONE;
+        _reaction.deflectType   = BONK_DEFLECT_NONE;
     
         return _reaction;
     }

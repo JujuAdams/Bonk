@@ -1,9 +1,9 @@
 {
   "$GMScript":"v1",
-  "%Name":"BonkDeflectDeepest",
+  "%Name":"BonkDeflectMany",
   "isCompatibility":false,
   "isDnD":false,
-  "name":"BonkDeflectDeepest",
+  "name":"BonkDeflectMany",
   "parent":{
     "name":"General Functions",
     "path":"folders/Bonk/General Functions.yy",
