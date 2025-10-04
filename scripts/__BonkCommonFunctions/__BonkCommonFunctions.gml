@@ -1,6 +1,6 @@
 // Feather disable all
 
-function __BonkCommonFunctions()
+function __BonkCommonFunctions(_groupVector = BONK_DEFAULT_GROUP)
 {
     if (BONK_DEBUG_INSTANCES)
     {
@@ -9,7 +9,7 @@ function __BonkCommonFunctions()
         array_pop(__bonkOrigin);
     }
     
-    bonkGroup = 0x00;
+    bonkGroup = _groupVector;
     
     
     
@@ -21,6 +21,33 @@ function __BonkCommonFunctions()
     AddVelocity = function(_velocityStruct)
     {
         SetPosition(x + _velocityStruct.xSpeed, y + _velocityStruct.ySpeed, z + _velocityStruct.zSpeed);
+    }
+    
+    FilterTest = function(_filter)
+    {
+        var _bonkGroup = bonkGroup;
+        
+        //Filter out shapes that conflict with the NOT vector (if in use)
+        var _notVector = (_filter >> 40) & 0xFFFFF;
+        if ((_notVector > 0) && (_bonkGroup & _notVector))
+        {
+            return false;
+        }
+        
+        //Accept shapes that hit the OR vector
+        if (_bonkGroup & (_filter & 0xFFFFF))
+        {
+            return true;
+        }
+        
+        //Accept shapes the hit all of the AND vector (if in use)
+        var _andVector = (_filter >> 20) & 0xFFFFF;
+        if ((_andVector > 0) && ((_bonkGroup & _andVector) == _andVector))
+        {
+            return true;
+        }
+        
+        return false;
     }
 
     Touch = function(_otherShape)

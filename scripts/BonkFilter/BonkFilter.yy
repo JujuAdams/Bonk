@@ -1,0 +1,13 @@
+{
+  "$GMScript":"v1",
+  "%Name":"BonkFilter",
+  "isCompatibility":false,
+  "isDnD":false,
+  "name":"BonkFilter",
+  "parent":{
+    "name":"Bonk",
+    "path":"folders/Bonk.yy",
+  },
+  "resourceType":"GMScript",
+  "resourceVersion":"2.0",
+}

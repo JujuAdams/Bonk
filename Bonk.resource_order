@@ -1,7 +1,7 @@
 {
   "FolderOrderSettings":[
     {"name":"Bonk","order":1,"path":"folders/Bonk.yy",},
-    {"name":"(System)","order":8,"path":"folders/Bonk/(System).yy",},
+    {"name":"(System)","order":5,"path":"folders/Bonk/(System).yy",},
     {"name":"Common Values","order":17,"path":"folders/Bonk/(System)/Common Values.yy",},
     {"name":"Direct Control","order":3,"path":"folders/Bonk/Direct Control.yy",},
     {"name":"Collide","order":5,"path":"folders/Bonk/Direct Control/Collide.yy",},
@@ -186,6 +186,7 @@
     {"name":"BonkCylinderTouchRotatedBox","order":3,"path":"scripts/BonkCylinderTouchRotatedBox/BonkCylinderTouchRotatedBox.yy",},
     {"name":"BonkCylinderTouchSphere","order":4,"path":"scripts/BonkCylinderTouchSphere/BonkCylinderTouchSphere.yy",},
     {"name":"BonkDeflectMany","order":3,"path":"scripts/BonkDeflectMany/BonkDeflectMany.yy",},
+    {"name":"BonkFilter","order":6,"path":"scripts/BonkFilter/BonkFilter.yy",},
     {"name":"BonkInstanceCollideDeepest","order":5,"path":"scripts/BonkInstanceCollideDeepest/BonkInstanceCollideDeepest.yy",},
     {"name":"BonkInstanceCollideMany","order":6,"path":"scripts/BonkInstanceCollideMany/BonkInstanceCollideMany.yy",},
     {"name":"BonkInstanceDeflectMany","order":4,"path":"scripts/BonkInstanceDeflectMany/BonkInstanceDeflectMany.yy",},

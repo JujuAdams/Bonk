@@ -16,6 +16,17 @@ function __BonkClassShared() constructor
         SetPosition(x + _velocityStruct.xSpeed, y + _velocityStruct.ySpeed, z + _velocityStruct.zSpeed);
     }
     
+    static FilterTest = function(_filter)
+    {
+        var _andVector = (_filter >> 20) & 0xFFFFF;
+        var _norVector = (_filter >> 40) & 0xFFFFF;
+        
+        var _orVector = _filter & 0xFFFFF;
+        return (((bonkGroup & (_filter & 0xFFFFF))
+             || ((bonkGroup & _andVector) == _andVector))
+            && (not (bonkGroup & _norVector)))
+    }
+    
     static Touch = function(_otherShape)
     {
         var _insideFunc = __insideFuncLookup[_otherShape.bonkType];

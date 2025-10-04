@@ -10,7 +10,7 @@
 /// @param [list]
 /// @param [object]
 
-function BonkCollisionLineList(_x1, _y1, _z1, _x2, _y2, _z2, _groupFilter = undefined, _list = undefined, _object = BonkObject)
+function BonkCollisionLineList(_x1, _y1, _z1, _x2, _y2, _z2, _groupFilter = -1, _list = undefined, _object = BonkObject)
 {
     static _listStatic   = ds_list_create();
     static _listXZStatic = ds_list_create();
@@ -28,12 +28,12 @@ function BonkCollisionLineList(_x1, _y1, _z1, _x2, _y2, _z2, _groupFilter = unde
     
     collision_line_list(_x1, _y1, _x2, _y2, _object, false, false, _list, false);
     
-    if (_groupFilter != undefined)
+    if (_groupFilter >= 0)
     {
         var _i = ds_list_size(_list)-1;
         repeat(_i+1 - _listStart)
         {
-            if (_list[| _i].bonkGroup | _groupFilter)
+            if (not _list[| _i].FilterTest(_groupFilter))
             {
                 ds_list_delete(_list, _i);
             }
