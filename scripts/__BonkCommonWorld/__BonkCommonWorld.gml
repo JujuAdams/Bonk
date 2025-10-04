@@ -399,6 +399,19 @@ function __BonkCommonWorld(_cellXSize, _cellYSize, _cellZSize)
         __minCellZ = min(__minCellZ, _cellZ, _cellZ2);
         __maxCellZ = max(__maxCellZ, _cellZ, _cellZ2);
         
+        if (instance_exists(self))
+        {
+            var _left   = __cellXSize*__minCellX;
+            var _top    = __cellYSize*__minCellY;
+            var _right  = __cellXSize*__maxCellX;
+            var _bottom = __cellYSize*__maxCellY;
+            
+            x = 0.5*(_left + _right);
+            y = 0.5*(_top + _bottom);
+            image_xscale = max(BONK_INSTANCE_MIN_SIZE, 1 + _right - _left) / BONK_MASK_SIZE;
+            image_yscale = max(BONK_INSTANCE_MIN_SIZE, 1 + _bottom - _top) / BONK_MASK_SIZE;
+        }
+        
         var _cellXSize = 1 + _cellX2 - _cellX;
         var _cellYSize = 1 + _cellY2 - _cellY;
         var _cellZSize = 1 + _cellZ2 - _cellZ;

@@ -1,3 +1,5 @@
+world = noone;
+
 shape = BonkCreateCapsule(x, y, 200,   80, 25);
 velocity = new BonkVelocity();
 
