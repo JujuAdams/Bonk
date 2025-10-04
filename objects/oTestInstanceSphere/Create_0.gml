@@ -1,1 +1,1 @@
-BonkSetAsSphere(self,   x, y, 32,   32);
+BonkSetAsSphere(x, y, 32,   32);

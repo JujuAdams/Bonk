@@ -1,1 +1,1 @@
-BonkSetAsTriangle(self,   x, y, 32,   x + 64, y, 0,   x, y + 64, 0);
+BonkSetAsTriangle(x, y, 32,   x + 64, y, 0,   x, y + 64, 0);
