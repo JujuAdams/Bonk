@@ -3,9 +3,9 @@
 /// This function returns `true` if the subject shape intersects with one or more target shapes.
 /// The subject shape can be either a Bonk struct or a Bonk instance.
 /// 
-/// The `targetShapes` parameter can be an array, a list, a Bonk struct, a Bonk object, or a Bonk
-/// instance. If you provide an array or list then elements in the array/list should be either
-/// a Bonk struct, a Bonk object, or a Bonk instance.
+/// The `targetShapes` parameter can be an array, a list, a Bonk struct/instance, or an object used
+/// to create Bonk instances. If you provide an array or list then elements in the array/list
+/// should be either a Bonk struct/instance or an object.
 /// 
 /// That's quite a lot to take in so here are some examples of use:
 /// 

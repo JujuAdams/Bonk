@@ -1,19 +1,25 @@
 // Feather disable all
 
+/// Returns a ds_list containing Bonk instances that *probably* touch a line segment. Normal
+/// operation would be to not provide a list in which case this function will return a statically
+/// allocated list that contains all probable colliding instances.
+/// 
+/// However, you may choose to specify a list. Any (probable) collisions are appended to the end
+/// of the list.
+/// 
+/// Collision checks happen in the XY plane so z-axis information is not needed by this function.
+/// 
 /// @param x1
 /// @param y1
-/// @param z1
 /// @param x2
 /// @param y2
-/// @param z2
 /// @param [groupFilter]
 /// @param [list]
 /// @param [object=BonkObject]
 
-function BonkCollisionLineList(_x1, _y1, _z1, _x2, _y2, _z2, _object = BonkObject, _groupFilter = -1, _list = undefined)
+function BonkCollisionLineList(_x1, _y1, _x2, _y2, _object = BonkObject, _groupFilter = -1, _list = undefined)
 {
-    static _listStatic   = ds_list_create();
-    static _listXZStatic = ds_list_create();
+    static _listStatic = ds_list_create();
     
     if (_list == undefined)
     {

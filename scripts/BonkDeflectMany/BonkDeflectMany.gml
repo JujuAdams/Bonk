@@ -1,6 +1,10 @@
 // Feather disable all
 
-/// Pushes a shape (the "subject shape") outside any and all of the shapes in the shape array.
+/// Pushes a shape (the "subject shape") outside any and all of the target shapes.
+/// 
+/// The `targetShapes` parameter can be an array, a list, a Bonk struct/instance, or an object used
+/// to create Bonk instances. If you provide an array or list then elements in the array/list
+/// should be either a Bonk struct/instance or an object.
 /// 
 /// The `slopeThreshold` argument is measured in degrees and referes to the gradient angle of
 /// colliding surfaces that the surface bumps into. A slope threshold of `0` degrees is a flat

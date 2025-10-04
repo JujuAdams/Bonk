@@ -1,5 +1,12 @@
 // Feather disable all
 
+/// Performs a raycast against the target shapes along a ray. If you'd like to use a Bonk line for
+/// raycasting then please use the `.HitFirst()` method on the ray struct.
+/// 
+/// The `targetShapes` parameter can be an array, a list, a Bonk struct/instance, or an object used
+/// to create Bonk instances. If you provide an array or list then elements in the array/list
+/// should be either a Bonk struct/instance or an object.
+/// 
 /// @param targetShapes
 /// @param rayX
 /// @param rayY

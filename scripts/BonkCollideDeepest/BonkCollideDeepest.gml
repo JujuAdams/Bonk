@@ -1,5 +1,12 @@
 // Feather disable all
 
+/// Returns collision data for the deepest collision with one of the given target shapes. The
+/// `subjectShape` should be either a Bonk struct or Bonk instance.
+/// 
+/// The `targetShapes` parameter can be an array, a list, a Bonk struct/instance, or an object used
+/// to create Bonk instances. If you provide an array or list then elements in the array/list
+/// should be either a Bonk struct/instance or an object.
+/// 
 /// @param subjectShape
 /// @param targetShapes
 /// @param [groupFilter]
