@@ -25,6 +25,11 @@ function __BonkCommonFunctions()
     {
         SetPosition(x + _dX, y + _dY, z + _dZ);
     }
+    
+    AddVelocity = function(_velocityStruct)
+    {
+        SetPosition(x + _velocityStruct.xSpeed, y + _velocityStruct.ySpeed, z + _velocityStruct.zSpeed);
+    }
 
     Touch = function(_otherShape)
     {

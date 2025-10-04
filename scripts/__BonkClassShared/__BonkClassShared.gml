@@ -11,6 +11,11 @@ function __BonkClassShared() constructor
         SetPosition(x + _dX, y + _dY, z + _dZ);
     }
     
+    static AddVelocity = function(_velocityStruct)
+    {
+        SetPosition(x + _velocityStruct.xSpeed, y + _velocityStruct.ySpeed, z + _velocityStruct.zSpeed);
+    }
+    
     static Touch = function(_otherShape)
     {
         var _insideFunc = __insideFuncLookup[_otherShape.bonkType];
