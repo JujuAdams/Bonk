@@ -1,9 +1,9 @@
 // Feather disable all
 
-/// @param targetShapes
 /// @param subjectShape
+/// @param targetShapes
 
-function BonkCollideDeepest(_targetShapes, _subjectShape)
+function BonkCollideDeepest(_subjectShape, _targetShapes)
 {
     static _nullCollisionData = __Bonk().__nullCollisionData;
     

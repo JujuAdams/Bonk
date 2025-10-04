@@ -17,7 +17,7 @@ function BonkMoveAndDeflect(_subjectShape, _velocityStruct, _targetShapes, _slop
         var _z = z;
         
         AddVelocity(_velocityStruct);
-        _returnData = BonkDeflectMany(_targetShapes, _subjectShape, _slopeThreshold);
+        _returnData = BonkDeflectMany(_subjectShape, _targetShapes, _slopeThreshold);
         
         _velocityStruct.xSpeed = x - _x;
         _velocityStruct.ySpeed = y - _y;

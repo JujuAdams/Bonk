@@ -1,9 +1,9 @@
 // Feather disable all
 
-/// @param targetShapes
 /// @param subjectShape
+/// @param targetShapes
 
-function BonkCollideMany(_targetShapes, _subjectShape)
+function BonkCollideMany(_subjectShape, _targetShapes)
 {
     static _returnData = [];
     array_resize(_returnData, 0);

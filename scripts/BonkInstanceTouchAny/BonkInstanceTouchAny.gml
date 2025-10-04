@@ -1,11 +1,11 @@
 // Feather disable all
 
-/// @param subjectShape
+/// @param bonkInstance
 /// @param [groupFilter]
 /// @param [objectXY]
 /// @param [objectXZ]
 
-function BonkInstanceTouchAny(_subjectShape, _groupFilter = undefined, _objectXY = BonkObjectXY, _objectXZ = BonkObjectXZ)
+function BonkInstanceTouchAny(_bonkInstance, _groupFilter = undefined, _objectXY = BonkObjectXY, _objectXZ = BonkObjectXZ)
 {
-    return BonkTouchAny(_subjectShape, BonkInstancePlaceList(_subjectShape, 0, 0, 0, _groupFilter, _objectXY, _objectXZ));
+    return BonkTouchAny(_bonkInstance, BonkInstancePlaceList(_bonkInstance, 0, 0, 0, _groupFilter, undefined, _objectXY, _objectXZ));
 }

@@ -16,11 +16,11 @@
 /// player character and non-player characters alike will want a slope threshold of some kind. I
 /// personally like an angle of `40` degrees.
 /// 
-/// @param targetShapes
 /// @param subjectShape
+/// @param targetShapes
 /// @param [slopeThreshold=0]
 
-function BonkDeflectMany(_targetShapes, _subjectShape, _slopeThreshold = 0)
+function BonkDeflectMany(_subjectShape, _targetShapes, _slopeThreshold = 0)
 {
     static _nullDeflectData = __Bonk().__nullDeflectData;
     
