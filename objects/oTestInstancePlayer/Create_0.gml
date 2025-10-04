@@ -1,4 +1,4 @@
-shape = BonkCreateCapsule(x, y, 200,   80, 25,   undefined, 0b10);
+shape = BonkCreateCapsule(x, y, 200,   80, 25);
 velocity = new BonkVelocity();
 
 line = new BonkLine(shape.x, shape.y, shape.z + 0.5*shape.height,

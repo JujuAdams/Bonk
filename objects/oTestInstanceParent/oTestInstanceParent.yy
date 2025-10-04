@@ -1,12 +1,9 @@
 {
   "$GMObject":"",
-  "%Name":"oTestInstanceAutoHeavy",
-  "eventList":[
-    {"$GMEvent":"v1","%Name":"","collisionObjectId":null,"eventNum":0,"eventType":0,"isDnD":false,"name":"","resourceType":"GMEvent","resourceVersion":"2.0",},
-    {"$GMEvent":"v1","%Name":"","collisionObjectId":null,"eventNum":4,"eventType":7,"isDnD":false,"name":"","resourceType":"GMEvent","resourceVersion":"2.0",},
-  ],
+  "%Name":"oTestInstanceParent",
+  "eventList":[],
   "managed":true,
-  "name":"oTestInstanceAutoHeavy",
+  "name":"oTestInstanceParent",
   "overriddenProperties":[],
   "parent":{
     "name":"Instance Playground",
@@ -30,10 +27,7 @@
   "resourceType":"GMObject",
   "resourceVersion":"2.0",
   "solid":false,
-  "spriteId":{
-    "name":"sAutoHeavy",
-    "path":"sprites/sAutoHeavy/sAutoHeavy.yy",
-  },
+  "spriteId":null,
   "spriteMaskId":null,
   "visible":true,
 }

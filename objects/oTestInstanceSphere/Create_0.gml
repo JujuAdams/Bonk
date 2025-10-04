@@ -1,1 +1,1 @@
-shape = BonkCreateSphere(x, y, 32,   32);
+BonkSetAsSphere(self,   x, y, 32,   32);

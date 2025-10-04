@@ -1,7 +1,7 @@
 shape.Draw(c_lime, true);
 line.Draw(c_yellow);
 
-var _hit = line.HitFirstInstance(undefined, BONK_DEFAULT_GROUP);
+var _hit = line.HitFirstInstance(oTestInstanceParent);
 if (_hit.collision)
 {
     UggSphere(_hit.x, _hit.y, _hit.z, 3, c_red);

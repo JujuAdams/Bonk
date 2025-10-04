@@ -1,1 +1,1 @@
-shape = BonkCreateCylinder(x, y, 16,   32, 32);
+BonkSetAsCylinder(self,   x, y, 16,   32, 32);

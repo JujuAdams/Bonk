@@ -1,18 +1,20 @@
 {
   "$GMObject":"",
-  "%Name":"oTestInstanceAutoHeavy",
+  "%Name":"oTestInstanceAuto",
   "eventList":[
-    {"$GMEvent":"v1","%Name":"","collisionObjectId":null,"eventNum":0,"eventType":0,"isDnD":false,"name":"","resourceType":"GMEvent","resourceVersion":"2.0",},
-    {"$GMEvent":"v1","%Name":"","collisionObjectId":null,"eventNum":4,"eventType":7,"isDnD":false,"name":"","resourceType":"GMEvent","resourceVersion":"2.0",},
+    {"$GMEvent":"v1","%Name":"","collisionObjectId":null,"eventNum":0,"eventType":8,"isDnD":false,"name":"","resourceType":"GMEvent","resourceVersion":"2.0",},
   ],
   "managed":true,
-  "name":"oTestInstanceAutoHeavy",
+  "name":"oTestInstanceAuto",
   "overriddenProperties":[],
   "parent":{
     "name":"Instance Playground",
     "path":"folders/Test Cases/Instance Playground.yy",
   },
-  "parentObjectId":null,
+  "parentObjectId":{
+    "name":"oTestInstanceParent",
+    "path":"objects/oTestInstanceParent/oTestInstanceParent.yy",
+  },
   "persistent":false,
   "physicsAngularDamping":0.1,
   "physicsDensity":0.5,
@@ -30,10 +32,7 @@
   "resourceType":"GMObject",
   "resourceVersion":"2.0",
   "solid":false,
-  "spriteId":{
-    "name":"sAutoHeavy",
-    "path":"sprites/sAutoHeavy/sAutoHeavy.yy",
-  },
+  "spriteId":null,
   "spriteMaskId":null,
   "visible":true,
 }

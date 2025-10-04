@@ -1,1 +1,1 @@
-shape = BonkCreateQuad(x, y, 0,   x + 64, y, 0,   x, y + 64, 32);
+BonkSetAsQuad(self,   x, y, 0,   x + 64, y, 0,   x, y + 64, 32);

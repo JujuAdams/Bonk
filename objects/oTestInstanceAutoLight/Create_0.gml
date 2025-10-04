@@ -1,3 +1,3 @@
 // Feather disable all
 
-AutoslopeInstances(0);
+AutoslopeInstances(0, oTestInstanceAuto);

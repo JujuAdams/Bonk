@@ -13,8 +13,8 @@
     "path":"folders/Test Cases/Instance Playground.yy",
   },
   "parentObjectId":{
-    "name":"oTestParent",
-    "path":"objects/oTestParent/oTestParent.yy",
+    "name":"oTestInstanceParent",
+    "path":"objects/oTestInstanceParent/oTestInstanceParent.yy",
   },
   "persistent":false,
   "physicsAngularDamping":0.1,
