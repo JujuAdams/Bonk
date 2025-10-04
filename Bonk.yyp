@@ -22,7 +22,6 @@
     {"$GMFolder":"","%Name":"Rotated Box","folderPath":"folders/Bonk/Direct Control/Collide/Rotated Box.yy","name":"Rotated Box","resourceType":"GMFolder","resourceVersion":"2.0",},
     {"$GMFolder":"","%Name":"Sphere","folderPath":"folders/Bonk/Direct Control/Collide/Sphere.yy","name":"Sphere","resourceType":"GMFolder","resourceVersion":"2.0",},
     {"$GMFolder":"","%Name":"Triangle","folderPath":"folders/Bonk/Direct Control/Collide/Triangle.yy","name":"Triangle","resourceType":"GMFolder","resourceVersion":"2.0",},
-    {"$GMFolder":"","%Name":"Instance Broad Phase","folderPath":"folders/Bonk/Direct Control/Instance Broad Phase.yy","name":"Instance Broad Phase","resourceType":"GMFolder","resourceVersion":"2.0",},
     {"$GMFolder":"","%Name":"Line Hit","folderPath":"folders/Bonk/Direct Control/Line Hit.yy","name":"Line Hit","resourceType":"GMFolder","resourceVersion":"2.0",},
     {"$GMFolder":"","%Name":"Multi Functions","folderPath":"folders/Bonk/Direct Control/Multi Functions.yy","name":"Multi Functions","resourceType":"GMFolder","resourceVersion":"2.0",},
     {"$GMFolder":"","%Name":"Ray Hit","folderPath":"folders/Bonk/Direct Control/Ray Hit.yy","name":"Ray Hit","resourceType":"GMFolder","resourceVersion":"2.0",},
@@ -81,10 +80,6 @@
   },
   "name":"Bonk",
   "resources":[
-    {"id":{"name":"Bonk - About Direct Control","path":"notes/Bonk - About Direct Control/Bonk - About Direct Control.yy",},},
-    {"id":{"name":"Bonk - About Helper Constructors","path":"notes/Bonk - About Helper Constructors/Bonk - About Helper Constructors.yy",},},
-    {"id":{"name":"Bonk - About Instances","path":"notes/Bonk - About Instances/Bonk - About Instances.yy",},},
-    {"id":{"name":"Bonk - About Multi Functions","path":"notes/Bonk - About Multi Functions/Bonk - About Multi Functions.yy",},},
     {"id":{"name":"BonkObject","path":"objects/BonkObject/BonkObject.yy",},},
     {"id":{"name":"objTestAABInAAB","path":"objects/objTestAABInAAB/objTestAABInAAB.yy",},},
     {"id":{"name":"objTestAABInCylinder","path":"objects/objTestAABInCylinder/objTestAABInCylinder.yy",},},
