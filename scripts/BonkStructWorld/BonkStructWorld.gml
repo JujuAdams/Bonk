@@ -94,18 +94,11 @@
 /// @param cellXSize
 /// @param cellYSize
 /// @param cellZSize
-/// @param [x=0]
-/// @param [y=0]
-/// @param [z=0]
 
-function BonkStructWorld(_cellXSize, _cellYSize, _cellZSize, _x = 0, _y = 0, _z = 0) constructor
+function BonkStructWorld(_cellXSize, _cellYSize, _cellZSize) constructor
 {
     static bonkType = BONK_TYPE_WORLD;
     static __lineHitFunction = BonkLineHitWorld;
-    
-    __xOffset = _x;
-    __yOffset = _y;
-    __zOffset = _z;
     
     __cellXSize = _cellXSize;
     __cellYSize = _cellYSize;
@@ -420,12 +413,12 @@ function BonkStructWorld(_cellXSize, _cellYSize, _cellZSize, _x = 0, _y = 0, _z 
     static GetAABB = function()
     {
         return {
-            xMin: __xOffset + __cellXSize*__minCellX,
-            yMin: __yOffset + __cellYSize*__minCellY,
-            zMin: __zOffset + __cellZSize*__minCellZ,
-            xMax: __xOffset + __cellXSize*(__maxCellX+1),
-            yMax: __yOffset + __cellYSize*(__maxCellY+1),
-            zMax: __zOffset + __cellZSize*(__maxCellZ+1),
+            xMin: __cellXSize*__minCellX,
+            yMin: __cellYSize*__minCellY,
+            zMin: __cellZSize*__minCellZ,
+            xMax: __cellXSize*(__maxCellX+1),
+            yMax: __cellYSize*(__maxCellY+1),
+            zMax: __cellZSize*(__maxCellZ+1),
         };
     }
     
@@ -654,9 +647,7 @@ function BonkStructWorld(_cellXSize, _cellYSize, _cellZSize, _x = 0, _y = 0, _z 
     
     static GetShapeArrayFromPoint = function(_x, _y, _z)
     {
-        return GetShapeArrayFromCell((_x - __xOffset) / __cellXSize,
-                                     (_y - __yOffset) / __cellYSize,
-                                     (_z - __zOffset) / __cellZSize);
+        return GetShapeArrayFromCell(_x / __cellXSize, _y / __cellYSize, _z / __cellZSize);
     }
     
     static GetShapeArrayFromCell = function(_x, _y, _z)
@@ -888,10 +879,6 @@ function BonkStructWorld(_cellXSize, _cellYSize, _cellZSize, _x = 0, _y = 0, _z 
     
     static DrawCellsFromArray = function(_array, _color = undefined, _wireframe = true)
     {
-        var _xOffset = __xOffset;
-        var _yOffset = __yOffset;
-        var _zOffset = __zOffset;
-        
         var _cellXSize = __cellXSize;
         var _cellYSize = __cellYSize;
         var _cellZSize = __cellZSize;
@@ -910,9 +897,9 @@ function BonkStructWorld(_cellXSize, _cellYSize, _cellZSize, _x = 0, _y = 0, _z 
             var _y = floor(clamp(_array[_i+1], _minCellY, _maxCellY));
             var _z = floor(clamp(_array[_i+2], _minCellZ, _maxCellZ));
             
-            UggAABB(_xOffset + _cellXSize*(_x + 0.5),
-                    _yOffset + _cellYSize*(_y + 0.5),
-                    _zOffset + _cellZSize*(_z + 0.5),
+            UggAABB(_cellXSize*(_x + 0.5),
+                    _cellYSize*(_y + 0.5),
+                    _cellZSize*(_z + 0.5),
                     _cellXSize, _cellYSize, _cellZSize,
                     _color, _wireframe);
             
@@ -922,10 +909,6 @@ function BonkStructWorld(_cellXSize, _cellYSize, _cellZSize, _x = 0, _y = 0, _z 
     
     static DrawCellsFromRange = function(_struct, _color = undefined, _wireframe = true, _checkerboard = false)
     {
-        var _xOffset = __xOffset;
-        var _yOffset = __yOffset;
-        var _zOffset = __zOffset;
-        
         var _cellXSize = __cellXSize;
         var _cellYSize = __cellYSize;
         var _cellZSize = __cellZSize;
@@ -948,9 +931,9 @@ function BonkStructWorld(_cellXSize, _cellYSize, _cellZSize, _x = 0, _y = 0, _z 
                 {
                     if ((not _checkerboard) || ((abs(_x + _y + _z) mod 2) == 1))
                     {
-                        UggAABB(_xOffset + _cellXSize*(_x + 0.5),
-                                _yOffset + _cellYSize*(_y + 0.5),
-                                _zOffset + _cellZSize*(_z + 0.5),
+                        UggAABB(_cellXSize*(_x + 0.5),
+                                _cellYSize*(_y + 0.5),
+                                _cellZSize*(_z + 0.5),
                                 _cellXSize, _cellYSize, _cellZSize,
                                 _color, _wireframe);
                     }
@@ -993,13 +976,6 @@ function BonkStructWorld(_cellXSize, _cellYSize, _cellZSize, _x = 0, _y = 0, _z 
     
     static GetCellsFromLine = function(_x1, _y1, _z1, _x2, _y2, _z2)
     {
-        _x1 -= __xOffset;
-        _y1 -= __yOffset;
-        _z1 -= __zOffset;
-        _x2 -= __xOffset;
-        _y2 -= __yOffset;
-        _z2 -= __zOffset;
-        
         var _dX = _x2 - _x1;
         var _dY = _y2 - _y1;
         var _dZ = _z2 - _z1;
