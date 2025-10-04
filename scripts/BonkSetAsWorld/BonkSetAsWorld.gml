@@ -6,6 +6,12 @@
 
 function BonkSetAsWorld(_cellXSize, _cellYSize, _cellZSize)
 {
+    if (BONK_DEBUG_INSTANCES)
+    {
+        bonkCreateCallstack = debug_get_callstack();
+        array_pop(bonkCreateCallstack);
+    }
+    
     __BonkCommonWorld(_cellXSize, _cellYSize, _cellZSize);
     
     DrawXY = function(_color = c_white)

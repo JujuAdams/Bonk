@@ -4,6 +4,12 @@
 
 function __BonkClassShared(_groupVector) constructor
 {
+    if (BONK_DEBUG_STRUCTS)
+    {
+        bonkCreateCallstack = debug_get_callstack();
+        array_pop(bonkCreateCallstack);
+    }
+    
     __world = undefined;
     bonkGroup = _groupVector;
     

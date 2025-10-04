@@ -4,9 +4,9 @@ function __BonkCommonFunctions(_groupVector = BONK_DEFAULT_GROUP)
 {
     if (BONK_DEBUG_INSTANCES)
     {
-        __bonkOrigin = debug_get_callstack();
-        array_shift(__bonkOrigin);
-        array_pop(__bonkOrigin);
+        bonkCreateCallstack = debug_get_callstack();
+        array_shift(bonkCreateCallstack);
+        array_pop(bonkCreateCallstack);
     }
     
     bonkGroup = _groupVector;

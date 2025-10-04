@@ -9,6 +9,8 @@ function __BonkCommonWorld(_cellXSize, _cellYSize, _cellZSize)
     bonkType = BONK_TYPE_WORLD;
     __lineHitFunction = BonkLineHitWorld;
     
+    bonkGroup = -1;
+    
     
     
     __cellXSize = _cellXSize;
@@ -338,7 +340,7 @@ function __BonkCommonWorld(_cellXSize, _cellYSize, _cellZSize)
         {
             if (BONK_STRICT)
             {
-                __BonkError("Cannot add instances to a BonkStructWorld");
+                __BonkError("Cannot add instances to a Bonk world. Please use Bonk structs instead");
             }
             
             return;
@@ -351,7 +353,7 @@ function __BonkCommonWorld(_cellXSize, _cellYSize, _cellZSize)
         {
             if (BONK_STRICT)
             {
-                __BonkError("Cannot add instances to a BonkStructWorld");
+                __BonkError("Cannot add instances to a Bonk world. Please use Bonk structs instead");
             }
             
             return;
