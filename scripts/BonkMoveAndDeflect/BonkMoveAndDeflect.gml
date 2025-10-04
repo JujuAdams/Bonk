@@ -2,17 +2,17 @@
 
 /// @param subjectShape
 /// @param velocityStruct
-/// @param shapeArray
+/// @param targetShapes
 /// @param [slopeThreshold=0]
 /// @param [updateVelocity=true]
 
-function BonkMoveAndDeflect(_subjectShape, _velocityStruct, _shapeArray, _slopeThreshold = 0, _updateVelocity = true)
+function BonkMoveAndDeflect(_subjectShape, _velocityStruct, _targetShapes, _slopeThreshold = 0, _updateVelocity = true)
 {
     static _nullDeflectData = __Bonk().__nullDeflectData;
     
-    if ((not is_array(_shapeArray)) && (not ds_exists(_shapeArray, ds_type_list)))
+    if ((not is_array(_targetShapes)) && (not ds_exists(_targetShapes, ds_type_list)))
     {
-        _shapeArray = [_shapeArray];
+        _targetShapes = [_targetShapes];
     }
     
     var _returnData = _nullDeflectData;
@@ -29,12 +29,12 @@ function BonkMoveAndDeflect(_subjectShape, _velocityStruct, _shapeArray, _slopeT
         
         AddPosition(_velocityStruct.xSpeed, _velocityStruct.ySpeed, _velocityStruct.zSpeed);
         
-        if (is_array(_shapeArray)) //We were given an array
+        if (is_array(_targetShapes)) //We were given an array
         {
             var _i = 0;
-            repeat(array_length(_shapeArray))
+            repeat(array_length(_targetShapes))
             {
-                with(_shapeArray[_i]) //Use `with()` here to support iterating over objects
+                with(_targetShapes[_i]) //Use `with()` here to support iterating over objects
                 {
                     var _reaction = Deflect(_subjectShape, _slopeThreshold);
                     if (_reaction.deflectType != BONK_DEFLECT_NONE)
@@ -54,12 +54,12 @@ function BonkMoveAndDeflect(_subjectShape, _velocityStruct, _shapeArray, _slopeT
                 ++_i;
             }
         }
-        else if (ds_exists(_shapeArray, ds_type_list)) //We were given a list
+        else if (ds_exists(_targetShapes, ds_type_list)) //We were given a list
         {
             var _i = 0;
-            repeat(ds_list_size(_shapeArray))
+            repeat(ds_list_size(_targetShapes))
             {
-                with(_shapeArray[| _i]) //Use `with()` here to support iterating over objects
+                with(_targetShapes[| _i]) //Use `with()` here to support iterating over objects
                 {
                     var _reaction = Deflect(_subjectShape, _slopeThreshold);
                     if (_reaction.deflectType != BONK_DEFLECT_NONE)
@@ -81,7 +81,7 @@ function BonkMoveAndDeflect(_subjectShape, _velocityStruct, _shapeArray, _slopeT
         }
         else
         {
-            with(_shapeArray[| _i]) //Use `with()` here to support iterating over objects
+            with(_targetShapes) //Use `with()` here to support iterating over objects
             {
                 var _reaction = Deflect(_subjectShape, _slopeThreshold);
                 if (_reaction.deflectType != BONK_DEFLECT_NONE)

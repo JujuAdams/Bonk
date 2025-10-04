@@ -1,19 +1,19 @@
 // Feather disable all
 
-/// @param shapeArray
+/// @param targetShapes
 /// @param subjectShape
 
-function BonkCollideMany(_shapeArray, _subjectShape)
+function BonkCollideMany(_targetShapes, _subjectShape)
 {
     static _returnData = [];
     array_resize(_returnData, 0);
     
-    if (is_array(_shapeArray)) //We were given an array
+    if (is_array(_targetShapes)) //We were given an array
     {
         var _i = 0;
-        repeat(array_length(_shapeArray))
+        repeat(array_length(_targetShapes))
         {
-            with(_shapeArray[_i]) //Use `with()` here to support iterating over objects
+            with(_targetShapes[_i]) //Use `with()` here to support iterating over objects
             {
                 var _reaction = Collide(_subjectShape);
                 if (_reaction.collision)
@@ -25,12 +25,12 @@ function BonkCollideMany(_shapeArray, _subjectShape)
             ++_i;
         }
     }
-    else if (ds_exists(_shapeArray, ds_type_list)) //We were given a list
+    else if (ds_exists(_targetShapes, ds_type_list)) //We were given a list
     {
         var _i = 0;
-        repeat(ds_list_size(_shapeArray))
+        repeat(ds_list_size(_targetShapes))
         {
-            with(_shapeArray[| _i]) //Use `with()` here to support iterating over objects
+            with(_targetShapes[| _i]) //Use `with()` here to support iterating over objects
             {
                 var _reaction = Collide(_subjectShape);
                 if (_reaction.collision)
@@ -44,7 +44,7 @@ function BonkCollideMany(_shapeArray, _subjectShape)
     }
     else
     {
-        with(_shapeArray[| _i]) //Use `with()` here to support iterating over objects
+        with(_targetShapes) //Use `with()` here to support iterating over objects
         {
             var _reaction = Collide(_subjectShape);
             if (_reaction.collision)

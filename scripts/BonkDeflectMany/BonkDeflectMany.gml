@@ -16,23 +16,23 @@
 /// player character and non-player characters alike will want a slope threshold of some kind. I
 /// personally like an angle of `40` degrees.
 /// 
-/// @param shapeArray
+/// @param targetShapes
 /// @param subjectShape
 /// @param [slopeThreshold=0]
 
-function BonkDeflectMany(_shapeArray, _subjectShape, _slopeThreshold = 0)
+function BonkDeflectMany(_targetShapes, _subjectShape, _slopeThreshold = 0)
 {
     static _nullDeflectData = __Bonk().__nullDeflectData;
     
     var _returnData = _nullDeflectData;
     var _largestDepth = 0;
     
-    if (is_array(_shapeArray)) //We were given an array
+    if (is_array(_targetShapes)) //We were given an array
     {
         var _i = 0;
-        repeat(array_length(_shapeArray))
+        repeat(array_length(_targetShapes))
         {
-            with(_shapeArray[_i]) //Use `with()` here to support iterating over objects
+            with(_targetShapes[_i]) //Use `with()` here to support iterating over objects
             {
                 var _reaction = Deflect(_subjectShape, _slopeThreshold);
                 if (_reaction.deflectType != BONK_DEFLECT_NONE)
@@ -52,12 +52,12 @@ function BonkDeflectMany(_shapeArray, _subjectShape, _slopeThreshold = 0)
             ++_i;
         }
     }
-    else if (ds_exists(_shapeArray, ds_type_list)) //We were given a list
+    else if (ds_exists(_targetShapes, ds_type_list)) //We were given a list
     {
         var _i = 0;
-        repeat(ds_list_size(_shapeArray))
+        repeat(ds_list_size(_targetShapes))
         {
-            with(_shapeArray[| _i]) //Use `with()` here to support iterating over objects
+            with(_targetShapes[| _i]) //Use `with()` here to support iterating over objects
             {
                 var _reaction = Deflect(_subjectShape, _slopeThreshold);
                 if (_reaction.deflectType != BONK_DEFLECT_NONE)
@@ -79,7 +79,7 @@ function BonkDeflectMany(_shapeArray, _subjectShape, _slopeThreshold = 0)
     }
     else
     {
-        with(_shapeArray[| _i]) //Use `with()` here to support iterating over objects
+        with(_targetShapes) //Use `with()` here to support iterating over objects
         {
             var _reaction = Deflect(_subjectShape, _slopeThreshold);
             if (_reaction.deflectType != BONK_DEFLECT_NONE)

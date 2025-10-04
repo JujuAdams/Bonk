@@ -133,7 +133,7 @@ function BonkLine(_x1, _y1, _z1, _x2, _y2, _z2) constructor
         return _nullHit;
     }
     
-    static HitFirst = function(_targetArray)
+    static HitFirst = function(_targetShapes)
     {
         static _map = ds_map_create();
         static _nullHit = __Bonk().__nullHit;
@@ -149,12 +149,12 @@ function BonkLine(_x1, _y1, _z1, _x2, _y2, _z2) constructor
         var _closestHit      = undefined;
         var _closestDistance = infinity;
         
-        if (is_array(_targetArray))
+        if (is_array(_targetShapes))
         {
             var _i = 0;
-            repeat(array_length(_targetArray))
+            repeat(array_length(_targetShapes))
             {
-                with(_targetArray[_i])
+                with(_targetShapes[_i])
                 {
                     if (not ds_map_exists(_map, self))
                     {
@@ -176,12 +176,12 @@ function BonkLine(_x1, _y1, _z1, _x2, _y2, _z2) constructor
                 ++_i;
             }
         }
-        else if (ds_exists(_targetArray, ds_type_list))
+        else if (ds_exists(_targetShapes, ds_type_list))
         {
             var _i = 0;
-            repeat(ds_list_size(_targetArray))
+            repeat(ds_list_size(_targetShapes))
             {
-                with(_targetArray[| _i])
+                with(_targetShapes[| _i])
                 {
                     if (not ds_map_exists(_map, self))
                     {
@@ -205,7 +205,7 @@ function BonkLine(_x1, _y1, _z1, _x2, _y2, _z2) constructor
         }
         else
         {
-            with(_targetArray)
+            with(_targetShapes)
             {
                 if (not ds_map_exists(_map, self))
                 {
