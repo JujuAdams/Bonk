@@ -32,7 +32,7 @@
 /// @param targetShapes
 /// @param [groupFilter]
 
-function BonkTouchAny(_subjectShape, _targetShapes, _groupFilter = undefined)
+function BonkTouchAny(_subjectShape, _targetShapes, _groupFilter = -1)
 {
     if (is_array(_targetShapes)) //We were given an array
     {
@@ -41,7 +41,7 @@ function BonkTouchAny(_subjectShape, _targetShapes, _groupFilter = undefined)
         {
             with(_targetShapes[_i]) //Use `with()` here to support iterating over objects
             {
-                if ((_groupFilter == undefined) || FilterTest(_groupFilter))
+                if ((_groupFilter < 0) || FilterTest(_groupFilter))
                 {
                     if (Touch(_subjectShape))
                     {
@@ -60,7 +60,7 @@ function BonkTouchAny(_subjectShape, _targetShapes, _groupFilter = undefined)
         {
             with(_targetShapes[| _i]) //Use `with()` here to support iterating over objects
             {
-                if ((_groupFilter == undefined) || FilterTest(_groupFilter))
+                if ((_groupFilter < 0) || FilterTest(_groupFilter))
                 {
                     if (Touch(_subjectShape))
                     {
@@ -76,7 +76,7 @@ function BonkTouchAny(_subjectShape, _targetShapes, _groupFilter = undefined)
     {
         with(_targetShapes) //Use `with()` here to support iterating over objects
         {
-            if ((_groupFilter == undefined) || FilterTest(_groupFilter))
+            if ((_groupFilter < 0) || FilterTest(_groupFilter))
             {
                 if (Touch(_subjectShape))
                 {

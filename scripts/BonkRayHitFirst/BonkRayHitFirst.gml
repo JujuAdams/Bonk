@@ -10,7 +10,7 @@
 /// @param [groupFilter]
 /// @param [length]
 
-function BonkRayHitFirst(_targetShapes, _rayX, _rayY, _rayZ, _dX, _dY, _dZ, _groupFilter = undefined, _length = BONK_RAY_LENGTH)
+function BonkRayHitFirst(_targetShapes, _rayX, _rayY, _rayZ, _dX, _dY, _dZ, _groupFilter = -1, _length = BONK_RAY_LENGTH)
 {
     return BonkLineHitFirst(_targetShapes,
                             _rayX, _rayY, _rayZ,

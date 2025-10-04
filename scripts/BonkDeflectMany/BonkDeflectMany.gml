@@ -21,7 +21,7 @@
 /// @param [slopeThreshold=0]
 /// @parma [groupFilter]
 
-function BonkDeflectMany(_subjectShape, _targetShapes, _slopeThreshold = 0, _groupFilter = undefined)
+function BonkDeflectMany(_subjectShape, _targetShapes, _slopeThreshold = 0, _groupFilter = -1)
 {
     static _nullDeflectData = __Bonk().__nullDeflectData;
     
@@ -35,7 +35,7 @@ function BonkDeflectMany(_subjectShape, _targetShapes, _slopeThreshold = 0, _gro
         {
             with(_targetShapes[_i]) //Use `with()` here to support iterating over objects
             {
-                if ((_groupFilter == undefined) || FilterTest(_groupFilter))
+                if ((_groupFilter < 0) || FilterTest(_groupFilter))
                 {
                     var _reaction = Deflect(_subjectShape, _slopeThreshold);
                     if (_reaction.deflectType != BONK_DEFLECT_NONE)
@@ -63,7 +63,7 @@ function BonkDeflectMany(_subjectShape, _targetShapes, _slopeThreshold = 0, _gro
         {
             with(_targetShapes[| _i]) //Use `with()` here to support iterating over objects
             {
-                if ((_groupFilter == undefined) || FilterTest(_groupFilter))
+                if ((_groupFilter < 0) || FilterTest(_groupFilter))
                 {
                     var _reaction = Deflect(_subjectShape, _slopeThreshold);
                     if (_reaction.deflectType != BONK_DEFLECT_NONE)
@@ -88,7 +88,7 @@ function BonkDeflectMany(_subjectShape, _targetShapes, _slopeThreshold = 0, _gro
     {
         with(_targetShapes) //Use `with()` here to support iterating over objects
         {
-            if ((_groupFilter == undefined) || FilterTest(_groupFilter))
+            if ((_groupFilter < 0) || FilterTest(_groupFilter))
             {
                 var _reaction = Deflect(_subjectShape, _slopeThreshold);
                 if (_reaction.deflectType != BONK_DEFLECT_NONE)

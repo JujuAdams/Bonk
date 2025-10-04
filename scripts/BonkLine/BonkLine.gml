@@ -138,12 +138,12 @@ function BonkLine(_x1, _y1, _z1, _x2, _y2, _z2) constructor
         return BonkLineHitFirst(_targetShapes, x1, y1, z1, x2, y2, z2);
     }
     
-    static HitFirstInstance = function(_object = BonkObject, _groupFilter = undefined)
+    static HitFirstInstance = function(_object = BonkObject, _groupFilter = -1)
     {
         return BonkLineHitFirst(CollisionList(_object, _groupFilter), x1, y1, z1, x2, y2, z2);
     }
     
-    static CollisionList = function(_object = BonkObject, _groupFilter = undefined, _list = undefined)
+    static CollisionList = function(_object = BonkObject, _groupFilter = -1, _list = undefined)
     {
         return BonkCollisionLineList(x1, y1, z1, x2, y2, z2, _object, _groupFilter, _list);
     }

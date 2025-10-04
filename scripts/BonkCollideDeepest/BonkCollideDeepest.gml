@@ -4,7 +4,7 @@
 /// @param targetShapes
 /// @param [groupFilter]
 
-function BonkCollideDeepest(_subjectShape, _targetShapes, _groupFilter = undefined)
+function BonkCollideDeepest(_subjectShape, _targetShapes, _groupFilter = -1)
 {
     static _nullCollisionData = __Bonk().__nullCollisionData;
     
@@ -18,7 +18,7 @@ function BonkCollideDeepest(_subjectShape, _targetShapes, _groupFilter = undefin
         {
             with(_targetShapes[_i]) //Use `with()` here to support iterating over objects
             {
-                if ((_groupFilter == undefined) || FilterTest(_groupFilter))
+                if ((_groupFilter < 0) || FilterTest(_groupFilter))
                 {
                     var _reaction = Collide(_subjectShape);
                     if (_reaction.collision)
@@ -46,7 +46,7 @@ function BonkCollideDeepest(_subjectShape, _targetShapes, _groupFilter = undefin
         {
             with(_targetShapes[| _i]) //Use `with()` here to support iterating over objects
             {
-                if ((_groupFilter == undefined) || FilterTest(_groupFilter))
+                if ((_groupFilter < 0) || FilterTest(_groupFilter))
                 {
                     var _reaction = Collide(_subjectShape);
                     if (_reaction.collision)
@@ -71,7 +71,7 @@ function BonkCollideDeepest(_subjectShape, _targetShapes, _groupFilter = undefin
     {
         with(_targetShapes) //Use `with()` here to support iterating over objects
         {
-            if ((_groupFilter == undefined) || FilterTest(_groupFilter))
+            if ((_groupFilter < 0) || FilterTest(_groupFilter))
             {
                 var _reaction = Collide(_subjectShape);
                 if (_reaction.collision)

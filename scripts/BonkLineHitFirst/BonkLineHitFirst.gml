@@ -9,7 +9,7 @@
 /// @param z2
 /// @param [groupFilter]
 
-function BonkLineHitFirst(_targetShapes, _x1, _y1, _z1, _x2, _y2, _z2, _groupFilter = undefined)
+function BonkLineHitFirst(_targetShapes, _x1, _y1, _z1, _x2, _y2, _z2, _groupFilter = -1)
 {
     static _map = ds_map_create();
     static _nullHit = __Bonk().__nullHit;
@@ -28,7 +28,7 @@ function BonkLineHitFirst(_targetShapes, _x1, _y1, _z1, _x2, _y2, _z2, _groupFil
                 {
                     _map[? self] = true;
                     
-                    if ((_groupFilter == undefined) || FilterTest(_groupFilter))
+                    if ((_groupFilter < 0) || FilterTest(_groupFilter))
                     {
                         var _hit = __lineHitFunction(self, _x1, _y1, _z1, _x2, _y2, _z2);
                         if (_hit.collision)
@@ -58,7 +58,7 @@ function BonkLineHitFirst(_targetShapes, _x1, _y1, _z1, _x2, _y2, _z2, _groupFil
                 {
                     _map[? self] = true;
                     
-                    if ((_groupFilter == undefined) || FilterTest(_groupFilter))
+                    if ((_groupFilter < 0) || FilterTest(_groupFilter))
                     {
                         var _hit = __lineHitFunction(self, _x1, _y1, _z1, _x2, _y2, _z2);
                         if (_hit.collision)
@@ -85,7 +85,7 @@ function BonkLineHitFirst(_targetShapes, _x1, _y1, _z1, _x2, _y2, _z2, _groupFil
             {
                 _map[? self] = true;
                 
-                if ((_groupFilter == undefined) || FilterTest(_groupFilter))
+                if ((_groupFilter < 0) || FilterTest(_groupFilter))
                 {
                     var _hit = __lineHitFunction(self, _x1, _y1, _z1, _x2, _y2, _z2);
                     if (_hit.collision)

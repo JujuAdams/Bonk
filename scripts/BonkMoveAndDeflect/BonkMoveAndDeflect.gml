@@ -6,7 +6,7 @@
 /// @param [slopeThreshold=0]
 /// @param [groupFilter]
 
-function BonkMoveAndDeflect(_subjectShape, _velocityStruct, _targetShapes, _slopeThreshold = 0, _groupFilter = undefined)
+function BonkMoveAndDeflect(_subjectShape, _velocityStruct, _targetShapes, _slopeThreshold = 0, _groupFilter = -1)
 {
     static _nullDeflectData = __Bonk().__nullDeflectData;
     var _returnData = _nullDeflectData;

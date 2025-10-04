@@ -4,7 +4,7 @@
 /// @param targetShapes
 /// @param [groupFilter]
 
-function BonkCollideMany(_subjectShape, _targetShapes, _groupFilter = undefined)
+function BonkCollideMany(_subjectShape, _targetShapes, _groupFilter = -1)
 {
     static _returnData = [];
     array_resize(_returnData, 0);
@@ -16,7 +16,7 @@ function BonkCollideMany(_subjectShape, _targetShapes, _groupFilter = undefined)
         {
             with(_targetShapes[_i]) //Use `with()` here to support iterating over objects
             {
-                if ((_groupFilter == undefined) || FilterTest(_groupFilter))
+                if ((_groupFilter < 0) || FilterTest(_groupFilter))
                 {
                     var _reaction = Collide(_subjectShape);
                     if (_reaction.collision)
@@ -36,7 +36,7 @@ function BonkCollideMany(_subjectShape, _targetShapes, _groupFilter = undefined)
         {
             with(_targetShapes[| _i]) //Use `with()` here to support iterating over objects
             {
-                if ((_groupFilter == undefined) || FilterTest(_groupFilter))
+                if ((_groupFilter < 0) || FilterTest(_groupFilter))
                 {
                     var _reaction = Collide(_subjectShape);
                     if (_reaction.collision)
@@ -53,7 +53,7 @@ function BonkCollideMany(_subjectShape, _targetShapes, _groupFilter = undefined)
     {
         with(_targetShapes) //Use `with()` here to support iterating over objects
         {
-            if ((_groupFilter == undefined) || FilterTest(_groupFilter))
+            if ((_groupFilter < 0) || FilterTest(_groupFilter))
             {
                 var _reaction = Collide(_subjectShape);
                 if (_reaction.collision)
