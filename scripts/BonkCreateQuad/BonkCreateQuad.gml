@@ -1,5 +1,7 @@
 // Feather disable all
 
+/// Creates an instance of the given object and sets it as a Bonk quad instance.
+/// 
 /// @param x1
 /// @param y1
 /// @param z1

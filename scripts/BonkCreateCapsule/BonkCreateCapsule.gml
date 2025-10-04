@@ -1,5 +1,7 @@
 // Feather disable all
 
+/// Creates an instance of the given object and sets it as a Bonk capsule instance.
+/// 
 /// @param xCenter
 /// @param yCenter
 /// @param zCenter
