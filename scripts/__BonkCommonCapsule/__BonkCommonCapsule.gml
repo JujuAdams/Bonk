@@ -3,7 +3,6 @@
 function __BonkCommonCapsule()
 {
     bonkType = BONK_TYPE_CAPSULE;
-    __lineHitFunction = BonkLineHitCapsule;
     
     static _collideFuncLookup = (function()
     {
@@ -33,4 +32,18 @@ function __BonkCommonCapsule()
     
     __collideFuncLookup = _collideFuncLookup;
     __insideFuncLookup  = _insideFuncLookup;
+    
+    LineHit = function(_x1, _y1, _z1, _x2, _y2, _z2, _groupFilter = -1)
+    {
+        static _nullHit = __Bonk().__nullHit;
+        
+        if ((_groupFilter < 0) || FilterTest(_groupFilter))
+        {
+            return BonkLineHitCapsule(self, _x1, _y1, _z1, _x2, _y2, _z2);
+        }
+        else
+        {
+            return _nullHit;
+        }
+    }
 }

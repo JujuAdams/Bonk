@@ -35,7 +35,7 @@ function BonkLineHitFirst(_targetShapes, _x1, _y1, _z1, _x2, _y2, _z2, _groupFil
                 {
                     _map[? self] = true;
                     
-                    var _hit = __lineHitFunction(self, _x1, _y1, _z1, _x2, _y2, _z2);
+                    var _hit = LineHit(_x1, _y1, _z1, _x2, _y2, _z2, _groupFilter);
                     if (_hit.collision)
                     {
                         var _distance = point_distance_3d(_x1, _y1, _z1, _hit.x, _hit.y, _hit.z);
@@ -62,7 +62,7 @@ function BonkLineHitFirst(_targetShapes, _x1, _y1, _z1, _x2, _y2, _z2, _groupFil
                 {
                     _map[? self] = true;
                     
-                    var _hit = __lineHitFunction(self, _x1, _y1, _z1, _x2, _y2, _z2);
+                    var _hit = LineHit(_x1, _y1, _z1, _x2, _y2, _z2, _groupFilter);
                     if (_hit.collision)
                     {
                         var _distance = point_distance_3d(_x1, _y1, _z1, _hit.x, _hit.y, _hit.z);
@@ -86,7 +86,7 @@ function BonkLineHitFirst(_targetShapes, _x1, _y1, _z1, _x2, _y2, _z2, _groupFil
             {
                 _map[? self] = true;
                 
-                var _hit = __lineHitFunction(self, _x1, _y1, _z1, _x2, _y2, _z2);
+                var _hit = LineHit(_x1, _y1, _z1, _x2, _y2, _z2, _groupFilter);
                 if (_hit.collision)
                 {
                     var _distance = point_distance_3d(_x1, _y1, _z1, _hit.x, _hit.y, _hit.z);

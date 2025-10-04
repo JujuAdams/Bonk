@@ -57,7 +57,7 @@
 function BonkRay(_x, _y, _z, _dX, _dY, _dZ) constructor
 {
     static bonkType = BONK_TYPE_RAY;
-    static __lineHitFunction = __BonkReturnNullHit;
+    static LineHit = __BonkReturnNullHit;
     
     static _hitFuncLookup = (function()
     {
@@ -120,14 +120,14 @@ function BonkRay(_x, _y, _z, _dX, _dY, _dZ) constructor
         };
     }
     
-    static Hit = function(_otherShape)
+    static Hit = function(_otherShape, _groupFilter = -1)
     {
         static _nullHit = __Bonk().__nullHit;
         
         var _hitFunc = _hitFuncLookup[_otherShape.bonkType];
         if (is_callable(_hitFunc))
         {
-            return _hitFunc(_otherShape, x, y, z, dX, dY, dZ);
+            return _hitFunc(_otherShape, x, y, z, dX, dY, dZ, undefined, _groupFilter);
         }
         else
         {
@@ -145,13 +145,13 @@ function BonkRay(_x, _y, _z, _dX, _dY, _dZ) constructor
         return BonkCollisionLineList(x, y, x + _length*dX, y + _length*dY, _objectOrArray, _groupFilter, _list);
     }
     
-    static HitFirst = function(_targetShapes)
+    static HitFirst = function(_targetShapes, _groupFilter = -1)
     {
-        return BonkRayHitFirst(_targetShapes, x, y, z, dX, dY, dZ);
+        return BonkRayHitFirst(_targetShapes, x, y, z, dX, dY, dZ, undefined, _groupFilter);
     }
     
     static HitFirstInstance = function(_objectOrArray = BonkObject, _groupFilter = -1)
     {
-        return BonkRayHitFirst(CollisionLineList(_objectOrArray), x, y, z, dX, dY, dZ, _groupFilter);
+        return BonkRayHitFirst(CollisionLineList(_objectOrArray), x, y, z, dX, dY, dZ, undefined, _groupFilter);
     }
 }

@@ -3,7 +3,6 @@
 function __BonkCommonRotatedBox()
 {
     bonkType = BONK_TYPE_OBB;
-    __lineHitFunction = BonkLineHitRotatedBox;
     
     static _collideFuncLookup = (function()
     {
@@ -25,4 +24,18 @@ function __BonkCommonRotatedBox()
     
     __collideFuncLookup = _collideFuncLookup;
     __insideFuncLookup  = _insideFuncLookup;
+    
+    LineHit = function(_x1, _y1, _z1, _x2, _y2, _z2, _groupFilter = -1)
+    {
+        static _nullHit = __Bonk().__nullHit;
+        
+        if ((_groupFilter < 0) || FilterTest(_groupFilter))
+        {
+            return BonkLineHitRotatedBox(self, _x1, _y1, _z1, _x2, _y2, _z2);
+        }
+        else
+        {
+            return _nullHit;
+        }
+    }
 }

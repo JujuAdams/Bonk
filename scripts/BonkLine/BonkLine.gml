@@ -50,7 +50,7 @@
 function BonkLine(_x1, _y1, _z1, _x2, _y2, _z2) constructor
 {
     static bonkType = BONK_TYPE_LINE;
-    static __lineHitFunction = __BonkReturnNullHit;
+    static LineHit = __BonkReturnNullHit;
     
     static _hitFuncLookup = (function()
     {
@@ -113,14 +113,14 @@ function BonkLine(_x1, _y1, _z1, _x2, _y2, _z2) constructor
         UggArrow(x1, y1, z1, x2, y2, z2, undefined, _color, _thickness, _wireframe);
     }
     
-    static Hit = function(_otherShape)
+    static Hit = function(_otherShape, _groupFilter = -1)
     {
         static _nullHit = __Bonk().__nullHit;
         
         var _hitFunc = _hitFuncLookup[_otherShape.bonkType];
         if (is_callable(_hitFunc))
         {
-            return _hitFunc(_otherShape, x1, y1, z1, x2, y2, z2);
+            return _hitFunc(_otherShape, x1, y1, z1, x2, y2, z2, _groupFilter);
         }
         else
         {
@@ -133,9 +133,9 @@ function BonkLine(_x1, _y1, _z1, _x2, _y2, _z2) constructor
         return _nullHit;
     }
     
-    static HitFirst = function(_targetShapes)
+    static HitFirst = function(_targetShapes, _groupFilter = -1)
     {
-        return BonkLineHitFirst(_targetShapes, x1, y1, z1, x2, y2, z2);
+        return BonkLineHitFirst(_targetShapes, x1, y1, z1, x2, y2, z2, _groupFilter);
     }
     
     static HitFirstInstance = function(_objectOrArray = BonkObject, _groupFilter = -1)

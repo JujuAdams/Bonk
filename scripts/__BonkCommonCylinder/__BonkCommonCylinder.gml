@@ -3,7 +3,6 @@
 function __BonkCommonCylinder()
 {
     bonkType = BONK_TYPE_CYLINDER;
-    __lineHitFunction = BonkLineHitCylinder;
     
     static _collideFuncLookup = (function()
     {
@@ -29,4 +28,18 @@ function __BonkCommonCylinder()
     
     __collideFuncLookup = _collideFuncLookup;
     __insideFuncLookup  = _insideFuncLookup;
+    
+    LineHit = function(_x1, _y1, _z1, _x2, _y2, _z2, _groupFilter = -1)
+    {
+        static _nullHit = __Bonk().__nullHit;
+        
+        if ((_groupFilter < 0) || FilterTest(_groupFilter))
+        {
+            return BonkLineHitCylinder(self, _x1, _y1, _z1, _x2, _y2, _z2);
+        }
+        else
+        {
+            return _nullHit;
+        }
+    }
 }

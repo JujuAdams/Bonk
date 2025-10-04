@@ -14,10 +14,10 @@
 /// @param dX
 /// @param dY
 /// @param dZ
-/// @param [groupFilter]
 /// @param [length]
+/// @param [groupFilter]
 
-function BonkRayHitFirst(_targetShapes, _rayX, _rayY, _rayZ, _dX, _dY, _dZ, _groupFilter = -1, _length = BONK_RAY_LENGTH)
+function BonkRayHitFirst(_targetShapes, _rayX, _rayY, _rayZ, _dX, _dY, _dZ, _length = BONK_RAY_LENGTH, _groupFilter = -1)
 {
     return BonkLineHitFirst(_targetShapes,
                             _rayX, _rayY, _rayZ,

@@ -24,8 +24,9 @@
 /// @param x2
 /// @param y2
 /// @param z2
+/// @param [groupFilter]
 
-function BonkLineHitWorld(_world, _x1, _y1, _z1, _x2, _y2, _z2)
+function BonkLineHitWorld(_world, _x1, _y1, _z1, _x2, _y2, _z2, _groupFilter = -1)
 {
     static _map = ds_map_create();
     static _nullHit = __Bonk().__nullHit;
@@ -53,7 +54,7 @@ function BonkLineHitWorld(_world, _x1, _y1, _z1, _x2, _y2, _z2)
                 {
                     _map[? _shape] = true;
                     
-                    var _hit = _shape.__lineHitFunction(_shape, _x1, _y1, _z1, _x2, _y2, _z2);
+                    var _hit = _shape.LineHit(_x1, _y1, _z1, _x2, _y2, _z2, _groupFilter);
                     if (_hit.collision)
                     {
                         var _distance = point_distance_3d(_x1, _y1, _z1, _hit.x, _hit.y, _hit.z);

@@ -22,8 +22,9 @@
 /// @param dY
 /// @param dZ
 /// @param [length]
+/// @param [groupFilter]
 
-function BonkRayHitWorld(_world, _rayX, _rayY, _rayZ, _dX, _dY, _dZ, _length = BONK_RAY_LENGTH)
+function BonkRayHitWorld(_world, _rayX, _rayY, _rayZ, _dX, _dY, _dZ, _length = BONK_RAY_LENGTH, _groupFilter = -1)
 {
     return BonkLineHitWorld(_world,
                             _rayX, _rayY, _rayZ,

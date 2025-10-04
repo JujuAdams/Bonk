@@ -7,8 +7,6 @@
 function __BonkCommonWorld(_cellXSize, _cellYSize, _cellZSize)
 {
     bonkType = BONK_TYPE_WORLD;
-    __lineHitFunction = BonkLineHitWorld;
-    
     bonkGroup = -1;
     
     
@@ -36,6 +34,11 @@ function __BonkCommonWorld(_cellXSize, _cellYSize, _cellZSize)
     SetPosition = function() {};
     AddPosition = function() {};
     AddVelocity = function() {};
+    
+    LineHit = function(_x1, _y1, _z1, _x2, _y2, _z2, _groupFilter = -1)
+    {
+        return BonkLineHitWorld(self, _x1, _y1, _z1, _x2, _y2, _z2, _groupFilter);
+    }
     
     Touch = function(_subjectShape, _groupFilter = -1)
     {
