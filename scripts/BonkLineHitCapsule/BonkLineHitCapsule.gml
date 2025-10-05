@@ -121,7 +121,7 @@ function BonkLineHitCapsule(_capsule, _x1, _y1, _z1, _x2, _y2, _z2, _struct = un
                 normalZ = _normalZ;
             }
             
-            return _coordinate;
+            return _reaction;
         }
         
         //Build a quadratic equation to solve the intersection between the line and an infinitely high

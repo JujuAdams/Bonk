@@ -31,15 +31,15 @@ function __BonkClassHit() constructor
     
     static CopyTo = function(_destination)
     {
-        shape = _destination.shape;
+        _destination.shape = shape;
         
-        x = _destination.x;
-        y = _destination.y;
-        z = _destination.z;
+        _destination.x = x;
+        _destination.y = y;
+        _destination.z = z;
         
-        normalX = _destination.normalX;
-        normalY = _destination.normalY;
-        normalZ = _destination.normalZ;
+        _destination.normalX = normalX;
+        _destination.normalY = normalY;
+        _destination.normalZ = normalZ;
         
         return self;
     }
