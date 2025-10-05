@@ -1,0 +1,13 @@
+{
+  "$GMScript":"v1",
+  "%Name":"BonkRayHitMany",
+  "isCompatibility":false,
+  "isDnD":false,
+  "name":"BonkRayHitMany",
+  "parent":{
+    "name":"Instances",
+    "path":"folders/Bonk/Instances.yy",
+  },
+  "resourceType":"GMScript",
+  "resourceVersion":"2.0",
+}

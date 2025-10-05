@@ -1,1 +1,1 @@
-BonkSetAsQuad(x, y, 0,   x + 64, y, 0,   x, y + 64, 32);
+BonkSetupQuad(x, y, 0,   x + 64, y, 0,   x, y + 64, 32);

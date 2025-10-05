@@ -1,1 +1,1 @@
-BonkSetAsRotatedBox(x, y, 32,   sprite_width, sprite_height, 64,   image_angle);
+BonkSetupRotatedBox(x, y, 32,   sprite_width, sprite_height, 64,   image_angle);

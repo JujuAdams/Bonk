@@ -13,7 +13,7 @@ function BonkCreateSphere(_x, _y, _z, _radius, _object = BonkObject, _groupVecto
 {
     with(instance_create_depth(0, 0, 0, _object))
     {
-        BonkSetAsSphere(_x, _y, _z,   _radius,   _groupVector);
+        BonkSetupSphere(_x, _y, _z,   _radius,   _groupVector);
         return self;
     }
 }

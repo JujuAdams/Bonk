@@ -1,1 +1,1 @@
-BonkSetAsCylinder(x, y, 16,   32, 32);
+BonkSetupCylinder(x, y, 16,   32, 32);

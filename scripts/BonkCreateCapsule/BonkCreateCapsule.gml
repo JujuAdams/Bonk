@@ -14,7 +14,7 @@ function BonkCreateCapsule(_x, _y, _z, _height, _radius, _object = BonkObject, _
 {
     with(instance_create_depth(0, 0, 0, _object))
     {
-        BonkSetAsCapsule(_x, _y, _z,   _height, _radius,   _groupVector);
+        BonkSetupCapsule(_x, _y, _z,   _height, _radius,   _groupVector);
         return self;
     }
 }

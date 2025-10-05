@@ -1,0 +1,64 @@
+// Feather disable all
+
+/// @param x1
+/// @param y1
+/// @param z1
+/// @param x2
+/// @param y2
+/// @param z2
+/// @param targetShapes
+/// @param [groupFilter]
+
+function BonkLineHitManyExt(_x1, _y1, _z1, _x2, _y2, _z2, _targetShapes, _groupFilter = -1)
+{
+    static _returnData = [];
+    array_resize(_returnData, 0);
+    
+    if (is_array(_targetShapes))
+    {
+        var _i = 0;
+        repeat(array_length(_targetShapes))
+        {
+            with(_targetShapes[_i]) //Use `with()` here to support iterating over objects
+            {
+                var _hit = LineHit(_x1, _y1, _z1, _x2, _y2, _z2, _groupFilter);
+                if (_hit.collision)
+                {
+                    array_push(_returnData, _hit.Clone());
+                }
+            }
+            
+            ++_i;
+        }
+    }
+    else if (ds_exists(_targetShapes, ds_type_list))
+    {
+        var _i = 0;
+        repeat(ds_list_size(_targetShapes)) //Use `with()` here to support iterating over objects
+        {
+            with(_targetShapes[| _i])
+            {
+                var _hit = LineHit(_x1, _y1, _z1, _x2, _y2, _z2, _groupFilter);
+                if (_hit.collision)
+                {
+                    array_push(_returnData, _hit.Clone());
+                }
+            }
+            
+            ++_i;
+        }
+    }
+    else
+    {
+        with(_targetShapes) //Use `with()` here to support iterating over objects
+        {
+            var _hit = LineHit(_x1, _y1, _z1, _x2, _y2, _z2, _groupFilter);
+            if (_hit.collision)
+            {
+                array_push(_returnData, _hit.Clone());
+            }
+        }
+    }
+    
+    return _returnData;
+}

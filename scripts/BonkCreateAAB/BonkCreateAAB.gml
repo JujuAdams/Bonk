@@ -15,7 +15,7 @@ function BonkCreateAAB(_x, _y, _z, _xSize, _ySize, _zSize, _object = BonkObject,
 {
     with(instance_create_depth(0, 0, 0, _object))
     {
-        BonkSetAsAAB(_x, _y, _z,   _xSize, _ySize, _zSize,   _groupVector);
+        BonkSetupAAB(_x, _y, _z,   _xSize, _ySize, _zSize,   _groupVector);
         return self;
     }
 }

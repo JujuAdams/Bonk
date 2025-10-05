@@ -18,7 +18,7 @@ function BonkCreateTriangle(_x1, _y1, _z1, _x2, _y2, _z2, _x3, _y3, _z3, _object
 {
     with(instance_create_depth(0, 0, 0, _object))
     {
-        BonkSetAsTriangle(_x1, _y1, _z1,   _x2, _y2, _z2,   _x3, _y3, _z3,   _groupVector);
+        BonkSetupTriangle(_x1, _y1, _z1,   _x2, _y2, _z2,   _x3, _y3, _z3,   _groupVector);
         return self;
     }
 }

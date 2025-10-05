@@ -13,7 +13,7 @@ function BonkCreateWorld(_cellXSize, _cellYSize, _cellZSize, _object = BonkObjec
 {
     with(instance_create_depth(0, 0, 0, _object))
     {
-        BonkSetAsWorld(_cellXSize, _cellYSize, _cellZSize);
+        BonkSetupWorld(_cellXSize, _cellYSize, _cellZSize);
         return self;
     }
 }

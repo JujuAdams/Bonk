@@ -5,8 +5,8 @@
   "isDnD":false,
   "name":"BonkCreateSphere",
   "parent":{
-    "name":"Instance Creators",
-    "path":"folders/Bonk/Instances/Instance Creators.yy",
+    "name":"Instance Create",
+    "path":"folders/Bonk/Instances/Instance Create.yy",
   },
   "resourceType":"GMScript",
   "resourceVersion":"2.0",

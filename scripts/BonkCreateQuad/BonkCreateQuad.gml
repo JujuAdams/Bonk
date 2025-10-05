@@ -18,7 +18,7 @@ function BonkCreateQuad(_x1, _y1, _z1, _x2, _y2, _z2, _x3, _y3, _z3, _object = B
 {
     with(instance_create_depth(0, 0, 0, _object))
     {
-        BonkSetAsQuad(_x1, _y1, _z1,   _x2, _y2, _z2,   _x3, _y3, _z3,   _groupVector);
+        BonkSetupQuad(_x1, _y1, _z1,   _x2, _y2, _z2,   _x3, _y3, _z3,   _groupVector);
         return self;
     }
 }

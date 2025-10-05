@@ -16,7 +16,7 @@ function BonkCreateRotatedBox(_x, _y, _z, _xSize, _ySize, _zSize, _zRotation, _o
 {
     with(instance_create_depth(0, 0, 0, _object))
     {
-        BonkSetAsRotatedBox(_x, _y, _z,   _xSize, _ySize, _zSize,   _zRotation,   _groupVector);
+        BonkSetupRotatedBox(_x, _y, _z,   _xSize, _ySize, _zSize,   _zRotation,   _groupVector);
         return self;
     }
 }

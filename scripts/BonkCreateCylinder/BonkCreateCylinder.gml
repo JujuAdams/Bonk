@@ -14,7 +14,7 @@ function BonkCreateCylinder(_x, _y, _z, _height, _radius, _object = BonkObject, 
 {
     with(instance_create_depth(0, 0, 0, _object))
     {
-        BonkSetAsCylinder(_x, _y, _z,   _height, _radius,   _groupVector);
+        BonkSetupCylinder(_x, _y, _z,   _height, _radius,   _groupVector);
         return self;
     }
 }
