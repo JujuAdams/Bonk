@@ -13,8 +13,8 @@
 
 function BonkCollideDeepestExt(_subjectShape, _targetShapes, _groupFilter = -1)
 {
-    static _staticCollideA = new __BonkClassCollideData();
-    static _staticCollideB = new __BonkClassCollideData();
+    static _staticCollideA = new BonkResultCollide();
+    static _staticCollideB = new BonkResultCollide();
     
     var _returnCollide  = _staticCollideA;
     var _workingCollide = _staticCollideB;

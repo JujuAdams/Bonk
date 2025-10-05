@@ -9,11 +9,14 @@
 /// @param ySize
 /// @param zSize
 /// @param [object=BonkObject]
+/// @param [variableStruct]
 /// @param [groupVector=BONK_DEFAULT_GROUP]
 
-function BonkCreateAAB(_x, _y, _z, _xSize, _ySize, _zSize, _object = BonkObject, _groupVector = BONK_DEFAULT_GROUP)
+function BonkCreateAAB(_x, _y, _z, _xSize, _ySize, _zSize, _object = BonkObject, _variableStruct = undefined, _groupVector = BONK_DEFAULT_GROUP)
 {
-    with(instance_create_depth(0, 0, 0, _object))
+    static _staticVariableStruct = {};
+    
+    with(instance_create_depth(0, 0, 0, _object, _variableStruct ?? _staticVariableStruct))
     {
         BonkSetupAAB(_x, _y, _z,   _xSize, _ySize, _zSize,   _groupVector);
         return self;

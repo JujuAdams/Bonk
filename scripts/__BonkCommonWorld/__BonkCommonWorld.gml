@@ -127,8 +127,8 @@ function __BonkCommonWorld(_cellXSize, _cellYSize, _cellZSize)
     {
         static _map = ds_map_create();
         
-        static _staticDeflectA = new __BonkClassDeflectData();
-        static _staticDeflectB = new __BonkClassDeflectData();
+        static _staticDeflectA = new BonkResultDeflect();
+        static _staticDeflectB = new BonkResultDeflect();
         
         var _returnDeflect  = _staticDeflectA;
         var _workingDeflect = _staticDeflectB;
@@ -241,7 +241,7 @@ function __BonkCommonWorld(_cellXSize, _cellYSize, _cellZSize)
     Collide = function(_subjectShape, _groupFilter = -1, _struct = undefined)
     {
         static _map = ds_map_create();
-        static _nullCollisionData = new __BonkClassCollideData();
+        static _nullCollisionData = new BonkResultCollide();
         
         var _cheapVersion = true;
         
@@ -415,7 +415,7 @@ function __BonkCommonWorld(_cellXSize, _cellYSize, _cellZSize)
         __minCellZ = min(__minCellZ, _cellZ, _cellZ2);
         __maxCellZ = max(__maxCellZ, _cellZ, _cellZ2);
         
-        if (__BonkIsInstance())
+        if (__BonkIsInstance()) //TODO - Optimize
         {
             var _left   = __cellXSize*__minCellX;
             var _top    = __cellYSize*__minCellY;
@@ -698,14 +698,14 @@ function __BonkCommonWorld(_cellXSize, _cellYSize, _cellZSize)
                     var _c = matrix_transform_vertex(_matrix, _x3, _y3, _z3, 1);
                     
                     var _bonkTri = new BonkStructTriangle(_a[0], _a[1], _a[2],
-                                                    _b[0], _b[1], _b[2],
-                                                    _c[0], _c[1], _c[2]);
+                                                          _b[0], _b[1], _b[2],
+                                                          _c[0], _c[1], _c[2]);
                 }
                 else
                 {
                     var _bonkTri = new BonkStructTriangle(_x1, _y1, _z1,
-                                                    _x2, _y2, _z2,
-                                                    _x3, _y3, _z3);
+                                                          _x2, _y2, _z2,
+                                                          _x3, _y3, _z3);
                 }
                 
                 __Add(_bonkTri); //Use the internal version to avoid expensive instance checks

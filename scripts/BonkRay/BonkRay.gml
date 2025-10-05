@@ -122,7 +122,7 @@ function BonkRay(_x, _y, _z, _dX, _dY, _dZ) constructor
     
     static Hit = function(_otherShape, _groupFilter = -1)
     {
-        static _nullHit = new __BonkClassHit();
+        static _nullHit = new BonkResultHit();
         
         var _hitFunc = _hitFuncLookup[_otherShape.bonkType];
         if (is_callable(_hitFunc))

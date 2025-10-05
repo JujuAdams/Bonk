@@ -1,22 +1,5 @@
 // Feather disable all
 
-/// Returns the point of impact where a line meets a Bonk quad.
-/// 
-/// This function returns a struct containing the following variables:
-/// 
-/// `.collision`
-///     Whether a collision was found. If no collision is found, this variable is set to `false`.
-/// 
-/// `.x` `.y` `.z`
-///     The point of impact. If there is no collision, all three variables will be set to `0`.
-/// 
-/// `.normalX` `.normalY` `.normalZ`
-///     The normal of the surface at the point of impact. If there is no collision, a normal of
-///     `{0, 0, 1}` will be returned.
-/// 
-/// N.B. The returned struct is statically allocated. Reusing this function may cause the same
-///      struct to be returned.
-/// 
 /// @param quad
 /// @param x1
 /// @param y1
@@ -28,7 +11,7 @@
 
 function BonkLineHitQuad(_quad, _x1, _y1, _z1, _x2, _y2, _z2, _struct = undefined)
 {
-    static _staticHit = new __BonkClassHit();
+    static _staticHit = new BonkResultHit();
     var _reaction = _struct ?? _staticHit;
     
     with(_quad)

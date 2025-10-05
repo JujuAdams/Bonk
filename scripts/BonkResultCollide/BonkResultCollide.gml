@@ -1,6 +1,11 @@
 // Feather disable all
 
-function __BonkClassCollideData() constructor
+/// Returned by all "collide" functions (e.g. `BonkCylinderCollideCylinder()`) and is also part of
+/// deflect data (please see `BonkResultDeflect()`).
+/// 
+/// You'll almost certainly never need to create one these structs yourself.
+
+function BonkResultCollide() constructor
 {
     shape = undefined;
     

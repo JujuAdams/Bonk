@@ -36,7 +36,7 @@ function BonkSetupAAB(_x, _y, _z, _xSize, _ySize, _zSize, _groupVector = BONK_DE
     
     
     
-    SetPosition = function(_x = x, _y = y, _z = z)
+    bonkSetPosition = function(_x = x, _y = y, _z = z)
     {
         x = _x;
         y = _y;
@@ -45,7 +45,7 @@ function BonkSetupAAB(_x, _y, _z, _xSize, _ySize, _zSize, _groupVector = BONK_DE
         return self;
     }
     
-    SetSize = function(_x = xSize, _y = ySize, _z = zSize)
+    bonkSetSize = function(_x = xSize, _y = ySize, _z = zSize)
     {
         xSize = _x;
         ySize = _y;
@@ -57,7 +57,7 @@ function BonkSetupAAB(_x, _y, _z, _xSize, _ySize, _zSize, _groupVector = BONK_DE
         return self;
     }
     
-    GetAABB = function()
+    bonkGetAABB = function()
     {
         return {
             xMin: bbox_left,
@@ -69,7 +69,7 @@ function BonkSetupAAB(_x, _y, _z, _xSize, _ySize, _zSize, _groupVector = BONK_DE
         };
     }
     
-    Draw = function(_color = undefined, _wireframe = undefined)
+    bonkDraw = function(_color = undefined, _wireframe = undefined)
     {
         __BONK_VERIFY_UGG
         UggAABB(x, y, z, xSize, ySize, zSize, _color, _wireframe);

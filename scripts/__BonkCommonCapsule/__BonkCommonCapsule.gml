@@ -35,7 +35,7 @@ function __BonkCommonCapsule()
     
     LineHit = method(undefined, function(_x1, _y1, _z1, _x2, _y2, _z2, _groupFilter = -1, _struct = undefined)
     {
-        static _nullHit = new __BonkClassHit();
+        static _nullHit = new BonkResultHit();
         
         if ((_groupFilter < 0) || FilterTest(_groupFilter))
         {

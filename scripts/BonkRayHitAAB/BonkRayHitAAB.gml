@@ -1,19 +1,5 @@
 // Feather disable all
 
-/// Returns the point of impact where a ray meets a Bonk AAB. The ray is defined by a starting
-/// point (`rayX` `rayY` `rayZ`) and direction (`dX` `dY` `dZ`).
-/// 
-/// This function returns a struct containing the following variables:
-/// 
-/// `.collision`
-///     Whether a collision was found. If no collision is found, this variable is set to `false`.
-/// 
-/// `.x` `.y` `.z`
-///     The point of impact. If there is no collision, all three variables will be set to `0`.
-/// 
-/// N.B. The returned struct is statically allocated. Reusing this function may cause the same struct
-///      to be returned.
-/// 
 /// @param aab
 /// @param rayX
 /// @param rayY

@@ -1,55 +1,5 @@
 // Feather disable all
 
-/// Constructor that generates a quad. Vertices must be defined in a clockwise order. Only three
-/// vertices need to be provided, the fourth coordinate is automatically generated using the
-/// following formulas `P4 = P2 + (P1 - P3)`.
-/// 
-/// Quads can check against the following shapes:
-/// - Capsule
-/// - Sphere
-/// 
-/// `.Refresh()`
-/// 
-/// `.GetAABB()`
-///     Returns a struct containing the bounding box for the shape.
-/// 
-/// `.Draw([color], [thickness], [wireframe])`
-///     Draws the shape. This uses Ugg, please see https://github.com/jujuadams/Ugg
-/// 
-/// `.Touch(otherShape)`
-///     Returns whether the two shapes overlap. Not all shapes can be checked against, see above.
-/// 
-/// `.Collide(otherShape)`
-///     Returns the vector that separates two overlapping shapes. Not all shapes can be checked
-///     against, see above. This method returns a struct that contains the following variables:
-///     
-///     `.collision`
-///         Whether a collision was found. If no collision is found, this variable is set to `false`.
-///     
-///     `.x` `.y` `.z`
-///         The vector that separates the two shapes. If there is no collision, all three variables
-///         will be set to `0`.
-/// 
-///     N.B. The returned struct is statically allocated. Reusing `.Collide()` may cause the same struct
-///          to be returned.
-/// 
-/// `.Deflect(subjectShape, [slopeThreshold=0])`
-///     Pushes the subject shape out of the scoped shape (provided that the two shapes can collide,
-///     see above). The slope threshold will allow shapes to "stand" on slopes instead of sliding
-///     down them. The units of this parameter are degrees. An angle of `0` represents a perfectly
-///     horizontal floor plane. Increase this value to allow shapes to stand on steeper slopes.
-/// 
-/// The struct created by the constructor contains the following values:
-/// 
-/// `.x1` `.y1` `.z1`
-///     Coordinate of the first coordinate of the quad.
-/// 
-/// `.x2` `.y2` `.z2`
-///     Coordinate of the second coordinate of the quad.
-/// 
-/// `.x3` `.y3` `.z3`
-///     Coordinate of the third coordinate of the quad.
-/// 
 /// @param x1
 /// @param y1
 /// @param z1

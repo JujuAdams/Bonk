@@ -1,6 +1,5 @@
 // Feather disable all
 
-/// 
 /// The `targetShapes` parameter can be an array, a list, a Bonk struct/instance, or an object used
 /// to create Bonk instances. If you provide an array or list then elements in the array/list
 /// should be either a Bonk struct/instance or an object.
@@ -14,7 +13,7 @@ function BonkCollideManyExt(_subjectShape, _targetShapes, _groupFilter = -1)
     static _returnData = [];
     array_resize(_returnData, 0);
     
-    var _reaction = new __BonkClassCollideData();
+    var _reaction = new BonkResultCollide();
     
     if (is_array(_targetShapes)) //We were given an array
     {
@@ -26,7 +25,7 @@ function BonkCollideManyExt(_subjectShape, _targetShapes, _groupFilter = -1)
                 if (Collide(_subjectShape, _groupFilter, _reaction).shape != undefined)
                 {
                     array_push(_returnData, _reaction);
-                    _reaction = new __BonkClassCollideData();
+                    _reaction = new BonkResultCollide();
                 }
             }
             
@@ -43,7 +42,7 @@ function BonkCollideManyExt(_subjectShape, _targetShapes, _groupFilter = -1)
                 if (Collide(_subjectShape, _groupFilter, _reaction).shape != undefined)
                 {
                     array_push(_returnData, _reaction);
-                    _reaction = new __BonkClassCollideData();
+                    _reaction = new BonkResultCollide();
                 }
             }
             
@@ -57,7 +56,7 @@ function BonkCollideManyExt(_subjectShape, _targetShapes, _groupFilter = -1)
             if (Collide(_subjectShape, _groupFilter, _reaction).shape != undefined)
             {
                 array_push(_returnData, _reaction);
-                _reaction = new __BonkClassCollideData();
+                _reaction = new BonkResultCollide();
             }
         }
     }

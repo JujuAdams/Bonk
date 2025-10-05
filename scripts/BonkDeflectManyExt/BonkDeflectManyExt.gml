@@ -27,8 +27,8 @@
 
 function BonkDeflectManyExt(_subjectShape, _targetShapes, _slopeThreshold = 0, _groupFilter = -1)
 {
-    static _staticDeflectA = new __BonkClassDeflectData();
-    static _staticDeflectB = new __BonkClassDeflectData();
+    static _staticDeflectA = new BonkResultDeflect();
+    static _staticDeflectB = new BonkResultDeflect();
     
     var _returnDeflect  = _staticDeflectA;
     var _workingDeflect = _staticDeflectB;

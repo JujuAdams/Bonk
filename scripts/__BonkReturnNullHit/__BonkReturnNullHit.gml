@@ -2,6 +2,6 @@
 
 function __BonkReturnNullHit()
 {
-    static _nullHit = new __BonkClassHit();
+    static _nullHit = new BonkResultHit();
     return _nullHit;
 }

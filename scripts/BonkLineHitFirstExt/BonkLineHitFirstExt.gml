@@ -21,8 +21,8 @@ function BonkLineHitFirstExt(_x1, _y1, _z1, _x2, _y2, _z2, _targetShapes, _group
 {
     static _map = ds_map_create();
     
-    static _staticHitA = new __BonkClassHit();
-    static _staticHitB = new __BonkClassHit();
+    static _staticHitA = new BonkResultHit();
+    static _staticHitB = new BonkResultHit();
     
     var _returnHit  = _staticHitA;
     var _workingHit = _staticHitB;

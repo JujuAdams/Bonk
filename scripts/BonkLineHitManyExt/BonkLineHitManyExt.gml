@@ -14,7 +14,7 @@ function BonkLineHitManyExt(_x1, _y1, _z1, _x2, _y2, _z2, _targetShapes, _groupF
     static _returnData = [];
     array_resize(_returnData, 0);
     
-    var _hit = new __BonkClassCollideData();
+    var _hit = new BonkResultCollide();
     
     if (is_array(_targetShapes))
     {
@@ -26,7 +26,7 @@ function BonkLineHitManyExt(_x1, _y1, _z1, _x2, _y2, _z2, _targetShapes, _groupF
                 if (LineHit(_x1, _y1, _z1, _x2, _y2, _z2, _groupFilter, _hit).shape != undefined)
                 {
                     array_push(_returnData, _hit);
-                    _hit = new __BonkClassCollideData();
+                    _hit = new BonkResultCollide();
                 }
             }
             
@@ -43,7 +43,7 @@ function BonkLineHitManyExt(_x1, _y1, _z1, _x2, _y2, _z2, _targetShapes, _groupF
                 if (LineHit(_x1, _y1, _z1, _x2, _y2, _z2, _groupFilter, _hit).shape != undefined)
                 {
                     array_push(_returnData, _hit);
-                    _hit = new __BonkClassCollideData();
+                    _hit = new BonkResultCollide();
                 }
             }
             
@@ -57,7 +57,7 @@ function BonkLineHitManyExt(_x1, _y1, _z1, _x2, _y2, _z2, _targetShapes, _groupF
             if (LineHit(_x1, _y1, _z1, _x2, _y2, _z2, _groupFilter, _hit).shape != undefined)
             {
                 array_push(_returnData, _hit);
-                _hit = new __BonkClassCollideData();
+                _hit = new BonkResultCollide();
             }
         }
     }

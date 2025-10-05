@@ -82,7 +82,7 @@ function __BonkClassShared(_groupVector) constructor
     
     static Deflect = function(_subjectShape, _slopeThreshold = 0, _groupFilter = -1, _struct = undefined)
     {
-        static _staticDeflect = new __BonkClassDeflectData();
+        static _staticDeflect = new BonkResultDeflect();
         var _reaction = _struct ?? _staticDeflect;
         
         if ((_groupFilter < 0) || FilterTest(_groupFilter))
@@ -126,7 +126,7 @@ function __BonkClassShared(_groupVector) constructor
     
     static Collide = function(_otherShape, _groupFilter = -1, _struct = undefined)
     {
-        static _nullCollisionData = new __BonkClassCollideData();
+        static _nullCollisionData = new BonkResultCollide();
         
         if ((_groupFilter >= 0) && (not FilterTest(_groupFilter)))
         {

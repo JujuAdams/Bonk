@@ -115,7 +115,7 @@ function BonkLine(_x1, _y1, _z1, _x2, _y2, _z2) constructor
     
     static Hit = function(_otherShape, _groupFilter = -1)
     {
-        static _nullHit = new __BonkClassHit();
+        static _nullHit = new BonkResultHit();
         
         var _hitFunc = _hitFuncLookup[_otherShape.bonkType];
         if (is_callable(_hitFunc))
