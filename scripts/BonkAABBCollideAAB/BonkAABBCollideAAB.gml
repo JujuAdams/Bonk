@@ -16,11 +16,12 @@
 /// 
 /// @param aab1
 /// @param aab2
+/// @param [struct]
 
-function BonkAABCollideAAB(_aab1, _aab2)
+function BonkAABCollideAAB(_aab1, _aab2, _struct = undefined)
 {
-    static _nullData = __Bonk().__nullCollisionData;
-    static _reaction     = new __BonkClassCollideData();
+    static _staticStruct = new __BonkClassCollideData();
+    var _reaction = _struct ?? _staticStruct;
     
     with(_aab1)
     {
@@ -53,11 +54,14 @@ function BonkAABCollideAAB(_aab1, _aab2)
     
     if ((_pushLeft >= 0) || (_pushRight <= 0) || (_pushUp >= 0) || (_pushDown <= 0) || (_pushBelow >= 0) || (_pushAbove <= 0))
     {
-        return _nullData;
+        return _reaction.__Null();
     }
     
     with(_reaction)
     {
+        collision = true;
+        shape = _aab2;
+        
         var _min = min(abs(_pushLeft), abs(_pushRight), abs(_pushUp), abs(_pushDown), abs(_pushBelow), abs(_pushAbove));
         if (_min == abs(_pushBelow)) //Prefer z-axis
         {

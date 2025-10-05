@@ -19,11 +19,11 @@
 
 function BonkCollisionLineList(_x1, _y1, _x2, _y2, _objectOrArray = BonkObject, _groupFilter = -1, _list = undefined)
 {
-    static _listStatic = ds_list_create();
+    static _staticList = ds_list_create();
     
     if (_list == undefined)
     {
-        _list = _listStatic;
+        _list = _staticList;
         ds_list_clear(_list);
         var _listStart = 0;
     }

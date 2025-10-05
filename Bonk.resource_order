@@ -11,7 +11,7 @@
     {"name":"Rotated Box","order":4,"path":"folders/Bonk/Direct Control/Collide/Rotated Box.yy",},
     {"name":"Sphere","order":5,"path":"folders/Bonk/Direct Control/Collide/Sphere.yy",},
     {"name":"Triangle","order":6,"path":"folders/Bonk/Direct Control/Collide/Triangle.yy",},
-    {"name":"Instance Broad Phase","order":9,"path":"folders/Bonk/Direct Control/Instance Broad Phase.yy",},
+    {"name":"Instance Broadphase","order":9,"path":"folders/Bonk/Direct Control/Instance Broadphase.yy",},
     {"name":"Line Hit","order":4,"path":"folders/Bonk/Direct Control/Line Hit.yy",},
     {"name":"Multi Functions","order":8,"path":"folders/Bonk/Direct Control/Multi Functions.yy",},
     {"name":"Ray Hit","order":5,"path":"folders/Bonk/Direct Control/Ray Hit.yy",},

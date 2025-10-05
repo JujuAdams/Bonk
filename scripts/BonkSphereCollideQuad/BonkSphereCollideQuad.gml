@@ -16,11 +16,12 @@
 /// 
 /// @param sphere
 /// @param quad
+/// @param [struct]
 
-function BonkSphereCollideQuad(_sphere, _quad)
+function BonkSphereCollideQuad(_sphere, _quad, _struct = undefined)
 {
-    static _nullData = __Bonk().__nullCollisionData;
-    static _reaction     = new __BonkClassCollideData();
+    static _staticStruct = new __BonkClassCollideData();
+    var _reaction = _struct ?? _staticStruct;
     
     with(_sphere)
     {
@@ -80,7 +81,7 @@ function BonkSphereCollideQuad(_sphere, _quad)
     //Early out if the sphere is too far away from the plane
     if ((_refToPlaneDist < -_sphereRadius) || (_refToPlaneDist > _sphereRadius))
     {
-        return _nullData;
+        return _reaction.__Null();
     }
     
     //Point on the plane closest to the sphere's centre
@@ -156,6 +157,9 @@ function BonkSphereCollideQuad(_sphere, _quad)
                     
                     with(_reaction)
                     {
+                        collision = true;
+                        shape = _quad;
+                        
                         var _pushLength = sign(_refToPlaneDist) * (_sphereRadius - abs(_refToPlaneDist));
                         dX = _pushLength*_normalX;
                         dY = _pushLength*_normalY;
@@ -181,16 +185,19 @@ function BonkSphereCollideQuad(_sphere, _quad)
     if (_pushLength == 0)
     {
         //TODO - Handle this edge case
-        return _nullData;
+        return _reaction.__Null();
     }
     
     if (_pushLength >= _sphereRadius)
     {
-        return _nullData;
+        return _reaction.__Null();
     }
     
     with(_reaction)
     {
+        collision = true;
+        shape = _quad;
+        
         //Push out just enough so that the surface of the capsule is touching the triangle
         var _coeff = (_sphereRadius - _pushLength) / _pushLength;
         dX = _coeff*_pushX;

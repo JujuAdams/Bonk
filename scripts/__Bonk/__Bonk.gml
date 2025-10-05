@@ -18,7 +18,7 @@ function __Bonk()
     with(_global)
     {
         __nullCollisionData = new __BonkClassCollideData();
-        __nullCollisionData.collision = false;
+        __nullCollisionData.__Null();
         
         __nullDeflectData = new __BonkClassDeflectData();
         

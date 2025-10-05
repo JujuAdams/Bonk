@@ -16,11 +16,12 @@
 /// 
 /// @param capsule
 /// @param cylinder
+/// @param [struct]
 
-function BonkCapsuleCollideCylinder(_capsule, _cylinder)
+function BonkCapsuleCollideCylinder(_capsule, _cylinder, _struct = undefined)
 {
-    static _nullData = __Bonk().__nullCollisionData;
-    static _reaction     = new __BonkClassCollideData();
+    static _staticStruct = new __BonkClassCollideData();
+    var _reaction = _struct ?? _staticStruct;
     
     with(_capsule)
     {
@@ -62,7 +63,7 @@ function BonkCapsuleCollideCylinder(_capsule, _cylinder)
     var _dist = sqrt(_dX*_dX + _dY*_dY + _dZ*_dZ);
     if (_dist >= _capsuleRadius)
     {
-        return _nullData;
+        return _reaction.__Null();
     }
     
     var _coeff = _capsuleRadius / _dist;
@@ -72,6 +73,9 @@ function BonkCapsuleCollideCylinder(_capsule, _cylinder)
     
     with(_reaction)
     {
+        collision = true;
+        shape = _cylinder;
+        
         dX = _cylinderX - _capsuleClosestX;
         dY = _cylinderY - _capsuleClosestY;
         dZ = _cylinderZ - _capsuleClosestZ;

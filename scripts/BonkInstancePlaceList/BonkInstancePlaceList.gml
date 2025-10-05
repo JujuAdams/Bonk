@@ -20,7 +20,7 @@
 
 function BonkInstancePlaceList(_subjectInstance, _dX, _dY, _objectOrArray = BonkObject, _groupFilter = -1, _list = undefined)
 {
-    static _listStatic = ds_list_create();
+    static _staticList = ds_list_create();
     
     if (not instance_exists(_subjectInstance))
     {
@@ -29,7 +29,7 @@ function BonkInstancePlaceList(_subjectInstance, _dX, _dY, _objectOrArray = Bonk
     
     if (_list == undefined)
     {
-        _list = _listStatic;
+        _list = _staticList;
         ds_list_clear(_list);
         var _listStart = 0;
     }

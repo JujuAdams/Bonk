@@ -16,11 +16,12 @@
 /// 
 /// @param capsule
 /// @param aab
+/// @param [struct]
 
-function BonkCapsuleCollideAAB(_capsule, _aab)
+function BonkCapsuleCollideAAB(_capsule, _aab, _struct = undefined)
 {
-    static _nullData = __Bonk().__nullCollisionData;
-    static _reaction = new __BonkClassCollideData();
+    static _staticStruct = new __BonkClassCollideData();
+    var _reaction = _struct ?? _staticStruct;
     
     with(_capsule)
     {
@@ -48,7 +49,7 @@ function BonkCapsuleCollideAAB(_capsule, _aab)
     var _dist = sqrt(_dX*_dX + _dY*_dY + _dZ*_dZ);
     if ((_dist <= 0) || (_dist >= _capsuleRadius))
     {
-        return _nullData;
+        return _reaction.__Null();
     }
     
     var _coeff = _capsuleRadius / _dist;
@@ -58,6 +59,9 @@ function BonkCapsuleCollideAAB(_capsule, _aab)
     
     with(_reaction)
     {
+        collision = true;
+        shape = _aab;
+        
         dX = _aabX - _capsuleClosestX;
         dY = _aabY - _capsuleClosestY;
         dZ = _aabZ - _capsuleClosestZ;

@@ -16,11 +16,12 @@
 /// 
 /// @param cylinder
 /// @param box
+/// @param [struct]
 
-function BonkCylinderCollideRotatedBox(_cylinder, _box)
+function BonkCylinderCollideRotatedBox(_cylinder, _box, _struct = undefined)
 {
-    static _nullData = __Bonk().__nullCollisionData;
-    static _reaction     = new __BonkClassCollideData();
+    static _staticStruct = new __BonkClassCollideData();
+    var _reaction = _struct ?? _staticStruct;
     
     with(_cylinder)
     {
@@ -67,7 +68,7 @@ function BonkCylinderCollideRotatedBox(_cylinder, _box)
         
         if (not rectangle_in_circle(_left, _top, _right, _bottom, _i, _j, _cylinderRadius))
         {
-            return _nullData;
+            return _reaction.__Null();
         }
         
         var _pushI = 0;
@@ -124,6 +125,9 @@ function BonkCylinderCollideRotatedBox(_cylinder, _box)
         
         with(_reaction)
         {
+            collision = true;
+            shape = _box;
+            
             dX = -_pushX;
             dY = -_pushY;
             dZ = -_pushZ;
@@ -132,5 +136,5 @@ function BonkCylinderCollideRotatedBox(_cylinder, _box)
         return _reaction;
     }
     
-    return _nullData;
+    return _reaction.__Null();
 }

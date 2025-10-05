@@ -16,11 +16,12 @@
 /// 
 /// @param capsule
 /// @param triangle
+/// @param [struct]
 
-function BonkCapsuleCollideTriangle(_capsule, _triangle)
+function BonkCapsuleCollideTriangle(_capsule, _triangle, _struct = undefined)
 {
-    static _nullData = __Bonk().__nullCollisionData;
-    static _reaction     = new __BonkClassCollideData();
+    static _staticStruct = new __BonkClassCollideData();
+    var _reaction = _struct ?? _staticStruct;
     
     with(_capsule)
     {
@@ -243,6 +244,9 @@ function BonkCapsuleCollideTriangle(_capsule, _triangle)
                 
                 with(_reaction)
                 {
+                    collision = true;
+                    shape = _triangle;
+                    
                     dX = _pushLength*_normalX;
                     dY = _pushLength*_normalY;
                     dZ = _pushLength*_normalZ;
@@ -266,16 +270,19 @@ function BonkCapsuleCollideTriangle(_capsule, _triangle)
     if (_pushLength == 0)
     {
         //TODO - Handle this edge case
-        return _nullData;
+        return _reaction.__Null();
     }
     
     if (_pushLength >= _capsuleRadius)
     {
-        return _nullData;
+        return _reaction.__Null();
     }
     
     with(_reaction)
     {
+        collision = true;
+        shape = _triangle;
+        
         //Push out just enough so that the surface of the capsule is touching the triangle
         var _coeff = (_capsuleRadius - _pushLength) / _pushLength;
         dX = _coeff*_pushX;

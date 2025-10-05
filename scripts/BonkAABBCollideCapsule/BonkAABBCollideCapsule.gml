@@ -16,8 +16,9 @@
 /// 
 /// @param aab
 /// @param capsule
+/// @param [struct]
 
-function BonkAABCollideCapsule(_aab, _capsule)
+function BonkAABCollideCapsule(_aab, _capsule, _struct = undefined)
 {
-    return BonkCapsuleCollideAAB(_capsule, _aab).__Reverse();
+    return BonkCapsuleCollideAAB(_capsule, _aab, _struct).__Reverse(_capsule);
 }

@@ -16,11 +16,12 @@
 /// 
 /// @param capsule
 /// @param box
+/// @param [struct]
 
-function BonkCapsuleCollideRotatedBox(_capsule, _box)
+function BonkCapsuleCollideRotatedBox(_capsule, _box, _struct = undefined)
 {
-    static _nullData = __Bonk().__nullCollisionData;
-    static _reaction     = new __BonkClassCollideData();
+    static _staticStruct = new __BonkClassCollideData();
+    var _reaction = _struct ?? _staticStruct;
     
     with(_capsule)
     {
@@ -95,7 +96,7 @@ function BonkCapsuleCollideRotatedBox(_capsule, _box)
             
             if (_d >= _capsuleRadius)
             {
-                return _nullData;
+                return _reaction.__Null();
             }
             
             _pushDistance = _capsuleRadius - _d;
@@ -110,6 +111,9 @@ function BonkCapsuleCollideRotatedBox(_capsule, _box)
         
         with(_reaction)
         {
+            collision = true;
+            shape = _box;
+            
             dX = -_pushX;
             dY = -_pushY;
             dZ = -_pushZ;
@@ -118,5 +122,5 @@ function BonkCapsuleCollideRotatedBox(_capsule, _box)
         return _reaction;
     }
     
-    return _nullData;
+    return _reaction.__Null();
 }

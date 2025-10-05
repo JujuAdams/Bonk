@@ -16,11 +16,12 @@
 /// 
 /// @param cylinder1
 /// @param cylinder2
+/// @param [struct]
 
-function BonkCylinderCollideCylinder(_cylinder1, _cylinder2)
+function BonkCylinderCollideCylinder(_cylinder1, _cylinder2, _struct = undefined)
 {
-    static _nullData = __Bonk().__nullCollisionData;
-    static _reaction     = new __BonkClassCollideData();
+    static _staticStruct = new __BonkClassCollideData();
+    var _reaction = _struct ?? _staticStruct;
     
     with(_cylinder1)
     {
@@ -35,7 +36,7 @@ function BonkCylinderCollideCylinder(_cylinder1, _cylinder2)
         
         if ((_pushBelow >= 0) && (_pushAbove <= 0))
         {
-            return _nullData;
+            return _reaction.__Null();
         }
         
         var _dX = x - _cylinder2.x;
@@ -47,6 +48,9 @@ function BonkCylinderCollideCylinder(_cylinder1, _cylinder2)
             //Cylinders exactly overlap, fall back on pushing out in the z-axis
             with(_reaction)
             {
+                collision = true;
+                shape = _cylinder2;
+                
                 dX = 0;
                 dY = 0;
                 dZ = _dZ;
@@ -58,11 +62,14 @@ function BonkCylinderCollideCylinder(_cylinder1, _cylinder2)
         var _pushXY = (radius + _cylinder2.radius) - _xyDist;
         if (_pushXY <= 0)
         {
-            return _nullData;
+            return _reaction.__Null();
         }
         
         with(_reaction)
         {
+            collision = true;
+            shape = _cylinder2;
+            
             var _dZ = (abs(_pushBelow) < abs(_pushAbove))? _pushBelow : _pushAbove;
             if (abs(_dZ) < _pushXY)
             {
@@ -82,5 +89,5 @@ function BonkCylinderCollideCylinder(_cylinder1, _cylinder2)
         return _reaction;
     }
     
-    return _nullData;
+    return _reaction.__Null();
 }

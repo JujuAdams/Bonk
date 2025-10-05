@@ -16,11 +16,12 @@
 /// 
 /// @param aab
 /// @param sphere
+/// @param [struct]
 
-function BonkAABCollideSphere(_aab, _sphere)
+function BonkAABCollideSphere(_aab, _sphere, _struct = undefined)
 {
-    static _nullData = __Bonk().__nullCollisionData;
-    static _reaction     = new __BonkClassCollideData();
+    static _staticStruct = new __BonkClassCollideData();
+    var _reaction = _struct ?? _staticStruct;
     
     with(_aab)
     {
@@ -51,7 +52,7 @@ function BonkAABCollideSphere(_aab, _sphere)
     var _dist = sqrt(_dX*_dX + _dY*_dY + _dZ*_dZ);
     if (_dist >= _sphereRadius)
     {
-        return _nullData;
+        return _reaction.__Null();
     }
     
     var _coeff = _sphereRadius / _dist;
@@ -61,6 +62,7 @@ function BonkAABCollideSphere(_aab, _sphere)
     
     with(_reaction)
     {
+        shape = _sphere;
         dX = _sphereClosestX - _aabClosestX;
         dY = _sphereClosestY - _aabClosestY;
         dZ = _sphereClosestZ - _aabClosestZ;

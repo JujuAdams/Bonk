@@ -22,7 +22,7 @@
     {"$GMFolder":"","%Name":"Rotated Box","folderPath":"folders/Bonk/Direct Control/Collide/Rotated Box.yy","name":"Rotated Box","resourceType":"GMFolder","resourceVersion":"2.0",},
     {"$GMFolder":"","%Name":"Sphere","folderPath":"folders/Bonk/Direct Control/Collide/Sphere.yy","name":"Sphere","resourceType":"GMFolder","resourceVersion":"2.0",},
     {"$GMFolder":"","%Name":"Triangle","folderPath":"folders/Bonk/Direct Control/Collide/Triangle.yy","name":"Triangle","resourceType":"GMFolder","resourceVersion":"2.0",},
-    {"$GMFolder":"","%Name":"Instance Broad Phase","folderPath":"folders/Bonk/Direct Control/Instance Broad Phase.yy","name":"Instance Broad Phase","resourceType":"GMFolder","resourceVersion":"2.0",},
+    {"$GMFolder":"","%Name":"Instance Broadphase","folderPath":"folders/Bonk/Direct Control/Instance Broadphase.yy","name":"Instance Broadphase","resourceType":"GMFolder","resourceVersion":"2.0",},
     {"$GMFolder":"","%Name":"Line Hit","folderPath":"folders/Bonk/Direct Control/Line Hit.yy","name":"Line Hit","resourceType":"GMFolder","resourceVersion":"2.0",},
     {"$GMFolder":"","%Name":"Multi Functions","folderPath":"folders/Bonk/Direct Control/Multi Functions.yy","name":"Multi Functions","resourceType":"GMFolder","resourceVersion":"2.0",},
     {"$GMFolder":"","%Name":"Ray Hit","folderPath":"folders/Bonk/Direct Control/Ray Hit.yy","name":"Ray Hit","resourceType":"GMFolder","resourceVersion":"2.0",},

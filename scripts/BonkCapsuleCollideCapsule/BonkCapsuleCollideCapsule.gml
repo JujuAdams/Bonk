@@ -16,11 +16,12 @@
 /// 
 /// @param capsule1
 /// @param capsule2
+/// @param [struct]
 
-function BonkCapsuleCollideCapsule(_capsule1, _capsule2)
+function BonkCapsuleCollideCapsule(_capsule1, _capsule2, _struct = undefined)
 {
-    static _nullData = __Bonk().__nullCollisionData;
-    static _reaction     = new __BonkClassCollideData();
+    static _staticStruct = new __BonkClassCollideData();
+    var _reaction = _struct ?? _staticStruct;
     
     with(_capsule1)
     {
@@ -52,11 +53,14 @@ function BonkCapsuleCollideCapsule(_capsule1, _capsule2)
     var _dist = sqrt(_dX*_dX + _dY*_dY + _dZ*_dZ);
     if (_dist >= _capsuleRadius1 + _capsuleRadius2)
     {
-        return _nullData;
+        return _reaction.__Null();
     }
     
     with(_reaction)
     {
+        collision = true;
+        shape = _capsule2;
+        
         if (_dist != 0)
         {
             var _coeff = (_capsuleRadius1 + _capsuleRadius2) / _dist;

@@ -16,11 +16,12 @@
 /// 
 /// @param sphere
 /// @param box
+/// @param [struct]
 
-function BonkSphereCollideRotatedBox(_sphere, _box)
+function BonkSphereCollideRotatedBox(_sphere, _box, _struct = undefined)
 {
-    static _nullData = __Bonk().__nullCollisionData;
-    static _reaction     = new __BonkClassCollideData();
+    static _staticStruct = new __BonkClassCollideData();
+    var _reaction = _struct ?? _staticStruct;
     
     with(_sphere)
     {
@@ -92,7 +93,7 @@ function BonkSphereCollideRotatedBox(_sphere, _box)
             
             if (_d >= _sphereRadius)
             {
-                return _nullData;
+                return _reaction.__Null();
             }
             
             _pushDistance = _sphereRadius - _d;
@@ -107,6 +108,9 @@ function BonkSphereCollideRotatedBox(_sphere, _box)
         
         with(_reaction)
         {
+            collision = true;
+            shape = _box;
+            
             dX = -_pushX;
             dY = -_pushY;
             dZ = -_pushZ;
@@ -115,5 +119,5 @@ function BonkSphereCollideRotatedBox(_sphere, _box)
         return _reaction;
     }
     
-    return _nullData;
+    return _reaction.__Null();
 }

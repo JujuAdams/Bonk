@@ -16,11 +16,12 @@
 /// 
 /// @param capsule
 /// @param quad
+/// @param [struct]
 
-function BonkCapsuleCollideQuad(_capsule, _quad)
+function BonkCapsuleCollideQuad(_capsule, _quad, _struct = undefined)
 {
-    static _nullData = __Bonk().__nullCollisionData;
-    static _reaction     = new __BonkClassCollideData();
+    static _staticStruct = new __BonkClassCollideData();
+    var _reaction = _struct ?? _staticStruct;
     
     with(_capsule)
     {
@@ -192,9 +193,12 @@ function BonkCapsuleCollideQuad(_capsule, _quad)
     var _tempY = _refY - _quadY1;
     var _tempZ = _refZ - _quadZ1;
     
-        //Sneaky distance-to-plane check as an early-out
-        var _refToPlaneDist = dot_product_3d(_tempX, _tempY, _tempZ, _normalX, _normalY, _normalZ);
-        if (abs(_refToPlaneDist) > _capsuleRadius) return _nullData;
+    //Sneaky distance-to-plane check as an early-out
+    var _refToPlaneDist = dot_product_3d(_tempX, _tempY, _tempZ, _normalX, _normalY, _normalZ);
+    if (abs(_refToPlaneDist) > _capsuleRadius)
+    {
+        return _reaction.__Null();
+    }
     
     _edgeSqrLen = _edgeSqrLength12;
     _edgeX = _dX12;
@@ -285,6 +289,9 @@ function BonkCapsuleCollideQuad(_capsule, _quad)
                     
                     with(_reaction)
                     {
+                        collision = true;
+                        shape = _quad;
+                        
                         dX = _pushLength*_normalX;
                         dY = _pushLength*_normalY;
                         dZ = _pushLength*_normalZ;
@@ -309,16 +316,19 @@ function BonkCapsuleCollideQuad(_capsule, _quad)
     if (_pushLength == 0)
     {
         //TODO - Handle this edge case
-        return _nullData;
+        return _reaction.__Null();
     }
     
     if (_pushLength >= _capsuleRadius)
     {
-        return _nullData;
+        return _reaction.__Null();
     }
     
     with(_reaction)
     {
+        collision = true;
+        shape = _quad;
+        
         //Push out just enough so that the surface of the capsule is touching the triangle
         var _coeff = (_capsuleRadius - _pushLength) / _pushLength;
         dX = _coeff*_pushX;

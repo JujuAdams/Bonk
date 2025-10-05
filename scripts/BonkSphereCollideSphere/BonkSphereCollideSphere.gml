@@ -16,11 +16,12 @@
 /// 
 /// @param sphere1
 /// @param sphere2
+/// @param [struct]
 
-function BonkSphereCollideSphere(_sphere1, _sphere2)
+function BonkSphereCollideSphere(_sphere1, _sphere2, _struct = undefined)
 {
-    static _nullData = __Bonk().__nullCollisionData;
-    static _reaction     = new __BonkClassCollideData();
+    static _staticStruct = new __BonkClassCollideData();
+    var _reaction = _struct ?? _staticStruct;
     
     var _dX = _sphere1.x - _sphere2.x;
     var _dY = _sphere1.y - _sphere2.y;
@@ -31,6 +32,9 @@ function BonkSphereCollideSphere(_sphere1, _sphere2)
     {
         with(_reaction)
         {
+            collision = true;
+            shape = _sphere2;
+            
             //Panic! Pick a randomish direction to push out in
             dX = 1 - 2*floor(abs(_sphere1.x) mod 2);
             dY = 1 - 2*floor(abs(_sphere1.y) mod 2);
@@ -43,11 +47,14 @@ function BonkSphereCollideSphere(_sphere1, _sphere2)
     var _push = (_sphere1.radius + _sphere2.radius) - _dist;
     if (_push <= 0)
     {
-        return _nullData;
+        return _reaction.__Null();
     }
     
     with(_reaction)
     {
+        collision = true;
+        shape = _sphere2;
+        
         var _coeff = _push / _dist;
         dX = _coeff*_dX;
         dY = _coeff*_dY;

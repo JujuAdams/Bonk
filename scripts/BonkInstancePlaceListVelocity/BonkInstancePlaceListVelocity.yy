@@ -5,8 +5,8 @@
   "isDnD":false,
   "name":"BonkInstancePlaceListVelocity",
   "parent":{
-    "name":"Instance Broad Phase",
-    "path":"folders/Bonk/Direct Control/Instance Broad Phase.yy",
+    "name":"Instance Broadphase",
+    "path":"folders/Bonk/Direct Control/Instance Broadphase.yy",
   },
   "resourceType":"GMScript",
   "resourceVersion":"2.0",
