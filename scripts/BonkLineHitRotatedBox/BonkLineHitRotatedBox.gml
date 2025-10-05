@@ -131,7 +131,6 @@ function BonkLineHitRotatedBox(_box, _x1, _y1, _z1, _x2, _y2, _z2, _struct = und
         
         with(_reaction)
         {
-            collision = true;
             shape = _box;
             
             x = _hitX;

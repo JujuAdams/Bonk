@@ -111,7 +111,6 @@ function BonkCapsuleCollideRotatedBox(_capsule, _box, _struct = undefined)
         
         with(_reaction)
         {
-            collision = true;
             shape = _box;
             
             dX = -_pushX;

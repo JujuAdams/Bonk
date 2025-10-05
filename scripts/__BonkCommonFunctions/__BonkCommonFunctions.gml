@@ -88,7 +88,7 @@ function __BonkCommonFunctions(_groupVector = BONK_DEFAULT_GROUP)
             with(_subjectShape)
             {
                 var _collisionData = Collide(other, undefined, _reaction.collisionData);
-                if (_collisionData.collision)
+                if (_collisionData.shape != undefined)
                 {
                     var _dX = _collisionData.dX;
                     var _dY = _collisionData.dY;
@@ -125,7 +125,7 @@ function __BonkCommonFunctions(_groupVector = BONK_DEFAULT_GROUP)
     
     Collide = function(_otherShape, _groupFilter = -1, _struct = undefined)
     {
-        static _nullCollisionData = __Bonk().__nullCollisionData;
+        static _nullCollisionData = new __BonkClassCollideData();
         
         if ((_groupFilter >= 0) && (not FilterTest(_groupFilter)))
         {

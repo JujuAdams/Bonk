@@ -2,7 +2,7 @@ capsule1.Draw(BonkCapsuleTouchCapsule(capsule1, capsule2)? c_lime : c_red);
 capsule2.Draw();
 
 var _reaction = BonkCapsuleCollideCapsule(capsule1, capsule2);
-if (_reaction.collision)
+if (_reaction.shape != undefined)
 {
     UggCapsule(capsule1.x + _reaction.dX,
                capsule1.y + _reaction.dY,

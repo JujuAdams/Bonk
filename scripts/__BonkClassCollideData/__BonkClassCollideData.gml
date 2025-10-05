@@ -2,16 +2,18 @@
 
 function __BonkClassCollideData() constructor
 {
-    collision = true;
     shape = undefined;
+    
     dX = 0;
     dY = 0;
     dZ = 0;
     
+    
+    
     static __Null = function()
     {
-        collision = false;
         shape = undefined;
+        
         dX = 0;
         dY = 0;
         dZ = 0;

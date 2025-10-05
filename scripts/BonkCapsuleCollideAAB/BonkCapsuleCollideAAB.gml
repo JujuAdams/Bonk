@@ -59,7 +59,6 @@ function BonkCapsuleCollideAAB(_capsule, _aab, _struct = undefined)
     
     with(_reaction)
     {
-        collision = true;
         shape = _aab;
         
         dX = _aabX - _capsuleClosestX;

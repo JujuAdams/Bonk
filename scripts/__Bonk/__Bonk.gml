@@ -17,12 +17,6 @@ function __Bonk()
     _global = {};
     with(_global)
     {
-        __nullCollisionData = new __BonkClassCollideData();
-        __nullCollisionData.__Null();
-        
-        __nullHit = new __BonkClassHit();
-        __nullHit.collision = false;
-        
         try
         {
             __Ugg();

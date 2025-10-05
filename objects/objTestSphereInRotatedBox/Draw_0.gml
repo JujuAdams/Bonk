@@ -3,7 +3,7 @@ sphere2.Draw(BonkSphereTouchRotatedBox(sphere2, rotatedBox)? c_lime : c_red, tru
 rotatedBox.Draw();
 
 var _reaction = BonkSphereCollideRotatedBox(sphere1, rotatedBox);
-if (_reaction.collision)
+if (_reaction.shape != undefined)
 {
     UggSphere(sphere1.x + _reaction.dX,
               sphere1.y + _reaction.dY,
@@ -13,7 +13,7 @@ if (_reaction.collision)
 }
 
 var _reaction = BonkSphereCollideRotatedBox(sphere2, rotatedBox);
-if (_reaction.collision)
+if (_reaction.shape != undefined)
 {
     UggSphere(sphere2.x + _reaction.dX,
               sphere2.y + _reaction.dY,

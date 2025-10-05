@@ -23,7 +23,7 @@ function BonkCollideManyExt(_subjectShape, _targetShapes, _groupFilter = -1)
         {
             with(_targetShapes[_i]) //Use `with()` here to support iterating over objects
             {
-                if (Collide(_subjectShape, _groupFilter, _reaction).collision)
+                if (Collide(_subjectShape, _groupFilter, _reaction).shape != undefined)
                 {
                     array_push(_returnData, _reaction);
                     _reaction = new __BonkClassCollideData();
@@ -40,7 +40,7 @@ function BonkCollideManyExt(_subjectShape, _targetShapes, _groupFilter = -1)
         {
             with(_targetShapes[| _i]) //Use `with()` here to support iterating over objects
             {
-                if (Collide(_subjectShape, _groupFilter, _reaction).collision)
+                if (Collide(_subjectShape, _groupFilter, _reaction).shape != undefined)
                 {
                     array_push(_returnData, _reaction);
                     _reaction = new __BonkClassCollideData();
@@ -54,7 +54,7 @@ function BonkCollideManyExt(_subjectShape, _targetShapes, _groupFilter = -1)
     {
         with(_targetShapes) //Use `with()` here to support iterating over objects
         {
-            if (Collide(_subjectShape, _groupFilter, _reaction).collision)
+            if (Collide(_subjectShape, _groupFilter, _reaction).shape != undefined)
             {
                 array_push(_returnData, _reaction);
                 _reaction = new __BonkClassCollideData();

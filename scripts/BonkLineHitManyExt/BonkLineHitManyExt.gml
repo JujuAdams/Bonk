@@ -23,7 +23,7 @@ function BonkLineHitManyExt(_x1, _y1, _z1, _x2, _y2, _z2, _targetShapes, _groupF
         {
             with(_targetShapes[_i]) //Use `with()` here to support iterating over objects
             {
-                if (LineHit(_x1, _y1, _z1, _x2, _y2, _z2, _groupFilter, _hit).collision)
+                if (LineHit(_x1, _y1, _z1, _x2, _y2, _z2, _groupFilter, _hit).shape != undefined)
                 {
                     array_push(_returnData, _hit);
                     _hit = new __BonkClassCollideData();
@@ -40,7 +40,7 @@ function BonkLineHitManyExt(_x1, _y1, _z1, _x2, _y2, _z2, _targetShapes, _groupF
         {
             with(_targetShapes[| _i])
             {
-                if (LineHit(_x1, _y1, _z1, _x2, _y2, _z2, _groupFilter, _hit).collision)
+                if (LineHit(_x1, _y1, _z1, _x2, _y2, _z2, _groupFilter, _hit).shape != undefined)
                 {
                     array_push(_returnData, _hit);
                     _hit = new __BonkClassCollideData();
@@ -54,7 +54,7 @@ function BonkLineHitManyExt(_x1, _y1, _z1, _x2, _y2, _z2, _targetShapes, _groupF
     {
         with(_targetShapes) //Use `with()` here to support iterating over objects
         {
-            if (LineHit(_x1, _y1, _z1, _x2, _y2, _z2, _groupFilter, _hit).collision)
+            if (LineHit(_x1, _y1, _z1, _x2, _y2, _z2, _groupFilter, _hit).shape != undefined)
             {
                 array_push(_returnData, _hit);
                 _hit = new __BonkClassCollideData();

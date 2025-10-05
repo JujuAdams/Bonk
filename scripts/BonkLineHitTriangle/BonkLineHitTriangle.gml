@@ -167,7 +167,6 @@ function BonkLineHitTriangle(_triangle, _x1, _y1, _z1, _x2, _y2, _z2, _struct = 
                 {
                     with(_reaction)
                     {
-                        collision = true;
                         shape = _triangle;
                         
                         x = _traceX;

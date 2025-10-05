@@ -73,7 +73,6 @@ function BonkCapsuleCollideCylinder(_capsule, _cylinder, _struct = undefined)
     
     with(_reaction)
     {
-        collision = true;
         shape = _cylinder;
         
         dX = _cylinderX - _capsuleClosestX;

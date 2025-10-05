@@ -55,7 +55,6 @@ function BonkCapsuleCollideSphere(_capsule, _sphere, _struct = undefined)
     
     with(_reaction)
     {
-        collision = true;
         shape = _sphere;
         
         var _coeff = (_capsuleRadius + _sphereRadius) / _dist;

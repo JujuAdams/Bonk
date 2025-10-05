@@ -32,7 +32,6 @@ function BonkSphereCollideSphere(_sphere1, _sphere2, _struct = undefined)
     {
         with(_reaction)
         {
-            collision = true;
             shape = _sphere2;
             
             //Panic! Pick a randomish direction to push out in
@@ -52,7 +51,6 @@ function BonkSphereCollideSphere(_sphere1, _sphere2, _struct = undefined)
     
     with(_reaction)
     {
-        collision = true;
         shape = _sphere2;
         
         var _coeff = _push / _dist;

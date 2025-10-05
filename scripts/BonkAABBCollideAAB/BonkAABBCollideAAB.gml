@@ -59,7 +59,6 @@ function BonkAABCollideAAB(_aab1, _aab2, _struct = undefined)
     
     with(_reaction)
     {
-        collision = true;
         shape = _aab2;
         
         var _min = min(abs(_pushLeft), abs(_pushRight), abs(_pushUp), abs(_pushDown), abs(_pushBelow), abs(_pushAbove));

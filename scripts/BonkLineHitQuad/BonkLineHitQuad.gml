@@ -186,7 +186,6 @@ function BonkLineHitQuad(_quad, _x1, _y1, _z1, _x2, _y2, _z2, _struct = undefine
                     {
                         with(_reaction)
                         {
-                            collision = true;
                             shape = _quad;
                             
                             x = _traceX;

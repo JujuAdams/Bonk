@@ -289,7 +289,6 @@ function BonkCapsuleCollideQuad(_capsule, _quad, _struct = undefined)
                     
                     with(_reaction)
                     {
-                        collision = true;
                         shape = _quad;
                         
                         dX = _pushLength*_normalX;
@@ -326,7 +325,6 @@ function BonkCapsuleCollideQuad(_capsule, _quad, _struct = undefined)
     
     with(_reaction)
     {
-        collision = true;
         shape = _quad;
         
         //Push out just enough so that the surface of the capsule is touching the triangle

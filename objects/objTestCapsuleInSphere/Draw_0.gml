@@ -2,7 +2,7 @@
 sphere.Draw();
 
 var _reaction = BonkCapsuleCollideSphere(capsule, sphere);
-if (_reaction.collision)
+if (_reaction.shape != undefined)
 {
     UggCapsule(capsule.x + _reaction.dX,
                capsule.y + _reaction.dY,

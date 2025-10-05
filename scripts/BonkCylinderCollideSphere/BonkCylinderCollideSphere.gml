@@ -75,7 +75,6 @@ function BonkCylinderCollideSphere(_cylinder, _sphere, _struct = undefined)
     
     with(_reaction)
     {
-        collision = true;
         shape = _sphere;
         
         dX = _sphereClosestX - _cylinderClosestX;

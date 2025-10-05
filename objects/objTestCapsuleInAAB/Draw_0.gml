@@ -2,7 +2,7 @@ capsule.Draw(BonkCapsuleTouchAAB(capsule, aab)? c_lime : c_red, false);
 aab.Draw(c_white, false);
 
 var _reaction = BonkCapsuleCollideAAB(capsule, aab);
-if (_reaction.collision)
+if (_reaction.shape != undefined)
 {
     UggCapsule(capsule.x + _reaction.dX,
                capsule.y + _reaction.dY,

@@ -110,7 +110,6 @@ function BonkLineHitCapsule(_capsule, _x1, _y1, _z1, _x2, _y2, _z2, _struct = un
             
             with(_reaction)
             {
-                collision = true;
                 shape = _capsule;
                 
                 x = _hitX;
@@ -200,7 +199,6 @@ function BonkLineHitCapsule(_capsule, _x1, _y1, _z1, _x2, _y2, _z2, _struct = un
         
         with(_reaction)
         {
-            collision = true;
             shape = _capsule;
             
             x = _hitX;

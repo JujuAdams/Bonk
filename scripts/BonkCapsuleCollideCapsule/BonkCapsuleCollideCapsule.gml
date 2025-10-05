@@ -58,7 +58,6 @@ function BonkCapsuleCollideCapsule(_capsule1, _capsule2, _struct = undefined)
     
     with(_reaction)
     {
-        collision = true;
         shape = _capsule2;
         
         if (_dist != 0)

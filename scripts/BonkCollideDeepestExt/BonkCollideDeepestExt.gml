@@ -29,7 +29,7 @@ function BonkCollideDeepestExt(_subjectShape, _targetShapes, _groupFilter = -1)
             with(_targetShapes[_i]) //Use `with()` here to support iterating over objects
             {
                 var _reaction = Collide(_subjectShape, _groupFilter, _workingCollide);
-                if (_reaction.collision)
+                if (_reaction.shape != undefined)
                 {
                     with(_reaction)
                     {
@@ -58,7 +58,7 @@ function BonkCollideDeepestExt(_subjectShape, _targetShapes, _groupFilter = -1)
             with(_targetShapes[| _i]) //Use `with()` here to support iterating over objects
             {
                 var _reaction = Collide(_subjectShape, _groupFilter, _workingCollide);
-                if (_reaction.collision)
+                if (_reaction.shape != undefined)
                 {
                     with(_reaction)
                     {
@@ -84,7 +84,7 @@ function BonkCollideDeepestExt(_subjectShape, _targetShapes, _groupFilter = -1)
         with(_targetShapes) //Use `with()` here to support iterating over objects
         {
             var _reaction = Collide(_subjectShape, _groupFilter, _workingCollide);
-            if (_reaction.collision)
+            if (_reaction.shape != undefined)
             {
                 with(_reaction)
                 {

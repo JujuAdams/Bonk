@@ -17,7 +17,7 @@ repeat(array_length(sphereArray))
         var _shapeB = sphereArray[_i];
         
         var _reaction = _shapeA.Collide(_shapeB);
-        if (_reaction.collision)
+        if (_reaction.shape != undefined)
         {
             with(_reaction)
             {
@@ -72,7 +72,7 @@ repeat(array_length(sphereArray))
         var _other = _quadArray[_i];
         
         var _reaction = _shape.Collide(_other);
-        if (_reaction.collision)
+        if (_reaction.shape != undefined)
         {
             with(_reaction)
             {

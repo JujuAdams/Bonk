@@ -125,7 +125,6 @@ function BonkCylinderCollideRotatedBox(_cylinder, _box, _struct = undefined)
         
         with(_reaction)
         {
-            collision = true;
             shape = _box;
             
             dX = -_pushX;

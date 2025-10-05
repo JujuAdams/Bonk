@@ -48,7 +48,6 @@ function BonkCylinderCollideCylinder(_cylinder1, _cylinder2, _struct = undefined
             //Cylinders exactly overlap, fall back on pushing out in the z-axis
             with(_reaction)
             {
-                collision = true;
                 shape = _cylinder2;
                 
                 dX = 0;
@@ -67,7 +66,6 @@ function BonkCylinderCollideCylinder(_cylinder1, _cylinder2, _struct = undefined
         
         with(_reaction)
         {
-            collision = true;
             shape = _cylinder2;
             
             var _dZ = (abs(_pushBelow) < abs(_pushAbove))? _pushBelow : _pushAbove;

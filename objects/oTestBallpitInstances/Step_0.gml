@@ -19,7 +19,7 @@ repeat(array_length(sphereArray))
         if (id < _shapeB.id)
         {
             var _reaction = _shapeA.Collide(_shapeB);
-            if (_reaction.collision)
+            if (_reaction.shape != undefined)
             {
                 with(_reaction)
                 {
@@ -75,7 +75,7 @@ repeat(array_length(sphereArray))
         var _other = _list[| _i];
         
         var _reaction = _shape.Collide(_other);
-        if (_reaction.collision)
+        if (_reaction.shape != undefined)
         {
             with(_reaction)
             {

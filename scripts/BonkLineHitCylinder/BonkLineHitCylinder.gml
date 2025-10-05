@@ -68,7 +68,6 @@ function BonkLineHitCylinder(_cylinder, _x1, _y1, _z1, _x2, _y2, _z2, _struct = 
         
         with(_reaction)
         {
-            collision = true;
             shape = _cylinder;
             
             x = _x1;
@@ -119,7 +118,6 @@ function BonkLineHitCylinder(_cylinder, _x1, _y1, _z1, _x2, _y2, _z2, _struct = 
         
         with(_reaction)
         {
-            collision = true;
             shape = _cylinder;
             
             x = _hitX;
@@ -167,7 +165,6 @@ function BonkLineHitCylinder(_cylinder, _x1, _y1, _z1, _x2, _y2, _z2, _struct = 
         
         with(_reaction)
         {
-            collision = true;
             shape = _cylinder;
             
             x = _x1 + _t*_dX;

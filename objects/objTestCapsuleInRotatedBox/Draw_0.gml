@@ -3,7 +3,7 @@ capsule2.Draw(BonkCapsuleTouchRotatedBox(capsule2, rotatedBox)? c_lime : c_red);
 rotatedBox.Draw();
 
 var _reaction = BonkCapsuleCollideRotatedBox(capsule1, rotatedBox);
-if (_reaction.collision)
+if (_reaction.shape != undefined)
 {
     UggCapsule(capsule1.x + _reaction.dX,
                capsule1.y + _reaction.dY,
@@ -13,7 +13,7 @@ if (_reaction.collision)
 }
 
 var _reaction = BonkCapsuleCollideRotatedBox(capsule2, rotatedBox);
-if (_reaction.collision)
+if (_reaction.shape != undefined)
 {
     UggCapsule(capsule2.x + _reaction.dX,
                capsule2.y + _reaction.dY,

@@ -157,7 +157,6 @@ function BonkSphereCollideQuad(_sphere, _quad, _struct = undefined)
                     
                     with(_reaction)
                     {
-                        collision = true;
                         shape = _quad;
                         
                         var _pushLength = sign(_refToPlaneDist) * (_sphereRadius - abs(_refToPlaneDist));
@@ -195,7 +194,6 @@ function BonkSphereCollideQuad(_sphere, _quad, _struct = undefined)
     
     with(_reaction)
     {
-        collision = true;
         shape = _quad;
         
         //Push out just enough so that the surface of the capsule is touching the triangle

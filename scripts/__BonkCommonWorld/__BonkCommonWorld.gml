@@ -241,7 +241,7 @@ function __BonkCommonWorld(_cellXSize, _cellYSize, _cellZSize)
     Collide = function(_subjectShape, _groupFilter = -1, _struct = undefined)
     {
         static _map = ds_map_create();
-        static _nullCollisionData = __Bonk().__nullCollisionData;
+        static _nullCollisionData = new __BonkClassCollideData();
         
         var _cheapVersion = true;
         
@@ -261,7 +261,7 @@ function __BonkCommonWorld(_cellXSize, _cellYSize, _cellZSize)
             repeat(array_length(_shapeArray))
             {
                 var _reaction = _shapeArray[_i].Collide(_subjectShape, _groupFilter, _struct);
-                if (_reaction.collision)
+                if (_reaction.shape != undefined)
                 {
                     return _reaction;
                 }
@@ -299,7 +299,7 @@ function __BonkCommonWorld(_cellXSize, _cellYSize, _cellZSize)
                                 _map[? _shape] = true;
                                 
                                 var _reaction = _shape.Collide(_subjectShape, _groupFilter, _struct);
-                                if (_reaction.collision)
+                                if (_reaction.shape != undefined)
                                 {
                                     ds_map_clear(_map);
                                     return _reaction;

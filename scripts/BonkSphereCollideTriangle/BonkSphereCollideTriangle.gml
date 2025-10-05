@@ -132,7 +132,6 @@ function BonkSphereCollideTriangle(_sphere, _triangle, _struct = undefined)
                 
                 with(_reaction)
                 {
-                    collision = true;
                     shape = _triangle;
                     
                     var _pushLength = sign(_refToPlaneDist) * (_sphereRadius - abs(_refToPlaneDist));
@@ -169,7 +168,6 @@ function BonkSphereCollideTriangle(_sphere, _triangle, _struct = undefined)
     
     with(_reaction)
     {
-        collision = true;
         shape = _triangle;
         
         //Push out just enough so that the surface of the capsule is touching the triangle

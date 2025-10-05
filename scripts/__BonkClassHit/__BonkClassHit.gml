@@ -2,7 +2,6 @@
 
 function __BonkClassHit() constructor
 {
-    collision = false;
     shape = undefined;
     
     x = 0;
@@ -17,7 +16,6 @@ function __BonkClassHit() constructor
     
     static __Null = function()
     {
-        collision = false;
         shape = undefined;
         
         x = 0;
@@ -33,7 +31,6 @@ function __BonkClassHit() constructor
     
     static CopyTo = function(_destination)
     {
-        collision = _destination.collision;
         shape = _destination.shape;
         
         x = _destination.x;

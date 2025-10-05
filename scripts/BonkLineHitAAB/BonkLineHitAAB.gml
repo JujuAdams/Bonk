@@ -107,7 +107,6 @@ function BonkLineHitAAB(_aab, _x1, _y1, _z1, _x2, _y2, _z2, _struct = undefined)
         
         with(_reaction)
         {
-            collision = true;
             shape = _aab;
             
             x = _hitX;

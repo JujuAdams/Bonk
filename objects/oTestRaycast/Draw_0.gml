@@ -24,7 +24,7 @@ world.Draw();
 lineB.Draw();
 
 hit = lineB.Hit(world);
-if (hit.collision)
+if (hit.shape != undefined)
 {
     UggSphere(hit.x, hit.y, hit.z, 3, c_red);
 }

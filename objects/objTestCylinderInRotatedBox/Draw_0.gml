@@ -3,7 +3,7 @@ cylinder2.Draw(BonkCylinderTouchRotatedBox(cylinder2, rotatedBox)? c_lime : c_re
 rotatedBox.Draw(c_white);
 
 var _reaction = BonkCylinderCollideRotatedBox(cylinder1, rotatedBox);
-if (_reaction.collision)
+if (_reaction.shape != undefined)
 {
     UggCylinder(cylinder1.x + _reaction.dX,
                 cylinder1.y + _reaction.dY,
@@ -13,7 +13,7 @@ if (_reaction.collision)
 }
 
 var _reaction = BonkCylinderCollideRotatedBox(cylinder2, rotatedBox);
-if (_reaction.collision)
+if (_reaction.shape != undefined)
 {
     UggCylinder(cylinder2.x + _reaction.dX,
                 cylinder2.y + _reaction.dY,

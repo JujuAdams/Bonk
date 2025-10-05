@@ -2,7 +2,7 @@ shape.Draw(c_lime, true);
 line.Draw(c_yellow);
 
 var _hit = line.HitFirst(oTestInstanceParent);
-if (_hit.collision)
+if (_hit.shape != undefined)
 {
     UggSphere(_hit.x, _hit.y, _hit.z, 3, c_red);
 }
