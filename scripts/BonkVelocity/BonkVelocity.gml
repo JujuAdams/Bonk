@@ -1,7 +1,7 @@
 // Feather disable all
 
 /// Constructor to make a struct that contains 3D velocity data. This struct is required when using
-/// `BonkMoveAndDeflect()`. Struct are created with three member variables, `xSpeed` `ySpeed` and
+/// `BonkMoveAndDeflectExt()`. Struct are created with three member variables, `xSpeed` `ySpeed` and
 /// `zSpeed`, that encode the three components of the velocity. You may get and set these variables
 /// as you see fit.
 /// 

@@ -27,7 +27,7 @@ function __BonkCommonAAB()
     __collideFuncLookup = _collideFuncLookup;
     __insideFuncLookup  = _insideFuncLookup;
     
-    LineHit = function(_x1, _y1, _z1, _x2, _y2, _z2, _groupFilter = -1)
+    LineHit = method(undefined, function(_x1, _y1, _z1, _x2, _y2, _z2, _groupFilter = -1)
     {
         static _nullHit = __Bonk().__nullHit;
         
@@ -39,5 +39,5 @@ function __BonkCommonAAB()
         {
             return _nullHit;
         }
-    }
+    });
 }

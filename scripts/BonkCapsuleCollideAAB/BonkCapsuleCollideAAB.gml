@@ -20,7 +20,7 @@
 function BonkCapsuleCollideAAB(_capsule, _aab)
 {
     static _nullData = __Bonk().__nullCollisionData;
-    static _reaction     = new __BonkClassCollideData();
+    static _reaction = new __BonkClassCollideData();
     
     with(_capsule)
     {

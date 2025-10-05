@@ -1,7 +1,7 @@
 // Feather disable all
 
 /// Constructs a group filter that is compatible with various Bonk functions, such as
-/// `BonkInstanceMoveAndDeflect()`. This function returns a 64-bit integer, a "bitvector", that
+/// `BonkMoveAndDeflect()`. This function returns a 64-bit integer, a "bitvector", that
 /// encodes the group logic you'd like to execute.
 /// 
 /// There are three parts to Bonk's group logic:

@@ -5,8 +5,8 @@
   "isDnD":false,
   "name":"BonkCollideDeepest",
   "parent":{
-    "name":"Multi Functions",
-    "path":"folders/Bonk/Direct Control/Multi Functions.yy",
+    "name":"Instances",
+    "path":"folders/Bonk/Instances.yy",
   },
   "resourceType":"GMScript",
   "resourceVersion":"2.0",

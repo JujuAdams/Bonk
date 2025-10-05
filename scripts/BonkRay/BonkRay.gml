@@ -145,13 +145,13 @@ function BonkRay(_x, _y, _z, _dX, _dY, _dZ) constructor
         return BonkCollisionLineList(x, y, x + _length*dX, y + _length*dY, _objectOrArray, _groupFilter, _list);
     }
     
-    static HitFirst = function(_targetShapes, _groupFilter = -1)
+    static HitFirstExt = function(_targetShapes, _groupFilter = -1)
     {
-        return BonkRayHitFirst(_targetShapes, x, y, z, dX, dY, dZ, undefined, _groupFilter);
+        return BonkRayHitFirstExt(x, y, z, dX, dY, dZ, _targetShapes, undefined, _groupFilter);
     }
     
-    static HitFirstInstance = function(_objectOrArray = BonkObject, _groupFilter = -1)
+    static HitFirst = function(_objectOrArray = BonkObject, _groupFilter = -1)
     {
-        return BonkRayHitFirst(CollisionLineList(_objectOrArray), x, y, z, dX, dY, dZ, undefined, _groupFilter);
+        return BonkRayHitFirst(x, y, z, dX, dY, dZ, _objectOrArray, undefined, _groupFilter);
     }
 }
