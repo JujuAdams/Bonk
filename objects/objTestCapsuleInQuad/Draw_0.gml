@@ -1,5 +1,5 @@
-capsule.Draw(BonkCapsuleTouchQuad(capsule, quad)? c_lime : c_red, true);
-quad.Draw(c_white, true);
+capsule.DebugDraw(BonkCapsuleTouchQuad(capsule, quad)? c_lime : c_red, true);
+quad.DebugDraw(c_white, true);
 
 var _reaction = BonkCapsuleCollideQuad(capsule, quad);
 if (_reaction.shape != undefined)

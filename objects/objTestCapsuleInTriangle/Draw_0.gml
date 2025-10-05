@@ -1,5 +1,5 @@
-capsule.Draw(BonkCapsuleTouchTriangle(capsule, triangle)? c_lime : c_red, false);
-triangle.Draw(c_white, false);
+capsule.DebugDraw(BonkCapsuleTouchTriangle(capsule, triangle)? c_lime : c_red, false);
+triangle.DebugDraw(c_white, false);
 
 var _reaction = BonkCapsuleCollideTriangle(capsule, triangle);
 if (_reaction.shape != undefined)

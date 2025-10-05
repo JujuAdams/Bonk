@@ -1,45 +1,5 @@
 // Feather disable all
 
-/// Constructor that generates a line segment between two coordinates.
-/// 
-/// `.SetA([x], [y], [z])`
-/// 
-/// `.SetB([x], [y], [z])`
-/// 
-/// `.GetAABB()`
-/// 
-/// `.Draw([color], [thickness], [wireframe])`
-///     Draws the shape. This uses Ugg, please see https://github.com/jujuadams/Ugg
-/// 
-/// `.Hit(otherShape)`
-///     Checks whether the ray hits another shape. You may check against the following shapes:
-///     - Axis-Aligned Box
-///     - Capsule
-///     - Cylinder
-///     - Quad
-///     - Sphere
-///     - Triangle
-///     
-///     This method returns a struct that contains the following variables:
-///     
-///     `.collision`
-///         Whether a collision was found. If no collision is found, this variable is set to `false`.
-///     
-///     `.x` `.y` `.z`
-///         The point of impact. If there is no collision, all three variables will be set to `0`.
-///     
-///     N.B. The returned struct is statically allocated. Reusing `.Hit()` may cause the same struct
-///          to be returned.
-/// 
-/// 
-/// The struct created by the constructor contains the following values:
-/// 
-/// `.x1` `.y1` `.z1`
-///     Coordinate of the origin of the line.
-/// 
-/// `.x2` `.y2` `.z2`
-///     Coordinate of the destination of the line.
-/// 
 /// @param x1
 /// @param y1
 /// @param z1
@@ -107,7 +67,7 @@ function BonkLine(_x1, _y1, _z1, _x2, _y2, _z2) constructor
         };
     }
     
-    static Draw = function(_color = undefined, _thickness = undefined, _wireframe = undefined)
+    static DebugDraw = function(_color = undefined, _thickness = undefined, _wireframe = undefined)
     {
         __BONK_VERIFY_UGG
         UggArrow(x1, y1, z1, x2, y2, z2, undefined, _color, _thickness, _wireframe);

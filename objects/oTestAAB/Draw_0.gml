@@ -1,1 +1,1 @@
-shape.Draw();
+shape.DebugDraw();

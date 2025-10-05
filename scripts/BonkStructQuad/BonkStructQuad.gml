@@ -93,7 +93,7 @@ function BonkStructQuad(_x1, _y1, _z1, _x2, _y2, _z2, _x3, _y3, _z3, _groupVecto
         };
     }
     
-    static Draw = function(_color = undefined, _wireframe = undefined)
+    static DebugDraw = function(_color = undefined, _wireframe = undefined)
     {
         __BONK_VERIFY_UGG
         UggQuad(x1, y1, z1,   x2, y2, z2,   x3, y3, z3,   _color, _wireframe);

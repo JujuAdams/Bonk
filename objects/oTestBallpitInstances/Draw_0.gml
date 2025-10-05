@@ -1,15 +1,15 @@
 // Feather disable all
 
-quadLeft.Draw(c_white, true);
-quadTop.Draw(c_white, true);
-quadBelow.Draw(c_white, true);
-quadRight.Draw(c_white, true);
-quadBottom.Draw(c_white, true);
-quadAbove.Draw(c_white, true);
+quadLeft.DebugDraw(c_white, true);
+quadTop.DebugDraw(c_white, true);
+quadBelow.DebugDraw(c_white, true);
+quadRight.DebugDraw(c_white, true);
+quadBottom.DebugDraw(c_white, true);
+quadAbove.DebugDraw(c_white, true);
 
 var _i = 0;
 repeat(array_length(sphereArray))
 {
-    sphereArray[_i].Draw();
+    sphereArray[_i].DebugDraw();
     ++_i;
 }

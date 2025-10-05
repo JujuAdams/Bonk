@@ -1,1 +1,1 @@
-Draw(c_ltgray);
+DebugDraw(c_ltgray);

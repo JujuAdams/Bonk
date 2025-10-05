@@ -1,6 +1,6 @@
 UggSetWireframe(true);
-sphereA.Draw();
+sphereA.DebugDraw();
 UggSetWireframe(false);
 
-sphereB.Draw(BonkSphereTouchSphere(sphereA, sphereB)? c_red : c_lime);
-sphereC.Draw(BonkSphereTouchSphere(sphereA, sphereC)? c_red : c_lime);
+sphereB.DebugDraw(BonkSphereTouchSphere(sphereA, sphereB)? c_red : c_lime);
+sphereC.DebugDraw(BonkSphereTouchSphere(sphereA, sphereC)? c_red : c_lime);

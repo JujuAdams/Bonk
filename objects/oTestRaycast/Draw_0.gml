@@ -20,8 +20,8 @@ UggArrow(gridScale*lineA.x1, gridScale*lineA.y1, gridScale*lineA.z1,
          gridScale*lineA.x2, gridScale*lineA.y2, gridScale*lineA.z2,
          undefined, c_yellow);
 
-world.Draw();
-lineB.Draw();
+world.DebugDraw();
+lineB.DebugDraw();
 
 hit = lineB.Hit(world);
 if (hit.shape != undefined)

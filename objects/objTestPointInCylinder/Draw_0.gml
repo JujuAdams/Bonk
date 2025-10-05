@@ -1,4 +1,4 @@
-cylinder.Draw(c_white, true);
+cylinder.DebugDraw(c_white, true);
 
-pointA.Draw(pointA.Touch(cylinder)? c_red : c_lime);
-pointB.Draw(pointB.Touch(cylinder)? c_red : c_lime);
+pointA.DebugDraw(pointA.Touch(cylinder)? c_red : c_lime);
+pointB.DebugDraw(pointB.Touch(cylinder)? c_red : c_lime);

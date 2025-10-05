@@ -1,5 +1,5 @@
-shape.Draw(c_lime, true);
-line.Draw(c_yellow);
+shape.DebugDraw(c_lime, true);
+line.DebugDraw(c_yellow);
 
 var _hit = line.HitFirst(oTestInstanceParent);
 if (_hit.shape != undefined)

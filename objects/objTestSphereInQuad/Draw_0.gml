@@ -1,5 +1,5 @@
-sphere.Draw(BonkSphereTouchQuad(sphere, quad)? c_lime : c_red);
-quad.Draw();
+sphere.DebugDraw(BonkSphereTouchQuad(sphere, quad)? c_lime : c_red);
+quad.DebugDraw();
 
 var _reaction = BonkSphereCollideQuad(sphere, quad);
 if (_reaction.shape != undefined)

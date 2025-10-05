@@ -82,7 +82,7 @@ function BonkSetupRotatedBox(_x, _y, _z, _xSize, _ySize, _zSize, _zRotation, _gr
         };
     }
     
-    Draw = function(_color = undefined, _wireframe = undefined)
+    DebugDraw = function(_color = undefined, _wireframe = undefined)
     {
         __BONK_VERIFY_UGG
         UggRotatedBox(x, y, z, xSize, ySize, zSize, zRotation, _color, _wireframe);

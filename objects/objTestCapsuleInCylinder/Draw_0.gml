@@ -1,5 +1,5 @@
-capsule.Draw(BonkCapsuleTouchCylinder(capsule, cylinder)? c_lime : c_red);
-cylinder.Draw();
+capsule.DebugDraw(BonkCapsuleTouchCylinder(capsule, cylinder)? c_lime : c_red);
+cylinder.DebugDraw();
 
 var _reaction = BonkCapsuleCollideCylinder(capsule, cylinder);
 if (_reaction.shape != undefined)

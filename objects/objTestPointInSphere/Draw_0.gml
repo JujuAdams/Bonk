@@ -1,3 +1,3 @@
-sphere.Draw(c_white, true);
+sphere.DebugDraw(c_white, true);
 
-point.Draw(point.Touch(sphere)? c_red : c_lime);
+point.DebugDraw(point.Touch(sphere)? c_red : c_lime);

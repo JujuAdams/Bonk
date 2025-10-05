@@ -1,3 +1,3 @@
-aabA.Draw(c_white, true);
-aabB.Draw(BonkAABTouchAAB(aabA, aabB)? c_red : c_lime);
-aabC.Draw(BonkAABTouchAAB(aabA, aabC)? c_red : c_lime);
+aabA.DebugDraw(c_white, true);
+aabB.DebugDraw(BonkAABTouchAAB(aabA, aabB)? c_red : c_lime);
+aabC.DebugDraw(BonkAABTouchAAB(aabA, aabC)? c_red : c_lime);

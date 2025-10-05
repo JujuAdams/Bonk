@@ -72,7 +72,7 @@ function BonkStructCapsule(_x, _y, _z, _height, _radius, _groupVector = BONK_DEF
         };
     }
     
-    static Draw = function(_color = undefined, _wireframe = undefined)
+    static DebugDraw = function(_color = undefined, _wireframe = undefined)
     {
         __BONK_VERIFY_UGG
         UggCapsule(x, y, z - height/2, height, radius, _color, _wireframe);

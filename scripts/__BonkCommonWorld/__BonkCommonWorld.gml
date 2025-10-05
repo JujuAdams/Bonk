@@ -755,7 +755,7 @@ function __BonkCommonWorld(_cellXSize, _cellYSize, _cellZSize)
                         if (not ds_map_exists(_map, _shape))
                         {
                             _map[? _shape] = true;    
-                            _shape.Draw(_color, _wireframe);
+                            _shape.DebugDraw(_color, _wireframe);
                         }
                         
                         ++_i;
@@ -799,7 +799,7 @@ function __BonkCommonWorld(_cellXSize, _cellYSize, _cellZSize)
                 if (not ds_map_exists(_map, _shape))
                 {
                     _map[? _shape] = true;    
-                    _shape.Draw(_color, _wireframe);
+                    _shape.DebugDraw(_color, _wireframe);
                 }
                 
                 ++_i;

@@ -1,6 +1,6 @@
-shape.Draw();
+shape.DebugDraw();
 
 if (shapeB != undefined)
 {
-    shapeB.Draw();
+    shapeB.DebugDraw();
 }

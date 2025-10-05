@@ -1,1 +1,1 @@
-shape.Draw(c_yellow);
+shape.DebugDraw(c_yellow);

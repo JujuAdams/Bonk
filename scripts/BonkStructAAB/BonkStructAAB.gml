@@ -78,7 +78,7 @@ function BonkStructAAB(_x, _y, _z, _xSize, _ySize, _zSize, _groupVector = BONK_D
         };
     }
     
-    static Draw = function(_color = undefined, _wireframe = undefined)
+    static DebugDraw = function(_color = undefined, _wireframe = undefined)
     {
         __BONK_VERIFY_UGG
         UggAABB(x, y, z, xSize, ySize, zSize, _color, _wireframe);

@@ -1,6 +1,6 @@
 // Feather disable all
 
-line.Draw(c_aqua);
+line.DebugDraw(c_aqua);
 
 with(oTestPlayer)
 {

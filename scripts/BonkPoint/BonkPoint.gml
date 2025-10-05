@@ -1,26 +1,5 @@
 // Feather disable all
 
-/// Constructor that generates an infinitesimal point.
-/// 
-/// `.SetPosition([x], [y], [z])`
-/// 
-/// `.GetAABB()`
-/// 
-/// `.Draw([color], [thickness], [wireframe])`
-///     Draws the shape. This uses Ugg, please see https://github.com/jujuadams/Ugg
-/// 
-/// `.Touch(otherShape)`
-///     Checks whether the line hits another shape. You may check against the following shapes:
-///     - Axis-Aligned Box
-///     - Capsule
-///     - Cylinder
-///     - Sphere
-/// 
-/// The struct created by the constructor contains the following values:
-/// 
-/// `.x` `.y` `.z` 
-///     Coordinate of the point.
-/// 
 /// @param x
 /// @param y
 /// @param z
@@ -57,7 +36,7 @@ function BonkPoint(_x, _y, _z) constructor
         return self;
     }
     
-    static Draw = function(_color = undefined, _wireframe = undefined)
+    static DebugDraw = function(_color = undefined, _wireframe = undefined)
     {
         __BONK_VERIFY_UGG
         UggPoint(x, y, z, _color, _wireframe);

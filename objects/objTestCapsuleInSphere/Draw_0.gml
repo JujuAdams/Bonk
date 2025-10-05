@@ -1,5 +1,5 @@
-//capsule.Draw(BonkCapsuleTouchSphere(capsule, sphere)? c_lime : c_red);
-sphere.Draw();
+//capsule.DebugDraw(BonkCapsuleTouchSphere(capsule, sphere)? c_lime : c_red);
+sphere.DebugDraw();
 
 var _reaction = BonkCapsuleCollideSphere(capsule, sphere);
 if (_reaction.shape != undefined)

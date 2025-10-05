@@ -60,7 +60,7 @@ function BonkSetupSphere(_x, _y, _z, _radius, _groupVector = BONK_DEFAULT_GROUP)
         };
     }
     
-    Draw = function(_color = undefined, _wireframe = undefined)
+    DebugDraw = function(_color = undefined, _wireframe = undefined)
     {
         __BONK_VERIFY_UGG
         UggSphere(x, y, z, radius, _color, _wireframe);

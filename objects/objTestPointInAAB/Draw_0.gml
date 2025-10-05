@@ -1,3 +1,3 @@
-aab.Draw(c_white, true);
+aab.DebugDraw(c_white, true);
 
-point.Draw(point.Touch(aab)? c_red : c_lime);
+point.DebugDraw(point.Touch(aab)? c_red : c_lime);

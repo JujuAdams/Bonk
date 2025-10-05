@@ -1,6 +1,6 @@
 UggSetWireframe(true);
-cylinder.Draw();
+cylinder.DebugDraw();
 UggSetWireframe(false);
 
-aabA.Draw(BonkAABTouchCylinder(aabA, cylinder)? c_red : c_lime);
-aabB.Draw(BonkAABTouchCylinder(aabB, cylinder)? c_red : c_lime);
+aabA.DebugDraw(BonkAABTouchCylinder(aabA, cylinder)? c_red : c_lime);
+aabB.DebugDraw(BonkAABTouchCylinder(aabB, cylinder)? c_red : c_lime);

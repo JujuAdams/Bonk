@@ -1,52 +1,5 @@
 // Feather disable all
 
-/// Constructor that generates a ray that starts at a point and extending out in a direction. Rays
-/// can check against the following shapes:
-/// - Axis-Aligned Box
-/// - Capsule
-/// - Cylinder
-/// - Quad
-/// - Sphere
-/// - Triangle
-/// 
-/// `.SetOrigin([x], [y], [z])`
-/// 
-/// `.SetDirection([dX], [dY], [dZ])`
-/// 
-/// `.GetAABB()`
-/// 
-/// `.Draw([color], [thickness], [wireframe])`
-///     Draws the shape. This uses Ugg, please see https://github.com/jujuadams/Ugg
-/// 
-/// `.Hit(otherShape)`
-///     Checks whether the ray hits another shape. You may check against the following shapes:
-///     - Axis-Aligned Box
-///     - Capsule
-///     - Cylinder
-///     - Quad
-///     - Sphere
-///     - Triangle
-///     
-///     This method returns a struct that contains the following variables:
-///     
-///     `.collision`
-///         Whether a collision was found. If no collision is found, this variable is set to `false`.
-///     
-///     `.x` `.y` `.z`
-///         The point of impact. If there is no collision, all three variables will be set to `0`.
-///     
-///     N.B. The returned struct is statically allocated. Reusing `.Hit()` may cause the same struct
-///          to be returned.
-/// 
-/// 
-/// The struct created by the constructor contains the following values:
-/// 
-/// `.x` `.y` `.z`
-///     Coordinate of the origin of the ray.
-/// 
-/// `.dX` `.dY` `.dZ`
-///     Direction that the ray is pointed in.
-/// 
 /// @param x
 /// @param y
 /// @param z
@@ -102,7 +55,7 @@ function BonkRay(_x, _y, _z, _dX, _dY, _dZ) constructor
         return self;
     }
     
-    static Draw = function(_color = undefined, _thickness = undefined, _wireframe = undefined)
+    static DebugDraw = function(_color = undefined, _thickness = undefined, _wireframe = undefined)
     {
         __BONK_VERIFY_UGG
         UggRayWithArrow(x, y, z, dX, dY, dZ, _color, _thickness, _wireframe);

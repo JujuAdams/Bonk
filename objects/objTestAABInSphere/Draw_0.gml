@@ -1,6 +1,6 @@
 UggSetWireframe(true);
-sphere.Draw();
+sphere.DebugDraw();
 UggSetWireframe(false);
 
-aabA.Draw(BonkAABTouchSphere(aabA, sphere)? c_red : c_lime);
-aabB.Draw(BonkAABTouchSphere(aabB, sphere)? c_red : c_lime);
+aabA.DebugDraw(BonkAABTouchSphere(aabA, sphere)? c_red : c_lime);
+aabB.DebugDraw(BonkAABTouchSphere(aabB, sphere)? c_red : c_lime);

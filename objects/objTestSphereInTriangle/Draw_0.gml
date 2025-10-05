@@ -1,5 +1,5 @@
-sphere.Draw(BonkSphereTouchTriangle(sphere, triangle)? c_lime : c_red);
-triangle.Draw();
+sphere.DebugDraw(BonkSphereTouchTriangle(sphere, triangle)? c_lime : c_red);
+triangle.DebugDraw();
 
 var _reaction = BonkSphereCollideTriangle(sphere, triangle);
 if (_reaction.shape != undefined)

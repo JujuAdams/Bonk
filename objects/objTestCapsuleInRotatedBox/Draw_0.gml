@@ -1,6 +1,6 @@
-capsule1.Draw(BonkCapsuleTouchRotatedBox(capsule1, rotatedBox)? c_lime : c_red);
-capsule2.Draw(BonkCapsuleTouchRotatedBox(capsule2, rotatedBox)? c_lime : c_red);
-rotatedBox.Draw();
+capsule1.DebugDraw(BonkCapsuleTouchRotatedBox(capsule1, rotatedBox)? c_lime : c_red);
+capsule2.DebugDraw(BonkCapsuleTouchRotatedBox(capsule2, rotatedBox)? c_lime : c_red);
+rotatedBox.DebugDraw();
 
 var _reaction = BonkCapsuleCollideRotatedBox(capsule1, rotatedBox);
 if (_reaction.shape != undefined)
