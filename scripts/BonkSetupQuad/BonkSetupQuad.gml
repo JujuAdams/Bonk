@@ -43,34 +43,34 @@ function BonkSetupQuad(_x1, _y1, _z1, _x2, _y2, _z2, _x3, _y3, _z3, _groupVector
     
     Refresh = function()
     {
-        dX12 = x2 - x1;
-        dY12 = y2 - y1;
-        dZ12 = z2 - z1;
+        __bonkDX12 = x2 - x1;
+        __bonkDY12 = y2 - y1;
+        __bonkDZ12 = z2 - z1;
         
-        dX31 = x1 - x3;
-        dY31 = y1 - y3;
-        dZ31 = z1 - z3;
+        __bonkDX31 = x1 - x3;
+        __bonkDY31 = y1 - y3;
+        __bonkDZ31 = z1 - z3;
         
-        dX24 = -dX31;
-        dY24 = -dY31;
-        dZ24 = -dZ31;
+        __bonkDX24 = -__bonkDX31;
+        __bonkDY24 = -__bonkDY31;
+        __bonkDZ24 = -__bonkDZ31;
         
-        dX43 = -dX12;
-        dY43 = -dY12;
-        dZ43 = -dZ12;
+        __bonkDX43 = -__bonkDX12;
+        __bonkDY43 = -__bonkDY12;
+        __bonkDZ43 = -__bonkDZ12;
         
-        x4 = x2 + dX24;
-        y4 = y2 + dY24;
-        z4 = z2 + dZ24;
+        x4 = x2 + __bonkDX24;
+        y4 = y2 + __bonkDY24;
+        z4 = z2 + __bonkDZ24;
         
-        lengthSqr12 = dX12*dX12 + dY12*dY12 + dZ12*dZ12;
-        lengthSqr31 = dX31*dX31 + dY31*dY31 + dZ31*dZ31;
-        lengthSqr24 = lengthSqr31;
-        lengthSqr43 = lengthSqr12;
+        __bonkLengthSqr12 = __bonkDX12*__bonkDX12 + __bonkDY12*__bonkDY12 + __bonkDZ12*__bonkDZ12;
+        __bonkLengthSqr31 = __bonkDX31*__bonkDX31 + __bonkDY31*__bonkDY31 + __bonkDZ31*__bonkDZ31;
+        __bonkLengthSqr24 = __bonkLengthSqr31;
+        __bonkLengthSqr43 = __bonkLengthSqr12;
         
-        normalX = dZ12*dY31 - dY12*dZ31;
-        normalY = dX12*dZ31 - dZ12*dX31;
-        normalZ = dY12*dX31 - dX12*dY31;
+        normalX = __bonkDZ12*__bonkDY31 - __bonkDY12*__bonkDZ31;
+        normalY = __bonkDX12*__bonkDZ31 - __bonkDZ12*__bonkDX31;
+        normalZ = __bonkDY12*__bonkDX31 - __bonkDX12*__bonkDY31;
         
         var _length = sqrt(normalX*normalX + normalY*normalY + normalZ*normalZ);
         if (_length > 0)

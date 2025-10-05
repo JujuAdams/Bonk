@@ -3,7 +3,7 @@
 /// Returned by all "collide" functions (e.g. `BonkCylinderCollideCylinder()`) and is also part of
 /// deflect data (please see `BonkResultDeflect()`).
 /// 
-/// You'll almost certainly never need to create one these structs yourself.
+/// You'll almost certainly never need to create one of these structs yourself.
 
 function BonkResultCollide() constructor
 {

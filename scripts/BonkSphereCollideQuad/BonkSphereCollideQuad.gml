@@ -35,26 +35,26 @@ function BonkSphereCollideQuad(_sphere, _quad, _struct = undefined)
         var _quadY4 = y3;
         var _quadZ4 = z3;
         
-        var _dX12 = dX12;
-        var _dY12 = dY12;
-        var _dZ12 = dZ12;
+        var _dX12 = __bonkDX12;
+        var _dY12 = __bonkDY12;
+        var _dZ12 = __bonkDZ12;
         
-        var _dX23 = dX24;
-        var _dY23 = dY24;
-        var _dZ23 = dZ24;
+        var _dX23 = __bonkDX24;
+        var _dY23 = __bonkDY24;
+        var _dZ23 = __bonkDZ24;
         
-        var _dX34 = dX43;
-        var _dY34 = dY43;
-        var _dZ34 = dZ43;
+        var _dX34 = __bonkDX43;
+        var _dY34 = __bonkDY43;
+        var _dZ34 = __bonkDZ43;
         
-        var _dX41 = dX31;
-        var _dY41 = dY31;
-        var _dZ41 = dZ31;
+        var _dX41 = __bonkDX31;
+        var _dY41 = __bonkDY31;
+        var _dZ41 = __bonkDZ31;
         
-        var _edgeSqrLength12 = lengthSqr12;
-        var _edgeSqrLength23 = lengthSqr24;
-        var _edgeSqrLength34 = lengthSqr43;
-        var _edgeSqrLength41 = lengthSqr31;
+        var _edgeSqrLength12 = __bonkLengthSqr12;
+        var _edgeSqrLength23 = __bonkLengthSqr24;
+        var _edgeSqrLength34 = __bonkLengthSqr43;
+        var _edgeSqrLength41 = __bonkLengthSqr31;
         
         var _normalX = normalX;
         var _normalY = normalY;

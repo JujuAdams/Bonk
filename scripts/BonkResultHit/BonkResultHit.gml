@@ -2,7 +2,7 @@
 
 /// Returned by all "hit" functions (e.g. `BonkRayHitSphere()`).
 /// 
-/// You'll almost certainly never need to create one these structs yourself.
+/// You'll almost certainly never need to create one of these structs yourself.
 
 function BonkResultHit() constructor
 {

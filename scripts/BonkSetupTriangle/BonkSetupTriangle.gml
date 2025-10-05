@@ -44,25 +44,25 @@ function BonkSetupTriangle(_x1, _y1, _z1, _x2, _y2, _z2, _x3, _y3, _z3, _groupVe
     
     Refresh = function()
     {
-        dX12 = x2 - x1;
-        dY12 = y2 - y1;
-        dZ12 = z2 - z1;
+        __bonkDX12 = x2 - x1;
+        __bonkDY12 = y2 - y1;
+        __bonkDZ12 = z2 - z1;
         
-        dX23 = x3 - x2;
-        dY23 = y3 - y2;
-        dZ23 = z3 - z2;
+        __bonkDX23 = x3 - x2;
+        __bonkDY23 = y3 - y2;
+        __bonkDZ23 = z3 - z2;
         
-        dX31 = x1 - x3;
-        dY31 = y1 - y3;
-        dZ31 = z1 - z3;
+        __bonkDX31 = x1 - x3;
+        __bonkDY31 = y1 - y3;
+        __bonkDZ31 = z1 - z3;
         
-        lengthSqr12 = dX12*dX12 + dY12*dY12 + dZ12*dZ12;
-        lengthSqr23 = dX23*dX23 + dY23*dY23 + dZ23*dZ23;
-        lengthSqr31 = dX31*dX31 + dY31*dY31 + dZ31*dZ31;
+        __bonkLengthSqr12 = __bonkDX12*__bonkDX12 + __bonkDY12*__bonkDY12 + __bonkDZ12*__bonkDZ12;
+        __bonkLengthSqr23 = __bonkDX23*__bonkDX23 + __bonkDY23*__bonkDY23 + __bonkDZ23*__bonkDZ23;
+        __bonkLengthSqr31 = __bonkDX31*__bonkDX31 + __bonkDY31*__bonkDY31 + __bonkDZ31*__bonkDZ31;
         
-        normalX = dZ12*dY31 - dY12*dZ31;
-        normalY = dX12*dZ31 - dZ12*dX31;
-        normalZ = dY12*dX31 - dX12*dY31;
+        normalX = __bonkDZ12*__bonkDY31 - __bonkDY12*__bonkDZ31;
+        normalY = __bonkDX12*__bonkDZ31 - __bonkDZ12*__bonkDX31;
+        normalZ = __bonkDY12*__bonkDX31 - __bonkDX12*__bonkDY31;
         
         var _length = sqrt(normalX*normalX + normalY*normalY + normalZ*normalZ);
         if (_length > 0)

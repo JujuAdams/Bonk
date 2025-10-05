@@ -5,8 +5,8 @@
   "isDnD":false,
   "name":"BonkFilter",
   "parent":{
-    "name":"Bonk",
-    "path":"folders/Bonk.yy",
+    "name":"Direct Control",
+    "path":"folders/Bonk/Direct Control.yy",
   },
   "resourceType":"GMScript",
   "resourceVersion":"2.0",

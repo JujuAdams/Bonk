@@ -31,25 +31,25 @@ function BonkSphereCollideTriangle(_sphere, _triangle, _struct = undefined)
         var _triY3 = y3;
         var _triZ3 = z3;
         
-        var _dX12 = dX12;
-        var _dY12 = dY12;
-        var _dZ12 = dZ12;
+        var _dX12 = __bonkDX12;
+        var _dY12 = __bonkDY12;
+        var _dZ12 = __bonkDZ12;
         
-        var _dX23 = dX23;
-        var _dY23 = dY23;
-        var _dZ23 = dZ23;
+        var _dX23 = __bonkDX23;
+        var _dY23 = __bonkDY23;
+        var _dZ23 = __bonkDZ23;
         
-        var _dX31 = dX31;
-        var _dY31 = dY31;
-        var _dZ31 = dZ31;
+        var _dX31 = __bonkDX31;
+        var _dY31 = __bonkDY31;
+        var _dZ31 = __bonkDZ31;
         
         var _normalX = normalX;
         var _normalY = normalY;
         var _normalZ = normalZ;
         
-        var _edgeSqrLength12 = lengthSqr12;
-        var _edgeSqrLength23 = lengthSqr23;
-        var _edgeSqrLength31 = lengthSqr31;
+        var _edgeSqrLength12 = __bonkLengthSqr12;
+        var _edgeSqrLength23 = __bonkLengthSqr23;
+        var _edgeSqrLength31 = __bonkLengthSqr31;
     }
     
     //Distance from the sphere's centre to the plane
