@@ -14,6 +14,8 @@ function BonkCollideManyExt(_subjectShape, _targetShapes, _groupFilter = -1)
     static _returnData = [];
     array_resize(_returnData, 0);
     
+    var _reaction = new __BonkClassCollideData();
+    
     if (is_array(_targetShapes)) //We were given an array
     {
         var _i = 0;
@@ -21,10 +23,10 @@ function BonkCollideManyExt(_subjectShape, _targetShapes, _groupFilter = -1)
         {
             with(_targetShapes[_i]) //Use `with()` here to support iterating over objects
             {
-                var _reaction = Collide(_subjectShape, _groupFilter);
-                if (_reaction.collision)
+                if (Collide(_subjectShape, _groupFilter, _reaction).collision)
                 {
-                    array_push(_returnData, _reaction.Clone());
+                    array_push(_returnData, _reaction);
+                    _reaction = new __BonkClassCollideData();
                 }
             }
             
@@ -38,10 +40,10 @@ function BonkCollideManyExt(_subjectShape, _targetShapes, _groupFilter = -1)
         {
             with(_targetShapes[| _i]) //Use `with()` here to support iterating over objects
             {
-                var _reaction = Collide(_subjectShape, _groupFilter);
-                if (_reaction.collision)
+                if (Collide(_subjectShape, _groupFilter, _reaction).collision)
                 {
-                    array_push(_returnData, _reaction.Clone());
+                    array_push(_returnData, _reaction);
+                    _reaction = new __BonkClassCollideData();
                 }
             }
             
@@ -52,10 +54,10 @@ function BonkCollideManyExt(_subjectShape, _targetShapes, _groupFilter = -1)
     {
         with(_targetShapes) //Use `with()` here to support iterating over objects
         {
-            var _reaction = Collide(_subjectShape, _groupFilter);
-            if (_reaction.collision)
+            if (Collide(_subjectShape, _groupFilter, _reaction).collision)
             {
-                array_push(_returnData, _reaction.Clone());
+                array_push(_returnData, _reaction);
+                _reaction = new __BonkClassCollideData();
             }
         }
     }
