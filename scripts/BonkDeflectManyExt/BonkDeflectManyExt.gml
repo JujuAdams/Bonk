@@ -23,14 +23,17 @@
 /// @param subjectShape
 /// @param targetShapes
 /// @param [slopeThreshold=0]
-/// @parma [groupFilter]
+/// @param [groupFilter]
 
 function BonkDeflectManyExt(_subjectShape, _targetShapes, _slopeThreshold = 0, _groupFilter = -1)
 {
-    static _nullDeflectData = __Bonk().__nullDeflectData;
+    static _staticDeflectA = new __BonkClassDeflectData();
+    static _staticDeflectB = new __BonkClassDeflectData();
     
-    var _returnData = _nullDeflectData;
-    var _largestDepth = 0;
+    var _returnDeflect  = _staticDeflectA;
+    var _workingDeflect = _staticDeflectB;
+    
+    var _largestDepth = -infinity;
     
     if (is_array(_targetShapes)) //We were given an array
     {
@@ -39,16 +42,20 @@ function BonkDeflectManyExt(_subjectShape, _targetShapes, _slopeThreshold = 0, _
         {
             with(_targetShapes[_i]) //Use `with()` here to support iterating over objects
             {
-                var _reaction = Deflect(_subjectShape, _slopeThreshold, _groupFilter);
+                var _reaction = Deflect(_subjectShape, _slopeThreshold, _groupFilter, _workingDeflect);
                 if (_reaction.deflectType != BONK_DEFLECT_NONE)
                 {
                     with(_reaction.collisionData)
                     {
                         var _depth = dX*dX + dY*dY + dZ*dZ;
-                        if ((_depth > _largestDepth) && (_reaction.deflectType >= _returnData.deflectType))
+                        if ((_depth > _largestDepth) && (_reaction.deflectType >= _returnDeflect.deflectType))
                         {
                             _largestDepth = _depth;
-                            _returnData = _reaction.Clone();
+                            
+                            //Swap over
+                            var _tempDeflect = _workingDeflect;
+                            _workingDeflect = _returnDeflect;
+                            _returnDeflect  = _tempDeflect;
                         }
                     }
                 }
@@ -64,16 +71,20 @@ function BonkDeflectManyExt(_subjectShape, _targetShapes, _slopeThreshold = 0, _
         {
             with(_targetShapes[| _i]) //Use `with()` here to support iterating over objects
             {
-                var _reaction = Deflect(_subjectShape, _slopeThreshold, _groupFilter);
+                var _reaction = Deflect(_subjectShape, _slopeThreshold, _groupFilter, _workingDeflect);
                 if (_reaction.deflectType != BONK_DEFLECT_NONE)
                 {
                     with(_reaction.collisionData)
                     {
                         var _depth = dX*dX + dY*dY + dZ*dZ;
-                        if ((_depth > _largestDepth) && (_reaction.deflectType >= _returnData.deflectType))
+                        if ((_depth > _largestDepth) && (_reaction.deflectType >= _returnDeflect.deflectType))
                         {
                             _largestDepth = _depth;
-                            _returnData = _reaction.Clone();
+                            
+                            //Swap over
+                            var _tempDeflect = _workingDeflect;
+                            _workingDeflect = _returnDeflect;
+                            _returnDeflect  = _tempDeflect;
                         }
                     }
                 }
@@ -86,21 +97,25 @@ function BonkDeflectManyExt(_subjectShape, _targetShapes, _slopeThreshold = 0, _
     {
         with(_targetShapes) //Use `with()` here to support iterating over objects
         {
-            var _reaction = Deflect(_subjectShape, _slopeThreshold, _groupFilter);
+            var _reaction = Deflect(_subjectShape, _slopeThreshold, _groupFilter, _workingDeflect);
             if (_reaction.deflectType != BONK_DEFLECT_NONE)
             {
                 with(_reaction.collisionData)
                 {
                     var _depth = dX*dX + dY*dY + dZ*dZ;
-                    if ((_depth > _largestDepth) && (_reaction.deflectType >= _returnData.deflectType))
+                    if ((_depth > _largestDepth) && (_reaction.deflectType >= _returnDeflect.deflectType))
                     {
                         _largestDepth = _depth;
-                        _returnData = _reaction.Clone();
+                        
+                        //Swap over
+                        var _tempDeflect = _workingDeflect;
+                        _workingDeflect = _returnDeflect;
+                        _returnDeflect  = _tempDeflect;
                     }
                 }
             }
         }
     }
     
-    return _returnData;
+    return is_infinity(_largestDepth)? _returnDeflect.__Null() : _returnDeflect;
 }

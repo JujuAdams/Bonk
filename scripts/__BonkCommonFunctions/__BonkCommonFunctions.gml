@@ -78,18 +78,16 @@ function __BonkCommonFunctions(_groupVector = BONK_DEFAULT_GROUP)
         return false;
     }
     
-    Deflect = function(_subjectShape, _slopeThreshold = 0, _groupFilter = -1)
+    Deflect = function(_subjectShape, _slopeThreshold = 0, _groupFilter = -1, _struct = undefined)
     {
-        static _reaction = new __BonkClassDeflectData();
-        static _nullCollisionData = __Bonk().__nullCollisionData;
+        static _staticDeflect = new __BonkClassDeflectData();
+        var _reaction = _struct ?? _staticDeflect;
         
         if ((_groupFilter < 0) || FilterTest(_groupFilter))
         {
-            _reaction.targetShape = self;
-            
             with(_subjectShape)
             {
-                var _collisionData = Collide(other);
+                var _collisionData = Collide(other, undefined, _reaction.collisionData);
                 if (_collisionData.collision)
                 {
                     var _dX = _collisionData.dX;
@@ -118,19 +116,14 @@ function __BonkCommonFunctions(_groupVector = BONK_DEFAULT_GROUP)
                 }
                 
                 _reaction.collisionData = _collisionData;
-                
                 return _reaction;
             }
         }
-    
-        //Subject shape was `undefined`
-        _reaction.collisionData = _nullCollisionData;
-        _reaction.deflectType   = BONK_DEFLECT_NONE;
-    
-        return _reaction;
+        
+        return _reaction.__Null();
     }
     
-    Collide = function(_otherShape, _groupFilter = -1)
+    Collide = function(_otherShape, _groupFilter = -1, _struct = undefined)
     {
         static _nullCollisionData = __Bonk().__nullCollisionData;
         
@@ -142,7 +135,7 @@ function __BonkCommonFunctions(_groupVector = BONK_DEFAULT_GROUP)
         var _collideFunc = __collideFuncLookup[_otherShape.bonkType];
         if (is_callable(_collideFunc))
         {
-            return _collideFunc(self, _otherShape);
+            return _collideFunc(self, _otherShape, _struct);
         }
         else
         {

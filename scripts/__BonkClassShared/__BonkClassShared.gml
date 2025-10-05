@@ -80,18 +80,16 @@ function __BonkClassShared(_groupVector) constructor
         return false;
     }
     
-    static Deflect = function(_subjectShape, _slopeThreshold = 0, _groupFilter = -1)
+    static Deflect = function(_subjectShape, _slopeThreshold = 0, _groupFilter = -1, _struct = undefined)
     {
-        static _reaction = new __BonkClassDeflectData();
-        static _nullCollisionData = __Bonk().__nullCollisionData;
+        static _staticDeflect = new __BonkClassDeflectData();
+        var _reaction = _struct ?? _staticDeflect;
         
         if ((_groupFilter < 0) || FilterTest(_groupFilter))
         {
-            _reaction.targetShape = self;
-            
             with(_subjectShape)
             {
-                var _collisionData = Collide(other);
+                var _collisionData = Collide(other, undefined, _reaction.collisionData);
                 if (_collisionData.collision)
                 {
                     var _dX = _collisionData.dX;
@@ -103,17 +101,13 @@ function __BonkClassShared(_groupVector) constructor
                     {
                         //If the slope is shallow enough, just move upwards
                         //This movement is approximate but good enough
-                        z += _distance;
-                        
+                        AddPosition(0, 0, _distance);
                         _reaction.deflectType = BONK_DEFLECT_GRIPPY;
                     }
                     else
                     {
                         //Otherwise move out as usual which will typically slide the subject down slopes
-                        x += _dX;
-                        y += _dY;
-                        z += _dZ;
-                        
+                        AddPosition(_dX, _dY, _dZ);
                         _reaction.deflectType = BONK_DEFLECT_SLIPPERY;
                     }
                 }
@@ -123,20 +117,14 @@ function __BonkClassShared(_groupVector) constructor
                     _reaction.deflectType = BONK_DEFLECT_NONE;
                 }
                 
-                _reaction.collisionData = _collisionData;
-                
                 return _reaction;
             }
         }
         
-        //Subject shape was `undefined`
-        _reaction.collisionData = _nullCollisionData;
-        _reaction.deflectType       = BONK_DEFLECT_NONE;
-        
-        return _reaction;
+        return _reaction.__Null();
     }
     
-    static Collide = function(_otherShape, _groupFilter = -1)
+    static Collide = function(_otherShape, _groupFilter = -1, _struct = undefined)
     {
         static _nullCollisionData = __Bonk().__nullCollisionData;
         
@@ -148,7 +136,7 @@ function __BonkClassShared(_groupVector) constructor
         var _collideFunc = __collideFuncLookup[_otherShape.bonkType];
         if (is_callable(_collideFunc))
         {
-            return _collideFunc(self, _otherShape);
+            return _collideFunc(self, _otherShape, _struct);
         }
         else
         {

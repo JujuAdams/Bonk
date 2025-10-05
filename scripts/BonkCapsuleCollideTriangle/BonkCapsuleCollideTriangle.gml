@@ -167,9 +167,12 @@ function BonkCapsuleCollideTriangle(_capsule, _triangle, _struct = undefined)
     var _tempY = _refY - _triY1;
     var _tempZ = _refZ - _triZ1;
     
-        //Sneaky distance-to-plane check as an early-out
-        var _refToPlaneDist = dot_product_3d(_tempX, _tempY, _tempZ, _normalX, _normalY, _normalZ);
-        if (abs(_refToPlaneDist) > _capsuleRadius) return _nullData;
+    //Sneaky distance-to-plane check as an early-out
+    var _refToPlaneDist = dot_product_3d(_tempX, _tempY, _tempZ, _normalX, _normalY, _normalZ);
+    if (abs(_refToPlaneDist) > _capsuleRadius)
+    {
+        return _reaction.__Null();
+    }
     
     _edgeSqrLen = _edgeSqrLength12;
     _edgeX = _dX12;

@@ -2,18 +2,14 @@
 
 function __BonkClassDeflectData() constructor
 {
-    targetShape   = undefined;
-    collisionData = undefined;
+    collisionData = new __BonkClassCollideData();
     deflectType   = BONK_DEFLECT_NONE;
     
-    static Clone = function()
+    static __Null = function()
     {
-        var _new = new __BonkClassDeflectData();
+        collisionData.__Null();
+        deflectType = BONK_DEFLECT_NONE;
         
-        _new.targetShape       = targetShape;
-        _new.collisionData = variable_clone(collisionData);
-        _new.deflectType       = deflectType;
-         
-        return _new;
+        return self;
     }
 }

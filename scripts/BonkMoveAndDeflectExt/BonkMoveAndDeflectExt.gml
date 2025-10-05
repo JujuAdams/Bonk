@@ -13,8 +13,7 @@
 
 function BonkMoveAndDeflectExt(_subjectShape, _velocityStruct, _targetShapes, _slopeThreshold = 0, _groupFilter = -1)
 {
-    static _nullDeflectData = __Bonk().__nullDeflectData;
-    var _returnData = _nullDeflectData;
+    static _staticNullDeflect = new __BonkClassDeflectData();
     
     with(_subjectShape)
     {
@@ -23,12 +22,14 @@ function BonkMoveAndDeflectExt(_subjectShape, _velocityStruct, _targetShapes, _s
         var _z = z;
         
         AddVelocity(_velocityStruct);
-        _returnData = BonkDeflectManyExt(_subjectShape, _targetShapes, _slopeThreshold, _groupFilter);
+        var _return = BonkDeflectManyExt(_subjectShape, _targetShapes, _slopeThreshold, _groupFilter);
         
         _velocityStruct.xSpeed = x - _x;
         _velocityStruct.ySpeed = y - _y;
         _velocityStruct.zSpeed = z - _z;
+        
+        return _return;
     }
     
-    return _returnData;
+    return _staticNullDeflect;
 }

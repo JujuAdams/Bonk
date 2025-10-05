@@ -123,16 +123,19 @@ function __BonkCommonWorld(_cellXSize, _cellYSize, _cellZSize)
         return false;
     }
     
-    Deflect = function(_subjectShape, _slopeThreshold = 0, _groupFilter = -1)
+    Deflect = function(_subjectShape, _slopeThreshold = 0, _groupFilter = -1, _struct = undefined)
     {
         static _map = ds_map_create();
-        static _nullDeflectData = __Bonk().__nullDeflectData;
         
-        var _returnData = _nullDeflectData;
-        var _largestDepth = 0;
+        static _staticDeflectA = new __BonkClassDeflectData();
+        static _staticDeflectB = new __BonkClassDeflectData();
+        
+        var _returnDeflect  = _staticDeflectA;
+        var _workingDeflect = _staticDeflectB;
+        
+        var _largestDepth = -infinity;
         
         var _cheapVersion = true;
-        
         var _aabb = _subjectShape.GetAABB();
         with(_aabb)
         {
@@ -148,16 +151,20 @@ function __BonkCommonWorld(_cellXSize, _cellYSize, _cellZSize)
             var _i = 0;
             repeat(array_length(_shapeArray))
             {
-                var _reaction = _shapeArray[_i].Deflect(_subjectShape, _slopeThreshold, _groupFilter);
+                var _reaction = _shapeArray[_i].Deflect(_subjectShape, _slopeThreshold, _groupFilter, _workingDeflect);
                 if (_reaction.deflectType != BONK_DEFLECT_NONE)
                 {
                     with(_reaction.collisionData)
                     {
                         var _depth = dX*dX + dY*dY + dZ*dZ;
-                        if ((_depth > _largestDepth) && (_reaction.deflectType >= _returnData.deflectType))
+                        if ((_depth > _largestDepth) && (_reaction.deflectType >= _returnDeflect.deflectType))
                         {
                             _largestDepth = _depth;
-                            _returnData = _reaction.Clone();
+                            
+                            //Swap over
+                            var _tempDeflect = _workingDeflect;
+                            _workingDeflect = _returnDeflect;
+                            _returnDeflect  = _tempDeflect;
                         }
                     }
                 }
@@ -194,16 +201,20 @@ function __BonkCommonWorld(_cellXSize, _cellYSize, _cellZSize)
                             {
                                 _map[? _shape] = true;
                                 
-                                var _reaction = _shape.Deflect(_subjectShape, _slopeThreshold, _groupFilter);
+                                var _reaction = _shape.Deflect(_subjectShape, _slopeThreshold, _groupFilter, _workingDeflect);
                                 if (_reaction.deflectType != BONK_DEFLECT_NONE)
                                 {
                                     with(_reaction.collisionData)
                                     {
                                         var _depth = dX*dX + dY*dY + dZ*dZ;
-                                        if ((_depth > _largestDepth) && (_reaction.deflectType >= _returnData.deflectType))
+                                        if ((_depth > _largestDepth) && (_reaction.deflectType >= _returnDeflect.deflectType))
                                         {
                                             _largestDepth = _depth;
-                                            _returnData = _reaction.Clone();
+                                            
+                                            //Swap over
+                                            var _tempDeflect = _workingDeflect;
+                                            _workingDeflect = _returnDeflect;
+                                            _returnDeflect  = _tempDeflect;
                                         }
                                     }
                                 }
@@ -224,10 +235,10 @@ function __BonkCommonWorld(_cellXSize, _cellYSize, _cellZSize)
             ds_map_clear(_map);
         }
         
-        return _returnData;
+        return is_infinity(_largestDepth)? _returnDeflect.__Null() : _returnDeflect;
     }
     
-    Collide = function(_subjectShape, _groupFilter = -1)
+    Collide = function(_subjectShape, _groupFilter = -1, _struct = undefined)
     {
         static _map = ds_map_create();
         static _nullCollisionData = __Bonk().__nullCollisionData;
@@ -249,7 +260,7 @@ function __BonkCommonWorld(_cellXSize, _cellYSize, _cellZSize)
             var _i = 0;
             repeat(array_length(_shapeArray))
             {
-                var _reaction = _shapeArray[_i].Collide(_subjectShape, _groupFilter);
+                var _reaction = _shapeArray[_i].Collide(_subjectShape, _groupFilter, _struct);
                 if (_reaction.collision)
                 {
                     return _reaction;
@@ -287,7 +298,7 @@ function __BonkCommonWorld(_cellXSize, _cellYSize, _cellZSize)
                             {
                                 _map[? _shape] = true;
                                 
-                                var _reaction = _shape.Collide(_subjectShape, _groupFilter);
+                                var _reaction = _shape.Collide(_subjectShape, _groupFilter, _struct);
                                 if (_reaction.collision)
                                 {
                                     ds_map_clear(_map);

@@ -20,8 +20,6 @@ function __Bonk()
         __nullCollisionData = new __BonkClassCollideData();
         __nullCollisionData.__Null();
         
-        __nullDeflectData = new __BonkClassDeflectData();
-        
         __nullHit = new __BonkClassHit();
         __nullHit.collision = false;
         
