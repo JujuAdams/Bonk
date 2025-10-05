@@ -24,11 +24,12 @@
 /// @param x2
 /// @param y2
 /// @param z2
+/// @param [struct]
 
-function BonkLineHitCapsule(_capsule, _x1, _y1, _z1, _x2, _y2, _z2)
+function BonkLineHitCapsule(_capsule, _x1, _y1, _z1, _x2, _y2, _z2, _struct = undefined)
 {
-    static _nullHit = __Bonk().__nullHit;
-    static _coordinate     = new __BonkClassHit();
+    static _staticHit = new __BonkClassHit();
+    var _reaction = _struct ?? _staticHit;
     
     with(_capsule)
     {
@@ -51,7 +52,7 @@ function BonkLineHitCapsule(_capsule, _x1, _y1, _z1, _x2, _y2, _z2)
         {
             if (_dZ == 0)
             {
-                return _nullHit;
+                return _reaction.__Null();
             }
             
             var _distSqr = _vX*_vX + _vY*_vY
@@ -59,7 +60,7 @@ function BonkLineHitCapsule(_capsule, _x1, _y1, _z1, _x2, _y2, _z2)
             if (_zSqr < 0)
             {
                 //Ray misses the circular cross-section of the cylinder
-                return _nullHit;
+                return _reaction.__Null();
             }
             
             if (_z1 < _capsuleZMin - radius)
@@ -69,7 +70,7 @@ function BonkLineHitCapsule(_capsule, _x1, _y1, _z1, _x2, _y2, _z2)
                 if (_dZ <= 0)
                 {
                     //Ray pointing the wrong direction, early out
-                    return _nullHit;
+                    return _reaction.__Null();
                 }
                 
                 var _hemisphereZ = _capsuleZMin;
@@ -81,7 +82,7 @@ function BonkLineHitCapsule(_capsule, _x1, _y1, _z1, _x2, _y2, _z2)
                 if (_dZ >= 0)
                 {
                     //Ray pointing the wrong direction, early out
-                    return _nullHit;
+                    return _reaction.__Null();
                 }
                 
                 var _hemisphereZ = _capsuleZMax;
@@ -107,8 +108,11 @@ function BonkLineHitCapsule(_capsule, _x1, _y1, _z1, _x2, _y2, _z2)
             _normalY *= _coeff;
             _normalZ *= _coeff;
             
-            with(_coordinate)
+            with(_reaction)
             {
+                collision = true;
+                shape = _capsule;
+                
                 x = _hitX;
                 y = _hitY;
                 z = _hitZ;
@@ -128,7 +132,10 @@ function BonkLineHitCapsule(_capsule, _x1, _y1, _z1, _x2, _y2, _z2)
         var _c = (_vX*_vX + _vY*_vY) - _capsuleRadius*_capsuleRadius;
         
         var _discriminant = _b*_b - 4*_a*_c;
-        if (_discriminant < 0) return _nullHit; //No solutions!
+        if (_discriminant < 0)
+        {
+            return _reaction.__Null(); //No solutions!
+        }
         
         //Handle rays that start inside the cylinder
         _discriminant = sqrt(_discriminant);
@@ -159,7 +166,7 @@ function BonkLineHitCapsule(_capsule, _x1, _y1, _z1, _x2, _y2, _z2)
             var _discriminant = _b*_b - 4*_a*_c;
             if (_discriminant < 0)
             {
-                return _nullHit;
+                return _reaction.__Null();
             }
         
             //Handle rays that start inside the cylinder
@@ -175,7 +182,7 @@ function BonkLineHitCapsule(_capsule, _x1, _y1, _z1, _x2, _y2, _z2)
         
         if ((_t < 0) || (_t > 1))
         {
-            return _nullHit;
+            return _reaction.__Null();
         }
         
         var _hitX = _x1 + _t*_dX;
@@ -191,8 +198,11 @@ function BonkLineHitCapsule(_capsule, _x1, _y1, _z1, _x2, _y2, _z2)
         _normalY *= _coeff;
         _normalZ *= _coeff;
         
-        with(_coordinate)
+        with(_reaction)
         {
+            collision = true;
+            shape = _capsule;
+            
             x = _hitX;
             y = _hitY;
             z = _hitZ;
@@ -202,6 +212,6 @@ function BonkLineHitCapsule(_capsule, _x1, _y1, _z1, _x2, _y2, _z2)
             normalZ = _normalZ;
         }
         
-        return _coordinate;
+        return _reaction;
     }
 }

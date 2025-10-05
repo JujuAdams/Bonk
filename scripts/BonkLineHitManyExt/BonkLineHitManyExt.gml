@@ -14,6 +14,8 @@ function BonkLineHitManyExt(_x1, _y1, _z1, _x2, _y2, _z2, _targetShapes, _groupF
     static _returnData = [];
     array_resize(_returnData, 0);
     
+    var _hit = new __BonkClassCollideData();
+    
     if (is_array(_targetShapes))
     {
         var _i = 0;
@@ -21,10 +23,10 @@ function BonkLineHitManyExt(_x1, _y1, _z1, _x2, _y2, _z2, _targetShapes, _groupF
         {
             with(_targetShapes[_i]) //Use `with()` here to support iterating over objects
             {
-                var _hit = LineHit(_x1, _y1, _z1, _x2, _y2, _z2, _groupFilter);
-                if (_hit.collision)
+                if (LineHit(_x1, _y1, _z1, _x2, _y2, _z2, _groupFilter, _hit).collision)
                 {
-                    array_push(_returnData, _hit.Clone());
+                    array_push(_returnData, _hit);
+                    _hit = new __BonkClassCollideData();
                 }
             }
             
@@ -38,10 +40,10 @@ function BonkLineHitManyExt(_x1, _y1, _z1, _x2, _y2, _z2, _targetShapes, _groupF
         {
             with(_targetShapes[| _i])
             {
-                var _hit = LineHit(_x1, _y1, _z1, _x2, _y2, _z2, _groupFilter);
-                if (_hit.collision)
+                if (LineHit(_x1, _y1, _z1, _x2, _y2, _z2, _groupFilter, _hit).collision)
                 {
-                    array_push(_returnData, _hit.Clone());
+                    array_push(_returnData, _hit);
+                    _hit = new __BonkClassCollideData();
                 }
             }
             
@@ -52,10 +54,10 @@ function BonkLineHitManyExt(_x1, _y1, _z1, _x2, _y2, _z2, _targetShapes, _groupF
     {
         with(_targetShapes) //Use `with()` here to support iterating over objects
         {
-            var _hit = LineHit(_x1, _y1, _z1, _x2, _y2, _z2, _groupFilter);
-            if (_hit.collision)
+            if (LineHit(_x1, _y1, _z1, _x2, _y2, _z2, _groupFilter, _hit).collision)
             {
-                array_push(_returnData, _hit.Clone());
+                array_push(_returnData, _hit);
+                _hit = new __BonkClassCollideData();
             }
         }
     }

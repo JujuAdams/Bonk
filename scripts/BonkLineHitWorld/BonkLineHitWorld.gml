@@ -25,13 +25,18 @@
 /// @param y2
 /// @param z2
 /// @param [groupFilter]
+/// @param [struct]
 
-function BonkLineHitWorld(_world, _x1, _y1, _z1, _x2, _y2, _z2, _groupFilter = -1)
+function BonkLineHitWorld(_world, _x1, _y1, _z1, _x2, _y2, _z2, _groupFilter = -1, _struct = undefined)
 {
     static _map = ds_map_create();
-    static _nullHit = __Bonk().__nullHit;
     
-    var _closestHit      = undefined;
+    static _staticHitA = new __BonkClassHit();
+    static _staticHitB = new __BonkClassHit();
+    
+    var _returnHit  = _staticHitA;
+    var _workingHit = _staticHitB;
+    
     var _closestDistance = infinity;
     
     with(_world)
@@ -54,14 +59,17 @@ function BonkLineHitWorld(_world, _x1, _y1, _z1, _x2, _y2, _z2, _groupFilter = -
                 {
                     _map[? _shape] = true;
                     
-                    var _hit = _shape.LineHit(_x1, _y1, _z1, _x2, _y2, _z2, _groupFilter);
-                    if (_hit.collision)
+                    if ((_shape.LineHit(_x1, _y1, _z1, _x2, _y2, _z2, _groupFilter, _workingHit)).collision)
                     {
-                        var _distance = point_distance_3d(_x1, _y1, _z1, _hit.x, _hit.y, _hit.z);
+                        var _distance = point_distance_3d(_x1, _y1, _z1, _workingHit.x, _workingHit.y, _workingHit.z);
                         if (_distance < _closestDistance)
                         {
                             _closestDistance = _distance;
-                            _closestHit = variable_clone(_hit);
+                            
+                            //Swap over
+                            var _tempHit = _workingHit;
+                            _workingHit = _returnHit;
+                            _returnHit  = _tempHit;
                         }
                     }
                 }
@@ -69,10 +77,19 @@ function BonkLineHitWorld(_world, _x1, _y1, _z1, _x2, _y2, _z2, _groupFilter = -
                 ++_j;
             }
             
-            if (_closestHit != undefined)
+            if (not is_infinity(_closestDistance))
             {
                 ds_map_clear(_map);
-                return _closestHit;
+                
+                if (_struct == undefined)
+                {
+                    return _returnHit;
+                }
+                else
+                {
+                    _returnHit.CopyTo(_struct);
+                    return _struct;
+                }
             }
             
             _i += 3;
@@ -80,5 +97,5 @@ function BonkLineHitWorld(_world, _x1, _y1, _z1, _x2, _y2, _z2, _groupFilter = -
     }
     
     ds_map_clear(_map);
-    return _nullHit;
+    return _returnHit.__Null();
 }

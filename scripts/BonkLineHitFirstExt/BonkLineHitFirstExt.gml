@@ -15,13 +15,18 @@
 /// @param z2
 /// @param targetShapes
 /// @param [groupFilter]
+/// @param [struct]
 
-function BonkLineHitFirstExt(_x1, _y1, _z1, _x2, _y2, _z2, _targetShapes, _groupFilter = -1)
+function BonkLineHitFirstExt(_x1, _y1, _z1, _x2, _y2, _z2, _targetShapes, _groupFilter = -1, _struct = undefined)
 {
     static _map = ds_map_create();
-    static _nullHit = __Bonk().__nullHit;
     
-    var _closestHit      = undefined;
+    static _staticHitA = new __BonkClassHit();
+    static _staticHitB = new __BonkClassHit();
+    
+    var _returnHit  = _staticHitA;
+    var _workingHit = _staticHitB;
+    
     var _closestDistance = infinity;
     
     if (is_array(_targetShapes))
@@ -35,14 +40,17 @@ function BonkLineHitFirstExt(_x1, _y1, _z1, _x2, _y2, _z2, _targetShapes, _group
                 {
                     _map[? self] = true;
                     
-                    var _hit = LineHit(_x1, _y1, _z1, _x2, _y2, _z2, _groupFilter);
-                    if (_hit.collision)
+                    if (LineHit(_x1, _y1, _z1, _x2, _y2, _z2, _groupFilter, _workingHit).collision)
                     {
-                        var _distance = point_distance_3d(_x1, _y1, _z1, _hit.x, _hit.y, _hit.z);
+                        var _distance = point_distance_3d(_x1, _y1, _z1, _workingHit.x, _workingHit.y, _workingHit.z);
                         if (_distance < _closestDistance)
                         {
                             _closestDistance = _distance;
-                            _closestHit = variable_clone(_hit);
+                            
+                            //Swap over
+                            var _tempHit = _workingHit;
+                            _workingHit = _returnHit;
+                            _returnHit  = _tempHit;
                         }
                     }
                 }
@@ -62,14 +70,17 @@ function BonkLineHitFirstExt(_x1, _y1, _z1, _x2, _y2, _z2, _targetShapes, _group
                 {
                     _map[? self] = true;
                     
-                    var _hit = LineHit(_x1, _y1, _z1, _x2, _y2, _z2, _groupFilter);
-                    if (_hit.collision)
+                    if (LineHit(_x1, _y1, _z1, _x2, _y2, _z2, _groupFilter, _workingHit).collision)
                     {
-                        var _distance = point_distance_3d(_x1, _y1, _z1, _hit.x, _hit.y, _hit.z);
+                        var _distance = point_distance_3d(_x1, _y1, _z1, _workingHit.x, _workingHit.y, _workingHit.z);
                         if (_distance < _closestDistance)
                         {
                             _closestDistance = _distance;
-                            _closestHit = variable_clone(_hit);
+                            
+                            //Swap over
+                            var _tempHit = _workingHit;
+                            _workingHit = _returnHit;
+                            _returnHit  = _tempHit;
                         }
                     }
                 }
@@ -86,26 +97,23 @@ function BonkLineHitFirstExt(_x1, _y1, _z1, _x2, _y2, _z2, _targetShapes, _group
             {
                 _map[? self] = true;
                 
-                var _hit = LineHit(_x1, _y1, _z1, _x2, _y2, _z2, _groupFilter);
-                if (_hit.collision)
+                if (LineHit(_x1, _y1, _z1, _x2, _y2, _z2, _groupFilter, _workingHit).collision)
                 {
-                    var _distance = point_distance_3d(_x1, _y1, _z1, _hit.x, _hit.y, _hit.z);
+                    var _distance = point_distance_3d(_x1, _y1, _z1, _workingHit.x, _workingHit.y, _workingHit.z);
                     if (_distance < _closestDistance)
                     {
                         _closestDistance = _distance;
-                        _closestHit = variable_clone(_hit);
+                        
+                        //Swap over
+                        var _tempHit = _workingHit;
+                        _workingHit = _returnHit;
+                        _returnHit  = _tempHit;
                     }
                 }
             }
         }
     }
     
-    if (_closestHit != undefined)
-    {
-        ds_map_clear(_map);
-        return _closestHit;
-    }
-    
     ds_map_clear(_map);
-    return _nullHit;
+    return is_infinity(_closestDistance)? _returnHit.__Null() : _returnHit;
 }

@@ -24,11 +24,12 @@
 /// @param x2
 /// @param y2
 /// @param z2
+/// @param [struct]
 
-function BonkLineHitCylinder(_cylinder, _x1, _y1, _z1, _x2, _y2, _z2)
+function BonkLineHitCylinder(_cylinder, _x1, _y1, _z1, _x2, _y2, _z2, _struct = undefined)
 {
-    static _nullHit = __Bonk().__nullHit;
-    static _coordinate     = new __BonkClassHit();
+    static _staticHit = new __BonkClassHit();
+    var _reaction = _struct ?? _staticHit;
     
     with(_cylinder)
     {
@@ -51,22 +52,25 @@ function BonkLineHitCylinder(_cylinder, _x1, _y1, _z1, _x2, _y2, _z2)
     {
         if (_dZ == 0)
         {
-            return _nullHit;
+            return _reaction.__Null();
         }
         
         if (_vX*_vX + _vY*_vY > _cylinderRadius*_cylinderRadius)
         {
-            return _nullHit;
+            return _reaction.__Null();
         }
         
         var _t = min((_cylinderZMin - _z1) / _dZ, (_cylinderZMax - _z1) / _dZ);
         if ((_t < 0) || (_t > 1))
         {
-            return _nullHit;
+            return _reaction.__Null();
         }
         
-        with(_coordinate)
+        with(_reaction)
         {
+            collision = true;
+            shape = _cylinder;
+            
             x = _x1;
             y = _y1;
             z = _z1 + _t*_dZ;
@@ -76,7 +80,7 @@ function BonkLineHitCylinder(_cylinder, _x1, _y1, _z1, _x2, _y2, _z2)
             normalZ = sign(z - _cylinder.z);
         }
         
-        return _coordinate;
+        return _reaction;
     }
     
     //Build a quadratic equation to solve the intersection between the line and an infinitely high
@@ -113,8 +117,11 @@ function BonkLineHitCylinder(_cylinder, _x1, _y1, _z1, _x2, _y2, _z2)
         _normalX *= _coeff;
         _normalY *= _coeff;
         
-        with(_coordinate)
+        with(_reaction)
         {
+            collision = true;
+            shape = _cylinder;
+            
             x = _hitX;
             y = _hitY;
             z = _z;
@@ -124,7 +131,7 @@ function BonkLineHitCylinder(_cylinder, _x1, _y1, _z1, _x2, _y2, _z2)
             normalZ = 0;
         }
         
-        return _coordinate;
+        return _reaction;
     }
     else
     {
@@ -133,7 +140,7 @@ function BonkLineHitCylinder(_cylinder, _x1, _y1, _z1, _x2, _y2, _z2)
         //If the ray has no change in z then it cannot hit either cap
         if (_dZ == 0)
         {
-            return _nullHit;
+            return _reaction.__Null();
         }
         
         //Find the other t value for the intersection with the cylinder
@@ -155,11 +162,14 @@ function BonkLineHitCylinder(_cylinder, _x1, _y1, _z1, _x2, _y2, _z2)
         //If this new t value is outside the cylinder then we have no solution
         if ((_t < _tMin) || (_t > _tMax))
         {
-            return _nullHit;
+            return _reaction.__Null();
         }
         
-        with(_coordinate)
+        with(_reaction)
         {
+            collision = true;
+            shape = _cylinder;
+            
             x = _x1 + _t*_dX;
             y = _y1 + _t*_dY;
             z = _z1 + _t*_dZ;
@@ -169,6 +179,6 @@ function BonkLineHitCylinder(_cylinder, _x1, _y1, _z1, _x2, _y2, _z2)
             normalZ = sign(z - _cylinder.z);
         }
         
-        return _coordinate;
+        return _reaction;
     }
 }

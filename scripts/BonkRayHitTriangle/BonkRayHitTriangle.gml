@@ -23,9 +23,10 @@
 /// @param dZ
 /// @param [length]
 
-function BonkRayHitTriangle(_triangle, _rayX, _rayY, _rayZ, _dX, _dY, _dZ, _length = BONK_RAY_LENGTH)
+function BonkRayHitTriangle(_triangle, _rayX, _rayY, _rayZ, _dX, _dY, _dZ, _length = BONK_RAY_LENGTH, _struct = undefined)
 {
     return BonkLineHitTriangle(_triangle,
                                _rayX, _rayY, _rayZ,
-                               _rayX + _length*_dX, _rayY + _length*_dY, _rayZ + _length*_dZ);
+                               _rayX + _length*_dX, _rayY + _length*_dY, _rayZ + _length*_dZ,
+                               _struct);
 }

@@ -24,11 +24,12 @@
 /// @param x2
 /// @param y2
 /// @param z2
+/// @param [struct]
 
-function BonkLineHitTriangle(_triangle, _x1, _y1, _z1, _x2, _y2, _z2)
+function BonkLineHitTriangle(_triangle, _x1, _y1, _z1, _x2, _y2, _z2, _struct = undefined)
 {
-    static _nullHit = __Bonk().__nullHit;
-    static _coordinate = new __BonkClassHit();
+    static _staticHit = new __BonkClassHit();
+    var _reaction = _struct ?? _staticHit;
     
     with(_triangle)
     {
@@ -63,7 +64,7 @@ function BonkLineHitTriangle(_triangle, _x1, _y1, _z1, _x2, _y2, _z2)
         var _normalSqrLength = _normalX*_normalX + _normalY*_normalY + _normalZ*_normalZ
         if (_normalSqrLength <= 0)
         {
-            return _nullHit;
+            return _reaction.__Null();
         }
         
         var _length = sqrt(_normalSqrLength);
@@ -80,7 +81,7 @@ function BonkLineHitTriangle(_triangle, _x1, _y1, _z1, _x2, _y2, _z2)
         {
             //Ray lies on plane
             
-            return _nullHit;
+            return _reaction.__Null();
             
             //var _func = function(_x1, _y1, _z1,   _dX12, _dY12, _dZ12,   _x3, _y3, _z3,   _dX34, _dY34, _dZ34)
             //{
@@ -127,7 +128,7 @@ function BonkLineHitTriangle(_triangle, _x1, _y1, _z1, _x2, _y2, _z2)
         var _coeff = dot_product_3d(_vX, _vY, _vZ, _normalX, _normalY, _normalZ) / _dot;
         if ((_coeff < 0) || (_coeff > 1))
         {
-            return _nullHit;
+            return _reaction.__Null();
         }
         
         var _traceX = _x1 + _coeff*_rX;
@@ -164,8 +165,11 @@ function BonkLineHitTriangle(_triangle, _x1, _y1, _z1, _x2, _y2, _z2)
                                    _vY*_dX31 - _vX*_dY31,
                                    _normalX, _normalY, _normalZ) > 0)
                 {
-                    with(_coordinate)
+                    with(_reaction)
                     {
+                        collision = true;
+                        shape = _triangle;
+                        
                         x = _traceX;
                         y = _traceY;
                         z = _traceZ;
@@ -176,11 +180,11 @@ function BonkLineHitTriangle(_triangle, _x1, _y1, _z1, _x2, _y2, _z2)
                         normalZ = _sign*_normalZ;
                     }
                 
-                    return _coordinate;
+                    return _reaction;
                 }
             }
         }
     }
     
-    return _nullHit;
+    return _reaction.__Null();
 }

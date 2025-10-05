@@ -24,11 +24,12 @@
 /// @param x2
 /// @param y2
 /// @param z2
+/// @param [struct]
 
-function BonkLineHitRotatedBox(_box, _x1, _y1, _z1, _x2, _y2, _z2)
+function BonkLineHitRotatedBox(_box, _x1, _y1, _z1, _x2, _y2, _z2, _struct = undefined)
 {
-    static _nullHit    = __Bonk().__nullHit;
-    static _coordinate = new __BonkClassHit();
+    static _staticHit = new __BonkClassHit();
+    var _reaction = _struct ?? _staticHit;
     
     with(_box)
     {
@@ -102,7 +103,7 @@ function BonkLineHitRotatedBox(_box, _x1, _y1, _z1, _x2, _y2, _z2)
         
         if ((_tMax < 0) || (_tMin > 1) || (_tMin > _tMax))
         {
-            return _nullHit;
+            return _reaction.__Null();
         }
         
         var _t = (_tMin < 0)? _tMax : _tMin;
@@ -110,26 +111,29 @@ function BonkLineHitRotatedBox(_box, _x1, _y1, _z1, _x2, _y2, _z2)
         var _hitI = _i1 + _t*_dI;
         if (abs(_hitI) > 0.5*xSize)
         {
-            return _nullHit;
+            return _reaction.__Null();
         }
         
         var _hitJ = _j1 + _t*_dJ;
         if (abs(_hitJ) > 0.5*ySize)
         {
-            return _nullHit;
+            return _reaction.__Null();
         }
         
         var _hitZ = _z1 + _t*_dZ;
         if (abs(_hitZ - z) > 0.5*zSize)
         {
-            return _nullHit;
+            return _reaction.__Null();
         }
         
         var _hitX = x + _hitI*_iX + _hitJ*_jX;
         var _hitY = y + _hitI*_iY + _hitJ*_jY;
         
-        with(_coordinate)
+        with(_reaction)
         {
+            collision = true;
+            shape = _box;
+            
             x = _hitX;
             y = _hitY;
             z = _hitZ;
@@ -156,8 +160,8 @@ function BonkLineHitRotatedBox(_box, _x1, _y1, _z1, _x2, _y2, _z2)
             }
         }
         
-        return _coordinate;
+        return _reaction;
     }
     
-    return _nullHit;
+    return _reaction.__Null();
 }

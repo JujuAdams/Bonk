@@ -24,11 +24,12 @@
 /// @param x2
 /// @param y2
 /// @param z2
+/// @param [struct]
 
-function BonkLineHitAAB(_aab, _x1, _y1, _z1, _x2, _y2, _z2)
+function BonkLineHitAAB(_aab, _x1, _y1, _z1, _x2, _y2, _z2, _struct = undefined)
 {
-    static _nullHit = __Bonk().__nullHit;
-    static _coordinate = new __BonkClassHit();
+    static _staticHit = new __BonkClassHit();
+    var _reaction = _struct ?? _staticHit;
     
     with(_aab)
     {
@@ -81,7 +82,7 @@ function BonkLineHitAAB(_aab, _x1, _y1, _z1, _x2, _y2, _z2)
         
         if ((_tMax < 0) || (_tMin > 1) || (_tMin > _tMax))
         {
-            return _nullHit;
+            return _reaction.__Null();
         }
         
         var _t = (_tMin < 0)? _tMax : _tMin;
@@ -89,23 +90,26 @@ function BonkLineHitAAB(_aab, _x1, _y1, _z1, _x2, _y2, _z2)
         var _hitX = _x1 + _t*_dX;
         if (abs(_hitX - x) > 0.5*xSize)
         {
-            return _nullHit;
+            return _reaction.__Null();
         }
         
         var _hitY = _y1 + _t*_dY;
         if (abs(_hitY - y) > 0.5*ySize)
         {
-            return _nullHit;
+            return _reaction.__Null();
         }
         
         var _hitZ = _z1 + _t*_dZ;
         if (abs(_hitZ - z) > 0.5*zSize)
         {
-            return _nullHit;
+            return _reaction.__Null();
         }
         
-        with(_coordinate)
+        with(_reaction)
         {
+            collision = true;
+            shape = _aab;
+            
             x = _hitX;
             y = _hitY;
             z = _hitZ;
@@ -130,8 +134,8 @@ function BonkLineHitAAB(_aab, _x1, _y1, _z1, _x2, _y2, _z2)
             }
         }
         
-        return _coordinate;
+        return _reaction;
     }
     
-    return _nullHit;
+    return _reaction.__Null();
 }

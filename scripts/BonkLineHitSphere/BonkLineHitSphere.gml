@@ -24,11 +24,12 @@
 /// @param x2
 /// @param y2
 /// @param z2
+/// @param [struct]
 
-function BonkLineHitSphere(_sphere, _x1, _y1, _z1, _x2, _y2, _z2)
+function BonkLineHitSphere(_sphere, _x1, _y1, _z1, _x2, _y2, _z2, _struct = undefined)
 {
-    static _nullHit = __Bonk().__nullHit;
-    static _coordinate = new __BonkClassHit();
+    static _staticHit = new __BonkClassHit();
+    var _reaction = _struct ?? _staticHit;
     
     with(_sphere)
     {
@@ -52,7 +53,7 @@ function BonkLineHitSphere(_sphere, _x1, _y1, _z1, _x2, _y2, _z2)
         var _discriminant = _b*_b - 4*_a*_c;
         if (_discriminant < 0)
         {
-            return _nullHit;
+            return _reaction.__Null();
         }
         
         //Catch cases where the start of the ray is inside the sphere
@@ -62,7 +63,7 @@ function BonkLineHitSphere(_sphere, _x1, _y1, _z1, _x2, _y2, _z2)
         var _t = (-_b - _discriminant) / (2*_a);
         if (_t > 1)
         {
-            return _nullHit;
+            return _reaction.__Null();
         }
         
         var _hitX = _x1 + _t*_dX;
@@ -78,8 +79,11 @@ function BonkLineHitSphere(_sphere, _x1, _y1, _z1, _x2, _y2, _z2)
         _normalY *= _coeff;
         _normalZ *= _coeff;
         
-        with(_coordinate)
+        with(_reaction)
         {
+            collision = true;
+            shape = _sphere;
+            
             x = _hitX;
             y = _hitY;
             z = _hitZ;
@@ -89,8 +93,8 @@ function BonkLineHitSphere(_sphere, _x1, _y1, _z1, _x2, _y2, _z2)
             normalZ = _normalZ;
         }
         
-        return _coordinate;
+        return _reaction;
     }
     
-    return _nullHit;
+    return _reaction.__Null();
 }
