@@ -48,7 +48,9 @@ function BonkDeflectManyExt(_subjectShape, _targetShapes, _slopeThreshold = 0, _
                     with(_reaction.collisionData)
                     {
                         var _depth = dX*dX + dY*dY + dZ*dZ;
-                        if ((_depth > _largestDepth) && (_reaction.deflectType >= _returnDeflect.deflectType))
+                        
+                        if ((_reaction.deflectType > _returnDeflect.deflectType)
+                        ||  ((_depth > _largestDepth) && (_reaction.deflectType >= _returnDeflect.deflectType)))
                         {
                             _largestDepth = _depth;
                             
@@ -77,7 +79,9 @@ function BonkDeflectManyExt(_subjectShape, _targetShapes, _slopeThreshold = 0, _
                     with(_reaction.collisionData)
                     {
                         var _depth = dX*dX + dY*dY + dZ*dZ;
-                        if ((_depth > _largestDepth) && (_reaction.deflectType >= _returnDeflect.deflectType))
+                        
+                        if ((_reaction.deflectType > _returnDeflect.deflectType)
+                        ||  ((_depth > _largestDepth) && (_reaction.deflectType >= _returnDeflect.deflectType)))
                         {
                             _largestDepth = _depth;
                             
@@ -103,7 +107,9 @@ function BonkDeflectManyExt(_subjectShape, _targetShapes, _slopeThreshold = 0, _
                 with(_reaction.collisionData)
                 {
                     var _depth = dX*dX + dY*dY + dZ*dZ;
-                    if ((_depth > _largestDepth) && (_reaction.deflectType >= _returnDeflect.deflectType))
+                    
+                    if ((_reaction.deflectType > _returnDeflect.deflectType)
+                    ||  ((_depth > _largestDepth) && (_reaction.deflectType >= _returnDeflect.deflectType)))
                     {
                         _largestDepth = _depth;
                         

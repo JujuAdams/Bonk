@@ -33,7 +33,7 @@ velocity.zSpeed -= gravAccel;
 var _pushOutData = BonkMoveAndDeflect(shape, velocity, 40, oTestInstanceParent);
 if (_pushOutData.deflectType == BONK_DEFLECT_GRIPPY)
 {
-    onGroundFrames = 5;
+    onGroundFrames = 30;
 }
 
 if (onGroundFrames > 0)

@@ -157,7 +157,9 @@ function __BonkCommonWorld(_cellXSize, _cellYSize, _cellZSize)
                     with(_reaction.collisionData)
                     {
                         var _depth = dX*dX + dY*dY + dZ*dZ;
-                        if ((_depth > _largestDepth) && (_reaction.deflectType >= _returnDeflect.deflectType))
+                        
+                        if ((_reaction.deflectType > _returnDeflect.deflectType)
+                        ||  ((_depth > _largestDepth) && (_reaction.deflectType >= _returnDeflect.deflectType)))
                         {
                             _largestDepth = _depth;
                             
@@ -207,7 +209,9 @@ function __BonkCommonWorld(_cellXSize, _cellYSize, _cellZSize)
                                     with(_reaction.collisionData)
                                     {
                                         var _depth = dX*dX + dY*dY + dZ*dZ;
-                                        if ((_depth > _largestDepth) && (_reaction.deflectType >= _returnDeflect.deflectType))
+                                        
+                                        if ((_reaction.deflectType > _returnDeflect.deflectType)
+                                        ||  ((_depth > _largestDepth) && (_reaction.deflectType >= _returnDeflect.deflectType)))
                                         {
                                             _largestDepth = _depth;
                                             
