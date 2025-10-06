@@ -15,7 +15,7 @@ function BonkSetupSphere(_x, _y, _z, _radius, _groupVector = BONK_DEFAULT_GROUP)
         __BonkError("Must only be called on an object instance");
     }
     
-    __BonkCommonFunctions(_groupVector);
+    __BonkCommonInstanceFunctions(_groupVector);
     __BonkCommonSphere();
     
     
@@ -27,7 +27,7 @@ function BonkSetupSphere(_x, _y, _z, _radius, _groupVector = BONK_DEFAULT_GROUP)
     
     if (BONK_SET_INSTANCE_DEPTH)
     {
-        depth = -_z;
+        depth = _z;
     }
     
     mask_index = __BonkMaskCircle;
@@ -44,7 +44,7 @@ function BonkSetupSphere(_x, _y, _z, _radius, _groupVector = BONK_DEFAULT_GROUP)
         
         if (BONK_SET_INSTANCE_DEPTH)
         {
-            depth = -_z;
+            depth = _z;
         }
         
         return self;

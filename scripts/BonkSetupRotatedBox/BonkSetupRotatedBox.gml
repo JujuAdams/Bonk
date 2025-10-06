@@ -18,7 +18,7 @@ function BonkSetupRotatedBox(_x, _y, _z, _xSize, _ySize, _zSize, _zRotation, _gr
         __BonkError("Must only be called on an object instance");
     }
     
-    __BonkCommonFunctions(_groupVector);
+    __BonkCommonInstanceFunctions(_groupVector);
     __BonkCommonRotatedBox();
     
     
@@ -29,7 +29,7 @@ function BonkSetupRotatedBox(_x, _y, _z, _xSize, _ySize, _zSize, _zRotation, _gr
     
     if (BONK_SET_INSTANCE_DEPTH)
     {
-        depth = -_z;
+        depth = _z;
     }
     
     xSize = _xSize;
@@ -53,7 +53,7 @@ function BonkSetupRotatedBox(_x, _y, _z, _xSize, _ySize, _zSize, _zRotation, _gr
         
         if (BONK_SET_INSTANCE_DEPTH)
         {
-            depth = -_z;
+            depth = _z;
         }
         
         return self;

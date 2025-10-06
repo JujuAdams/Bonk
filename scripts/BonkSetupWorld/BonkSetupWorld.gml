@@ -25,4 +25,9 @@ function BonkSetupWorld(_cellXSize, _cellYSize, _cellZSize)
     mask_index = __BonkMaskAAB;
     image_xscale = 0;
     image_yscale = 0;
+    
+    DebugDrawMask = function(_color = c_white)
+    {
+        draw_sprite_ext(mask_index, 0, x, y, image_xscale, image_yscale, image_angle, _color, 1);
+    }
 }

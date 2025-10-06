@@ -1,9 +1,9 @@
 {
   "$GMScript":"v1",
-  "%Name":"__BonkCommonFunctions",
+  "%Name":"__BonkCommonInstanceFunctions",
   "isCompatibility":false,
   "isDnD":false,
-  "name":"__BonkCommonFunctions",
+  "name":"__BonkCommonInstanceFunctions",
   "parent":{
     "name":"Common Values",
     "path":"folders/Bonk/(System)/Common Values.yy",

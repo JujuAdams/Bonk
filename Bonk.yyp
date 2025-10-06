@@ -154,7 +154,7 @@
     {"id":{"name":"__BonkCommonAAB","path":"scripts/__BonkCommonAAB/__BonkCommonAAB.yy",},},
     {"id":{"name":"__BonkCommonCapsule","path":"scripts/__BonkCommonCapsule/__BonkCommonCapsule.yy",},},
     {"id":{"name":"__BonkCommonCylinder","path":"scripts/__BonkCommonCylinder/__BonkCommonCylinder.yy",},},
-    {"id":{"name":"__BonkCommonFunctions","path":"scripts/__BonkCommonFunctions/__BonkCommonFunctions.yy",},},
+    {"id":{"name":"__BonkCommonInstanceFunctions","path":"scripts/__BonkCommonInstanceFunctions/__BonkCommonInstanceFunctions.yy",},},
     {"id":{"name":"__BonkCommonQuad","path":"scripts/__BonkCommonQuad/__BonkCommonQuad.yy",},},
     {"id":{"name":"__BonkCommonRotatedBox","path":"scripts/__BonkCommonRotatedBox/__BonkCommonRotatedBox.yy",},},
     {"id":{"name":"__BonkCommonSphere","path":"scripts/__BonkCommonSphere/__BonkCommonSphere.yy",},},

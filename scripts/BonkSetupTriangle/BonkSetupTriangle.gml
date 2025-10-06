@@ -21,7 +21,7 @@ function BonkSetupTriangle(_x1, _y1, _z1, _x2, _y2, _z2, _x3, _y3, _z3, _groupVe
         __BonkError("Must only be called on an object instance");
     }
     
-    __BonkCommonFunctions(_groupVector);
+    __BonkCommonInstanceFunctions(_groupVector);
     __BonkCommonTriangle();
     
     
@@ -86,7 +86,7 @@ function BonkSetupTriangle(_x1, _y1, _z1, _x2, _y2, _z2, _x3, _y3, _z3, _groupVe
         
         if (BONK_SET_INSTANCE_DEPTH)
         {
-            depth = -_z;
+            depth = z;
         }
         
         image_xscale = max(BONK_INSTANCE_MIN_SIZE, _maxX - _minX) / BONK_MASK_SIZE;

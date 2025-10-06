@@ -17,7 +17,7 @@ function BonkSetupAAB(_x, _y, _z, _xSize, _ySize, _zSize, _groupVector = BONK_DE
         __BonkError("Must only be called on an object instance");
     }
     
-    __BonkCommonFunctions(_groupVector);
+    __BonkCommonInstanceFunctions(_groupVector);
     __BonkCommonAAB();
     
     
@@ -28,7 +28,7 @@ function BonkSetupAAB(_x, _y, _z, _xSize, _ySize, _zSize, _groupVector = BONK_DE
     
     if (BONK_SET_INSTANCE_DEPTH)
     {
-        depth = -_z;
+        depth = _z;
     }
     
     xSize = _xSize;
@@ -49,7 +49,7 @@ function BonkSetupAAB(_x, _y, _z, _xSize, _ySize, _zSize, _groupVector = BONK_DE
         
         if (BONK_SET_INSTANCE_DEPTH)
         {
-            depth = -_z;
+            depth = _z;
         }
         
         return self;

@@ -16,7 +16,7 @@ function BonkSetupCapsule(_x, _y, _z, _height, _radius, _groupVector = BONK_DEFA
         __BonkError("Must only be called on an object instance");
     }
     
-    __BonkCommonFunctions(_groupVector);
+    __BonkCommonInstanceFunctions(_groupVector);
     __BonkCommonCapsule();
     
     
@@ -27,7 +27,7 @@ function BonkSetupCapsule(_x, _y, _z, _height, _radius, _groupVector = BONK_DEFA
         
     if (BONK_SET_INSTANCE_DEPTH)
     {
-        depth = -_z;
+        depth = _z;
     }
     
     height = _height;
@@ -47,7 +47,7 @@ function BonkSetupCapsule(_x, _y, _z, _height, _radius, _groupVector = BONK_DEFA
         
         if (BONK_SET_INSTANCE_DEPTH)
         {
-            depth = -_z;
+            depth = _z;
         }
         
         return self;
