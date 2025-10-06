@@ -1,8 +1,8 @@
 // Feather disable all
 
 /// Creates an instance of the given object and sets it as a Bonk instance that can be used to
-/// stored Bonk structs in a spatial hash map. This is useful for storing static meshes generated
-/// from 3D models.
+/// store Bonk structs in a spatial hash map. This is especially useful for storing static meshes
+/// generated from 3D models.
 /// 
 /// @param cellXSize
 /// @param cellYSize

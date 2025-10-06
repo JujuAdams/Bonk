@@ -82,6 +82,7 @@
   },
   "name":"Bonk",
   "resources":[
+    {"id":{"name":"Bonk Instance Details","path":"notes/Bonk Instance Details/Bonk Instance Details.yy",},},
     {"id":{"name":"BonkObject","path":"objects/BonkObject/BonkObject.yy",},},
     {"id":{"name":"oBallpitSphere","path":"objects/oBallpitSphere/oBallpitSphere.yy",},},
     {"id":{"name":"objTestAABInAAB","path":"objects/objTestAABInAAB/objTestAABInAAB.yy",},},

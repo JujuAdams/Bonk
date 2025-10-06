@@ -1,6 +1,8 @@
 // Feather disable all
 
-/// Creates an instance of the given object and sets it as a Bonk triangle instance.
+/// Creates an instance of the given object and sets it as a Bonk triangle instance. Please see
+/// `BonkSetupTriangle()` for more details on what variables and properties are available on the
+/// created instance.
 /// 
 /// @param x1
 /// @param y1

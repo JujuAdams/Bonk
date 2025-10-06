@@ -2,6 +2,53 @@
 
 /// Sets the currently scoped instance as a Bonk instance of the triangle type.
 /// 
+/// In general, setting up an instance to work with Bonk will do the following things:
+/// 
+///  1. Set the following native GameMaker variables:
+///     `x`  `y`  `mask_index`  `image_xscale`  `image_yscale`  `image_angle`  (and maybe `depth`)
+/// 
+///  2. Set variables that Bonk needs to operate
+///     `z`  `bonkType`  `bonkGroup`  `__bonkCollideFuncLookup`  `__bonkTouchFuncLookup`
+///     (and maybe `bonkCreateCallstack`)
+/// 
+///  3. Set variables to Bonk methods
+///     `SetPosition()`  `AddPosition()`  `Touch()`  `Collide()`  `Deflect()`  `LineHit()`
+///     `FilterTest()`  `DebugDraw()`  `DebugDrawMask()`
+/// 
+///  4. Set a handful of further variables and methods for the specific shape type
+/// 
+/// You can read about the how to use the shared general variables and methods in the
+/// `Bonk Instance Details` Note asset found in the same asset browset folder as this function. The
+/// following variables and methods are unique to this type of shape:
+/// 
+/// `x` `y` `z`
+///   These variables are **read-only** for this shape type and are derived by calculating the
+///   centre of the triangle when calling `Refresh()`.
+/// 
+/// `.x1` `.y1` `.z1` `.x2` `.y2` `.z2` `.x3` `.y3` `.z3`
+///   These variables store the coordinates of the vertices of the triangle. These variables may be
+///   read at any time. You may also write to these variables; however, if you do change any of the
+///   coordinates you must call `Refresh()` before the next collision check to ensure that the
+///   underlying instance collision mask remains accurate.
+/// 
+/// `.Refresh()`
+///   Updates various internal values and properties, including the following variables (some of
+///   which are native GameMaker variables): `x` `y` `z` `image_xscale` `image_yscale` `normalX`
+///   `normalY` `normalZ` (and maybe `depth`). You should call this method after changing any of
+///   above triangle coordinates and before the next collision check.
+/// 
+/// `.normalX` `.normalY` `.normalZ`
+///   **Read-only** variables that store the normal to the triangle. This value is calculated by
+///   the `Refresh()` method. You may read these variables at any time but they must not be
+///   directly written to.
+/// 
+/// `.__bonkDX12`  `.__bonkDY12`  `.__bonkDZ12`  `.__bonkDX23`  `.__bonkDY23`  `.__bonkDZ23`
+/// `.__bonkDX31`  `.__bonkDY31`  `.__bonkDZ31`  `.__bonkLengthSqr12`  `.__bonkLengthSqr23`
+/// `.__bonkLengthSqr31`
+///   Various cached values that are used to speed up triangle collision detection. These are
+///   **read-only** and even then you'll probably never need to read these variables.
+/// 
+/// 
 /// @param x1
 /// @param y1
 /// @param z1

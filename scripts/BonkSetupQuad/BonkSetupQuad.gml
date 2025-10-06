@@ -2,6 +2,58 @@
 
 /// Sets the currently scoped instance as a Bonk instance of the quad type.
 /// 
+/// In general, setting up an instance to work with Bonk will do the following things:
+/// 
+///  1. Set the following native GameMaker variables:
+///     `x`  `y`  `mask_index`  `image_xscale`  `image_yscale`  `image_angle`  (and maybe `depth`)
+/// 
+///  2. Set variables that Bonk needs to operate
+///     `z`  `bonkType`  `bonkGroup`  `__bonkCollideFuncLookup`  `__bonkTouchFuncLookup`
+///     (and maybe `bonkCreateCallstack`)
+/// 
+///  3. Set variables to Bonk methods
+///     `SetPosition()`  `AddPosition()`  `Touch()`  `Collide()`  `Deflect()`  `LineHit()`
+///     `FilterTest()`  `DebugDraw()`  `DebugDrawMask()`
+/// 
+///  4. Set a handful of further variables and methods for the specific shape type
+/// 
+/// You can read about the how to use the shared general variables and methods in the
+/// `Bonk Instance Details` Note asset found in the same asset browset folder as this function. The
+/// following variables and methods are unique to this type of shape:
+/// 
+/// `x` `y` `z`
+///   These variables are **read-only** for this shape type and are derived by calculating the
+///   centre of the quad when calling `Refresh()`.
+/// 
+/// `.x1` `.y1` `.z1` `.x2` `.y2` `.z2` `.x3` `.y3` `.z3`
+///   These variables store the coordinates of the defining vertices of the quad. These variables
+///   may be read at any time. You may also write to these variables; however, if you do change any
+///   of the coordinates you must call `Refresh()` before the next collision check to ensure that
+///   the underlying instance collision mask remains accurate.
+/// 
+/// `.Refresh()`
+///   Updates various internal values and properties, including the following variables (some of
+///   which are native GameMaker variables): `x` `y` `z` `x4` `y4` `z4`  `image_xscale`
+///   `image_yscale` `normalX`  `normalY` `normalZ` (and maybe `depth`). You should call this
+///   method after changing any of above quad coordinates and before the next collision check.
+/// 
+/// `.x4` `.y4` `.z4`
+///   These variables store the coordinated of the derived fourth vertex of the quad. These
+///   variables are **read-only** and are updated by calling `Refresh()`. You may read these
+///   variables at any time but they must not be directly written to.
+/// 
+/// `.normalX` `.normalY` `.normalZ`
+///   **Read-only** variables that store the normal to the quad. This value is calculated by the
+///   `Refresh()` method. You may read these variables at any time but they must not be directly
+///   written to.
+/// 
+/// `__bonkDX12`  `__bonkDY12`  `__bonkDZ12`  `__bonkDX31`  `__bonkDY31`  `__bonkDZ31`
+/// `__bonkDX24`  `__bonkDY24`  `__bonkDZ24`  `__bonkDX43`  `__bonkDY43`  `__bonkDZ43`
+/// `__bonkLengthSqr12`  `__bonkLengthSqr31`  `__bonkLengthSqr24`  `__bonkLengthSqr43`
+///   Various cached values that are used to speed up quad collision detection. These are
+///   **read-only** and even then you'll probably never need to read these variables.
+/// 
+/// 
 /// @param x1
 /// @param y1
 /// @param z1
@@ -37,7 +89,8 @@ function BonkSetupQuad(_x1, _y1, _z1, _x2, _y2, _z2, _x3, _y3, _z3, _groupVector
     y3 = _y3;
     z3 = _z3;
     
-    mask_index = __BonkMaskAAB;
+    mask_index  = __BonkMaskAAB;
+    image_angle = 0;
     
     
     

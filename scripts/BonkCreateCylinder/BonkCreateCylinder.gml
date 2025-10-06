@@ -1,6 +1,8 @@
 // Feather disable all
 
-/// Creates an instance of the given object and sets it as a Bonk cylinder instance.
+/// Creates an instance of the given object and sets it as a Bonk cylinder instance. Please see
+/// `BonkSetupCylinder()` for more details on what variables and properties are available on the
+/// created instance.
 /// 
 /// @param xCenter
 /// @param yCenter
