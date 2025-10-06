@@ -25,7 +25,7 @@ function BonkLineHitWorld(_world, _x1, _y1, _z1, _x2, _y2, _z2, _groupFilter = -
     with(_world)
     {
         //TODO - Replace with incremental algo
-        var _pointArray = GetCellsFromLine(_x1, _y1, _z1, _x2, _y2, _z2);
+        var _pointArray = GetCellsFromLineExt(_x1, _y1, _z1, _x2, _y2, _z2);
         var _i = 0;
         repeat(array_length(_pointArray) div 3)
         {

@@ -22,14 +22,79 @@
 /// `Bonk Instance Details` Note asset found in the same asset browset folder as this function. The
 /// following variables and methods are unique to this type of shape:
 /// 
-/// `.xSize` `.ySize` `.zSize`
-///   **Read-only** variables that store the size of the AAB in each axis. You may read these at
-///   any time but they must not be directly written. Please use the method below to change the
-///   size of the AAB.
+/// `.x` `.y` `.z`
+///   These variables are **read-only** for this shape type and are derived by calculating the
+///   centre of the world when adding new shape structs to it.
 /// 
-/// `.SetSize([x], [y], [z])`
-///   Method to set the size of the AAB. If a parameter is set to `undefined` then the existing
-///   size in that axis will be used.
+/// `.Add(shapeStruct)`
+///   Adds a Bonk shape struct to the world. If the struct exists outside the bounding box of the
+///   world then the world will expand to include the shape. Shapes may only be in one world at a
+///   time.
+/// 
+/// `.AddVertexBuffer(vertexBufferOrArray, vertexFormat, [matrix])`
+///   Adds triangles from a `pr_trianglelist` vertex buffer as collisions to the world. You may
+///   provide a matrix to transform the position/size/angle of the triangle. You should be very
+///   careful about adding too many triangles in one location. Try to use a low poly mesh for
+///   collisions and keep the triangle density low.
+/// 
+/// `.CellInside(x, y, z)`
+///   Returns if the given cell exists within the bounding box of the world.
+/// 
+/// `.GetCellsFromLine(lineOrRayShape)`
+///   Returns an array of sequential x/y/z cell coordinate triplets that compromise the supercover
+///   for the line within the world. You may iterate over these coordinates to inspect what shapes
+///   may intersect with the line/ray shape.
+/// 
+/// `.GetCellsFromLineExt(x1, y1, z1, x2, y2, z2)`
+///   Returns an array of sequential x/y/z cell coordinate triplets that compromise the supercover
+///   for the line within the world. You may iterate over these coordinates to inspect what shapes
+///   may intersect with the line/ray shape.
+/// 
+/// `.GetShapeArrayFromPoint(x, y, z)`
+///   Returns an array of shapes that can be found in the cell corresponding to the coordinate
+///   provided. These coordinates are in worldspace and are **not** cell coordinates.
+/// 
+/// `.GetShapeArrayFromCell(x, y, z)`
+///   Returns an array of shapes that can be found in the given cell. These coordinates are cell
+///   coordinates and are **not** worldspace.
+/// 
+/// `.DrawAABB([color], [wireframe=true])`
+///   Draws the axis-aligned bounding box for the world.
+/// 
+/// `.DrawShapesFromRange(aabbStruct, [color], [wireframe])`
+///   Draws all shapes in cells that cover the range of worldspace coordinates given by the AABB
+///   struct. This struct should contain the following variables: `.xMin` `.yMin` `.zMIn` `.xMax`
+///   `.yMax` `.zMax`. This function is compatible with the `.GetAABB()` method found in many
+///   Bonk structs/instances.
+/// 
+/// `.DrawShapesFromArray(cellCoordArray, [color], [wireframe])`
+///   Draws all shapes in cells found in the provided array. Array should provide cell coordinates
+///   as sequential x/y/z triplets. This function is compatible with the `.GetCellsFromLine()`
+///   and `.GetCellsFromLineExt()` methods.
+/// 
+/// `.DrawShapes([color], [wireframe])`
+///   Draws all shapes in the world. This is very slow and should only be used for debugging!
+/// 
+/// `.DrawCellsFromRange(aabbStruct, [color], [wireframe=true], [checkboard=false])`
+///   Draws all cells that cover the range of worldspace coordinates given by the AABB struct.
+///   This struct should contain the following variables: `.xMin` `.yMin` `.zMIn` `.xMax` `.yMax`
+///   `.zMax`. This function is compatible with the `.GetAABB()` method found in many Bonk
+///   structs/instances. If the optional `checkerboard` parameter is set to `true` then every other
+///   cell will be skipped which halves the number of cells drawn.
+/// 
+/// `.DrawCellsFromArray(cellCoordArray, [color], [wireframe])`
+///   Draws all cells found in the provided array. Array should provide cell coordinates as
+///   sequential x/y/z triplets. This function is compatible with the `.GetCellsFromLine()` and
+///   `.GetCellsFromLineExt()` methods.
+/// 
+/// `.DrawCells(aabbStruct, [color], [wireframe=true], [checkboard=true])`
+///   Draws all cells in the world. This is very slow and should only be used for debugging! If the
+///   optional `checkerboard` parameter is set to `false` then every cell will be drawn which
+///   doubles the number of cells drawn.
+/// 
+/// `.__bonk*`
+///   Various cached values that are used to speed up collision detection. These are **read-only**
+///   and even then you'll probably never need to read these variables.
 /// 
 /// @param cellXSize
 /// @param cellYSize

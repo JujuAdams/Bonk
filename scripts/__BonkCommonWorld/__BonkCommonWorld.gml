@@ -712,6 +712,8 @@ function __BonkCommonWorld(_cellXSize, _cellYSize, _cellZSize)
     
     DrawAABB = function(_color = undefined, _wireframe = true)
     {
+        __BONK_VERIFY_UGG
+        
         with(GetAABB())
         {
             UggAABB(0.5*(xMin + xMax), 0.5*(yMin + yMax), 0.5*(zMin + zMax),
@@ -885,17 +887,17 @@ function __BonkCommonWorld(_cellXSize, _cellYSize, _cellZSize)
         return DrawCellsFromRange(GetAABB(), _color, _wireframe, _checkerboard);
     }
     
-    GetCellsFromShape = function(_lineShape)
+    GetCellsFromLine = function(_lineShape)
     {
         with(_lineShape)
         {
             if (bonkType == BONK_TYPE_LINE)
             {
-                return other.GetCellsFromLine(x1, y1, z1,   x2, y2, z2);
+                return other.GetCellsFromLineExt(x1, y1, z1,   x2, y2, z2);
             }
             else if (bonkType == BONK_TYPE_RAY)
             {
-                return other.GetCellsFromLine(x, y, z,   x + BONK_RAY_LENGTH*dx, y + BONK_RAY_LENGTH*dy, z + BONK_RAY_LENGTH*dz);
+                return other.GetCellsFromLineExt(x, y, z,   x + BONK_RAY_LENGTH*dx, y + BONK_RAY_LENGTH*dy, z + BONK_RAY_LENGTH*dz);
             }
             else
             {
@@ -906,7 +908,7 @@ function __BonkCommonWorld(_cellXSize, _cellYSize, _cellZSize)
         return [];
     }
     
-    GetCellsFromLine = function(_x1, _y1, _z1, _x2, _y2, _z2)
+    GetCellsFromLineExt = function(_x1, _y1, _z1, _x2, _y2, _z2)
     {
         var _dX = _x2 - _x1;
         var _dY = _y2 - _y1;

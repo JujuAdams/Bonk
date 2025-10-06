@@ -21,7 +21,7 @@
 /// `Bonk Instance Details` Note asset found in the same asset browset folder as this function. The
 /// following variables and methods are unique to this type of shape:
 /// 
-/// `x` `y` `z`
+/// `.x` `.y` `.z`
 ///   These variables are **read-only** for this shape type and are derived by calculating the
 ///   centre of the quad when calling `Refresh()`.
 /// 
@@ -47,11 +47,9 @@
 ///   `Refresh()` method. You may read these variables at any time but they must not be directly
 ///   written to.
 /// 
-/// `__bonkDX12`  `__bonkDY12`  `__bonkDZ12`  `__bonkDX31`  `__bonkDY31`  `__bonkDZ31`
-/// `__bonkDX24`  `__bonkDY24`  `__bonkDZ24`  `__bonkDX43`  `__bonkDY43`  `__bonkDZ43`
-/// `__bonkLengthSqr12`  `__bonkLengthSqr31`  `__bonkLengthSqr24`  `__bonkLengthSqr43`
-///   Various cached values that are used to speed up quad collision detection. These are
-///   **read-only** and even then you'll probably never need to read these variables.
+/// `.__bonk*`
+///   Various cached values that are used to speed up collision detection. These are **read-only**
+///   and even then you'll probably never need to read these variables.
 /// 
 /// 
 /// @param x1
