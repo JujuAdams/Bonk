@@ -2,14 +2,16 @@
 
 /// Returns a ds_list containing Bonk instances that *probably* touch the provided Bonk instance.
 /// Normal operation would be to not provide a list in which case this function will return a
-/// statically allocated list that contains all probable colliding instances.
-/// 
-/// However, you may choose to specify a list. Any (probable) collisions are appended to the end
-/// of the list.
+/// statically allocated list that contains all probable colliding instances. However, you may
+/// choose to specify a list. Any (probable) collisions are appended to the end of the list you
+/// provide.
 /// 
 /// Collision checks happen in the XY plane. You specify a `dX` and `dY` value to collision the
 /// subject Bonk instance in a different position to where its `x` and `y` position would otherwise
 /// indicate.
+/// 
+/// You may also filter what shapes you do and don't want to test for by setting the optional
+/// `groupFilter` parameter. Please see `BonkFilter()` for more information.
 /// 
 /// @param subjectInstance
 /// @param dX

@@ -1,6 +1,6 @@
 // Feather disable all
 
-/// Returns whether twos Bonk capsules overlap.
+/// Returns whether two Bonk capsules overlap.
 ///
 /// @param capsule1
 /// @param capsule2

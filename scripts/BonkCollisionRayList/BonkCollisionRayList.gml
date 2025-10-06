@@ -1,8 +1,6 @@
 // Feather disable all
 
 /// Works similarly to `BonkCollisionLineList()` albeit using a ray rather than a line segment.
-/// Please note that intersection test happens in the XY plane so z-axis information is not needed
-/// by this function.
 /// 
 /// @param x
 /// @param y

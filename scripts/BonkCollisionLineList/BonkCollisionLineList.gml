@@ -2,12 +2,14 @@
 
 /// Returns a ds_list containing Bonk instances that *probably* touch a line segment. Normal
 /// operation would be to not provide a list in which case this function will return a statically
-/// allocated list that contains all probable colliding instances.
+/// allocated list that contains all probable colliding instances. However, you may choose to
+/// specify a list. Any (probable) collisions are appended to the end of the list that you provide.
 /// 
-/// However, you may choose to specify a list. Any (probable) collisions are appended to the end
-/// of the list.
+/// You may also filter what shapes you do and don't want to test for by setting the optional
+/// `groupFilter` parameter. Please see `BonkFilter()` for more information.
 /// 
-/// Collision checks happen in the XY plane so z-axis information is not needed by this function.
+/// Line intersection checks happen in the XY plane so z-axis information is not needed by this
+/// function.
 /// 
 /// @param x1
 /// @param y1
