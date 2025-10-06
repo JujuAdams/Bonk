@@ -13,6 +13,20 @@ function __BonkCommonInstanceFunctions(_groupVector = BONK_DEFAULT_GROUP)
     
     
     
+    SetPosition = function(_x = x, _y = y, _z = z)
+    {
+        x = _x;
+        y = _y;
+        z = _z;
+        
+        if (BONK_SET_INSTANCE_DEPTH)
+        {
+            depth = _z;
+        }
+        
+        return self;
+    }
+    
     AddPosition = function(_dX, _dY, _dZ)
     {
         SetPosition(x + _dX, y + _dY, z + _dZ);
@@ -62,7 +76,7 @@ function __BonkCommonInstanceFunctions(_groupVector = BONK_DEFAULT_GROUP)
             return false;
         }
         
-        var _insideFunc = __insideFuncLookup[_otherShape.bonkType];
+        var _insideFunc = __bonkTouchFuncLookup[_otherShape.bonkType];
         if (is_callable(_insideFunc))
         {
             return _insideFunc(self, _otherShape);
@@ -132,7 +146,7 @@ function __BonkCommonInstanceFunctions(_groupVector = BONK_DEFAULT_GROUP)
             return _nullCollisionData;
         }
         
-        var _collideFunc = __collideFuncLookup[_otherShape.bonkType];
+        var _collideFunc = __bonkCollideFuncLookup[_otherShape.bonkType];
         if (is_callable(_collideFunc))
         {
             return _collideFunc(self, _otherShape, _struct);

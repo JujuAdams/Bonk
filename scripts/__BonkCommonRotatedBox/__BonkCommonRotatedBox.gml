@@ -13,7 +13,7 @@ function __BonkCommonRotatedBox()
         return _array;
     })();
     
-    static _insideFuncLookup = (function()
+    static _touchFuncLookup = (function()
     {
         var _array = array_create(BONK_NUMBER_OF_TYPES, undefined);
         _array[@ BONK_TYPE_CAPSULE ] = BonkRotatedBoxTouchCapsule;
@@ -22,8 +22,8 @@ function __BonkCommonRotatedBox()
         return _array;
     })();
     
-    __collideFuncLookup = _collideFuncLookup;
-    __insideFuncLookup  = _insideFuncLookup;
+    __bonkCollideFuncLookup = _collideFuncLookup;
+    __bonkTouchFuncLookup  = _touchFuncLookup;
     
     LineHit = method(undefined, function(_x1, _y1, _z1, _x2, _y2, _z2, _groupFilter = -1, _struct = undefined)
     {

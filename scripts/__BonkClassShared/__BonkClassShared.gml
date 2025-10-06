@@ -64,7 +64,7 @@ function __BonkClassShared(_groupVector) constructor
             return false;
         }
         
-        var _insideFunc = __insideFuncLookup[_otherShape.bonkType];
+        var _insideFunc = __bonkTouchFuncLookup[_otherShape.bonkType];
         if (is_callable(_insideFunc))
         {
             return _insideFunc(self, _otherShape);
@@ -133,7 +133,7 @@ function __BonkClassShared(_groupVector) constructor
             return _nullCollisionData;
         }
         
-        var _collideFunc = __collideFuncLookup[_otherShape.bonkType];
+        var _collideFunc = __bonkCollideFuncLookup[_otherShape.bonkType];
         if (is_callable(_collideFunc))
         {
             return _collideFunc(self, _otherShape, _struct);

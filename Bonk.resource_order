@@ -1,7 +1,7 @@
 {
   "FolderOrderSettings":[
     {"name":"Bonk","order":1,"path":"folders/Bonk.yy",},
-    {"name":"(System)","order":7,"path":"folders/Bonk/(System).yy",},
+    {"name":"(System)","order":6,"path":"folders/Bonk/(System).yy",},
     {"name":"Common Values","order":17,"path":"folders/Bonk/(System)/Common Values.yy",},
     {"name":"Direct Control","order":3,"path":"folders/Bonk/Direct Control.yy",},
     {"name":"Collide","order":4,"path":"folders/Bonk/Direct Control/Collide.yy",},
@@ -25,7 +25,7 @@
     {"name":"Sphere","order":6,"path":"folders/Bonk/Direct Control/Touch/Sphere.yy",},
     {"name":"Triangle","order":7,"path":"folders/Bonk/Direct Control/Touch/Triangle.yy",},
     {"name":"Helper Constructors","order":2,"path":"folders/Bonk/Helper Constructors.yy",},
-    {"name":"Instances","order":6,"path":"folders/Bonk/Instances.yy",},
+    {"name":"Instances","order":4,"path":"folders/Bonk/Instances.yy",},
     {"name":"Instance Create","order":11,"path":"folders/Bonk/Instances/Instance Create.yy",},
     {"name":"Instance Setup","order":12,"path":"folders/Bonk/Instances/Instance Setup.yy",},
     {"name":"dotobj","order":13,"path":"folders/dotobj.yy",},
@@ -190,7 +190,6 @@
     {"name":"BonkCylinderTouchSphere","order":4,"path":"scripts/BonkCylinderTouchSphere/BonkCylinderTouchSphere.yy",},
     {"name":"BonkDeflectMany","order":4,"path":"scripts/BonkDeflectMany/BonkDeflectMany.yy",},
     {"name":"BonkDeflectManyExt","order":3,"path":"scripts/BonkDeflectManyExt/BonkDeflectManyExt.yy",},
-    {"name":"BonkFilter","order":8,"path":"scripts/BonkFilter/BonkFilter.yy",},
     {"name":"BonkInstancePlaceListVelocity","order":1,"path":"scripts/BonkInstancePlaceListVelocity/BonkInstancePlaceListVelocity.yy",},
     {"name":"BonkLine","order":2,"path":"scripts/BonkLine/BonkLine.yy",},
     {"name":"BonkLineHitCapsule","order":1,"path":"scripts/BonkLineHitCapsule/BonkLineHitCapsule.yy",},

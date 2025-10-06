@@ -39,23 +39,19 @@ function BonkSetupCylinder(_x, _y, _z, _height, _radius, _groupVector = BONK_DEF
     
     
     
-    SetPosition = function(_x = x, _y = y, _z = z)
+    SetHeight = function(_height = height)
     {
-        x = _x;
-        y = _y;
-        z = _z;
-        
-        if (BONK_SET_INSTANCE_DEPTH)
-        {
-            depth = _z;
-        }
+        height = _height;
         
         return self;
     }
     
-    SetHeight = function(_height = height)
+    SetRadius = function(_radius = radius)
     {
-        height = _height;
+        radius = _radius;
+        
+        image_xscale = 2*radius / BONK_MASK_SIZE;
+        image_yscale = 2*radius / BONK_MASK_SIZE;
         
         return self;
     }
@@ -70,16 +66,6 @@ function BonkSetupCylinder(_x, _y, _z, _height, _radius, _groupVector = BONK_DEF
             yMax: bbox_bottom,
             zMax: z + 0.5*height,
         };
-    }
-    
-    SetRadius = function(_radius = radius)
-    {
-        radius = _radius;
-        
-        image_xscale = 2*radius / BONK_MASK_SIZE;
-        image_yscale = 2*radius / BONK_MASK_SIZE;
-        
-        return self;
     }
     
     DebugDraw = function(_color = undefined, _wireframe = undefined)

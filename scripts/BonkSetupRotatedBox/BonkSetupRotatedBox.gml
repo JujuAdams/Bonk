@@ -44,20 +44,6 @@ function BonkSetupRotatedBox(_x, _y, _z, _xSize, _ySize, _zSize, _zRotation, _gr
     image_angle  = _zRotation;
     
     
-    
-    SetPosition = function(_x = x, _y = y, _z = z)
-    {
-        x = _x;
-        y = _y;
-        z = _z;
-        
-        if (BONK_SET_INSTANCE_DEPTH)
-        {
-            depth = _z;
-        }
-        
-        return self;
-    }
         
     SetSize = function(_x = xSize, _y = ySize, _z = zSize)
     {
@@ -71,7 +57,7 @@ function BonkSetupRotatedBox(_x, _y, _z, _xSize, _ySize, _zSize, _zRotation, _gr
         return self;
     }
     
-    static SetRotation = function(_zRotation = zRotation)
+    SetRotation = function(_zRotation = zRotation)
     {
         zRotation = _zRotation;
         
