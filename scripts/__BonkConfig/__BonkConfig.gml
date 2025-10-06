@@ -8,11 +8,13 @@
 #macro BONK_RAY_LENGTH  100_000
 
 // Adds callstack data to Bonk instances in the `bonkCreateCallstack` variable. This is helpful
-// when tracking down Bonk instances that haven't been destroyed when they should be.
+// when tracking down Bonk instances that haven't been destroyed when they should be. Please note
+// that this is an expensive feature and should be set to `false` for production builds.
 #macro BONK_DEBUG_INSTANCES  false
 
 // Adds callstack data to Bonk structs in the `bonkCreateCallstack` variable. This is helpful
-// when tracking down why Bonk structs have been created.
+// when tracking down why Bonk structs have been created. Please note that this is an expensive
+// feature and should be set to `false` for production builds.
 #macro BONK_DEBUG_STRUCTS  false
 
 // Whether to set the native GameMaker `depth` instance variable. If this macro is set to `true`,

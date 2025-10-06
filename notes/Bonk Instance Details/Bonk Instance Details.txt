@@ -80,6 +80,12 @@ the final fourth point (e.g. `BonkSetupAAB()`).
   maximum value that this variable can hold is `0xFFFFF` (1,048,575).
 
 
+`.bonkCreateCallstack`
+  This variable will not normally be set. However, if you set `BONK_DEBUG_INSTANCES` to `true` then
+  the callstack when creating the instance will be pushed to this variable. Please note that this
+  is rather expensive and you should set `BONK_DEBUG_INSTANCES` to `false` for production builds.
+
+
 `.__bonkCollideFuncLookup`  `.__bonkTouchFuncLookup`
   Private variables that you'll never need to access.
 
