@@ -19,9 +19,16 @@ function BonkSetupSphere(_x, _y, _z, _radius, _groupVector = BONK_DEFAULT_GROUP)
     __BonkCommonSphere();
     
     
-    
+    x = _x;
+    y = _y;
     z = _z;
+    
     radius = _radius;
+    
+    if (BONK_SET_INSTANCE_DEPTH)
+    {
+        depth = -_z;
+    }
     
     mask_index = __BonkMaskCircle;
     image_xscale = 2*_radius / BONK_MASK_SIZE;
@@ -34,6 +41,11 @@ function BonkSetupSphere(_x, _y, _z, _radius, _groupVector = BONK_DEFAULT_GROUP)
         x = _x;
         y = _y;
         z = _z;
+        
+        if (BONK_SET_INSTANCE_DEPTH)
+        {
+            depth = -_z;
+        }
         
         return self;
     }

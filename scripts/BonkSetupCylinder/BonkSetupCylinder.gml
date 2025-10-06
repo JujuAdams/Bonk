@@ -25,6 +25,11 @@ function BonkSetupCylinder(_x, _y, _z, _height, _radius, _groupVector = BONK_DEF
     y = _y;
     z = _z;
     
+    if (BONK_SET_INSTANCE_DEPTH)
+    {
+        depth = -_z;
+    }
+    
     height = _height;
     radius = _radius;
     
@@ -39,6 +44,11 @@ function BonkSetupCylinder(_x, _y, _z, _height, _radius, _groupVector = BONK_DEF
         x = _x;
         y = _y;
         z = _z;
+        
+        if (BONK_SET_INSTANCE_DEPTH)
+        {
+            depth = -_z;
+        }
         
         return self;
     }

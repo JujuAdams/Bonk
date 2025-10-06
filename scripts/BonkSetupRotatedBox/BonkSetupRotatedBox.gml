@@ -27,6 +27,11 @@ function BonkSetupRotatedBox(_x, _y, _z, _xSize, _ySize, _zSize, _zRotation, _gr
     y = _y;
     z = _z;
     
+    if (BONK_SET_INSTANCE_DEPTH)
+    {
+        depth = -_z;
+    }
+    
     xSize = _xSize;
     ySize = _ySize;
     zSize = _zSize;
@@ -45,6 +50,11 @@ function BonkSetupRotatedBox(_x, _y, _z, _xSize, _ySize, _zSize, _zRotation, _gr
         x = _x;
         y = _y;
         z = _z;
+        
+        if (BONK_SET_INSTANCE_DEPTH)
+        {
+            depth = -_z;
+        }
         
         return self;
     }
