@@ -2,9 +2,9 @@ if (not oCamera.camera.GetMouseLock())
 {
     if (keyboard_check_pressed(ord("R")))
     {
-        shape.x = xstart;
-        shape.y = ystart;
-        shape.z = 200;
+        x = xstart;
+        y = ystart;
+        z = 200;
         velocity.Reset();
     }
     
@@ -30,7 +30,7 @@ else
 velocity.zSpeed -= gravAccel;
 --onGroundFrames;
 
-var _pushOutData = BonkMoveAndDeflect(shape, velocity, 40, oTestInstanceParent);
+var _pushOutData = BonkMoveAndDeflect(self, velocity, 40, oTestInstanceParent);
 if (_pushOutData.deflectType == BONK_DEFLECT_GRIPPY)
 {
     onGroundFrames = 30;
@@ -41,9 +41,9 @@ if (onGroundFrames > 0)
     velocity.zSpeed = min(-0.3, velocity.zSpeed);
 }
 
-line.x1 = shape.x;
-line.y1 = shape.y;
-line.z1 = shape.z + 0.5*shape.height;
-line.x2 = shape.x;
-line.y2 = shape.y;
-line.z2 = shape.z - 0.5*shape.height - 50;
+line.x1 = x;
+line.y1 = y;
+line.z1 = z + 0.5*height;
+line.x2 = x;
+line.y2 = y;
+line.z2 = z - 0.5*height - 50;

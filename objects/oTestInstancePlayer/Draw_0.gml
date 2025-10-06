@@ -1,4 +1,4 @@
-shape.DebugDraw(c_lime, true);
+DebugDraw(c_lime, true);
 line.DebugDraw(c_yellow);
 
 var _hit = line.HitFirst(oTestInstanceParent);
