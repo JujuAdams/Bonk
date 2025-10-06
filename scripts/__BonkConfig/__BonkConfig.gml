@@ -23,4 +23,4 @@
 // 
 // N.B.  If you are setting `z` manually, `depth` will not be set! You should always use the
 ///      `.SetPosition()` method.
-#macro BONK_SET_INSTANCE_DEPTH  true
+#macro BONK_SET_INSTANCE_DEPTH  false
