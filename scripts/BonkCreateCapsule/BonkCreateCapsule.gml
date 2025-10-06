@@ -2,7 +2,8 @@
 
 /// Creates an instance of the given object and sets it as a Bonk capsule instance. Please see
 /// `BonkSetupCapsule()` for more details on what variables and properties are available on the
-/// created instance.
+/// created instance. Bonk instances share the same basic behaviour and an details can be found in
+/// the `Bonk Instance Details` Note asset.
 /// 
 /// @param xCenter
 /// @param yCenter

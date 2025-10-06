@@ -1,0 +1,152 @@
+# Introduction
+
+Bonk instances share the same basic behaviour. In general, setting up an instance to work with
+Bonk will do the following things:
+
+1. Set the following native GameMaker variables:
+   `x`  `y`  `mask_index`  `image_xscale`  `image_yscale`  `image_angle`  (and maybe `depth`)
+
+2. Set variables that Bonk needs to operate:
+   `z`  `bonkType`  `bonkGroup`  `__bonkCollideFuncLookup`  `__bonkTouchFuncLookup`
+   (and maybe `bonkCreateCallstack`)
+
+3. Set variables to Bonk methods:
+   `SetPosition()`  `AddPosition()`  `Touch()`  `Collide()`  `Deflect()`  `LineHit()`
+   `FilterTest()`  `DebugDraw()`  `DebugDrawMask()`
+
+4. Set a handful of further variables and methods for the specific shape type.
+
+Ths document will cover the first three points. Please refer to shape-specific documentation for
+the final fourth point (e.g. `BonkSetupAAB()`).
+
+
+
+## Native GameMaker Variables
+
+`.x` `.y`
+  These variables determine the coordinates of the centre of the shape. These variables should
+  **never** be manually set for triangles, quads, or worlds.
+  
+  For other shapes, if `BONK_SET_INSTANCE_DEPTH` is set to `false` (which is the typical value)
+  then `.x` and `y` can be set freely. However, if you have set `BONK_SET_INSTANCE_DEPTH` to
+  `true` then you should never set `.x` and `.y` directly and should instead use `.SetPosition()`
+  or `.AddPosition()` to set your position.
+
+
+`.depth`
+  If the config macro `BONK_SET_INSTANCE_DEPTH` is set to `true` then the native variable `depth`
+  is set to copy the value for `z` whenever a Bonk instance is created or `.SetPosition()` or
+  `.AddPosition()` is called.
+
+
+`.mask_index`
+  This is used to set the mask sprite needed to accuate collide between instances. As such, this is
+  a **read-only** variable. You're welcome to use `sprite_index` for your instances, however.
+
+
+`.image_xscale` `.image_yscale`
+  Used to set the size of the instance collider in worldspace. As such, these are **read-only**
+  variables.
+
+
+`.image_angle`
+  Only actively used by rotated box shapes; however, any value other than `0` for `image_angle` is
+  likely to cause incorrect collision results for other shapes. As such, this is a **read-only**
+  variable.
+
+
+
+
+## Bonk-specific Variables
+
+`.z`
+  The z coordinate of the centre of the shape. This variables should **never** be manually set for
+  triangles, quads, or worlds.
+  
+  For other shapes, if `BONK_SET_INSTANCE_DEPTH` is set to `false` (which is the typical value)
+  then `.z` can be set freely. However, if you have set `BONK_SET_INSTANCE_DEPTH` to `true` then
+  you should never set `.z` directly and should instead use `.SetPosition()` or `.AddPosition()` to
+  set your position.
+
+
+`.bonkType`
+  Used to store the fundamental type of shape. This will be one of the `BONK_TYPE_*` constants.
+  This is a **read-only** variable.
+
+
+`.bonkGroup`
+  The bitvector used to determine what group(s) the shape is in. You can read and write this
+  variable freely. However, you are limited to a group being in up to 20 groups which means the
+  maximum value that this variable can hold is `0xFFFFF` (1,048,575).
+
+
+`.__bonkCollideFuncLookup`  `.__bonkTouchFuncLookup`
+  Private variables that you'll never need to access.
+
+
+
+
+## Bonk-specific Methods
+
+`.SetPosition([x], [y], [z])`
+  Sets the position of the centre of the shape. This function should **never** be called for
+  triangle, quad, or world shapes. This function will take care of setting `depth` if
+  `BONK_SET_INSTANCE_DEPTH` is set to `true`. If any parameter is not provided, the existing
+  coordinate is used.
+
+
+`.AddPosition([dX], [dY], [dZ])`
+  Adds to the position of the centre of the shape. This function should **never** be called for
+  triangle, quad, or world shapes. This function will take care of setting `depth` if
+  `BONK_SET_INSTANCE_DEPTH` is set to `true`. If any parameter is not provided, no movement is
+  applied along that axis.
+
+
+`.Touch(subjectShape, [groupFilter])`
+  Returns if the scoped shape touches the subject shape. You may also apply a group filte by
+  setting the `groupFilter` parameter. Please see `BonkFilter()` for more information.
+
+
+`.Collide(subjectShape, [groupFilter], [struct])`
+  Performs a collision check against the subject shape. This function returns collision data
+  (`BonkResultCollision`) with the `.shape` variable set to the scoped shape if a collision exists.
+  If no collision is found, `.shape` in the returned struct will be set to `undefined`.
+  
+  You may also apply a group filter by setting the `groupFilter` parameter. Please see
+  `BonkFilter()` for more information.
+
+
+`.Deflect(subjectShape, [slopeThreshold], [groupFilter], [struct])`
+  Attempts to push the subject shape out of the scoped shape. This function returns deflection data
+  (`BonkResultDeflect`) with the `.deflectType` variable set to indicate what sort of collision
+  occurred. If there was no collision, `.deflectType` will be set to `BONK_DEFLECT_NONE`. You can
+  also inspect the nested `.collisionData` struct.
+  
+  You may also apply a group filter by setting the `groupFilter` parameter. Please see
+  `BonkFilter()` for more information.
+
+
+`.LineHit(x1, y1, z1, x2, y2, z2, [groupFilter], [struct])`
+  Performs a line/ray hit check against the shape. This function returns hit data (`BonkResultHit`)
+  which describes how and where the line intersects the shape. If not hit was found, the `.shape`
+  variable in the returned struct will be set to `undefined`.
+  
+  This function will return a statically allocated struct by default. Calling this function
+  multiple times will reuse the same internal struct. If you'd like to push results to your own
+  struct, please set the optional `struct` parameter.
+
+
+`.FilterTest([groupFilter])`
+  Checks if the group vector for the shape passes the provided group filter. If the group filter is
+  set to `undefined` or a negative value then this function will always return `true`.
+
+
+`.DebugDraw([color], [wireframe])`
+  Draws an Ugg 3D shape that represents the 3D collider for the shape. You will need to import Ugg
+  into your project for this function to work; please visit https://www.github.com/jujuadams/Ugg .
+
+
+`.DebugDrawMask([color])`
+  Draws a sprite that represents the mask being used for instance collisions in the XY plane.
+  This mask will not usually be drawn at the correct z position and is offered for debugging use
+  only.

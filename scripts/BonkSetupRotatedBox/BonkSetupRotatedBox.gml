@@ -7,19 +7,19 @@
 ///  1. Set the following native GameMaker variables:
 ///     `x`  `y`  `mask_index`  `image_xscale`  `image_yscale`  `image_angle`  (and maybe `depth`)
 /// 
-///  2. Set variables that Bonk needs to operate
+///  2. Set variables that Bonk needs to operate:
 ///     `z`  `bonkType`  `bonkGroup`  `__bonkCollideFuncLookup`  `__bonkTouchFuncLookup`
 ///     (and maybe `bonkCreateCallstack`)
 /// 
-///  3. Set variables to Bonk methods
+///  3. Set variables to Bonk methods:
 ///     `SetPosition()`  `AddPosition()`  `Touch()`  `Collide()`  `Deflect()`  `LineHit()`
 ///     `FilterTest()`  `DebugDraw()`  `DebugDrawMask()`
 /// 
 ///  4. Set a handful of further variables and methods for the specific shape type
 /// 
 /// You can read about the how to use the shared general variables and methods in the
-/// `Bonk Instance Details` Note asset found in the same asset browset folder as this function. The
-/// following variables and methods are unique to this type of shape:
+/// `Bonk Instance Details` Note asset. The following variables and methods are unique to this type
+/// of shape:
 /// 
 /// `.xSize` `.ySize` `.zSize`
 ///   **Read-only** variables that store the size of the box in each axis. You may read these at
