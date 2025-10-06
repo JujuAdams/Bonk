@@ -20,11 +20,6 @@ function __BonkClassShared(_groupVector) constructor
         SetPosition(x + _dX, y + _dY, z + _dZ);
     }
     
-    static AddVelocity = function(_velocityStruct)
-    {
-        SetPosition(x + _velocityStruct.xSpeed, y + _velocityStruct.ySpeed, z + _velocityStruct.zSpeed);
-    }
-    
     static FilterTest = function(_filter)
     {
         if (_filter < 0)
@@ -147,10 +142,5 @@ function __BonkClassShared(_groupVector) constructor
         }
         
         return _nullCollisionData;
-    }
-    
-    static InstancePlaceList = function(_dX, _dY, _objectOrArray = BonkObject, _groupFilter = -1, _list = undefined)
-    {
-        return BonkInstancePlaceList(self, _dX, _dY, _objectOrArray, _groupFilter, _list);
     }
 }

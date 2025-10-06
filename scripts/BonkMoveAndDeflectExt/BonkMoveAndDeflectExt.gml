@@ -20,7 +20,10 @@ function BonkMoveAndDeflectExt(_subjectShape, _velocityStruct, _targetShapes, _s
         var _y = y;
         var _z = z;
         
-        AddVelocity(_velocityStruct);
+        SetPosition(x + _velocityStruct.xSpeed,
+                    y + _velocityStruct.ySpeed,
+                    z + _velocityStruct.zSpeed);
+        
         var _return = BonkDeflectManyExt(_subjectShape, _targetShapes, _slopeThreshold, _groupFilter);
         
         _velocityStruct.xSpeed = x - _x;

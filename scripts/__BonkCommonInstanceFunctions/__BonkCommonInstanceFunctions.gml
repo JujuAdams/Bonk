@@ -32,11 +32,6 @@ function __BonkCommonInstanceFunctions(_groupVector = BONK_DEFAULT_GROUP)
         SetPosition(x + _dX, y + _dY, z + _dZ);
     }
     
-    AddVelocity = function(_velocityStruct)
-    {
-        SetPosition(x + _velocityStruct.xSpeed, y + _velocityStruct.ySpeed, z + _velocityStruct.zSpeed);
-    }
-    
     FilterTest = function(_filter = -1)
     {
         if (_filter < 0)
