@@ -1,9 +1,17 @@
 // Feather disable all
 
 /// Returned by all "collide" functions (e.g. `BonkCylinderCollideCylinder()`) and is also part of
-/// deflect data (please see `BonkResultDeflect()`).
+/// deflect data (please see `BonkResultDeflect()`). You'll almost certainly never need to create
+/// one of these structs yourself.
 /// 
-/// You'll almost certainly never need to create one of these structs yourself.
+/// Structs created by the constructor contain the following variables:
+/// 
+/// `.dX` `.dY` `.dZ`
+///   The displacement required to separate the two colliding shapes.
+///
+/// `.shape`
+///   The shape that was collided with. If this variable is set to `undefined` then no collision
+///   was found.
 
 function BonkResultCollide() constructor
 {

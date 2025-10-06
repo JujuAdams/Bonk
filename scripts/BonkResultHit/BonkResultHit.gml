@@ -1,8 +1,18 @@
 // Feather disable all
 
-/// Returned by all "hit" functions (e.g. `BonkRayHitSphere()`).
+/// Returned by all "hit" functions (e.g. `BonkRayHitSphere()`). You'll almost certainly never need
+/// to create one of these structs yourself.
 /// 
-/// You'll almost certainly never need to create one of these structs yourself.
+/// Structs created by the constructor contain the following variables:
+/// 
+/// `.x` `.y` `.z`
+///   The point where the line/ray hit the shape.
+/// 
+/// `.normalX `.normalY` `.normalZ`
+///   The normal of the surface where the line/ray hits the shape.
+///
+/// `.shape`
+///   The shape that was hit. If this variable is set to `undefined` then no hit was found.
 
 function BonkResultHit() constructor
 {

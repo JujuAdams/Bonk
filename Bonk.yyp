@@ -15,7 +15,7 @@
     {"$GMFolder":"","%Name":"Common Values","folderPath":"folders/Bonk/(System)/Common Values.yy","name":"Common Values","resourceType":"GMFolder","resourceVersion":"2.0",},
     {"$GMFolder":"","%Name":"Direct Control","folderPath":"folders/Bonk/Direct Control.yy","name":"Direct Control","resourceType":"GMFolder","resourceVersion":"2.0",},
     {"$GMFolder":"","%Name":"Multi Functions","folderPath":"folders/Bonk/Direct Control/Multi Functions.yy","name":"Multi Functions","resourceType":"GMFolder","resourceVersion":"2.0",},
-    {"$GMFolder":"","%Name":"Result Structs","folderPath":"folders/Bonk/Direct Control/Result Structs.yy","name":"Result Structs","resourceType":"GMFolder","resourceVersion":"2.0",},
+    {"$GMFolder":"","%Name":"Result Structs","folderPath":"folders/Bonk/Result Structs.yy","name":"Result Structs","resourceType":"GMFolder","resourceVersion":"2.0",},
     {"$GMFolder":"","%Name":"Shape Constructors","folderPath":"folders/Bonk/Direct Control/Shape Constructors.yy","name":"Shape Constructors","resourceType":"GMFolder","resourceVersion":"2.0",},
     {"$GMFolder":"","%Name":"Helper Constructors","folderPath":"folders/Bonk/Helper Constructors.yy","name":"Helper Constructors","resourceType":"GMFolder","resourceVersion":"2.0",},
     {"$GMFolder":"","%Name":"Instances","folderPath":"folders/Bonk/Instances.yy","name":"Instances","resourceType":"GMFolder","resourceVersion":"2.0",},

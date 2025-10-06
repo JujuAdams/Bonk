@@ -6,7 +6,7 @@
   "name":"BonkResultHit",
   "parent":{
     "name":"Result Structs",
-    "path":"folders/Bonk/Direct Control/Result Structs.yy",
+    "path":"folders/Bonk/Result Structs.yy",
   },
   "resourceType":"GMScript",
   "resourceVersion":"2.0",
