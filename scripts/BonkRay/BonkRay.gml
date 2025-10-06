@@ -1,5 +1,9 @@
 // Feather disable all
 
+/// Constructor that defines a ray - a line with an origin and a direction but (functionally)
+/// infinite length. Bonk rays aren't actually infinite in length - their length is determiend
+/// by `BONK_RAY_LENGTH`. Bonk rays can be used in the same way as Bonk lines.
+/// 
 /// @param x
 /// @param y
 /// @param z

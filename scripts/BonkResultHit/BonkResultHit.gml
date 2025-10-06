@@ -16,8 +16,6 @@ function BonkResultHit() constructor
     normalY = 0;
     normalZ = 1;
     
-    
-    
     static __Null = function()
     {
         shape = undefined;

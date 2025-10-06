@@ -1,5 +1,7 @@
 // Feather disable all
 
+/// Constructor that defines a line segment that can be used for various Bonk functions.
+/// 
 /// @param x1
 /// @param y1
 /// @param z1

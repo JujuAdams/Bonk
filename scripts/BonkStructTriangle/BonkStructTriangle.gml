@@ -1,5 +1,9 @@
 // Feather disable all
 
+/// Constructor that creates a Bonk triangle as a struct rather than an instance. For further
+/// information please refer to `BonkSetupTriangle()` (though native GameMaker variables other
+/// than `x` and `y` will not be set for structs).
+/// 
 /// @param x1
 /// @param y1
 /// @param z1

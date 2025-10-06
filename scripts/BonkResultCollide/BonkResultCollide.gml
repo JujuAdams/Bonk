@@ -13,8 +13,6 @@ function BonkResultCollide() constructor
     dY = 0;
     dZ = 0;
     
-    
-    
     static __Null = function()
     {
         shape = undefined;

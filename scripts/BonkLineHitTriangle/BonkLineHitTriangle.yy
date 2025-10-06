@@ -5,8 +5,8 @@
   "isDnD":false,
   "name":"BonkLineHitTriangle",
   "parent":{
-    "name":"Line Hit",
-    "path":"folders/Bonk/Direct Control/Line Hit.yy",
+    "name":"Line",
+    "path":"folders/Bonk/Direct Control/Manual Checkers/Hit/Line.yy",
   },
   "resourceType":"GMScript",
   "resourceVersion":"2.0",

@@ -36,5 +36,5 @@
 
 function BonkMoveAndDeflect(_subjectInstance, _velocityStruct, _slopeThreshold = 0, _objectOrArray = BonkObject, _groupFilter = -1)
 {
-    return BonkMoveAndDeflectExt(_subjectInstance, _velocityStruct, BonkInstancePlaceListVelocity(_subjectInstance, _velocityStruct, _objectOrArray), _slopeThreshold, _groupFilter);
+    return BonkMoveAndDeflectExt(_subjectInstance, _velocityStruct, BonkInstancePlaceList(_subjectInstance, _velocityStruct.xSpeed, _velocityStruct.ySpeed, _objectOrArray), _slopeThreshold, _groupFilter);
 }

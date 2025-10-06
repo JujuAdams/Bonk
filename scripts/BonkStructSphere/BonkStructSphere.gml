@@ -1,5 +1,9 @@
 // Feather disable all
 
+/// Constructor that creates a Bonk sphere as a struct rather than an instance. For further
+/// information please refer to `BonkSetupSphere()` (though native GameMaker variables other
+/// than `x` and `y` will not be set for structs).
+/// 
 /// @param x
 /// @param y
 /// @param z

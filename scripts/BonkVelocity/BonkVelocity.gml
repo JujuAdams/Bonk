@@ -1,23 +1,18 @@
 // Feather disable all
 
 /// Constructor to make a struct that contains 3D velocity data. This struct is required when using
-/// `BonkMoveAndDeflectExt()`. Struct are created with three member variables, `xSpeed` `ySpeed` and
-/// `zSpeed`, that encode the three components of the velocity. You may get and set these variables
-/// as you see fit.
+/// `BonkMoveAndDeflect()` and `BonkMoveAndDeflectExt()`. Structs are created with three variables,
+/// `xSpeed` `ySpeed` `zSpeed`, that encode the three components of the velocity. You may read and
+/// write these variables freely.
 /// 
 /// Structs created by this constructor have two methods:
 /// 
 /// `.GetSpeed()`
-///     Return the scalar speed that the struct represents. This is the "length" of the velocity
-///     vector.
+///   Return the scalar speed that the struct represents. This is the "length" of the velocity
+///   vector.
 /// 
 /// `.Reset()`
-///     Sets the x, y, and z components of the velocity to 0.
-/// 
-/// The struct created by the constructor contains the following values:
-/// 
-/// `.xSpeed` `.ySpeed` `.zSpeed`
-///     Components of the velocity vector.
+///   Sets the x, y, and z components of the velocity to 0.
 /// 
 /// @param [xSpeed=0]
 /// @param [ySpeed=0]

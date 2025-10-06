@@ -6,7 +6,7 @@
   "name":"BonkCylinderTouchRotatedBox",
   "parent":{
     "name":"Cylinder",
-    "path":"folders/Bonk/Direct Control/Touch/Cylinder.yy",
+    "path":"folders/Bonk/Direct Control/Manual Checkers/Touch/Cylinder.yy",
   },
   "resourceType":"GMScript",
   "resourceVersion":"2.0",

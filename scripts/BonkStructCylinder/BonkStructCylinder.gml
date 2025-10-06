@@ -1,5 +1,9 @@
 // Feather disable all
 
+/// Constructor that creates a Bonk cylinder as a struct rather than an instance. For further
+/// information please refer to `BonkSetupCylinder()` (though native GameMaker variables other than
+/// `x` and `y` will not be set for structs).
+/// 
 /// @param xCenter
 /// @param yCenter
 /// @param zCenter

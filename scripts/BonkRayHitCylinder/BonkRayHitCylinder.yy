@@ -5,8 +5,8 @@
   "isDnD":false,
   "name":"BonkRayHitCylinder",
   "parent":{
-    "name":"Ray Hit",
-    "path":"folders/Bonk/Direct Control/Ray Hit.yy",
+    "name":"Ray",
+    "path":"folders/Bonk/Direct Control/Manual Checkers/Hit/Ray.yy",
   },
   "resourceType":"GMScript",
   "resourceVersion":"2.0",

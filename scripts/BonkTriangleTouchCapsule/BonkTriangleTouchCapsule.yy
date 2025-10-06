@@ -6,7 +6,7 @@
   "name":"BonkTriangleTouchCapsule",
   "parent":{
     "name":"Triangle",
-    "path":"folders/Bonk/Direct Control/Touch/Triangle.yy",
+    "path":"folders/Bonk/Direct Control/Manual Checkers/Touch/Triangle.yy",
   },
   "resourceType":"GMScript",
   "resourceVersion":"2.0",

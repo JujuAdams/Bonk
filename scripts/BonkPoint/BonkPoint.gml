@@ -1,5 +1,7 @@
 // Feather disable all
 
+/// Constructor that defines a point in space that can be used for various Bonk functions.
+/// 
 /// @param x
 /// @param y
 /// @param z
