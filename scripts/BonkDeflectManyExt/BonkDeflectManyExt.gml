@@ -1,6 +1,12 @@
 // Feather disable all
 
-/// Pushes a shape (the "subject shape") outside any and all of the target shapes.
+/// Pushes the subject shape out of collisions found with the target shapes.
+/// 
+/// This function will then return deflect data (`BonkResultDeflect`) for the highest priority
+/// collision. Collisions with slopes beneath the threshold ("grippy") take priority over
+/// collisions with slopes above the threshold ("slippery") collisions, and higher depth collisions
+/// take priority over lower depth collisions. The returned struct is statically allocated and
+/// calling this function multiple times will reuse the same struct.
 /// 
 /// The `targetShapes` parameter can be an array, a list, a Bonk struct/instance, or an object used
 /// to create Bonk instances. If you provide an array or list then elements in the array/list
@@ -19,6 +25,9 @@
 /// game; that is, objects that are intended move and roll around the environment freely. The
 /// player character and non-player characters alike will want a slope threshold of some kind. I
 /// personally like an angle of `40` degrees.
+/// 
+/// You may also filter what shapes you do and don't want to test for by setting the optional
+/// `groupFilter` parameter. Please see `BonkFilter()` for more information.
 /// 
 /// @param subjectShape
 /// @param targetShapes

@@ -7,8 +7,8 @@
 /// and Bonk instances in the returned collision data.
 /// 
 /// This function will return a statically allocated array by default. Calling this function
-/// multiple times will reuse the same internal array. If you'd like to insert results into your
-/// own array, please set the optional `array` parameter.
+/// multiple times will reuse the same internal array. If you'd like to push results to your own
+/// array, please set the optional `array` parameter.
 /// 
 /// You may also filter what shapes you do and don't want to test for by setting the optional
 /// `groupFilter` parameter. Please see `BonkFilter()` for more information.

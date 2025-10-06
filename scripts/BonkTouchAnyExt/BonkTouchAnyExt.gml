@@ -1,32 +1,15 @@
 // Feather disable all
 
-/// This function returns `true` if the subject shape intersects with one or more target shapes.
-/// The subject shape can be either a Bonk struct or a Bonk instance.
+/// Returns `true` if the subject shape touches any of the target shapes. If any of the shapes
+/// being tested are Bonk worlds then this function will also test for collisions with structs
+/// stored inside the Bonk world.
 /// 
 /// The `targetShapes` parameter can be an array, a list, a Bonk struct/instance, or an object used
 /// to create Bonk instances. If you provide an array or list then elements in the array/list
 /// should be either a Bonk struct/instance or an object.
 /// 
-/// That's quite a lot to take in so here are some examples of use:
-/// 
-/// `BonkTouchAnyExt(shape, BonkObject);`
-///   Will check if the subject shape touches any instance of the `BonkObject` object or are
-///   instances of objects that inherit from `BonkObject`. The subject shape can be a Bonk struct
-///   or Bonk instance.
-/// 
-/// `BonkTouchAnyExt(shape, [oColliderWater, oColliderLava]);`
-///   Will check if the subject shape touches any instance of `oColliderWater` or `oColliderLava`
-///   or are instances of objects that inherit from `oColliderWater` or `oColliderLava`. The
-///   subject shape can be a Bonk struct or Bonk instance.
-/// 
-/// `BonkTouchAnyExt(shape, triggerArray);`
-///   Will check if the subject shape touches any shape stored in `triggerArray`. The shapes in the
-///   array can be structs, instances, or objects.
-/// 
-/// `BonkTouchAnyExt(shapeInstance, BonkInstancePlaceList(shapeInstance, 0, 0, 0));`
-///   Will check if the subject shape touches any instance found by the broad phase function
-///   `BonkInstancePlaceList()`. The subject shape must be a Bonk instance in this siutation
-///   because `BonkInstancePlaceList()` only works with Bonk instances.
+/// You may also filter what shapes you do and don't want to test for by setting the optional
+/// `groupFilter` parameter. Please see `BonkFilter()` for more information.
 /// 
 /// @param subjectShape
 /// @param targetShapes
