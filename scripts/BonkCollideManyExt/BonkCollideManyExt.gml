@@ -7,11 +7,17 @@
 /// @param subjectShape
 /// @param targetShapes
 /// @param [groupFilter]
+/// @param [array]
 
-function BonkCollideManyExt(_subjectShape, _targetShapes, _groupFilter = -1)
+function BonkCollideManyExt(_subjectShape, _targetShapes, _groupFilter = -1, _array = undefined)
 {
-    static _returnData = [];
-    array_resize(_returnData, 0);
+    static _staticArray = [];
+    
+    if (_array == undefined)
+    {
+        _array = _staticArray;
+        array_resize(_array, 0);
+    }
     
     var _reaction = new BonkResultCollide();
     
@@ -24,7 +30,7 @@ function BonkCollideManyExt(_subjectShape, _targetShapes, _groupFilter = -1)
             {
                 if (Collide(_subjectShape, _groupFilter, _reaction).shape != undefined)
                 {
-                    array_push(_returnData, _reaction);
+                    array_push(_array, _reaction);
                     _reaction = new BonkResultCollide();
                 }
             }
@@ -41,7 +47,7 @@ function BonkCollideManyExt(_subjectShape, _targetShapes, _groupFilter = -1)
             {
                 if (Collide(_subjectShape, _groupFilter, _reaction).shape != undefined)
                 {
-                    array_push(_returnData, _reaction);
+                    array_push(_array, _reaction);
                     _reaction = new BonkResultCollide();
                 }
             }
@@ -55,11 +61,11 @@ function BonkCollideManyExt(_subjectShape, _targetShapes, _groupFilter = -1)
         {
             if (Collide(_subjectShape, _groupFilter, _reaction).shape != undefined)
             {
-                array_push(_returnData, _reaction);
+                array_push(_array, _reaction);
                 _reaction = new BonkResultCollide();
             }
         }
     }
     
-    return _returnData;
+    return _array;
 }

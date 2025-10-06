@@ -6,7 +6,7 @@
 /// to create Bonk instances. If you provide an array or list then elements in the array/list
 /// should be either a Bonk struct/instance or an object.
 /// 
-/// The `slopeThreshold` argument is measured in degrees and referes to the gradient angle of
+/// The `slopeThreshold` parameter is measured in degrees and referes to the gradient angle of
 /// colliding surfaces that the surface bumps into. A slope threshold of `0` degrees is a flat
 /// floor, a slope threshold of `90` degrees is a flat wall.
 /// 
