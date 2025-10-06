@@ -12,11 +12,14 @@
 /// @param y3
 /// @param z3
 /// @param [object=BonkObject]
+/// @param [variableStruct]
 /// @param [groupVector=BONK_DEFAULT_GROUP]
 
-function BonkCreateTriangle(_x1, _y1, _z1, _x2, _y2, _z2, _x3, _y3, _z3, _object = BonkObject, _groupVector = BONK_DEFAULT_GROUP)
+function BonkCreateTriangle(_x1, _y1, _z1, _x2, _y2, _z2, _x3, _y3, _z3, _object = BonkObject, _variableStruct = undefined, _groupVector = BONK_DEFAULT_GROUP)
 {
-    with(instance_create_depth(0, 0, 0, _object))
+    static _staticVariableStruct = {};
+    
+    with(instance_create_depth(0, 0, 0, _object, _variableStruct ?? _staticVariableStruct))
     {
         BonkSetupTriangle(_x1, _y1, _z1,   _x2, _y2, _z2,   _x3, _y3, _z3,   _groupVector);
         return self;

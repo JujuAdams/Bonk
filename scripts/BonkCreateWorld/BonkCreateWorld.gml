@@ -8,10 +8,13 @@
 /// @param cellYSize
 /// @param cellZSize
 /// @param [object=BonkObject]
+/// @param [variableStruct]
 
-function BonkCreateWorld(_cellXSize, _cellYSize, _cellZSize, _object = BonkObject)
+function BonkCreateWorld(_cellXSize, _cellYSize, _cellZSize, _object = BonkObject, _variableStruct = undefined)
 {
-    with(instance_create_depth(0, 0, 0, _object))
+    static _staticVariableStruct = {};
+    
+    with(instance_create_depth(0, 0, 0, _object, _variableStruct ?? _staticVariableStruct))
     {
         BonkSetupWorld(_cellXSize, _cellYSize, _cellZSize);
         return self;
