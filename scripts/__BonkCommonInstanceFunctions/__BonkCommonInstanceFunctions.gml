@@ -136,25 +136,23 @@ function __BonkCommonInstanceFunctions(_groupVector = BONK_DEFAULT_GROUP)
     {
         static _nullCollisionData = new BonkResultCollide();
         
-        if ((_groupFilter >= 0) && (not FilterTest(_groupFilter)))
+        if ((_groupFilter < 0) || FilterTest(_groupFilter))
         {
-            return _nullCollisionData;
-        }
-        
-        var _collideFunc = __bonkCollideFuncLookup[_otherShape.bonkType];
-        if (is_callable(_collideFunc))
-        {
-            return _collideFunc(self, _otherShape, _struct);
-        }
-        else
-        {
-            if (BONK_STRICT)
+            var _collideFunc = __bonkCollideFuncLookup[_otherShape.bonkType];
+            if (is_callable(_collideFunc))
             {
-                __BonkError($".Collide() not supported between \"{instanceof(self)}\" (type={bonkType}) and \"{instanceof(_otherShape)}\" (type={_otherShape.bonkType})");
+                return _collideFunc(self, _otherShape, _struct);
+            }
+            else
+            {
+                if (BONK_STRICT)
+                {
+                    __BonkError($".Collide() not supported between \"{instanceof(self)}\" (type={bonkType}) and \"{instanceof(_otherShape)}\" (type={_otherShape.bonkType})");
+                }
             }
         }
     
-        return _nullCollisionData;
+        return (_struct == undefined)? _nullCollisionData : _struct.__Null();
     }
     
     DebugDrawMask = function(_color = c_white)

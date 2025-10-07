@@ -70,20 +70,7 @@ function BonkLineHitWorld(_world, _x1, _y1, _z1, _x2, _y2, _z2, _groupFilter = -
                 }
                 else
                 {
-                    with(_returnHit)
-                    {
-                        _struct.shape = shape;
-                        
-                        _struct.x = x;
-                        _struct.y = y;
-                        _struct.z = z;
-                        
-                        _struct.normalX = normalX;
-                        _struct.normalY = normalY;
-                        _struct.normalZ = normalZ;
-                    }
-                    
-                    return _struct;
+                    return _returnHit.__CopyTo(_struct);
                 }
             }
             

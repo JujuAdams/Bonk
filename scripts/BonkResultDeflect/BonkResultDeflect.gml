@@ -28,4 +28,11 @@ function BonkResultDeflect() constructor
         
         return self;
     }
+    
+    static __CopyTo = function(_other)
+    {
+        _other.deflectType = deflectType;
+        collisionData.__CopyTo(_other.collisionData);
+        return _other;
+    }
 }

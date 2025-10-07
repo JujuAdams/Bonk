@@ -40,4 +40,19 @@ function BonkResultHit() constructor
         
         return self;
     }
+    
+    static __CopyTo = function(_other)
+    {
+        _other.shape = shape;
+        
+        x = _other.x;
+        y = _other.y;
+        z = _other.z;
+        
+        normalX = _other.normalX;
+        normalY = _other.normalY;
+        normalZ = _other.normalZ;
+        
+        return _other;
+    }
 }

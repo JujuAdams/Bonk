@@ -233,7 +233,14 @@ function __BonkCommonWorld(_cellXSize, _cellYSize, _cellZSize)
             ds_map_clear(_map);
         }
         
-        return is_infinity(_largestDepth)? _returnDeflect.__Null() : _returnDeflect;
+        if (_struct == undefined)
+        {
+            return is_infinity(_largestDepth)? _returnDeflect.__Null() : _returnDeflect;
+        }
+        else
+        {
+            return is_infinity(_largestDepth)? _struct.__Null() : _returnDeflect.__CopyTo(_struct);
+        }
     }
     
     Collide = function(_subjectShape, _groupFilter = -1, _struct = undefined)
@@ -319,7 +326,7 @@ function __BonkCommonWorld(_cellXSize, _cellYSize, _cellZSize)
             ds_map_clear(_map);
         }
         
-        return _nullCollisionData;
+        return (_struct == undefined)? _nullCollisionData : _struct.__Null();
     }
     
     FilterTest = function()

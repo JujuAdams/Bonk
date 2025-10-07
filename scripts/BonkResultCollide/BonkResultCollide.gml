@@ -45,4 +45,13 @@ function BonkResultCollide() constructor
         
         return self;
     }
+    
+    static __CopyTo = function(_other)
+    {
+        _other.shape = shape;
+        _other.dX = dX;
+        _other.dY = dY;
+        _other.dZ = dZ;
+        return _other;
+    }
 }
