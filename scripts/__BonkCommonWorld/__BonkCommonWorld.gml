@@ -894,6 +894,22 @@ function __BonkCommonWorld(_cellXSize, _cellYSize, _cellZSize)
         return DrawCellsFromRange(GetAABB(), _color, _wireframe, _checkerboard);
     }
     
+    DrawNeighborhood = function(_shape, _color)
+    {
+        var _aabb = _shape.GetAABB();
+        DrawCellsFromRange(_aabb);
+        
+        var _oldEnable = gpu_get_ztestenable();
+        var _oldWrite = gpu_get_zwriteenable();
+        gpu_set_ztestenable(false);
+        gpu_set_zwriteenable(false);
+        
+        DrawShapesFromRange(_aabb, _color, true);
+        
+        gpu_set_ztestenable(_oldEnable);
+        gpu_set_zwriteenable(_oldWrite);
+    }
+    
     GetCellsFromLine = function(_lineShape)
     {
         with(_lineShape)
