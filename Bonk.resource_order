@@ -113,6 +113,7 @@
     {"name":"rmTestMeshInstances","order":4,"path":"rooms/rmTestMeshInstances/rmTestMeshInstances.yy",},
     {"name":"rmTestRaycast","order":5,"path":"rooms/rmTestRaycast/rmTestRaycast.yy",},
     {"name":"__BonkClassShared","order":2,"path":"scripts/__BonkClassShared/__BonkClassShared.yy",},
+    {"name":"__BonkClassWorker","order":10,"path":"scripts/__BonkClassWorker/__BonkClassWorker.yy",},
     {"name":"__BonkCommonAAB","order":1,"path":"scripts/__BonkCommonAAB/__BonkCommonAAB.yy",},
     {"name":"__BonkCommonCapsule","order":2,"path":"scripts/__BonkCommonCapsule/__BonkCommonCapsule.yy",},
     {"name":"__BonkCommonCylinder","order":3,"path":"scripts/__BonkCommonCylinder/__BonkCommonCylinder.yy",},

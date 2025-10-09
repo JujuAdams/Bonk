@@ -154,6 +154,7 @@
     {"id":{"name":"rmTestRaycast","path":"rooms/rmTestRaycast/rmTestRaycast.yy",},},
     {"id":{"name":"__Bonk","path":"scripts/__Bonk/__Bonk.yy",},},
     {"id":{"name":"__BonkClassShared","path":"scripts/__BonkClassShared/__BonkClassShared.yy",},},
+    {"id":{"name":"__BonkClassWorker","path":"scripts/__BonkClassWorker/__BonkClassWorker.yy",},},
     {"id":{"name":"__BonkCommonAAB","path":"scripts/__BonkCommonAAB/__BonkCommonAAB.yy",},},
     {"id":{"name":"__BonkCommonCapsule","path":"scripts/__BonkCommonCapsule/__BonkCommonCapsule.yy",},},
     {"id":{"name":"__BonkCommonCylinder","path":"scripts/__BonkCommonCylinder/__BonkCommonCylinder.yy",},},
