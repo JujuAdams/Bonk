@@ -32,3 +32,8 @@
 //As of runtime v2024.11.0.227, a minimum size less than 1 will lead to GameMaker instances
 //refusing to collide.
 #macro BONK_INSTANCE_MIN_SIZE  1
+
+//How many triangles to process per update tick. Multiple update ticks will happen per frame so
+//this value is really more of a "how often should we check to see if we've gone over our time
+//budget" rather than any measure of speed.
+#macro BONK_VERTEX_BUFFER_ASYNC_TRIANGLE_RESOLUTION  100

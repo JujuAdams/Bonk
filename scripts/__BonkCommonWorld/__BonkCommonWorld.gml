@@ -24,6 +24,8 @@ function __BonkCommonWorld(_cellXSize, _cellYSize, _cellZSize)
     
     __bonkSpatialDict = {};
     
+    __bonkWorkerArray = [];
+    
     
     
     SetPosition = function() {};
@@ -646,6 +648,23 @@ function __BonkCommonWorld(_cellXSize, _cellYSize, _cellZSize)
         }
         
         return (new __BonkClassWorker(self, _vertexBufferArray, _vertexFormat, _matrix)).__StartAsync(_budget);
+    }
+    
+    GetVertexBufferAsyncCount = function()
+    {
+        return array_length(__bonkWorkerArray);
+    }
+    
+    CancelVertexBufferAsync = function()
+    {
+        var _i = array_length(__bonkWorkerArray)-1;
+        repeat(array_length(__bonkWorkerArray))
+        {
+            __bonkWorkerArray[_i].Cancel();
+            --_i;
+        }
+        
+        return self;
     }
     
     DrawAABB = function(_color = undefined, _wireframe = true)
