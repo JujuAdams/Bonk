@@ -39,8 +39,8 @@ function BonkDeflectManyExt(_subjectShape, _targetShapes, _slopeThreshold = 0, _
     static _staticDeflectA = new BonkResultDeflect();
     static _staticDeflectB = new BonkResultDeflect();
     
-    var _returnDeflect  = _staticDeflectA;
-    var _workingDeflect = _staticDeflectB;
+    var _returnDeflect  = _staticDeflectA.__Null();
+    var _workingDeflect = _staticDeflectB.__Null();
     
     var _largestDepth = -infinity;
     
