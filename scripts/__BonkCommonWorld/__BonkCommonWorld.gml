@@ -844,9 +844,8 @@ function __BonkCommonWorld(_cellXSize, _cellYSize, _cellZSize)
         return DrawCellsFromRange(GetAABB(), _color, _wireframe, _checkerboard);
     }
     
-    DrawNeighborhood = function(_shape, _color)
+    DrawNeighborhoodForRange = function(_aabb, _color)
     {
-        var _aabb = _shape.GetAABB();
         DrawCellsFromRange(_aabb);
         
         var _oldEnable = gpu_get_ztestenable();
@@ -858,6 +857,46 @@ function __BonkCommonWorld(_cellXSize, _cellYSize, _cellZSize)
         
         gpu_set_ztestenable(_oldEnable);
         gpu_set_zwriteenable(_oldWrite);
+        
+        return self;
+    }
+    
+    DrawNeighborhoodForArray = function(_array, _color)
+    {
+        DrawCellsFromArray(_array);
+        
+        var _oldEnable = gpu_get_ztestenable();
+        var _oldWrite = gpu_get_zwriteenable();
+        gpu_set_ztestenable(false);
+        gpu_set_zwriteenable(false);
+        
+        DrawShapesFromArray(_array, _color, true);
+        
+        gpu_set_ztestenable(_oldEnable);
+        gpu_set_zwriteenable(_oldWrite);
+        
+        return self;
+    }
+    
+    DrawNeighborhoodForShape = function(_shape, _color)
+    {
+        DrawNeighborhoodForAABB(_shape.GetAABB());
+        
+        return self;
+    }
+    
+    DrawNeighborhoodForLine = function(_lineShape, _color)
+    {
+        DrawNeighborhoodForArray(GetCellsFromLine(_lineShape), _color);
+        
+        return self;
+    }
+    
+    DrawNeighborhoodForLineExt = function(_x1, _y1, _z1, _x2, _y2, _z2, _color)
+    {
+        DrawNeighborhoodForArray(GetCellsFromLineExt(_x1, _y1, _z1, _x2, _y2, _z2), _color);
+        
+        return self;
     }
     
     GetCellsFromLine = function(_lineShape)
