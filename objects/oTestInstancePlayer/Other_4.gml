@@ -2,6 +2,6 @@
 
 with(oTestMesh)
 {
-    other.world = BonkCreateWorld(32, 32, 100, oTestInstanceParent);
+    other.world = BonkCreateWorld(20, 20, 20, oTestInstanceParent);
     other.world.AddVertexBufferAsync(model.GetVertexBufferArray(), DotobjGetVertexFormat(), matrix);
 }
