@@ -22,9 +22,9 @@ function __BonkSupercover(_x1, _y1, _z1, _x2, _y2, _z2, _array = [])
     var _ySign = sign(_yDelta);
     var _zSign = sign(_zDelta);
     
-    var _x2Grid = floor(_x2);
-    var _y2Grid = floor(_y2);
-    var _z2Grid = floor(_z2);
+    var _x2GridAbs = abs(floor(_x2));
+    var _y2GridAbs = abs(floor(_y2));
+    var _z2GridAbs = abs(floor(_z2));
     
     //We always have the origin cell
     var _xWrite = floor(_x1);
@@ -52,7 +52,7 @@ function __BonkSupercover(_x1, _y1, _z1, _x2, _y2, _z2, _array = [])
         _zWalk = 1 - _zWalk;
     }
     
-    while((_xWrite != _x2Grid) || (_yWrite != _y2Grid) || (_zWrite != _z2Grid))
+    while((_xSign*_xWrite < _x2GridAbs) || (_ySign*_yWrite < _y2GridAbs) || (_zSign*_zWrite < _z2GridAbs))
     {
         var _tX = (1 - _xWalk) / _xDeltaAbs;
         var _tY = (1 - _yWalk) / _yDeltaAbs;
@@ -156,7 +156,7 @@ function __BonkSupercover(_x1, _y1, _z1, _x2, _y2, _z2, _array = [])
                 array_push(_array,   _xWrite,          _yWrite + _ySign, _zWrite         );
                 array_push(_array,   _xWrite,          _yWrite,          _zWrite + _zSign);
                 
-                array_push(_array,   _xWrite + _xSign, _yWrite + _ySign, _zWrite);
+                array_push(_array,   _xWrite + _xSign, _yWrite + _ySign, _zWrite         );
                 array_push(_array,   _xWrite,          _yWrite + _ySign, _zWrite + _zSign);
                 array_push(_array,   _xWrite + _xSign, _yWrite,          _zWrite + _zSign);
                 
