@@ -45,13 +45,13 @@ function BonkResultHit() constructor
     {
         _other.shape = shape;
         
-        x = _other.x;
-        y = _other.y;
-        z = _other.z;
+        _other.x = x;
+        _other.y = y;
+        _other.z = z;
         
-        normalX = _other.normalX;
-        normalY = _other.normalY;
-        normalZ = _other.normalZ;
+        _other.normalX = normalX;
+        _other.normalY = normalY;
+        _other.normalZ = normalZ;
         
         return _other;
     }
