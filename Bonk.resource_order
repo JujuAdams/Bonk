@@ -127,6 +127,7 @@
     {"name":"__BonkIsInstance","order":5,"path":"scripts/__BonkIsInstance/__BonkIsInstance.yy",},
     {"name":"__BonkReturnNullHit","order":3,"path":"scripts/__BonkReturnNullHit/__BonkReturnNullHit.yy",},
     {"name":"__BonkSupercover","order":4,"path":"scripts/__BonkSupercover/__BonkSupercover.yy",},
+    {"name":"__BonkTrace","order":2,"path":"scripts/__BonkTrace/__BonkTrace.yy",},
     {"name":"__DotobjConfig","order":6,"path":"scripts/__DotobjConfig/__DotobjConfig.yy",},
     {"name":"__Ugg","order":5,"path":"scripts/__Ugg/__Ugg.yy",},
     {"name":"__UggConfig","order":5,"path":"scripts/__UggConfig/__UggConfig.yy",},
