@@ -37,6 +37,18 @@
 ///   careful about adding too many triangles in one location. Try to use a low poly mesh for
 ///   collisions and keep the triangle density low.
 /// 
+/// `.AddVertexBufferAsync(vertexBufferOrArray, vertexFormat, [matrix], [budget=12])`
+///   Starts an asynchronous process to load vertex buffers into the world over multiple frames.
+///   This function operates as above. This isn't truly asynchronous and will take up a small
+///   amount of time every game step. The optional `budget` parameter sets an approximate limit
+///   for the amount of time per step that the process is allowed to use (measured in milliseconds).
+/// 
+/// `.GetVertexBufferAsyncCount()`
+///   Returns the number of in-progress unfinished vertex buffer operations.
+/// 
+/// `.CancelVertexBufferAsync()`
+///   Cancels all asynchronous vertex buffer operations.
+/// 
 /// `.CellInside(x, y, z)`
 ///   Returns if the given cell exists within the bounding box of the world.
 /// 
@@ -91,6 +103,21 @@
 ///   Draws all cells in the world. This is very slow and should only be used for debugging! If the
 ///   optional `checkerboard` parameter is set to `false` then every cell will be drawn which
 ///   doubles the number of cells drawn.
+/// 
+/// `.DrawNeighborhoodForRange(aabb, color)`
+///   Draws the world grid and any collision shapes nearby the cells in the AABB range.
+/// 
+/// `.DrawNeighborhoodForArray(array, color)`
+///   Draws the world grid and any collision shapes nearby any of the cells in the input array.
+/// 
+/// `.DrawNeighborhoodForShape(shape, color)`
+///   Draws the world grid and any collision shapes nearby the given shape.
+/// 
+/// `.DrawNeighborhoodForLine(lineShape, color)`
+///   Draws the world grid and any collision shapes nearby the given line/ray shape.
+/// 
+/// `.DrawNeighborhoodForLineExt(x1, y1, z1, x2, y2, z2, color)`
+///   Draws the world grid and any collision shapes nearby the given line segment.
 /// 
 /// `.__bonk*`
 ///   Various cached values that are used to speed up collision detection. These are **read-only**

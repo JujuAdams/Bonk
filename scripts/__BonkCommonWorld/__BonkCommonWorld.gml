@@ -769,6 +769,8 @@ function __BonkCommonWorld(_cellXSize, _cellYSize, _cellZSize)
         return DrawShapesFromRange(GetAABB(), _color, _wireframe);
     }
     
+    DebugDraw = DrawShapes;
+    
     DrawCellsFromArray = function(_array, _color = undefined, _wireframe = true)
     {
         var _cellXSize = __bonkCellXSize;
