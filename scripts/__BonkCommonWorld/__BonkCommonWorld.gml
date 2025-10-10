@@ -880,7 +880,7 @@ function __BonkCommonWorld(_cellXSize, _cellYSize, _cellZSize)
     
     DrawNeighborhoodForShape = function(_shape, _color)
     {
-        DrawNeighborhoodForAABB(_shape.GetAABB());
+        DrawNeighborhoodForRange(_shape.GetAABB(), _color);
         
         return self;
     }
