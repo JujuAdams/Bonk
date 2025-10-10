@@ -1,3 +1,8 @@
+if (world.GetVertexBufferAsyncCount() > 0)
+{
+    return;
+}
+
 if (not oCamera.camera.GetMouseLock())
 {
     if (keyboard_check_pressed(ord("R")))

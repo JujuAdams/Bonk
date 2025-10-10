@@ -10,5 +10,5 @@ with(oTestParent)
 
 with(oTestMesh)
 {
-    other.world.AddVertexBuffer(model.GetVertexBufferArray(), DotobjGetVertexFormat(), matrix);
+    other.world.AddVertexBufferAsync(model.GetVertexBufferArray(), DotobjGetVertexFormat(), matrix);
 }
