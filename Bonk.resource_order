@@ -78,6 +78,7 @@
     {"name":"objTestRaycastRotatedBox","order":4,"path":"objects/objTestRaycastRotatedBox/objTestRaycastRotatedBox.yy",},
     {"name":"objTestRaycastSphere","order":5,"path":"objects/objTestRaycastSphere/objTestRaycastSphere.yy",},
     {"name":"objTestRaycastTriangle","order":6,"path":"objects/objTestRaycastTriangle/objTestRaycastTriangle.yy",},
+    {"name":"objTestRaycastWorld","order":7,"path":"objects/objTestRaycastWorld/objTestRaycastWorld.yy",},
     {"name":"objTestSphereInQuad","order":2,"path":"objects/objTestSphereInQuad/objTestSphereInQuad.yy",},
     {"name":"objTestSphereInRotatedBox","order":3,"path":"objects/objTestSphereInRotatedBox/objTestSphereInRotatedBox.yy",},
     {"name":"objTestSphereInTriangle","order":1,"path":"objects/objTestSphereInTriangle/objTestSphereInTriangle.yy",},
