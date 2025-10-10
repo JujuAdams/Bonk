@@ -71,6 +71,10 @@ function __BonkClassWorker(_world, _vertexBufferArray, _vertexFormat, _matrix) c
         {
             array_delete(__world.__bonkWorkerArray, _index, 1);
         }
+        else
+        {
+            __BonkTrace($"Warning! Could not find worker {string(ptr(self))} in world {string(ptr(__world))}");
+        }
     }
     
     static __StartAsync = function(_budget)

@@ -40,20 +40,19 @@ function __BonkCommonWorld(_cellXSize, _cellYSize, _cellZSize)
     {
         static _map = ds_map_create();
         
-        var _cheapVersion = true;
-        
         var _aabb = _subjectShape.GetAABB();
-        with(_aabb)
-        {
-            if ((xMax - xMin > 2*other.__bonkCellXSize) || (yMax - yMin > 2*other.__bonkCellYSize) || (zMax - zMin > 2*other.__bonkCellZSize))
-            {
-                _cheapVersion = false;
-            }
-        }
         
-        if (_cheapVersion)
+        var _shapeXMin = floor(_aabb.xMin / __bonkCellXSize);
+        var _shapeYMin = floor(_aabb.yMin / __bonkCellYSize);
+        var _shapeZMin = floor(_aabb.zMin / __bonkCellZSize);
+        
+        var _shapeXMax = floor(_aabb.xMax / __bonkCellXSize);
+        var _shapeYMax = floor(_aabb.yMax / __bonkCellYSize);
+        var _shapeZMax = floor(_aabb.zMax / __bonkCellZSize);
+        
+        if ((_shapeXMin == _shapeXMax) && (_shapeYMin == _shapeYMax) && (_shapeZMin == _shapeZMax))
         {
-            var _shapeArray = GetShapeArrayFromPoint(_subjectShape.x, _subjectShape.y, _subjectShape.z);
+            var _shapeArray = GetShapeArrayFromCell(_shapeXMin, _shapeYMin, _shapeZMin);
             var _i = 0;
             repeat(array_length(_shapeArray))
             {
@@ -67,21 +66,21 @@ function __BonkCommonWorld(_cellXSize, _cellYSize, _cellZSize)
         }
         else
         {
-            var _cellX = clamp(floor(_aabb.xMin / __bonkCellXSize), BONK_WORLD_CELL_MIN, BONK_WORLD_CELL_MAX);
-            var _cellY = clamp(floor(_aabb.yMin / __bonkCellYSize), BONK_WORLD_CELL_MIN, BONK_WORLD_CELL_MAX);
-            var _cellZ = clamp(floor(_aabb.zMin / __bonkCellZSize), BONK_WORLD_CELL_MIN, BONK_WORLD_CELL_MAX);
+            _shapeXMin = clamp(_shapeXMin, BONK_WORLD_CELL_MIN, BONK_WORLD_CELL_MAX);
+            _shapeYMin = clamp(_shapeYMin, BONK_WORLD_CELL_MIN, BONK_WORLD_CELL_MAX);
+            _shapeZMin = clamp(_shapeZMin, BONK_WORLD_CELL_MIN, BONK_WORLD_CELL_MAX);
             
-            var _cellXSize = 1 + clamp(floor(_aabb.xMax / __bonkCellXSize), BONK_WORLD_CELL_MIN, BONK_WORLD_CELL_MAX) - _cellX;
-            var _cellYSize = 1 + clamp(floor(_aabb.yMax / __bonkCellYSize), BONK_WORLD_CELL_MIN, BONK_WORLD_CELL_MAX) - _cellY;
-            var _cellZSize = 1 + clamp(floor(_aabb.zMax / __bonkCellZSize), BONK_WORLD_CELL_MIN, BONK_WORLD_CELL_MAX) - _cellZ;
+            var _cellXSize = 1 + clamp(_shapeXMax, BONK_WORLD_CELL_MIN, BONK_WORLD_CELL_MAX) - _shapeXMin;
+            var _cellYSize = 1 + clamp(_shapeYMax, BONK_WORLD_CELL_MIN, BONK_WORLD_CELL_MAX) - _shapeYMin;
+            var _cellZSize = 1 + clamp(_shapeZMax, BONK_WORLD_CELL_MIN, BONK_WORLD_CELL_MAX) - _shapeZMin;
             
-            var _z = _cellZ;
+            var _z = _shapeZMin;
             repeat(_cellZSize)
             {
-                var _y = _cellY;
+                var _y = _shapeYMin;
                 repeat(_cellYSize)
                 {
-                    var _x = _cellX;
+                    var _x = _shapeXMin;
                     repeat(_cellXSize)
                     {
                         var _shapeArray = __GetShapeArrayFromCellUnsafe(_x, _y, _z);
@@ -131,19 +130,19 @@ function __BonkCommonWorld(_cellXSize, _cellYSize, _cellZSize)
         
         var _largestDepth = -infinity;
         
-        var _cheapVersion = true;
         var _aabb = _subjectShape.GetAABB();
-        with(_aabb)
-        {
-            if ((xMax - xMin > 2*other.__bonkCellXSize) || (yMax - yMin > 2*other.__bonkCellYSize) || (zMax - zMin > 2*other.__bonkCellZSize))
-            {
-                _cheapVersion = false;
-            }
-        }
         
-        if (_cheapVersion)
+        var _shapeXMin = floor(_aabb.xMin / __bonkCellXSize);
+        var _shapeYMin = floor(_aabb.yMin / __bonkCellYSize);
+        var _shapeZMin = floor(_aabb.zMin / __bonkCellZSize);
+        
+        var _shapeXMax = floor(_aabb.xMax / __bonkCellXSize);
+        var _shapeYMax = floor(_aabb.yMax / __bonkCellYSize);
+        var _shapeZMax = floor(_aabb.zMax / __bonkCellZSize);
+        
+        if ((_shapeXMin == _shapeXMax) && (_shapeYMin == _shapeYMax) && (_shapeZMin == _shapeZMax))
         {
-            var _shapeArray = GetShapeArrayFromPoint(_subjectShape.x, _subjectShape.y, _subjectShape.z);
+            var _shapeArray = GetShapeArrayFromCell(_shapeXMin, _shapeYMin, _shapeZMin);
             var _i = 0;
             repeat(array_length(_shapeArray))
             {
@@ -172,21 +171,21 @@ function __BonkCommonWorld(_cellXSize, _cellYSize, _cellZSize)
         }
         else
         {
-            var _cellX = clamp(floor(_aabb.xMin / __bonkCellXSize), BONK_WORLD_CELL_MIN, BONK_WORLD_CELL_MAX);
-            var _cellY = clamp(floor(_aabb.yMin / __bonkCellYSize), BONK_WORLD_CELL_MIN, BONK_WORLD_CELL_MAX);
-            var _cellZ = clamp(floor(_aabb.zMin / __bonkCellZSize), BONK_WORLD_CELL_MIN, BONK_WORLD_CELL_MAX);
+            _shapeXMin = clamp(_shapeXMin, BONK_WORLD_CELL_MIN, BONK_WORLD_CELL_MAX);
+            _shapeYMin = clamp(_shapeYMin, BONK_WORLD_CELL_MIN, BONK_WORLD_CELL_MAX);
+            _shapeZMin = clamp(_shapeZMin, BONK_WORLD_CELL_MIN, BONK_WORLD_CELL_MAX);
             
-            var _cellXSize = 1 + clamp(floor(_aabb.xMax / __bonkCellXSize), BONK_WORLD_CELL_MIN, BONK_WORLD_CELL_MAX) - _cellX;
-            var _cellYSize = 1 + clamp(floor(_aabb.yMax / __bonkCellYSize), BONK_WORLD_CELL_MIN, BONK_WORLD_CELL_MAX) - _cellY;
-            var _cellZSize = 1 + clamp(floor(_aabb.zMax / __bonkCellZSize), BONK_WORLD_CELL_MIN, BONK_WORLD_CELL_MAX) - _cellZ;
+            var _cellXSize = 1 + clamp(_shapeXMax, BONK_WORLD_CELL_MIN, BONK_WORLD_CELL_MAX) - _shapeXMin;
+            var _cellYSize = 1 + clamp(_shapeYMax, BONK_WORLD_CELL_MIN, BONK_WORLD_CELL_MAX) - _shapeYMin;
+            var _cellZSize = 1 + clamp(_shapeZMax, BONK_WORLD_CELL_MIN, BONK_WORLD_CELL_MAX) - _shapeZMin;
             
-            var _z = _cellZ;
+            var _z = _shapeZMin;
             repeat(_cellZSize)
             {
-                var _y = _cellY;
+                var _y = _shapeYMin;
                 repeat(_cellYSize)
                 {
-                    var _x = _cellX;
+                    var _x = _shapeXMin;
                     repeat(_cellXSize)
                     {
                         var _shapeArray = GetShapeArrayFromCell(_x, _y, _z);
@@ -250,18 +249,17 @@ function __BonkCommonWorld(_cellXSize, _cellYSize, _cellZSize)
         static _map = ds_map_create();
         static _nullCollisionData = new BonkResultCollide();
         
-        var _cheapVersion = true;
-        
         var _aabb = _subjectShape.GetAABB();
-        with(_aabb)
-        {
-            if ((xMax - xMin > 2*other.__bonkCellXSize) || (yMax - yMin > 2*other.__bonkCellYSize) || (zMax - zMin > 2*other.__bonkCellZSize))
-            {
-                _cheapVersion = false;
-            }
-        }
         
-        if (_cheapVersion)
+        var _shapeXMin = floor(_aabb.xMin / __bonkCellXSize);
+        var _shapeYMin = floor(_aabb.yMin / __bonkCellYSize);
+        var _shapeZMin = floor(_aabb.zMin / __bonkCellZSize);
+        
+        var _shapeXMax = floor(_aabb.xMax / __bonkCellXSize);
+        var _shapeYMax = floor(_aabb.yMax / __bonkCellYSize);
+        var _shapeZMax = floor(_aabb.zMax / __bonkCellZSize);
+        
+        if ((_shapeXMin == _shapeXMax) && (_shapeYMin == _shapeYMax) && (_shapeZMin == _shapeZMax))
         {
             var _shapeArray = GetShapeArrayFromPoint(_subjectShape.x, _subjectShape.y, _subjectShape.z);
             var _i = 0;
@@ -278,21 +276,21 @@ function __BonkCommonWorld(_cellXSize, _cellYSize, _cellZSize)
         }
         else
         {
-            var _cellX = clamp(floor(_aabb.xMin / __bonkCellXSize), BONK_WORLD_CELL_MIN, BONK_WORLD_CELL_MAX);
-            var _cellY = clamp(floor(_aabb.yMin / __bonkCellYSize), BONK_WORLD_CELL_MIN, BONK_WORLD_CELL_MAX);
-            var _cellZ = clamp(floor(_aabb.zMin / __bonkCellZSize), BONK_WORLD_CELL_MIN, BONK_WORLD_CELL_MAX);
+            _shapeXMin = clamp(_shapeXMin, BONK_WORLD_CELL_MIN, BONK_WORLD_CELL_MAX);
+            _shapeYMin = clamp(_shapeYMin, BONK_WORLD_CELL_MIN, BONK_WORLD_CELL_MAX);
+            _shapeZMin = clamp(_shapeZMin, BONK_WORLD_CELL_MIN, BONK_WORLD_CELL_MAX);
             
-            var _cellXSize = 1 + clamp(floor(_aabb.xMax / __bonkCellXSize), BONK_WORLD_CELL_MIN, BONK_WORLD_CELL_MAX) - _cellX;
-            var _cellYSize = 1 + clamp(floor(_aabb.yMax / __bonkCellYSize), BONK_WORLD_CELL_MIN, BONK_WORLD_CELL_MAX) - _cellY;
-            var _cellZSize = 1 + clamp(floor(_aabb.zMax / __bonkCellZSize), BONK_WORLD_CELL_MIN, BONK_WORLD_CELL_MAX) - _cellZ;
+            var _cellXSize = 1 + clamp(_shapeXMax, BONK_WORLD_CELL_MIN, BONK_WORLD_CELL_MAX) - _shapeXMin;
+            var _cellYSize = 1 + clamp(_shapeYMax, BONK_WORLD_CELL_MIN, BONK_WORLD_CELL_MAX) - _shapeYMin;
+            var _cellZSize = 1 + clamp(_shapeZMax, BONK_WORLD_CELL_MIN, BONK_WORLD_CELL_MAX) - _shapeZMin;
             
-            var _z = _cellZ;
+            var _z = _shapeZMin;
             repeat(_cellZSize)
             {
-                var _y = _cellY;
+                var _y = _shapeYMin;
                 repeat(_cellYSize)
                 {
-                    var _x = _cellX;
+                    var _x = _shapeXMin;
                     repeat(_cellXSize)
                     {
                         var _shapeArray = __GetShapeArrayFromCellUnsafe(_x, _y, _z);
@@ -407,13 +405,13 @@ function __BonkCommonWorld(_cellXSize, _cellYSize, _cellZSize)
         
         var _aabb = _shape.GetAABB();
         
-        var _cellX = clamp(floor((_aabb.xMin / __bonkCellXSize) - 0.5), BONK_WORLD_CELL_MIN, BONK_WORLD_CELL_MAX);
-        var _cellY = clamp(floor((_aabb.yMin / __bonkCellYSize) - 0.5), BONK_WORLD_CELL_MIN, BONK_WORLD_CELL_MAX);
-        var _cellZ = clamp(floor((_aabb.zMin / __bonkCellZSize) - 0.5), BONK_WORLD_CELL_MIN, BONK_WORLD_CELL_MAX);
+        var _cellX = clamp(floor((_aabb.xMin / __bonkCellXSize)), BONK_WORLD_CELL_MIN, BONK_WORLD_CELL_MAX);
+        var _cellY = clamp(floor((_aabb.yMin / __bonkCellYSize)), BONK_WORLD_CELL_MIN, BONK_WORLD_CELL_MAX);
+        var _cellZ = clamp(floor((_aabb.zMin / __bonkCellZSize)), BONK_WORLD_CELL_MIN, BONK_WORLD_CELL_MAX);
         
-        var _cellX2 = clamp(floor((_aabb.xMax / __bonkCellXSize) + 0.5), BONK_WORLD_CELL_MIN, BONK_WORLD_CELL_MAX);
-        var _cellY2 = clamp(floor((_aabb.yMax / __bonkCellYSize) + 0.5), BONK_WORLD_CELL_MIN, BONK_WORLD_CELL_MAX);
-        var _cellZ2 = clamp(floor((_aabb.zMax / __bonkCellZSize) + 0.5), BONK_WORLD_CELL_MIN, BONK_WORLD_CELL_MAX);
+        var _cellX2 = clamp(floor((_aabb.xMax / __bonkCellXSize)), BONK_WORLD_CELL_MIN, BONK_WORLD_CELL_MAX);
+        var _cellY2 = clamp(floor((_aabb.yMax / __bonkCellYSize)), BONK_WORLD_CELL_MIN, BONK_WORLD_CELL_MAX);
+        var _cellZ2 = clamp(floor((_aabb.zMax / __bonkCellZSize)), BONK_WORLD_CELL_MIN, BONK_WORLD_CELL_MAX);
         
         __bonkMinCellX = min(__bonkMinCellX, _cellX, _cellX2);
         __bonkMaxCellX = max(__bonkMaxCellX, _cellX, _cellX2);
@@ -463,13 +461,13 @@ function __BonkCommonWorld(_cellXSize, _cellYSize, _cellZSize)
     {
         var _aabb = _shape.GetAABB();
         
-        var _cellX = clamp(floor((_aabb.xMin / __bonkCellXSize) - 0.5), BONK_WORLD_CELL_MIN, BONK_WORLD_CELL_MAX);
-        var _cellY = clamp(floor((_aabb.yMin / __bonkCellYSize) - 0.5), BONK_WORLD_CELL_MIN, BONK_WORLD_CELL_MAX);
-        var _cellZ = clamp(floor((_aabb.zMin / __bonkCellZSize) - 0.5), BONK_WORLD_CELL_MIN, BONK_WORLD_CELL_MAX);
+        var _cellX = clamp(floor(_aabb.xMin / __bonkCellXSize), BONK_WORLD_CELL_MIN, BONK_WORLD_CELL_MAX);
+        var _cellY = clamp(floor(_aabb.yMin / __bonkCellYSize), BONK_WORLD_CELL_MIN, BONK_WORLD_CELL_MAX);
+        var _cellZ = clamp(floor(_aabb.zMin / __bonkCellZSize), BONK_WORLD_CELL_MIN, BONK_WORLD_CELL_MAX);
         
-        var _cellXSize = 1 + clamp(floor((_aabb.xMax / __bonkCellXSize) + 0.5), BONK_WORLD_CELL_MIN, BONK_WORLD_CELL_MAX) - _cellX;
-        var _cellYSize = 1 + clamp(floor((_aabb.yMax / __bonkCellYSize) + 0.5), BONK_WORLD_CELL_MIN, BONK_WORLD_CELL_MAX) - _cellY;
-        var _cellZSize = 1 + clamp(floor((_aabb.zMax / __bonkCellZSize) + 0.5), BONK_WORLD_CELL_MIN, BONK_WORLD_CELL_MAX) - _cellZ;
+        var _cellXSize = 1 + clamp(floor(_aabb.xMax / __bonkCellXSize), BONK_WORLD_CELL_MIN, BONK_WORLD_CELL_MAX) - _cellX;
+        var _cellYSize = 1 + clamp(floor(_aabb.yMax / __bonkCellYSize), BONK_WORLD_CELL_MIN, BONK_WORLD_CELL_MAX) - _cellY;
+        var _cellZSize = 1 + clamp(floor(_aabb.zMax / __bonkCellZSize), BONK_WORLD_CELL_MIN, BONK_WORLD_CELL_MAX) - _cellZ;
         
         var _z = _cellZ;
         repeat(_cellZSize)
@@ -503,13 +501,13 @@ function __BonkCommonWorld(_cellXSize, _cellYSize, _cellZSize)
         
         //TODO - This is expensive. Is there a better way of doing this?
         
-        var _cellX = clamp(floor((_aabb.xMin / __bonkCellXSize) - 0.5), BONK_WORLD_CELL_MIN, BONK_WORLD_CELL_MAX);
-        var _cellY = clamp(floor((_aabb.yMin / __bonkCellYSize) - 0.5), BONK_WORLD_CELL_MIN, BONK_WORLD_CELL_MAX);
-        var _cellZ = clamp(floor((_aabb.zMin / __bonkCellZSize) - 0.5), BONK_WORLD_CELL_MIN, BONK_WORLD_CELL_MAX);
+        var _cellX = clamp(floor(_aabb.xMin / __bonkCellXSize), BONK_WORLD_CELL_MIN, BONK_WORLD_CELL_MAX);
+        var _cellY = clamp(floor(_aabb.yMin / __bonkCellYSize), BONK_WORLD_CELL_MIN, BONK_WORLD_CELL_MAX);
+        var _cellZ = clamp(floor(_aabb.zMin / __bonkCellZSize), BONK_WORLD_CELL_MIN, BONK_WORLD_CELL_MAX);
         
-        var _cellXSize = 1 + clamp(floor((_aabb.xMax / __bonkCellXSize) + 0.5), BONK_WORLD_CELL_MIN, BONK_WORLD_CELL_MAX) - _cellX;
-        var _cellYSize = 1 + clamp(floor((_aabb.yMax / __bonkCellYSize) + 0.5), BONK_WORLD_CELL_MIN, BONK_WORLD_CELL_MAX) - _cellY;
-        var _cellZSize = 1 + clamp(floor((_aabb.zMax / __bonkCellZSize) + 0.5), BONK_WORLD_CELL_MIN, BONK_WORLD_CELL_MAX) - _cellZ;
+        var _cellXSize = 1 + clamp(floor(_aabb.xMax / __bonkCellXSize), BONK_WORLD_CELL_MIN, BONK_WORLD_CELL_MAX) - _cellX;
+        var _cellYSize = 1 + clamp(floor(_aabb.yMax / __bonkCellYSize), BONK_WORLD_CELL_MIN, BONK_WORLD_CELL_MAX) - _cellY;
+        var _cellZSize = 1 + clamp(floor(_aabb.zMax / __bonkCellZSize), BONK_WORLD_CELL_MIN, BONK_WORLD_CELL_MAX) - _cellZ;
         
         with(_aabb)
         {
@@ -522,13 +520,13 @@ function __BonkCommonWorld(_cellXSize, _cellYSize, _cellZSize)
             zMax += _dZ;
         }
         
-        var _cellX2 = clamp(floor((_aabb.xMin / __bonkCellXSize) - 0.5), BONK_WORLD_CELL_MIN, BONK_WORLD_CELL_MAX);
-        var _cellY2 = clamp(floor((_aabb.yMin / __bonkCellYSize) - 0.5), BONK_WORLD_CELL_MIN, BONK_WORLD_CELL_MAX);
-        var _cellZ2 = clamp(floor((_aabb.zMin / __bonkCellZSize) - 0.5), BONK_WORLD_CELL_MIN, BONK_WORLD_CELL_MAX);
+        var _cellX2 = clamp(floor(_aabb.xMin / __bonkCellXSize), BONK_WORLD_CELL_MIN, BONK_WORLD_CELL_MAX);
+        var _cellY2 = clamp(floor(_aabb.yMin / __bonkCellYSize), BONK_WORLD_CELL_MIN, BONK_WORLD_CELL_MAX);
+        var _cellZ2 = clamp(floor(_aabb.zMin / __bonkCellZSize), BONK_WORLD_CELL_MIN, BONK_WORLD_CELL_MAX);
         
-        var _cellXSize2 = 1 + clamp(floor((_aabb.xMax / __bonkCellXSize) + 0.5), BONK_WORLD_CELL_MIN, BONK_WORLD_CELL_MAX) - _cellX;
-        var _cellYSize2 = 1 + clamp(floor((_aabb.yMax / __bonkCellYSize) + 0.5), BONK_WORLD_CELL_MIN, BONK_WORLD_CELL_MAX) - _cellY;
-        var _cellZSize2 = 1 + clamp(floor((_aabb.zMax / __bonkCellZSize) + 0.5), BONK_WORLD_CELL_MIN, BONK_WORLD_CELL_MAX) - _cellZ;
+        var _cellXSize2 = 1 + clamp(floor(_aabb.xMax / __bonkCellXSize), BONK_WORLD_CELL_MIN, BONK_WORLD_CELL_MAX) - _cellX;
+        var _cellYSize2 = 1 + clamp(floor(_aabb.yMax / __bonkCellYSize), BONK_WORLD_CELL_MIN, BONK_WORLD_CELL_MAX) - _cellY;
+        var _cellZSize2 = 1 + clamp(floor(_aabb.zMax / __bonkCellZSize), BONK_WORLD_CELL_MIN, BONK_WORLD_CELL_MAX) - _cellZ;
         
         if ((_cellX == _cellX2) && (_cellY == _cellY2) && (_cellZ == _cellZ2)
         &&  (_cellXSize == _cellXSize2) && (_cellYSize == _cellYSize2) && (_cellZSize == _cellZSize2))
@@ -647,7 +645,10 @@ function __BonkCommonWorld(_cellXSize, _cellYSize, _cellZSize)
             _vertexBufferArray = [_vertexBufferArray];
         }
         
-        return (new __BonkClassWorker(self, _vertexBufferArray, _vertexFormat, _matrix)).__StartAsync(_budget);
+        var _worker = new __BonkClassWorker(self, _vertexBufferArray, _vertexFormat, _matrix);
+        _worker.__StartAsync(_budget);
+        
+        return _worker;
     }
     
     GetVertexBufferAsyncCount = function()
