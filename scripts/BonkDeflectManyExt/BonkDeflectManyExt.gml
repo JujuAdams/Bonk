@@ -75,7 +75,7 @@ function BonkDeflectManyExt(_subjectShape, _targetShapes, _slopeThreshold = 0, _
             ++_i;
         }
     }
-    else if (ds_exists(_targetShapes, ds_type_list)) //We were given a list
+    else if (is_handle(_targetShapes) && ds_exists(_targetShapes, ds_type_list)) //We were given a list
     {
         var _i = 0;
         repeat(ds_list_size(_targetShapes))

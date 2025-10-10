@@ -47,7 +47,7 @@ function BonkLineHitManyExt(_x1, _y1, _z1, _x2, _y2, _z2, _targetShapes, _groupF
             ++_i;
         }
     }
-    else if (ds_exists(_targetShapes, ds_type_list))
+    else if (is_handle(_targetShapes) && ds_exists(_targetShapes, ds_type_list))
     {
         var _i = 0;
         repeat(ds_list_size(_targetShapes)) //Use `with()` here to support iterating over objects
