@@ -96,6 +96,11 @@ function __BonkSupercover(_x1, _y1, _z1, _x2, _y2, _z2, _array = [])
         //into the next cell. Depending on which face/axis is closest, we choose to move into a
         //different cell
         
+        if (min(_tX, _tY, _tZ) >= 1)
+        {
+            break;
+        }
+        
         if (_tX < _tY)
         {
             if (_tX < _tZ)
