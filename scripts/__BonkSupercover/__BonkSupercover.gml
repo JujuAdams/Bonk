@@ -59,8 +59,28 @@ function __BonkSupercover(_x1, _y1, _z1, _x2, _y2, _z2, _array = [])
     //We always visit the origin cell so let's push that now
     array_push(_array,   _xVisit, _yVisit, _zVisit);
     
+    if (BONK_SUPERCOVER_DEBUG)
+    {
+        var _i = 0;
+    }
+    
     while((_xCount < _xDeltaAbs) || (_yCount < _yDeltaAbs) || (_zCount < _zDeltaAbs))
     {
+        if (BONK_SUPERCOVER_DEBUG)
+        {
+            ++_i;
+            if (_i >= 1000)
+            {
+                if (BONK_RUNNING_FROM_IDE)
+                {
+                    __BonkTrace($"Found very long loop for supercover input parameters:  ({_x1}, {_y1}, {_z1}) -> ({_x2}, {_y2}, {_z2})");
+                    show_message($"Bonk:\nFound very long loop for supercover input parameters:\n({_x1}, {_y1}, {_z1}) -> ({_x2}, {_y2}, {_z2})\nA copy of this information can be found in the debug log.\n\nPlease report this error.");
+                }
+                
+                break;
+            }
+        }
+        
         //Figure out the t value ("parameter of the line") for each axis
         var _tX = (1 - _xWalk) / _xDeltaAbs;
         var _tY = (1 - _yWalk) / _yDeltaAbs;

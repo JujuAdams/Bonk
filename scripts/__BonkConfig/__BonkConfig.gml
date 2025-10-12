@@ -28,3 +28,8 @@
 // Whether to output debug information when adding triangles from vertex buffers using the
 // asynchronous method `AddVertexBufferAsync()`.
 #macro BONK_DEBUG_VERTEX_BUFFER_ASYNC  false
+
+// Enables debugging for the internal supercover algorithm used for line/ray hit detection against
+// Bonk worlds. Setting this macro to `true` will incur a minor performance penalty and will
+// provide additional information when the supercover algorithm fails.
+#macro BONK_SUPERCOVER_DEBUG  true
