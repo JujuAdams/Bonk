@@ -30,6 +30,15 @@ function __BonkSupercover(_x1, _y1, _z1, _x2, _y2, _z2, _array = [])
     var _yVisit = floor(_y1);
     var _zVisit = floor(_z1);
     
+    //We always visit the origin cell so let's push that now
+    array_push(_array,   _xVisit, _yVisit, _zVisit);
+    
+    if ((floor(_x2) == _xVisit) && (floor(_y2) == _yVisit) && (floor(_z2) == _zVisit))
+    {
+        //If the line segment starts and ends in the same cell then early out
+        return _array;
+    }
+    
     //Track where we are within the current cell using normalized coordinates
     var _xWalk = frac(abs(_x1));
     var _yWalk = frac(abs(_y1));
@@ -55,9 +64,6 @@ function __BonkSupercover(_x1, _y1, _z1, _x2, _y2, _z2, _array = [])
     var _xCount = 0;
     var _yCount = 0;
     var _zCount = 0;
-    
-    //We always visit the origin cell so let's push that now
-    array_push(_array,   _xVisit, _yVisit, _zVisit);
     
     if (BONK_SUPERCOVER_DEBUG)
     {
