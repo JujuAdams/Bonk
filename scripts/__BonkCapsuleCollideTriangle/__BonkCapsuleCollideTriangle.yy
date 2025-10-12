@@ -1,0 +1,13 @@
+{
+  "$GMScript":"v1",
+  "%Name":"__BonkCapsuleCollideTriangle",
+  "isCompatibility":false,
+  "isDnD":false,
+  "name":"__BonkCapsuleCollideTriangle",
+  "parent":{
+    "name":"Triangles",
+    "path":"folders/Bonk/(System)/Triangles.yy",
+  },
+  "resourceType":"GMScript",
+  "resourceVersion":"2.0",
+}
