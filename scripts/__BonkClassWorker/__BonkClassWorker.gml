@@ -23,6 +23,7 @@ function __BonkClassWorker(_world, _vertexBufferArray, _vertexFormat, _matrix) c
     __timeSource = undefined;
     __budget     = undefined;
     
+    __buffer = undefined;
     __vertexBufferIndex = undefined;
     __vertexFormatStride = undefined;
     __vertexFormatPositionOffset = undefined;
@@ -58,6 +59,12 @@ function __BonkClassWorker(_world, _vertexBufferArray, _vertexFormat, _matrix) c
         }
         
         __finished = true;
+        
+        if (__buffer != undefined)
+        {
+            buffer_delete(__buffer);
+            __buffer = undefined;
+        }
         
         if (__timeSource != undefined)
         {
@@ -208,6 +215,7 @@ function __BonkClassWorker(_world, _vertexBufferArray, _vertexFormat, _matrix) c
         if (__trianglesRemaining <= 0)
         {
             buffer_delete(__buffer);
+            __buffer = undefined;
             
             ++__vertexBufferIndex;
             
