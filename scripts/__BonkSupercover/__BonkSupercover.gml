@@ -14,49 +14,61 @@ function __BonkSupercover(_x1, _y1, _z1, _x2, _y2, _z2, _array = [])
     var _yDelta = _y2 - _y1;
     var _zDelta = _z2 - _z1;
     
-    var _xDeltaAbs = max(math_get_epsilon(), abs(_xDelta));
-    var _yDeltaAbs = max(math_get_epsilon(), abs(_yDelta));
-    var _zDeltaAbs = max(math_get_epsilon(), abs(_zDelta));
+    //Find the length of the line in each axis. We use this to determine where the line segment
+    //crosses each cell boundary (effectively using the gradient)
+    var _xDeltaAbs = abs(_xDelta);
+    var _yDeltaAbs = abs(_yDelta);
+    var _zDeltaAbs = abs(_zDelta);
     
+    //Find which direction the line is headed in. We're OK with `sign()` returning 0 here
     var _xSign = sign(_xDelta);
     var _ySign = sign(_yDelta);
     var _zSign = sign(_zDelta);
     
-    var _x2GridAbs = abs(floor(_x2));
-    var _y2GridAbs = abs(floor(_y2));
-    var _z2GridAbs = abs(floor(_z2));
+    //Track which cell we've most recently visited
+    var _xVisit = floor(_x1);
+    var _yVisit = floor(_y1);
+    var _zVisit = floor(_z1);
     
-    //We always have the origin cell
-    var _xWrite = floor(_x1);
-    var _yWrite = floor(_y1);
-    var _zWrite = floor(_z1);
-    
-    array_push(_array,   _xWrite, _yWrite, _zWrite);
-    
+    //Track where we are within the current cell using normalized coordinates
     var _xWalk = frac(abs(_x1));
     var _yWalk = frac(abs(_y1));
     var _zWalk = frac(abs(_z1));
     
-    if (_xDelta < 0)
+    //If we're going backwards in any axis then mirror the starting position of the line segment
+    if ((_xDelta < 0) && (_xWalk > 0))
     {
         _xWalk = 1 - _xWalk;
     }
     
-    if (_yDelta < 0)
+    if ((_yDelta < 0) && (_yWalk > 0))
     {
         _yWalk = 1 - _yWalk;
     }
     
-    if (_zDelta < 0)
+    if ((_zDelta < 0) && (_zWalk > 0))
     {
         _zWalk = 1 - _zWalk;
     }
     
-    while((_xSign*_xWrite < _x2GridAbs) || (_ySign*_yWrite < _y2GridAbs) || (_zSign*_zWrite < _z2GridAbs))
+    //Track how far we've moved along the line in absolute coordinates
+    var _xCount = 0;
+    var _yCount = 0;
+    var _zCount = 0;
+    
+    //We always visit the origin cell so let's push that now
+    array_push(_array,   _xVisit, _yVisit, _zVisit);
+    
+    while((_xCount < _xDeltaAbs) || (_yCount < _yDeltaAbs) || (_zCount < _zDeltaAbs))
     {
+        //Figure out the t value ("parameter of the line") for each axis
         var _tX = (1 - _xWalk) / _xDeltaAbs;
         var _tY = (1 - _yWalk) / _yDeltaAbs;
         var _tZ = (1 - _zWalk) / _zDeltaAbs;
+        
+        //Find the smallest t value as this gives us the closest cell face where the line crosses
+        //into the next cell. Depending on which face/axis is closest, we choose to move into a
+        //different cell
         
         if (_tX < _tY)
         {
@@ -66,7 +78,9 @@ function __BonkSupercover(_x1, _y1, _z1, _x2, _y2, _z2, _array = [])
                 _yWalk += _tX*_yDeltaAbs;
                 _zWalk += _tX*_zDeltaAbs;
                 
-                _xWrite += _xSign;
+                _xVisit += _xSign;
+                
+                _xCount++;
             }
             else if (_tZ < _tX)
             {
@@ -74,21 +88,26 @@ function __BonkSupercover(_x1, _y1, _z1, _x2, _y2, _z2, _array = [])
                 _yWalk += _tZ*_yDeltaAbs;
                 _zWalk  = 0;
                 
-                _zWrite += _zSign;
+                _zVisit += _zSign;
+                
+                _zCount++;
             }
             else //if (_tX == _tZ)
             {
                 //Line travels diagonally in the xz plane
                 
-                array_push(_array,   _xWrite + _xSign, _yWrite, _zWrite         );
-                array_push(_array,   _xWrite,          _yWrite, _zWrite + _zSign);
+                array_push(_array,   _xVisit + _xSign, _yVisit, _zVisit         );
+                array_push(_array,   _xVisit,          _yVisit, _zVisit + _zSign);
                 
                 _xWalk  = 0;
                 _yWalk += _tX*_yDeltaAbs;
                 _zWalk  = 0;
                 
-                _xWrite += _xSign;
-                _zWrite += _zSign;
+                _xVisit += _xSign;
+                _zVisit += _zSign;
+                
+                _xCount++;
+                _zCount++;
             }
         }
         else if (_tY < _tX)
@@ -99,7 +118,9 @@ function __BonkSupercover(_x1, _y1, _z1, _x2, _y2, _z2, _array = [])
                 _yWalk  = 0;
                 _zWalk += _tY*_zDeltaAbs;
                 
-                _yWrite += _ySign;
+                _yVisit += _ySign;
+                
+                _yCount++;
             }
             else if (_tZ < _tY)
             {
@@ -107,21 +128,26 @@ function __BonkSupercover(_x1, _y1, _z1, _x2, _y2, _z2, _array = [])
                 _yWalk += _tZ*_yDeltaAbs;
                 _zWalk  = 0;
                 
-                _zWrite += _zSign;
+                _zVisit += _zSign;
+                
+                _zCount++;
             }
             else //if (_tY == _tZ)
             {
                 //Line travels diagonally in the yz plane
                 
-                array_push(_array,   _xWrite, _yWrite + _ySign, _zWrite         );
-                array_push(_array,   _xWrite, _yWrite,          _zWrite + _zSign);
+                array_push(_array,   _xVisit, _yVisit + _ySign, _zVisit         );
+                array_push(_array,   _xVisit, _yVisit,          _zVisit + _zSign);
                 
                 _xWalk += _tY*_xDeltaAbs;
                 _yWalk  = 0;
                 _zWalk  = 0;
                 
-                _yWrite += _ySign;
-                _zWrite += _zSign;
+                _yVisit += _ySign;
+                _zVisit += _zSign;
+                
+                _yCount++;
+                _zCount++;
             }
         }
         else //if (_tX == _tY)
@@ -130,15 +156,18 @@ function __BonkSupercover(_x1, _y1, _z1, _x2, _y2, _z2, _array = [])
             {
                 //Line travels diagonally in the xy plane
                 
-                array_push(_array,   _xWrite + _xSign, _yWrite,          _zWrite);
-                array_push(_array,   _xWrite,          _yWrite + _ySign, _zWrite);
+                array_push(_array,   _xVisit + _xSign, _yVisit,          _zVisit);
+                array_push(_array,   _xVisit,          _yVisit + _ySign, _zVisit);
                 
                 _xWalk  = 0;
                 _yWalk  = 0;
                 _zWalk += _tY*_zDeltaAbs;
                 
-                _xWrite += _xSign;
-                _yWrite += _ySign;
+                _xVisit += _xSign;
+                _yVisit += _ySign;
+                
+                _xCount++;
+                _yCount++;
             }
             else if (_tZ < _tX)
             {
@@ -146,31 +175,37 @@ function __BonkSupercover(_x1, _y1, _z1, _x2, _y2, _z2, _array = [])
                 _yWalk += _tZ*_yDeltaAbs;
                 _zWalk  = 0;
                 
-                _zWrite += _zSign;
+                _zVisit += _zSign;
+                
+                _zCount++;
             }
             else //if (_tX == _tZ)
             {
                 //Three way tie!
                 
-                array_push(_array,   _xWrite + _xSign, _yWrite,          _zWrite         );
-                array_push(_array,   _xWrite,          _yWrite + _ySign, _zWrite         );
-                array_push(_array,   _xWrite,          _yWrite,          _zWrite + _zSign);
+                array_push(_array,   _xVisit + _xSign, _yVisit,          _zVisit         );
+                array_push(_array,   _xVisit,          _yVisit + _ySign, _zVisit         );
+                array_push(_array,   _xVisit,          _yVisit,          _zVisit + _zSign);
                 
-                array_push(_array,   _xWrite + _xSign, _yWrite + _ySign, _zWrite         );
-                array_push(_array,   _xWrite,          _yWrite + _ySign, _zWrite + _zSign);
-                array_push(_array,   _xWrite + _xSign, _yWrite,          _zWrite + _zSign);
+                array_push(_array,   _xVisit + _xSign, _yVisit + _ySign, _zVisit         );
+                array_push(_array,   _xVisit,          _yVisit + _ySign, _zVisit + _zSign);
+                array_push(_array,   _xVisit + _xSign, _yVisit,          _zVisit + _zSign);
                 
                 _xWalk = 0;
                 _yWalk = 0;
                 _zWalk = 0;
                 
-                _xWrite += _xSign;
-                _yWrite += _ySign;
-                _zWrite += _zSign;
+                _xVisit += _xSign;
+                _yVisit += _ySign;
+                _zVisit += _zSign;
+                
+                _xCount++;
+                _yCount++;
+                _zCount++;
             }
         }
         
-        array_push(_array,   _xWrite, _yWrite, _zWrite);
+        array_push(_array,   _xVisit, _yVisit, _zVisit);
     }
     
     return _array;
