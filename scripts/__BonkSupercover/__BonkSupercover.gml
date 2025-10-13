@@ -14,6 +14,11 @@ function __BonkSupercover(_x1, _y1, _z1, _x2, _y2, _z2, _array = [])
     var _yDelta = _y2 - _y1;
     var _zDelta = _z2 - _z1;
     
+    //Don't allow divide-by-zero anywhere
+    if (_xDelta == 0) _xDelta = math_get_epsilon();
+    if (_yDelta == 0) _yDelta = math_get_epsilon();
+    if (_zDelta == 0) _zDelta = math_get_epsilon();
+    
     //Find the length of the line in each axis. We use this to determine where the line segment
     //crosses each cell boundary (effectively using the gradient)
     var _xIncrAbs = 1 / abs(_xDelta);
@@ -160,9 +165,6 @@ function __BonkSupercover(_x1, _y1, _z1, _x2, _y2, _z2, _array = [])
                 _tZ += _zIncrAbs;
             }
         }
-        
-        //var _t = min(_tX, _tY, _tZ);
-        //UggSphere(gridScale*(_x1 + _t*_xDelta), gridScale*(_y1 + _t*_yDelta), gridScale*(_z1 + _t*_zDelta), 5, c_red);
         
         array_push(_array,   _xWrite, _yWrite, _zWrite);
     }
