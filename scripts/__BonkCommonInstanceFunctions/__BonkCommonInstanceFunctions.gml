@@ -27,6 +27,8 @@ function __BonkCommonInstanceFunctions(_groupVector = BONK_DEFAULT_GROUP)
         return self;
     }
     
+    RemoveFromWorld = function() {} //Do nothing!
+    
     AddPosition = function(_dX, _dY, _dZ)
     {
         SetPosition(x + _dX, y + _dY, z + _dZ);
