@@ -368,7 +368,7 @@ function __BonkCommonWorld(_cellXSize, _cellYSize, _cellZSize)
         {
             return;
         }
-        else if (instance_exists(_shape))
+        else if (__BonkIsInstance(_shape))
         {
             if (BONK_STRICT)
             {

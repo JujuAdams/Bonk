@@ -24,7 +24,7 @@ function BonkInstancePlaceList(_subjectInstance, _dX, _dY, _objectOrArray = Bonk
 {
     static _staticList = ds_list_create();
     
-    if (not instance_exists(_subjectInstance))
+    if (not __BonkIsInstance(_subjectInstance))
     {
         __BonkError("Can only use BonkInstancePlaceList() with instances");
     }
