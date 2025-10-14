@@ -479,7 +479,7 @@ function __BonkCommonWorld(_cellXSize, _cellYSize, _cellZSize)
                 repeat(_cellXSize)
                 {
                     var _array = __EnsureShapeArrayFromCell(_x, _y, _z);
-                    var _index = array_find_index(_array, _shape);
+                    var _index = array_get_index(_array, _shape);
                     if (_index >= 0)
                     {
                         array_delete(_array, _index, 1);
@@ -546,7 +546,7 @@ function __BonkCommonWorld(_cellXSize, _cellYSize, _cellZSize)
                 repeat(_cellXSize)
                 {
                     var _array = __GetShapeArrayFromCellUnsafe(_x, _y, _z);
-                    var _index = array_find_index(_array, _shape);
+                    var _index = array_get_index(_array, _shape);
                     if (_index >= 0)
                     {
                         array_delete(_array, _index, 1);
