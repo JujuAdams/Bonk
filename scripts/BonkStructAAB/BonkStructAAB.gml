@@ -41,7 +41,7 @@ function BonkStructAAB(_x, _y, _z, _xSize, _ySize, _zSize, _groupVector = BONK_D
     
     static __SetPositionInWorld = function(_x = x, _y = y, _z = z)
     {
-        __world.__MoveShape(_x - x, _y - y, _z - z, self);
+        __bonkWorld.__MoveShape(_x - x, _y - y, _z - z, self);
         
         x = _x;
         y = _y;
@@ -51,15 +51,6 @@ function BonkStructAAB(_x, _y, _z, _xSize, _ySize, _zSize, _groupVector = BONK_D
     }
     
     SetPosition = __SetPositionFree;
-    
-    static RemoveFromWorld = function()
-    {
-        if (__world != undefined)
-        {
-            __world.__RemoveShape(self);
-            SetPosition = __SetPositionFree;
-        }
-    }
     
     static SetSize = function(_x = xSize, _y = ySize, _z = zSize)
     {

@@ -39,7 +39,7 @@ function BonkStructCapsule(_x, _y, _z, _height, _radius, _groupVector = BONK_DEF
     
     static __SetPositionInWorld = function(_x = x, _y = y, _z = z)
     {
-        __world.__MoveShape(_x - x, _y - y, _z - z, self);
+        __bonkWorld.__MoveShape(_x - x, _y - y, _z - z, self);
         
         x = _x;
         y = _y;

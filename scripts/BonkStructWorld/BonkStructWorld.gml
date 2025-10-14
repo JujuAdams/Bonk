@@ -17,4 +17,13 @@ function BonkStructWorld(_cellXSize, _cellYSize, _cellZSize) constructor
     }
     
     __BonkCommonWorld(_cellXSize, _cellYSize, _cellZSize);
+    
+    static RemoveFromWorld = function()
+    {
+        if (__bonkWorld != undefined)
+        {
+            __bonkWorld.__RemoveShape(self);
+            SetPosition = __SetPositionFree;
+        }
+    }
 }

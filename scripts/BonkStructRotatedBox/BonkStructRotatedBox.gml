@@ -44,7 +44,7 @@ function BonkStructRotatedBox(_x, _y, _z, _xSize, _ySize, _zSize, _zRotation, _g
     
     static __SetPositionInWorld = function(_x = x, _y = y, _z = z)
     {
-        __world.__MoveShape(_x - x, _y - y, _z - z, self);
+        __bonkWorld.__MoveShape(_x - x, _y - y, _z - z, self);
         
         x = _x;
         y = _y;

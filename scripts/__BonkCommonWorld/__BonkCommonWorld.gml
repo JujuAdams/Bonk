@@ -395,12 +395,12 @@ function __BonkCommonWorld(_cellXSize, _cellYSize, _cellZSize)
             return;
         }
         
-        if (_shape.__world != undefined)
+        if (_shape.__bonkWorld != undefined)
         {
             _shape.RemoveFromWorld();
         }
         
-        _shape.__world = self;
+        _shape.__bonkWorld = self;
         _shape.SetPosition = _shape.__SetPositionInWorld;
         
         var _aabb = _shape.GetAABB();

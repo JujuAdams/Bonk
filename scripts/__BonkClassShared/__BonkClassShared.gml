@@ -10,7 +10,7 @@ function __BonkClassShared(_groupVector) constructor
         array_pop(bonkCreateCallstack);
     }
     
-    __world = undefined;
+    __bonkWorld = undefined;
     bonkGroup = _groupVector;
     
     
@@ -18,6 +18,15 @@ function __BonkClassShared(_groupVector) constructor
     static AddPosition = function(_dX, _dY, _dZ)
     {
         SetPosition(x + _dX, y + _dY, z + _dZ);
+    }
+    
+    static RemoveFromWorld = function()
+    {
+        if (__bonkWorld != undefined)
+        {
+            __bonkWorld.__RemoveShape(self);
+            SetPosition = __SetPositionFree;
+        }
     }
     
     static FilterTest = function(_filter)

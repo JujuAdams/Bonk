@@ -37,7 +37,7 @@ function BonkStructSphere(_x, _y, _z, _radius, _groupVector = BONK_DEFAULT_GROUP
     
     static __SetPositionInWorld = function(_x = x, _y = y, _z = z)
     {
-        __world.__MoveShape(_x - x, _y - y, _z - z, self);
+        __bonkWorld.__MoveShape(_x - x, _y - y, _z - z, self);
         
         x = _x;
         y = _y;
