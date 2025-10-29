@@ -38,10 +38,11 @@ function __BonkSupercover(_x1, _y1, _z1, _x2, _y2, _z2, _array = [])
     //We always visit the origin cell so let's push that now
     array_push(_array,   _xWrite, _yWrite, _zWrite);
     
-    //Figure out the t value ("parameter of the line") for each axis
-    var _tX = (_xWrite - _x1) / _xDelta;
-    var _tY = (_yWrite - _y1) / _yDelta;
-    var _tZ = (_zWrite - _z1) / _zDelta;
+    //Figure out the t value ("parameter of the line") for each axis. We use `abs()` to handle edge
+    //cases. The t-parameter values should always be positive initially!
+    var _tX = abs((_xWrite - _x1) / _xDelta);
+    var _tY = abs((_yWrite - _y1) / _yDelta);
+    var _tZ = abs((_zWrite - _z1) / _zDelta);
     
     if (_xDelta > 0) _tX += _xIncrAbs;
     if (_yDelta > 0) _tY += _yIncrAbs;
