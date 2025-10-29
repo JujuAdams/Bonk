@@ -124,5 +124,15 @@ function BonkLineHitFirstExt(_x1, _y1, _z1, _x2, _y2, _z2, _targetShapes, _group
     }
     
     ds_map_clear(_map);
-    return is_infinity(_closestDistance)? _returnHit.__Null() : _returnHit;
+    
+    if (_struct == undefined)
+    {
+        //Return the static struct
+        return is_infinity(_closestDistance)? _returnHit.__Null() : _returnHit;
+    }
+    else
+    {
+        //Return the input struct
+        return is_infinity(_closestDistance)? _struct.__Null() : _returnHit.__CopyTo(_struct);
+    }
 }
