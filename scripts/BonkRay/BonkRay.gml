@@ -84,7 +84,8 @@ function BonkRay(_x, _y, _z, _dX, _dY, _dZ) constructor
         var _hitFunc = _hitFuncLookup[_otherShape.bonkType];
         if (is_callable(_hitFunc))
         {
-            return _hitFunc(_otherShape, x, y, z, dX, dY, dZ, _groupFilter);
+            //TODO - Restore group filter
+            return _hitFunc(_otherShape, x, y, z, dX, dY, dZ);
         }
         else
         {
