@@ -994,13 +994,13 @@ function __BonkCommonWorld(_cellXSize, _cellYSize, _cellZSize)
         }
         
         var _hitY = _y1 + _t*_dY;
-        if ((_hitY < _yMin) || (_hitY >= _yMax))
+        if ((_hitY < _yMin) || (_hitY > _yMax))
         {
             return [];
         }
         
         var _hitZ = _z1 + _t*_dZ;
-        if ((_hitZ < _zMin) || (_hitZ >= _zMax))
+        if ((_hitZ < _zMin) || (_hitZ > _zMax))
         {
             return [];
         }
