@@ -1,0 +1,13 @@
+{
+  "$GMScript":"v1",
+  "%Name":"UtilFrustrumToWorld",
+  "isCompatibility":false,
+  "isDnD":false,
+  "name":"UtilFrustrumToWorld",
+  "parent":{
+    "name":"Misc",
+    "path":"folders/Misc.yy",
+  },
+  "resourceType":"GMScript",
+  "resourceVersion":"2.0",
+}

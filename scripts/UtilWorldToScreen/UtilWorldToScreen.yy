@@ -1,0 +1,13 @@
+{
+  "$GMScript":"v1",
+  "%Name":"UtilWorldToScreen",
+  "isCompatibility":false,
+  "isDnD":false,
+  "name":"UtilWorldToScreen",
+  "parent":{
+    "name":"Misc",
+    "path":"folders/Misc.yy",
+  },
+  "resourceType":"GMScript",
+  "resourceVersion":"2.0",
+}
