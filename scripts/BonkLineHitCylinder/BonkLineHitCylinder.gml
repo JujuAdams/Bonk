@@ -72,7 +72,7 @@ function BonkLineHitCylinder(_cylinder, _x1, _y1, _z1, _x2, _y2, _z2, _struct = 
     var _c = (_vX*_vX + _vY*_vY) - _cylinderRadius*_cylinderRadius;
     
     var _discriminant = _b*_b - 4*_a*_c;
-    if (_discriminant < 0) return _nullHit; //No solutions!
+    if (_discriminant < 0) return _reaction.__Null(); //No solutions!
     
     //Handle rays that start inside the cylinder
     _discriminant = sqrt(_discriminant);
