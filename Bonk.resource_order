@@ -197,6 +197,7 @@
     {"name":"BonkCylinderTouchSphere","order":4,"path":"scripts/BonkCylinderTouchSphere/BonkCylinderTouchSphere.yy",},
     {"name":"BonkDeflectMany","order":5,"path":"scripts/BonkDeflectMany/BonkDeflectMany.yy",},
     {"name":"BonkDeflectManyExt","order":3,"path":"scripts/BonkDeflectManyExt/BonkDeflectManyExt.yy",},
+    {"name":"BonkFilter","order":4,"path":"scripts/BonkFilter/BonkFilter.yy",},
     {"name":"BonkLine","order":2,"path":"scripts/BonkLine/BonkLine.yy",},
     {"name":"BonkLineHitCapsule","order":1,"path":"scripts/BonkLineHitCapsule/BonkLineHitCapsule.yy",},
     {"name":"BonkLineHitCylinder","order":2,"path":"scripts/BonkLineHitCylinder/BonkLineHitCylinder.yy",},

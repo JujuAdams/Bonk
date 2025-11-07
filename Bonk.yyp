@@ -251,6 +251,7 @@
     {"id":{"name":"BonkCylinderTouchSphere","path":"scripts/BonkCylinderTouchSphere/BonkCylinderTouchSphere.yy",},},
     {"id":{"name":"BonkDeflectMany","path":"scripts/BonkDeflectMany/BonkDeflectMany.yy",},},
     {"id":{"name":"BonkDeflectManyExt","path":"scripts/BonkDeflectManyExt/BonkDeflectManyExt.yy",},},
+    {"id":{"name":"BonkFilter","path":"scripts/BonkFilter/BonkFilter.yy",},},
     {"id":{"name":"BonkInstancePlaceList","path":"scripts/BonkInstancePlaceList/BonkInstancePlaceList.yy",},},
     {"id":{"name":"BonkLine","path":"scripts/BonkLine/BonkLine.yy",},},
     {"id":{"name":"BonkLineHitAAB","path":"scripts/BonkLineHitAAB/BonkLineHitAAB.yy",},},
