@@ -206,23 +206,30 @@ function __BonkCapsuleCollideTriangle(_capsuleX, _capsuleY, _capsuleZ, _capsuleH
     var _pushZ = _tempZ - _dot*_edgeZ;
     
     var _pushLength = point_distance_3d(0, 0, 0, _pushX, _pushY, _pushZ);
-    if (_pushLength == 0)
-    {
-        //TODO - Handle this edge case
-        return _reaction.__Null();
-    }
-    
     if (_pushLength >= _capsuleRadius)
     {
         return _reaction.__Null();
+    }
+    
+    if (_pushLength == 0)
+    {
+        //Capsule axis is exactly on the edge
+        
+        var _pushX = _normalZ*_edgeY - _normalY*_edgeZ;
+        var _pushY = _normalX*_edgeZ - _normalZ*_edgeX;
+        var _pushZ = _normalY*_edgeX - _normalX*_edgeY;
+        var _coeff = 1 / point_distance_3d(0, 0, 0, _pushX, _pushY, _pushZ);
+    }
+    else
+    {
+        //Push out just enough so that the surface of the capsule is touching the triangle
+        var _coeff = (_capsuleRadius - _pushLength) / _pushLength;
     }
     
     with(_reaction)
     {
         shape = _triangleShape;
         
-        //Push out just enough so that the surface of the capsule is touching the triangle
-        var _coeff = (_capsuleRadius - _pushLength) / _pushLength;
         dX = _coeff*_pushX;
         dY = _coeff*_pushY;
         dZ = _coeff*_pushZ;

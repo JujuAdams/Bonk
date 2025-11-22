@@ -150,7 +150,7 @@ function BonkCapsuleCollideQuad(_capsule, _quad, _struct = undefined)
         
         if (_penDepth == undefined)
         {
-            //Catch intersection points that are outside the triangle
+            //Catch intersection points that are outside the quad
             
             //Work backwards to get the original vertex z component
             var _quadZ = _tempZ - _trace;
@@ -244,7 +244,7 @@ function BonkCapsuleCollideQuad(_capsule, _quad, _struct = undefined)
                                    _tempY*_edgeX - _tempX*_edgeY,
                                    _normalX, _normalY, _normalZ) > 0)
                 {
-                    //Reference point is inside the triangle
+                    //Reference point is inside the quad
                     
                     if (_refToPlaneDist == 0)
                     {
@@ -252,23 +252,23 @@ function BonkCapsuleCollideQuad(_capsule, _quad, _struct = undefined)
                     
                         if (_normalZ > 0)
                         {
-                            //Push the capsule up if the triangle is up-facing
+                            //Push the capsule up if the quad is up-facing
                             var _pushLength = _capsuleRadius + (_penDepth / _normalZ);
                         }
                         else if (_normalZ < 0)
                         {
-                            //Push the capsule down if the triangle is down-facing
+                            //Push the capsule down if the quad is down-facing
                             var _pushLength = _capsuleRadius + ((_capsuleHeight - _penDepth) / _normalZ);
                         }
                         else
                         {
-                            //Push the capsule sideways out if the triangle plane is perfectly vertical
+                            //Push the capsule sideways out if the quad plane is perfectly vertical
                             var _pushLength = _capsuleRadius;
                         }
                     }
                     else
                     {
-                        //The reference point is inside the triangle but not exactly on the plane
+                        //The reference point is inside the quad but not exactly on the plane
                         //This happens when the very end of a cap intersects the plane
                         var _pushLength = sign(_refToPlaneDist) * (_capsuleRadius - abs(_refToPlaneDist));
                     }
@@ -288,9 +288,9 @@ function BonkCapsuleCollideQuad(_capsule, _quad, _struct = undefined)
         }
     }
     
-    //Catch reference point that is outside the triangle
+    //Catch reference point that is outside the quad
     
-    //Calculate the direction to push the reference point away from the triangle. This is the perpendicular
+    //Calculate the direction to push the reference point away from the quad. This is the perpendicular
     //vector from the edge to the reference point
     var _dot = clamp(dot_product_3d(_edgeX, _edgeY, _edgeZ, _tempX, _tempY, _tempZ) / _edgeSqrLen, 0, 1);
     var _pushX = _tempX - _dot*_edgeX; 
@@ -298,23 +298,30 @@ function BonkCapsuleCollideQuad(_capsule, _quad, _struct = undefined)
     var _pushZ = _tempZ - _dot*_edgeZ;
     
     var _pushLength = point_distance_3d(0, 0, 0, _pushX, _pushY, _pushZ);
-    if (_pushLength == 0)
-    {
-        //TODO - Handle this edge case
-        return _reaction.__Null();
-    }
-    
     if (_pushLength >= _capsuleRadius)
     {
         return _reaction.__Null();
+    }
+    
+    if (_pushLength == 0)
+    {
+        //Capsule axis is exactly on the edge
+        
+        var _pushX = _normalZ*_edgeY - _normalY*_edgeZ;
+        var _pushY = _normalX*_edgeZ - _normalZ*_edgeX;
+        var _pushZ = _normalY*_edgeX - _normalX*_edgeY;
+        var _coeff = 1 / point_distance_3d(0, 0, 0, _pushX, _pushY, _pushZ);
+    }
+    else
+    {
+        //Push out just enough so that the surface of the capsule is touching the triangle
+        var _coeff = (_capsuleRadius - _pushLength) / _pushLength;
     }
     
     with(_reaction)
     {
         shape = _quad;
         
-        //Push out just enough so that the surface of the capsule is touching the triangle
-        var _coeff = (_capsuleRadius - _pushLength) / _pushLength;
         dX = _coeff*_pushX;
         dY = _coeff*_pushY;
         dZ = _coeff*_pushZ;

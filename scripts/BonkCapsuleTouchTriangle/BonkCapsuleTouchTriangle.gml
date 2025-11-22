@@ -212,16 +212,5 @@ function BonkCapsuleTouchTriangle(_capsule, _triangle)
     var _pushY = _tempY - _dot*_edgeY;
     var _pushZ = _tempZ - _dot*_edgeZ;
     
-    var _pushLength = point_distance_3d(0, 0, 0, _pushX, _pushY, _pushZ);
-    if (_pushLength == 0)
-    {
-        return false;
-    }
-    
-    if (_pushLength >= _capsuleRadius)
-    {
-        return false;
-    }
-    
-    return true;
+    return (point_distance_3d(0, 0, 0, _pushX, _pushY, _pushZ) < _capsuleRadius);
 }
