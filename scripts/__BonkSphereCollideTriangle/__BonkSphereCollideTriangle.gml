@@ -94,26 +94,35 @@ function __BonkSphereCollideTriangle(_sphereX, _sphereY, _sphereZ, _sphereRadius
     var _pushZ = _sphereZ - (_refZ - _tempZ + _dot*_edgeZ);
     
     var _pushLength = point_distance_3d(0, 0, 0, _pushX, _pushY, _pushZ);
-    if (_pushLength == 0)
-    {
-        //TODO - Handle this edge case
-        return _reaction.__Null();
-    }
-    
     if (_pushLength >= _sphereRadius)
     {
         return _reaction.__Null();
     }
     
-    with(_reaction)
+    if (_pushLength == 0)
     {
-        shape = _triangleShape;
+        //Sphere center lies exactly on the triangle
+        with(_reaction)
+        {
+            shape = _triangleShape;
+            
+            dX = _sphereRadius*_normalX;
+            dY = _sphereRadius*_normalY;
+            dZ = _sphereRadius*_normalZ;
+        }
+    }
+    else
+    {
+        with(_reaction)
+        {
+            shape = _triangleShape;
         
-        //Push out just enough so that the surface of the capsule is touching the triangle
-        var _coeff = (_sphereRadius - _pushLength) / _pushLength;
-        dX = _coeff*_pushX;
-        dY = _coeff*_pushY;
-        dZ = _coeff*_pushZ;
+            //Push out just enough so that the surface of the capsule is touching the triangle
+            var _coeff = (_sphereRadius - _pushLength) / _pushLength;
+            dX = _coeff*_pushX;
+            dY = _coeff*_pushY;
+            dZ = _coeff*_pushZ;
+        }
     }
     
     return _reaction;

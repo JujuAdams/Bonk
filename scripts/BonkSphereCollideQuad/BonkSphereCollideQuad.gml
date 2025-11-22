@@ -139,7 +139,7 @@ function BonkSphereCollideQuad(_sphere, _quad, _struct = undefined)
                                    _tempY*_edgeX - _tempX*_edgeY,
                                    _normalX, _normalY, _normalZ) > 0)
                 {
-                    //Reference point is inside the triangle
+                    //Reference point is inside the quad
                     
                     with(_reaction)
                     {
@@ -157,9 +157,9 @@ function BonkSphereCollideQuad(_sphere, _quad, _struct = undefined)
         }
     }
     
-    //Catch reference point that is outside the triangle
+    //Catch reference point that is outside the quad
     
-    //Calculate the direction to push the reference point away from the triangle. This is the perpendicular
+    //Calculate the direction to push the reference point away from the quad. This is the perpendicular
     //vector from the edge to the reference point
     var _dot = clamp(dot_product_3d(_edgeX, _edgeY, _edgeZ, _tempX, _tempY, _tempZ) / _edgeSqrLen, 0, 1);
     var _pushX = _sphereX - (_refX - _tempX + _dot*_edgeX); 
@@ -167,26 +167,35 @@ function BonkSphereCollideQuad(_sphere, _quad, _struct = undefined)
     var _pushZ = _sphereZ - (_refZ - _tempZ + _dot*_edgeZ);
     
     var _pushLength = point_distance_3d(0, 0, 0, _pushX, _pushY, _pushZ);
-    if (_pushLength == 0)
-    {
-        //TODO - Handle this edge case
-        return _reaction.__Null();
-    }
-    
     if (_pushLength >= _sphereRadius)
     {
         return _reaction.__Null();
     }
     
-    with(_reaction)
+    if (_pushLength == 0)
     {
-        shape = _quad;
-        
-        //Push out just enough so that the surface of the capsule is touching the triangle
-        var _coeff = (_sphereRadius - _pushLength) / _pushLength;
-        dX = _coeff*_pushX;
-        dY = _coeff*_pushY;
-        dZ = _coeff*_pushZ;
+        //Sphere center lies exactly on the quad
+        with(_reaction)
+        {
+            shape = _quad;
+            
+            dX = _sphereRadius*_normalX;
+            dY = _sphereRadius*_normalY;
+            dZ = _sphereRadius*_normalZ;
+        }
+    }
+    else
+    {
+        with(_reaction)
+        {
+            shape = _quad;
+            
+            //Push out just enough so that the surface of the sphere is touching the quad
+            var _coeff = (_sphereRadius - _pushLength) / _pushLength;
+            dX = _coeff*_pushX;
+            dY = _coeff*_pushY;
+            dZ = _coeff*_pushZ;
+        }
     }
     
     return _reaction;

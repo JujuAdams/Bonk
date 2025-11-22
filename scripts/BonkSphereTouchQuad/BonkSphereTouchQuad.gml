@@ -155,17 +155,5 @@ function BonkSphereTouchQuad(_sphere, _quad)
     var _pushY = _sphereY - (_refY - _tempY + _dot*_edgeY);
     var _pushZ = _sphereZ - (_refZ - _tempZ + _dot*_edgeZ);
     
-    var _pushLength = point_distance_3d(0, 0, 0, _pushX, _pushY, _pushZ);
-    if (_pushLength == 0)
-    {
-        //TODO - Handle this edge case
-        return false;
-    }
-    
-    if (_pushLength >= _sphereRadius)
-    {
-        return false;
-    }
-    
-    return true;
+    return (point_distance_3d(0, 0, 0, _pushX, _pushY, _pushZ) < _sphereRadius);
 }
