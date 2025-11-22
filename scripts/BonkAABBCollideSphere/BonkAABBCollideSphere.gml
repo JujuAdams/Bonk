@@ -41,17 +41,55 @@ function BonkAABCollideSphere(_aab, _sphere, _struct = undefined)
         return _reaction.__Null();
     }
     
-    var _coeff = _sphereRadius / _dist;
-    var _sphereClosestX = _coeff*_dX + _sphereX;
-    var _sphereClosestY = _coeff*_dY + _sphereY;
-    var _sphereClosestZ = _coeff*_dZ + _sphereZ;
-    
-    with(_reaction)
+    if (_dist > 0)
     {
-        shape = _sphere;
-        dX = _sphereClosestX - _aabClosestX;
-        dY = _sphereClosestY - _aabClosestY;
-        dZ = _sphereClosestZ - _aabClosestZ;
+        //Sphere center is outside the box
+        
+        var _coeff = _sphereRadius / _dist;
+        var _sphereClosestX = _coeff*_dX + _sphereX;
+        var _sphereClosestY = _coeff*_dY + _sphereY;
+        var _sphereClosestZ = _coeff*_dZ + _sphereZ;
+    
+        with(_reaction)
+        {
+            shape = _sphere;
+            
+            dX = _sphereClosestX - _aabClosestX;
+            dY = _sphereClosestY - _aabClosestY;
+            dZ = _sphereClosestZ - _aabClosestZ;
+        }
+    }
+    else
+    {
+        //Sphere center is inside the box
+        
+        var _lPush     = (_sphereX + _sphereRadius) - _xMin;
+        var _tPush     = (_sphereY + _sphereRadius) - _yMin;
+        var _belowPush = (_sphereZ + _sphereRadius) - _zMin;
+        var _rPush     = _xMax - (_sphereX - _sphereRadius);
+        var _bPush     = _yMax - (_sphereY - _sphereRadius);
+        var _abovePush = _zMax - (_sphereZ - _sphereRadius);
+        
+        var _pushX = 0;
+        var _pushY = 0;
+        var _pushZ = 0;
+        
+        var _pushDistance = min(_lPush, _tPush, _belowPush, _rPush, _bPush, _abovePush);
+        if (_lPush     == _pushDistance) _pushX =  _lPush;
+        if (_tPush     == _pushDistance) _pushY =  _tPush;
+        if (_belowPush == _pushDistance) _pushZ =  _belowPush;
+        if (_rPush     == _pushDistance) _pushX = -_rPush;
+        if (_bPush     == _pushDistance) _pushY = -_bPush;
+        if (_abovePush == _pushDistance) _pushZ = -_abovePush;
+        
+        with(_reaction)
+        {
+            shape = _sphere;
+            
+            dX = _pushX;
+            dY = _pushY;
+            dZ = _pushZ;
+        }
     }
     
     return _reaction;
