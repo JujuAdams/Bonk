@@ -424,8 +424,8 @@ function __BonkCommonWorld(_cellXSize, _cellYSize, _cellZSize)
         {
             var _left   = __bonkCellXSize*__bonkMinCellX;
             var _top    = __bonkCellYSize*__bonkMinCellY;
-            var _right  = __bonkCellXSize*__bonkMaxCellX;
-            var _bottom = __bonkCellYSize*__bonkMaxCellY;
+            var _right  = __bonkCellXSize*(__bonkMaxCellX+1);
+            var _bottom = __bonkCellYSize*(__bonkMaxCellY+1);
             
             x = 0.5*(_left + _right);
             y = 0.5*(_top + _bottom);
