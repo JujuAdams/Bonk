@@ -63,15 +63,7 @@ function BonkLineHitWorld(_world, _x1, _y1, _z1, _x2, _y2, _z2, _groupFilter = -
             if (not is_infinity(_closestDistance))
             {
                 ds_map_clear(_map);
-                
-                if (_struct == undefined)
-                {
-                    return _returnHit;
-                }
-                else
-                {
-                    return _returnHit.__CopyTo(_struct);
-                }
+                return (_struct == undefined)? _returnHit : _returnHit.__CopyTo(_struct);
             }
             
             _i += 3;
@@ -79,5 +71,5 @@ function BonkLineHitWorld(_world, _x1, _y1, _z1, _x2, _y2, _z2, _groupFilter = -
     }
     
     ds_map_clear(_map);
-    return _returnHit.__Null();
+    return (_struct == undefined)? _returnHit.__Null() : _struct.__Null();
 }

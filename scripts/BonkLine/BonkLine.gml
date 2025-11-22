@@ -82,7 +82,8 @@ function BonkLine(_x1, _y1, _z1, _x2, _y2, _z2) constructor
         var _hitFunc = _hitFuncLookup[_otherShape.bonkType];
         if (is_callable(_hitFunc))
         {
-            return _hitFunc(_otherShape, x1, y1, z1, x2, y2, z2, _groupFilter);
+            //TODO - Restore group filter
+            return _hitFunc(_otherShape, x1, y1, z1, x2, y2, z2);
         }
         else
         {
