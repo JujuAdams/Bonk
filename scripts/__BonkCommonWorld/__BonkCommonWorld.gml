@@ -912,7 +912,7 @@ function __BonkCommonWorld(_cellXSize, _cellYSize, _cellZSize)
             }
             else if (bonkType == BONK_TYPE_RAY)
             {
-                return other.GetCellsFromLineExt(x, y, z,   x + BONK_RAY_LENGTH*dx, y + BONK_RAY_LENGTH*dy, z + BONK_RAY_LENGTH*dz);
+                return other.GetCellsFromLineExt(x, y, z,   x + BONK_RAY_LENGTH*dX, y + BONK_RAY_LENGTH*dY, z + BONK_RAY_LENGTH*dZ);
             }
             else
             {
