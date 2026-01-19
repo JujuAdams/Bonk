@@ -21,6 +21,24 @@ function BonkResultCollide() constructor
     dY = 0;
     dZ = 0;
     
+    static toString = function()
+    {
+        if (instance_exists(shape))
+        {
+            var _shape = $"{object_get_name(shape.object_index)} {string(real(shape.id))}";
+        }
+        else if (is_struct(shape))
+        {
+            var _shape = $"{instanceof(shape)} {string_delete(string(ptr(shape)), 1, 8)}";
+        }
+        else
+        {
+            var _shape = "<none>";
+        }
+        
+        return $"\{\"shape\":\"{_shape}\",\"dX\":{dX},\"dY\":{dY},\"dZ\":{dZ}\}";
+    }
+    
     static __Null = function()
     {
         shape = undefined;
