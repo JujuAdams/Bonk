@@ -124,6 +124,7 @@
     {"name":"__BonkCommonSphere","order":6,"path":"scripts/__BonkCommonSphere/__BonkCommonSphere.yy",},
     {"name":"__BonkCommonTriangle","order":7,"path":"scripts/__BonkCommonTriangle/__BonkCommonTriangle.yy",},
     {"name":"__BonkCommonWorld","order":8,"path":"scripts/__BonkCommonWorld/__BonkCommonWorld.yy",},
+    {"name":"__BonkConditionalError","order":2,"path":"scripts/__BonkConditionalError/__BonkConditionalError.yy",},
     {"name":"__BonkConstants","order":1,"path":"scripts/__BonkConstants/__BonkConstants.yy",},
     {"name":"__BonkError","order":1,"path":"scripts/__BonkError/__BonkError.yy",},
     {"name":"__BonkIsInstance","order":6,"path":"scripts/__BonkIsInstance/__BonkIsInstance.yy",},

@@ -61,7 +61,7 @@ function __BonkClassShared(_groupVector) constructor
         return false;
     }
     
-    static Touch = function(_otherShape, _groupFilter = -1)
+    static Touch = function(_otherShape, _groupFilter = -1, _quietFail = false)
     {
         if ((_groupFilter >= 0) && (not FilterTest(_groupFilter)))
         {
@@ -77,7 +77,7 @@ function __BonkClassShared(_groupVector) constructor
         {
             if (BONK_STRICT)
             {
-                __BonkError($".Touch() not supported between \"{instanceof(self)}\" (type={bonkType}) and \"{instanceof(_otherShape)}\" (type={_otherShape.bonkType})");
+                __BonkConditionalError(not _quietFail, $".Touch() not supported between \"{instanceof(self)}\" (type={bonkType}) and \"{instanceof(_otherShape)}\" (type={_otherShape.bonkType})");
             }
         }
         
@@ -128,7 +128,7 @@ function __BonkClassShared(_groupVector) constructor
         return _reaction.__Null();
     }
     
-    static Collide = function(_otherShape, _groupFilter = -1, _struct = undefined)
+    static Collide = function(_otherShape, _groupFilter = -1, _struct = undefined, _quietFail = false)
     {
         static _nullCollisionData = new BonkResultCollide();
         
@@ -143,7 +143,7 @@ function __BonkClassShared(_groupVector) constructor
             {
                 if (BONK_STRICT)
                 {
-                    __BonkError($".Collide() not supported between \"{instanceof(self)}\" (type={bonkType}) and \"{instanceof(_otherShape)}\" (type={_otherShape.bonkType})");
+                    __BonkConditionalError(not _quietFail, $".Collide() not supported between \"{instanceof(self)}\" (type={bonkType}) and \"{instanceof(_otherShape)}\" (type={_otherShape.bonkType})");
                 }
             }
         }

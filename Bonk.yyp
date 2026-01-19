@@ -168,6 +168,7 @@
     {"id":{"name":"__BonkCommonSphere","path":"scripts/__BonkCommonSphere/__BonkCommonSphere.yy",},},
     {"id":{"name":"__BonkCommonTriangle","path":"scripts/__BonkCommonTriangle/__BonkCommonTriangle.yy",},},
     {"id":{"name":"__BonkCommonWorld","path":"scripts/__BonkCommonWorld/__BonkCommonWorld.yy",},},
+    {"id":{"name":"__BonkConditionalError","path":"scripts/__BonkConditionalError/__BonkConditionalError.yy",},},
     {"id":{"name":"__BonkConfig","path":"scripts/__BonkConfig/__BonkConfig.yy",},},
     {"id":{"name":"__BonkConstants","path":"scripts/__BonkConstants/__BonkConstants.yy",},},
     {"id":{"name":"__BonkError","path":"scripts/__BonkError/__BonkError.yy",},},

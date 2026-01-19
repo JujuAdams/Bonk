@@ -1,0 +1,13 @@
+{
+  "$GMScript":"v1",
+  "%Name":"__BonkConditionalError",
+  "isCompatibility":false,
+  "isDnD":false,
+  "name":"__BonkConditionalError",
+  "parent":{
+    "name":"(System)",
+    "path":"folders/Bonk/(System).yy",
+  },
+  "resourceType":"GMScript",
+  "resourceVersion":"2.0",
+}

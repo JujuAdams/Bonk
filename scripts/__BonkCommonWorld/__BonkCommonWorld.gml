@@ -56,7 +56,7 @@ function __BonkCommonWorld(_cellXSize, _cellYSize, _cellZSize)
             var _i = 0;
             repeat(array_length(_shapeArray))
             {
-                if (_shapeArray[_i].Touch(_subjectShape, _groupFilter))
+                if (_shapeArray[_i].Touch(_subjectShape, _groupFilter, true))
                 {
                     return true;
                 }

@@ -56,7 +56,7 @@ function BonkPoint(_x, _y, _z) constructor
         };
     }
     
-    static Touch = function(_otherShape)
+    static Touch = function(_otherShape, _quietFail = false)
     {
         var _insideFunc = __bonkTouchFuncLookup[_otherShape.bonkType];
         if (is_callable(_insideFunc))
@@ -67,7 +67,7 @@ function BonkPoint(_x, _y, _z) constructor
         {
             if (BONK_STRICT)
             {
-                __BonkError($".Touch() not supported between \"{instanceof(self)}\" (type={bonkType}) and \"{instanceof(_otherShape)}\" (type={_otherShape.bonkType})");
+                __BonkConditionalError(not _quietFail, $".Touch() not supported between \"{instanceof(self)}\" (type={bonkType}) and \"{instanceof(_otherShape)}\" (type={_otherShape.bonkType})");
             }
         }
         
