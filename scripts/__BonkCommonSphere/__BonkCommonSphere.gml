@@ -14,6 +14,7 @@ function __BonkCommonSphere()
         _array[@ BONK_TYPE_QUAD    ] = BonkSphereCollideQuad;
         _array[@ BONK_TYPE_SPHERE  ] = BonkSphereCollideSphere;
         _array[@ BONK_TYPE_TRIANGLE] = BonkSphereCollideTriangle;
+        _array[@ BONK_TYPE_WORLD   ] = BonkSphereCollideWorld;
         return _array;
     })();
     

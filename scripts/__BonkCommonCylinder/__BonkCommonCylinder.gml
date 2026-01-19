@@ -12,6 +12,7 @@ function __BonkCommonCylinder()
         _array[@ BONK_TYPE_CAPSULE ] = BonkCylinderCollideCapsule;
         _array[@ BONK_TYPE_CYLINDER] = BonkCylinderCollideCylinder;
         _array[@ BONK_TYPE_SPHERE  ] = BonkCylinderCollideSphere;
+        _array[@ BONK_TYPE_WORLD   ] = BonkCylinderCollideWorld;
         return _array;
     })();
     

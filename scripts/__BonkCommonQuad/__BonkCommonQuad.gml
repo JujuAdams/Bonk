@@ -9,6 +9,7 @@ function __BonkCommonQuad()
         var _array = array_create(BONK_NUMBER_OF_TYPES, undefined);
         _array[@ BONK_TYPE_CAPSULE] = BonkQuadCollideCapsule;
         _array[@ BONK_TYPE_SPHERE ] = BonkQuadCollideSphere;
+        _array[@ BONK_TYPE_WORLD  ] = BonkQuadCollideWorld;
         return _array;
     })();
     

@@ -11,6 +11,7 @@ function __BonkCommonAAB()
         _array[@ BONK_TYPE_CAPSULE ] = BonkAABCollideCapsule;
         _array[@ BONK_TYPE_CYLINDER] = BonkAABCollideCylinder;
         _array[@ BONK_TYPE_SPHERE  ] = BonkAABCollideSphere;
+        _array[@ BONK_TYPE_WORLD   ] = BonkAABCollideWorld;
         return _array;
     })();
     

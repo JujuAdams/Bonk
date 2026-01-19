@@ -1,9 +1,9 @@
 {
   "$GMScript":"v1",
-  "%Name":"BonkAABBCollideSphere",
+  "%Name":"BonkAABCollideCylinder",
   "isCompatibility":false,
   "isDnD":false,
-  "name":"BonkAABBCollideSphere",
+  "name":"BonkAABCollideCylinder",
   "parent":{
     "name":"AAB",
     "path":"folders/Bonk/Direct Control/Manual Checkers/Collide/AAB.yy",

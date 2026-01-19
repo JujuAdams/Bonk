@@ -9,6 +9,7 @@ function __BonkCommonTriangle()
         var _array = array_create(BONK_NUMBER_OF_TYPES, undefined);
         _array[@ BONK_TYPE_CAPSULE] = BonkTriangleCollideCapsule;
         _array[@ BONK_TYPE_SPHERE ] = BonkTriangleCollideSphere;
+        _array[@ BONK_TYPE_WORLD  ] = BonkTriangleCollideWorld;
         return _array;
     })();
     

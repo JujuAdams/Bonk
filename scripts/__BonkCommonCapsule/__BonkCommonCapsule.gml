@@ -14,6 +14,7 @@ function __BonkCommonCapsule()
         _array[@ BONK_TYPE_QUAD    ] = BonkCapsuleCollideQuad;
         _array[@ BONK_TYPE_SPHERE  ] = BonkCapsuleCollideSphere;
         _array[@ BONK_TYPE_TRIANGLE] = BonkCapsuleCollideTriangle;
+        _array[@ BONK_TYPE_WORLD   ] = BonkCapsuleCollideWorld;
         return _array;
     })();
     

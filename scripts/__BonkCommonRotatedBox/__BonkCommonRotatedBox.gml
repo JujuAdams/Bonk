@@ -10,6 +10,7 @@ function __BonkCommonRotatedBox()
         _array[@ BONK_TYPE_CAPSULE ] = BonkRotatedBoxCollideCapsule;
         _array[@ BONK_TYPE_CYLINDER] = BonkRotatedBoxCollideCylinder;
         _array[@ BONK_TYPE_SPHERE  ] = BonkRotatedBoxCollideSphere;
+        _array[@ BONK_TYPE_WORLD   ] = BonkRotatedBoxCollideWorld;
         return _array;
     })();
     
