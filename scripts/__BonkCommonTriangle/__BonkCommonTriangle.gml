@@ -17,6 +17,7 @@ function __BonkCommonTriangle()
         var _array = array_create(BONK_NUMBER_OF_TYPES, undefined);
         _array[@ BONK_TYPE_CAPSULE] = BonkTriangleTouchCapsule;
         _array[@ BONK_TYPE_SPHERE ] = BonkTriangleTouchSphere;
+        _array[@ BONK_TYPE_WORLD  ] = BonkTriangleTouchWorld;
         return _array;
     })();
     

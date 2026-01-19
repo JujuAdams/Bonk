@@ -19,6 +19,7 @@ function __BonkCommonRotatedBox()
         _array[@ BONK_TYPE_CAPSULE ] = BonkRotatedBoxTouchCapsule;
         _array[@ BONK_TYPE_CYLINDER] = BonkRotatedBoxTouchCylinder;
         _array[@ BONK_TYPE_SPHERE  ] = BonkRotatedBoxTouchSphere;
+        _array[@ BONK_TYPE_WORLD   ] = BonkRotatedBoxTouchWorld;
         return _array;
     })();
     

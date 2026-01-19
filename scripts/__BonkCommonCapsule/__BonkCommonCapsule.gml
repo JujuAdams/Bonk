@@ -27,6 +27,7 @@ function __BonkCommonCapsule()
         _array[@ BONK_TYPE_QUAD    ] = BonkCapsuleTouchQuad;
         _array[@ BONK_TYPE_SPHERE  ] = BonkCapsuleTouchSphere;
         _array[@ BONK_TYPE_TRIANGLE] = BonkCapsuleTouchTriangle;
+        _array[@ BONK_TYPE_WORLD   ] = BonkCapsuleTouchWorld;
         return _array;
     })();
     

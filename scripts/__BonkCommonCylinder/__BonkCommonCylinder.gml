@@ -23,6 +23,7 @@ function __BonkCommonCylinder()
         _array[@ BONK_TYPE_CAPSULE ] = BonkCylinderTouchCapsule;
         _array[@ BONK_TYPE_CYLINDER] = BonkCylinderTouchCylinder;
         _array[@ BONK_TYPE_SPHERE  ] = BonkCylinderTouchSphere;
+        _array[@ BONK_TYPE_WORLD   ] = BonkCylinderTouchWorld;
         return _array;
     })();
     

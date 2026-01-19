@@ -21,6 +21,7 @@ function __BonkCommonAAB()
         _array[@ BONK_TYPE_CAPSULE ] = BonkAABTouchCapsule;
         _array[@ BONK_TYPE_CYLINDER] = BonkAABTouchCylinder;
         _array[@ BONK_TYPE_SPHERE  ] = BonkAABTouchSphere;
+        _array[@ BONK_TYPE_WORLD   ] = BonkAABTouchWorld;
         return _array;
     })();
     

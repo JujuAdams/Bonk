@@ -27,6 +27,7 @@ function __BonkCommonSphere()
         _array[@ BONK_TYPE_QUAD    ] = BonkSphereTouchQuad;
         _array[@ BONK_TYPE_SPHERE  ] = BonkSphereTouchSphere;
         _array[@ BONK_TYPE_TRIANGLE] = BonkSphereTouchTriangle;
+        _array[@ BONK_TYPE_WORLD   ] = BonkSphereTouchWorld;
         return _array;
     })();
     
