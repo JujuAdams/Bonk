@@ -1,5 +1,5 @@
 {
-  "$GMNotes":"",
+  "$GMNotes":"v1",
   "%Name":"Bonk Instance Details",
   "name":"Bonk Instance Details",
   "parent":{
