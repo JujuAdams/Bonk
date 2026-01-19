@@ -14,6 +14,11 @@ function __BonkSupercover(_x1, _y1, _z1, _x2, _y2, _z2, _array = [])
     var _yDelta = _y2 - _y1;
     var _zDelta = _z2 - _z1;
     
+    //Find which direction the line is headed in. We're OK with `sign()` returning 0 here
+    var _xSign = sign(_xDelta);
+    var _ySign = sign(_yDelta);
+    var _zSign = sign(_zDelta);
+    
     //Don't allow divide-by-zero anywhere
     if (_xDelta == 0) _xDelta = math_get_epsilon();
     if (_yDelta == 0) _yDelta = math_get_epsilon();
@@ -25,11 +30,6 @@ function __BonkSupercover(_x1, _y1, _z1, _x2, _y2, _z2, _array = [])
     var _yIncrAbs = 1 / abs(_yDelta);
     var _zIncrAbs = 1 / abs(_zDelta);
     
-    //Find which direction the line is headed in. We're OK with `sign()` returning 0 here
-    var _xSign = sign(_xDelta);
-    var _ySign = sign(_yDelta);
-    var _zSign = sign(_zDelta);
-    
     //Track which cell we've most recently visited
     var _xWrite = floor(_x1);
     var _yWrite = floor(_y1);
@@ -40,13 +40,13 @@ function __BonkSupercover(_x1, _y1, _z1, _x2, _y2, _z2, _array = [])
     
     //Figure out the t value ("parameter of the line") for each axis. We use `abs()` to handle edge
     //cases. The t-parameter values should always be positive initially!
-    var _tX = abs((_xWrite - _x1) / _xDelta);
-    var _tY = abs((_yWrite - _y1) / _yDelta);
-    var _tZ = abs((_zWrite - _z1) / _zDelta);
+    var _tX = (_xSign > 0)? (1 - frac(_x1)) : frac(_x1);
+    var _tY = (_ySign > 0)? (1 - frac(_y1)) : frac(_y1);
+    var _tZ = (_zSign > 0)? (1 - frac(_z1)) : frac(_z1);
     
-    if (_xDelta > 0) _tX += _xIncrAbs;
-    if (_yDelta > 0) _tY += _yIncrAbs;
-    if (_zDelta > 0) _tZ += _zIncrAbs;
+    _tX *= _xIncrAbs;
+    _tY *= _yIncrAbs;
+    _tZ *= _zIncrAbs;
     
     if (BONK_SUPERCOVER_DEBUG)
     {
