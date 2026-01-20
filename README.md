@@ -1,6 +1,6 @@
-<h1 align="center">Bonk 3.2.6.1</h1>
+<h1 align="center">Bonk 3.3.0</h1>
 
-<p align="center">3D collisions for GameMaker 2024.11 by <a href="https://www.jujuadams.com/" target="_blank">Juju Adams</a></p>
+<p align="center">3D collisions for GameMaker 2024.14 by <a href="https://www.jujuadams.com/" target="_blank">Juju Adams</a></p>
 
 <p align="center"><a href="https://github.com/JujuAdams/bonk/releases/">Download the .yymps</a></p>
 
