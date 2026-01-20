@@ -38,15 +38,16 @@ function __BonkSupercover(_x1, _y1, _z1, _x2, _y2, _z2, _array = [])
     //We always visit the origin cell so let's push that now
     array_push(_array,   _xWrite, _yWrite, _zWrite);
     
-    //Figure out the t value ("parameter of the line") for each axis. We use `abs()` to handle edge
-    //cases. The t-parameter values should always be positive initially!
-    var _tX = (_xSign > 0)? (1 - frac(_x1)) : frac(_x1);
-    var _tY = (_ySign > 0)? (1 - frac(_y1)) : frac(_y1);
-    var _tZ = (_zSign > 0)? (1 - frac(_z1)) : frac(_z1);
+    //Find the relative coordinates for the next intersection located on the face of the cube we're
+    //inside
+    var _nextX = ((_xSign < 0)? _xWrite : (_xWrite+1)) - _x1;
+    var _nextY = ((_ySign < 0)? _yWrite : (_yWrite+1)) - _y1;
+    var _nextZ = ((_zSign < 0)? _zWrite : (_zWrite+1)) - _z1;
     
-    _tX *= _xIncrAbs;
-    _tY *= _yIncrAbs;
-    _tZ *= _zIncrAbs;
+    //Convert the coordinates into line parameter values
+    var _tX = _nextX / _xDelta;
+    var _tY = _nextY / _yDelta;
+    var _tZ = _nextZ / _zDelta;
     
     if (BONK_SUPERCOVER_DEBUG)
     {
