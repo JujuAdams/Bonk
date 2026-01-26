@@ -27,6 +27,7 @@ function __BonkClassWorker(_world, _vertexBufferArray, _vertexFormat, _matrix) c
     __vertexBufferIndex = undefined;
     __vertexFormatStride = undefined;
     __vertexFormatPositionOffset = undefined;
+    __triangleCount = undefined;
     __trianglesRemaining = undefined;
     
     
@@ -47,6 +48,21 @@ function __BonkClassWorker(_world, _vertexBufferArray, _vertexFormat, _matrix) c
     static Cancel = function()
     {
         __End();
+    }
+    
+    static GetProgress = function()
+    {
+        if (__finished)
+        {
+            return 1;
+        }
+        
+        if ((__triangleCount == undefined) || (__trianglesRemaining == undefined))
+        {
+            return 0;
+        }
+        
+        return clamp(1 - (__trianglesRemaining / __triangleCount), 0, 1);
     }
     
     static __End = function()
@@ -149,11 +165,13 @@ function __BonkClassWorker(_world, _vertexBufferArray, _vertexFormat, _matrix) c
         var _vertexBuffer = __vertexBufferArray[__vertexBufferIndex];
         
         var _vertexCount = vertex_get_number(_vertexBuffer);
-        __trianglesRemaining = _vertexCount / 3;
-        if (__trianglesRemaining != floor(__trianglesRemaining))
+        __triangleCount = _vertexCount / 3;
+        if (__triangleCount != floor(__triangleCount))
         {
             __BonkError($"Vertex buffer does not have a whole number of triangles (vertex count {_vertexCount} is not divisible by 3)");
         }
+        
+        __trianglesRemaining = __triangleCount;
         
         __buffer = buffer_create_from_vertex_buffer_ext(_vertexBuffer, buffer_fixed, 1, 0, _vertexCount);
         buffer_seek(__buffer, buffer_seek_start, __vertexFormatPositionOffset);
