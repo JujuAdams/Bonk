@@ -646,7 +646,7 @@ function __BonkCommonWorld(_cellXSize, _cellYSize, _cellZSize)
         }
         
         var _worker = new __BonkClassWorker(self, _vertexBufferArray, _vertexFormat, _matrix);
-        _worker.__StartAsync(_budget);
+        _worker.__StartAsync();
         
         return _worker;
     }

@@ -1,12 +1,12 @@
 {
   "$GMScript":"v1",
-  "%Name":"__Bonk",
+  "%Name":"BonkAsyncGetPendingWorkers",
   "isCompatibility":false,
   "isDnD":false,
-  "name":"__Bonk",
+  "name":"BonkAsyncGetPendingWorkers",
   "parent":{
-    "name":"(System)",
-    "path":"folders/Bonk/(System).yy",
+    "name":"Async",
+    "path":"folders/Bonk/Async.yy",
   },
   "resourceType":"GMScript",
   "resourceVersion":"2.0",

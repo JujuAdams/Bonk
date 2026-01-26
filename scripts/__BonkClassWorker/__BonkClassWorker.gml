@@ -7,6 +7,8 @@
 
 function __BonkClassWorker(_world, _vertexBufferArray, _vertexFormat, _matrix) constructor
 {
+    static _pendingWorkerArray = __BonkSystem().__pendingWorkerArray;
+    
     if (BONK_DEBUG_VERTEX_BUFFER_ASYNC)
     {
         __BonkTrace($"Adding worker {string(ptr(self))} to world {string(ptr(_world))}");
@@ -21,7 +23,6 @@ function __BonkClassWorker(_world, _vertexBufferArray, _vertexFormat, _matrix) c
     
     __finished   = false;
     __timeSource = undefined;
-    __budget     = undefined;
     
     __buffer = undefined;
     __vertexBufferIndex = undefined;
@@ -67,12 +68,19 @@ function __BonkClassWorker(_world, _vertexBufferArray, _vertexFormat, _matrix) c
             return 1;
         }
         
+        var _vertexBufferCount = array_length(__vertexBufferArray);
+        var _value = (__vertexBufferIndex ?? 0) / _vertexBufferCount;
+        
         if ((__triangleCount == undefined) || (__trianglesRemaining == undefined))
         {
-            return 0;
+            var _triangleProgress =  0;
+        }
+        else
+        {
+            var _triangleProgress = clamp(1 - (__trianglesRemaining / __triangleCount), 0, 1);
         }
         
-        return clamp(1 - (__trianglesRemaining / __triangleCount), 0, 1);
+        return _value + _triangleProgress/_vertexBufferCount;
     }
     
     static __End = function()
@@ -110,26 +118,9 @@ function __BonkClassWorker(_world, _vertexBufferArray, _vertexFormat, _matrix) c
         }
     }
     
-    static __StartAsync = function(_budget)
+    static __StartAsync = function()
     {
-        __budget = _budget;
-        
-        __timeSource = time_source_create(time_source_global, 1, time_source_units_frames, function()
-        {
-            if (BONK_DEBUG_VERTEX_BUFFER_ASYNC)
-            {
-                __BonkTrace($"Worker {string(ptr(self))} updating (world {string(ptr(__world))})");
-            }
-            
-            var _startTime = current_time;
-            while((current_time - _startTime < __budget) && (not __finished))
-            {
-                __funcUpdate();
-            }
-        },
-        [], -1);
-        
-        time_source_start(__timeSource);
+        array_push(_pendingWorkerArray, self);
         
         return self;
     }
@@ -138,7 +129,7 @@ function __BonkClassWorker(_world, _vertexBufferArray, _vertexFormat, _matrix) c
     
     static __WorkFirstTime = function()
     {
-        if (__finished) return;
+        if (__finished) return true;
         
         var _vertexFormatInfo = vertex_format_get_info(__vertexFormat);
         __vertexFormatStride = _vertexFormatInfo.stride;
@@ -166,11 +157,13 @@ function __BonkClassWorker(_world, _vertexBufferArray, _vertexFormat, _matrix) c
         __vertexBufferIndex = 0;
         
         __funcUpdate = __WorkVertexBuffer;
+        
+        return false;
     }
     
     static __WorkVertexBuffer = function()
     {
-        if (__finished) return;
+        if (__finished) return true;
         
         var _vertexBuffer = __vertexBufferArray[__vertexBufferIndex];
         
@@ -187,11 +180,13 @@ function __BonkClassWorker(_world, _vertexBufferArray, _vertexFormat, _matrix) c
         buffer_seek(__buffer, buffer_seek_start, __vertexFormatPositionOffset);
         
         __funcUpdate = __WorkTriangles;
+        
+        return false;
     }
         
     static __WorkTriangles = function()
     {
-        if (__finished) return;
+        if (__finished) return true;
         
         var _world              = __world;
         var _buffer             = __buffer;
@@ -238,9 +233,13 @@ function __BonkClassWorker(_world, _vertexBufferArray, _vertexFormat, _matrix) c
             _world.__Add(_bonkTri); //Use the internal version to avoid unnecessary instance checks
         }
         
-        __trianglesRemaining -= BONK_VERTEX_BUFFER_ASYNC_TRIANGLE_RESOLUTION;
+        __trianglesRemaining = max(0, __trianglesRemaining - BONK_VERTEX_BUFFER_ASYNC_TRIANGLE_RESOLUTION);
         
-        if (__trianglesRemaining <= 0)
+        if (__trianglesRemaining > 0)
+        {
+            return false;
+        }
+        else
         {
             buffer_delete(__buffer);
             __buffer = undefined;
@@ -250,6 +249,7 @@ function __BonkClassWorker(_world, _vertexBufferArray, _vertexFormat, _matrix) c
             if (__vertexBufferIndex >= array_length(__vertexBufferArray))
             {
                 __End();
+                return true;
             }
             else
             {

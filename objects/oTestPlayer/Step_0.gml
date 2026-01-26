@@ -1,4 +1,4 @@
-if (world.GetVertexBufferAsyncCount() > 0)
+if (BonkAsyncGetPendingWorkers() > 0)
 {
     return;
 }

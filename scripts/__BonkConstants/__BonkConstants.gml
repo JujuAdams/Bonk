@@ -36,4 +36,4 @@
 //How many triangles to process per update tick. Multiple update ticks will happen per frame so
 //this value is really more of a "how often should we check to see if we've gone over our time
 //budget" rather than any measure of speed.
-#macro BONK_VERTEX_BUFFER_ASYNC_TRIANGLE_RESOLUTION  100
+#macro BONK_VERTEX_BUFFER_ASYNC_TRIANGLE_RESOLUTION  200

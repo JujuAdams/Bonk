@@ -1,0 +1,13 @@
+{
+  "$GMScript":"v1",
+  "%Name":"BonkAsyncSetBudget",
+  "isCompatibility":false,
+  "isDnD":false,
+  "name":"BonkAsyncSetBudget",
+  "parent":{
+    "name":"Async",
+    "path":"folders/Bonk/Async.yy",
+  },
+  "resourceType":"GMScript",
+  "resourceVersion":"2.0",
+}
