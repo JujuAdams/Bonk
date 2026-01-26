@@ -50,6 +50,16 @@ function __BonkClassWorker(_world, _vertexBufferArray, _vertexFormat, _matrix) c
         __End();
     }
     
+    static GetRemaining = function()
+    {
+        if (__finished)
+        {
+            return 0;
+        }
+        
+        return __trianglesRemaining ?? 0;
+    }
+    
     static GetProgress = function()
     {
         if (__finished)

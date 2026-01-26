@@ -651,6 +651,20 @@ function __BonkCommonWorld(_cellXSize, _cellYSize, _cellZSize)
         return _worker;
     }
     
+    GetVertexBufferAsyncRemaining = function()
+    {
+        var _value = 0;
+        
+        var _i = 0;
+        repeat(array_length(__bonkWorkerArray))
+        {
+            _value += __bonkWorkerArray[_i].GetRemaining();
+            ++_i;
+        }
+        
+        return _value;
+    }
+    
     GetVertexBufferAsyncCount = function()
     {
         return array_length(__bonkWorkerArray);
