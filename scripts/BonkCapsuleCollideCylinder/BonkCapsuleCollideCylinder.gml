@@ -51,11 +51,23 @@ function BonkCapsuleCollideCylinder(_capsule, _cylinder, _struct = undefined)
     {
         return _reaction.__Null();
     }
-    
-    var _coeff = _capsuleRadius / _dist;
-    var _capsuleClosestX = _coeff*_dX + _capsuleX;
-    var _capsuleClosestY = _coeff*_dY + _capsuleY;
-    var _capsuleClosestZ = _coeff*_dZ + _capsuleClosestZ;
+    else if (_dist <= 0)
+    {
+        var _dX = _cylinder.x - _capsuleX;
+        var _dY = _cylinder.y - _capsuleY;
+        var _dist = sqrt(_dX*_dX + _dY*_dY);
+        
+        var _coeff = _capsuleRadius / _dist;
+        var _capsuleClosestX = _coeff*_dX + _capsuleX;
+        var _capsuleClosestY = _coeff*_dY + _capsuleY;
+    }
+    else
+    {
+        var _coeff = _capsuleRadius / _dist;
+        var _capsuleClosestX = _coeff*_dX + _capsuleX;
+        var _capsuleClosestY = _coeff*_dY + _capsuleY;
+        var _capsuleClosestZ = _coeff*_dZ + _capsuleClosestZ;
+    }
     
     with(_reaction)
     {
