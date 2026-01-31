@@ -14,6 +14,7 @@
     {"$GMFolder":"","%Name":"(System)","folderPath":"folders/Bonk/(System).yy","name":"(System)","resourceType":"GMFolder","resourceVersion":"2.0",},
     {"$GMFolder":"","%Name":"Common Values","folderPath":"folders/Bonk/(System)/Common Values.yy","name":"Common Values","resourceType":"GMFolder","resourceVersion":"2.0",},
     {"$GMFolder":"","%Name":"Triangles","folderPath":"folders/Bonk/(System)/Triangles.yy","name":"Triangles","resourceType":"GMFolder","resourceVersion":"2.0",},
+    {"$GMFolder":"","%Name":"Async","folderPath":"folders/Bonk/Async.yy","name":"Async","resourceType":"GMFolder","resourceVersion":"2.0",},
     {"$GMFolder":"","%Name":"Direct Control","folderPath":"folders/Bonk/Direct Control.yy","name":"Direct Control","resourceType":"GMFolder","resourceVersion":"2.0",},
     {"$GMFolder":"","%Name":"Manual Checkers","folderPath":"folders/Bonk/Direct Control/Manual Checkers.yy","name":"Manual Checkers","resourceType":"GMFolder","resourceVersion":"2.0",},
     {"$GMFolder":"","%Name":"Collide","folderPath":"folders/Bonk/Direct Control/Manual Checkers/Collide.yy","name":"Collide","resourceType":"GMFolder","resourceVersion":"2.0",},
@@ -39,7 +40,6 @@
     {"$GMFolder":"","%Name":"Triangle","folderPath":"folders/Bonk/Direct Control/Manual Checkers/Touch/Triangle.yy","name":"Triangle","resourceType":"GMFolder","resourceVersion":"2.0",},
     {"$GMFolder":"","%Name":"Multi Functions","folderPath":"folders/Bonk/Direct Control/Multi Functions.yy","name":"Multi Functions","resourceType":"GMFolder","resourceVersion":"2.0",},
     {"$GMFolder":"","%Name":"Shape Constructors","folderPath":"folders/Bonk/Direct Control/Shape Constructors.yy","name":"Shape Constructors","resourceType":"GMFolder","resourceVersion":"2.0",},
-    {"$GMFolder":"","%Name":"Async","folderPath":"folders/Bonk/Async.yy","name":"Async","resourceType":"GMFolder","resourceVersion":"2.0",},
     {"$GMFolder":"","%Name":"Helper Constructors","folderPath":"folders/Bonk/Helper Constructors.yy","name":"Helper Constructors","resourceType":"GMFolder","resourceVersion":"2.0",},
     {"$GMFolder":"","%Name":"Instances","folderPath":"folders/Bonk/Instances.yy","name":"Instances","resourceType":"GMFolder","resourceVersion":"2.0",},
     {"$GMFolder":"","%Name":"Instance Create","folderPath":"folders/Bonk/Instances/Instance Create.yy","name":"Instance Create","resourceType":"GMFolder","resourceVersion":"2.0",},
@@ -83,7 +83,7 @@
   "isEcma":false,
   "LibraryEmitters":[],
   "MetaData":{
-    "IDEVersion":"2024.14.1.210",
+    "IDEVersion":"2024.14.3.217",
   },
   "name":"Bonk",
   "resources":[
@@ -125,6 +125,8 @@
     {"id":{"name":"oTestAutoLight","path":"objects/oTestAutoLight/oTestAutoLight.yy",},},
     {"id":{"name":"oTestBallpit","path":"objects/oTestBallpit/oTestBallpit.yy",},},
     {"id":{"name":"oTestBallpitInstances","path":"objects/oTestBallpitInstances/oTestBallpitInstances.yy",},},
+    {"id":{"name":"oTestBigSlope","path":"objects/oTestBigSlope/oTestBigSlope.yy",},},
+    {"id":{"name":"oTestBigSlopePart","path":"objects/oTestBigSlopePart/oTestBigSlopePart.yy",},},
     {"id":{"name":"oTestCylinder","path":"objects/oTestCylinder/oTestCylinder.yy",},},
     {"id":{"name":"oTestFallingSphere","path":"objects/oTestFallingSphere/oTestFallingSphere.yy",},},
     {"id":{"name":"oTestFloor","path":"objects/oTestFloor/oTestFloor.yy",},},
@@ -433,8 +435,8 @@
   "resourceType":"GMProject",
   "resourceVersion":"2.0",
   "RoomOrderNodes":[
-    {"roomId":{"name":"rmTestMeshInstances","path":"rooms/rmTestMeshInstances/rmTestMeshInstances.yy",},},
     {"roomId":{"name":"rmTestConstructorPlayground","path":"rooms/rmTestConstructorPlayground/rmTestConstructorPlayground.yy",},},
+    {"roomId":{"name":"rmTestMeshInstances","path":"rooms/rmTestMeshInstances/rmTestMeshInstances.yy",},},
     {"roomId":{"name":"rmTestMesh","path":"rooms/rmTestMesh/rmTestMesh.yy",},},
     {"roomId":{"name":"rmTestRaycast","path":"rooms/rmTestRaycast/rmTestRaycast.yy",},},
     {"roomId":{"name":"rmTestBasics","path":"rooms/rmTestBasics/rmTestBasics.yy",},},

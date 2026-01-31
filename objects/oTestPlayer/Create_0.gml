@@ -6,5 +6,5 @@ velocity = new BonkVelocity();
 line = new BonkLine(shape.x, shape.y, shape.z + 0.5*shape.height,
                     shape.x, shape.y, shape.z - 0.5*shape.height - 50);
 
-gravAccel = 0.1;
+gravAccel = 0.2;
 onGroundFrames = 0;
