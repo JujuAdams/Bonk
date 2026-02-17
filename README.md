@@ -1,4 +1,4 @@
-<h1 align="center">Bonk 3.4.0 (beta)</h1>
+<h1 align="center">Bonk 3.4.1 (beta)</h1>
 
 <p align="center">3D collisions for GameMaker 2024.14 by <a href="https://www.jujuadams.com/" target="_blank">Juju Adams</a></p>
 
