@@ -41,7 +41,7 @@ function BonkCollideManyExt(_subjectShape, _targetShapes, _groupFilter = -1, _ar
             {
                 if (Collide(_subjectShape, _groupFilter, _reaction).shape != undefined)
                 {
-                    array_push(_array, _reaction);
+                    array_push(_array, _reaction.__Reverse(self));
                     _reaction = new BonkResultCollide();
                 }
             }
@@ -58,7 +58,7 @@ function BonkCollideManyExt(_subjectShape, _targetShapes, _groupFilter = -1, _ar
             {
                 if (Collide(_subjectShape, _groupFilter, _reaction).shape != undefined)
                 {
-                    array_push(_array, _reaction);
+                    array_push(_array, _reaction.__Reverse(self));
                     _reaction = new BonkResultCollide();
                 }
             }
@@ -72,7 +72,7 @@ function BonkCollideManyExt(_subjectShape, _targetShapes, _groupFilter = -1, _ar
         {
             if (Collide(_subjectShape, _groupFilter, _reaction).shape != undefined)
             {
-                array_push(_array, _reaction);
+                array_push(_array, _reaction.__Reverse(self));
                 _reaction = new BonkResultCollide();
             }
         }
