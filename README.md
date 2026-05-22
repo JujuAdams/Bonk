@@ -1,4 +1,4 @@
-<h1 align="center">Bonk 4.0.0 (beta)</h1>
+<h1 align="center">Bonk 4.0.0</h1>
 
 <p align="center">3D collisions for GameMaker LTS 2026</p>
 
