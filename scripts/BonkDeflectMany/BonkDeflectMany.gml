@@ -10,8 +10,8 @@
 /// calling this function multiple times will reuse the same struct.
 /// 
 /// The `slopeThreshold` parameter is measured in degrees and referes to the gradient angle of
-/// colliding surfaces that the surface bumps into. A slope threshold of `0` degrees is a flat
-/// floor, a slope threshold of `90` degrees is a flat wall.
+/// colliding surfaces that the shape bumps into. A slope threshold of `0` degrees is a horizontal
+/// floor, a slope threshold of `90` degrees is a vertical wall.
 /// 
 /// If, at the point of collision with a shape, a slope has a gradient angle lower than the
 /// threshold then the subject shape will be pushed up (positive z) out of the shape instead of

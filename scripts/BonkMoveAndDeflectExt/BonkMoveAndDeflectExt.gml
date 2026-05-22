@@ -13,10 +13,10 @@
 /// The `targetShapes` parameter can be an array, a list, a Bonk struct/instance, or an object used
 /// to create Bonk instances. If you provide an array or list then elements in the array/list
 /// should be either a Bonk struct/instance or an object.
-///
+/// 
 /// The `slopeThreshold` parameter is measured in degrees and referes to the gradient angle of
-/// colliding surfaces that the surface bumps into. A slope threshold of `0` degrees is a flat
-/// floor, a slope threshold of `90` degrees is a flat wall.
+/// colliding surfaces that the shape bumps into. A slope threshold of `0` degrees is a horizontal
+/// floor, a slope threshold of `90` degrees is a vertical wall.
 /// 
 /// If, at the point of collision with a shape, a slope has a gradient angle lower than the
 /// threshold then the subject shape will be pushed up (positive z) out of the shape instead of
