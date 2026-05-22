@@ -12,6 +12,14 @@
 /// `.shape`
 ///   The shape that was collided with. If this variable is set to `undefined` then no collision
 ///   was found.
+/// 
+/// Structs created by the constructor contain the following method too:
+/// 
+/// `.GetFloor([slopeThreshold=0])`
+///   Returns `true` if  the collision is with a flat surface in the XY plane and `false` otherwise.
+///   The `slopeThreshold` parameter is measured in degrees and referes to the gradient angle of
+///   colliding surfaces that a shape has bumped into. A slope threshold of `0` degrees is a
+///   horizontal floor, a slope threshold of `90` degrees is a vertical wall.
 
 function BonkResultCollide() constructor
 {
@@ -20,6 +28,15 @@ function BonkResultCollide() constructor
     dX = 0;
     dY = 0;
     dZ = 0;
+    
+    static GetFloor = function(_slopeThreshold = 0)
+    {
+        var _dX = dX;
+        var _dY = dY;
+        var _dZ = dZ;
+        
+        return ((_dZ / max(0.00001, sqrt(_dX*_dX + _dY*_dY + _dZ*_dZ))) > max(dcos(_slopeThreshold), 0));
+    }
     
     static toString = function()
     {
