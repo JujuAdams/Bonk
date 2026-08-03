@@ -7,7 +7,15 @@ function __BonkCapsuleCollideTriangle(_capsuleX, _capsuleY, _capsuleZ, _capsuleH
     
     if (_normalZ == 0)
     {
-        var _penDepth = clamp(_triZ1 - _capsuleZ, 0, _capsuleHeight);
+        if ((_normalX == 0) && (_normalY == 0))
+        {
+            //Gegenerate triangle
+            return _reaction.__Null();
+        }
+        else
+        {
+            var _penDepth = clamp(_triZ1 - _capsuleZ, 0, _capsuleHeight);
+        }
     }
     else
     {
