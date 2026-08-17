@@ -1,6 +1,6 @@
 // Feather disable all
 
-function __BonkSphereCollideTriangle(_sphereX, _sphereY, _sphereZ, _sphereRadius,   _triangleShape,   _triX1, _triY1, _triZ1,   _triX2, _triY2, _triZ2,   _triX3, _triY3, _triZ3,    _dX12, _dY12, _dZ12,    _dX23, _dY23, _dZ23,    _dX31, _dY31, _dZ31,   _normalX, _normalY, _normalZ,   _edgeSqrLength12, _edgeSqrLength23, _edgeSqrLength31,   _struct = undefined)
+function __BonkSphereCollideTriangle(_sphereX, _sphereY, _sphereZ, _sphereRadius,   _triangleShape,   _triX1, _triY1, _triZ1,   _triX2, _triY2, _triZ2,   _triX3, _triY3, _triZ3,    _dX12, _dY12, _dZ12,    _dX23, _dY23, _dZ23,    _dX31, _dY31, _dZ31,   _normalX, _normalY, _normalZ,   _hardEdge12, _hardEdge23, _hardEdge31,   _edgeSqrLength12, _edgeSqrLength23, _edgeSqrLength31,   _struct = undefined)
 {
     static _staticStruct = new BonkResultCollide();
     var _reaction = _struct ?? _staticStruct;
@@ -25,6 +25,7 @@ function __BonkSphereCollideTriangle(_sphereX, _sphereY, _sphereZ, _sphereRadius
     var _tempY = _refY - _triY1;
     var _tempZ = _refZ - _triZ1;
     
+    var _hardEdge = _hardEdge12;
     var _edgeSqrLen = _edgeSqrLength12;
     var _edgeX = _dX12;
     var _edgeY = _dY12;
@@ -37,14 +38,15 @@ function __BonkSphereCollideTriangle(_sphereX, _sphereY, _sphereZ, _sphereRadius
     {
         //Check the reference point is on the inner side of the edge 2->3
         //If we fail, these values fall through
-        var _tempX = _refX - _triX2;
-        var _tempY = _refY - _triY2;
-        var _tempZ = _refZ - _triZ2;
+        _tempX = _refX - _triX2;
+        _tempY = _refY - _triY2;
+        _tempZ = _refZ - _triZ2;
         
-        var _edgeSqrLen = _edgeSqrLength23;
-        var _edgeX = _dX23;
-        var _edgeY = _dY23;
-        var _edgeZ = _dZ23;
+        _hardEdge = _hardEdge23;
+        _edgeSqrLen = _edgeSqrLength23;
+        _edgeX = _dX23;
+        _edgeY = _dY23;
+        _edgeZ = _dZ23;
         
         if (dot_product_3d(_tempZ*_edgeY - _tempY*_edgeZ,
                            _tempX*_edgeZ - _tempZ*_edgeX,
@@ -53,14 +55,15 @@ function __BonkSphereCollideTriangle(_sphereX, _sphereY, _sphereZ, _sphereRadius
         {
             //Check the reference point is on the inner side of the edge 3->1
             //If we fail, these values fall through
-            var _tempX = _refX - _triX3;
-            var _tempY = _refY - _triY3;
-            var _tempZ = _refZ - _triZ3;
+            _tempX = _refX - _triX3;
+            _tempY = _refY - _triY3;
+            _tempZ = _refZ - _triZ3;
             
-            var _edgeSqrLen = _edgeSqrLength31;
-            var _edgeX = _dX31;
-            var _edgeY = _dY31;
-            var _edgeZ = _dZ31;
+            _hardEdge = _hardEdge31;
+            _edgeSqrLen = _edgeSqrLength31;
+            _edgeX = _dX31;
+            _edgeY = _dY31;
+            _edgeZ = _dZ31;
             
             if (dot_product_3d(_tempZ*_edgeY - _tempY*_edgeZ,
                                _tempX*_edgeZ - _tempZ*_edgeX,
@@ -68,23 +71,29 @@ function __BonkSphereCollideTriangle(_sphereX, _sphereY, _sphereZ, _sphereRadius
                                _normalX, _normalY, _normalZ) > 0)
             {
                 //Reference point is inside the triangle
-                
-                with(_reaction)
-                {
-                    shape = _triangleShape;
-                    
-                    var _pushLength = sign(_refToPlaneDist) * (_sphereRadius - abs(_refToPlaneDist));
-                    dX = _pushLength*_normalX;
-                    dY = _pushLength*_normalY;
-                    dZ = _pushLength*_normalZ;
-                }
-                
-                return _reaction;
+                _hardEdge = false;
             }
         }
     }
     
-    //Catch reference point that is outside the triangle
+    if (not _hardEdge)
+    {
+        //Soft edge
+        
+        with(_reaction)
+        {
+            shape = _triangleShape;
+            
+            var _pushLength = sign(_refToPlaneDist) * (_sphereRadius - abs(_refToPlaneDist));
+            dX = _pushLength*_normalX;
+            dY = _pushLength*_normalY;
+            dZ = _pushLength*_normalZ;
+        }
+        
+        return _reaction;
+    }
+    
+    //Catch reference point that is outside the triangle and is a hard edge
     
     //Calculate the direction to push the reference point away from the triangle. This is the perpendicular
     //vector from the edge to the reference point

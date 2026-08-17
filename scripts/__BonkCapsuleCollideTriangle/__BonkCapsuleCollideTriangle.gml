@@ -1,6 +1,6 @@
 // Feather disable all
 
-function __BonkCapsuleCollideTriangle(_capsuleX, _capsuleY, _capsuleZ, _capsuleHeight, _capsuleRadius,   _triangleShape,   _triX1, _triY1, _triZ1,   _triX2, _triY2, _triZ2,   _triX3, _triY3, _triZ3,    _dX12, _dY12, _dZ12,    _dX23, _dY23, _dZ23,    _dX31, _dY31, _dZ31,   _normalX, _normalY, _normalZ,   _edgeSqrLength12, _edgeSqrLength23, _edgeSqrLength31,   _struct = undefined)
+function __BonkCapsuleCollideTriangle(_capsuleX, _capsuleY, _capsuleZ, _capsuleHeight, _capsuleRadius,   _triangleShape,   _triX1, _triY1, _triZ1,   _triX2, _triY2, _triZ2,   _triX3, _triY3, _triZ3,    _dX12, _dY12, _dZ12,    _dX23, _dY23, _dZ23,    _dX31, _dY31, _dZ31,   _normalX, _normalY, _normalZ,   _hardEdge12, _hardEdge23, _hardEdge31,   _edgeSqrLength12, _edgeSqrLength23, _edgeSqrLength31,   _struct = undefined)
 {
     static _staticStruct = new BonkResultCollide();
     var _reaction = _struct ?? _staticStruct;
@@ -119,6 +119,7 @@ function __BonkCapsuleCollideTriangle(_capsuleX, _capsuleY, _capsuleZ, _capsuleH
         return _reaction.__Null();
     }
     
+    var _hardEdge = _hardEdge12;
     _edgeSqrLen = _edgeSqrLength12;
     _edgeX = _dX12;
     _edgeY = _dY12;
@@ -135,6 +136,7 @@ function __BonkCapsuleCollideTriangle(_capsuleX, _capsuleY, _capsuleZ, _capsuleH
         _tempY = _refY - _triY2;
         _tempZ = _refZ - _triZ2;
         
+        _hardEdge = _hardEdge23;
         _edgeSqrLen = _edgeSqrLength23;
         _edgeX = _dX23;
         _edgeY = _dY23;
@@ -151,6 +153,7 @@ function __BonkCapsuleCollideTriangle(_capsuleX, _capsuleY, _capsuleZ, _capsuleH
             _tempY = _refY - _triY3;
             _tempZ = _refZ - _triZ3;
             
+            _hardEdge = _hardEdge31;
             _edgeSqrLen = _edgeSqrLength31;
             _edgeX = _dX31;
             _edgeY = _dY31;
@@ -162,49 +165,55 @@ function __BonkCapsuleCollideTriangle(_capsuleX, _capsuleY, _capsuleZ, _capsuleH
                                _normalX, _normalY, _normalZ) > 0)
             {
                 //Reference point is inside the triangle
-                
-                if (_refToPlaneDist == 0)
-                {
-                    //If the reference point is on the plane then ...
-                    
-                    if (_normalZ > 0)
-                    {
-                        //Push the capsule up if the triangle is up-facing
-                        var _pushLength = _capsuleRadius + (_penDepth / _normalZ);
-                    }
-                    else if (_normalZ < 0)
-                    {
-                        //Push the capsule down if the triangle is down-facing
-                        var _pushLength = _capsuleRadius + ((_capsuleHeight - _penDepth) / _normalZ);
-                    }
-                    else
-                    {
-                        //Push the capsule sideways out if the triangle plane is perfectly vertical
-                        var _pushLength = _capsuleRadius;
-                    }
-                }
-                else
-                {
-                    //The reference point is inside the triangle but not exactly on the plane
-                    //This happens when the very end of a cap intersects the plane
-                    var _pushLength = sign(_refToPlaneDist) * (_capsuleRadius - abs(_refToPlaneDist));
-                }
-                
-                with(_reaction)
-                {
-                    shape = _triangleShape;
-                    
-                    dX = _pushLength*_normalX;
-                    dY = _pushLength*_normalY;
-                    dZ = _pushLength*_normalZ;
-                }
-                
-                return _reaction;
+                _hardEdge = false;
             }
         }
     }
     
-    //Catch reference point that is outside the triangle
+    if (not _hardEdge)
+    {
+        //Soft edge
+        
+        if (_refToPlaneDist == 0)
+        {
+            //If the reference point is on the plane then ...
+            
+            if (_normalZ > 0)
+            {
+                //Push the capsule up if the triangle is up-facing
+                var _pushLength = _capsuleRadius + (_penDepth / _normalZ);
+            }
+            else if (_normalZ < 0)
+            {
+                //Push the capsule down if the triangle is down-facing
+                var _pushLength = _capsuleRadius + ((_capsuleHeight - _penDepth) / _normalZ);
+            }
+            else
+            {
+                //Push the capsule sideways out if the triangle plane is perfectly vertical
+                var _pushLength = _capsuleRadius;
+            }
+        }
+        else
+        {
+            //The reference point is inside the triangle but not exactly on the plane
+            //This happens when the very end of a cap intersects the plane
+            var _pushLength = sign(_refToPlaneDist) * (_capsuleRadius - abs(_refToPlaneDist));
+        }
+          
+        with(_reaction)
+        {
+            shape = _triangleShape;
+                    
+            dX = _pushLength*_normalX;
+            dY = _pushLength*_normalY;
+            dZ = _pushLength*_normalZ;
+        }
+        
+        return _reaction;
+    }
+    
+    //Catch reference point that is outside the triangle and is a hard edge
     
     //Calculate the direction to push the reference point away from the triangle. This is the perpendicular
     //vector from the edge to the reference point
@@ -222,7 +231,6 @@ function __BonkCapsuleCollideTriangle(_capsuleX, _capsuleY, _capsuleZ, _capsuleH
     if (_pushLength == 0)
     {
         //Capsule axis is exactly on the edge
-        
         var _pushX = _normalZ*_edgeY - _normalY*_edgeZ;
         var _pushY = _normalX*_edgeZ - _normalZ*_edgeX;
         var _pushZ = _normalY*_edgeX - _normalX*_edgeY;

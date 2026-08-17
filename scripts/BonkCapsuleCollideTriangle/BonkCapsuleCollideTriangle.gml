@@ -27,6 +27,7 @@ function BonkCapsuleCollideTriangle(_capsule, _triangle, _struct = undefined)
                                             __bonkDX23, __bonkDY23, __bonkDZ23,
                                             __bonkDX31, __bonkDY31, __bonkDZ31,
                                             normalX, normalY, normalZ,
+                                            hardEdge12, hardEdge23, hardEdge31,
                                             __bonkLengthSqr12, __bonkLengthSqr23, __bonkLengthSqr31,
                                             _struct);
     }
