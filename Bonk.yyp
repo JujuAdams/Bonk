@@ -83,7 +83,7 @@
   "isEcma":false,
   "LibraryEmitters":[],
   "MetaData":{
-    "IDEVersion":"2026.0.0.15",
+    "IDEVersion":"2026.0.0.16",
   },
   "name":"Bonk",
   "resources":[
@@ -150,6 +150,7 @@
     {"id":{"name":"oTestRaycast","path":"objects/oTestRaycast/oTestRaycast.yy",},},
     {"id":{"name":"oTestRotatedBox","path":"objects/oTestRotatedBox/oTestRotatedBox.yy",},},
     {"id":{"name":"oTestSphere","path":"objects/oTestSphere/oTestSphere.yy",},},
+    {"id":{"name":"oTestTouchingTriangle","path":"objects/oTestTouchingTriangle/oTestTouchingTriangle.yy",},},
     {"id":{"name":"oTestTriangle","path":"objects/oTestTriangle/oTestTriangle.yy",},},
     {"id":{"name":"rmTestBasics","path":"rooms/rmTestBasics/rmTestBasics.yy",},},
     {"id":{"name":"rmTestConstructorPlayground","path":"rooms/rmTestConstructorPlayground/rmTestConstructorPlayground.yy",},},
@@ -436,12 +437,12 @@
   "resourceVersion":"2.0",
   "RoomOrderNodes":[
     {"roomId":{"name":"rmTestConstructorPlayground","path":"rooms/rmTestConstructorPlayground/rmTestConstructorPlayground.yy",},},
-    {"roomId":{"name":"rmTestMeshInstances","path":"rooms/rmTestMeshInstances/rmTestMeshInstances.yy",},},
-    {"roomId":{"name":"rmTestMesh","path":"rooms/rmTestMesh/rmTestMesh.yy",},},
-    {"roomId":{"name":"rmTestRaycast","path":"rooms/rmTestRaycast/rmTestRaycast.yy",},},
-    {"roomId":{"name":"rmTestBasics","path":"rooms/rmTestBasics/rmTestBasics.yy",},},
     {"roomId":{"name":"rmTestInstancePlayground","path":"rooms/rmTestInstancePlayground/rmTestInstancePlayground.yy",},},
+    {"roomId":{"name":"rmTestRaycast","path":"rooms/rmTestRaycast/rmTestRaycast.yy",},},
     {"roomId":{"name":"rmTestInstanceBallpit","path":"rooms/rmTestInstanceBallpit/rmTestInstanceBallpit.yy",},},
+    {"roomId":{"name":"rmTestMesh","path":"rooms/rmTestMesh/rmTestMesh.yy",},},
+    {"roomId":{"name":"rmTestMeshInstances","path":"rooms/rmTestMeshInstances/rmTestMeshInstances.yy",},},
+    {"roomId":{"name":"rmTestBasics","path":"rooms/rmTestBasics/rmTestBasics.yy",},},
   ],
   "templateType":null,
   "TextureGroups":[

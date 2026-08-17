@@ -1,6 +1,6 @@
 world = new BonkStructWorld(30, 30, 30);
 
-shape = new BonkStructCapsule(x, y, 200,   80, 25);
+shape = new BonkStructCapsule(x, y, 2000,   80, 25);
 velocity = new BonkVelocity();
 
 line = new BonkLine(shape.x, shape.y, shape.z + 0.5*shape.height,

@@ -25,7 +25,9 @@ function __BonkSphereCollideTriangle(_sphereX, _sphereY, _sphereZ, _sphereRadius
     var _tempY = _refY - _triY1;
     var _tempZ = _refZ - _triZ1;
     
+    var _inside = false;
     var _hardEdge = _hardEdge12;
+    
     var _edgeSqrLen = _edgeSqrLength12;
     var _edgeX = _dX12;
     var _edgeY = _dY12;
@@ -72,7 +74,26 @@ function __BonkSphereCollideTriangle(_sphereX, _sphereY, _sphereZ, _sphereRadius
             {
                 //Reference point is inside the triangle
                 _hardEdge = false;
+                _inside = true;
             }
+        }
+    }
+    
+    if (not _inside)
+    {
+        //Catch reference point that is outside the triangle and is a hard edge
+        
+        //Calculate the direction to push the reference point away from the triangle. This is the perpendicular
+        //vector from the edge to the reference point
+        var _dot = clamp(dot_product_3d(_edgeX, _edgeY, _edgeZ, _tempX, _tempY, _tempZ) / _edgeSqrLen, 0, 1);
+        var _pushX = _sphereX - (_refX - _tempX + _dot*_edgeX); 
+        var _pushY = _sphereY - (_refY - _tempY + _dot*_edgeY);
+        var _pushZ = _sphereZ - (_refZ - _tempZ + _dot*_edgeZ);
+        
+        var _pushLength = point_distance_3d(0, 0, 0, _pushX, _pushY, _pushZ);
+        if (_pushLength >= _sphereRadius)
+        {
+            return _reaction.__Null();
         }
     }
     
@@ -91,21 +112,6 @@ function __BonkSphereCollideTriangle(_sphereX, _sphereY, _sphereZ, _sphereRadius
         }
         
         return _reaction;
-    }
-    
-    //Catch reference point that is outside the triangle and is a hard edge
-    
-    //Calculate the direction to push the reference point away from the triangle. This is the perpendicular
-    //vector from the edge to the reference point
-    var _dot = clamp(dot_product_3d(_edgeX, _edgeY, _edgeZ, _tempX, _tempY, _tempZ) / _edgeSqrLen, 0, 1);
-    var _pushX = _sphereX - (_refX - _tempX + _dot*_edgeX); 
-    var _pushY = _sphereY - (_refY - _tempY + _dot*_edgeY);
-    var _pushZ = _sphereZ - (_refZ - _tempZ + _dot*_edgeZ);
-    
-    var _pushLength = point_distance_3d(0, 0, 0, _pushX, _pushY, _pushZ);
-    if (_pushLength >= _sphereRadius)
-    {
-        return _reaction.__Null();
     }
     
     if (_pushLength == 0)
