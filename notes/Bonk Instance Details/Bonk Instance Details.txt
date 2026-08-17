@@ -126,7 +126,7 @@ the final fourth point (e.g. `BonkSetupAAB()`).
   Attempts to push the subject shape out of the scoped shape. This function returns deflection data
   (`BonkResultDeflect`) with the `.deflectType` variable set to indicate what sort of collision
   occurred. If there was no collision, `.deflectType` will be set to `BONK_DEFLECT_NONE`. You can
-  also inspect the nested `.collisionData` struct.
+  also inspect the nested `.primaryCollision` struct.
   
   You may also apply a group filter by setting the `groupFilter` parameter. Please see
   `BonkFilter()` for more information.

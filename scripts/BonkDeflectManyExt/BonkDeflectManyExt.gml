@@ -36,13 +36,11 @@
 
 function BonkDeflectManyExt(_subjectShape, _targetShapes, _slopeThreshold = 0, _groupFilter = -1)
 {
-    static _staticDeflectA = new BonkResultDeflect();
-    static _staticDeflectB = new BonkResultDeflect();
+    static _staticDeflect = new BonkResultDeflect();
+    var _result = _staticDeflect;
     
-    var _returnDeflect  = _staticDeflectA.__Null();
-    var _workingDeflect = _staticDeflectB.__Null();
-    
-    var _largestDepth = -infinity;
+    var _largestGrippyDepth   = -infinity;
+    var _largestSlipperyDepth = -infinity;
     
     if (is_array(_targetShapes)) //We were given an array
     {
@@ -51,22 +49,32 @@ function BonkDeflectManyExt(_subjectShape, _targetShapes, _slopeThreshold = 0, _
         {
             with(_targetShapes[_i]) //Use `with()` here to support iterating over objects
             {
-                var _reaction = Deflect(_subjectShape, _slopeThreshold, _groupFilter, _workingDeflect);
+                var _reaction = Deflect(_subjectShape, _slopeThreshold, _groupFilter);
                 if (_reaction.deflectType != BONK_DEFLECT_NONE)
                 {
-                    with(_reaction.collisionData)
+                    with(_reaction.grippyCollision)
                     {
-                        var _depth = dX*dX + dY*dY + dZ*dZ;
-                        
-                        if ((_reaction.deflectType > _returnDeflect.deflectType)
-                        ||  ((_depth > _largestDepth) && (_reaction.deflectType >= _returnDeflect.deflectType)))
+                        if (shape != undefined)
                         {
-                            _largestDepth = _depth;
-                            
-                            //Swap over
-                            var _tempDeflect = _workingDeflect;
-                            _workingDeflect = _returnDeflect;
-                            _returnDeflect  = _tempDeflect;
+                            var _depth = dX*dX + dY*dY + dZ*dZ;
+                            if (_depth > _largestGrippyDepth)
+                            {
+                                _largestGrippyDepth = _depth;
+                                __CopyTo(_result.grippyCollision);
+                            }
+                        }
+                    }
+                    
+                    with(_reaction.slipperyCollision)
+                    {
+                        if (shape != undefined)
+                        {
+                            var _depth = dX*dX + dY*dY + dZ*dZ;
+                            if (_depth > _largestSlipperyDepth)
+                            {
+                                _largestSlipperyDepth = _depth;
+                                __CopyTo(_result.slipperyCollision);
+                            }
                         }
                     }
                 }
@@ -82,22 +90,32 @@ function BonkDeflectManyExt(_subjectShape, _targetShapes, _slopeThreshold = 0, _
         {
             with(_targetShapes[| _i]) //Use `with()` here to support iterating over objects
             {
-                var _reaction = Deflect(_subjectShape, _slopeThreshold, _groupFilter, _workingDeflect);
+                var _reaction = Deflect(_subjectShape, _slopeThreshold, _groupFilter);
                 if (_reaction.deflectType != BONK_DEFLECT_NONE)
                 {
-                    with(_reaction.collisionData)
+                    with(_reaction.grippyCollision)
                     {
-                        var _depth = dX*dX + dY*dY + dZ*dZ;
-                        
-                        if ((_reaction.deflectType > _returnDeflect.deflectType)
-                        ||  ((_depth > _largestDepth) && (_reaction.deflectType >= _returnDeflect.deflectType)))
+                        if (shape != undefined)
                         {
-                            _largestDepth = _depth;
-                            
-                            //Swap over
-                            var _tempDeflect = _workingDeflect;
-                            _workingDeflect = _returnDeflect;
-                            _returnDeflect  = _tempDeflect;
+                            var _depth = dX*dX + dY*dY + dZ*dZ;
+                            if (_depth > _largestGrippyDepth)
+                            {
+                                _largestGrippyDepth = _depth;
+                                __CopyTo(_result.grippyCollision);
+                            }
+                        }
+                    }
+                    
+                    with(_reaction.slipperyCollision)
+                    {
+                        if (shape != undefined)
+                        {
+                            var _depth = dX*dX + dY*dY + dZ*dZ;
+                            if (_depth > _largestSlipperyDepth)
+                            {
+                                _largestSlipperyDepth = _depth;
+                                __CopyTo(_result.slipperyCollision);
+                            }
                         }
                     }
                 }
@@ -110,27 +128,66 @@ function BonkDeflectManyExt(_subjectShape, _targetShapes, _slopeThreshold = 0, _
     {
         with(_targetShapes) //Use `with()` here to support iterating over objects
         {
-            var _reaction = Deflect(_subjectShape, _slopeThreshold, _groupFilter, _workingDeflect);
+            var _reaction = Deflect(_subjectShape, _slopeThreshold, _groupFilter);
             if (_reaction.deflectType != BONK_DEFLECT_NONE)
             {
-                with(_reaction.collisionData)
+                with(_reaction.grippyCollision)
                 {
-                    var _depth = dX*dX + dY*dY + dZ*dZ;
-                    
-                    if ((_reaction.deflectType > _returnDeflect.deflectType)
-                    ||  ((_depth > _largestDepth) && (_reaction.deflectType >= _returnDeflect.deflectType)))
+                    if (shape != undefined)
                     {
-                        _largestDepth = _depth;
-                        
-                        //Swap over
-                        var _tempDeflect = _workingDeflect;
-                        _workingDeflect = _returnDeflect;
-                        _returnDeflect  = _tempDeflect;
+                        var _depth = dX*dX + dY*dY + dZ*dZ;
+                        if (_depth > _largestGrippyDepth)
+                        {
+                            _largestGrippyDepth = _depth;
+                            __CopyTo(_result.grippyCollision);
+                        }
+                    }
+                }
+                
+                with(_reaction.slipperyCollision)
+                {
+                    if (shape != undefined)
+                    {
+                        var _depth = dX*dX + dY*dY + dZ*dZ;
+                        if (_depth > _largestSlipperyDepth)
+                        {
+                            _largestSlipperyDepth = _depth;
+                            __CopyTo(_result.slipperyCollision);
+                        }
                     }
                 }
             }
         }
     }
     
-    return is_infinity(_largestDepth)? _returnDeflect.__Null() : _returnDeflect;
+    with(_result)
+    {
+        if (not is_infinity(_largestGrippyDepth))
+        {
+            primaryCollision = grippyCollision;
+            deflectType = BONK_DEFLECT_GRIPPY;
+            
+            if (is_infinity(_largestSlipperyDepth))
+            {
+                slipperyCollision.__Null();
+            }
+        }
+        else
+        {
+            grippyCollision.__Null();
+            primaryCollision = slipperyCollision;
+            
+            if (not is_infinity(_largestSlipperyDepth))
+            {
+                deflectType = BONK_DEFLECT_SLIPPERY;
+            }
+            else
+            {
+                slipperyCollision.__Null();
+                deflectType = BONK_DEFLECT_NONE;
+            }
+        }
+        
+        return self;
+    }
 }
