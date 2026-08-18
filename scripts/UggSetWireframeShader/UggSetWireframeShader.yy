@@ -1,0 +1,13 @@
+{
+  "$GMScript":"v1",
+  "%Name":"UggSetWireframeShader",
+  "isCompatibility":false,
+  "isDnD":false,
+  "name":"UggSetWireframeShader",
+  "parent":{
+    "name":"Misc",
+    "path":"folders/Ugg/Misc.yy",
+  },
+  "resourceType":"GMScript",
+  "resourceVersion":"2.0",
+}

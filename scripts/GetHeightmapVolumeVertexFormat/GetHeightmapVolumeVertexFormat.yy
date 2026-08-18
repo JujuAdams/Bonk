@@ -1,0 +1,13 @@
+{
+  "$GMScript":"v1",
+  "%Name":"GetHeightmapVolumeVertexFormat",
+  "isCompatibility":false,
+  "isDnD":false,
+  "name":"GetHeightmapVolumeVertexFormat",
+  "parent":{
+    "name":"Heightmap",
+    "path":"folders/Heightmap.yy",
+  },
+  "resourceType":"GMScript",
+  "resourceVersion":"2.0",
+}

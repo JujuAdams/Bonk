@@ -1,0 +1,13 @@
+{
+  "$GMScript":"v1",
+  "%Name":"GetHeightmapWireframeVertexFormat",
+  "isCompatibility":false,
+  "isDnD":false,
+  "name":"GetHeightmapWireframeVertexFormat",
+  "parent":{
+    "name":"Heightmap",
+    "path":"folders/Heightmap.yy",
+  },
+  "resourceType":"GMScript",
+  "resourceVersion":"2.0",
+}

@@ -1,0 +1,13 @@
+{
+  "$GMScript":"v1",
+  "%Name":"BuildHeightmapVolume",
+  "isCompatibility":false,
+  "isDnD":false,
+  "name":"BuildHeightmapVolume",
+  "parent":{
+    "name":"Heightmap",
+    "path":"folders/Heightmap.yy",
+  },
+  "resourceType":"GMScript",
+  "resourceVersion":"2.0",
+}

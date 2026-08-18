@@ -1,0 +1,13 @@
+{
+  "$GMScript":"v1",
+  "%Name":"BuildHeightmapWireframe",
+  "isCompatibility":false,
+  "isDnD":false,
+  "name":"BuildHeightmapWireframe",
+  "parent":{
+    "name":"Heightmap",
+    "path":"folders/Heightmap.yy",
+  },
+  "resourceType":"GMScript",
+  "resourceVersion":"2.0",
+}

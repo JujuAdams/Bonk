@@ -12,3 +12,8 @@ with(oTestMesh)
 {
     other.world.AddVertexBufferAsync(model.GetVertexBufferArray(), DotobjGetVertexFormat(), matrix);
 }
+
+with(oTestHeightmap)
+{
+    other.world.AddVertexBufferAsync(vbuffVolume, GetHeightmapVolumeVertexFormat());
+}
