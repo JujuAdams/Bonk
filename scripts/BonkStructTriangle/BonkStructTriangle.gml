@@ -80,10 +80,31 @@ function BonkStructTriangle(_x1, _y1, _z1, _x2, _y2, _z2, _x3, _y3, _z3, _groupV
         }
     }
     
-    static DebugDraw = function(_color = undefined, _wireframe = undefined)
+    static DebugDraw = function(_color = undefined, _wireframe = undefined, _softEdgeColor = undefined)
     {
         __BONK_VERIFY_UGG
-        UggTriangle(x1, y1, z1,   x2, y2, z2,   x3, y3, z3,   _color, _wireframe);
+        if (_wireframe)
+        {
+            if (_softEdgeColor == undefined)
+            {
+                _softEdgeColor = merge_colour(_color, c_white, 0.66);
+            }
+            
+            if (_color == _softEdgeColor)
+            {
+                UggTriangle(x1, y1, z1,   x2, y2, z2,   x3, y3, z3,   _color, true);
+            }
+            else
+            {
+                UggLine(x1, y1, z1,   x2, y2, z2,   hardEdge12? _color : _softEdgeColor, undefined, true);
+                UggLine(x2, y2, z2,   x3, y3, z3,   hardEdge23? _color : _softEdgeColor, undefined, true);
+                UggLine(x3, y3, z3,   x1, y1, z1,   hardEdge31? _color : _softEdgeColor, undefined, true);
+            }
+        }
+        else
+        {
+            UggTriangle(x1, y1, z1,   x2, y2, z2,   x3, y3, z3,   _color, false);
+        }
     }
     
     static GetAABB = function()
