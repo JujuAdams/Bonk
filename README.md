@@ -1,4 +1,4 @@
-<h1 align="center">Bonk 5.0.0-alpha</h1>
+<h1 align="center">Bonk 5.0.1-alpha</h1>
 
 <p align="center">3D collisions for GameMaker LTS 2026</p>
 
