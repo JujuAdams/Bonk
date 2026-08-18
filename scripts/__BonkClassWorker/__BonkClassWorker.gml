@@ -201,7 +201,7 @@ function __BonkClassWorker(_world, _vertexBufferArray, _vertexFormat, _matrix, _
         var _applySoftEdges = __applySoftEdges;
         var _edgeMap = __edgeMap;
         
-        var _funcEdgeCheck = method(undefined, function(_edgeMap, _x1, _y1, _z1, _x2, _y2, _z2, _edgeIndex)
+        var _funcEdgeCheck = method(undefined, function(_edgeMap, _x1, _y1, _z1, _x2, _y2, _z2, _edgeIndex, _flip)
         {
             var _edgeKey = $"{_x1},{_y1},{_z1}->{_x2},{_y2},{_z2}"; //TODO - Buffer might be faster
             
@@ -216,11 +216,34 @@ function __BonkClassWorker(_world, _vertexBufferArray, _vertexFormat, _matrix, _
                 var _other = _otherArray[0];
                 if (_other != self)
                 {
-                    //Check to see if the normal of the two triangles that share an edge have a similar normal
-                    //If they do have a similar normal then this edge is a "soft" edge
-                    //
-                    //TODO - Experiment with different threshold values. 0.966 is roughly 15 degrees of difference
-                    if (dot_product_3d(normalX, normalY, normalZ, _otherArray[2], _otherArray[3], _otherArray[4]) >= 0.966)
+                    var _normalX = normalX;
+                    var _normalY = normalY;
+                    var _normalZ = normalZ;
+                    
+                    var _otherNormalX = _otherArray[2];
+                    var _otherNormalY = _otherArray[3];
+                    var _otherNormalZ = _otherArray[4];
+                    
+                    //Calculate the dot product between the two normals. If the normals are close to each other then this is
+                    //always a soft edge
+                    var _dotAngle = dot_product_3d(_normalX, _normalY, _normalZ, _otherNormalX, _otherNormalY, _otherNormalZ);
+                    
+                    if (_dotAngle < 0.98)
+                    {
+                        //Calculate the dot product between the edge itself and the cross product of the two normals
+                        //This will detect if the two faces meet as a valley or a peak. We always want valleys to be
+                        //soft edges. This dot product will be negative if the two normals point away from each other
+                        //which indicates a peak
+                        if (_flip*dot_product_3d(_x2 - _x1, _y2 - _y1, _z2 - _z1,
+                                                 _normalZ*_otherNormalY - _normalY*_otherNormalZ,
+                                                 _normalX*_otherNormalZ - _normalZ*_otherNormalX,
+                                                 _normalY*_otherNormalX - _normalX*_otherNormalY) >= 0)
+                        {
+                            _dotAngle = 1;
+                        }
+                    }
+                    
+                    if (_dotAngle >= 0.98)
                     {
                         //Mark our edge as soft
                         if (_edgeIndex == 1)
@@ -299,14 +322,14 @@ function __BonkClassWorker(_world, _vertexBufferArray, _vertexFormat, _matrix, _
             {
                 with(_bonkTri)
                 {
-                    _funcEdgeCheck(_edgeMap,   _x1, _y1, _z1,   _x2, _y2, _z2,   1);
-                    _funcEdgeCheck(_edgeMap,   _x2, _y2, _z2,   _x3, _y3, _z3,   2);
-                    _funcEdgeCheck(_edgeMap,   _x3, _y3, _z3,   _x1, _y1, _z1,   3);
+                    _funcEdgeCheck(_edgeMap,   _x1, _y1, _z1,   _x2, _y2, _z2,   1, 1);
+                    _funcEdgeCheck(_edgeMap,   _x2, _y2, _z2,   _x3, _y3, _z3,   2, 1);
+                    _funcEdgeCheck(_edgeMap,   _x3, _y3, _z3,   _x1, _y1, _z1,   3, 1);
                     
                     //Reverse edges
-                    _funcEdgeCheck(_edgeMap,   _x2, _y2, _z2,   _x1, _y1, _z1,   1);
-                    _funcEdgeCheck(_edgeMap,   _x3, _y3, _z3,   _x2, _y2, _z2,   2);
-                    _funcEdgeCheck(_edgeMap,   _x1, _y1, _z1,   _x3, _y3, _z3,   3);
+                    _funcEdgeCheck(_edgeMap,   _x2, _y2, _z2,   _x1, _y1, _z1,   1, -1);
+                    _funcEdgeCheck(_edgeMap,   _x3, _y3, _z3,   _x2, _y2, _z2,   2, -1);
+                    _funcEdgeCheck(_edgeMap,   _x1, _y1, _z1,   _x3, _y3, _z3,   3, -1);
                 }
             }
             
