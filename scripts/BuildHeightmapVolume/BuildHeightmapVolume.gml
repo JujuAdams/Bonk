@@ -8,14 +8,9 @@ function BuildHeightmapVolume(_grid, _xScale, _yScale, _zScale)
     var _width  = ds_grid_width(_grid);
     var _height = ds_grid_width(_grid);
     
-    if (_width < 2)
+    if ((_width < 2) || (_height < 2))
     {
-        
-    }
-    
-    if (_height < 2)
-    {
-        
+        show_error($"Heightmap grid must be at least 2x2 (was {_width} x {_height})", true);
     }
     
     var _funcTriangle = function(_vbuff,   _x1, _y1, _z1,   _x2, _y2, _z2,   _x3, _y3, _z3)

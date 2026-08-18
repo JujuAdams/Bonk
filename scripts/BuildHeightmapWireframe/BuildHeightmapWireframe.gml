@@ -8,14 +8,9 @@ function BuildHeightmapWireframe(_grid, _xScale, _yScale, _zScale)
     var _width  = ds_grid_width(_grid);
     var _height = ds_grid_width(_grid);
     
-    if (_width < 2)
+    if ((_width < 2) || (_height < 2))
     {
-        
-    }
-    
-    if (_height < 2)
-    {
-        
+        show_error($"Heightmap grid must be at least 2x2 (was {_width} x {_height})", true);
     }
     
     var _vbuff = vertex_create_buffer();
@@ -39,6 +34,8 @@ function BuildHeightmapWireframe(_grid, _xScale, _yScale, _zScale)
             var _z3 = _zScale*_grid[# _x,   _y+1];
             var _z4 = _zScale*_grid[# _x+1, _y+1];
             var _zm = 0.25*(_z1 + _z2 + _z3 + _z4);
+            
+            
             
             vertex_position_3d(_vbuff, _xl, _yt, _z1); vertex_color(_vbuff, c_white, 1);
             vertex_position_3d(_vbuff, _xr, _yt, _z2); vertex_color(_vbuff, c_white, 1);

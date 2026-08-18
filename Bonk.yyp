@@ -158,6 +158,7 @@
     {"id":{"name":"rmTestConstructorHeightmap","path":"rooms/rmTestConstructorHeightmap/rmTestConstructorHeightmap.yy",},},
     {"id":{"name":"rmTestConstructorPlayground","path":"rooms/rmTestConstructorPlayground/rmTestConstructorPlayground.yy",},},
     {"id":{"name":"rmTestInstanceBallpit","path":"rooms/rmTestInstanceBallpit/rmTestInstanceBallpit.yy",},},
+    {"id":{"name":"rmTestInstanceHeightmap","path":"rooms/rmTestInstanceHeightmap/rmTestInstanceHeightmap.yy",},},
     {"id":{"name":"rmTestInstancePlayground","path":"rooms/rmTestInstancePlayground/rmTestInstancePlayground.yy",},},
     {"id":{"name":"rmTestMesh","path":"rooms/rmTestMesh/rmTestMesh.yy",},},
     {"id":{"name":"rmTestMeshInstances","path":"rooms/rmTestMeshInstances/rmTestMeshInstances.yy",},},
@@ -444,6 +445,7 @@
   "resourceType":"GMProject",
   "resourceVersion":"2.0",
   "RoomOrderNodes":[
+    {"roomId":{"name":"rmTestInstanceHeightmap","path":"rooms/rmTestInstanceHeightmap/rmTestInstanceHeightmap.yy",},},
     {"roomId":{"name":"rmTestConstructorHeightmap","path":"rooms/rmTestConstructorHeightmap/rmTestConstructorHeightmap.yy",},},
     {"roomId":{"name":"rmTestConstructorPlayground","path":"rooms/rmTestConstructorPlayground/rmTestConstructorPlayground.yy",},},
     {"roomId":{"name":"rmTestInstancePlayground","path":"rooms/rmTestInstancePlayground/rmTestInstancePlayground.yy",},},
