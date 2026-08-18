@@ -219,8 +219,8 @@ function __BonkClassWorker(_world, _vertexBufferArray, _vertexFormat, _matrix, _
                     //Check to see if the normal of the two triangles that share an edge have a similar normal
                     //If they do have a similar normal then this edge is a "soft" edge
                     //
-                    //TODO - Experiment with different threshold values. 0.99 is roughly 5 degrees of difference
-                    if (dot_product_3d(normalX, normalY, normalZ, _otherArray[2], _otherArray[3], _otherArray[4]) >= 0.99)
+                    //TODO - Experiment with different threshold values. 0.966 is roughly 15 degrees of difference
+                    if (dot_product_3d(normalX, normalY, normalZ, _otherArray[2], _otherArray[3], _otherArray[4]) >= 0.966)
                     {
                         //Mark our edge as soft
                         if (_edgeIndex == 1)
