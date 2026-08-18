@@ -4,8 +4,9 @@
 /// @param vertexbufferArray
 /// @param vertexFormat
 /// @param matrix
+/// @param applySoftEdges
 
-function __BonkClassWorker(_world, _vertexBufferArray, _vertexFormat, _matrix) constructor
+function __BonkClassWorker(_world, _vertexBufferArray, _vertexFormat, _matrix, _applySoftEdges) constructor
 {
     static _pendingWorkerArray = __BonkSystem().__pendingWorkerArray;
     
@@ -18,6 +19,7 @@ function __BonkClassWorker(_world, _vertexBufferArray, _vertexFormat, _matrix) c
     __vertexBufferArray = _vertexBufferArray;
     __vertexFormat      = _vertexFormat;
     __matrix            = _matrix;
+    __applySoftEdges    = _applySoftEdges;
     
     array_push(__world.__bonkWorkerArray, self);
     
@@ -30,6 +32,8 @@ function __BonkClassWorker(_world, _vertexBufferArray, _vertexFormat, _matrix) c
     __vertexFormatPositionOffset = undefined;
     __triangleCount = undefined;
     __trianglesRemaining = undefined;
+    
+    __edgeMap = ds_map_create();
     
     
     
@@ -105,6 +109,12 @@ function __BonkClassWorker(_world, _vertexBufferArray, _vertexFormat, _matrix) c
             time_source_stop(__timeSource);
             time_source_destroy(__timeSource);
             __timeSource = undefined;
+        }
+        
+        if (__edgeMap != undefined)
+        {
+            ds_map_destroy(__edgeMap);
+            __edgeMap = undefined;
         }
         
         var _index = array_get_index(__world.__bonkWorkerArray, self);
@@ -188,6 +198,63 @@ function __BonkClassWorker(_world, _vertexBufferArray, _vertexFormat, _matrix) c
     {
         if (__finished) return true;
         
+        var _applySoftEdges = __applySoftEdges;
+        var _edgeMap = __edgeMap;
+        
+        var _funcEdgeCheck = method(undefined, function(_edgeMap, _x1, _y1, _z1, _x2, _y2, _z2, _edgeIndex)
+        {
+            var _edgeKey = $"{_x1},{_y1},{_z1}->{_x2},{_y2},{_z2}"; //TODO - Buffer might be faster
+            
+            var _otherArray = _edgeMap[? _edgeKey];
+            if (_otherArray == undefined)
+            {
+                //Use an array for storing edge information as it uses less memory than a struct
+                _edgeMap[? _edgeKey] = [self, _edgeIndex, normalX, normalY, normalZ];
+            }
+            else
+            {
+                var _other = _otherArray[0];
+                if (_other != self)
+                {
+                    //Check to see if the normal of the two triangles that share an edge have a similar normal
+                    //If they do have a similar normal then this edge is a "soft" edge
+                    //
+                    //TODO - Experiment with different threshold values. 0.99 is roughly 5 degrees of difference
+                    if (dot_product_3d(normalX, normalY, normalZ, _otherArray[2], _otherArray[3], _otherArray[4]) >= 0.99)
+                    {
+                        //Mark our edge as soft
+                        if (_edgeIndex == 1)
+                        {
+                            hardEdge12 = false;
+                        }
+                        else if (_edgeIndex == 2)
+                        {
+                            hardEdge23 = false;
+                        }
+                        else if (_edgeIndex == 3)
+                        {
+                            hardEdge31 = false;
+                        }
+                        
+                        //Mark the other edge as soft
+                        var _otherEdgeIndex = _otherArray[1];
+                        if (_otherEdgeIndex == 1)
+                        {
+                            _other.hardEdge12 = false;
+                        }
+                        else if (_otherEdgeIndex == 2)
+                        {
+                            _other.hardEdge23 = false;
+                        }
+                        else if (_otherEdgeIndex == 3)
+                        {
+                            _other.hardEdge31 = false;
+                        }
+                    }
+                }
+            }
+        });
+        
         var _world              = __world;
         var _buffer             = __buffer;
         var _vertexFormatStride = __vertexFormatStride;
@@ -219,15 +286,28 @@ function __BonkClassWorker(_world, _vertexBufferArray, _vertexFormat, _matrix) c
                 var _b = matrix_transform_vertex(_matrix, _x2, _y2, _z2, 1);
                 var _c = matrix_transform_vertex(_matrix, _x3, _y3, _z3, 1);
                 
-                var _bonkTri = new BonkStructTriangle(_a[0], _a[1], _a[2],
-                                                      _b[0], _b[1], _b[2],
-                                                      _c[0], _c[1], _c[2]);
+                _x1 = _a[0]; _y1 = _a[1]; _z1 = _a[2];
+                _x2 = _b[0]; _y2 = _b[1]; _z2 = _b[2];
+                _x3 = _c[0]; _y3 = _c[1]; _z3 = _c[2];
             }
-            else
+            
+            var _bonkTri = new BonkStructTriangle(_x1, _y1, _z1,
+                                                  _x2, _y2, _z2,
+                                                  _x3, _y3, _z3);
+            
+            if (_applySoftEdges)
             {
-                var _bonkTri = new BonkStructTriangle(_x1, _y1, _z1,
-                                                      _x2, _y2, _z2,
-                                                      _x3, _y3, _z3);
+                with(_bonkTri)
+                {
+                    _funcEdgeCheck(_edgeMap,   _x1, _y1, _z1,   _x2, _y2, _z2,   1);
+                    _funcEdgeCheck(_edgeMap,   _x2, _y2, _z2,   _x3, _y3, _z3,   2);
+                    _funcEdgeCheck(_edgeMap,   _x3, _y3, _z3,   _x1, _y1, _z1,   3);
+                    
+                    //Reverse edges
+                    _funcEdgeCheck(_edgeMap,   _x2, _y2, _z2,   _x1, _y1, _z1,   1);
+                    _funcEdgeCheck(_edgeMap,   _x3, _y3, _z3,   _x2, _y2, _z2,   2);
+                    _funcEdgeCheck(_edgeMap,   _x1, _y1, _z1,   _x3, _y3, _z3,   3);
+                }
             }
             
             _world.__Add(_bonkTri); //Use the internal version to avoid unnecessary instance checks

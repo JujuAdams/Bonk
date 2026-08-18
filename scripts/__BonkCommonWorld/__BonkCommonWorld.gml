@@ -665,27 +665,27 @@ function __BonkCommonWorld(_cellXSize, _cellYSize, _cellZSize)
         return _array;
     }
     
-    AddVertexBuffer = function(_vertexBufferArray, _vertexFormat, _matrix = undefined)
+    AddVertexBuffer = function(_vertexBufferArray, _vertexFormat, _matrix = undefined, _applySoftEdges = true)
     {
         if (not is_array(_vertexBufferArray))
         {
             _vertexBufferArray = [_vertexBufferArray];
         }
         
-        var _worker = new __BonkClassWorker(self, _vertexBufferArray, _vertexFormat, _matrix);
+        var _worker = new __BonkClassWorker(self, _vertexBufferArray, _vertexFormat, _matrix, _applySoftEdges);
         _worker.Force();
         
         return self;
     }
     
-    AddVertexBufferAsync = function(_vertexBufferArray, _vertexFormat, _matrix = undefined, _budget = 12)
+    AddVertexBufferAsync = function(_vertexBufferArray, _vertexFormat, _matrix = undefined, _budget = 12, _applySoftEdges = true)
     {
         if (not is_array(_vertexBufferArray))
         {
             _vertexBufferArray = [_vertexBufferArray];
         }
         
-        var _worker = new __BonkClassWorker(self, _vertexBufferArray, _vertexFormat, _matrix);
+        var _worker = new __BonkClassWorker(self, _vertexBufferArray, _vertexFormat, _matrix, _applySoftEdges);
         _worker.__StartAsync();
         
         return _worker;
