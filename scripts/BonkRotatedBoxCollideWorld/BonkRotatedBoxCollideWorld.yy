@@ -1,9 +1,9 @@
 {
   "$GMScript":"v1",
-  "%Name":"BonkRotatedBoxCollideSphere_1",
+  "%Name":"BonkRotatedBoxCollideWorld",
   "isCompatibility":false,
   "isDnD":false,
-  "name":"BonkRotatedBoxCollideSphere_1",
+  "name":"BonkRotatedBoxCollideWorld",
   "parent":{
     "name":"Rotated Box",
     "path":"folders/Bonk/Direct Control/Manual Checkers/Collide/Rotated Box.yy",
