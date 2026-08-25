@@ -6,7 +6,7 @@
   "name":"BonkAsyncGetPendingWorkers",
   "parent":{
     "name":"Async",
-    "path":"folders/Bonk/Async.yy",
+    "path":"folders/Bonk/Instances/Instance Setup/Async.yy",
   },
   "resourceType":"GMScript",
   "resourceVersion":"2.0",

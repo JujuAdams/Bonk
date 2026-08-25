@@ -7,24 +7,26 @@ function __BonkCommonCylinder()
     static _collideFuncLookup = (function()
     {
         var _array = array_create(BONK_NUMBER_OF_TYPES, undefined);
-        _array[@ BONK_TYPE_AAB     ] = BonkCylinderCollideAAB;
-        _array[@ BONK_TYPE_OBB     ] = BonkCylinderCollideRotatedBox;
-        _array[@ BONK_TYPE_CAPSULE ] = BonkCylinderCollideCapsule;
-        _array[@ BONK_TYPE_CYLINDER] = BonkCylinderCollideCylinder;
-        _array[@ BONK_TYPE_SPHERE  ] = BonkCylinderCollideSphere;
-        _array[@ BONK_TYPE_WORLD   ] = BonkCylinderCollideWorld;
+        _array[@ BONK_TYPE_AAB      ] = BonkCylinderCollideAAB;
+        _array[@ BONK_TYPE_OBB      ] = BonkCylinderCollideRotatedBox;
+        _array[@ BONK_TYPE_CAPSULE  ] = BonkCylinderCollideCapsule;
+        _array[@ BONK_TYPE_CYLINDER ] = BonkCylinderCollideCylinder;
+        _array[@ BONK_TYPE_SPHERE   ] = BonkCylinderCollideSphere;
+        _array[@ BONK_TYPE_HEIGHTMAP] = BonkCylinderCollideHeightmap;
+        _array[@ BONK_TYPE_WORLD    ] = BonkCylinderCollideWorld;
         return _array;
     })();
     
     static _touchFuncLookup = (function()
     {
         var _array = array_create(BONK_NUMBER_OF_TYPES, undefined);
-        _array[@ BONK_TYPE_AAB     ] = BonkCylinderTouchAAB;
-        _array[@ BONK_TYPE_OBB     ] = BonkCylinderTouchRotatedBox;
-        _array[@ BONK_TYPE_CAPSULE ] = BonkCylinderTouchCapsule;
-        _array[@ BONK_TYPE_CYLINDER] = BonkCylinderTouchCylinder;
-        _array[@ BONK_TYPE_SPHERE  ] = BonkCylinderTouchSphere;
-        _array[@ BONK_TYPE_WORLD   ] = BonkCylinderTouchWorld;
+        _array[@ BONK_TYPE_AAB      ] = BonkCylinderTouchAAB;
+        _array[@ BONK_TYPE_OBB      ] = BonkCylinderTouchRotatedBox;
+        _array[@ BONK_TYPE_CAPSULE  ] = BonkCylinderTouchCapsule;
+        _array[@ BONK_TYPE_CYLINDER ] = BonkCylinderTouchCylinder;
+        _array[@ BONK_TYPE_SPHERE   ] = BonkCylinderTouchSphere;
+        _array[@ BONK_TYPE_HEIGHTMAP] = BonkCylinderTouchHeightmap;
+        _array[@ BONK_TYPE_WORLD    ] = BonkCylinderTouchWorld;
         return _array;
     })();
     

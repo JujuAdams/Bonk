@@ -7,28 +7,30 @@ function __BonkCommonCapsule()
     static _collideFuncLookup = (function()
     {
         var _array = array_create(BONK_NUMBER_OF_TYPES, undefined);
-        _array[@ BONK_TYPE_AAB     ] = BonkCapsuleCollideAAB;
-        _array[@ BONK_TYPE_OBB     ] = BonkCapsuleCollideRotatedBox;
-        _array[@ BONK_TYPE_CAPSULE ] = BonkCapsuleCollideCapsule;
-        _array[@ BONK_TYPE_CYLINDER] = BonkCapsuleCollideCylinder;
-        _array[@ BONK_TYPE_QUAD    ] = BonkCapsuleCollideQuad;
-        _array[@ BONK_TYPE_SPHERE  ] = BonkCapsuleCollideSphere;
-        _array[@ BONK_TYPE_TRIANGLE] = BonkCapsuleCollideTriangle;
-        _array[@ BONK_TYPE_WORLD   ] = BonkCapsuleCollideWorld;
+        _array[@ BONK_TYPE_AAB      ] = BonkCapsuleCollideAAB;
+        _array[@ BONK_TYPE_OBB      ] = BonkCapsuleCollideRotatedBox;
+        _array[@ BONK_TYPE_CAPSULE  ] = BonkCapsuleCollideCapsule;
+        _array[@ BONK_TYPE_CYLINDER ] = BonkCapsuleCollideCylinder;
+        _array[@ BONK_TYPE_QUAD     ] = BonkCapsuleCollideQuad;
+        _array[@ BONK_TYPE_SPHERE   ] = BonkCapsuleCollideSphere;
+        _array[@ BONK_TYPE_TRIANGLE ] = BonkCapsuleCollideTriangle;
+        _array[@ BONK_TYPE_HEIGHTMAP] = BonkCapsuleCollideHeightmap;
+        _array[@ BONK_TYPE_WORLD    ] = BonkCapsuleCollideWorld;
         return _array;
     })();
     
     static _touchFuncLookup = (function()
     {
         var _array = array_create(BONK_NUMBER_OF_TYPES, undefined);
-        _array[@ BONK_TYPE_AAB     ] = BonkCapsuleTouchAAB;
-        _array[@ BONK_TYPE_OBB     ] = BonkCapsuleTouchRotatedBox;
-        _array[@ BONK_TYPE_CAPSULE ] = BonkCapsuleTouchCapsule;
-        _array[@ BONK_TYPE_CYLINDER] = BonkCapsuleTouchCylinder;
-        _array[@ BONK_TYPE_QUAD    ] = BonkCapsuleTouchQuad;
-        _array[@ BONK_TYPE_SPHERE  ] = BonkCapsuleTouchSphere;
-        _array[@ BONK_TYPE_TRIANGLE] = BonkCapsuleTouchTriangle;
-        _array[@ BONK_TYPE_WORLD   ] = BonkCapsuleTouchWorld;
+        _array[@ BONK_TYPE_AAB      ] = BonkCapsuleTouchAAB;
+        _array[@ BONK_TYPE_OBB      ] = BonkCapsuleTouchRotatedBox;
+        _array[@ BONK_TYPE_CAPSULE  ] = BonkCapsuleTouchCapsule;
+        _array[@ BONK_TYPE_CYLINDER ] = BonkCapsuleTouchCylinder;
+        _array[@ BONK_TYPE_QUAD     ] = BonkCapsuleTouchQuad;
+        _array[@ BONK_TYPE_SPHERE   ] = BonkCapsuleTouchSphere;
+        _array[@ BONK_TYPE_TRIANGLE ] = BonkCapsuleTouchTriangle;
+        _array[@ BONK_TYPE_HEIGHTMAP] = BonkCapsuleTouchHeightmap;
+        _array[@ BONK_TYPE_WORLD    ] = BonkCapsuleTouchWorld;
         return _array;
     })();
     

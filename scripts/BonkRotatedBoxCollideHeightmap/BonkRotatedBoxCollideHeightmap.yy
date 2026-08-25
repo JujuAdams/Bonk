@@ -1,0 +1,13 @@
+{
+  "$GMScript":"v1",
+  "%Name":"BonkRotatedBoxCollideHeightmap",
+  "isCompatibility":false,
+  "isDnD":false,
+  "name":"BonkRotatedBoxCollideHeightmap",
+  "parent":{
+    "name":"Rotated Box",
+    "path":"folders/Bonk/Direct Control/Manual Checkers/Collide/Rotated Box.yy",
+  },
+  "resourceType":"GMScript",
+  "resourceVersion":"2.0",
+}
