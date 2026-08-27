@@ -40,6 +40,14 @@ function __BonkCommonWorld(_cellXSize, _cellYSize, _cellZSize)
     {
         static _map = ds_map_create();
         
+        var _minCellX = __bonkMinCellX;
+        var _minCellY = __bonkMinCellY;
+        var _minCellZ = __bonkMinCellZ;
+        
+        var _maxCellX = __bonkMaxCellX;
+        var _maxCellY = __bonkMaxCellY;
+        var _maxCellZ = __bonkMaxCellZ;
+        
         var _aabb = _subjectShape.GetAABB();
         
         var _shapeXMin = floor(_aabb.xMin / __bonkCellXSize);
@@ -49,6 +57,21 @@ function __BonkCommonWorld(_cellXSize, _cellYSize, _cellZSize)
         var _shapeXMax = floor(_aabb.xMax / __bonkCellXSize);
         var _shapeYMax = floor(_aabb.yMax / __bonkCellYSize);
         var _shapeZMax = floor(_aabb.zMax / __bonkCellZSize);
+        
+        if ((_shapeXMin > _maxCellX) || (_shapeYMin > _maxCellY) || (_shapeZMin > _maxCellZ)
+        ||  (_shapeXMax < _minCellX) || (_shapeYMax < _minCellY) || (_shapeZMax < _minCellZ))
+        {
+            //Shape is outside bounds
+            return false;
+        }
+        
+        _shapeXMin = clamp(_shapeXMin, _minCellX, _maxCellX);
+        _shapeYMin = clamp(_shapeYMin, _minCellY, _maxCellY);
+        _shapeZMin = clamp(_shapeZMin, _minCellZ, _maxCellZ);
+        
+        _shapeXMax = clamp(_shapeXMax, _minCellX, _maxCellX);
+        _shapeYMax = clamp(_shapeYMax, _minCellY, _maxCellY);
+        _shapeZMax = clamp(_shapeZMax, _minCellZ, _maxCellZ);
         
         if ((_shapeXMin == _shapeXMax) && (_shapeYMin == _shapeYMax) && (_shapeZMin == _shapeZMax))
         {
@@ -128,6 +151,14 @@ function __BonkCommonWorld(_cellXSize, _cellYSize, _cellZSize)
         var _largestGrippyDepth   = -infinity;
         var _largestSlipperyDepth = -infinity;
         
+        var _minCellX = __bonkMinCellX;
+        var _minCellY = __bonkMinCellY;
+        var _minCellZ = __bonkMinCellZ;
+        
+        var _maxCellX = __bonkMaxCellX;
+        var _maxCellY = __bonkMaxCellY;
+        var _maxCellZ = __bonkMaxCellZ;
+        
         var _aabb = _subjectShape.GetAABB();
         
         var _shapeXMin = floor(_aabb.xMin / __bonkCellXSize);
@@ -138,118 +169,134 @@ function __BonkCommonWorld(_cellXSize, _cellYSize, _cellZSize)
         var _shapeYMax = floor(_aabb.yMax / __bonkCellYSize);
         var _shapeZMax = floor(_aabb.zMax / __bonkCellZSize);
         
-        if ((_shapeXMin == _shapeXMax) && (_shapeYMin == _shapeYMax) && (_shapeZMin == _shapeZMax))
+        if ((_shapeXMin > _maxCellX) || (_shapeYMin > _maxCellY) || (_shapeZMin > _maxCellZ)
+        ||  (_shapeXMax < _minCellX) || (_shapeYMax < _minCellY) || (_shapeZMax < _minCellZ))
         {
-            var _shapeArray = GetShapeArrayFromCell(_shapeXMin, _shapeYMin, _shapeZMin);
-            var _i = 0;
-            repeat(array_length(_shapeArray))
+            //Shape is outside bounds
+        }
+        else
+        {
+            _shapeXMin = clamp(_shapeXMin, _minCellX, _maxCellX);
+            _shapeYMin = clamp(_shapeYMin, _minCellY, _maxCellY);
+            _shapeZMin = clamp(_shapeZMin, _minCellZ, _maxCellZ);
+            
+            _shapeXMax = clamp(_shapeXMax, _minCellX, _maxCellX);
+            _shapeYMax = clamp(_shapeYMax, _minCellY, _maxCellY);
+            _shapeZMax = clamp(_shapeZMax, _minCellZ, _maxCellZ);
+        
+            if ((_shapeXMin == _shapeXMax) && (_shapeYMin == _shapeYMax) && (_shapeZMin == _shapeZMax))
             {
-                var _reaction = _shapeArray[_i].Deflect(_subjectShape, _slopeThreshold, _groupFilter);
-                if (_reaction.deflectType != BONK_DEFLECT_NONE)
+                var _shapeArray = GetShapeArrayFromCell(_shapeXMin, _shapeYMin, _shapeZMin);
+                var _i = 0;
+                repeat(array_length(_shapeArray))
                 {
-                    with(_reaction.grippyCollision)
+                    var _reaction = _shapeArray[_i].Deflect(_subjectShape, _slopeThreshold, _groupFilter);
+                    if (_reaction.deflectType != BONK_DEFLECT_NONE)
                     {
-                        if (shape != undefined)
+                        with(_reaction.grippyCollision)
                         {
-                            var _depth = dX*dX + dY*dY + dZ*dZ;
-                            if (_depth > _largestGrippyDepth)
+                            if (shape != undefined)
                             {
-                                _largestGrippyDepth = _depth;
-                                __CopyTo(_result.grippyCollision);
+                                var _depth = dX*dX + dY*dY + dZ*dZ;
+                                if (_depth > _largestGrippyDepth)
+                                {
+                                    _largestGrippyDepth = _depth;
+                                    __CopyTo(_result.grippyCollision);
+                                }
+                            }
+                        }
+                        
+                        with(_reaction.slipperyCollision)
+                        {
+                            if (shape != undefined)
+                            {
+                                var _depth = dX*dX + dY*dY + dZ*dZ;
+                                if (_depth > _largestSlipperyDepth)
+                                {
+                                    _largestSlipperyDepth = _depth;
+                                    __CopyTo(_result.slipperyCollision);
+                                }
                             }
                         }
                     }
                     
-                    with(_reaction.slipperyCollision)
-                    {
-                        if (shape != undefined)
-                        {
-                            var _depth = dX*dX + dY*dY + dZ*dZ;
-                            if (_depth > _largestSlipperyDepth)
-                            {
-                                _largestSlipperyDepth = _depth;
-                                __CopyTo(_result.slipperyCollision);
-                            }
-                        }
-                    }
+                    ++_i;
                 }
-                
-                ++_i;
             }
-        }
-        else
-        {
-            _shapeXMin = clamp(_shapeXMin, BONK_WORLD_CELL_MIN, BONK_WORLD_CELL_MAX);
-            _shapeYMin = clamp(_shapeYMin, BONK_WORLD_CELL_MIN, BONK_WORLD_CELL_MAX);
-            _shapeZMin = clamp(_shapeZMin, BONK_WORLD_CELL_MIN, BONK_WORLD_CELL_MAX);
-            
-            var _cellXSize = 1 + clamp(_shapeXMax, BONK_WORLD_CELL_MIN, BONK_WORLD_CELL_MAX) - _shapeXMin;
-            var _cellYSize = 1 + clamp(_shapeYMax, BONK_WORLD_CELL_MIN, BONK_WORLD_CELL_MAX) - _shapeYMin;
-            var _cellZSize = 1 + clamp(_shapeZMax, BONK_WORLD_CELL_MIN, BONK_WORLD_CELL_MAX) - _shapeZMin;
-            
-            var _z = _shapeZMin;
-            repeat(_cellZSize)
+            else
             {
-                var _y = _shapeYMin;
-                repeat(_cellYSize)
+                _shapeXMin = clamp(_shapeXMin, BONK_WORLD_CELL_MIN, BONK_WORLD_CELL_MAX);
+                _shapeYMin = clamp(_shapeYMin, BONK_WORLD_CELL_MIN, BONK_WORLD_CELL_MAX);
+                _shapeZMin = clamp(_shapeZMin, BONK_WORLD_CELL_MIN, BONK_WORLD_CELL_MAX);
+                
+                var _cellXSize = 1 + clamp(_shapeXMax, BONK_WORLD_CELL_MIN, BONK_WORLD_CELL_MAX) - _shapeXMin;
+                var _cellYSize = 1 + clamp(_shapeYMax, BONK_WORLD_CELL_MIN, BONK_WORLD_CELL_MAX) - _shapeYMin;
+                var _cellZSize = 1 + clamp(_shapeZMax, BONK_WORLD_CELL_MIN, BONK_WORLD_CELL_MAX) - _shapeZMin;
+                
+                var _z = _shapeZMin;
+                repeat(_cellZSize)
                 {
-                    var _x = _shapeXMin;
-                    repeat(_cellXSize)
+                    var _y = _shapeYMin;
+                    repeat(_cellYSize)
                     {
-                        var _shapeArray = GetShapeArrayFromCell(_x, _y, _z);
-                        
-                        var _i = 0;
-                        repeat(array_length(_shapeArray))
+                        var _x = _shapeXMin;
+                        repeat(_cellXSize)
                         {
-                            var _shape = _shapeArray[_i];
-                            if (not ds_map_exists(_map, _shape))
+                            var _shapeArray = GetShapeArrayFromCell(_x, _y, _z);
+                            
+                            var _i = 0;
+                            repeat(array_length(_shapeArray))
                             {
-                                _map[? _shape] = true;
-                                
-                                var _reaction = _shape.Deflect(_subjectShape, _slopeThreshold, _groupFilter);
-                                if (_reaction.deflectType != BONK_DEFLECT_NONE)
+                                var _shape = _shapeArray[_i];
+                                if (not ds_map_exists(_map, _shape))
                                 {
-                                    with(_reaction.grippyCollision)
+                                    _map[? _shape] = true;
+                                    
+                                    var _reaction = _shape.Deflect(_subjectShape, _slopeThreshold, _groupFilter);
+                                    if (_reaction.deflectType != BONK_DEFLECT_NONE)
                                     {
-                                        if (shape != undefined)
+                                        with(_reaction.grippyCollision)
                                         {
-                                            var _depth = dX*dX + dY*dY + dZ*dZ;
-                                            if (_depth > _largestGrippyDepth)
+                                            if (shape != undefined)
                                             {
-                                                _largestGrippyDepth = _depth;
-                                                __CopyTo(_result.grippyCollision);
+                                                var _depth = dX*dX + dY*dY + dZ*dZ;
+                                                if (_depth > _largestGrippyDepth)
+                                                {
+                                                    _largestGrippyDepth = _depth;
+                                                    __CopyTo(_result.grippyCollision);
+                                                }
                                             }
                                         }
-                                    }
-                                    
-                                    with(_reaction.slipperyCollision)
-                                    {
-                                        if (shape != undefined)
+                                        
+                                        with(_reaction.slipperyCollision)
                                         {
-                                            var _depth = dX*dX + dY*dY + dZ*dZ;
-                                            if (_depth > _largestSlipperyDepth)
+                                            if (shape != undefined)
                                             {
-                                                _largestSlipperyDepth = _depth;
-                                                __CopyTo(_result.slipperyCollision);
+                                                var _depth = dX*dX + dY*dY + dZ*dZ;
+                                                if (_depth > _largestSlipperyDepth)
+                                                {
+                                                    _largestSlipperyDepth = _depth;
+                                                    __CopyTo(_result.slipperyCollision);
+                                                }
                                             }
                                         }
                                     }
                                 }
+                                
+                                ++_i;
                             }
                             
-                            ++_i;
+                            ++_x;
                         }
                         
-                        ++_x;
+                        ++_y;
                     }
                     
-                    ++_y;
+                    ++_z;
                 }
                 
-                ++_z;
+                ds_map_clear(_map);
             }
-            
-            ds_map_clear(_map);
         }
         
         with(_result)
@@ -289,6 +336,14 @@ function __BonkCommonWorld(_cellXSize, _cellYSize, _cellZSize)
         static _map = ds_map_create();
         static _nullCollisionData = new BonkResultCollide();
         
+        var _minCellX = __bonkMinCellX;
+        var _minCellY = __bonkMinCellY;
+        var _minCellZ = __bonkMinCellZ;
+        
+        var _maxCellX = __bonkMaxCellX;
+        var _maxCellY = __bonkMaxCellY;
+        var _maxCellZ = __bonkMaxCellZ;
+        
         var _aabb = _subjectShape.GetAABB();
         
         var _shapeXMin = floor(_aabb.xMin / __bonkCellXSize);
@@ -299,71 +354,88 @@ function __BonkCommonWorld(_cellXSize, _cellYSize, _cellZSize)
         var _shapeYMax = floor(_aabb.yMax / __bonkCellYSize);
         var _shapeZMax = floor(_aabb.zMax / __bonkCellZSize);
         
-        if ((_shapeXMin == _shapeXMax) && (_shapeYMin == _shapeYMax) && (_shapeZMin == _shapeZMax))
+        if ((_shapeXMin > _maxCellX) || (_shapeYMin > _maxCellY) || (_shapeZMin > _maxCellZ)
+        ||  (_shapeXMax < _minCellX) || (_shapeYMax < _minCellY) || (_shapeZMax < _minCellZ))
         {
-            var _shapeArray = GetShapeArrayFromPoint(_subjectShape.x, _subjectShape.y, _subjectShape.z);
-            var _i = 0;
-            repeat(array_length(_shapeArray))
-            {
-                var _reaction = _shapeArray[_i].Collide(_subjectShape, _groupFilter, _struct);
-                if (_reaction.shape != undefined)
-                {
-                    return _reaction;
-                }
-                
-                ++_i;
-            }
+            //Shape is outside bounds
+            return _nullCollisionData;
         }
         else
         {
-            _shapeXMin = clamp(_shapeXMin, BONK_WORLD_CELL_MIN, BONK_WORLD_CELL_MAX);
-            _shapeYMin = clamp(_shapeYMin, BONK_WORLD_CELL_MIN, BONK_WORLD_CELL_MAX);
-            _shapeZMin = clamp(_shapeZMin, BONK_WORLD_CELL_MIN, BONK_WORLD_CELL_MAX);
+            _shapeXMin = clamp(_shapeXMin, _minCellX, _maxCellX);
+            _shapeYMin = clamp(_shapeYMin, _minCellY, _maxCellY);
+            _shapeZMin = clamp(_shapeZMin, _minCellZ, _maxCellZ);
             
-            var _cellXSize = 1 + clamp(_shapeXMax, BONK_WORLD_CELL_MIN, BONK_WORLD_CELL_MAX) - _shapeXMin;
-            var _cellYSize = 1 + clamp(_shapeYMax, BONK_WORLD_CELL_MIN, BONK_WORLD_CELL_MAX) - _shapeYMin;
-            var _cellZSize = 1 + clamp(_shapeZMax, BONK_WORLD_CELL_MIN, BONK_WORLD_CELL_MAX) - _shapeZMin;
+            _shapeXMax = clamp(_shapeXMax, _minCellX, _maxCellX);
+            _shapeYMax = clamp(_shapeYMax, _minCellY, _maxCellY);
+            _shapeZMax = clamp(_shapeZMax, _minCellZ, _maxCellZ);
             
-            var _z = _shapeZMin;
-            repeat(_cellZSize)
+            if ((_shapeXMin == _shapeXMax) && (_shapeYMin == _shapeYMax) && (_shapeZMin == _shapeZMax))
             {
-                var _y = _shapeYMin;
-                repeat(_cellYSize)
+                var _shapeArray = GetShapeArrayFromPoint(_subjectShape.x, _subjectShape.y, _subjectShape.z);
+                var _i = 0;
+                repeat(array_length(_shapeArray))
                 {
-                    var _x = _shapeXMin;
-                    repeat(_cellXSize)
+                    var _reaction = _shapeArray[_i].Collide(_subjectShape, _groupFilter, _struct);
+                    if (_reaction.shape != undefined)
                     {
-                        var _shapeArray = __GetShapeArrayFromCellUnsafe(_x, _y, _z);
-                        
-                        var _i = 0;
-                        repeat(array_length(_shapeArray))
-                        {
-                            var _shape = _shapeArray[_i];
-                            if (not ds_map_exists(_map, _shape))
-                            {
-                                _map[? _shape] = true;
-                                
-                                var _reaction = _shape.Collide(_subjectShape, _groupFilter, _struct);
-                                if (_reaction.shape != undefined)
-                                {
-                                    ds_map_clear(_map);
-                                    return _reaction;
-                                }
-                            }
-                            
-                            ++_i;
-                        }
-                        
-                        ++_x;
+                        return _reaction;
                     }
                     
-                    ++_y;
+                    ++_i;
+                }
+            }
+            else
+            {
+                _shapeXMin = clamp(_shapeXMin, BONK_WORLD_CELL_MIN, BONK_WORLD_CELL_MAX);
+                _shapeYMin = clamp(_shapeYMin, BONK_WORLD_CELL_MIN, BONK_WORLD_CELL_MAX);
+                _shapeZMin = clamp(_shapeZMin, BONK_WORLD_CELL_MIN, BONK_WORLD_CELL_MAX);
+                
+                var _cellXSize = 1 + clamp(_shapeXMax, BONK_WORLD_CELL_MIN, BONK_WORLD_CELL_MAX) - _shapeXMin;
+                var _cellYSize = 1 + clamp(_shapeYMax, BONK_WORLD_CELL_MIN, BONK_WORLD_CELL_MAX) - _shapeYMin;
+                var _cellZSize = 1 + clamp(_shapeZMax, BONK_WORLD_CELL_MIN, BONK_WORLD_CELL_MAX) - _shapeZMin;
+                
+                var _z = _shapeZMin;
+                repeat(_cellZSize)
+                {
+                    var _y = _shapeYMin;
+                    repeat(_cellYSize)
+                    {
+                        var _x = _shapeXMin;
+                        repeat(_cellXSize)
+                        {
+                            var _shapeArray = __GetShapeArrayFromCellUnsafe(_x, _y, _z);
+                            
+                            var _i = 0;
+                            repeat(array_length(_shapeArray))
+                            {
+                                var _shape = _shapeArray[_i];
+                                if (not ds_map_exists(_map, _shape))
+                                {
+                                    _map[? _shape] = true;
+                                    
+                                    var _reaction = _shape.Collide(_subjectShape, _groupFilter, _struct);
+                                    if (_reaction.shape != undefined)
+                                    {
+                                        ds_map_clear(_map);
+                                        return _reaction;
+                                    }
+                                }
+                                
+                                ++_i;
+                            }
+                            
+                            ++_x;
+                        }
+                        
+                        ++_y;
+                    }
+                    
+                    ++_z;
                 }
                 
-                ++_z;
+                ds_map_clear(_map);
             }
-            
-            ds_map_clear(_map);
         }
         
         return (_struct == undefined)? _nullCollisionData : _struct.__Null();
@@ -387,6 +459,7 @@ function __BonkCommonWorld(_cellXSize, _cellYSize, _cellZSize)
             xMin: __bonkCellXSize*__bonkMinCellX,
             yMin: __bonkCellYSize*__bonkMinCellY,
             zMin: __bonkCellZSize*__bonkMinCellZ,
+            
             xMax: __bonkCellXSize*(__bonkMaxCellX+1),
             yMax: __bonkCellYSize*(__bonkMaxCellY+1),
             zMax: __bonkCellZSize*(__bonkMaxCellZ+1),
@@ -454,10 +527,11 @@ function __BonkCommonWorld(_cellXSize, _cellYSize, _cellZSize)
         var _cellZ2 = clamp(floor((_aabb.zMax / __bonkCellZSize)), BONK_WORLD_CELL_MIN, BONK_WORLD_CELL_MAX);
         
         __bonkMinCellX = min(__bonkMinCellX, _cellX, _cellX2);
-        __bonkMaxCellX = max(__bonkMaxCellX, _cellX, _cellX2);
         __bonkMinCellY = min(__bonkMinCellY, _cellY, _cellY2);
-        __bonkMaxCellY = max(__bonkMaxCellY, _cellY, _cellY2);
         __bonkMinCellZ = min(__bonkMinCellZ, _cellZ, _cellZ2);
+        
+        __bonkMaxCellX = max(__bonkMaxCellX, _cellX, _cellX2);
+        __bonkMaxCellY = max(__bonkMaxCellY, _cellY, _cellY2);
         __bonkMaxCellZ = max(__bonkMaxCellZ, _cellZ, _cellZ2);
         
         if (__BonkIsInstance()) //TODO - Optimize
@@ -604,6 +678,7 @@ function __BonkCommonWorld(_cellXSize, _cellYSize, _cellZSize)
         __bonkMinCellX = min(__bonkMinCellX, _cellX, _cellX + _cellXSize - 1);
         __bonkMaxCellX = max(__bonkMaxCellX, _cellX, _cellX + _cellXSize - 1);
         __bonkMinCellY = min(__bonkMinCellY, _cellY, _cellY + _cellYSize - 1);
+        
         __bonkMaxCellY = max(__bonkMaxCellY, _cellY, _cellY + _cellYSize - 1);
         __bonkMinCellZ = min(__bonkMinCellZ, _cellZ, _cellZ + _cellZSize - 1);
         __bonkMaxCellZ = max(__bonkMaxCellZ, _cellZ, _cellZ + _cellZSize - 1);
@@ -738,12 +813,36 @@ function __BonkCommonWorld(_cellXSize, _cellYSize, _cellZSize)
     {
         static _map = ds_map_create();
         
-        var _xMin = floor(clamp(_struct.xMin / __bonkCellXSize, __bonkMinCellX, __bonkMaxCellX));
-        var _yMin = floor(clamp(_struct.yMin / __bonkCellYSize, __bonkMinCellY, __bonkMaxCellY));
-        var _zMin = floor(clamp(_struct.zMin / __bonkCellZSize, __bonkMinCellZ, __bonkMaxCellZ));
-        var _xMax = floor(clamp(_struct.xMax / __bonkCellXSize, __bonkMinCellX, __bonkMaxCellX));
-        var _yMax = floor(clamp(_struct.yMax / __bonkCellYSize, __bonkMinCellY, __bonkMaxCellY));
-        var _zMax = floor(clamp(_struct.zMax / __bonkCellZSize, __bonkMinCellZ, __bonkMaxCellZ));
+        var _minCellX = __bonkMinCellX;
+        var _minCellY = __bonkMinCellY;
+        var _minCellZ = __bonkMinCellZ;
+        
+        var _maxCellX = __bonkMaxCellX;
+        var _maxCellY = __bonkMaxCellY;
+        var _maxCellZ = __bonkMaxCellZ;
+        
+        var _xMin = floor(_struct.xMin / __bonkCellXSize);
+        var _yMin = floor(_struct.yMin / __bonkCellYSize);
+        var _zMin = floor(_struct.zMin / __bonkCellZSize);
+        
+        var _xMax = floor(_struct.xMax / __bonkCellXSize);
+        var _yMax = floor(_struct.yMax / __bonkCellYSize);
+        var _zMax = floor(_struct.zMax / __bonkCellZSize);
+        
+        if ((_xMin > _maxCellX) || (_yMin > _maxCellY) || (_zMin > _maxCellZ)
+        ||  (_xMax < _minCellX) || (_yMax < _minCellY) || (_zMax < _minCellZ))
+        {
+            //Range is outside bounds
+            return;
+        }
+        
+        _xMin = clamp(_xMin, _minCellX, _maxCellX);
+        _yMin = clamp(_yMin, _minCellY, _maxCellY);
+        _zMin = clamp(_zMin, _minCellZ, _maxCellZ);
+        
+        _xMax = clamp(_xMax, _minCellX, _maxCellX);
+        _yMax = clamp(_yMax, _minCellY, _maxCellY);
+        _zMax = clamp(_zMax, _minCellZ, _maxCellZ);
         
         var _z = _zMin;
         repeat(1 + _zMax - _zMin)
@@ -785,10 +884,11 @@ function __BonkCommonWorld(_cellXSize, _cellYSize, _cellZSize)
         static _map = ds_map_create();
         
         var _minCellX = __bonkMinCellX;
-        var _maxCellX = __bonkMaxCellX;
         var _minCellY = __bonkMinCellY;
-        var _maxCellY = __bonkMaxCellY;
         var _minCellZ = __bonkMinCellZ;
+        
+        var _maxCellX = __bonkMaxCellX;
+        var _maxCellY = __bonkMaxCellY;
         var _maxCellZ = __bonkMaxCellZ;
         
         var _j = 0;
@@ -832,10 +932,11 @@ function __BonkCommonWorld(_cellXSize, _cellYSize, _cellZSize)
         var _cellZSize = __bonkCellZSize;
         
         var _minCellX = __bonkMinCellX;
-        var _maxCellX = __bonkMaxCellX;
         var _minCellY = __bonkMinCellY;
-        var _maxCellY = __bonkMaxCellY;
         var _minCellZ = __bonkMinCellZ;
+        
+        var _maxCellX = __bonkMaxCellX;
+        var _maxCellY = __bonkMaxCellY;
         var _maxCellZ = __bonkMaxCellZ;
         
         var _i = 0;
@@ -861,12 +962,36 @@ function __BonkCommonWorld(_cellXSize, _cellYSize, _cellZSize)
         var _cellYSize = __bonkCellYSize;
         var _cellZSize = __bonkCellZSize;
         
-        var _xMin = floor(clamp(_struct.xMin / _cellXSize, __bonkMinCellX, __bonkMaxCellX));
-        var _yMin = floor(clamp(_struct.yMin / _cellYSize, __bonkMinCellY, __bonkMaxCellY));
-        var _zMin = floor(clamp(_struct.zMin / _cellZSize, __bonkMinCellZ, __bonkMaxCellZ));
-        var _xMax = floor(clamp(_struct.xMax / _cellXSize, __bonkMinCellX, __bonkMaxCellX));
-        var _yMax = floor(clamp(_struct.yMax / _cellYSize, __bonkMinCellY, __bonkMaxCellY));
-        var _zMax = floor(clamp(_struct.zMax / _cellZSize, __bonkMinCellZ, __bonkMaxCellZ));
+        var _minCellX = __bonkMinCellX;
+        var _minCellY = __bonkMinCellY;
+        var _minCellZ = __bonkMinCellZ;
+        
+        var _maxCellX = __bonkMaxCellX;
+        var _maxCellY = __bonkMaxCellY;
+        var _maxCellZ = __bonkMaxCellZ;
+        
+        var _xMin = floor(_struct.xMin / _cellXSize);
+        var _yMin = floor(_struct.yMin / _cellYSize);
+        var _zMin = floor(_struct.zMin / _cellZSize);
+        
+        var _xMax = floor(_struct.xMax / _cellXSize);
+        var _yMax = floor(_struct.yMax / _cellYSize);
+        var _zMax = floor(_struct.zMax / _cellZSize);
+        
+        if ((_xMin > _maxCellX) || (_yMin > _maxCellY) || (_zMin > _maxCellZ)
+        ||  (_xMax < _minCellX) || (_yMax < _minCellY) || (_zMax < _minCellZ))
+        {
+            //Range is outside bounds
+            return;
+        }
+        
+        _xMin = clamp(_xMin, _minCellX, _maxCellX);
+        _yMin = clamp(_yMin, _minCellY, _maxCellY);
+        _zMin = clamp(_zMin, _minCellZ, _maxCellZ);
+        
+        _xMax = clamp(_xMax, _minCellX, _maxCellX);
+        _yMax = clamp(_yMax, _minCellY, _maxCellY);
+        _zMax = clamp(_zMax, _minCellZ, _maxCellZ);
         
         var _z = _zMin;
         repeat(1 + _zMax - _zMin)
@@ -979,6 +1104,8 @@ function __BonkCommonWorld(_cellXSize, _cellYSize, _cellZSize)
     
     GetCellsFromLineExt = function(_x1, _y1, _z1, _x2, _y2, _z2)
     {
+        //FIXME - Return a static array
+        
         var _dX = _x2 - _x1;
         var _dY = _y2 - _y1;
         var _dZ = _z2 - _z1;
@@ -987,6 +1114,7 @@ function __BonkCommonWorld(_cellXSize, _cellYSize, _cellZSize)
         var _xMin = __bonkMinCellX*__bonkCellXSize;
         var _yMin = __bonkMinCellY*__bonkCellYSize;
         var _zMin = __bonkMinCellZ*__bonkCellZSize;
+        
         var _xMax = (__bonkMaxCellX+1)*__bonkCellXSize;
         var _yMax = (__bonkMaxCellY+1)*__bonkCellYSize;
         var _zMax = (__bonkMaxCellZ+1)*__bonkCellZSize;
