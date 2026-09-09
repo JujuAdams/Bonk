@@ -237,6 +237,10 @@ function __BonkCommonHeightmap(_function, _x, _y, _z, _cellWidth, _cellHeight, _
         
         var _bonkTriangleArray = __bonkTriangleArray;
         
+        _subjectShape.x -= x;
+        _subjectShape.y -= y;
+        _subjectShape.z -= z;
+        
         var _aabb = _subjectShape.GetAABB();
         
         var _shapeXMin = floor((_aabb.xMin - x) / xScale);
@@ -251,6 +255,11 @@ function __BonkCommonHeightmap(_function, _x, _y, _z, _cellWidth, _cellHeight, _
         ||  (_shapeXMax < 0) || (_shapeYMax < 0) || (_shapeZMax < __bonkMinZ))
         {
             //Shape is outside bounds
+            
+            _subjectShape.x += x;
+            _subjectShape.y += y;
+            _subjectShape.z += z;
+            
             return false;
         }
         
@@ -271,12 +280,20 @@ function __BonkCommonHeightmap(_function, _x, _y, _z, _cellWidth, _cellHeight, _
             {
                 if (_bonkTriangleArray[_index++].Touch(_subjectShape, _groupFilter))
                 {
+                    _subjectShape.x += x;
+                    _subjectShape.y += y;
+                    _subjectShape.z += z;
+                    
                     return true;
                 }
             }
             
             ++_y;
         }
+        
+        _subjectShape.x += x;
+        _subjectShape.y += y;
+        _subjectShape.z += z;
         
         return false;
     }
@@ -294,15 +311,19 @@ function __BonkCommonHeightmap(_function, _x, _y, _z, _cellWidth, _cellHeight, _
         
         var _bonkTriangleArray = __bonkTriangleArray;
         
+        _subjectShape.x -= x;
+        _subjectShape.y -= y;
+        _subjectShape.z -= z;
+        
         var _aabb = _subjectShape.GetAABB();
         
-        var _shapeXMin = floor((_aabb.xMin - x) / xScale);
-        var _shapeYMin = floor((_aabb.yMin - y) / yScale);
-        var _shapeZMin = floor((_aabb.zMin - z) / zScale);
+        var _shapeXMin = floor(_aabb.xMin / xScale);
+        var _shapeYMin = floor(_aabb.yMin / yScale);
+        var _shapeZMin = floor(_aabb.zMin / zScale);
         
-        var _shapeXMax = floor((_aabb.xMax - x) / xScale);
-        var _shapeYMax = floor((_aabb.yMax - y) / yScale);
-        var _shapeZMax = floor((_aabb.zMax - z) / zScale);
+        var _shapeXMax = floor(_aabb.xMax / xScale);
+        var _shapeYMax = floor(_aabb.yMax / yScale);
+        var _shapeZMax = floor(_aabb.zMax / zScale);
         
         if ((_shapeXMin > _cellWidth-1) || (_shapeYMin > _cellHeight-1) || (_shapeZMin > __bonkMaxZ)
         ||  (_shapeXMax < 0) || (_shapeYMax < 0) || (_shapeZMax < __bonkMinZ))
@@ -360,6 +381,10 @@ function __BonkCommonHeightmap(_function, _x, _y, _z, _cellWidth, _cellHeight, _
             }
         }
         
+        _subjectShape.x += x;
+        _subjectShape.y += y;
+        _subjectShape.z += z;
+        
         with(_result)
         {
             if (not is_infinity(_largestGrippyDepth))
@@ -401,20 +426,29 @@ function __BonkCommonHeightmap(_function, _x, _y, _z, _cellWidth, _cellHeight, _
         
         var _bonkTriangleArray = __bonkTriangleArray;
         
+        _subjectShape.x -= x;
+        _subjectShape.y -= y;
+        _subjectShape.z -= z;
+        
         var _aabb = _subjectShape.GetAABB();
         
-        var _shapeXMin = floor((_aabb.xMin - x) / xScale);
-        var _shapeYMin = floor((_aabb.yMin - y) / yScale);
-        var _shapeZMin = floor((_aabb.zMin - z) / zScale);
+        var _shapeXMin = floor(_aabb.xMin / xScale);
+        var _shapeYMin = floor(_aabb.yMin / yScale);
+        var _shapeZMin = floor(_aabb.zMin / zScale);
         
-        var _shapeXMax = floor((_aabb.xMax - x) / xScale);
-        var _shapeYMax = floor((_aabb.yMax - y) / yScale);
-        var _shapeZMax = floor((_aabb.zMax - z) / zScale);
+        var _shapeXMax = floor(_aabb.xMax / xScale);
+        var _shapeYMax = floor(_aabb.yMax / yScale);
+        var _shapeZMax = floor(_aabb.zMax / zScale);
         
         if ((_shapeXMin > _cellWidth-1) || (_shapeYMin > _cellHeight-1) || (_shapeZMin > __bonkMaxZ)
         ||  (_shapeXMax < 0) || (_shapeYMax < 0) || (_shapeZMax < __bonkMinZ))
         {
             //Shape is outside bounds
+            
+            _subjectShape.x += x;
+            _subjectShape.y += y;
+            _subjectShape.z += z;
+            
             return _nullCollisionData;
         }
         
@@ -436,6 +470,10 @@ function __BonkCommonHeightmap(_function, _x, _y, _z, _cellWidth, _cellHeight, _
                 var _reaction = _bonkTriangleArray[_index++].Collide(_subjectShape, _groupFilter, _struct);
                 if (_reaction.shape != undefined)
                 {
+                    _subjectShape.x += x;
+                    _subjectShape.y += y;
+                    _subjectShape.z += z;
+                    
                     return _reaction;
                 }
             }
