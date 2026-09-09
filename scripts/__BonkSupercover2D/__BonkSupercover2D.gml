@@ -67,8 +67,8 @@ function __BonkSupercover2D(_x1, _y1, _x2, _y2, _array = [])
         
         if (_tX < _tY)
         {
-            array_push(_array,   _xWrite + _xSign, _yWrite, 0);
-            array_push(_array,   _xWrite,          _yWrite, 0);
+            array_push(_array,   _xWrite + _xSign, _yWrite);
+            array_push(_array,   _xWrite,          _yWrite);
             
             _xWrite += _xSign;
             
@@ -76,8 +76,8 @@ function __BonkSupercover2D(_x1, _y1, _x2, _y2, _array = [])
         }
         else if (_tY < _tX)
         {
-            array_push(_array,   _xWrite, _yWrite + _ySign, 0);
-            array_push(_array,   _xWrite, _yWrite,          0);
+            array_push(_array,   _xWrite, _yWrite + _ySign);
+            array_push(_array,   _xWrite, _yWrite);
             
             _yWrite += _ySign;
             
@@ -87,8 +87,8 @@ function __BonkSupercover2D(_x1, _y1, _x2, _y2, _array = [])
         {
             //Line travels diagonally in the xy plane
             
-            array_push(_array,   _xWrite + _xSign, _yWrite,          0);
-            array_push(_array,   _xWrite,          _yWrite + _ySign, 0);
+            array_push(_array,   _xWrite + _xSign, _yWrite         );
+            array_push(_array,   _xWrite,          _yWrite + _ySign);
             
             _xWrite += _xSign;
             _yWrite += _ySign;
@@ -97,7 +97,7 @@ function __BonkSupercover2D(_x1, _y1, _x2, _y2, _array = [])
             _tY += _yIncrAbs;
         }
         
-        array_push(_array,   _xWrite, _yWrite, 0);
+        array_push(_array,   _xWrite, _yWrite);
     }
     
     return _array;
