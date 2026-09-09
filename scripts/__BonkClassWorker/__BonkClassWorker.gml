@@ -333,7 +333,7 @@ function __BonkClassWorker(_world, _vertexBufferArray, _vertexFormat, _matrix, _
                 }
             }
             
-            _world.__Add(_bonkTri); //Use the internal version to avoid unnecessary instance checks
+            _world.__AddShape(_bonkTri); //Use the internal version to avoid unnecessary instance checks
         }
         
         __trianglesRemaining = max(0, __trianglesRemaining - BONK_VERTEX_BUFFER_ASYNC_TRIANGLE_RESOLUTION);

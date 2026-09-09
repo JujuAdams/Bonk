@@ -485,7 +485,7 @@ function __BonkCommonWorld(_cellXSize, _cellYSize, _cellZSize)
         }
     }
     
-    Add = function(_shape)
+    AddShape = function(_shape)
     {
         if (is_handle(_shape))
         {
@@ -510,10 +510,10 @@ function __BonkCommonWorld(_cellXSize, _cellYSize, _cellZSize)
             return;
         }
         
-        __Add(_shape);
+        __AddShape(_shape);
     }
     
-    __Add = function(_shape)
+    __AddShape = function(_shape)
     {
         if ((_shape.bonkType == BONK_TYPE_LINE)
         ||  (_shape.bonkType == BONK_TYPE_RAY)

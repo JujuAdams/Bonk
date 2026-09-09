@@ -1,10 +1,10 @@
 with(oTestParent)
 {
-    other.world.Add(shape);
+    other.world.AddShape(shape);
     
     if (variable_instance_get(self, "shapeB") != undefined)
     {
-        other.world.Add(shapeB);
+        other.world.AddShape(shapeB);
     }
 }
 
