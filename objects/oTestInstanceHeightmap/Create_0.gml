@@ -1,5 +1,5 @@
-var _width  =   3;
-var _height =   3;
+var _width  =   5;
+var _height =   5;
 var _xScale = 100;
 var _yScale = 100;
 var _zScale = 100;

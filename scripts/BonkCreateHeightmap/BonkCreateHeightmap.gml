@@ -14,11 +14,12 @@
 /// @param xScale      Scaling factor to apply (this is analogous to the width of a single cell in the x-axis)
 /// @param yScale      Scaling factor to apply (this is analogous to the height of a single cell in the y-axis)
 /// @param zScale      Scaling factor to apply
+/// @param [tesselation=simple]
 /// @param [object=BonkObject]
 /// @param [variableStruct]
 /// @param [groupVector=BONK_DEFAULT_GROUP]
 
-function BonkCreateHeightmap(_function, _x, _y, _z, _cellWidth, _cellHeight, _xScale, _yScale, _zScale, _object = BonkObject, _variableStruct = undefined, _groupVector = BONK_DEFAULT_GROUP)
+function BonkCreateHeightmap(_function, _x, _y, _z, _cellWidth, _cellHeight, _xScale, _yScale, _zScale, _tesselation = BONK_TESSELATE_SIMPLE, _object = BonkObject, _variableStruct = undefined, _groupVector = BONK_DEFAULT_GROUP)
 {
     static _staticVariableStruct = {};
     

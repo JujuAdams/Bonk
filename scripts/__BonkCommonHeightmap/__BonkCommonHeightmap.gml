@@ -1,8 +1,39 @@
 // Feather disable all
 
-function __BonkCommonHeightmap()
+/// @param function
+/// @param x
+/// @param y
+/// @param z
+/// @param cellWidth
+/// @param cellHeight
+/// @param xScale
+/// @param yScale
+/// @param zScale
+/// @param tesselation
+
+function __BonkCommonHeightmap(_function, _x, _y, _z, _cellWidth, _cellHeight, _xScale, _yScale, _zScale, _tesselation)
 {
     bonkType = BONK_TYPE_HEIGHTMAP;
+    
+    heightFunction = _function;
+    
+    x = _x;
+    y = _y;
+    z = _z;
+    
+    cellWidth  = _cellWidth;
+    cellHeight = _cellHeight;
+    
+    xScale = _xScale;
+    yScale = _yScale;
+    zScale = _zScale;
+    
+    tesselation = _tesselation;
+    
+    __bonkTriangleArray = [];
+    __bonkMinZArray     = []; //FIXME - Use these!
+    __bonkMaxZArray     = []; //FIXME - Use these!
+    
     
     //TODO - Add async variant
     //TODO - Add partial variant
@@ -14,6 +45,10 @@ function __BonkCommonHeightmap()
         var _xScale     = xScale;
         var _yScale     = yScale;
         var _zScale     = zScale;
+        
+        var _tesselation = tesselation;
+        var _simpleMode  = (_tesselation == BONK_TESSELATE_SIMPLE);
+        var _flipMode    = (_tesselation == BONK_TESSELATE_FLIP);
         
         __bonkWidth  = xScale*_cellWidth;
         __bonkHeight = yScale*_cellHeight;
@@ -74,11 +109,31 @@ function __BonkCommonHeightmap()
                 _minZArray[@ _index/2] = _zMinCell;
                 _maxZArray[@ _index/2] = _zMaxCell;
                 
-                // TODO - Alternate handedness of triangles
                 // TODO - Set soft edges
                 
-                _bonkTriangleArray[@ _index++] = new BonkStructTriangle(_x0, _y0, _z00,   _x1, _y0, _z10,   _x0, _y1, _z01);
-                _bonkTriangleArray[@ _index++] = new BonkStructTriangle(_x0, _y1, _z01,   _x1, _y0, _z10,   _x1, _y1, _z11);
+                if (_simpleMode)
+                {
+                    _bonkTriangleArray[@ _index++] = new BonkStructTriangle(_x0, _y0, _z00,   _x1, _y0, _z10,   _x0, _y1, _z01);
+                    _bonkTriangleArray[@ _index++] = new BonkStructTriangle(_x0, _y1, _z01,   _x1, _y0, _z10,   _x1, _y1, _z11);
+                }
+                else if (_flipMode)
+                {
+                    _bonkTriangleArray[@ _index++] = new BonkStructTriangle(_x0, _y0, _z00,   _x1, _y0, _z10,   _x1, _y1, _z11);
+                    _bonkTriangleArray[@ _index++] = new BonkStructTriangle(_x0, _y0, _z00,   _x1, _y1, _z11,   _x0, _y1, _z01);
+                }
+                else
+                {
+                    if ((_xCell + _yCell + _tesselation) mod 2)
+                    {
+                        _bonkTriangleArray[@ _index++] = new BonkStructTriangle(_x0, _y0, _z00,   _x1, _y0, _z10,   _x0, _y1, _z01);
+                        _bonkTriangleArray[@ _index++] = new BonkStructTriangle(_x0, _y1, _z01,   _x1, _y0, _z10,   _x1, _y1, _z11);
+                    }
+                    else
+                    {
+                        _bonkTriangleArray[@ _index++] = new BonkStructTriangle(_x0, _y0, _z00,   _x1, _y0, _z10,   _x1, _y1, _z11);
+                        _bonkTriangleArray[@ _index++] = new BonkStructTriangle(_x0, _y0, _z00,   _x1, _y1, _z11,   _x0, _y1, _z01);
+                    }
+                }
                 
                 ++_xCell;
             }

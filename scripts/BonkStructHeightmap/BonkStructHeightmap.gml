@@ -9,29 +9,12 @@
 /// @param xScale      Scaling factor to apply (this is analogous to the width of a single cell in the x-axis)
 /// @param yScale      Scaling factor to apply (this is analogous to the height of a single cell in the y-axis)
 /// @param zScale      Scaling factor to apply
+/// @param [tesselation=simple]
 /// @param [groupVector=BONK_DEFAULT_GROUP]
 
-function BonkStructHeightmap(_function, _x, _y, _z, _cellWidth, _cellHeight, _xScale, _yScale, _zScale, _groupVector = BONK_DEFAULT_GROUP) : __BonkClassShared(_groupVector) constructor
+function BonkStructHeightmap(_function, _x, _y, _z, _cellWidth, _cellHeight, _xScale, _yScale, _zScale, _tesselation = BONK_TESSELATE_SIMPLE, _groupVector = BONK_DEFAULT_GROUP) : __BonkClassShared(_groupVector) constructor
 {
-    __BonkCommonHeightmap();
-    
-    heightFunction = _function;
-    
-    x = _x;
-    y = _y;
-    z = _z;
-    
-    cellWidth  = _cellWidth;
-    cellHeight = _cellHeight;
-    
-    xScale = _xScale;
-    yScale = _yScale;
-    zScale = _zScale;
-    
-    __bonkTriangleArray = [];
-    __bonkMinZArray     = []; //FIXME - Use these!
-    __bonkMaxZArray     = []; //FIXME - Use these!
-    
+    __BonkCommonHeightmap(_function, _x, _y, _z, _cellWidth, _cellHeight, _xScale, _yScale, _zScale, _tesselation);
     UpdateTriangles();
     
     
@@ -58,5 +41,20 @@ function BonkStructHeightmap(_function, _x, _y, _z, _cellWidth, _cellHeight, _xS
     
     SetPosition = __SetPositionFree;
     
-    //TODO - Add method to change heightmap size
+    static SetHeightmapSize = function(_cellWidth = cellWidth, _cellHeight = cellHeight)
+    {
+        cellWidth  = _cellWidth;
+        cellHeight = _cellHeight;
+        
+        UpdateTriangles();
+    }
+    
+    static SetScale = function(_xScale = xScale, _yScale = yScale, _zScale = zScale)
+    {
+        xScale = _xScale;
+        yScale = _yScale;
+        zScale = _zScale;
+        
+        UpdateTriangles();
+    }
 }
