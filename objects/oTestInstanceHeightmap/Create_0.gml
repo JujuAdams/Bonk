@@ -5,7 +5,6 @@ var _yScale = 100;
 var _zScale = 100;
 
 grid = ds_grid_create(_width, _height);
-
 //repeat(50) ds_grid_add_disk(grid, irandom(_width-1), irandom(_height-1), irandom_range(3, 6), random(1));
 
 var _y = 0;
@@ -66,5 +65,5 @@ var _function = function(_x, _y)
     }
 }
 
-shape = new BonkStructHeightmap(_function, 0, 0, 0, _width-1, _height-1, _xScale, _yScale, _zScale);
-vbuffVolume = BuildHeightmapVolume(grid, _xScale, _yScale, _zScale);
+BonkSetupHeightmap(_function, 0, 0, 0, _width-1, _height-1, _xScale, _yScale, _zScale);
+//vbuffVolume = BuildHeightmapVolume(grid, _xScale, _yScale, _zScale);

@@ -1,9 +1,9 @@
 {
   "$GMScript":"v1",
-  "%Name":"__BonkClassWorker",
+  "%Name":"__BonkClassWorldWorker",
   "isCompatibility":false,
   "isDnD":false,
-  "name":"__BonkClassWorker",
+  "name":"__BonkClassWorldWorker",
   "parent":{
     "name":"(System)",
     "path":"folders/Bonk/(System).yy",

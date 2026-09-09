@@ -43,8 +43,8 @@ function BuildHeightmapVolume(_grid, _xScale, _yScale, _zScale)
         {
             var _xl = _xScale*_x;
             var _yt = _yScale*_y;
-            var _xm = _xl + 0.5*_xScale;
-            var _ym = _yt + 0.5*_yScale;
+            //var _xm = _xl + 0.5*_xScale;
+            //var _ym = _yt + 0.5*_yScale;
             var _xr = _xl + _xScale;
             var _yb = _yt + _yScale;
             
@@ -52,12 +52,15 @@ function BuildHeightmapVolume(_grid, _xScale, _yScale, _zScale)
             var _z2 = _zScale*_grid[# _x+1, _y  ];
             var _z3 = _zScale*_grid[# _x,   _y+1];
             var _z4 = _zScale*_grid[# _x+1, _y+1];
-            var _zm = 0.25*(_z1 + _z2 + _z3 + _z4);
+            //var _zm = 0.25*(_z1 + _z2 + _z3 + _z4);
             
-            _funcTriangle(_vbuff,   _xl, _yt, _z1,   _xr, _yt, _z2,   _xm, _ym, _zm);
-            _funcTriangle(_vbuff,   _xr, _yt, _z2,   _xr, _yb, _z4,   _xm, _ym, _zm);
-            _funcTriangle(_vbuff,   _xr, _yb, _z4,   _xl, _yb, _z3,   _xm, _ym, _zm);
-            _funcTriangle(_vbuff,   _xl, _yb, _z3,   _xl, _yt, _z1,   _xm, _ym, _zm);
+            _funcTriangle(_vbuff,   _xl, _yt, _z1,   _xr, _yt, _z2,   _xl, _yb, _z3);
+            _funcTriangle(_vbuff,   _xl, _yb, _z3,   _xr, _yt, _z2,   _xr, _yb, _z4);
+            
+            //_funcTriangle(_vbuff,   _xl, _yt, _z1,   _xr, _yt, _z2,   _xm, _ym, _zm);
+            //_funcTriangle(_vbuff,   _xr, _yt, _z2,   _xr, _yb, _z4,   _xm, _ym, _zm);
+            //_funcTriangle(_vbuff,   _xr, _yb, _z4,   _xl, _yb, _z3,   _xm, _ym, _zm);
+            //_funcTriangle(_vbuff,   _xl, _yb, _z3,   _xl, _yt, _z1,   _xm, _ym, _zm);
             
             ++_x;
         }

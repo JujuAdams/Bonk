@@ -6,7 +6,7 @@
 /// @param matrix
 /// @param applySoftEdges
 
-function __BonkClassWorker(_world, _vertexBufferArray, _vertexFormat, _matrix, _applySoftEdges) constructor
+function __BonkClassWorldWorker(_world, _vertexBufferArray, _vertexFormat, _matrix, _applySoftEdges) constructor
 {
     static _pendingWorkerArray = __BonkSystem().__pendingWorkerArray;
     

@@ -8,7 +8,7 @@
 /// @param z2
 /// @param [array]
 
-function __BonkSupercover(_x1, _y1, _z1, _x2, _y2, _z2, _array = [])
+function __BonkSupercover3D(_x1, _y1, _z1, _x2, _y2, _z2, _array = [])
 {
     var _xDelta = _x2 - _x1;
     var _yDelta = _y2 - _y1;

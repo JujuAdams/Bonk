@@ -1,9 +1,9 @@
 {
   "$GMScript":"v1",
-  "%Name":"__BonkSupercover",
+  "%Name":"__BonkSupercover3D",
   "isCompatibility":false,
   "isDnD":false,
-  "name":"__BonkSupercover",
+  "name":"__BonkSupercover3D",
   "parent":{
     "name":"(System)",
     "path":"folders/Bonk/(System).yy",

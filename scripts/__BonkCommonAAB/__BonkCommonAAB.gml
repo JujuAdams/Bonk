@@ -44,4 +44,10 @@ function __BonkCommonAAB()
             return (_struct == undefined)? _nullHit : _struct.__Null();
         }
     });
+    
+    DebugDraw = function(_color = undefined, _wireframe = undefined)
+    {
+        __BONK_VERIFY_UGG
+        UggAABB(x, y, z, xSize, ySize, zSize, _color, _wireframe);
+    }
 }

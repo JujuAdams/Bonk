@@ -590,7 +590,7 @@ function __BonkCommonWorld(_cellXSize, _cellYSize, _cellZSize)
         }
     }
     
-    __RemoveShape = function(_shape)
+    __RemoveShape = function(_shape) //FIXME - Do this faster
     {
         var _aabb = _shape.GetAABB();
         
@@ -766,7 +766,7 @@ function __BonkCommonWorld(_cellXSize, _cellYSize, _cellZSize)
             _vertexBufferArray = [_vertexBufferArray];
         }
         
-        var _worker = new __BonkClassWorker(self, _vertexBufferArray, _vertexFormat, _matrix, _applySoftEdges);
+        var _worker = new __BonkClassWorldWorker(self, _vertexBufferArray, _vertexFormat, _matrix, _applySoftEdges);
         _worker.Force();
         
         return self;
@@ -779,7 +779,7 @@ function __BonkCommonWorld(_cellXSize, _cellYSize, _cellZSize)
             _vertexBufferArray = [_vertexBufferArray];
         }
         
-        var _worker = new __BonkClassWorker(self, _vertexBufferArray, _vertexFormat, _matrix, _applySoftEdges);
+        var _worker = new __BonkClassWorldWorker(self, _vertexBufferArray, _vertexFormat, _matrix, _applySoftEdges);
         _worker.__StartAsync();
         
         return _worker;
@@ -1214,7 +1214,7 @@ function __BonkCommonWorld(_cellXSize, _cellYSize, _cellZSize)
         var _clampedY2 = _y1 + _tMax*_dY;
         var _clampedZ2 = _z1 + _tMax*_dZ;
         
-        return __BonkSupercover(_clampedX1/_cellXSize, _clampedY1/_cellYSize, _clampedZ1/_cellZSize,
-                                _clampedX2/_cellXSize, _clampedY2/_cellYSize, _clampedZ2/_cellZSize);
+        return __BonkSupercover3D(_clampedX1/_cellXSize, _clampedY1/_cellYSize, _clampedZ1/_cellZSize,
+                                  _clampedX2/_cellXSize, _clampedY2/_cellYSize, _clampedZ2/_cellZSize);
     }
 }

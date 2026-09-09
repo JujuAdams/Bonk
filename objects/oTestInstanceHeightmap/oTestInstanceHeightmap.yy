@@ -1,18 +1,21 @@
 {
   "$GMObject":"",
-  "%Name":"oTestHeightmapVolume",
+  "%Name":"oTestInstanceHeightmap",
   "eventList":[
     {"$GMEvent":"v1","%Name":"","collisionObjectId":null,"eventNum":0,"eventType":0,"isDnD":false,"name":"","resourceType":"GMEvent","resourceVersion":"2.0",},
     {"$GMEvent":"v1","%Name":"","collisionObjectId":null,"eventNum":0,"eventType":8,"isDnD":false,"name":"","resourceType":"GMEvent","resourceVersion":"2.0",},
   ],
   "managed":true,
-  "name":"oTestHeightmapVolume",
+  "name":"oTestInstanceHeightmap",
   "overriddenProperties":[],
   "parent":{
-    "name":"Mesh Collision",
-    "path":"folders/Test Cases/Mesh Collision.yy",
+    "name":"Instance Playground",
+    "path":"folders/Test Cases/Instance Playground.yy",
   },
-  "parentObjectId":null,
+  "parentObjectId":{
+    "name":"oTestInstanceParent",
+    "path":"objects/oTestInstanceParent/oTestInstanceParent.yy",
+  },
   "persistent":false,
   "physicsAngularDamping":0.1,
   "physicsDensity":0.5,
