@@ -466,6 +466,25 @@ function __BonkCommonWorld(_cellXSize, _cellYSize, _cellZSize)
         };
     }
     
+    ClearShapes = function()
+    {
+        __bonkMinCellX = 0;
+        __bonkMaxCellX = 0;
+        __bonkMinCellY = 0;
+        __bonkMaxCellY = 0;
+        __bonkMinCellZ = 0;
+        __bonkMaxCellZ = 0;
+        
+        __bonkSpatialDict = {};
+        
+        var _i = 0;
+        repeat(array_length(__bonkWorkerArray))
+        {
+            __bonkWorkerArray[_i].Cancel();
+            ++_i;
+        }
+    }
+    
     Add = function(_shape)
     {
         if (is_handle(_shape))
