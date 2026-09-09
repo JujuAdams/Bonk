@@ -564,7 +564,7 @@ function __BonkCommonHeightmap(_function, _x, _y, _z, _cellWidth, _cellHeight, _
         
         var _bonkTriangleArray = __bonkTriangleArray;
         
-        //FIXME - Apply transformation matrix here to move the shapes
+        __BonkSetWorldMatrix(x, y, z);
         
         var _i = 0;
         repeat(array_length(_array) div 3)
@@ -585,11 +585,13 @@ function __BonkCommonHeightmap(_function, _x, _y, _z, _cellWidth, _cellHeight, _
             
             ++_i;
         }
+        
+        __BonkResetWorldMatrix();
     }
     
     DrawShapes = function(_color = undefined, _wireframe = undefined)
     {
-        //FIXME - Apply transformation matrix here to move the shapes
+        __BonkSetWorldMatrix(x, y, z);
         
         var _bonkTriangleArray = __bonkTriangleArray;
         var _i = 0;
@@ -598,6 +600,8 @@ function __BonkCommonHeightmap(_function, _x, _y, _z, _cellWidth, _cellHeight, _
             _bonkTriangleArray[_i].DebugDraw(_color, _wireframe);
             ++_i;
         }
+        
+        __BonkResetWorldMatrix();
     }
     
     DebugDraw = DrawShapes;

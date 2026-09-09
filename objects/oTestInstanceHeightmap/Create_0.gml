@@ -65,5 +65,5 @@ var _function = function(_x, _y)
     }
 }
 
-BonkSetupHeightmap(_function, 0, 0, 0, _width-1, _height-1, _xScale, _yScale, _zScale);
+BonkSetupHeightmap(_function, x, y, 0, _width-1, _height-1, _xScale, _yScale, _zScale);
 //vbuffVolume = BuildHeightmapVolume(grid, _xScale, _yScale, _zScale);
