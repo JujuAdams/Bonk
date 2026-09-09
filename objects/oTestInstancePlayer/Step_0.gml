@@ -3,47 +3,52 @@ if (BonkAsyncGetPendingWorkers() > 0)
     return;
 }
 
-if (not oCamera.camera.GetMouseLock())
+if (instance_exists(oCamera))
 {
-    if (keyboard_check_pressed(ord("R")))
-    {
-        x = xstart;
-        y = ystart;
-        z = 200;
-        velocity.Reset();
-    }
+    var _camera = oCamera.camera;
     
-    if (keyboard_check_pressed(vk_space))
+    if (not _camera.GetMouseLock())
     {
-        velocity.zSpeed += 5;
-        onGroundFrames = 0;
+        if (keyboard_check_pressed(ord("R")))
+        {
+            x = xstart;
+            y = ystart;
+            z = 200;
+            velocity.Reset();
+        }
+        
+        if (keyboard_check_pressed(vk_space))
+        {
+            velocity.zSpeed += 5;
+            onGroundFrames = 0;
+        }
+        
+        var _para = moveAccel*(keyboard_check(ord("W")) - keyboard_check(ord("S")));
+        var _perp = moveAccel*(keyboard_check(ord("A")) - keyboard_check(ord("D")));
+        var _sin  = dsin(_camera.yaw);
+        var _cos  = dcos(_camera.yaw);
+        
+        with(velocity)
+        {
+            xSpeed +=  _para*_cos - _perp*_sin;
+            ySpeed += -_para*_sin - _perp*_cos;
+        }
     }
-    
-    var _para = 2*(keyboard_check(ord("W")) - keyboard_check(ord("S")));
-    var _perp = 2*(keyboard_check(ord("A")) - keyboard_check(ord("D")));
-    var _sin  = dsin(oCamera.camera.yaw);
-    var _cos  = dcos(oCamera.camera.yaw);
-    velocity.xSpeed =  _para*_cos - _perp*_sin;
-    velocity.ySpeed = -_para*_sin - _perp*_cos;
-}
-else
-{
-    velocity.xSpeed = 0;
-    velocity.ySpeed = 0;
 }
 
-velocity.zSpeed -= gravAccel;
+with(velocity)
+{
+    xSpeed *= other.damping;
+    ySpeed *= other.damping;
+    zSpeed -= other.gravAccel;
+}
+
 --onGroundFrames;
 
 var _pushOutData = BonkMoveAndDeflect(self, velocity, 40, oTestInstanceParent);
 if (_pushOutData.deflectType == BONK_DEFLECT_GRIPPY)
 {
-    onGroundFrames = 30;
-}
-
-if (onGroundFrames > 0)
-{
-    velocity.zSpeed = min(-0.3, velocity.zSpeed);
+    onGroundFrames = 10;
 }
 
 line.x1 = x;
