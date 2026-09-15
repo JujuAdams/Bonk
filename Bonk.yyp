@@ -321,6 +321,7 @@
     {"id":{"name":"BonkRayHitCylinder","path":"scripts/BonkRayHitCylinder/BonkRayHitCylinder.yy",},},
     {"id":{"name":"BonkRayHitFirst","path":"scripts/BonkRayHitFirst/BonkRayHitFirst.yy",},},
     {"id":{"name":"BonkRayHitFirstExt","path":"scripts/BonkRayHitFirstExt/BonkRayHitFirstExt.yy",},},
+    {"id":{"name":"BonkRayHitHeightmap","path":"scripts/BonkRayHitHeightmap/BonkRayHitHeightmap.yy",},},
     {"id":{"name":"BonkRayHitMany","path":"scripts/BonkRayHitMany/BonkRayHitMany.yy",},},
     {"id":{"name":"BonkRayHitManyExt","path":"scripts/BonkRayHitManyExt/BonkRayHitManyExt.yy",},},
     {"id":{"name":"BonkRayHitQuad","path":"scripts/BonkRayHitQuad/BonkRayHitQuad.yy",},},

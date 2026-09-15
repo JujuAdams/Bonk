@@ -22,11 +22,20 @@ function BonkLineHitHeightmap(_heightmap, _x1, _y1, _z1, _x2, _y2, _z2, _groupFi
     
     with(_heightmap)
     {
+        //Correct for the heightmap's position
+        _x1 -= x;
+        _y1 -= y;
+        _z1 -= z;
+        
+        _x2 -= x;
+        _y2 -= y;
+        _z2 -= z;
+        
         var _cellWidth = cellWidth;
         var _bonkTriangleArray = __bonkTriangleArray;
         
         //TODO - Replace with incremental algo
-        var _pointArray = GetCellsFromLineExt(_x1, _y1, _z1, _x2, _y2, _z2);
+        var _pointArray = __GetCellsFromLineExtInternal(_x1, _y1, _z1, _x2, _y2, _z2);
         var _i = 0;
         repeat(array_length(_pointArray) div 2)
         {
@@ -53,6 +62,11 @@ function BonkLineHitHeightmap(_heightmap, _x1, _y1, _z1, _x2, _y2, _z2, _groupFi
             
             if (not is_infinity(_closestDistance))
             {
+                //Re-correct for the heightmap's position
+                _returnHit.x += x;
+                _returnHit.y += y;
+                _returnHit.z += z;
+                
                 return (_struct == undefined)? _returnHit : _returnHit.__CopyTo(_struct);
             }
             

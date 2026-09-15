@@ -256,6 +256,7 @@
     {"name":"BonkRayHitCylinder","order":2,"path":"scripts/BonkRayHitCylinder/BonkRayHitCylinder.yy",},
     {"name":"BonkRayHitFirst","order":10,"path":"scripts/BonkRayHitFirst/BonkRayHitFirst.yy",},
     {"name":"BonkRayHitFirstExt","order":8,"path":"scripts/BonkRayHitFirstExt/BonkRayHitFirstExt.yy",},
+    {"name":"BonkRayHitHeightmap","order":8,"path":"scripts/BonkRayHitHeightmap/BonkRayHitHeightmap.yy",},
     {"name":"BonkRayHitMany","order":11,"path":"scripts/BonkRayHitMany/BonkRayHitMany.yy",},
     {"name":"BonkRayHitManyExt","order":9,"path":"scripts/BonkRayHitManyExt/BonkRayHitManyExt.yy",},
     {"name":"BonkRayHitQuad","order":3,"path":"scripts/BonkRayHitQuad/BonkRayHitQuad.yy",},

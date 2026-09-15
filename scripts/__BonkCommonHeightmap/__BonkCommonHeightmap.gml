@@ -856,19 +856,23 @@ function __BonkCommonHeightmap(_function, _x, _y, _z, _cellWidth, _cellHeight, _
     
     GetCellsFromLineExt = function(_x1, _y1, _z1, _x2, _y2, _z2)
     {
+        return __GetCellsFromLineExtInternal(_x1-x, _y1-y, _z1-z, _x2-x, _y2-y, _z2-z);
+    }
+    
+    __GetCellsFromLineExtInternal = function(_x1, _y1, _z1, _x2, _y2, _z2)
+    {
         //FIXME - Return a static array
         
         var _dX = _x2 - _x1;
         var _dY = _y2 - _y1;
         var _dZ = _z2 - _z1;
         
-        var _xMin = x;
-        var _yMin = y;
-        var _zMin = z + __bonkMinZ;
+        //xMin and yMin are both 0
+        var _zMin = __bonkMinZ;
         
-        var _xMax = x + __bonkWidth;
-        var _yMax = y + __bonkHeight;
-        var _zMax = z + __bonkMaxZ;
+        var _xMax = __bonkWidth;
+        var _yMax = __bonkHeight;
+        var _zMax = __bonkMaxZ;
         
         if (_dX == 0)
         {
@@ -877,7 +881,7 @@ function __BonkCommonHeightmap(_function, _x, _y, _z, _cellWidth, _cellHeight, _
         }
         else
         {
-            var _t1 = (_xMin - _x1) / _dX;
+            var _t1 = -_x1 / _dX;
             var _t2 = (_xMax - _x1) / _dX;
         }
         
@@ -888,7 +892,7 @@ function __BonkCommonHeightmap(_function, _x, _y, _z, _cellWidth, _cellHeight, _
         }
         else
         {
-            var _t3 = (_yMin - _y1) / _dY;
+            var _t3 = -_y1 / _dY;
             var _t4 = (_yMax - _y1) / _dY;
         }
         
@@ -917,13 +921,13 @@ function __BonkCommonHeightmap(_function, _x, _y, _z, _cellWidth, _cellHeight, _
         var _t = (_tMin < 0)? _tMax : _tMin;
         
         var _hitX = _x1 + _t*_dX;
-        if ((_hitX < _xMin) || (_hitX > _xMax))
+        if ((_hitX < 0) || (_hitX > _xMax))
         {
             return [];
         }
         
         var _hitY = _y1 + _t*_dY;
-        if ((_hitY < _yMin) || (_hitY > _yMax))
+        if ((_hitY < 0) || (_hitY > _yMax))
         {
             return [];
         }
