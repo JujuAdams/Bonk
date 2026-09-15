@@ -15,7 +15,7 @@
 function BonkStructHeightmap(_function, _x, _y, _z, _cellWidth, _cellHeight, _xScale, _yScale, _zScale, _tesselation = BONK_TESSELATE_SIMPLE, _groupVector = BONK_DEFAULT_GROUP) : __BonkClassShared(_groupVector) constructor
 {
     __BonkCommonHeightmap(_function, _x, _y, _z, _cellWidth, _cellHeight, _xScale, _yScale, _zScale, _tesselation);
-    UpdateTriangles();
+    UpdateAllTriangles();
     
     
     
@@ -46,7 +46,7 @@ function BonkStructHeightmap(_function, _x, _y, _z, _cellWidth, _cellHeight, _xS
         cellWidth  = _cellWidth;
         cellHeight = _cellHeight;
         
-        UpdateTriangles();
+        UpdateAllTriangles();
     }
     
     static SetScale = function(_xScale = xScale, _yScale = yScale, _zScale = zScale)
@@ -55,6 +55,6 @@ function BonkStructHeightmap(_function, _x, _y, _z, _cellWidth, _cellHeight, _xS
         yScale = _yScale;
         zScale = _zScale;
         
-        UpdateTriangles();
+        UpdateAllTriangles();
     }
 }

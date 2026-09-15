@@ -37,7 +37,7 @@ function __BonkCommonHeightmap(_function, _x, _y, _z, _cellWidth, _cellHeight, _
     
     //TODO - Add async variant
     //TODO - Add partial variant
-    UpdateTriangles = function()
+    UpdateAllTriangles = function()
     {
         var _function   = heightFunction;
         var _cellWidth  = cellWidth;
@@ -143,6 +143,119 @@ function __BonkCommonHeightmap(_function, _x, _y, _z, _cellWidth, _cellHeight, _
         
         __bonkMinZ = _zMinOverall;
         __bonkMaxZ = _zMaxOverall;
+    }
+    
+    UpdateSomeTriangles = function(_regionX1, _regionY1, _regionX2, _regionY2)
+    {
+        var _gridWidth  = cellWidth;
+        var _gridHeight = cellHeight;
+        
+        if ((_regionX1 > _gridWidth-1) || (_regionY1 > _gridHeight-1) || (_regionX2 < 0) || (_regionY2 < 0)) return;
+        
+        _regionX1 = clamp(_regionX1, 0, _gridWidth-1);
+        _regionY1 = clamp(_regionY1, 0, _gridHeight-1);
+        _regionX2 = clamp(_regionX2, 0, _gridWidth-1);
+        _regionY2 = clamp(_regionY2, 0, _gridHeight-1);
+        
+        var _cellWidth  = 1 + _regionX2 - _regionX1;
+        var _cellHeight = 1 + _regionY2 - _regionY1;
+        
+        var _function = heightFunction;
+        var _xScale   = xScale;
+        var _yScale   = yScale;
+        var _zScale   = zScale;
+        
+        var _tesselation = tesselation;
+        var _simpleMode  = (_tesselation == BONK_TESSELATE_SIMPLE);
+        var _flipMode    = (_tesselation == BONK_TESSELATE_FLIP);
+        
+        var _bonkTriangleArray = __bonkTriangleArray;
+        var _minZArray = __bonkMinZArray;
+        var _maxZArray = __bonkMaxZArray;
+        
+        var _z00 = undefined;
+        var _z10 = undefined;
+        var _z01 = undefined;
+        var _z11 = _zScale*_function(_regionX1, _regionY1);
+        
+        var _y0 = undefined;
+        var _y1 = 0;
+        
+        var _zMinCell    = _z11;
+        var _zMaxCell    = _z11;
+        var _zMinOverall = _z11;
+        var _zMaxOverall = _z11;
+        
+        var _yCell = _regionY1;
+        repeat(_cellHeight)
+        {
+            _y0 = _y1;
+            _y1 = _y0 + _yScale;
+            
+            _z10 = _zScale*_function(0, _yCell);
+            _z11 = _zScale*_function(0, _yCell+1);
+            
+            _zMinCell = min(_zMinCell, _z10, _z11);
+            _zMaxCell = max(_zMaxCell, _z10, _z11);
+            
+            var _x0 = undefined;
+            var _x1 = 0;
+            
+            var _xCell = _regionX1;
+            var _index = 2*(_xCell + _gridWidth*_yCell);
+            repeat(_cellWidth)
+            {
+                _x0 = _x1;
+                _x1 = _x0 + _xScale;
+                
+                _z00 = _z10;
+                _z01 = _z11;
+                _z10 = _zScale*_function(_xCell+1, _yCell);
+                _z11 = _zScale*_function(_xCell+1, _yCell+1);
+                
+                _zMinCell    = min(_zMinCell, _z10, _z11);
+                _zMaxCell    = max(_zMaxCell, _z10, _z11);
+                _zMinOverall = min(_zMinCell, _zMinOverall);
+                _zMaxOverall = max(_zMaxCell, _zMaxOverall);
+                
+                _minZArray[@ _index/2] = _zMinCell;
+                _maxZArray[@ _index/2] = _zMaxCell;
+                
+                // TODO - Set soft edges
+                // TODO - Update rather than replace triangles
+                
+                if (_simpleMode)
+                {
+                    _bonkTriangleArray[@ _index++] = new BonkStructTriangle(_x0, _y0, _z00,   _x1, _y0, _z10,   _x0, _y1, _z01);
+                    _bonkTriangleArray[@ _index++] = new BonkStructTriangle(_x0, _y1, _z01,   _x1, _y0, _z10,   _x1, _y1, _z11);
+                }
+                else if (_flipMode)
+                {
+                    _bonkTriangleArray[@ _index++] = new BonkStructTriangle(_x0, _y0, _z00,   _x1, _y0, _z10,   _x1, _y1, _z11);
+                    _bonkTriangleArray[@ _index++] = new BonkStructTriangle(_x0, _y0, _z00,   _x1, _y1, _z11,   _x0, _y1, _z01);
+                }
+                else
+                {
+                    if ((_xCell + _yCell + _tesselation) mod 2)
+                    {
+                        _bonkTriangleArray[@ _index++] = new BonkStructTriangle(_x0, _y0, _z00,   _x1, _y0, _z10,   _x0, _y1, _z01);
+                        _bonkTriangleArray[@ _index++] = new BonkStructTriangle(_x0, _y1, _z01,   _x1, _y0, _z10,   _x1, _y1, _z11);
+                    }
+                    else
+                    {
+                        _bonkTriangleArray[@ _index++] = new BonkStructTriangle(_x0, _y0, _z00,   _x1, _y0, _z10,   _x1, _y1, _z11);
+                        _bonkTriangleArray[@ _index++] = new BonkStructTriangle(_x0, _y0, _z00,   _x1, _y1, _z11,   _x0, _y1, _z01);
+                    }
+                }
+                
+                ++_xCell;
+            }
+            
+            ++_yCell;
+        }
+        
+        __bonkMinZ = min(__bonkMinZ, _zMinOverall);
+        __bonkMaxZ = max(__bonkMaxZ, _zMaxOverall);
     }
     
     GetHeightAt = function(_x, _y)

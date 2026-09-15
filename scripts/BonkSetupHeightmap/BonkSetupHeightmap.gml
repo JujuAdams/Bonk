@@ -21,7 +21,7 @@ function BonkSetupHeightmap(_function, _x, _y, _z, _cellWidth, _cellHeight, _xSc
     
     __BonkCommonInstanceFunctions(_groupVector);
     __BonkCommonHeightmap(_function, _x, _y, _z, _cellWidth, _cellHeight, _xScale, _yScale, _zScale, _tesselation);
-    UpdateTriangles();
+    UpdateAllTriangles();
     
     
     
@@ -42,7 +42,7 @@ function BonkSetupHeightmap(_function, _x, _y, _z, _cellWidth, _cellHeight, _xSc
         cellWidth  = _cellWidth;
         cellHeight = _cellHeight;
         
-        UpdateTriangles();
+        UpdateAllTriangles();
         
         image_xscale = __bonkWidth / BONK_MASK_SIZE;
         image_yscale = __bonkHeight / BONK_MASK_SIZE;
@@ -54,7 +54,7 @@ function BonkSetupHeightmap(_function, _x, _y, _z, _cellWidth, _cellHeight, _xSc
         yScale = _yScale;
         zScale = _zScale;
         
-        UpdateTriangles();
+        UpdateAllTriangles();
         
         image_xscale = __bonkWidth / BONK_MASK_SIZE;
         image_yscale = __bonkHeight / BONK_MASK_SIZE;
