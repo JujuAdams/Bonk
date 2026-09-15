@@ -1,16 +1,16 @@
-/// @param grid
+/// @param vertexHeightGrid
 /// @param xScale
 /// @param yScale
 /// @param zScale
 
-function BuildHeightmapVolume(_grid, _xScale, _yScale, _zScale)
+function BuildHeightmapVolume(_vertexHeightGrid, _xScale, _yScale, _zScale)
 {
-    var _width  = ds_grid_width(_grid);
-    var _height = ds_grid_width(_grid);
+    var _width  = ds_grid_width(_vertexHeightGrid);
+    var _height = ds_grid_width(_vertexHeightGrid);
     
     if ((_width < 2) || (_height < 2))
     {
-        show_error($"Heightmap grid must be at least 2x2 (was {_width} x {_height})", true);
+        show_error($"Vertex height grid must be at least 2x2 (was {_width} x {_height})", true);
     }
     
     var _funcTriangle = function(_vbuff,   _x1, _y1, _z1,   _x2, _y2, _z2,   _x3, _y3, _z3)
@@ -48,10 +48,10 @@ function BuildHeightmapVolume(_grid, _xScale, _yScale, _zScale)
             var _xr = _xl + _xScale;
             var _yb = _yt + _yScale;
             
-            var _z1 = _zScale*_grid[# _x,   _y  ];
-            var _z2 = _zScale*_grid[# _x+1, _y  ];
-            var _z3 = _zScale*_grid[# _x,   _y+1];
-            var _z4 = _zScale*_grid[# _x+1, _y+1];
+            var _z1 = _zScale*_vertexHeightGrid[# _x,   _y  ];
+            var _z2 = _zScale*_vertexHeightGrid[# _x+1, _y  ];
+            var _z3 = _zScale*_vertexHeightGrid[# _x,   _y+1];
+            var _z4 = _zScale*_vertexHeightGrid[# _x+1, _y+1];
             //var _zm = 0.25*(_z1 + _z2 + _z3 + _z4);
             
             _funcTriangle(_vbuff,   _xl, _yt, _z1,   _xr, _yt, _z2,   _xl, _yb, _z3);

@@ -31,7 +31,7 @@ function BonkLineHitHeightmap(_heightmap, _x1, _y1, _z1, _x2, _y2, _z2, _groupFi
         _y2 -= y;
         _z2 -= z;
         
-        var _cellWidth = cellWidth;
+        var _cellCountX = cellCountX;
         var _bonkTriangleArray = __bonkTriangleArray;
         
         //TODO - Replace with incremental algo
@@ -42,7 +42,7 @@ function BonkLineHitHeightmap(_heightmap, _x1, _y1, _z1, _x2, _y2, _z2, _groupFi
             var _x = _pointArray[_i  ];
             var _y = _pointArray[_i+1];
             
-            var _index = 2*(_x + _y*_cellWidth);
+            var _index = 2*(_x + _y*_cellCountX);
             repeat(2)
             {
                 if ((_bonkTriangleArray[_index++].LineHit(_x1, _y1, _z1, _x2, _y2, _z2, _groupFilter, _workingHit)).shape != undefined)

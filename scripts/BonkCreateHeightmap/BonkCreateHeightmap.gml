@@ -9,8 +9,8 @@
 /// @param x           Position of the top-left corner
 /// @param y           Position of the top-left corner
 /// @param z           Position of the top-left corner
-/// @param cellWidth   Number of cells in the x axis
-/// @param cellHeight  Number of cells in the y axis
+/// @param cellCountX  Number of cells in the x axis
+/// @param cellCountY  Number of cells in the y axis
 /// @param xScale      Scaling factor to apply (this is analogous to the width of a single cell in the x-axis)
 /// @param yScale      Scaling factor to apply (this is analogous to the height of a single cell in the y-axis)
 /// @param zScale      Scaling factor to apply
@@ -19,13 +19,13 @@
 /// @param [variableStruct]
 /// @param [groupVector=BONK_DEFAULT_GROUP]
 
-function BonkCreateHeightmap(_function, _x, _y, _z, _cellWidth, _cellHeight, _xScale, _yScale, _zScale, _tesselation = BONK_TESSELATE_SIMPLE, _object = BonkObject, _variableStruct = undefined, _groupVector = BONK_DEFAULT_GROUP)
+function BonkCreateHeightmap(_function, _x, _y, _z, _cellCountX, _cellCountY, _xScale, _yScale, _zScale, _tesselation = BONK_TESSELATE_SIMPLE, _object = BonkObject, _variableStruct = undefined, _groupVector = BONK_DEFAULT_GROUP)
 {
     static _staticVariableStruct = {};
     
     with(instance_create_depth(0, 0, 0, _object, _variableStruct ?? _staticVariableStruct))
     {
-        BonkSetupHeightmap(_function,   _x, _y, _z,   _cellWidth, _cellHeight,   _xScale, _yScale, _zScale,   _groupVector);
+        BonkSetupHeightmap(_function,   _x, _y, _z,   _cellCountX, _cellCountY,   _xScale, _yScale, _zScale,   _groupVector);
         return self;
     }
 }

@@ -1,35 +1,37 @@
 function CreateHeightmap()
 {
-    gridWidth  =   5;
-    gridHeight =   5;
+    cellCountX =   5;
+    cellCountY =   5;
     xScale     = 100;
     yScale     = 100;
     zScale     = 100;
     
-    grid = ds_grid_create(gridWidth, gridHeight);
-    //repeat(50) ds_grid_add_disk(grid, irandom(gridWidth-1), irandom(gridHeight-1), irandom_range(3, 6), random(1));
+    var _vertexHeightCountX = cellCountX + 1;
+    var _vertexHeightCountY = cellCountY + 1;
+    vertexHeightGrid = ds_grid_create(_vertexHeightCountX, _vertexHeightCountY);
+    //repeat(50) ds_grid_add_disk(vertexHeightGrid, irandom(_vertexHeightCountX-1), irandom(_vertexHeightCountY-1), irandom_range(3, 6), random(1));
     
     var _y = 0;
-    repeat(ds_grid_height(grid))
+    repeat(ds_grid_height(vertexHeightGrid))
     {
         var _x = 0;
-        repeat(ds_grid_width(grid))
+        repeat(ds_grid_width(vertexHeightGrid))
         {
-            grid[# _x, _y] = random(1);
+            vertexHeightGrid[# _x, _y] = random(1);
             ++_x;
         }
         
         ++_y;
     }
     
-    var _min = ds_grid_get_min(grid, 0, 0, gridWidth-1, gridHeight-1);
-    ds_grid_add_region(grid, 0, 0, gridWidth-1, gridHeight-1, -_min);
-    var _max = ds_grid_get_max(grid, 0, 0, gridWidth-1, gridHeight-1);
-    if (_max != 0) ds_grid_multiply_region(grid, 0, 0, gridWidth-1, gridHeight-1, 1/_max);
+    var _min = ds_grid_get_min(vertexHeightGrid, 0, 0, _vertexHeightCountX, _vertexHeightCountY);
+    ds_grid_add_region(vertexHeightGrid, 0, 0, _vertexHeightCountX, _vertexHeightCountY, -_min);
+    var _max = ds_grid_get_max(vertexHeightGrid, 0, 0, _vertexHeightCountX, _vertexHeightCountY);
+    if (_max != 0) ds_grid_multiply_region(vertexHeightGrid, 0, 0, _vertexHeightCountX, _vertexHeightCountY, 1/_max);
     
-    funcGridZ = function(_x, _y)
+    funcGetHeight = function(_x, _y)
     {
-        var _grid = grid;
+        var _grid = vertexHeightGrid;
         
         if ((_x < 0) || (_y < 0) || (_x > ds_grid_width(_grid)-1) || (_y > ds_grid_height(_grid)-1))
         {

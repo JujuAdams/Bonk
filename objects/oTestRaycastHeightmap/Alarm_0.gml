@@ -1,6 +1,6 @@
 // Feather disable all
 
-line.SetB(random(gridWidth*xScale), random(gridHeight*yScale), 0);
+line.SetB(random(cellCountX*xScale), random(cellCountY*yScale), 0);
 
 if (not manual)
 {

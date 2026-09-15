@@ -70,13 +70,13 @@ function BonkRay(_x, _y, _z, _dX, _dY, _dZ) constructor
         matrix_multiply(_viewMatrix, _projMatrix, _matrix);
         matrix_inverse(_matrix, _matrix);
         
-        matrix_transform_vertex(_matrix, -_normalizedMouseX, -_normalizedMouseY, 0, 1, _vector);
+        matrix_transform_vertex(_matrix, _normalizedMouseX, -_normalizedMouseY, 0, 1, _vector);
         var _w = _vector[3];
         x1 = _vector[0] / _w;
         y1 = _vector[1] / _w;
         z1 = _vector[2] / _w;
         
-        matrix_transform_vertex(_matrix, -_normalizedMouseX, -_normalizedMouseY, 1, 1, _vector);
+        matrix_transform_vertex(_matrix, _normalizedMouseX, -_normalizedMouseY, 1, 1, _vector);
         var _w = _vector[3];
         var _dX = (_vector[0] / _w) - x1;
         var _dY = (_vector[1] / _w) - y1;

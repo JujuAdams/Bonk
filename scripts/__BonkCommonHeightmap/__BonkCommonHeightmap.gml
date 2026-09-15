@@ -4,14 +4,14 @@
 /// @param x
 /// @param y
 /// @param z
-/// @param cellWidth
-/// @param cellHeight
+/// @param cellCountX
+/// @param cellCountY
 /// @param xScale
 /// @param yScale
 /// @param zScale
 /// @param tesselation
 
-function __BonkCommonHeightmap(_function, _x, _y, _z, _cellWidth, _cellHeight, _xScale, _yScale, _zScale, _tesselation)
+function __BonkCommonHeightmap(_function, _x, _y, _z, _cellCountX, _cellCountY, _xScale, _yScale, _zScale, _tesselation)
 {
     bonkType = BONK_TYPE_HEIGHTMAP;
     
@@ -21,8 +21,8 @@ function __BonkCommonHeightmap(_function, _x, _y, _z, _cellWidth, _cellHeight, _
     y = _y;
     z = _z;
     
-    cellWidth  = _cellWidth;
-    cellHeight = _cellHeight;
+    cellCountX = _cellCountX;
+    cellCountY = _cellCountY;
     
     xScale = _xScale;
     yScale = _yScale;
@@ -40,8 +40,8 @@ function __BonkCommonHeightmap(_function, _x, _y, _z, _cellWidth, _cellHeight, _
     UpdateAllTriangles = function()
     {
         var _function   = heightFunction;
-        var _cellWidth  = cellWidth;
-        var _cellHeight = cellHeight
+        var _cellCountX = cellCountX;
+        var _cellCountY = cellCountY
         var _xScale     = xScale;
         var _yScale     = yScale;
         var _zScale     = zScale;
@@ -50,16 +50,16 @@ function __BonkCommonHeightmap(_function, _x, _y, _z, _cellWidth, _cellHeight, _
         var _simpleMode  = (_tesselation == BONK_TESSELATE_SIMPLE);
         var _flipMode    = (_tesselation == BONK_TESSELATE_FLIP);
         
-        __bonkWidth  = xScale*_cellWidth;
-        __bonkHeight = yScale*_cellHeight;
+        __bonkWidth  = xScale*_cellCountX;
+        __bonkHeight = yScale*_cellCountY;
         
         var _bonkTriangleArray = __bonkTriangleArray;
         var _minZArray = __bonkMinZArray;
         var _maxZArray = __bonkMaxZArray;
         
-        array_resize(_bonkTriangleArray, 2*_cellWidth*_cellHeight);
-        array_resize(_minZArray, _cellWidth*_cellHeight);
-        array_resize(_maxZArray, _cellWidth*_cellHeight);
+        array_resize(_bonkTriangleArray, 2*_cellCountX*_cellCountY);
+        array_resize(_minZArray, _cellCountX*_cellCountY);
+        array_resize(_maxZArray, _cellCountX*_cellCountY);
         
         var _z00 = undefined;
         var _z10 = undefined;
@@ -76,7 +76,7 @@ function __BonkCommonHeightmap(_function, _x, _y, _z, _cellWidth, _cellHeight, _
         
         var _index = 0;
         var _yCell = 0;
-        repeat(_cellHeight)
+        repeat(_cellCountY)
         {
             _y0 = _y1;
             _y1 = _y0 + _yScale;
@@ -91,7 +91,7 @@ function __BonkCommonHeightmap(_function, _x, _y, _z, _cellWidth, _cellHeight, _
             var _x1 = 0;
             
             var _xCell = 0;
-            repeat(_cellWidth)
+            repeat(_cellCountX)
             {
                 _x0 = _x1;
                 _x1 = _x0 + _xScale;
@@ -147,8 +147,8 @@ function __BonkCommonHeightmap(_function, _x, _y, _z, _cellWidth, _cellHeight, _
     
     UpdateSomeTriangles = function(_regionX1, _regionY1, _regionX2, _regionY2)
     {
-        var _gridWidth  = cellWidth;
-        var _gridHeight = cellHeight;
+        var _gridWidth  = cellCountX;
+        var _gridHeight = cellCountY;
         
         if ((_regionX1 > _gridWidth-1) || (_regionY1 > _gridHeight-1) || (_regionX2 < 0) || (_regionY2 < 0)) return;
         
@@ -157,8 +157,8 @@ function __BonkCommonHeightmap(_function, _x, _y, _z, _cellWidth, _cellHeight, _
         _regionX2 = clamp(_regionX2, 0, _gridWidth-1);
         _regionY2 = clamp(_regionY2, 0, _gridHeight-1);
         
-        var _cellWidth  = 1 + _regionX2 - _regionX1;
-        var _cellHeight = 1 + _regionY2 - _regionY1;
+        var _cellCountX = 1 + _regionX2 - _regionX1;
+        var _cellCountY = 1 + _regionY2 - _regionY1;
         
         var _function = heightFunction;
         var _xScale   = xScale;
@@ -187,7 +187,7 @@ function __BonkCommonHeightmap(_function, _x, _y, _z, _cellWidth, _cellHeight, _
         var _zMaxOverall = _z11;
         
         var _yCell = _regionY1;
-        repeat(_cellHeight)
+        repeat(_cellCountY)
         {
             _y0 = _y1;
             _y1 = _y0 + _yScale;
@@ -203,7 +203,7 @@ function __BonkCommonHeightmap(_function, _x, _y, _z, _cellWidth, _cellHeight, _
             
             var _xCell = _regionX1;
             var _index = 2*(_xCell + _gridWidth*_yCell);
-            repeat(_cellWidth)
+            repeat(_cellCountX)
             {
                 _x0 = _x1;
                 _x1 = _x0 + _xScale;
@@ -261,13 +261,13 @@ function __BonkCommonHeightmap(_function, _x, _y, _z, _cellWidth, _cellHeight, _
     GetHeightAt = function(_x, _y)
     {
         var _xCell = (_x - x) / xScale;
-        if ((_xCell < 0) || (_xCell > cellWidth-1))
+        if ((_xCell < 0) || (_xCell > cellCountX-1))
         {
             return undefined;
         }
         
         var _yCell = (_y - y) / yScale;
-        if ((_yCell < 0) || (_yCell > cellHeight-1))
+        if ((_yCell < 0) || (_yCell > cellCountY-1))
         {
             return undefined;
         }
@@ -345,8 +345,8 @@ function __BonkCommonHeightmap(_function, _x, _y, _z, _cellWidth, _cellHeight, _
     
     Touch = function(_subjectShape, _groupFilter = -1)
     {
-        var _cellWidth  = cellWidth;
-        var _cellHeight = cellHeight;
+        var _cellCountX = cellCountX;
+        var _cellCountY = cellCountY;
         
         var _bonkTriangleArray = __bonkTriangleArray;
         
@@ -364,7 +364,7 @@ function __BonkCommonHeightmap(_function, _x, _y, _z, _cellWidth, _cellHeight, _
         var _shapeYMax = floor((_aabb.yMax - y) / yScale);
         var _shapeZMax = floor((_aabb.zMax - z) / zScale);
         
-        if ((_shapeXMin > _cellWidth-1) || (_shapeYMin > _cellHeight-1) || (_shapeZMin > __bonkMaxZ)
+        if ((_shapeXMin > _cellCountX-1) || (_shapeYMin > _cellCountY-1) || (_shapeZMin > __bonkMaxZ)
         ||  (_shapeXMax < 0) || (_shapeYMax < 0) || (_shapeZMax < __bonkMinZ))
         {
             //Shape is outside bounds
@@ -376,18 +376,18 @@ function __BonkCommonHeightmap(_function, _x, _y, _z, _cellWidth, _cellHeight, _
             return false;
         }
         
-        _shapeXMin = clamp(_shapeXMin, 0, _cellWidth-1);
-        _shapeYMin = clamp(_shapeYMin, 0, _cellHeight-1);
+        _shapeXMin = clamp(_shapeXMin, 0, _cellCountX-1);
+        _shapeYMin = clamp(_shapeYMin, 0, _cellCountY-1);
         
-        _shapeXMax = clamp(_shapeXMax, 0, _cellWidth-1);
-        _shapeYMax = clamp(_shapeYMax, 0, _cellHeight-1);
+        _shapeXMax = clamp(_shapeXMax, 0, _cellCountX-1);
+        _shapeYMax = clamp(_shapeYMax, 0, _cellCountY-1);
         
         var _cellCheckWidth = 2*(1 + _shapeXMax - _shapeXMin);
         
         var _y = _shapeYMin;
         repeat(1 + _shapeYMax - _shapeYMin)
         {
-            var _index = 2*(_shapeXMin + _cellWidth*_y);
+            var _index = 2*(_shapeXMin + _cellCountX*_y);
             
             repeat(2*_cellCheckWidth)
             {
@@ -419,8 +419,8 @@ function __BonkCommonHeightmap(_function, _x, _y, _z, _cellWidth, _cellHeight, _
         var _largestGrippyDepth   = -infinity;
         var _largestSlipperyDepth = -infinity;
         
-        var _cellWidth  = cellWidth;
-        var _cellHeight = cellHeight;
+        var _cellCountX = cellCountX;
+        var _cellCountY = cellCountY;
         
         var _bonkTriangleArray = __bonkTriangleArray;
         
@@ -438,25 +438,25 @@ function __BonkCommonHeightmap(_function, _x, _y, _z, _cellWidth, _cellHeight, _
         var _shapeYMax = floor(_aabb.yMax / yScale);
         var _shapeZMax = floor(_aabb.zMax / zScale);
         
-        if ((_shapeXMin > _cellWidth-1) || (_shapeYMin > _cellHeight-1) || (_shapeZMin > __bonkMaxZ)
+        if ((_shapeXMin > _cellCountX-1) || (_shapeYMin > _cellCountY-1) || (_shapeZMin > __bonkMaxZ)
         ||  (_shapeXMax < 0) || (_shapeYMax < 0) || (_shapeZMax < __bonkMinZ))
         {
             //Shape is outside bounds
         }
         else
         {
-            _shapeXMin = clamp(_shapeXMin, 0, _cellWidth-1);
-            _shapeYMin = clamp(_shapeYMin, 0, _cellHeight-1);
+            _shapeXMin = clamp(_shapeXMin, 0, _cellCountX-1);
+            _shapeYMin = clamp(_shapeYMin, 0, _cellCountY-1);
             
-            _shapeXMax = clamp(_shapeXMax, 0, _cellWidth-1);
-            _shapeYMax = clamp(_shapeYMax, 0, _cellHeight-1);
+            _shapeXMax = clamp(_shapeXMax, 0, _cellCountX-1);
+            _shapeYMax = clamp(_shapeYMax, 0, _cellCountY-1);
             
             var _cellCheckWidth = 2*(1 + _shapeXMax - _shapeXMin);
             
             var _y = _shapeYMin;
             repeat(1 + _shapeYMax - _shapeYMin)
             {
-                var _index = 2*(_shapeXMin + _cellWidth*_y);
+                var _index = 2*(_shapeXMin + _cellCountX*_y);
                 repeat(_cellCheckWidth)
                 {
                     var _reaction = _bonkTriangleArray[_index++].Deflect(_subjectShape, _slopeThreshold, _groupFilter);
@@ -534,8 +534,8 @@ function __BonkCommonHeightmap(_function, _x, _y, _z, _cellWidth, _cellHeight, _
     {
         static _nullCollisionData = new BonkResultCollide();
         
-        var _cellWidth  = cellWidth;
-        var _cellHeight = cellHeight;
+        var _cellCountX = cellCountX;
+        var _cellCountY = cellCountY;
         
         var _bonkTriangleArray = __bonkTriangleArray;
         
@@ -553,7 +553,7 @@ function __BonkCommonHeightmap(_function, _x, _y, _z, _cellWidth, _cellHeight, _
         var _shapeYMax = floor(_aabb.yMax / yScale);
         var _shapeZMax = floor(_aabb.zMax / zScale);
         
-        if ((_shapeXMin > _cellWidth-1) || (_shapeYMin > _cellHeight-1) || (_shapeZMin > __bonkMaxZ)
+        if ((_shapeXMin > _cellCountX-1) || (_shapeYMin > _cellCountY-1) || (_shapeZMin > __bonkMaxZ)
         ||  (_shapeXMax < 0) || (_shapeYMax < 0) || (_shapeZMax < __bonkMinZ))
         {
             //Shape is outside bounds
@@ -565,18 +565,18 @@ function __BonkCommonHeightmap(_function, _x, _y, _z, _cellWidth, _cellHeight, _
             return _nullCollisionData;
         }
         
-        _shapeXMin = clamp(_shapeXMin, 0, _cellWidth-1);
-        _shapeYMin = clamp(_shapeYMin, 0, _cellHeight-1);
+        _shapeXMin = clamp(_shapeXMin, 0, _cellCountX-1);
+        _shapeYMin = clamp(_shapeYMin, 0, _cellCountY-1);
         
-        _shapeXMax = clamp(_shapeXMax, 0, _cellWidth-1);
-        _shapeYMax = clamp(_shapeYMax, 0, _cellHeight-1);
+        _shapeXMax = clamp(_shapeXMax, 0, _cellCountX-1);
+        _shapeYMax = clamp(_shapeYMax, 0, _cellCountY-1);
         
         var _cellCheckWidth = 2*(1 + _shapeXMax - _shapeXMin);
         
         var _y = _shapeYMin;
         repeat(1 + _shapeYMax - _shapeYMin)
         {
-            var _index = 2*(_shapeXMin + _cellWidth*_y);
+            var _index = 2*(_shapeXMin + _cellCountX*_y);
             
             repeat(2*_cellCheckWidth)
             {
@@ -619,14 +619,14 @@ function __BonkCommonHeightmap(_function, _x, _y, _z, _cellWidth, _cellHeight, _
     {
         static _array = [];
         
-        if ((_xCell < 0) || (_xCell > cellWidth-1) || (_yCell < 0) || (_yCell > cellHeight-1))
+        if ((_xCell < 0) || (_xCell > cellCountX-1) || (_yCell < 0) || (_yCell > cellCountY-1))
         {
             array_resize(_array, 0);
         }
         else
         {
             array_resize(_array, 2);
-            array_copy(_array, 0, __bonkTriangleArray, _xCell + _yCell*cellWidth, 2);
+            array_copy(_array, 0, __bonkTriangleArray, _xCell + _yCell*cellCountX, 2);
         }
         
         return _array;
@@ -646,8 +646,8 @@ function __BonkCommonHeightmap(_function, _x, _y, _z, _cellWidth, _cellHeight, _
     
     DrawShapesFromRange = function(_struct, _color = undefined, _wireframe = undefined)
     {
-        var _cellWidth  = cellWidth;
-        var _cellHeight = cellHeight;
+        var _cellCountX = cellCountX;
+        var _cellCountY = cellCountY;
         
         var _xShape = x;
         var _yShape = y;
@@ -669,17 +669,17 @@ function __BonkCommonHeightmap(_function, _x, _y, _z, _cellWidth, _cellHeight, _
         var _xMax = floor((_struct.xMax - _xShape) / xScale);
         var _yMax = floor((_struct.yMax - _yShape) / yScale);
         
-        if ((_xMin > _cellWidth-1) || (_yMin > _cellHeight-1) || (_xMax < 0) || (_yMax < 0))
+        if ((_xMin > _cellCountX-1) || (_yMin > _cellCountY-1) || (_xMax < 0) || (_yMax < 0))
         {
             //Range is outside bounds
             return;
         }
         
-        _xMin = clamp(_xMin, 0, _cellWidth-1);
-        _yMin = clamp(_yMin, 0, _cellHeight-1);
+        _xMin = clamp(_xMin, 0, _cellCountX-1);
+        _yMin = clamp(_yMin, 0, _cellCountY-1);
         
-        _xMax = clamp(_xMax, 0, _cellWidth-1);
-        _yMax = clamp(_yMax, 0, _cellHeight-1);
+        _xMax = clamp(_xMax, 0, _cellCountX-1);
+        _yMax = clamp(_yMax, 0, _cellCountY-1);
         
         var _cellCheckWidth = 2*(1 + _xMax - _xMin);
         
@@ -688,7 +688,7 @@ function __BonkCommonHeightmap(_function, _x, _y, _z, _cellWidth, _cellHeight, _
         var _y = _yMin;
         repeat(1 + _yMax - _yMin)
         {
-            var _index = 2*(_xMin + _cellWidth*_y);
+            var _index = 2*(_xMin + _cellCountX*_y);
             repeat(2*_cellCheckWidth)
             {
                 _bonkTriangleArray[_index++].DebugDraw(_color, _wireframe);
@@ -700,8 +700,8 @@ function __BonkCommonHeightmap(_function, _x, _y, _z, _cellWidth, _cellHeight, _
     
     DrawShapesFromArray = function(_array, _color = undefined, _wireframe = undefined)
     {
-        var _cellWidth  = cellWidth;
-        var _cellHeight = cellHeight;
+        var _cellCountX = cellCountX;
+        var _cellCountY = cellCountY;
         
         var _xShape = x;
         var _yShape = y;
@@ -726,9 +726,9 @@ function __BonkCommonHeightmap(_function, _x, _y, _z, _cellWidth, _cellHeight, _
                 var _xCell = floor((_array[_i  ] - _xShape) / _xScale);
                 var _yCell = floor((_array[_i+1] - _yShape) / _yScale);
                 
-                if ((_xCell >= 0) && (_yCell >= 0) && (_xCell <= _cellWidth-1) && (_yCell <= _cellHeight-1))
+                if ((_xCell >= 0) && (_yCell >= 0) && (_xCell <= _cellCountX-1) && (_yCell <= _cellCountY-1))
                 {
-                    var _index = 2*(_xCell + _cellWidth*_yCell);
+                    var _index = 2*(_xCell + _cellCountX*_yCell);
                     _bonkTriangleArray[_index  ].DebugDraw(_color, _wireframe);
                     _bonkTriangleArray[_index+1].DebugDraw(_color, _wireframe);
                 }
@@ -775,11 +775,11 @@ function __BonkCommonHeightmap(_function, _x, _y, _z, _cellWidth, _cellHeight, _
     //    
     //    var _yWorld = _y;
     //    var _yCell = 0;
-    //    repeat(_subdivision*(cellHeight-1) + 1)
+    //    repeat(_subdivision*(cellCountY-1) + 1)
     //    {
     //        var _xWorld = _x;
     //        var _xCell = 0;
-    //        repeat(_subdivision*(cellWidth-1) + 1)
+    //        repeat(_subdivision*(cellCountX-1) + 1)
     //        {
     //            var _height = _z + _zScale*_heightFunction(_xCell, _yCell);
     //            
@@ -796,8 +796,8 @@ function __BonkCommonHeightmap(_function, _x, _y, _z, _cellWidth, _cellHeight, _
     
     DrawCellsFromArray = function(_array, _color = undefined, _wireframe = true)
     {
-        var _cellWidth  = cellWidth;
-        var _cellHeight = cellHeight;
+        var _cellCountX = cellCountX;
+        var _cellCountY = cellCountY;
         
         var _xScale = xScale;
         var _yScale = yScale;
@@ -813,7 +813,7 @@ function __BonkCommonHeightmap(_function, _x, _y, _z, _cellWidth, _cellHeight, _
             var _x = floor(_array[_i  ]);
             var _y = floor(_array[_i+1]);
             
-            if ((_x >= 0) && (_y >= 0) && (_x <= _cellWidth-1) && (_y <= _cellHeight-1))
+            if ((_x >= 0) && (_y >= 0) && (_x <= _cellCountX-1) && (_y <= _cellCountY-1))
             {
                 UggAABB(_xShape + _xScale*(_x + 0.5),
                         _yShape + _yScale*(_y + 0.5),
@@ -828,8 +828,8 @@ function __BonkCommonHeightmap(_function, _x, _y, _z, _cellWidth, _cellHeight, _
     
     DrawCellsFromRange = function(_struct, _color = undefined, _wireframe = true, _checkerboard = false)
     {
-        var _cellWidth  = cellWidth;
-        var _cellHeight = cellHeight;
+        var _cellCountX = cellCountX;
+        var _cellCountY = cellCountY;
         
         var _xScale = xScale;
         var _yScale = yScale;
@@ -850,17 +850,17 @@ function __BonkCommonHeightmap(_function, _x, _y, _z, _cellWidth, _cellHeight, _
         var _xMax = floor((_struct.xMax - _xShape) / xScale);
         var _yMax = floor((_struct.yMax - _yShape) / yScale);
         
-        if ((_xMin > _cellWidth-1) || (_yMin > _cellHeight-1) || (_xMax < 0) || (_yMax < 0))
+        if ((_xMin > _cellCountX-1) || (_yMin > _cellCountY-1) || (_xMax < 0) || (_yMax < 0))
         {
             //Range is outside bounds
             return;
         }
         
-        _xMin = clamp(_xMin, 0, _cellWidth-1);
-        _yMin = clamp(_yMin, 0, _cellHeight-1);
+        _xMin = clamp(_xMin, 0, _cellCountX-1);
+        _yMin = clamp(_yMin, 0, _cellCountY-1);
         
-        _xMax = clamp(_xMax, 0, _cellWidth-1);
-        _yMax = clamp(_yMax, 0, _cellHeight-1);
+        _xMax = clamp(_xMax, 0, _cellCountX-1);
+        _yMax = clamp(_yMax, 0, _cellCountY-1);
         
         _zShape += 0.5*_zScale;
         
