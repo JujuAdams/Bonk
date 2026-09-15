@@ -695,13 +695,12 @@ function __BonkCommonHeightmap(_function, _x, _y, _z, _cellWidth, _cellHeight, _
         var _zShape = z + 0.5*_zScale;
         
         var _i = 0;
-        repeat(array_length(_array) div 3)
+        repeat(array_length(_array) div 2)
         {
             var _x = floor(_array[_i  ]);
             var _y = floor(_array[_i+1]);
-            var _z = floor(_array[_i+2]);
             
-            if ((_x >= 0) && (_y >= 0) && (_x <= _cellWidth-1) && (_y <= _cellHeight-1) && (_z == 0))
+            if ((_x >= 0) && (_y >= 0) && (_x <= _cellWidth-1) && (_y <= _cellHeight-1))
             {
                 UggAABB(_xShape + _xScale*(_x + 0.5),
                         _yShape + _yScale*(_y + 0.5),
@@ -710,7 +709,7 @@ function __BonkCommonHeightmap(_function, _x, _y, _z, _cellWidth, _cellHeight, _
                         _color, _wireframe);
             }
             
-            _i += 3;
+            _i += 2;
         }
     }
     

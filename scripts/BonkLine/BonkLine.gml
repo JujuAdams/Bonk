@@ -17,13 +17,14 @@ function BonkLine(_x1, _y1, _z1, _x2, _y2, _z2) constructor
     static _hitFuncLookup = (function()
     {
         var _array = array_create(BONK_NUMBER_OF_TYPES, undefined);
-        _array[@ BONK_TYPE_AAB     ] = BonkLineHitAAB;
-        _array[@ BONK_TYPE_CAPSULE ] = BonkLineHitCapsule;
-        _array[@ BONK_TYPE_CYLINDER] = BonkLineHitCylinder;
-        _array[@ BONK_TYPE_QUAD    ] = BonkLineHitQuad;
-        _array[@ BONK_TYPE_SPHERE  ] = BonkLineHitSphere;
-        _array[@ BONK_TYPE_TRIANGLE] = BonkLineHitTriangle;
-        _array[@ BONK_TYPE_WORLD   ] = BonkLineHitWorld;
+        _array[@ BONK_TYPE_AAB      ] = BonkLineHitAAB;
+        _array[@ BONK_TYPE_CAPSULE  ] = BonkLineHitCapsule;
+        _array[@ BONK_TYPE_CYLINDER ] = BonkLineHitCylinder;
+        _array[@ BONK_TYPE_QUAD     ] = BonkLineHitQuad;
+        _array[@ BONK_TYPE_SPHERE   ] = BonkLineHitSphere;
+        _array[@ BONK_TYPE_TRIANGLE ] = BonkLineHitTriangle;
+        _array[@ BONK_TYPE_WORLD    ] = BonkLineHitWorld;
+        _array[@ BONK_TYPE_HEIGHTMAP] = BonkLineHitHeightmap;
         return _array;
     })();
     
