@@ -146,6 +146,22 @@ function ClassCamera() constructor
         return self;
     }
     
+    static GetViewMatrix = function()
+    {
+        var _dX =  dcos(yaw)*dcos(pitch);
+        var _dY = -dsin(yaw)*dcos(pitch);
+        var _dZ =  dsin(pitch);
+        
+        return matrix_build_lookat(x, y, z,
+                                   x + _dX, y + _dY, z + _dZ,
+                                   0, 0, 1);
+    }
+    
+    static GetProjectionMatrix = function()
+    {
+        return matrix_build_projection_perspective_fov(fieldOfView, aspectRatio, zNear, zFar);
+    }
+    
     static DrawStateStart = function()
     {
         //Turn on z-writing and z-testing so we're ready for 3D rendering
@@ -160,17 +176,8 @@ function ClassCamera() constructor
         __oldViewMatrix  = matrix_get(matrix_view); 
         __oldProjMatrix  = matrix_get(matrix_projection);
         
-        var _dX =  dcos(yaw)*dcos(pitch);
-        var _dY = -dsin(yaw)*dcos(pitch);
-        var _dZ =  dsin(pitch);
-
-        var _viewMatrix = matrix_build_lookat(x, y, z,
-                                              x + _dX, y + _dY, z + _dZ,
-                                              0, 0, 1);
-        var _projMatrix = matrix_build_projection_perspective_fov(fieldOfView, aspectRatio, zNear, zFar);
-        
-        matrix_set(matrix_view, _viewMatrix);
-        matrix_set(matrix_projection, _projMatrix);
+        matrix_set(matrix_view, GetViewMatrix());
+        matrix_set(matrix_projection, GetProjectionMatrix());
         
         return self;
     }
