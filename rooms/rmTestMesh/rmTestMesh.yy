@@ -22,8 +22,8 @@
   ],
   "name":"rmTestMesh",
   "parent":{
-    "name":"Bonk",
-    "path":"Bonk.yyp",
+    "name":"Rooms",
+    "path":"folders/Rooms.yy",
   },
   "parentRoom":null,
   "physicsSettings":{

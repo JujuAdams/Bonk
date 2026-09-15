@@ -23,8 +23,8 @@
   ],
   "name":"rmTestConstructorHeightmap",
   "parent":{
-    "name":"Bonk",
-    "path":"Bonk.yyp",
+    "name":"Heightmap",
+    "path":"folders/Rooms/Heightmap.yy",
   },
   "parentRoom":null,
   "physicsSettings":{

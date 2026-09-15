@@ -45,9 +45,9 @@ function __BonkCommonAAB()
         }
     });
     
-    DebugDraw = function(_color = undefined, _wireframe = undefined)
+    DebugDraw = method(undefined, function(_color = undefined, _wireframe = undefined)
     {
         __BONK_VERIFY_UGG
         UggAABB(x, y, z, xSize, ySize, zSize, _color, _wireframe);
-    }
+    });
 }
