@@ -8,6 +8,8 @@
 
 function __BonkSupercover2D(_x1, _y1, _x2, _y2, _array = [])
 {
+    var _epsilon = math_get_epsilon();
+    
     var _xDelta = _x2 - _x1;
     var _yDelta = _y2 - _y1;
     
@@ -16,8 +18,8 @@ function __BonkSupercover2D(_x1, _y1, _x2, _y2, _array = [])
     var _ySign = sign(_yDelta);
     
     //Don't allow divide-by-zero anywhere
-    if (_xDelta == 0) _xDelta = math_get_epsilon();
-    if (_yDelta == 0) _yDelta = math_get_epsilon();
+    if (_xDelta == 0) _xDelta = _epsilon;
+    if (_yDelta == 0) _yDelta = _epsilon;
     
     //Find the length of the line in each axis. We use this to determine where the line segment
     //crosses each cell boundary (effectively using the gradient)
@@ -25,8 +27,8 @@ function __BonkSupercover2D(_x1, _y1, _x2, _y2, _array = [])
     var _yIncrAbs = 1 / abs(_yDelta);
     
     //Track which cell we've most recently visited
-    var _xWrite = floor(_x1);
-    var _yWrite = floor(_y1);
+    var _xWrite = (abs(_x1) > _epsilon)? floor(_x1) : 0;
+    var _yWrite = (abs(_y1) > _epsilon)? floor(_y1) : 0;
     
     //We always visit the origin cell so let's push that now
     array_push(_array,   _xWrite, _yWrite);
