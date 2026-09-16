@@ -19,13 +19,14 @@ function BonkRay(_x, _y, _z, _dX, _dY, _dZ) constructor
     static _hitFuncLookup = (function()
     {
         var _array = array_create(BONK_NUMBER_OF_TYPES, undefined);
-        _array[@ BONK_TYPE_AAB     ] = BonkRayHitAAB;
-        _array[@ BONK_TYPE_CAPSULE ] = BonkRayHitCapsule;
-        _array[@ BONK_TYPE_CYLINDER] = BonkRayHitCylinder;
-        _array[@ BONK_TYPE_QUAD    ] = BonkRayHitQuad;
-        _array[@ BONK_TYPE_SPHERE  ] = BonkRayHitSphere;
-        _array[@ BONK_TYPE_TRIANGLE] = BonkRayHitTriangle;
-        _array[@ BONK_TYPE_WORLD   ] = BonkRayHitWorld;
+        _array[@ BONK_TYPE_AAB      ] = BonkRayHitAAB;
+        _array[@ BONK_TYPE_CAPSULE  ] = BonkRayHitCapsule;
+        _array[@ BONK_TYPE_CYLINDER ] = BonkRayHitCylinder;
+        _array[@ BONK_TYPE_QUAD     ] = BonkRayHitQuad;
+        _array[@ BONK_TYPE_SPHERE   ] = BonkRayHitSphere;
+        _array[@ BONK_TYPE_TRIANGLE ] = BonkRayHitTriangle;
+        _array[@ BONK_TYPE_WORLD    ] = BonkRayHitWorld;
+        _array[@ BONK_TYPE_HEIGHTMAP] = BonkRayHitHeightmap;
         return _array;
     })();
     
