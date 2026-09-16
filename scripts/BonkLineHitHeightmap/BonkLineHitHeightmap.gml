@@ -44,7 +44,7 @@ function BonkLineHitHeightmap(_heightmap, _x1, _y1, _z1, _x2, _y2, _z2, _groupFi
             var _y = _pointArray[_i+1];
             
             var _index = 2*(_x + _y*_cellCountX);
-            if (_index >= _maxTriangles) break;
+            if (_index >= _maxTriangles) break; //FIXME - This shouldn't be necessary
             
             repeat(2)
             {

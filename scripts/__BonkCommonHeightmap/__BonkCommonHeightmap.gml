@@ -358,14 +358,12 @@ function __BonkCommonHeightmap(_function, _x, _y, _z, _cellCountX, _cellCountY, 
         
         var _shapeXMin = floor((_aabb.xMin - x) / xScale);
         var _shapeYMin = floor((_aabb.yMin - y) / yScale);
-        var _shapeZMin = floor((_aabb.zMin - z) / zScale);
         
         var _shapeXMax = floor((_aabb.xMax - x) / xScale);
         var _shapeYMax = floor((_aabb.yMax - y) / yScale);
-        var _shapeZMax = floor((_aabb.zMax - z) / zScale);
         
-        if ((_shapeXMin > _cellCountX-1) || (_shapeYMin > _cellCountY-1) || (_shapeZMin > __bonkMaxZ)
-        ||  (_shapeXMax < 0) || (_shapeYMax < 0) || (_shapeZMax < __bonkMinZ))
+        if ((_shapeXMin > _cellCountX-1) || (_shapeYMin > _cellCountY-1) || ((_aabb.zMin - z) > __bonkMaxZ)
+        ||  (_shapeXMax < 0) || (_shapeYMax < 0) || ((_aabb.zMax - z) < __bonkMinZ))
         {
             //Shape is outside bounds
             
@@ -432,14 +430,12 @@ function __BonkCommonHeightmap(_function, _x, _y, _z, _cellCountX, _cellCountY, 
         
         var _shapeXMin = floor(_aabb.xMin / xScale);
         var _shapeYMin = floor(_aabb.yMin / yScale);
-        var _shapeZMin = floor(_aabb.zMin / zScale);
         
         var _shapeXMax = floor(_aabb.xMax / xScale);
         var _shapeYMax = floor(_aabb.yMax / yScale);
-        var _shapeZMax = floor(_aabb.zMax / zScale);
         
-        if ((_shapeXMin > _cellCountX-1) || (_shapeYMin > _cellCountY-1) || (_shapeZMin > __bonkMaxZ)
-        ||  (_shapeXMax < 0) || (_shapeYMax < 0) || (_shapeZMax < __bonkMinZ))
+        if ((_shapeXMin > _cellCountX-1) || (_shapeYMin > _cellCountY-1) || (_aabb.zMin > __bonkMaxZ)
+        ||  (_shapeXMax < 0) || (_shapeYMax < 0) || (_aabb.zMax < __bonkMinZ))
         {
             //Shape is outside bounds
         }
@@ -547,14 +543,12 @@ function __BonkCommonHeightmap(_function, _x, _y, _z, _cellCountX, _cellCountY, 
         
         var _shapeXMin = floor(_aabb.xMin / xScale);
         var _shapeYMin = floor(_aabb.yMin / yScale);
-        var _shapeZMin = floor(_aabb.zMin / zScale);
         
         var _shapeXMax = floor(_aabb.xMax / xScale);
         var _shapeYMax = floor(_aabb.yMax / yScale);
-        var _shapeZMax = floor(_aabb.zMax / zScale);
         
-        if ((_shapeXMin > _cellCountX-1) || (_shapeYMin > _cellCountY-1) || (_shapeZMin > __bonkMaxZ)
-        ||  (_shapeXMax < 0) || (_shapeYMax < 0) || (_shapeZMax < __bonkMinZ))
+        if ((_shapeXMin > _cellCountX-1) || (_shapeYMin > _cellCountY-1) || (_aabb.zMin > __bonkMaxZ)
+        ||  (_shapeXMax < 0) || (_shapeYMax < 0) || (_aabb.zMax < __bonkMinZ))
         {
             //Shape is outside bounds
             
@@ -651,7 +645,6 @@ function __BonkCommonHeightmap(_function, _x, _y, _z, _cellCountX, _cellCountY, 
         
         var _xShape = x;
         var _yShape = y;
-        var _zShape = z;
         
         var _bonkTriangleArray = __bonkTriangleArray;
         
