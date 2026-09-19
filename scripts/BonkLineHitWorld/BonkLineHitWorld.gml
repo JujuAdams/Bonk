@@ -7,10 +7,10 @@
 /// @param x2
 /// @param y2
 /// @param z2
-/// @param [groupFilter]
 /// @param [struct]
+/// @param [groupFilter]
 
-function BonkLineHitWorld(_world, _x1, _y1, _z1, _x2, _y2, _z2, _groupFilter = -1, _struct = undefined)
+function BonkLineHitWorld(_world, _x1, _y1, _z1, _x2, _y2, _z2, _struct = undefined, _groupFilter = -1)
 {
     static _map = ds_map_create();
     

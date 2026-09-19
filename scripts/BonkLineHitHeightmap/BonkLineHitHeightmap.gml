@@ -7,10 +7,9 @@
 /// @param x2
 /// @param y2
 /// @param z2
-/// @param [groupFilter]
 /// @param [struct]
 
-function BonkLineHitHeightmap(_heightmap, _x1, _y1, _z1, _x2, _y2, _z2, _groupFilter = -1, _struct = undefined)
+function BonkLineHitHeightmap(_heightmap, _x1, _y1, _z1, _x2, _y2, _z2, _struct = undefined)
 {
     static _staticHitA = new BonkResultHit();
     static _staticHitB = new BonkResultHit();
@@ -48,7 +47,7 @@ function BonkLineHitHeightmap(_heightmap, _x1, _y1, _z1, _x2, _y2, _z2, _groupFi
             
             repeat(2)
             {
-                if ((_bonkTriangleArray[_index++].LineHit(_x1, _y1, _z1, _x2, _y2, _z2, _groupFilter, _workingHit)).shape != undefined)
+                if ((_bonkTriangleArray[_index++].LineHit(_x1, _y1, _z1, _x2, _y2, _z2, -1, _workingHit)).shape != undefined)
                 {
                     var _distance = point_distance_3d(_x1, _y1, _z1, _workingHit.x, _workingHit.y, _workingHit.z);
                     if (_distance < _closestDistance)

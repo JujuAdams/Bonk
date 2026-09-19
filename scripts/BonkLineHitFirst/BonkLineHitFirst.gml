@@ -21,8 +21,9 @@
 /// @param z2
 /// @param [objectOrArray=BonkObject]
 /// @param [groupFilter]
+/// @param [struct]
 
-function BonkLineHitFirst(_x1, _y1, _z1, _x2, _y2, _z2, _objectOrArray = BonkObject, _groupFilter = -1)
+function BonkLineHitFirst(_x1, _y1, _z1, _x2, _y2, _z2, _objectOrArray = BonkObject, _groupFilter = -1, _struct = undefined)
 {
-    return BonkLineHitFirstExt(_x1, _y1, _z1, _x2, _y2, _z2, BonkCollisionLineList(_x1, _y1, _x2, _y2, _objectOrArray), _groupFilter);
+    return BonkLineHitFirstExt(_x1, _y1, _z1, _x2, _y2, _z2, BonkCollisionLineList(_x1, _y1, _x2, _y2, _objectOrArray), _groupFilter, _struct);
 }

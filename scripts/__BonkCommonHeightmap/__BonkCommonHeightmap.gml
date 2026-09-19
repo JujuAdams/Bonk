@@ -340,7 +340,16 @@ function __BonkCommonHeightmap(_function, _x, _y, _z, _cellCountX, _cellCountY, 
     
     LineHit = function(_x1, _y1, _z1, _x2, _y2, _z2, _groupFilter = -1, _struct = undefined)
     {
-        return BonkLineHitHeightmap(self, _x1, _y1, _z1, _x2, _y2, _z2, _groupFilter, _struct);
+        static _nullHit = new BonkResultHit();
+        
+        if ((_groupFilter < 0) || FilterTest(_groupFilter))
+        {
+            return BonkLineHitHeightmap(self, _x1, _y1, _z1, _x2, _y2, _z2, _struct);
+        }
+        else
+        {
+            return (_struct == undefined)? _nullHit : _struct.__Null();
+        }
     }
     
     Touch = function(_subjectShape, _groupFilter = -1)
