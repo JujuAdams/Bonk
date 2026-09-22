@@ -348,7 +348,7 @@ function __BonkCommonHeightmap(_function, _x, _y, _z, _cellCountX, _cellCountY, 
         }
         else
         {
-            return (_struct == undefined)? _nullHit : _struct.__Null();
+            return (_struct == undefined)? _nullHit : _struct.Null();
         }
     }
     
@@ -512,12 +512,12 @@ function __BonkCommonHeightmap(_function, _x, _y, _z, _cellCountX, _cellCountY, 
                 
                 if (is_infinity(_largestSlipperyDepth))
                 {
-                    slipperyCollision.__Null();
+                    slipperyCollision.Null();
                 }
             }
             else
             {
-                grippyCollision.__Null();
+                grippyCollision.Null();
                 primaryCollision = slipperyCollision;
                 
                 if (not is_infinity(_largestSlipperyDepth))
@@ -526,7 +526,7 @@ function __BonkCommonHeightmap(_function, _x, _y, _z, _cellCountX, _cellCountY, 
                 }
                 else
                 {
-                    slipperyCollision.__Null();
+                    slipperyCollision.Null();
                     deflectType = BONK_DEFLECT_NONE;
                 }
             }
@@ -597,7 +597,7 @@ function __BonkCommonHeightmap(_function, _x, _y, _z, _cellCountX, _cellCountY, 
             ++_y;
         }
         
-        return (_struct == undefined)? _nullCollisionData : _struct.__Null();
+        return (_struct == undefined)? _nullCollisionData : _struct.Null();
     }
     
     GetAABB = function()

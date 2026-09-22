@@ -71,5 +71,5 @@ function BonkLineHitWorld(_world, _x1, _y1, _z1, _x2, _y2, _z2, _struct = undefi
     }
     
     ds_map_clear(_map);
-    return (_struct == undefined)? _returnHit.__Null() : _struct.__Null();
+    return (_struct == undefined)? _returnHit.Null() : _struct.Null();
 }

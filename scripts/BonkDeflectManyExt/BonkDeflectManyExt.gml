@@ -169,12 +169,12 @@ function BonkDeflectManyExt(_subjectShape, _targetShapes, _slopeThreshold = 0, _
             
             if (is_infinity(_largestSlipperyDepth))
             {
-                slipperyCollision.__Null();
+                slipperyCollision.Null();
             }
         }
         else
         {
-            grippyCollision.__Null();
+            grippyCollision.Null();
             primaryCollision = slipperyCollision;
             
             if (not is_infinity(_largestSlipperyDepth))
@@ -183,7 +183,7 @@ function BonkDeflectManyExt(_subjectShape, _targetShapes, _slopeThreshold = 0, _
             }
             else
             {
-                slipperyCollision.__Null();
+                slipperyCollision.Null();
                 deflectType = BONK_DEFLECT_NONE;
             }
         }

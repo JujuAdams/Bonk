@@ -112,5 +112,5 @@ function BonkCollideDeepestExt(_subjectShape, _targetShapes, _groupFilter = -1)
         }
     }
     
-    return is_infinity(_largestDepth)? _returnCollide.__Null() : _returnCollide;
+    return is_infinity(_largestDepth)? _returnCollide.Null() : _returnCollide;
 }

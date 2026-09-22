@@ -22,7 +22,7 @@ function BonkCylinderCollideCylinder(_cylinder1, _cylinder2, _struct = undefined
         
         if ((_pushBelow >= 0) && (_pushAbove <= 0))
         {
-            return _reaction.__Null();
+            return _reaction.Null();
         }
         
         var _dX = x - _cylinder2.x;
@@ -47,7 +47,7 @@ function BonkCylinderCollideCylinder(_cylinder1, _cylinder2, _struct = undefined
         var _pushXY = (radius + _cylinder2.radius) - _xyDist;
         if (_pushXY <= 0)
         {
-            return _reaction.__Null();
+            return _reaction.Null();
         }
         
         with(_reaction)
@@ -73,5 +73,5 @@ function BonkCylinderCollideCylinder(_cylinder1, _cylinder2, _struct = undefined
         return _reaction;
     }
     
-    return _reaction.__Null();
+    return _reaction.Null();
 }

@@ -27,7 +27,7 @@ function BonkCylinderCollideRotatedBox(_cylinder, _box, _struct = undefined)
         //Cylinder and box don't overlap in the z axis
         if ((_boxZMin > _cylinderZMax) && (_boxZMax < _cylinderZMin))
         {
-            return _reaction.__Null();
+            return _reaction.Null();
         }
         
         var _left   = -0.5*xSize;
@@ -54,7 +54,7 @@ function BonkCylinderCollideRotatedBox(_cylinder, _box, _struct = undefined)
         
         if (not rectangle_in_circle(_left, _top, _right, _bottom, _i, _j, _cylinderRadius))
         {
-            return _reaction.__Null();
+            return _reaction.Null();
         }
         
         var _pushI = 0;
@@ -121,5 +121,5 @@ function BonkCylinderCollideRotatedBox(_cylinder, _box, _struct = undefined)
         return _reaction;
     }
     
-    return _reaction.__Null();
+    return _reaction.Null();
 }

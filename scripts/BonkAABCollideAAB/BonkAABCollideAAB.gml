@@ -40,7 +40,7 @@ function BonkAABCollideAAB(_aab1, _aab2, _struct = undefined)
     
     if ((_pushLeft >= 0) || (_pushRight <= 0) || (_pushUp >= 0) || (_pushDown <= 0) || (_pushBelow >= 0) || (_pushAbove <= 0))
     {
-        return _reaction.__Null();
+        return _reaction.Null();
     }
     
     with(_reaction)

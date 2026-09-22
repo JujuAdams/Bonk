@@ -10,7 +10,7 @@ function __BonkCapsuleCollideTriangle(_capsuleX, _capsuleY, _capsuleZ, _capsuleH
         if ((_normalX == 0) && (_normalY == 0))
         {
             //Gegenerate triangle
-            return _reaction.__Null();
+            return _reaction.Null();
         }
         else
         {
@@ -116,7 +116,7 @@ function __BonkCapsuleCollideTriangle(_capsuleX, _capsuleY, _capsuleZ, _capsuleH
     var _refToPlaneDist = dot_product_3d(_tempX, _tempY, _tempZ, _normalX, _normalY, _normalZ);
     if (abs(_refToPlaneDist) > _capsuleRadius)
     {
-        return _reaction.__Null();
+        return _reaction.Null();
     }
     
     var _hardEdge = _hardEdge12;
@@ -187,7 +187,7 @@ function __BonkCapsuleCollideTriangle(_capsuleX, _capsuleY, _capsuleZ, _capsuleH
         var _pushLength = point_distance_3d(0, 0, 0, _pushX, _pushY, _pushZ);
         if (_pushLength >= _capsuleRadius)
         {
-            return _reaction.__Null();
+            return _reaction.Null();
         }
     }
     

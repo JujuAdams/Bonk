@@ -49,7 +49,7 @@ function BonkCapsuleCollideCylinder(_capsule, _cylinder, _struct = undefined)
     var _dist = sqrt(_dX*_dX + _dY*_dY + _dZ*_dZ);
     if (_dist >= _capsuleRadius)
     {
-        return _reaction.__Null();
+        return _reaction.Null();
     }
     else if (_dist <= 0)
     {

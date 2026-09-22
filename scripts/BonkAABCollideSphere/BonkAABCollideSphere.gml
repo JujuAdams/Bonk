@@ -38,7 +38,7 @@ function BonkAABCollideSphere(_aab, _sphere, _struct = undefined)
     var _dist = sqrt(_dX*_dX + _dY*_dY + _dZ*_dZ);
     if (_dist >= _sphereRadius)
     {
-        return _reaction.__Null();
+        return _reaction.Null();
     }
     
     if (_dist > 0)

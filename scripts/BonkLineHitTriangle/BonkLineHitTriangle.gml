@@ -47,7 +47,7 @@ function BonkLineHitTriangle(_triangle, _x1, _y1, _z1, _x2, _y2, _z2, _struct = 
         var _normalSqrLength = _normalX*_normalX + _normalY*_normalY + _normalZ*_normalZ
         if (_normalSqrLength <= 0)
         {
-            return _reaction.__Null();
+            return _reaction.Null();
         }
         
         var _length = sqrt(_normalSqrLength);
@@ -63,7 +63,7 @@ function BonkLineHitTriangle(_triangle, _x1, _y1, _z1, _x2, _y2, _z2, _struct = 
         if (_dot == 0)
         {
             //Ray lies on plane
-            return _reaction.__Null();
+            return _reaction.Null();
         }
         
         var _vX = _triX1 - _x1;
@@ -73,7 +73,7 @@ function BonkLineHitTriangle(_triangle, _x1, _y1, _z1, _x2, _y2, _z2, _struct = 
         var _coeff = dot_product_3d(_vX, _vY, _vZ, _normalX, _normalY, _normalZ) / _dot;
         if ((_coeff < 0) || (_coeff > 1))
         {
-            return _reaction.__Null();
+            return _reaction.Null();
         }
         
         var _traceX = _x1 + _coeff*_rX;
@@ -130,5 +130,5 @@ function BonkLineHitTriangle(_triangle, _x1, _y1, _z1, _x2, _y2, _z2, _struct = 
         }
     }
     
-    return _reaction.__Null();
+    return _reaction.Null();
 }

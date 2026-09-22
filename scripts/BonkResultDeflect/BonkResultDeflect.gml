@@ -43,12 +43,12 @@ function BonkResultDeflect() constructor
     primaryCollision  = slipperyCollision;
     deflectType       = BONK_DEFLECT_NONE;
     
-    static __Null = function()
+    static Null = function()
     {
         if (deflectType != BONK_DEFLECT_NONE)
         {
-            grippyCollision.__Null();
-            slipperyCollision.__Null();
+            grippyCollision.Null();
+            slipperyCollision.Null();
             primaryCollision = slipperyCollision;
             deflectType = BONK_DEFLECT_NONE;
         }

@@ -32,7 +32,7 @@ function BonkSphereCollideSphere(_sphere1, _sphere2, _struct = undefined)
     var _push = (_sphere1.radius + _sphere2.radius) - _dist;
     if (_push <= 0)
     {
-        return _reaction.__Null();
+        return _reaction.Null();
     }
     
     with(_reaction)

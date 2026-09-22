@@ -17,7 +17,7 @@ function BonkAABCollideHeightmap(_aab, _heightmap, _struct = undefined)
     
     if (_dZ <= 0)
     {
-        _reaction.__Null();
+        _reaction.Null();
     }
     else
     {

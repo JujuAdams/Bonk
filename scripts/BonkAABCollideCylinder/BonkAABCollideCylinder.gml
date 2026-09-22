@@ -23,7 +23,7 @@ function BonkAABCollideCylinder(_aab, _cylinder, _struct = undefined)
     {
         if ((z - 0.5*zSize >= _maxZ) || (z + 0.5*zSize <= _minZ))
         {
-            return _reaction.__Null();
+            return _reaction.Null();
         }
         
         var _left   = x - 0.5*xSize;
@@ -36,7 +36,7 @@ function BonkAABCollideCylinder(_aab, _cylinder, _struct = undefined)
         //2D collision check 
         if (not rectangle_in_circle(_left, _top, _right, _bottom, _cylinder.x, _cylinder.y, _cylinder.radius))
         {
-            return _reaction.__Null();
+            return _reaction.Null();
         }
         
         var _pushX = 0;

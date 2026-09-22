@@ -43,7 +43,7 @@ function BonkLineHitQuad(_quad, _x1, _y1, _z1, _x2, _y2, _z2, _struct = undefine
         var _normalSqrLength = _normalX*_normalX + _normalY*_normalY + _normalZ*_normalZ
         if (_normalSqrLength <= 0)
         {
-            return _reaction.__Null();
+            return _reaction.Null();
         }
         
         var _length = sqrt(_normalSqrLength);
@@ -71,7 +71,7 @@ function BonkLineHitQuad(_quad, _x1, _y1, _z1, _x2, _y2, _z2, _struct = undefine
         if (_dot == 0)
         {
             //Ray lies on plane
-            return _reaction.__Null();
+            return _reaction.Null();
         }
         
         var _vX = _quadX1 - _x1;
@@ -81,7 +81,7 @@ function BonkLineHitQuad(_quad, _x1, _y1, _z1, _x2, _y2, _z2, _struct = undefine
         var _coeff = dot_product_3d(_vX, _vY, _vZ, _normalX, _normalY, _normalZ) / _dot;
         if ((_coeff < 0) || (_coeff > 1))
         {
-            return _reaction.__Null();
+            return _reaction.Null();
         }
         
         var _traceX = _x1 + _coeff*_rX;
@@ -149,5 +149,5 @@ function BonkLineHitQuad(_quad, _x1, _y1, _z1, _x2, _y2, _z2, _struct = undefine
         }
     }
     
-    return _reaction.__Null();
+    return _reaction.Null();
 }

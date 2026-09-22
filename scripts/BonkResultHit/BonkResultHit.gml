@@ -44,7 +44,7 @@ function BonkResultHit() constructor
         return $"\{\"shape\":\"{_shape}\",\"x\":{x},\"y\":{y},\"z\":{z},\"normalX\": {normalX},\"normalY\":{normalY},\"normalZ\":{normalZ}\}";
     }
     
-    static __Null = function()
+    static Null = function()
     {
         shape = undefined;
         

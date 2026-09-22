@@ -82,7 +82,7 @@ function BonkCapsuleCollideRotatedBox(_capsule, _box, _struct = undefined)
             
             if (_d >= _capsuleRadius)
             {
-                return _reaction.__Null();
+                return _reaction.Null();
             }
             
             _pushDistance = _capsuleRadius - _d;
@@ -107,5 +107,5 @@ function BonkCapsuleCollideRotatedBox(_capsule, _box, _struct = undefined)
         return _reaction;
     }
     
-    return _reaction.__Null();
+    return _reaction.Null();
 }

@@ -44,7 +44,7 @@ function BonkCapsuleCollideAAB(_capsule, _aab, _struct = undefined)
     if (_dist >= _capsuleRadius)
     {
         //No collision
-        return _reaction.__Null();
+        return _reaction.Null();
     }
     
     if (_dist > 0)

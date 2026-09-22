@@ -36,7 +36,7 @@ function BonkLineHitSphere(_sphere, _x1, _y1, _z1, _x2, _y2, _z2, _struct = unde
         var _discriminant = _b*_b - 4*_a*_c;
         if (_discriminant < 0)
         {
-            return _reaction.__Null();
+            return _reaction.Null();
         }
         
         //Catch cases where the start of the ray is inside the sphere
@@ -46,7 +46,7 @@ function BonkLineHitSphere(_sphere, _x1, _y1, _z1, _x2, _y2, _z2, _struct = unde
         var _t = (-_b - _discriminant) / (2*_a);
         if (_t > 1)
         {
-            return _reaction.__Null();
+            return _reaction.Null();
         }
         
         var _hitX = _x1 + _t*_dX;
@@ -78,5 +78,5 @@ function BonkLineHitSphere(_sphere, _x1, _y1, _z1, _x2, _y2, _z2, _struct = unde
         return _reaction;
     }
     
-    return _reaction.__Null();
+    return _reaction.Null();
 }

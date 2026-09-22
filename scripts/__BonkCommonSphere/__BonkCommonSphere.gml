@@ -47,7 +47,7 @@ function __BonkCommonSphere()
         }
         else
         {
-            return (_struct == undefined)? _nullHit : _struct.__Null();
+            return (_struct == undefined)? _nullHit : _struct.Null();
         }
     });
 }

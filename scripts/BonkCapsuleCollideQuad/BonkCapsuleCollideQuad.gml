@@ -183,7 +183,7 @@ function BonkCapsuleCollideQuad(_capsule, _quad, _struct = undefined)
     var _refToPlaneDist = dot_product_3d(_tempX, _tempY, _tempZ, _normalX, _normalY, _normalZ);
     if (abs(_refToPlaneDist) > _capsuleRadius)
     {
-        return _reaction.__Null();
+        return _reaction.Null();
     }
     
     _edgeSqrLen = _edgeSqrLength12;
@@ -300,7 +300,7 @@ function BonkCapsuleCollideQuad(_capsule, _quad, _struct = undefined)
     var _pushLength = point_distance_3d(0, 0, 0, _pushX, _pushY, _pushZ);
     if (_pushLength >= _capsuleRadius)
     {
-        return _reaction.__Null();
+        return _reaction.Null();
     }
     
     if (_pushLength == 0)

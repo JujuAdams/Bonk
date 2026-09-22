@@ -56,7 +56,7 @@ function BonkResultCollide() constructor
         return $"\{\"shape\":\"{_shape}\",\"dX\":{dX},\"dY\":{dY},\"dZ\":{dZ}\}";
     }
     
-    static __Null = function()
+    static Null = function()
     {
         shape = undefined;
         

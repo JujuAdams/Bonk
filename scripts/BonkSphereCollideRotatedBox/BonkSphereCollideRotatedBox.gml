@@ -79,7 +79,7 @@ function BonkSphereCollideRotatedBox(_sphere, _box, _struct = undefined)
             
             if (_d >= _sphereRadius)
             {
-                return _reaction.__Null();
+                return _reaction.Null();
             }
             
             _pushDistance = _sphereRadius - _d;
@@ -104,5 +104,5 @@ function BonkSphereCollideRotatedBox(_sphere, _box, _struct = undefined)
         return _reaction;
     }
     
-    return _reaction.__Null();
+    return _reaction.Null();
 }

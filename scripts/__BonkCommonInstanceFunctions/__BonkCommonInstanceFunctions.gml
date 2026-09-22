@@ -115,7 +115,7 @@ function __BonkCommonInstanceFunctions(_groupVector = BONK_DEFAULT_GROUP)
                         with(_staticDeflect)
                         {
                             _staticCollision.__CopyTo(grippyCollision);
-                            slipperyCollision.__Null();
+                            slipperyCollision.Null();
                             primaryCollision = grippyCollision;
                             deflectType = BONK_DEFLECT_GRIPPY;
                             
@@ -129,7 +129,7 @@ function __BonkCommonInstanceFunctions(_groupVector = BONK_DEFAULT_GROUP)
                         
                         with(_staticDeflect)
                         {
-                            grippyCollision.__Null();
+                            grippyCollision.Null();
                             _staticCollision.__CopyTo(slipperyCollision);
                             primaryCollision = slipperyCollision;
                             deflectType = BONK_DEFLECT_SLIPPERY;
@@ -143,7 +143,7 @@ function __BonkCommonInstanceFunctions(_groupVector = BONK_DEFAULT_GROUP)
             }
         }
         
-        return _staticDeflect.__Null();
+        return _staticDeflect.Null();
     }
     
     Collide = function(_otherShape, _groupFilter = -1, _struct = undefined, _quietFail = false)
@@ -166,7 +166,7 @@ function __BonkCommonInstanceFunctions(_groupVector = BONK_DEFAULT_GROUP)
             }
         }
     
-        return (_struct == undefined)? _nullCollisionData : _struct.__Null();
+        return (_struct == undefined)? _nullCollisionData : _struct.Null();
     }
     
     DebugDrawMask = function(_color = c_white)

@@ -308,12 +308,12 @@ function __BonkCommonWorld(_cellXSize, _cellYSize, _cellZSize)
                 
                 if (is_infinity(_largestSlipperyDepth))
                 {
-                    slipperyCollision.__Null();
+                    slipperyCollision.Null();
                 }
             }
             else
             {
-                grippyCollision.__Null();
+                grippyCollision.Null();
                 primaryCollision = slipperyCollision;
                 
                 if (not is_infinity(_largestSlipperyDepth))
@@ -322,7 +322,7 @@ function __BonkCommonWorld(_cellXSize, _cellYSize, _cellZSize)
                 }
                 else
                 {
-                    slipperyCollision.__Null();
+                    slipperyCollision.Null();
                     deflectType = BONK_DEFLECT_NONE;
                 }
             }
@@ -438,7 +438,7 @@ function __BonkCommonWorld(_cellXSize, _cellYSize, _cellZSize)
             }
         }
         
-        return (_struct == undefined)? _nullCollisionData : _struct.__Null();
+        return (_struct == undefined)? _nullCollisionData : _struct.Null();
     }
     
     FilterTest = function()

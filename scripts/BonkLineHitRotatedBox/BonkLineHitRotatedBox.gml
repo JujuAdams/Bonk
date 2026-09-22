@@ -86,7 +86,7 @@ function BonkLineHitRotatedBox(_box, _x1, _y1, _z1, _x2, _y2, _z2, _struct = und
         
         if ((_tMax < 0) || (_tMin > 1) || (_tMin > _tMax))
         {
-            return _reaction.__Null();
+            return _reaction.Null();
         }
         
         var _t = (_tMin < 0)? _tMax : _tMin;
@@ -94,19 +94,19 @@ function BonkLineHitRotatedBox(_box, _x1, _y1, _z1, _x2, _y2, _z2, _struct = und
         var _hitI = _i1 + _t*_dI;
         if (abs(_hitI) > 0.5*xSize)
         {
-            return _reaction.__Null();
+            return _reaction.Null();
         }
         
         var _hitJ = _j1 + _t*_dJ;
         if (abs(_hitJ) > 0.5*ySize)
         {
-            return _reaction.__Null();
+            return _reaction.Null();
         }
         
         var _hitZ = _z1 + _t*_dZ;
         if (abs(_hitZ - z) > 0.5*zSize)
         {
-            return _reaction.__Null();
+            return _reaction.Null();
         }
         
         var _hitX = x + _hitI*_iX + _hitJ*_jX;
@@ -145,5 +145,5 @@ function BonkLineHitRotatedBox(_box, _x1, _y1, _z1, _x2, _y2, _z2, _struct = und
         return _reaction;
     }
     
-    return _reaction.__Null();
+    return _reaction.Null();
 }

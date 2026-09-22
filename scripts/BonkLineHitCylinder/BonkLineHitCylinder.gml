@@ -35,18 +35,18 @@ function BonkLineHitCylinder(_cylinder, _x1, _y1, _z1, _x2, _y2, _z2, _struct = 
     {
         if (_dZ == 0)
         {
-            return _reaction.__Null();
+            return _reaction.Null();
         }
         
         if (_vX*_vX + _vY*_vY > _cylinderRadius*_cylinderRadius)
         {
-            return _reaction.__Null();
+            return _reaction.Null();
         }
         
         var _t = min((_cylinderZMin - _z1) / _dZ, (_cylinderZMax - _z1) / _dZ);
         if ((_t < 0) || (_t > 1))
         {
-            return _reaction.__Null();
+            return _reaction.Null();
         }
         
         with(_reaction)
@@ -72,7 +72,7 @@ function BonkLineHitCylinder(_cylinder, _x1, _y1, _z1, _x2, _y2, _z2, _struct = 
     var _c = (_vX*_vX + _vY*_vY) - _cylinderRadius*_cylinderRadius;
     
     var _discriminant = _b*_b - 4*_a*_c;
-    if (_discriminant < 0) return _reaction.__Null(); //No solutions!
+    if (_discriminant < 0) return _reaction.Null(); //No solutions!
     
     //Handle rays that start inside the cylinder
     _discriminant = sqrt(_discriminant);
@@ -121,7 +121,7 @@ function BonkLineHitCylinder(_cylinder, _x1, _y1, _z1, _x2, _y2, _z2, _struct = 
         //If the ray has no change in z then it cannot hit either cap
         if (_dZ == 0)
         {
-            return _reaction.__Null();
+            return _reaction.Null();
         }
         
         //Find the other t value for the intersection with the cylinder
@@ -143,7 +143,7 @@ function BonkLineHitCylinder(_cylinder, _x1, _y1, _z1, _x2, _y2, _z2, _struct = 
         //If this new t value is outside the cylinder then we have no solution
         if ((_t < _tMin) || (_t > _tMax))
         {
-            return _reaction.__Null();
+            return _reaction.Null();
         }
         
         with(_reaction)

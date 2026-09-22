@@ -35,7 +35,7 @@ function BonkLineHitCapsule(_capsule, _x1, _y1, _z1, _x2, _y2, _z2, _struct = un
         {
             if (_dZ == 0)
             {
-                return _reaction.__Null();
+                return _reaction.Null();
             }
             
             var _distSqr = _vX*_vX + _vY*_vY
@@ -43,7 +43,7 @@ function BonkLineHitCapsule(_capsule, _x1, _y1, _z1, _x2, _y2, _z2, _struct = un
             if (_zSqr < 0)
             {
                 //Ray misses the circular cross-section of the cylinder
-                return _reaction.__Null();
+                return _reaction.Null();
             }
             
             if (_z1 < _capsuleZMin - radius)
@@ -53,7 +53,7 @@ function BonkLineHitCapsule(_capsule, _x1, _y1, _z1, _x2, _y2, _z2, _struct = un
                 if (_dZ <= 0)
                 {
                     //Ray pointing the wrong direction, early out
-                    return _reaction.__Null();
+                    return _reaction.Null();
                 }
                 
                 var _hemisphereZ = _capsuleZMin;
@@ -65,7 +65,7 @@ function BonkLineHitCapsule(_capsule, _x1, _y1, _z1, _x2, _y2, _z2, _struct = un
                 if (_dZ >= 0)
                 {
                     //Ray pointing the wrong direction, early out
-                    return _reaction.__Null();
+                    return _reaction.Null();
                 }
                 
                 var _hemisphereZ = _capsuleZMax;
@@ -116,7 +116,7 @@ function BonkLineHitCapsule(_capsule, _x1, _y1, _z1, _x2, _y2, _z2, _struct = un
         var _discriminant = _b*_b - 4*_a*_c;
         if (_discriminant < 0)
         {
-            return _reaction.__Null(); //No solutions!
+            return _reaction.Null(); //No solutions!
         }
         
         //Handle rays that start inside the cylinder
@@ -148,7 +148,7 @@ function BonkLineHitCapsule(_capsule, _x1, _y1, _z1, _x2, _y2, _z2, _struct = un
             var _discriminant = _b*_b - 4*_a*_c;
             if (_discriminant < 0)
             {
-                return _reaction.__Null();
+                return _reaction.Null();
             }
         
             //Handle rays that start inside the cylinder
@@ -164,7 +164,7 @@ function BonkLineHitCapsule(_capsule, _x1, _y1, _z1, _x2, _y2, _z2, _struct = un
         
         if ((_t < 0) || (_t > 1))
         {
-            return _reaction.__Null();
+            return _reaction.Null();
         }
         
         var _hitX = _x1 + _t*_dX;

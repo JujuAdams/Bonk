@@ -67,7 +67,7 @@ function BonkSphereCollideQuad(_sphere, _quad, _struct = undefined)
     //Early out if the sphere is too far away from the plane
     if ((_refToPlaneDist < -_sphereRadius) || (_refToPlaneDist > _sphereRadius))
     {
-        return _reaction.__Null();
+        return _reaction.Null();
     }
     
     //Point on the plane closest to the sphere's centre
@@ -169,7 +169,7 @@ function BonkSphereCollideQuad(_sphere, _quad, _struct = undefined)
     var _pushLength = point_distance_3d(0, 0, 0, _pushX, _pushY, _pushZ);
     if (_pushLength >= _sphereRadius)
     {
-        return _reaction.__Null();
+        return _reaction.Null();
     }
     
     if (_pushLength == 0)

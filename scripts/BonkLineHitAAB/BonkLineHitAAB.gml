@@ -65,7 +65,7 @@ function BonkLineHitAAB(_aab, _x1, _y1, _z1, _x2, _y2, _z2, _struct = undefined)
         
         if ((_tMax < 0) || (_tMin > 1) || (_tMin > _tMax))
         {
-            return _reaction.__Null();
+            return _reaction.Null();
         }
         
         var _t = (_tMin < 0)? _tMax : _tMin;
@@ -73,19 +73,19 @@ function BonkLineHitAAB(_aab, _x1, _y1, _z1, _x2, _y2, _z2, _struct = undefined)
         var _hitX = _x1 + _t*_dX;
         if (abs(_hitX - x) > 0.5*xSize)
         {
-            return _reaction.__Null();
+            return _reaction.Null();
         }
         
         var _hitY = _y1 + _t*_dY;
         if (abs(_hitY - y) > 0.5*ySize)
         {
-            return _reaction.__Null();
+            return _reaction.Null();
         }
         
         var _hitZ = _z1 + _t*_dZ;
         if (abs(_hitZ - z) > 0.5*zSize)
         {
-            return _reaction.__Null();
+            return _reaction.Null();
         }
         
         with(_reaction)
@@ -119,5 +119,5 @@ function BonkLineHitAAB(_aab, _x1, _y1, _z1, _x2, _y2, _z2, _struct = undefined)
         return _reaction;
     }
     
-    return _reaction.__Null();
+    return _reaction.Null();
 }
