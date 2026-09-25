@@ -33,7 +33,7 @@ function __BonkCommonMesh(_cellXSize, _cellYSize, _cellZSize)
     
     LineHit = function(_x1, _y1, _z1, _x2, _y2, _z2, _groupFilter = -1, _struct = undefined)
     {
-        return BonkLineHitWorld(self, _x1, _y1, _z1, _x2, _y2, _z2, _struct, _groupFilter);
+        return BonkLineHitMesh(self, _x1, _y1, _z1, _x2, _y2, _z2, _struct, _groupFilter);
     }
     
     Touch = function(_subjectShape, _groupFilter = -1)
@@ -485,34 +485,6 @@ function __BonkCommonMesh(_cellXSize, _cellYSize, _cellZSize)
         }
     }
     
-    AddShape = function(_shape)
-    {
-        if (is_handle(_shape))
-        {
-            if (BONK_STRICT)
-            {
-                __BonkError("Cannot add instances to a Bonk world. Please use Bonk structs instead");
-            }
-            
-            return;
-        }
-        else if (not is_struct(_shape))
-        {
-            return;
-        }
-        else if (__BonkIsInstance(_shape))
-        {
-            if (BONK_STRICT)
-            {
-                __BonkError("Cannot add instances to a Bonk world. Please use Bonk structs instead");
-            }
-            
-            return;
-        }
-        
-        __AddShape(_shape);
-    }
-    
     __AddShape = function(_shape)
     {
         if ((_shape.bonkType == BONK_TYPE_LINE)
@@ -580,44 +552,6 @@ function __BonkCommonMesh(_cellXSize, _cellYSize, _cellZSize)
                 repeat(_cellXSize)
                 {
                     array_push(__EnsureShapeArrayFromCell(_x, _y, _z), _shape);
-                    ++_x;
-                }
-                
-                ++_y;
-            }
-            
-            ++_z;
-        }
-    }
-    
-    __RemoveShape = function(_shape) //FIXME - Do this faster
-    {
-        var _aabb = _shape.GetAABB();
-        
-        var _cellX = clamp(floor(_aabb.xMin / __bonkCellXSize), BONK_WORLD_CELL_MIN, BONK_WORLD_CELL_MAX);
-        var _cellY = clamp(floor(_aabb.yMin / __bonkCellYSize), BONK_WORLD_CELL_MIN, BONK_WORLD_CELL_MAX);
-        var _cellZ = clamp(floor(_aabb.zMin / __bonkCellZSize), BONK_WORLD_CELL_MIN, BONK_WORLD_CELL_MAX);
-        
-        var _cellXSize = 1 + clamp(floor(_aabb.xMax / __bonkCellXSize), BONK_WORLD_CELL_MIN, BONK_WORLD_CELL_MAX) - _cellX;
-        var _cellYSize = 1 + clamp(floor(_aabb.yMax / __bonkCellYSize), BONK_WORLD_CELL_MIN, BONK_WORLD_CELL_MAX) - _cellY;
-        var _cellZSize = 1 + clamp(floor(_aabb.zMax / __bonkCellZSize), BONK_WORLD_CELL_MIN, BONK_WORLD_CELL_MAX) - _cellZ;
-        
-        var _z = _cellZ;
-        repeat(_cellZSize)
-        {
-            var _y = _cellY;
-            repeat(_cellYSize)
-            {
-                var _x = _cellX;
-                repeat(_cellXSize)
-                {
-                    var _array = __EnsureShapeArrayFromCell(_x, _y, _z);
-                    var _index = array_get_index(_array, _shape);
-                    if (_index >= 0)
-                    {
-                        array_delete(_array, _index, 1);
-                    }
-                    
                     ++_x;
                 }
                 
