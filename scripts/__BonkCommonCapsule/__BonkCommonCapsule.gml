@@ -14,8 +14,9 @@ function __BonkCommonCapsule()
         _array[@ BONK_TYPE_QUAD     ] = BonkCapsuleCollideQuad;
         _array[@ BONK_TYPE_SPHERE   ] = BonkCapsuleCollideSphere;
         _array[@ BONK_TYPE_TRIANGLE ] = BonkCapsuleCollideTriangle;
-        _array[@ BONK_TYPE_HEIGHTMAP] = BonkCapsuleCollideHeightmap;
         _array[@ BONK_TYPE_WORLD    ] = BonkCapsuleCollideWorld;
+        _array[@ BONK_TYPE_MESH     ] = BonkCapsuleCollideMesh;
+        _array[@ BONK_TYPE_HEIGHTMAP] = BonkCapsuleCollideHeightmap;
         return _array;
     })();
     
@@ -29,8 +30,9 @@ function __BonkCommonCapsule()
         _array[@ BONK_TYPE_QUAD     ] = BonkCapsuleTouchQuad;
         _array[@ BONK_TYPE_SPHERE   ] = BonkCapsuleTouchSphere;
         _array[@ BONK_TYPE_TRIANGLE ] = BonkCapsuleTouchTriangle;
-        _array[@ BONK_TYPE_HEIGHTMAP] = BonkCapsuleTouchHeightmap;
         _array[@ BONK_TYPE_WORLD    ] = BonkCapsuleTouchWorld;
+        _array[@ BONK_TYPE_MESH     ] = BonkCapsuleTouchMesh;
+        _array[@ BONK_TYPE_HEIGHTMAP] = BonkCapsuleTouchHeightmap;
         return _array;
     })();
     

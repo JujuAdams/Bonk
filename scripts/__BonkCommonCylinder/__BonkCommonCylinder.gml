@@ -12,8 +12,8 @@ function __BonkCommonCylinder()
         _array[@ BONK_TYPE_CAPSULE  ] = BonkCylinderCollideCapsule;
         _array[@ BONK_TYPE_CYLINDER ] = BonkCylinderCollideCylinder;
         _array[@ BONK_TYPE_SPHERE   ] = BonkCylinderCollideSphere;
-        _array[@ BONK_TYPE_HEIGHTMAP] = BonkCylinderCollideHeightmap;
         _array[@ BONK_TYPE_WORLD    ] = BonkCylinderCollideWorld;
+        _array[@ BONK_TYPE_HEIGHTMAP] = BonkCylinderCollideHeightmap;
         return _array;
     })();
     
@@ -25,8 +25,8 @@ function __BonkCommonCylinder()
         _array[@ BONK_TYPE_CAPSULE  ] = BonkCylinderTouchCapsule;
         _array[@ BONK_TYPE_CYLINDER ] = BonkCylinderTouchCylinder;
         _array[@ BONK_TYPE_SPHERE   ] = BonkCylinderTouchSphere;
-        _array[@ BONK_TYPE_HEIGHTMAP] = BonkCylinderTouchHeightmap;
         _array[@ BONK_TYPE_WORLD    ] = BonkCylinderTouchWorld;
+        _array[@ BONK_TYPE_HEIGHTMAP] = BonkCylinderTouchHeightmap;
         return _array;
     })();
     

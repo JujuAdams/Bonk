@@ -11,8 +11,8 @@ function __BonkCommonAAB()
         _array[@ BONK_TYPE_CAPSULE  ] = BonkAABCollideCapsule;
         _array[@ BONK_TYPE_CYLINDER ] = BonkAABCollideCylinder;
         _array[@ BONK_TYPE_SPHERE   ] = BonkAABCollideSphere;
-        _array[@ BONK_TYPE_HEIGHTMAP] = BonkAABCollideHeightmap;
         _array[@ BONK_TYPE_WORLD    ] = BonkAABCollideWorld;
+        _array[@ BONK_TYPE_HEIGHTMAP] = BonkAABCollideHeightmap;
         return _array;
     })();
     
@@ -23,8 +23,8 @@ function __BonkCommonAAB()
         _array[@ BONK_TYPE_CAPSULE  ] = BonkAABTouchCapsule;
         _array[@ BONK_TYPE_CYLINDER ] = BonkAABTouchCylinder;
         _array[@ BONK_TYPE_SPHERE   ] = BonkAABTouchSphere;
-        _array[@ BONK_TYPE_HEIGHTMAP] = BonkAABTouchHeightmap;
         _array[@ BONK_TYPE_WORLD    ] = BonkAABTouchWorld;
+        _array[@ BONK_TYPE_HEIGHTMAP] = BonkAABTouchHeightmap;
         return _array;
     })();
     

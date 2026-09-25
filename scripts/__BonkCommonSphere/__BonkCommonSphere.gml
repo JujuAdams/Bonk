@@ -14,8 +14,9 @@ function __BonkCommonSphere()
         _array[@ BONK_TYPE_QUAD     ] = BonkSphereCollideQuad;
         _array[@ BONK_TYPE_SPHERE   ] = BonkSphereCollideSphere;
         _array[@ BONK_TYPE_TRIANGLE ] = BonkSphereCollideTriangle;
-        _array[@ BONK_TYPE_HEIGHTMAP] = BonkSphereCollideHeightmap;
         _array[@ BONK_TYPE_WORLD    ] = BonkSphereCollideWorld;
+        _array[@ BONK_TYPE_MESH     ] = BonkSphereCollideMesh;
+        _array[@ BONK_TYPE_HEIGHTMAP] = BonkSphereCollideHeightmap;
         return _array;
     })();
     
@@ -29,8 +30,9 @@ function __BonkCommonSphere()
         _array[@ BONK_TYPE_QUAD     ] = BonkSphereTouchQuad;
         _array[@ BONK_TYPE_SPHERE   ] = BonkSphereTouchSphere;
         _array[@ BONK_TYPE_TRIANGLE ] = BonkSphereTouchTriangle;
-        _array[@ BONK_TYPE_HEIGHTMAP] = BonkSphereTouchHeightmap;
         _array[@ BONK_TYPE_WORLD    ] = BonkSphereTouchWorld;
+        _array[@ BONK_TYPE_MESH     ] = BonkSphereTouchMesh;
+        _array[@ BONK_TYPE_HEIGHTMAP] = BonkSphereTouchHeightmap;
         return _array;
     })();
     

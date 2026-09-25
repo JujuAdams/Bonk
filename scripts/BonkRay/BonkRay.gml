@@ -26,6 +26,7 @@ function BonkRay(_x, _y, _z, _dX, _dY, _dZ) constructor
         _array[@ BONK_TYPE_SPHERE   ] = BonkRayHitSphere;
         _array[@ BONK_TYPE_TRIANGLE ] = BonkRayHitTriangle;
         _array[@ BONK_TYPE_WORLD    ] = BonkRayHitWorld;
+        _array[@ BONK_TYPE_MESH     ] = BonkRayHitMesh;
         _array[@ BONK_TYPE_HEIGHTMAP] = BonkRayHitHeightmap;
         return _array;
     })();
