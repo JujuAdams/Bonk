@@ -1,16 +1,16 @@
 {
   "$GMObject":"",
-  "%Name":"oTestMesh",
+  "%Name":"oTestBigModel",
   "eventList":[
     {"$GMEvent":"v1","%Name":"","collisionObjectId":null,"eventNum":0,"eventType":0,"isDnD":false,"name":"","resourceType":"GMEvent","resourceVersion":"2.0",},
     {"$GMEvent":"v1","%Name":"","collisionObjectId":null,"eventNum":0,"eventType":8,"isDnD":false,"name":"","resourceType":"GMEvent","resourceVersion":"2.0",},
   ],
   "managed":true,
-  "name":"oTestMesh",
+  "name":"oTestBigModel",
   "overriddenProperties":[],
   "parent":{
-    "name":"Mesh Collision",
-    "path":"folders/Test Cases/Mesh Collision.yy",
+    "name":"Test Cases",
+    "path":"folders/Test Cases.yy",
   },
   "parentObjectId":null,
   "persistent":false,

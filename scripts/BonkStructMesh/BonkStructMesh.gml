@@ -1,6 +1,6 @@
 // Feather disable all
 
-/// Constructor that creates a Bonk world as a struct rather than an instance. For further
+/// Constructor that creates a Bonk mesh as a struct rather than an instance. For further
 /// information please refer to `BonkSetupMesh()` (though native GameMaker variables other than
 /// `x` and `y` will not be set for structs).
 /// 

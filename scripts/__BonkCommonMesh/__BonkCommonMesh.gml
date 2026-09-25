@@ -816,6 +816,8 @@ function __BonkCommonMesh(_cellXSize, _cellYSize, _cellZSize)
         return self;
     }
     
+    #region Draw
+    
     DrawAABB = function(_color = undefined, _wireframe = true)
     {
         __BONK_VERIFY_UGG
@@ -1099,6 +1101,8 @@ function __BonkCommonMesh(_cellXSize, _cellYSize, _cellZSize)
         
         return self;
     }
+    
+    #endregion
     
     GetCellsFromLine = function(_lineShape)
     {

@@ -1,13 +1,13 @@
 {
   "$GMRoom":"v1",
-  "%Name":"rmTestBasics",
+  "%Name":"rmTestScratch",
   "creationCodeFile":"",
   "inheritCode":false,
   "inheritCreationOrder":false,
   "inheritLayers":false,
   "instanceCreationOrder":[
-    {"name":"inst_1508A999_1","path":"rooms/rmTestBasics/rmTestBasics.yy",},
-    {"name":"inst_5EDFFBFD","path":"rooms/rmTestBasics/rmTestBasics.yy",},
+    {"name":"inst_1508A999_1","path":"rooms/rmTestScratch/rmTestScratch.yy",},
+    {"name":"inst_5EDFFBFD","path":"rooms/rmTestScratch/rmTestScratch.yy",},
   ],
   "isDnd":false,
   "layers":[
@@ -17,10 +17,10 @@
       ],"layers":[],"name":"Instances","properties":[],"resourceType":"GMRInstanceLayer","resourceVersion":"2.0","userdefinedDepth":false,"visible":true,},
     {"$GMRBackgroundLayer":"","%Name":"Background","animationFPS":15.0,"animationSpeedType":0,"colour":4287933618,"depth":100,"effectEnabled":true,"effectType":null,"gridX":32,"gridY":32,"hierarchyFrozen":false,"hspeed":0.0,"htiled":false,"inheritLayerDepth":false,"inheritLayerSettings":false,"inheritSubLayers":true,"inheritVisibility":true,"layers":[],"name":"Background","properties":[],"resourceType":"GMRBackgroundLayer","resourceVersion":"2.0","spriteId":null,"stretch":false,"userdefinedAnimFPS":false,"userdefinedDepth":false,"visible":true,"vspeed":0.0,"vtiled":false,"x":0,"y":0,},
   ],
-  "name":"rmTestBasics",
+  "name":"rmTestScratch",
   "parent":{
-    "name":"Rooms",
-    "path":"folders/Rooms.yy",
+    "name":"Miscellaneous",
+    "path":"folders/Rooms/Miscellaneous.yy",
   },
   "parentRoom":null,
   "physicsSettings":{

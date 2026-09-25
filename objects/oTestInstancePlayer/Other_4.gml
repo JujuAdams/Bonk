@@ -1,6 +1,6 @@
 // Feather disable all
 
-with(oTestMesh)
+with(oTestBigModel)
 {
     other.world.AddVertexBufferAsync(model.GetVertexBufferArray(), DotobjGetVertexFormat(), matrix);
 }

@@ -20,8 +20,8 @@
   ],
   "name":"rmTestRaycast",
   "parent":{
-    "name":"Rooms",
-    "path":"folders/Rooms.yy",
+    "name":"Miscellaneous",
+    "path":"folders/Rooms/Miscellaneous.yy",
   },
   "parentRoom":null,
   "physicsSettings":{
