@@ -1,5 +1,5 @@
-#macro BONK_VERSION  "5.0.5-alpha"
-#macro BONK_DATE     "2026-09-22"
+#macro BONK_VERSION  "5.0.6-alpha"
+#macro BONK_DATE     "2026-09-28"
 
 #macro BONK_RUNNING_FROM_IDE  (GM_build_type == "run")
 
