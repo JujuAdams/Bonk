@@ -32,11 +32,12 @@ function __BonkCommonMesh(_cellXSize, _cellYSize, _cellZSize)
     __bonkSetMatrix = false;
     
     
-    
-    AddPosition = function(_dX, _dY, _dZ)
-    {
-        return SetPosition(x + _dX, y + _dY, z + _dZ);
-    }
+    //These are not available and don't do anything. Users should move meshes by setting the
+    //transformation matrix
+    SetPosition          = function() {};
+    __SetPositionInWorld = function() {};
+    __SetPositionFree    = function() {};
+    AddPosition          = function() {};
     
     SetMatrix = function(_matrix)
     {
@@ -236,32 +237,6 @@ function __BonkCommonMesh(_cellXSize, _cellYSize, _cellZSize)
     {
         return __bonkMatrix;
     };
-    
-    __SetPositionFree = function(_x = x, _y = y, _z = z)
-    {
-        x = _x;
-        y = _y;
-        z = _z;
-        
-        //TODO - Do we need to move triangles?
-        
-        return self;
-    }
-    
-    __SetPositionInWorld = function(_x = x, _y = y, _z = z)
-    {
-        __bonkWorld.__MoveShape(_x - x, _y - y, _z - z, self);
-        
-        x = _x;
-        y = _y;
-        z = _z;
-        
-        //TODO - Do we need to move triangles?
-        
-        return self;
-    }
-    
-    SetPosition = __SetPositionFree; //TODO - Remove
     
     LineHit = function(_x1, _y1, _z1, _x2, _y2, _z2, _groupFilter = -1, _struct = undefined)
     {
