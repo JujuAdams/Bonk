@@ -70,6 +70,7 @@ function __BonkCommonMesh(_cellXSize, _cellYSize, _cellZSize)
         ds_map_clear(_map);
         var _triangleArray = [];
         
+        //This is way, way faster than `struct_foreach()`
         var _z = _minCellZ;
         repeat(_cellZSize)
         {
@@ -101,31 +102,6 @@ function __BonkCommonMesh(_cellXSize, _cellYSize, _cellZSize)
             
             ++_z;
         }
-        
-        // FIXME - This doesn't work so we should use a `foreach` instead
-        //
-        //var _bonkSpatialDict = __bonkSpatialDict;
-        //var _nameArray = struct_get_names(_bonkSpatialDict);
-        //var _i = 0;
-        //repeat(array_length(_nameArray))
-        //{
-        //    var _shapeArray = _bonkSpatialDict[$ _nameArray[_i]];
-        //    
-        //    var _j = 0;
-        //    repeat(array_length(_shapeArray))
-        //    {
-        //        var _shape = _shapeArray[_j];
-        //        if (not ds_map_exists(_map, _shape))
-        //        {
-        //            _map[? _shape] = true;
-        //            array_push(_triangleArray, _shape);
-        //        }
-        //        
-        //        ++_j;
-        //    }
-        //    
-        //    ++_i;
-        //}
         
         __bonkSpatialDict = {};
         
