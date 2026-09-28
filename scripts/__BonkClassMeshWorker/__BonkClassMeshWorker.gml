@@ -308,13 +308,27 @@ function __BonkClassMeshWorker(_mesh, _vertexBufferArray, _vertexFormat, _matrix
             var _bonkCellYSize = __bonkCellYSize;
             var _bonkCellZSize = __bonkCellZSize;
             
-            var _workMinCellX = __bonkMinCellX;
-            var _workMinCellY = __bonkMinCellY;
-            var _workMinCellZ = __bonkMinCellZ;
-            
-            var _workMaxCellX = __bonkMaxCellX;
-            var _workMaxCellY = __bonkMaxCellY;
-            var _workMaxCellZ = __bonkMaxCellZ;
+            var _meshEmpty = (struct_names_count(__bonkSpatialDict) == 0);
+            if (_meshEmpty)
+            {
+                var _workMinCellX = infinity;
+                var _workMinCellY = infinity;
+                var _workMinCellZ = infinity;
+                
+                var _workMaxCellX = -infinity;
+                var _workMaxCellY = -infinity;
+                var _workMaxCellZ = -infinity;
+            }
+            else
+            {
+                var _workMinCellX = __bonkMinCellX;
+                var _workMinCellY = __bonkMinCellY;
+                var _workMinCellZ = __bonkMinCellZ;
+                
+                var _workMaxCellX = __bonkMaxCellX;
+                var _workMaxCellY = __bonkMaxCellY;
+                var _workMaxCellZ = __bonkMaxCellZ;
+            }
         }
         
         repeat(min(BONK_VERTEX_BUFFER_ASYNC_TRIANGLE_RESOLUTION, __trianglesRemaining))
@@ -414,13 +428,26 @@ function __BonkClassMeshWorker(_mesh, _vertexBufferArray, _vertexFormat, _matrix
         
         with(_mesh)
         {
-            __bonkMinCellX = min(__bonkMinCellX, _workMinCellX);
-            __bonkMinCellY = min(__bonkMinCellY, _workMinCellY);
-            __bonkMinCellZ = min(__bonkMinCellZ, _workMinCellZ);
-            
-            __bonkMaxCellX = max(__bonkMaxCellX, _workMaxCellX);
-            __bonkMaxCellY = max(__bonkMaxCellY, _workMaxCellY);
-            __bonkMaxCellZ = max(__bonkMaxCellZ, _workMaxCellZ);
+            if (_meshEmpty)
+            {
+                __bonkMinCellX = _workMinCellX;
+                __bonkMinCellY = _workMinCellY;
+                __bonkMinCellZ = _workMinCellZ;
+                
+                __bonkMaxCellX = _workMaxCellX;
+                __bonkMaxCellY = _workMaxCellY;
+                __bonkMaxCellZ = _workMaxCellZ;
+            }
+            else
+            {
+                __bonkMinCellX = min(__bonkMinCellX, _workMinCellX);
+                __bonkMinCellY = min(__bonkMinCellY, _workMinCellY);
+                __bonkMinCellZ = min(__bonkMinCellZ, _workMinCellZ);
+                
+                __bonkMaxCellX = max(__bonkMaxCellX, _workMaxCellX);
+                __bonkMaxCellY = max(__bonkMaxCellY, _workMaxCellY);
+                __bonkMaxCellZ = max(__bonkMaxCellZ, _workMaxCellZ);
+            }
         }
         
         __trianglesRemaining = max(0, __trianglesRemaining - BONK_VERTEX_BUFFER_ASYNC_TRIANGLE_RESOLUTION);

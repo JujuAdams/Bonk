@@ -56,7 +56,7 @@ function __BonkCommonMesh(_cellXSize, _cellYSize, _cellZSize)
         return self;
     }
     
-    SetPosition = __SetPositionFree;
+    SetPosition = __SetPositionFree; //TODO - Remove
     
     LineHit = function(_x1, _y1, _z1, _x2, _y2, _z2, _groupFilter = -1, _struct = undefined)
     {
