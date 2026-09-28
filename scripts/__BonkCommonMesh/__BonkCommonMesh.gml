@@ -28,19 +28,222 @@ function __BonkCommonMesh(_cellXSize, _cellYSize, _cellZSize)
     
     __bonkWorkerArray = [];
     
+    __bonkMatrix = matrix_build_identity();
+    __bonkSetMatrix = false;
     
     
-    SetPosition = function() {}; //TODO
-    AddPosition = function() {}; //TODO
     
-    SetMatrix = function() {}; //TODO
-    GetMatrix = function() {}; //TODO
+    AddPosition = function(_dX, _dY, _dZ)
+    {
+        return SetPosition(x + _dX, y + _dY, z + _dZ);
+    }
+    
+    SetMatrix = function(_matrix)
+    {
+        static _map = ds_map_create();
+        
+        __bonkSetMatrix = true;
+        
+        if (array_equals(__bonkMatrix, _matrix)) return;
+        
+        if (__bonkWorld != undefined)
+        {
+            __bonkWorld.__RemoveShape(self);
+        }
+        
+        var _transformMatrix = matrix_multiply(matrix_inverse(__bonkMatrix), _matrix);
+        array_copy(__bonkMatrix, 0, _matrix, 0, 16);
+        
+        var _minCellX = __bonkMinCellX;
+        var _minCellY = __bonkMinCellY;
+        var _minCellZ = __bonkMinCellZ;
+        
+        var _maxCellX = __bonkMaxCellX;
+        var _maxCellY = __bonkMaxCellY;
+        var _maxCellZ = __bonkMaxCellZ;
+        
+        var _cellXSize = 1 + _maxCellX - _minCellX;
+        var _cellYSize = 1 + _maxCellY - _minCellY;
+        var _cellZSize = 1 + _maxCellZ - _minCellZ;
+        
+        ds_map_clear(_map);
+        var _triangleArray = [];
+        
+        var _z = _minCellZ;
+        repeat(_cellZSize)
+        {
+            var _y = _minCellY;
+            repeat(_cellYSize)
+            {
+                var _x = _minCellX;
+                repeat(_cellXSize)
+                {
+                    var _shapeArray = __GetShapeArrayFromCellUnsafe(_x, _y, _z);
+                    var _i = 0;
+                    repeat(array_length(_shapeArray))
+                    {
+                        var _shape = _shapeArray[_i];
+                        if (not ds_map_exists(_map, _shape))
+                        {
+                            _map[? _shape] = true;
+                            array_push(_triangleArray, _shape);
+                        }
+                        
+                        ++_i;
+                    }
+                    
+                    ++_x;
+                }
+                
+                ++_y;
+            }
+            
+            ++_z;
+        }
+        
+        // FIXME - This doesn't work so we should use a `foreach` instead
+        //
+        //var _bonkSpatialDict = __bonkSpatialDict;
+        //var _nameArray = struct_get_names(_bonkSpatialDict);
+        //var _i = 0;
+        //repeat(array_length(_nameArray))
+        //{
+        //    var _shapeArray = _bonkSpatialDict[$ _nameArray[_i]];
+        //    
+        //    var _j = 0;
+        //    repeat(array_length(_shapeArray))
+        //    {
+        //        var _shape = _shapeArray[_j];
+        //        if (not ds_map_exists(_map, _shape))
+        //        {
+        //            _map[? _shape] = true;
+        //            array_push(_triangleArray, _shape);
+        //        }
+        //        
+        //        ++_j;
+        //    }
+        //    
+        //    ++_i;
+        //}
+        
+        __bonkSpatialDict = {};
+        
+        var _bonkCellXSize = __bonkCellXSize;
+        var _bonkCellYSize = __bonkCellYSize;
+        var _bonkCellZSize = __bonkCellZSize;
+        
+        var _meshMinCellX = infinity;
+        var _meshMinCellY = infinity;
+        var _meshMinCellZ = infinity;
+        
+        var _meshMaxCellX = -infinity;
+        var _meshMaxCellY = -infinity;
+        var _meshMaxCellZ = -infinity;
+        
+        var _mesh = self;
+        var _vector = array_create(4, 0);
+        var _i = 0;
+        repeat(array_length(_triangleArray))
+        {
+            with(_triangleArray[_i])
+            {
+                matrix_transform_vertex(_transformMatrix, x1, y1, z1, 1, _vector);
+                x1 = _vector[0]; y1 = _vector[1]; z1 = _vector[2];
+                
+                matrix_transform_vertex(_transformMatrix, x2, y2, z2, 1, _vector);
+                x2 = _vector[0]; y2 = _vector[1]; z2 = _vector[2];
+                
+                matrix_transform_vertex(_transformMatrix, x3, y3, z3, 1, _vector);
+                x3 = _vector[0]; y3 = _vector[1]; z3 = _vector[2];
+                
+                Refresh();
+                
+                var _aabb = GetAABB();
+                
+                var _cellXMin = clamp(floor(_aabb.xMin / _bonkCellXSize), BONK_WORLD_CELL_MIN, BONK_WORLD_CELL_MAX);
+                var _cellYMin = clamp(floor(_aabb.yMin / _bonkCellYSize), BONK_WORLD_CELL_MIN, BONK_WORLD_CELL_MAX);
+                var _cellZMin = clamp(floor(_aabb.zMin / _bonkCellZSize), BONK_WORLD_CELL_MIN, BONK_WORLD_CELL_MAX);
+                
+                var _cellXMax = clamp(floor(_aabb.xMax / _bonkCellXSize), BONK_WORLD_CELL_MIN, BONK_WORLD_CELL_MAX);
+                var _cellYMax = clamp(floor(_aabb.yMax / _bonkCellYSize), BONK_WORLD_CELL_MIN, BONK_WORLD_CELL_MAX);
+                var _cellZMax = clamp(floor(_aabb.zMax / _bonkCellZSize), BONK_WORLD_CELL_MIN, BONK_WORLD_CELL_MAX);
+                
+                _meshMinCellX = min(_meshMinCellX, _cellXMin, _cellXMax);
+                _meshMinCellY = min(_meshMinCellY, _cellYMin, _cellYMax);
+                _meshMinCellZ = min(_meshMinCellZ, _cellZMin, _cellZMax);
+            
+                _meshMaxCellX = max(_meshMaxCellX, _cellXMin, _cellXMax);
+                _meshMaxCellY = max(_meshMaxCellY, _cellYMin, _cellYMax);
+                _meshMaxCellZ = max(_meshMaxCellZ, _cellZMin, _cellZMax);
+                
+                var _cellXSize = 1 + _cellXMax - _cellXMin;
+                var _cellYSize = 1 + _cellYMax - _cellYMin;
+                var _cellZSize = 1 + _cellZMax - _cellZMin;
+                
+                var _z = _cellZMin;
+                repeat(_cellZSize)
+                {
+                    var _y = _cellYMin;
+                    repeat(_cellYSize)
+                    {
+                        var _x = _cellXMin;
+                        repeat(_cellXSize)
+                        {
+                            array_push(_mesh.__EnsureShapeArrayFromCell(_x, _y, _z), self);
+                            ++_x;
+                        }
+                        
+                        ++_y;
+                    }
+                    
+                    ++_z;
+                }
+            }
+            
+            ++_i;
+        }
+        
+        if (is_infinity(_meshMinCellX))
+        {
+            __bonkMinCellX = 0;
+            __bonkMinCellY = 0;
+            __bonkMinCellZ = 0;
+            
+            __bonkMaxCellX = 0;
+            __bonkMaxCellY = 0;
+            __bonkMaxCellZ = 0;
+        }
+        else
+        {
+            __bonkMinCellX = _meshMinCellX;
+            __bonkMinCellY = _meshMinCellY;
+            __bonkMinCellZ = _meshMinCellZ;
+            
+            __bonkMaxCellX = _meshMaxCellX;
+            __bonkMaxCellY = _meshMaxCellY;
+            __bonkMaxCellZ = _meshMaxCellZ;
+        }
+        
+        if (__bonkWorld != undefined)
+        {
+            __bonkWorld.__AddShape(self);
+        }
+        
+        return self;
+    };
+    
+    GetMatrix = function()
+    {
+        return __bonkMatrix;
+    };
     
     __SetPositionFree = function(_x = x, _y = y, _z = z)
     {
         x = _x;
         y = _y;
         z = _z;
+        
+        //TODO - Do we need to move triangles?
         
         return self;
     }
@@ -52,6 +255,8 @@ function __BonkCommonMesh(_cellXSize, _cellYSize, _cellZSize)
         x = _x;
         y = _y;
         z = _z;
+        
+        //TODO - Do we need to move triangles?
         
         return self;
     }
@@ -533,29 +738,37 @@ function __BonkCommonMesh(_cellXSize, _cellYSize, _cellZSize)
         return _array;
     }
     
-    //TODO - How do we handle the matrix here? Is it baked?
-    AddVertexBuffer = function(_vertexBufferArray, _vertexFormat, _matrix = undefined, _applySoftEdges = true)
+    AddVertexBuffer = function(_vertexBufferArray, _vertexFormat, _applySoftEdges = true)
     {
+        if (not __bonkSetMatrix)
+        {
+            __BonkTrace($"Warning! Set the mesh matrix with `.SetMatrix()` before calling `.AddVertexBuffer()`");
+        }
+        
         if (not is_array(_vertexBufferArray))
         {
             _vertexBufferArray = [_vertexBufferArray];
         }
         
-        var _worker = new __BonkClassMeshWorker(self, _vertexBufferArray, _vertexFormat, _matrix, _applySoftEdges);
+        var _worker = new __BonkClassMeshWorker(self, _vertexBufferArray, _vertexFormat, __bonkMatrix, _applySoftEdges);
         _worker.Force();
         
         return self;
     }
     
-    //TODO - How do we handle the matrix here? Is it baked?
-    AddVertexBufferAsync = function(_vertexBufferArray, _vertexFormat, _matrix = undefined, _budget = 12, _applySoftEdges = true)
+    AddVertexBufferAsync = function(_vertexBufferArray, _vertexFormat, _budget = 12, _applySoftEdges = true)
     {
+        if (not __bonkSetMatrix)
+        {
+            __BonkTrace($"Warning! Set the mesh matrix with `.SetMatrix()` before calling `.AddVertexBuffer()`");
+        }
+        
         if (not is_array(_vertexBufferArray))
         {
             _vertexBufferArray = [_vertexBufferArray];
         }
         
-        var _worker = new __BonkClassMeshWorker(self, _vertexBufferArray, _vertexFormat, _matrix, _applySoftEdges);
+        var _worker = new __BonkClassMeshWorker(self, _vertexBufferArray, _vertexFormat, __bonkMatrix, _applySoftEdges);
         _worker.__StartAsync();
         
         return _worker;
