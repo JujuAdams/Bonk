@@ -7,6 +7,7 @@
 function __BonkCommonMesh(_cellXSize, _cellYSize, _cellZSize)
 {
     bonkType = BONK_TYPE_MESH;
+    __bonkWorld = undefined;
     bonkGroup = -1;
     
     
@@ -34,6 +35,28 @@ function __BonkCommonMesh(_cellXSize, _cellYSize, _cellZSize)
     
     SetMatrix = function() {}; //TODO
     GetMatrix = function() {}; //TODO
+    
+    __SetPositionFree = function(_x = x, _y = y, _z = z)
+    {
+        x = _x;
+        y = _y;
+        z = _z;
+        
+        return self;
+    }
+    
+    __SetPositionInWorld = function(_x = x, _y = y, _z = z)
+    {
+        __bonkWorld.__MoveShape(_x - x, _y - y, _z - z, self);
+        
+        x = _x;
+        y = _y;
+        z = _z;
+        
+        return self;
+    }
+    
+    SetPosition = __SetPositionFree;
     
     LineHit = function(_x1, _y1, _z1, _x2, _y2, _z2, _groupFilter = -1, _struct = undefined)
     {
@@ -256,6 +279,8 @@ function __BonkCommonMesh(_cellXSize, _cellYSize, _cellZSize)
                                 {
                                     _map[? _shape] = true;
                                     
+                                    //TODO - Call triangle collision code directly
+                                    
                                     var _reaction = _shape.Deflect(_subjectShape, _slopeThreshold, _groupFilter);
                                     if (_reaction.deflectType != BONK_DEFLECT_NONE)
                                     {
@@ -417,6 +442,8 @@ function __BonkCommonMesh(_cellXSize, _cellYSize, _cellZSize)
                                 if (not ds_map_exists(_map, _shape))
                                 {
                                     _map[? _shape] = true;
+                                    
+                                    //TODO - Call triangle collision code directly
                                     
                                     var _reaction = _shape.Collide(_subjectShape, _groupFilter, _struct);
                                     if (_reaction.shape != undefined)

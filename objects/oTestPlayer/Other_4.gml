@@ -12,3 +12,8 @@ with(oTestBigModel)
 {
     other.world.AddVertexBufferAsync(model.GetVertexBufferArray(), DotobjGetVertexFormat(), matrix);
 }
+
+with(oTestMesh)
+{
+    other.world.AddShape(shape);
+}

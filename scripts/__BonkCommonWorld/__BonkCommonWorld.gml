@@ -7,6 +7,7 @@
 function __BonkCommonWorld(_cellXSize, _cellYSize, _cellZSize)
 {
     bonkType = BONK_TYPE_WORLD;
+    __bonkWorld = undefined;
     bonkGroup = -1;
     
     
