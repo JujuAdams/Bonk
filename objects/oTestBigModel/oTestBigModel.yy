@@ -9,8 +9,8 @@
   "name":"oTestBigModel",
   "overriddenProperties":[],
   "parent":{
-    "name":"Test Cases",
-    "path":"folders/Test Cases.yy",
+    "name":"Big Model",
+    "path":"folders/Test Cases/Big Model.yy",
   },
   "parentObjectId":null,
   "persistent":false,
