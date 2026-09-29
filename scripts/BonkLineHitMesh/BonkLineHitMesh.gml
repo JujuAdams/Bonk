@@ -33,28 +33,29 @@ function BonkLineHitMesh(_mesh, _x1, _y1, _z1, _x2, _y2, _z2, _struct = undefine
             var _y = _pointArray[_i+1];
             var _z = _pointArray[_i+2];
             
-            var _shapeArray = _mesh.GetShapeArrayFromCell(_x, _y, _z); //TODO - Optimize by inlining
+            var _triDefArray = _mesh.GetTriDefArrayFromCell(_x, _y, _z); //TODO - Optimize by inlining
             var _j = 0;
-            repeat(array_length(_shapeArray))
+            repeat(array_length(_triDefArray))
             {
-                var _shape = _shapeArray[_j];
-                if (not ds_map_exists(_map, _shape))
+                var _triDef = _triDefArray[_j];
+                if (not ds_map_exists(_map, _triDef))
                 {
-                    _map[? _shape] = true;
+                    _map[? _triDef] = true;
                     
-                    if ((_shape.LineHit(_x1, _y1, _z1, _x2, _y2, _z2, _groupFilter, _workingHit)).shape != undefined)
-                    {
-                        var _distance = point_distance_3d(_x1, _y1, _z1, _workingHit.x, _workingHit.y, _workingHit.z);
-                        if (_distance < _closestDistance)
-                        {
-                            _closestDistance = _distance;
-                            
-                            //Swap over
-                            var _tempHit = _workingHit;
-                            _workingHit = _returnHit;
-                            _returnHit  = _tempHit;
-                        }
-                    }
+                    //TODO - Restore
+                    //if ((_triDef.LineHit(_x1, _y1, _z1, _x2, _y2, _z2, _groupFilter, _workingHit)).shape != undefined)
+                    //{
+                    //    var _distance = point_distance_3d(_x1, _y1, _z1, _workingHit.x, _workingHit.y, _workingHit.z);
+                    //    if (_distance < _closestDistance)
+                    //    {
+                    //        _closestDistance = _distance;
+                    //        
+                    //        //Swap over
+                    //        var _tempHit = _workingHit;
+                    //        _workingHit = _returnHit;
+                    //        _returnHit  = _tempHit;
+                    //    }
+                    //}
                 }
                 
                 ++_j;

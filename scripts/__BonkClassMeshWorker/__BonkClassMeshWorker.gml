@@ -304,6 +304,7 @@ function __BonkClassMeshWorker(_mesh, _vertexBufferArray, _vertexFormat, _matrix
         
         with(_mesh)
         {
+            var _triDefArray   = __bonkTriDefArray;
             var _bonkCellXSize = __bonkCellXSize;
             var _bonkCellYSize = __bonkCellYSize;
             var _bonkCellZSize = __bonkCellZSize;
@@ -362,37 +363,66 @@ function __BonkClassMeshWorker(_mesh, _vertexBufferArray, _vertexFormat, _matrix
                 _x3 = _c[0]; _y3 = _c[1]; _z3 = _c[2];
             }
             
-            var _bonkTri = new BonkStructTriangle(_x1, _y1, _z1,
-                                                  _x2, _y2, _z2,
-                                                  _x3, _y3, _z3);
+            var _dX12 = _x2 - _x1; var _dY12 = _y2 - _y1; var _dZ12 = _z2 - _z1;
+            var _dX23 = _x3 - _x2; var _dY23 = _y3 - _y2; var _dZ23 = _z3 - _z2;
+            var _dX31 = _x1 - _x3; var _dY31 = _y1 - _y3; var _dZ31 = _z1 - _z3;
             
-            if (_applySoftEdges)
-            {
-                with(_bonkTri)
-                {
-                    _funcEdgeCheck(_edgeMap,   _x1, _y1, _z1,   _x2, _y2, _z2,   1, 1);
-                    _funcEdgeCheck(_edgeMap,   _x2, _y2, _z2,   _x3, _y3, _z3,   2, 1);
-                    _funcEdgeCheck(_edgeMap,   _x3, _y3, _z3,   _x1, _y1, _z1,   3, 1);
-                    
-                    //Reverse edges
-                    _funcEdgeCheck(_edgeMap,   _x2, _y2, _z2,   _x1, _y1, _z1,   1, -1);
-                    _funcEdgeCheck(_edgeMap,   _x3, _y3, _z3,   _x2, _y2, _z2,   2, -1);
-                    _funcEdgeCheck(_edgeMap,   _x1, _y1, _z1,   _x3, _y3, _z3,   3, -1);
-                }
-            }
+            var _lengthSqr12 = _dX12*_dX12 + _dY12*_dY12 + _dZ12*_dZ12;
+            var _lengthSqr23 = _dX23*_dX23 + _dY23*_dY23 + _dZ23*_dZ23;
+            var _lengthSqr31 = _dX31*_dX31 + _dY31*_dY31 + _dZ31*_dZ31;
             
-            _bonkTri.__bonkWorld = self;
-            _bonkTri.SetPosition = _bonkTri.__SetPositionInWorld; //TODO - Is this necessary?
+            var _xNormal = _dZ12*_dY31 - _dY12*_dZ31;
+            var _yNormal = _dX12*_dZ31 - _dZ12*_dX31;
+            var _zNormal = _dY12*_dX31 - _dX12*_dY31;
             
-            var _aabb = _bonkTri.GetAABB();
+            var _hardEdge12 = true;
+            var _hardEdge23 = true;
+            var _hardEdge31 = true;
             
-            var _cellXMin = clamp(floor(_aabb.xMin / _bonkCellXSize), BONK_WORLD_CELL_MIN, BONK_WORLD_CELL_MAX);
-            var _cellYMin = clamp(floor(_aabb.yMin / _bonkCellYSize), BONK_WORLD_CELL_MIN, BONK_WORLD_CELL_MAX);
-            var _cellZMin = clamp(floor(_aabb.zMin / _bonkCellZSize), BONK_WORLD_CELL_MIN, BONK_WORLD_CELL_MAX);
+            //TODO - Restore this
+            //if (_applySoftEdges)
+            //{
+            //    with(_bonkTri)
+            //    {
+            //        _funcEdgeCheck(_edgeMap,   _x1, _y1, _z1,   _x2, _y2, _z2,   1, 1);
+            //        _funcEdgeCheck(_edgeMap,   _x2, _y2, _z2,   _x3, _y3, _z3,   2, 1);
+            //        _funcEdgeCheck(_edgeMap,   _x3, _y3, _z3,   _x1, _y1, _z1,   3, 1);
+            //        
+            //        //Reverse edges
+            //        _funcEdgeCheck(_edgeMap,   _x2, _y2, _z2,   _x1, _y1, _z1,   1, -1);
+            //        _funcEdgeCheck(_edgeMap,   _x3, _y3, _z3,   _x2, _y2, _z2,   2, -1);
+            //        _funcEdgeCheck(_edgeMap,   _x1, _y1, _z1,   _x3, _y3, _z3,   3, -1);
+            //    }
+            //}
             
-            var _cellXMax = clamp(floor(_aabb.xMax / _bonkCellXSize), BONK_WORLD_CELL_MIN, BONK_WORLD_CELL_MAX);
-            var _cellYMax = clamp(floor(_aabb.yMax / _bonkCellYSize), BONK_WORLD_CELL_MIN, BONK_WORLD_CELL_MAX);
-            var _cellZMax = clamp(floor(_aabb.zMax / _bonkCellZSize), BONK_WORLD_CELL_MIN, BONK_WORLD_CELL_MAX);
+            //Order is determined by the `__BONK_MESH_TRI*` macros in `__BonkCommonMesh`
+            var _triDef = [_x1, _y1, _z1,
+                           _x2, _y2, _z2,
+                           _x3, _y3, _z3,
+                           _hardEdge12, _hardEdge23, _hardEdge31,
+                           _dX12, _dY12, _dZ12,
+                           _dX23, _dY23, _dZ23,
+                           _dX31, _dY31, _dZ31,
+                           _lengthSqr12, _lengthSqr23, _lengthSqr31,
+                           _xNormal, _yNormal, _zNormal];
+            
+            array_push(_triDefArray, _triDef);
+            
+            var _xMin = min(_x1, _x2, _x3);
+            var _yMin = min(_y1, _y2, _y3);
+            var _zMin = min(_z1, _z2, _z3);
+            
+            var _xMax = max(_x1, _x2, _x3);
+            var _yMax = max(_y1, _y2, _y3);
+            var _zMax = max(_z1, _z2, _z3);
+            
+            var _cellXMin = clamp(floor(_xMin / _bonkCellXSize), BONK_WORLD_CELL_MIN, BONK_WORLD_CELL_MAX);
+            var _cellYMin = clamp(floor(_yMin / _bonkCellYSize), BONK_WORLD_CELL_MIN, BONK_WORLD_CELL_MAX);
+            var _cellZMin = clamp(floor(_zMin / _bonkCellZSize), BONK_WORLD_CELL_MIN, BONK_WORLD_CELL_MAX);
+            
+            var _cellXMax = clamp(floor(_xMax / _bonkCellXSize), BONK_WORLD_CELL_MIN, BONK_WORLD_CELL_MAX);
+            var _cellYMax = clamp(floor(_yMax / _bonkCellYSize), BONK_WORLD_CELL_MIN, BONK_WORLD_CELL_MAX);
+            var _cellZMax = clamp(floor(_zMax / _bonkCellZSize), BONK_WORLD_CELL_MIN, BONK_WORLD_CELL_MAX);
             
             _workMinCellX = min(_workMinCellX, _cellXMin, _cellXMax);
             _workMinCellY = min(_workMinCellY, _cellYMin, _cellYMax);
@@ -415,7 +445,7 @@ function __BonkClassMeshWorker(_mesh, _vertexBufferArray, _vertexFormat, _matrix
                     var _x = _cellXMin;
                     repeat(_cellXSize)
                     {
-                        array_push(_mesh.__EnsureShapeArrayFromCell(_x, _y, _z), _bonkTri);
+                        array_push(_mesh.__EnsureShapeArrayFromCell(_x, _y, _z), _triDef);
                         ++_x;
                     }
                     
