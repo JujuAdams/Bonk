@@ -371,13 +371,22 @@ function __BonkClassMeshWorker(_mesh, _vertexBufferArray, _vertexFormat, _matrix
             var _lengthSqr23 = _dX23*_dX23 + _dY23*_dY23 + _dZ23*_dZ23;
             var _lengthSqr31 = _dX31*_dX31 + _dY31*_dY31 + _dZ31*_dZ31;
             
+            var _hardEdge12 = true; //TODO
+            var _hardEdge23 = true;
+            var _hardEdge31 = true;
+            
             var _xNormal = _dZ12*_dY31 - _dY12*_dZ31;
             var _yNormal = _dX12*_dZ31 - _dZ12*_dX31;
             var _zNormal = _dY12*_dX31 - _dX12*_dY31;
             
-            var _hardEdge12 = true;
-            var _hardEdge23 = true;
-            var _hardEdge31 = true;
+            var _length = sqrt(_xNormal*_xNormal + _yNormal*_yNormal + _zNormal*_zNormal);
+            if (_length > 0)
+            {
+                var _coeff = 1 / _length;
+                _xNormal *= _coeff;
+                _yNormal *= _coeff;
+                _zNormal *= _coeff;
+            }
             
             //TODO - Restore this
             //if (_applySoftEdges)
@@ -399,12 +408,12 @@ function __BonkClassMeshWorker(_mesh, _vertexBufferArray, _vertexFormat, _matrix
             var _triDef = [_x1, _y1, _z1,
                            _x2, _y2, _z2,
                            _x3, _y3, _z3,
-                           _hardEdge12, _hardEdge23, _hardEdge31,
                            _dX12, _dY12, _dZ12,
                            _dX23, _dY23, _dZ23,
                            _dX31, _dY31, _dZ31,
-                           _lengthSqr12, _lengthSqr23, _lengthSqr31,
-                           _xNormal, _yNormal, _zNormal];
+                           _xNormal, _yNormal, _zNormal,
+                           _hardEdge12, _hardEdge23, _hardEdge31,
+                           _lengthSqr12, _lengthSqr23, _lengthSqr31];
             
             array_push(_triDefArray, _triDef);
             
