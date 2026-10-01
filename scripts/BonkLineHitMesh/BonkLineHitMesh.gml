@@ -12,6 +12,9 @@
 
 function BonkLineHitMesh(_mesh, _x1, _y1, _z1, _x2, _y2, _z2, _struct = undefined, _groupFilter = -1)
 {
+    static _executeArrayStatic = array_create(18, undefined);
+    var _executeArray = _executeArrayStatic;
+    
     static _map = ds_map_create();
     
     static _staticHitA = new BonkResultHit();
@@ -31,6 +34,15 @@ function BonkLineHitMesh(_mesh, _x1, _y1, _z1, _x2, _y2, _z2, _struct = undefine
         var _cellYSize = __bonkCellYSize;
         var _cellZSize = __bonkCellZSize;
         
+        _executeArray[@  0] = self;
+        _executeArray[@  1] = _x1;
+        _executeArray[@  2] = _y1;
+        _executeArray[@  3] = _z1;
+        _executeArray[@  4] = _x2;
+        _executeArray[@  5] = _y2;
+        _executeArray[@  6] = _z2;
+        _executeArray[@ 16] = _workingHit;
+        
         //TODO - Replace with incremental algo
         var _pointArray = GetCellsFromLineExt(_x1, _y1, _z1, _x2, _y2, _z2);
         var _i = 0;
@@ -49,13 +61,8 @@ function BonkLineHitMesh(_mesh, _x1, _y1, _z1, _x2, _y2, _z2, _struct = undefine
                 {
                     _map[? _triDef] = true;
                     
-                    if (__BonkLineHitTriangle(self,
-                                              _x1, _y1, _z1,
-                                              _x2, _y2, _z2,
-                                              _triDef[__BONK_MESH_TRI_X1], _triDef[__BONK_MESH_TRI_Y1], _triDef[__BONK_MESH_TRI_Z1],
-                                              _triDef[__BONK_MESH_TRI_X2], _triDef[__BONK_MESH_TRI_Y2], _triDef[__BONK_MESH_TRI_Z2],
-                                              _triDef[__BONK_MESH_TRI_X3], _triDef[__BONK_MESH_TRI_Y3], _triDef[__BONK_MESH_TRI_Z3],
-                                              _workingHit).shape != undefined)
+                    array_copy(_executeArray, 7, _triDef, 0, 9);
+                    if (script_execute_ext(__BonkLineHitTriangle, _executeArray).shape != undefined)
                     {
                         var _distance = point_distance_3d(_x1, _y1, _z1, _workingHit.x, _workingHit.y, _workingHit.z);
                         if (_distance < _closestDistance)
@@ -69,6 +76,8 @@ function BonkLineHitMesh(_mesh, _x1, _y1, _z1, _x2, _y2, _z2, _struct = undefine
                             var _tempHit = _workingHit;
                             _workingHit = _returnHit;
                             _returnHit  = _tempHit;
+                            
+                            _executeArray[@ 16] = _workingHit;
                         }
                     }
                 }

@@ -367,8 +367,8 @@ function __BonkCommonMesh(_cellXSize, _cellYSize, _cellZSize)
         //TODO - Add group filtering
         
         static _map = ds_map_create();
-        static _executeArrayStatic = [];
         
+        static _executeArrayStatic = [];
         var _executeArray = _executeArrayStatic;
         
         static _staticCollision = new BonkResultCollide();
