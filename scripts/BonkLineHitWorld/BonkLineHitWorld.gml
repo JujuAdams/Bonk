@@ -12,7 +12,8 @@
 
 function BonkLineHitWorld(_world, _x1, _y1, _z1, _x2, _y2, _z2, _struct = undefined, _groupFilter = -1)
 {
-    static _map = ds_map_create();
+    static _staticMap = ds_map_create();
+    var _map = _staticMap;
     
     static _staticHitA = new BonkResultHit();
     static _staticHitB = new BonkResultHit();
@@ -21,9 +22,16 @@ function BonkLineHitWorld(_world, _x1, _y1, _z1, _x2, _y2, _z2, _struct = undefi
     var _workingHit = _staticHitB;
     
     var _closestDistance = infinity;
+    var _closestGridX = infinity;
+    var _closestGridY = infinity;
+    var _closestGridZ = infinity;
     
     with(_world)
     {
+        var _cellXSize = __bonkCellXSize;
+        var _cellYSize = __bonkCellYSize;
+        var _cellZSize = __bonkCellZSize;
+        
         //TODO - Replace with incremental algo
         var _pointArray = GetCellsFromLineExt(_x1, _y1, _z1, _x2, _y2, _z2);
         var _i = 0;
@@ -40,7 +48,7 @@ function BonkLineHitWorld(_world, _x1, _y1, _z1, _x2, _y2, _z2, _struct = undefi
                 var _shape = _shapeArray[_j];
                 if (not ds_map_exists(_map, _shape))
                 {
-                    _map[? _shape] = true;
+                    _map[? _shape] = _shape;
                     
                     if ((_shape.LineHit(_x1, _y1, _z1, _x2, _y2, _z2, _groupFilter, _workingHit)).shape != undefined)
                     {
@@ -48,6 +56,9 @@ function BonkLineHitWorld(_world, _x1, _y1, _z1, _x2, _y2, _z2, _struct = undefi
                         if (_distance < _closestDistance)
                         {
                             _closestDistance = _distance;
+                            _closestGridX = floor(_workingHit.x / _cellXSize);
+                            _closestGridY = floor(_workingHit.y / _cellYSize);
+                            _closestGridZ = floor(_workingHit.z / _cellZSize);
                             
                             //Swap over
                             var _tempHit = _workingHit;
@@ -60,7 +71,10 @@ function BonkLineHitWorld(_world, _x1, _y1, _z1, _x2, _y2, _z2, _struct = undefi
                 ++_j;
             }
             
-            if (not is_infinity(_closestDistance))
+            //Cells returned by `GetCellsFromLineExt()` are ordered from the origin of the line towards
+            //the end of the line. If we have a hit already then we don't need to check beyond the cell
+            //that contains the hit
+            if ((_closestGridX == _x) && (_closestGridY == _y) && (_closestGridZ == _z))
             {
                 ds_map_clear(_map);
                 return (_struct == undefined)? _returnHit : _returnHit.__CopyTo(_struct);

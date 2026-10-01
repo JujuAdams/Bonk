@@ -21,9 +21,16 @@ function BonkLineHitMesh(_mesh, _x1, _y1, _z1, _x2, _y2, _z2, _struct = undefine
     var _workingHit = _staticHitB;
     
     var _closestDistance = infinity;
+    var _closestGridX = infinity;
+    var _closestGridY = infinity;
+    var _closestGridZ = infinity;
     
     with(_mesh)
     {
+        var _cellXSize = __bonkCellXSize;
+        var _cellYSize = __bonkCellYSize;
+        var _cellZSize = __bonkCellZSize;
+        
         //TODO - Replace with incremental algo
         var _pointArray = GetCellsFromLineExt(_x1, _y1, _z1, _x2, _y2, _z2);
         var _i = 0;
@@ -42,26 +49,37 @@ function BonkLineHitMesh(_mesh, _x1, _y1, _z1, _x2, _y2, _z2, _struct = undefine
                 {
                     _map[? _triDef] = true;
                     
-                    //TODO - Restore
-                    //if ((_triDef.LineHit(_x1, _y1, _z1, _x2, _y2, _z2, _groupFilter, _workingHit)).shape != undefined)
-                    //{
-                    //    var _distance = point_distance_3d(_x1, _y1, _z1, _workingHit.x, _workingHit.y, _workingHit.z);
-                    //    if (_distance < _closestDistance)
-                    //    {
-                    //        _closestDistance = _distance;
-                    //        
-                    //        //Swap over
-                    //        var _tempHit = _workingHit;
-                    //        _workingHit = _returnHit;
-                    //        _returnHit  = _tempHit;
-                    //    }
-                    //}
+                    if (__BonkLineHitTriangle(self,
+                                              _x1, _y1, _z1,
+                                              _x2, _y2, _z2,
+                                              _triDef[__BONK_MESH_TRI_X1], _triDef[__BONK_MESH_TRI_Y1], _triDef[__BONK_MESH_TRI_Z1],
+                                              _triDef[__BONK_MESH_TRI_X2], _triDef[__BONK_MESH_TRI_Y2], _triDef[__BONK_MESH_TRI_Z2],
+                                              _triDef[__BONK_MESH_TRI_X3], _triDef[__BONK_MESH_TRI_Y3], _triDef[__BONK_MESH_TRI_Z3],
+                                              _workingHit).shape != undefined)
+                    {
+                        var _distance = point_distance_3d(_x1, _y1, _z1, _workingHit.x, _workingHit.y, _workingHit.z);
+                        if (_distance < _closestDistance)
+                        {
+                            _closestDistance = _distance;
+                            _closestGridX = floor(_workingHit.x / _cellXSize);
+                            _closestGridY = floor(_workingHit.y / _cellYSize);
+                            _closestGridZ = floor(_workingHit.z / _cellZSize);
+                            
+                            //Swap over
+                            var _tempHit = _workingHit;
+                            _workingHit = _returnHit;
+                            _returnHit  = _tempHit;
+                        }
+                    }
                 }
                 
                 ++_j;
             }
             
-            if (not is_infinity(_closestDistance))
+            //Cells returned by `GetCellsFromLineExt()` are ordered from the origin of the line towards
+            //the end of the line. If we have a hit already then we don't need to check beyond the cell
+            //that contains the hit
+            if ((_closestGridX == _x) && (_closestGridY == _y) && (_closestGridZ == _z))
             {
                 ds_map_clear(_map);
                 return (_struct == undefined)? _returnHit : _returnHit.__CopyTo(_struct);
