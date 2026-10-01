@@ -223,6 +223,7 @@ function __BonkCommonHeightmap(_function, _x, _y, _z, _cellCountX, _cellCountY, 
                 
                 // TODO - Set soft edges
                 // TODO - Update rather than replace triangles
+                // TODO - Replace with tridef arrays
                 
                 if (_simpleMode)
                 {
