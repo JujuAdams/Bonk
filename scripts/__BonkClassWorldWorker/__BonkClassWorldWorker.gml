@@ -318,7 +318,7 @@ function __BonkClassWorldWorker(_world, _vertexBufferArray, _vertexFormat, _matr
                                                   _x2, _y2, _z2,
                                                   _x3, _y3, _z3);
             
-            if (_applySoftEdges)
+            if (_applySoftEdges && (not BONK_EXPERIMENT_FORCE_SOFT_EDGES))
             {
                 with(_bonkTri)
                 {

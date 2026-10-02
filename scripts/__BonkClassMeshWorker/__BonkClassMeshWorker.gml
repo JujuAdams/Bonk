@@ -366,7 +366,7 @@ function __BonkClassMeshWorker(_mesh, _vertexBufferArray, _vertexFormat, _matrix
                                                   _x2, _y2, _z2,
                                                   _x3, _y3, _z3);
             
-            if (_applySoftEdges)
+            if (_applySoftEdges && (_length > 0))
             {
                 with(_bonkTri)
                 {
