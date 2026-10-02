@@ -371,9 +371,9 @@ function __BonkClassMeshWorker(_mesh, _vertexBufferArray, _vertexFormat, _matrix
             var _lengthSqr23 = _dX23*_dX23 + _dY23*_dY23 + _dZ23*_dZ23;
             var _lengthSqr31 = _dX31*_dX31 + _dY31*_dY31 + _dZ31*_dZ31;
             
-            var _hardEdge12 = true; //TODO
-            var _hardEdge23 = true;
-            var _hardEdge31 = true;
+            var _hardEdge12 = not BONK_EXPERIMENT_FORCE_SOFT_EDGES; //TODO
+            var _hardEdge23 = not BONK_EXPERIMENT_FORCE_SOFT_EDGES;
+            var _hardEdge31 = not BONK_EXPERIMENT_FORCE_SOFT_EDGES;
             
             var _xNormal = _dZ12*_dY31 - _dY12*_dZ31;
             var _yNormal = _dX12*_dZ31 - _dZ12*_dX31;

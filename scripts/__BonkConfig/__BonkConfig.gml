@@ -33,3 +33,6 @@
 // Bonk worlds. Setting this macro to `true` will incur a minor performance penalty and will
 // provide additional information when the supercover algorithm fails.
 #macro BONK_SUPERCOVER_DEBUG  true
+
+// Forces triangle edges to be soft edges. Don't turn this on unless directed.
+#macro BONK_EXPERIMENT_FORCE_SOFT_EDGES  false

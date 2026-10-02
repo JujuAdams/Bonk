@@ -35,9 +35,9 @@ function BonkStructTriangle(_x1, _y1, _z1, _x2, _y2, _z2, _x3, _y3, _z3, _groupV
     y3 = _y3;
     z3 = _z3;
     
-    hardEdge12 = true;
-    hardEdge23 = true;
-    hardEdge31 = true;
+    hardEdge12 = BONK_EXPERIMENT_FORCE_SOFT_EDGES? false : true;
+    hardEdge23 = BONK_EXPERIMENT_FORCE_SOFT_EDGES? false : true;
+    hardEdge31 = BONK_EXPERIMENT_FORCE_SOFT_EDGES? false : true;
     
     Refresh();
     

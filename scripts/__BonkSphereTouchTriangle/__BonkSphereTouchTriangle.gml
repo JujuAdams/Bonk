@@ -36,6 +36,13 @@
 
 function __BonkSphereTouchTriangle(_sphereX, _sphereY, _sphereZ, _sphereRadius,   _triX1, _triY1, _triZ1,   _triX2, _triY2, _triZ2,   _triX3, _triY3, _triZ3,    _dX12, _dY12, _dZ12,    _dX23, _dY23, _dZ23,    _dX31, _dY31, _dZ31,   _normalX, _normalY, _normalZ,   _hardEdge12, _hardEdge23, _hardEdge31,   _edgeSqrLength12, _edgeSqrLength23, _edgeSqrLength31)
 {
+    if (BONK_EXPERIMENT_FORCE_SOFT_EDGES)
+    {
+        _hardEdge12 = false;
+        _hardEdge23 = false;
+        _hardEdge31 = false;
+    }
+    
     //Distance from the sphere's centre to the plane
     var _refToPlaneDist = dot_product_3d(_sphereX - _triX1, _sphereY - _triY1, _sphereZ - _triZ1, _normalX, _normalY, _normalZ);
     
