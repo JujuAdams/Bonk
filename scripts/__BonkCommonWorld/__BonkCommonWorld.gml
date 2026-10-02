@@ -142,15 +142,22 @@ function __BonkCommonWorld(_cellXSize, _cellYSize, _cellZSize)
         return false;
     }
     
-    Deflect = function(_subjectShape, _slopeThreshold = 0, _groupFilter = -1)
+    Deflect = function(_subjectShape, _slopeThreshold = 0, _groupFilter = -1, _deflectStruct = undefined)
     {
-        static _map = ds_map_create();
-        
         static _staticDeflect = new BonkResultDeflect();
-        var _result = _staticDeflect;
+        _deflectStruct ??= _staticDeflect;
         
-        var _largestGrippyDepth   = -infinity;
-        var _largestSlipperyDepth = -infinity;
+        _deflectStruct.Null()
+                      .__DeflectInner(_subjectShape, _slopeThreshold, _groupFilter, _deflectStruct)
+                      .MoveShape(_subjectShape);
+        
+        return _deflectStruct;
+    }
+    
+    __DeflectInner = function(_subjectShape, _slopeThreshold, _groupFilter, _deflectStruct)
+    {
+        static _staticMap = ds_map_create();
+        var _map = _staticMap;
         
         var _minCellX = __bonkMinCellX;
         var _minCellY = __bonkMinCellY;
@@ -191,36 +198,7 @@ function __BonkCommonWorld(_cellXSize, _cellYSize, _cellZSize)
                 var _i = 0;
                 repeat(array_length(_shapeArray))
                 {
-                    var _reaction = _shapeArray[_i].Deflect(_subjectShape, _slopeThreshold, _groupFilter);
-                    if (_reaction.deflectType != BONK_DEFLECT_NONE)
-                    {
-                        with(_reaction.grippyCollision)
-                        {
-                            if (shape != undefined)
-                            {
-                                var _depth = dX*dX + dY*dY + dZ*dZ;
-                                if (_depth > _largestGrippyDepth)
-                                {
-                                    _largestGrippyDepth = _depth;
-                                    __CopyTo(_result.grippyCollision);
-                                }
-                            }
-                        }
-                        
-                        with(_reaction.slipperyCollision)
-                        {
-                            if (shape != undefined)
-                            {
-                                var _depth = dX*dX + dY*dY + dZ*dZ;
-                                if (_depth > _largestSlipperyDepth)
-                                {
-                                    _largestSlipperyDepth = _depth;
-                                    __CopyTo(_result.slipperyCollision);
-                                }
-                            }
-                        }
-                    }
-                    
+                    _shapeArray[_i].__DeflectInner(_subjectShape, _slopeThreshold, _groupFilter, _deflectStruct);
                     ++_i;
                 }
             }
@@ -244,7 +222,6 @@ function __BonkCommonWorld(_cellXSize, _cellYSize, _cellZSize)
                         repeat(_cellXSize)
                         {
                             var _shapeArray = GetShapeArrayFromCell(_x, _y, _z);
-                            
                             var _i = 0;
                             repeat(array_length(_shapeArray))
                             {
@@ -252,36 +229,7 @@ function __BonkCommonWorld(_cellXSize, _cellYSize, _cellZSize)
                                 if (not ds_map_exists(_map, _shape))
                                 {
                                     _map[? _shape] = true;
-                                    
-                                    var _reaction = _shape.Deflect(_subjectShape, _slopeThreshold, _groupFilter);
-                                    if (_reaction.deflectType != BONK_DEFLECT_NONE)
-                                    {
-                                        with(_reaction.grippyCollision)
-                                        {
-                                            if (shape != undefined)
-                                            {
-                                                var _depth = dX*dX + dY*dY + dZ*dZ;
-                                                if (_depth > _largestGrippyDepth)
-                                                {
-                                                    _largestGrippyDepth = _depth;
-                                                    __CopyTo(_result.grippyCollision);
-                                                }
-                                            }
-                                        }
-                                        
-                                        with(_reaction.slipperyCollision)
-                                        {
-                                            if (shape != undefined)
-                                            {
-                                                var _depth = dX*dX + dY*dY + dZ*dZ;
-                                                if (_depth > _largestSlipperyDepth)
-                                                {
-                                                    _largestSlipperyDepth = _depth;
-                                                    __CopyTo(_result.slipperyCollision);
-                                                }
-                                            }
-                                        }
-                                    }
+                                    _shape.__DeflectInner(_subjectShape, _slopeThreshold, _groupFilter, _deflectStruct);
                                 }
                                 
                                 ++_i;
@@ -300,36 +248,7 @@ function __BonkCommonWorld(_cellXSize, _cellYSize, _cellZSize)
             }
         }
         
-        with(_result)
-        {
-            if (not is_infinity(_largestGrippyDepth))
-            {
-                primaryCollision = grippyCollision;
-                deflectType = BONK_DEFLECT_GRIPPY;
-                
-                if (is_infinity(_largestSlipperyDepth))
-                {
-                    slipperyCollision.Null();
-                }
-            }
-            else
-            {
-                grippyCollision.Null();
-                primaryCollision = slipperyCollision;
-                
-                if (not is_infinity(_largestSlipperyDepth))
-                {
-                    deflectType = BONK_DEFLECT_SLIPPERY;
-                }
-                else
-                {
-                    slipperyCollision.Null();
-                    deflectType = BONK_DEFLECT_NONE;
-                }
-            }
-            
-            return self;
-        }
+        return _deflectStruct;
     }
     
     Collide = function(_subjectShape, _groupFilter = -1, _struct = undefined)

@@ -33,14 +33,13 @@
 /// @param targetShapes
 /// @param [slopeThreshold=0]
 /// @param [groupFilter]
+/// @param [deflectStruct]
 
-function BonkDeflectManyExt(_subjectShape, _targetShapes, _slopeThreshold = 0, _groupFilter = -1)
+function BonkDeflectManyExt(_subjectShape, _targetShapes, _slopeThreshold = 0, _groupFilter = -1, _deflectStruct = undefined)
 {
     static _staticDeflect = new BonkResultDeflect();
-    var _result = _staticDeflect;
-    
-    var _largestGrippyDepth   = -infinity;
-    var _largestSlipperyDepth = -infinity;
+    _deflectStruct ??= _staticDeflect;
+    _deflectStruct.Null();
     
     if (is_array(_targetShapes)) //We were given an array
     {
@@ -49,35 +48,7 @@ function BonkDeflectManyExt(_subjectShape, _targetShapes, _slopeThreshold = 0, _
         {
             with(_targetShapes[_i]) //Use `with()` here to support iterating over objects
             {
-                var _reaction = Deflect(_subjectShape, _slopeThreshold, _groupFilter);
-                if (_reaction.deflectType != BONK_DEFLECT_NONE)
-                {
-                    with(_reaction.grippyCollision)
-                    {
-                        if (shape != undefined)
-                        {
-                            var _depth = dX*dX + dY*dY + dZ*dZ;
-                            if (_depth > _largestGrippyDepth)
-                            {
-                                _largestGrippyDepth = _depth;
-                                __CopyTo(_result.grippyCollision);
-                            }
-                        }
-                    }
-                    
-                    with(_reaction.slipperyCollision)
-                    {
-                        if (shape != undefined)
-                        {
-                            var _depth = dX*dX + dY*dY + dZ*dZ;
-                            if (_depth > _largestSlipperyDepth)
-                            {
-                                _largestSlipperyDepth = _depth;
-                                __CopyTo(_result.slipperyCollision);
-                            }
-                        }
-                    }
-                }
+                __DeflectInner(_subjectShape, _slopeThreshold, _groupFilter, _deflectStruct);
             }
             
             ++_i;
@@ -90,35 +61,7 @@ function BonkDeflectManyExt(_subjectShape, _targetShapes, _slopeThreshold = 0, _
         {
             with(_targetShapes[| _i]) //Use `with()` here to support iterating over objects
             {
-                var _reaction = Deflect(_subjectShape, _slopeThreshold, _groupFilter);
-                if (_reaction.deflectType != BONK_DEFLECT_NONE)
-                {
-                    with(_reaction.grippyCollision)
-                    {
-                        if (shape != undefined)
-                        {
-                            var _depth = dX*dX + dY*dY + dZ*dZ;
-                            if (_depth > _largestGrippyDepth)
-                            {
-                                _largestGrippyDepth = _depth;
-                                __CopyTo(_result.grippyCollision);
-                            }
-                        }
-                    }
-                    
-                    with(_reaction.slipperyCollision)
-                    {
-                        if (shape != undefined)
-                        {
-                            var _depth = dX*dX + dY*dY + dZ*dZ;
-                            if (_depth > _largestSlipperyDepth)
-                            {
-                                _largestSlipperyDepth = _depth;
-                                __CopyTo(_result.slipperyCollision);
-                            }
-                        }
-                    }
-                }
+                __DeflectInner(_subjectShape, _slopeThreshold, _groupFilter, _deflectStruct);
             }
             
             ++_i;
@@ -128,66 +71,11 @@ function BonkDeflectManyExt(_subjectShape, _targetShapes, _slopeThreshold = 0, _
     {
         with(_targetShapes) //Use `with()` here to support iterating over objects
         {
-            var _reaction = Deflect(_subjectShape, _slopeThreshold, _groupFilter);
-            if (_reaction.deflectType != BONK_DEFLECT_NONE)
-            {
-                with(_reaction.grippyCollision)
-                {
-                    if (shape != undefined)
-                    {
-                        var _depth = dX*dX + dY*dY + dZ*dZ;
-                        if (_depth > _largestGrippyDepth)
-                        {
-                            _largestGrippyDepth = _depth;
-                            __CopyTo(_result.grippyCollision);
-                        }
-                    }
-                }
-                
-                with(_reaction.slipperyCollision)
-                {
-                    if (shape != undefined)
-                    {
-                        var _depth = dX*dX + dY*dY + dZ*dZ;
-                        if (_depth > _largestSlipperyDepth)
-                        {
-                            _largestSlipperyDepth = _depth;
-                            __CopyTo(_result.slipperyCollision);
-                        }
-                    }
-                }
-            }
+            __DeflectInner(_subjectShape, _slopeThreshold, _groupFilter, _deflectStruct);
         }
     }
     
-    with(_result)
-    {
-        if (not is_infinity(_largestGrippyDepth))
-        {
-            primaryCollision = grippyCollision;
-            deflectType = BONK_DEFLECT_GRIPPY;
-            
-            if (is_infinity(_largestSlipperyDepth))
-            {
-                slipperyCollision.Null();
-            }
-        }
-        else
-        {
-            grippyCollision.Null();
-            primaryCollision = slipperyCollision;
-            
-            if (not is_infinity(_largestSlipperyDepth))
-            {
-                deflectType = BONK_DEFLECT_SLIPPERY;
-            }
-            else
-            {
-                slipperyCollision.Null();
-                deflectType = BONK_DEFLECT_NONE;
-            }
-        }
-        
-        return self;
-    }
+    _deflectStruct.MoveShape(_subjectShape);
+    
+    return _deflectStruct;
 }
