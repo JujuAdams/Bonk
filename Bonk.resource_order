@@ -146,6 +146,8 @@
     {"name":"__BonkCommonWorld","order":10,"path":"scripts/__BonkCommonWorld/__BonkCommonWorld.yy",},
     {"name":"__BonkConditionalError","order":2,"path":"scripts/__BonkConditionalError/__BonkConditionalError.yy",},
     {"name":"__BonkConstants","order":1,"path":"scripts/__BonkConstants/__BonkConstants.yy",},
+    {"name":"__BonkConvertCollideArrayToDeflect","order":17,"path":"scripts/__BonkConvertCollideArrayToDeflect/__BonkConvertCollideArrayToDeflect.yy",},
+    {"name":"__BonkConvertCollideToDeflect","order":18,"path":"scripts/__BonkConvertCollideToDeflect/__BonkConvertCollideToDeflect.yy",},
     {"name":"__BonkError","order":1,"path":"scripts/__BonkError/__BonkError.yy",},
     {"name":"__BonkIsInstance","order":8,"path":"scripts/__BonkIsInstance/__BonkIsInstance.yy",},
     {"name":"__BonkResetWorldMatrix","order":17,"path":"scripts/__BonkResetWorldMatrix/__BonkResetWorldMatrix.yy",},

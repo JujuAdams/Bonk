@@ -418,123 +418,6 @@ function __BonkCommonHeightmap(_function, _x, _y, _z, _cellCountX, _cellCountY, 
         return false;
     }
     
-    Deflect = function(_subjectShape, _slopeThreshold = 0, _groupFilter = -1)
-    {
-        static _staticDeflect = new BonkResultDeflect();
-        var _result = _staticDeflect;
-        
-        var _largestGrippyDepth   = -infinity;
-        var _largestSlipperyDepth = -infinity;
-        
-        var _cellCountX = cellCountX;
-        var _cellCountY = cellCountY;
-        
-        var _bonkTriangleArray = __bonkTriangleArray;
-        
-        _subjectShape.x -= x;
-        _subjectShape.y -= y;
-        _subjectShape.z -= z;
-        
-        var _aabb = _subjectShape.GetAABB();
-        
-        var _shapeXMin = floor(_aabb.xMin / xScale);
-        var _shapeYMin = floor(_aabb.yMin / yScale);
-        
-        var _shapeXMax = floor(_aabb.xMax / xScale);
-        var _shapeYMax = floor(_aabb.yMax / yScale);
-        
-        if ((_shapeXMin > _cellCountX-1) || (_shapeYMin > _cellCountY-1) || (_aabb.zMin > __bonkMaxZ)
-        ||  (_shapeXMax < 0) || (_shapeYMax < 0) || (_aabb.zMax < __bonkMinZ))
-        {
-            //Shape is outside bounds
-        }
-        else
-        {
-            _shapeXMin = clamp(_shapeXMin, 0, _cellCountX-1);
-            _shapeYMin = clamp(_shapeYMin, 0, _cellCountY-1);
-            
-            _shapeXMax = clamp(_shapeXMax, 0, _cellCountX-1);
-            _shapeYMax = clamp(_shapeYMax, 0, _cellCountY-1);
-            
-            var _cellCheckWidth = 2*(1 + _shapeXMax - _shapeXMin);
-            
-            var _y = _shapeYMin;
-            repeat(1 + _shapeYMax - _shapeYMin)
-            {
-                var _index = 2*(_shapeXMin + _cellCountX*_y);
-                repeat(_cellCheckWidth)
-                {
-                    var _reaction = _bonkTriangleArray[_index++].Deflect(_subjectShape, _slopeThreshold, _groupFilter);
-                    if (_reaction.deflectType != BONK_DEFLECT_NONE)
-                    {
-                        with(_reaction.grippyCollision)
-                        {
-                            if (shape != undefined)
-                            {
-                                var _depth = dX*dX + dY*dY + dZ*dZ;
-                                if (_depth > _largestGrippyDepth)
-                                {
-                                    _largestGrippyDepth = _depth;
-                                    __CopyTo(_result.grippyCollision);
-                                }
-                            }
-                        }
-                        
-                        with(_reaction.slipperyCollision)
-                        {
-                            if (shape != undefined)
-                            {
-                                var _depth = dX*dX + dY*dY + dZ*dZ;
-                                if (_depth > _largestSlipperyDepth)
-                                {
-                                    _largestSlipperyDepth = _depth;
-                                    __CopyTo(_result.slipperyCollision);
-                                }
-                            }
-                        }
-                    }
-                }
-                
-                ++_y;
-            }
-        }
-        
-        _subjectShape.x += x;
-        _subjectShape.y += y;
-        _subjectShape.z += z;
-        
-        with(_result)
-        {
-            if (not is_infinity(_largestGrippyDepth))
-            {
-                primaryCollision = grippyCollision;
-                deflectType = BONK_DEFLECT_GRIPPY;
-                
-                if (is_infinity(_largestSlipperyDepth))
-                {
-                    slipperyCollision.Null();
-                }
-            }
-            else
-            {
-                grippyCollision.Null();
-                primaryCollision = slipperyCollision;
-                
-                if (not is_infinity(_largestSlipperyDepth))
-                {
-                    deflectType = BONK_DEFLECT_SLIPPERY;
-                }
-                else
-                {
-                    slipperyCollision.Null();
-                    deflectType = BONK_DEFLECT_NONE;
-                }
-            }
-            
-            return self;
-        }
-    }
-    
     Collide = function(_subjectShape, _groupFilter = -1, _struct = undefined)
     {
         static _nullCollisionData = new BonkResultCollide();
@@ -598,6 +481,17 @@ function __BonkCommonHeightmap(_function, _x, _y, _z, _cellCountX, _cellCountY, 
         }
         
         return (_struct == undefined)? _nullCollisionData : _struct.Null();
+    }
+    
+    Deflect = function(_subjectShape, _slopeThreshold = 0, _groupFilter = -1)
+    {
+        static _staticCollisionArray = [];
+        
+        CollideAddToArray(_staticCollisionArray, _subjectShape, _groupFilter);
+        var _return = __BonkConvertCollideArrayToDeflect(_subjectShape, _slopeThreshold, _staticCollisionArray);
+        array_resize(_staticCollisionArray, 0);
+        
+        return _return;
     }
     
     GetAABB = function()
