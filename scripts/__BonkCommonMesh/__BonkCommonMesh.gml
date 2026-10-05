@@ -436,7 +436,7 @@ function __BonkCommonMesh(_cellXSize, _cellYSize, _cellZSize)
         return (_struct == undefined)? _nullCollisionData : _struct.Null();
     }
     
-    CollideAddToArray = function(_outputArray, _subjectShape)
+    __CollideForDeflect = function(_outputArray, _subjectShape)
     {
         static _map = ds_map_create();
         static _staticCollideStruct = new BonkResultCollide();
@@ -483,7 +483,7 @@ function __BonkCommonMesh(_cellXSize, _cellYSize, _cellZSize)
                 var _i = 0;
                 repeat(array_length(_shapeArray))
                 {
-                    _shapeArray[_i].Collide(_subjectShape, -1, _collideStruct);
+                    _subjectShape.Collide(_shapeArray[_i], -1, _collideStruct);
                     if (_collideStruct.shape != undefined)
                     {
                         array_push(_outputArray, _collideStruct);
@@ -522,7 +522,7 @@ function __BonkCommonMesh(_cellXSize, _cellYSize, _cellZSize)
                                 {
                                     _map[? _shape] = true;
                                     
-                                    var _reaction = _shape.Collide(_subjectShape, -1, _collideStruct);
+                                    var _reaction = _subjectShape.Collide(_shapeArray[_i], -1, _collideStruct);
                                     if (_reaction.shape != undefined)
                                     {
                                         array_push(_outputArray, _collideStruct);
@@ -553,7 +553,7 @@ function __BonkCommonMesh(_cellXSize, _cellYSize, _cellZSize)
     {
         static _staticCollisionArray = [];
         
-        CollideAddToArray(_staticCollisionArray, _subjectShape, _groupFilter);
+        __CollideForDeflect(_staticCollisionArray, _subjectShape, _groupFilter);
         var _return = __BonkConvertCollideArrayToDeflect(_subjectShape, _slopeThreshold, _staticCollisionArray);
         array_resize(_staticCollisionArray, 0);
         

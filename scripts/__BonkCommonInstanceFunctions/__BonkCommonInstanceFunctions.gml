@@ -112,11 +112,11 @@ function __BonkCommonInstanceFunctions(_groupVector = BONK_DEFAULT_GROUP)
         return (_struct == undefined)? _nullCollisionData : _struct.Null();
     }
     
-    CollideAddToArray = function(_array, _otherShape, _groupFilter = -1)
+    __CollideForDeflect = function(_array, _otherShape, _groupFilter = -1)
     {
         static _staticCollideStruct = new BonkResultCollide();
         
-        var _collide = Collide(_otherShape, _groupFilter, _staticCollideStruct, true);
+        var _collide = _otherShape.Collide(self, _groupFilter, _staticCollideStruct, true);
         if (_collide.shape != undefined)
         {
             array_push(_array, _collide);

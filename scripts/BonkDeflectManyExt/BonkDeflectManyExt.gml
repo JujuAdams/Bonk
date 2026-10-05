@@ -46,7 +46,7 @@ function BonkDeflectManyExt(_subjectShape, _targetShapes, _slopeThreshold = 0, _
         {
             with(_targetShapes[_i]) //Use `with()` here to support iterating over objects
             {
-                _subjectShape.CollideAddToArray(_collideArray, self, _groupFilter);
+                __CollideForDeflect(_collideArray, _subjectShape, _groupFilter);
             }
             
             ++_i;
@@ -60,7 +60,7 @@ function BonkDeflectManyExt(_subjectShape, _targetShapes, _slopeThreshold = 0, _
         {
             with(_targetShapes[| _i]) //Use `with()` here to support iterating over objects
             {
-                _subjectShape.CollideAddToArray(_collideArray, self, _groupFilter);
+                __CollideForDeflect(_collideArray, _subjectShape, _groupFilter);
             }
             
             ++_i;
@@ -70,7 +70,7 @@ function BonkDeflectManyExt(_subjectShape, _targetShapes, _slopeThreshold = 0, _
     {
         with(_targetShapes) //Use `with()` here to support iterating over objects
         {
-            _subjectShape.CollideAddToArray(_collideArray, self, _groupFilter);
+            __CollideForDeflect(_collideArray, _subjectShape, _groupFilter);
         }
     }
     

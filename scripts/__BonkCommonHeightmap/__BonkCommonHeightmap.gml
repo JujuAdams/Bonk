@@ -483,7 +483,7 @@ function __BonkCommonHeightmap(_function, _x, _y, _z, _cellCountX, _cellCountY, 
         return (_struct == undefined)? _nullCollisionData : _struct.Null();
     }
     
-    CollideAddToArray = function(_outputArray, _subjectShape)
+    __CollideForDeflect = function(_outputArray, _subjectShape)
     {
         static _staticCollideStruct = new BonkResultCollide();
         
@@ -528,12 +528,14 @@ function __BonkCommonHeightmap(_function, _x, _y, _z, _cellCountX, _cellCountY, 
                 
                 repeat(2*_cellCheckWidth)
                 {
-                    var _reaction = _bonkTriangleArray[_index++].Collide(_subjectShape, -1, _collideStruct);
+                    var _reaction = _subjectShape.Collide(_bonkTriangleArray[_index], -1, _collideStruct);
                     if (_reaction.shape != undefined)
                     {
                         array_push(_outputArray, _collideStruct);
                         _collideStruct = new BonkResultCollide();
                     }
+                    
+                    ++_index;
                 }
                 
                 ++_y;
@@ -551,7 +553,7 @@ function __BonkCommonHeightmap(_function, _x, _y, _z, _cellCountX, _cellCountY, 
     {
         static _staticCollisionArray = [];
         
-        CollideAddToArray(_staticCollisionArray, _subjectShape, _groupFilter);
+        __CollideForDeflect(_staticCollisionArray, _subjectShape, _groupFilter);
         var _return = __BonkConvertCollideArrayToDeflect(_subjectShape, _slopeThreshold, _staticCollisionArray);
         array_resize(_staticCollisionArray, 0);
         

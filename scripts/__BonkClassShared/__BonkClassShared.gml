@@ -107,11 +107,11 @@ function __BonkClassShared(_groupVector) constructor
         return (_struct == undefined)? _nullCollisionData : _struct.Null();
     }
     
-    static CollideAddToArray = function(_array, _otherShape, _groupFilter = -1)
+    static __CollideForDeflect = function(_array, _otherShape, _groupFilter = -1)
     {
         static _staticCollideStruct = new BonkResultCollide();
         
-        var _collide = Collide(_otherShape, _groupFilter, _staticCollideStruct, true);
+        var _collide = _otherShape.Collide(self, _groupFilter, _staticCollideStruct, true);
         if (_collide.shape != undefined)
         {
             array_push(_array, _collide);

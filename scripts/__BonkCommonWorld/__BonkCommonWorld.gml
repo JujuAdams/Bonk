@@ -252,10 +252,9 @@ function __BonkCommonWorld(_cellXSize, _cellYSize, _cellZSize)
         return (_struct == undefined)? _nullCollisionData : _struct.Null();
     }
     
-    CollideAddToArray = function(_outputArray, _subjectShape, _groupFilter = -1)
+    __CollideForDeflect = function(_outputArray, _subjectShape, _groupFilter = -1)
     {
         static _map = ds_map_create();
-        static _staticCollideStruct = new BonkResultCollide();
         
         var _minCellX = __bonkMinCellX;
         var _minCellY = __bonkMinCellY;
@@ -279,12 +278,9 @@ function __BonkCommonWorld(_cellXSize, _cellYSize, _cellZSize)
         ||  (_shapeXMax < _minCellX) || (_shapeYMax < _minCellY) || (_shapeZMax < _minCellZ))
         {
             //Shape is outside bounds
-            return;
         }
         else
         {
-            var _collideStruct = _staticCollideStruct;
-            
             _shapeXMin = clamp(_shapeXMin, _minCellX, _maxCellX);
             _shapeYMin = clamp(_shapeYMin, _minCellY, _maxCellY);
             _shapeZMin = clamp(_shapeZMin, _minCellZ, _maxCellZ);
@@ -299,13 +295,7 @@ function __BonkCommonWorld(_cellXSize, _cellYSize, _cellZSize)
                 var _i = 0;
                 repeat(array_length(_shapeArray))
                 {
-                    _shapeArray[_i].Collide(_subjectShape, _groupFilter, _collideStruct);
-                    if (_collideStruct.shape != undefined)
-                    {
-                        array_push(_outputArray, _collideStruct);
-                        _collideStruct = new BonkResultCollide();
-                    }
-                    
+                    _shapeArray[_i].__CollideForDeflect(_outputArray, _subjectShape, _groupFilter);
                     ++_i;
                 }
             }
@@ -337,13 +327,7 @@ function __BonkCommonWorld(_cellXSize, _cellYSize, _cellZSize)
                                 if (not ds_map_exists(_map, _shape))
                                 {
                                     _map[? _shape] = true;
-                                    
-                                    var _reaction = _shape.Collide(_subjectShape, _groupFilter, _collideStruct);
-                                    if (_reaction.shape != undefined)
-                                    {
-                                        array_push(_outputArray, _collideStruct);
-                                        _collideStruct = new BonkResultCollide();
-                                    }
+                                    _shape.__CollideForDeflect(_outputArray, _subjectShape, _groupFilter);
                                 }
                                 
                                 ++_i;
@@ -361,15 +345,13 @@ function __BonkCommonWorld(_cellXSize, _cellYSize, _cellZSize)
                 ds_map_clear(_map);
             }
         }
-        
-        _staticCollideStruct = _collideStruct;
     }
     
     Deflect = function(_subjectShape, _slopeThreshold = 0, _groupFilter = -1)
     {
         static _staticCollisionArray = [];
         
-        CollideAddToArray(_staticCollisionArray, _subjectShape, _groupFilter);
+        __CollideForDeflect(_staticCollisionArray, _subjectShape, _groupFilter);
         var _return = __BonkConvertCollideArrayToDeflect(_subjectShape, _slopeThreshold, _staticCollisionArray);
         array_resize(_staticCollisionArray, 0);
         
