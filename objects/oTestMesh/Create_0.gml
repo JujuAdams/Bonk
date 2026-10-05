@@ -7,4 +7,4 @@ matrix = matrix_multiply(matrix, matrix_build(x, y, 0,   0,0,0,   1,1,1));
     
 shape = (new BonkStructMesh(30, 30, 30))
         .SetMatrix(matrix)
-        .AddVertexBuffer(model.GetVertexBufferArray(), DotobjGetVertexFormat());
+        .AddVertexBuffer(model.GetVertexBufferArray(), DotobjGetVertexFormat(), false);

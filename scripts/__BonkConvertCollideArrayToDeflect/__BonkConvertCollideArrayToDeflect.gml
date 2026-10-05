@@ -33,32 +33,34 @@ function __BonkConvertCollideArrayToDeflect(_subjectShape, _slopeThreshold, _col
     //Sort the array with a special algorithm
     array_sort(_collideArray, function(_a, _b)
     {
-        if (_a.__grippy)
-        {
-            if (_b.__grippy)
-            {
-                //Sort grippy shapes by slope, descending
-                return sign(_b.__slope - _a.__slope);
-            }
-            else
-            {
-                //Always put grippy on top
-                return -1
-            }
-        }
-        else
-        {
-            if (_b.__grippy)
-            {
-                //Always put slippy on bottom
-                return +1;
-            }
-            else
-            {
-                //Sort grippy shapes by penetration distance, descending
-                return sign(_b.__distance - _a.__distance);
-            }
-        }
+        return sign(_b.__slope - _a.__slope);
+        
+        //if (_a.__grippy)
+        //{
+        //    if (_b.__grippy)
+        //    {
+        //        //Sort grippy shapes by slope, descending
+        //        return sign(_b.__slope - _a.__slope);
+        //    }
+        //    else
+        //    {
+        //        //Always put grippy on top
+        //        return -1
+        //    }
+        //}
+        //else
+        //{
+        //    if (_b.__grippy)
+        //    {
+        //        //Always put slippy on bottom
+        //        return +1;
+        //    }
+        //    else
+        //    {
+        //        //Sort grippy shapes by penetration distance, descending
+        //        return sign(_b.__distance - _a.__distance);
+        //    }
+        //}
     });
     
     //Handle the "most" collision first
