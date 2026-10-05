@@ -483,6 +483,70 @@ function __BonkCommonHeightmap(_function, _x, _y, _z, _cellCountX, _cellCountY, 
         return (_struct == undefined)? _nullCollisionData : _struct.Null();
     }
     
+    CollideAddToArray = function(_outputArray, _subjectShape)
+    {
+        static _staticCollideStruct = new BonkResultCollide();
+        
+        var _cellCountX = cellCountX;
+        var _cellCountY = cellCountY;
+        
+        var _bonkTriangleArray = __bonkTriangleArray;
+        
+        _subjectShape.x -= x;
+        _subjectShape.y -= y;
+        _subjectShape.z -= z;
+        
+        var _aabb = _subjectShape.GetAABB();
+        
+        var _shapeXMin = floor(_aabb.xMin / xScale);
+        var _shapeYMin = floor(_aabb.yMin / yScale);
+        
+        var _shapeXMax = floor(_aabb.xMax / xScale);
+        var _shapeYMax = floor(_aabb.yMax / yScale);
+        
+        if ((_shapeXMin > _cellCountX-1) || (_shapeYMin > _cellCountY-1) || (_aabb.zMin > __bonkMaxZ)
+        ||  (_shapeXMax < 0) || (_shapeYMax < 0) || (_aabb.zMax < __bonkMinZ))
+        {
+            //Shape is outside bounds
+        }
+        else
+        {
+            var _collideStruct = _staticCollideStruct;
+            
+            _shapeXMin = clamp(_shapeXMin, 0, _cellCountX-1);
+            _shapeYMin = clamp(_shapeYMin, 0, _cellCountY-1);
+            
+            _shapeXMax = clamp(_shapeXMax, 0, _cellCountX-1);
+            _shapeYMax = clamp(_shapeYMax, 0, _cellCountY-1);
+            
+            var _cellCheckWidth = 2*(1 + _shapeXMax - _shapeXMin);
+            
+            var _y = _shapeYMin;
+            repeat(1 + _shapeYMax - _shapeYMin)
+            {
+                var _index = 2*(_shapeXMin + _cellCountX*_y);
+                
+                repeat(2*_cellCheckWidth)
+                {
+                    var _reaction = _bonkTriangleArray[_index++].Collide(_subjectShape, -1, _collideStruct);
+                    if (_reaction.shape != undefined)
+                    {
+                        array_push(_outputArray, _collideStruct);
+                        _collideStruct = new BonkResultCollide();
+                    }
+                }
+                
+                ++_y;
+            }
+            
+            _staticCollideStruct = _collideStruct;
+        }
+        
+        _subjectShape.x += x;
+        _subjectShape.y += y;
+        _subjectShape.z += z;
+    }
+    
     Deflect = function(_subjectShape, _slopeThreshold = 0, _groupFilter = -1)
     {
         static _staticCollisionArray = [];
