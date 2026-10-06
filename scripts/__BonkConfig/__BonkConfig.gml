@@ -35,4 +35,4 @@
 #macro BONK_SUPERCOVER_DEBUG  true
 
 // Forces triangle edges to be soft edges. Don't turn this on unless directed.
-#macro BONK_EXPERIMENT_FORCE_SOFT_EDGES  false
+#macro BONK_EXPERIMENT_FORCE_EDGE_KIND  undefined

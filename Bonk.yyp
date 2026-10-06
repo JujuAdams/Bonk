@@ -493,8 +493,8 @@
   "resourceType":"GMProject",
   "resourceVersion":"2.0",
   "RoomOrderNodes":[
-    {"roomId":{"name":"rmTestInstancePlayground","path":"rooms/rmTestInstancePlayground/rmTestInstancePlayground.yy",},},
     {"roomId":{"name":"rmTestConstructorPlayground","path":"rooms/rmTestConstructorPlayground/rmTestConstructorPlayground.yy",},},
+    {"roomId":{"name":"rmTestInstancePlayground","path":"rooms/rmTestInstancePlayground/rmTestInstancePlayground.yy",},},
     {"roomId":{"name":"rmTestBigModelToWorld","path":"rooms/rmTestBigModelToWorld/rmTestBigModelToWorld.yy",},},
     {"roomId":{"name":"rmTestBigModelToWorldInstances","path":"rooms/rmTestBigModelToWorldInstances/rmTestBigModelToWorldInstances.yy",},},
     {"roomId":{"name":"rmTestBigModelToMesh","path":"rooms/rmTestBigModelToMesh/rmTestBigModelToMesh.yy",},},
