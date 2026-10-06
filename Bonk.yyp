@@ -178,6 +178,7 @@
     {"id":{"name":"rmTestRaycastHeightmap","path":"rooms/rmTestRaycastHeightmap/rmTestRaycastHeightmap.yy",},},
     {"id":{"name":"rmTestScratch","path":"rooms/rmTestScratch/rmTestScratch.yy",},},
     {"id":{"name":"__BonkCapsuleCollideTriangle","path":"scripts/__BonkCapsuleCollideTriangle/__BonkCapsuleCollideTriangle.yy",},},
+    {"id":{"name":"__BonkClassCollideArrayContainer","path":"scripts/__BonkClassCollideArrayContainer/__BonkClassCollideArrayContainer.yy",},},
     {"id":{"name":"__BonkClassMeshWorker","path":"scripts/__BonkClassMeshWorker/__BonkClassMeshWorker.yy",},},
     {"id":{"name":"__BonkClassShared","path":"scripts/__BonkClassShared/__BonkClassShared.yy",},},
     {"id":{"name":"__BonkClassWorldWorker","path":"scripts/__BonkClassWorldWorker/__BonkClassWorldWorker.yy",},},
@@ -492,8 +493,8 @@
   "resourceType":"GMProject",
   "resourceVersion":"2.0",
   "RoomOrderNodes":[
-    {"roomId":{"name":"rmTestConstructorPlayground","path":"rooms/rmTestConstructorPlayground/rmTestConstructorPlayground.yy",},},
     {"roomId":{"name":"rmTestInstancePlayground","path":"rooms/rmTestInstancePlayground/rmTestInstancePlayground.yy",},},
+    {"roomId":{"name":"rmTestConstructorPlayground","path":"rooms/rmTestConstructorPlayground/rmTestConstructorPlayground.yy",},},
     {"roomId":{"name":"rmTestBigModelToWorld","path":"rooms/rmTestBigModelToWorld/rmTestBigModelToWorld.yy",},},
     {"roomId":{"name":"rmTestBigModelToWorldInstances","path":"rooms/rmTestBigModelToWorldInstances/rmTestBigModelToWorldInstances.yy",},},
     {"roomId":{"name":"rmTestBigModelToMesh","path":"rooms/rmTestBigModelToMesh/rmTestBigModelToMesh.yy",},},

@@ -8,5 +8,5 @@ line = new BonkLine(x, y, z + 0.5*height,
 
 gravAccel = 0.2;
 moveAccel = 0.2;
-damping = 0.7;
+damping = 0.9;
 onGroundFrames = 0;

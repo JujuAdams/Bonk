@@ -354,164 +354,36 @@ function __BonkCommonHeightmap(_function, _x, _y, _z, _cellCountX, _cellCountY, 
     
     Touch = function(_subjectShape, _groupFilter = -1)
     {
-        var _cellCountX = cellCountX;
-        var _cellCountY = cellCountY;
-        
-        var _bonkTriangleArray = __bonkTriangleArray;
-        
-        _subjectShape.x -= x;
-        _subjectShape.y -= y;
-        _subjectShape.z -= z;
-        
-        var _aabb = _subjectShape.GetAABB();
-        
-        var _shapeXMin = floor((_aabb.xMin - x) / xScale);
-        var _shapeYMin = floor((_aabb.yMin - y) / yScale);
-        
-        var _shapeXMax = floor((_aabb.xMax - x) / xScale);
-        var _shapeYMax = floor((_aabb.yMax - y) / yScale);
-        
-        if ((_shapeXMin > _cellCountX-1) || (_shapeYMin > _cellCountY-1) || ((_aabb.zMin - z) > __bonkMaxZ)
-        ||  (_shapeXMax < 0) || (_shapeYMax < 0) || ((_aabb.zMax - z) < __bonkMinZ))
+        if ((_groupFilter < 0) || FilterTest(_groupFilter))
         {
-            //Shape is outside bounds
+            var _cellCountX = cellCountX;
+            var _cellCountY = cellCountY;
             
-            _subjectShape.x += x;
-            _subjectShape.y += y;
-            _subjectShape.z += z;
+            var _bonkTriangleArray = __bonkTriangleArray;
             
-            return false;
-        }
-        
-        _shapeXMin = clamp(_shapeXMin, 0, _cellCountX-1);
-        _shapeYMin = clamp(_shapeYMin, 0, _cellCountY-1);
-        
-        _shapeXMax = clamp(_shapeXMax, 0, _cellCountX-1);
-        _shapeYMax = clamp(_shapeYMax, 0, _cellCountY-1);
-        
-        var _cellCheckWidth = 2*(1 + _shapeXMax - _shapeXMin);
-        
-        var _y = _shapeYMin;
-        repeat(1 + _shapeYMax - _shapeYMin)
-        {
-            var _index = 2*(_shapeXMin + _cellCountX*_y);
+            _subjectShape.x -= x;
+            _subjectShape.y -= y;
+            _subjectShape.z -= z;
             
-            repeat(2*_cellCheckWidth)
+            var _aabb = _subjectShape.GetAABB();
+            
+            var _shapeXMin = floor((_aabb.xMin - x) / xScale);
+            var _shapeYMin = floor((_aabb.yMin - y) / yScale);
+            
+            var _shapeXMax = floor((_aabb.xMax - x) / xScale);
+            var _shapeYMax = floor((_aabb.yMax - y) / yScale);
+            
+            if ((_shapeXMin > _cellCountX-1) || (_shapeYMin > _cellCountY-1) || ((_aabb.zMin - z) > __bonkMaxZ)
+            ||  (_shapeXMax < 0) || (_shapeYMax < 0) || ((_aabb.zMax - z) < __bonkMinZ))
             {
-                if (_bonkTriangleArray[_index++].Touch(_subjectShape, _groupFilter))
-                {
-                    _subjectShape.x += x;
-                    _subjectShape.y += y;
-                    _subjectShape.z += z;
-                    
-                    return true;
-                }
+                //Shape is outside bounds
+                
+                _subjectShape.x += x;
+                _subjectShape.y += y;
+                _subjectShape.z += z;
+                
+                return false;
             }
-            
-            ++_y;
-        }
-        
-        _subjectShape.x += x;
-        _subjectShape.y += y;
-        _subjectShape.z += z;
-        
-        return false;
-    }
-    
-    Collide = function(_subjectShape, _groupFilter = -1, _struct = undefined)
-    {
-        static _nullCollisionData = new BonkResultCollide();
-        
-        var _cellCountX = cellCountX;
-        var _cellCountY = cellCountY;
-        
-        var _bonkTriangleArray = __bonkTriangleArray;
-        
-        _subjectShape.x -= x;
-        _subjectShape.y -= y;
-        _subjectShape.z -= z;
-        
-        var _aabb = _subjectShape.GetAABB();
-        
-        var _shapeXMin = floor(_aabb.xMin / xScale);
-        var _shapeYMin = floor(_aabb.yMin / yScale);
-        
-        var _shapeXMax = floor(_aabb.xMax / xScale);
-        var _shapeYMax = floor(_aabb.yMax / yScale);
-        
-        if ((_shapeXMin > _cellCountX-1) || (_shapeYMin > _cellCountY-1) || (_aabb.zMin > __bonkMaxZ)
-        ||  (_shapeXMax < 0) || (_shapeYMax < 0) || (_aabb.zMax < __bonkMinZ))
-        {
-            //Shape is outside bounds
-            
-            _subjectShape.x += x;
-            _subjectShape.y += y;
-            _subjectShape.z += z;
-            
-            return _nullCollisionData;
-        }
-        
-        _shapeXMin = clamp(_shapeXMin, 0, _cellCountX-1);
-        _shapeYMin = clamp(_shapeYMin, 0, _cellCountY-1);
-        
-        _shapeXMax = clamp(_shapeXMax, 0, _cellCountX-1);
-        _shapeYMax = clamp(_shapeYMax, 0, _cellCountY-1);
-        
-        var _cellCheckWidth = 2*(1 + _shapeXMax - _shapeXMin);
-        
-        var _y = _shapeYMin;
-        repeat(1 + _shapeYMax - _shapeYMin)
-        {
-            var _index = 2*(_shapeXMin + _cellCountX*_y);
-            
-            repeat(2*_cellCheckWidth)
-            {
-                var _reaction = _bonkTriangleArray[_index++].Collide(_subjectShape, _groupFilter, _struct);
-                if (_reaction.shape != undefined)
-                {
-                    _subjectShape.x += x;
-                    _subjectShape.y += y;
-                    _subjectShape.z += z;
-                    
-                    return _reaction;
-                }
-            }
-            
-            ++_y;
-        }
-        
-        return (_struct == undefined)? _nullCollisionData : _struct.Null();
-    }
-    
-    __CollideForDeflect = function(_outputArray, _subjectShape)
-    {
-        static _staticCollideStruct = new BonkResultCollide();
-        
-        var _cellCountX = cellCountX;
-        var _cellCountY = cellCountY;
-        
-        var _bonkTriangleArray = __bonkTriangleArray;
-        
-        _subjectShape.x -= x;
-        _subjectShape.y -= y;
-        _subjectShape.z -= z;
-        
-        var _aabb = _subjectShape.GetAABB();
-        
-        var _shapeXMin = floor(_aabb.xMin / xScale);
-        var _shapeYMin = floor(_aabb.yMin / yScale);
-        
-        var _shapeXMax = floor(_aabb.xMax / xScale);
-        var _shapeYMax = floor(_aabb.yMax / yScale);
-        
-        if ((_shapeXMin > _cellCountX-1) || (_shapeYMin > _cellCountY-1) || (_aabb.zMin > __bonkMaxZ)
-        ||  (_shapeXMax < 0) || (_shapeYMax < 0) || (_aabb.zMax < __bonkMinZ))
-        {
-            //Shape is outside bounds
-        }
-        else
-        {
-            var _collideStruct = _staticCollideStruct;
             
             _shapeXMin = clamp(_shapeXMin, 0, _cellCountX-1);
             _shapeYMin = clamp(_shapeYMin, 0, _cellCountY-1);
@@ -528,36 +400,200 @@ function __BonkCommonHeightmap(_function, _x, _y, _z, _cellCountX, _cellCountY, 
                 
                 repeat(2*_cellCheckWidth)
                 {
-                    var _reaction = _subjectShape.Collide(_bonkTriangleArray[_index], -1, _collideStruct);
-                    if (_reaction.shape != undefined)
+                    if (_bonkTriangleArray[_index++].Touch(_subjectShape, _groupFilter))
                     {
-                        array_push(_outputArray, _collideStruct);
-                        _collideStruct = new BonkResultCollide();
+                        _subjectShape.x += x;
+                        _subjectShape.y += y;
+                        _subjectShape.z += z;
+                        
+                        return true;
                     }
-                    
-                    ++_index;
                 }
                 
                 ++_y;
             }
             
-            _staticCollideStruct = _collideStruct;
+            _subjectShape.x += x;
+            _subjectShape.y += y;
+            _subjectShape.z += z;
         }
         
-        _subjectShape.x += x;
-        _subjectShape.y += y;
-        _subjectShape.z += z;
+        return false;
+    }
+    
+    Collide = function(_subjectShape, _groupFilter = -1, _struct = undefined)
+    {
+        static _nullCollisionData = new BonkResultCollide();
+        
+        if ((_groupFilter < 0) || FilterTest(_groupFilter))
+        {
+            var _cellCountX = cellCountX;
+            var _cellCountY = cellCountY;
+            
+            var _bonkTriangleArray = __bonkTriangleArray;
+            
+            _subjectShape.x -= x;
+            _subjectShape.y -= y;
+            _subjectShape.z -= z;
+            
+            var _aabb = _subjectShape.GetAABB();
+            
+            var _shapeXMin = floor(_aabb.xMin / xScale);
+            var _shapeYMin = floor(_aabb.yMin / yScale);
+            
+            var _shapeXMax = floor(_aabb.xMax / xScale);
+            var _shapeYMax = floor(_aabb.yMax / yScale);
+            
+            if ((_shapeXMin > _cellCountX-1) || (_shapeYMin > _cellCountY-1) || (_aabb.zMin > __bonkMaxZ)
+            ||  (_shapeXMax < 0) || (_shapeYMax < 0) || (_aabb.zMax < __bonkMinZ))
+            {
+                //Shape is outside bounds
+                
+                _subjectShape.x += x;
+                _subjectShape.y += y;
+                _subjectShape.z += z;
+                
+                return _nullCollisionData;
+            }
+            
+            _shapeXMin = clamp(_shapeXMin, 0, _cellCountX-1);
+            _shapeYMin = clamp(_shapeYMin, 0, _cellCountY-1);
+            
+            _shapeXMax = clamp(_shapeXMax, 0, _cellCountX-1);
+            _shapeYMax = clamp(_shapeYMax, 0, _cellCountY-1);
+            
+            var _cellCheckWidth = 2*(1 + _shapeXMax - _shapeXMin);
+            
+            var _y = _shapeYMin;
+            repeat(1 + _shapeYMax - _shapeYMin)
+            {
+                var _index = 2*(_shapeXMin + _cellCountX*_y);
+                
+                repeat(2*_cellCheckWidth)
+                {
+                    var _reaction = _bonkTriangleArray[_index++].Collide(_subjectShape, _groupFilter, _struct);
+                    if (_reaction.shape != undefined)
+                    {
+                        _subjectShape.x += x;
+                        _subjectShape.y += y;
+                        _subjectShape.z += z;
+                        
+                        return _reaction;
+                    }
+                }
+                
+                ++_y;
+            }
+        }
+        
+        return (_struct == undefined)? _nullCollisionData : _struct.Null();
+    }
+    
+    __CollideAddToArray = function(_collideArrayContainer, _subjectShape, _groupFilter)
+    {
+        static _staticCollideStruct = new BonkResultCollide();
+        
+        if ((_groupFilter < 0) || FilterTest(_groupFilter))
+        {
+            var _cellCountX = cellCountX;
+            var _cellCountY = cellCountY;
+            
+            var _bonkTriangleArray = __bonkTriangleArray;
+            
+            _subjectShape.x -= x;
+            _subjectShape.y -= y;
+            _subjectShape.z -= z;
+            
+            var _aabb = _subjectShape.GetAABB();
+            
+            var _shapeXMin = floor(_aabb.xMin / xScale);
+            var _shapeYMin = floor(_aabb.yMin / yScale);
+            
+            var _shapeXMax = floor(_aabb.xMax / xScale);
+            var _shapeYMax = floor(_aabb.yMax / yScale);
+            
+            if ((_shapeXMin > _cellCountX-1) || (_shapeYMin > _cellCountY-1) || (_aabb.zMin > __bonkMaxZ)
+            ||  (_shapeXMax < 0) || (_shapeYMax < 0) || (_aabb.zMax < __bonkMinZ))
+            {
+                //Shape is outside bounds
+            }
+            else
+            {
+                var _collideStruct = _staticCollideStruct;
+                
+                _shapeXMin = clamp(_shapeXMin, 0, _cellCountX-1);
+                _shapeYMin = clamp(_shapeYMin, 0, _cellCountY-1);
+                
+                _shapeXMax = clamp(_shapeXMax, 0, _cellCountX-1);
+                _shapeYMax = clamp(_shapeYMax, 0, _cellCountY-1);
+                
+                var _cellCheckWidth = 2*(1 + _shapeXMax - _shapeXMin);
+                
+                var _y = _shapeYMin;
+                repeat(1 + _shapeYMax - _shapeYMin)
+                {
+                    var _index = 2*(_shapeXMin + _cellCountX*_y);
+                    
+                    repeat(2*_cellCheckWidth)
+                    {
+                        _bonkTriangleArray[_index].__CollideAddToArray(_collideArrayContainer, _subjectShape, -1);
+                        ++_index;
+                    }
+                    
+                    ++_y;
+                }
+                
+                _staticCollideStruct = _collideStruct;
+            }
+            
+            _subjectShape.x += x;
+            _subjectShape.y += y;
+            _subjectShape.z += z;
+        }
     }
     
     Deflect = function(_subjectShape, _slopeThreshold = 0, _groupFilter = -1)
     {
-        static _staticCollisionArray = [];
+        static _staticCollideArrayContainer = new __BonkClassCollideArrayContainer();
+        var _collideArrayContainer = _staticCollideArrayContainer;
         
-        __CollideForDeflect(_staticCollisionArray, _subjectShape, _groupFilter);
-        var _return = __BonkConvertCollideArrayToDeflect(_subjectShape, _slopeThreshold, _staticCollisionArray);
-        array_resize(_staticCollisionArray, 0);
+        __CollideAddToArray(_collideArrayContainer, _subjectShape, _groupFilter);
+        var _return = __BonkConvertCollideArrayToDeflect(_collideArrayContainer, _subjectShape, _slopeThreshold);
         
+        _collideArrayContainer.__count = 0;
         return _return;
+    }
+    
+    FilterTest = function(_filter = -1)
+    {
+        if (_filter < 0)
+        {
+            return true;
+        }
+        
+        var _bonkGroup = bonkGroup;
+        
+        //Filter out shapes that conflict with the NOT vector (if in use)
+        var _notVector = (_filter >> 40) & 0xFFFFF;
+        if ((_notVector > 0) && (_bonkGroup & _notVector))
+        {
+            return false;
+        }
+        
+        //Accept shapes that hit the OR vector
+        if (_bonkGroup & (_filter & 0xFFFFF))
+        {
+            return true;
+        }
+        
+        //Accept shapes the hit all of the AND vector (if in use)
+        var _andVector = (_filter >> 20) & 0xFFFFF;
+        if ((_andVector > 0) && ((_bonkGroup & _andVector) == _andVector))
+        {
+            return true;
+        }
+        
+        return false;
     }
     
     GetAABB = function()

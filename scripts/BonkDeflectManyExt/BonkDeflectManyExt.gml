@@ -36,8 +36,8 @@
 
 function BonkDeflectManyExt(_subjectShape, _targetShapes, _slopeThreshold = 0, _groupFilter = -1)
 {
-    static _staticCollisionArray = [];
-    var _collideArray = _staticCollisionArray;
+    static _staticCollideArrayContainer = new __BonkClassCollideArrayContainer();
+    var _collideArrayContainer = _staticCollideArrayContainer;
     
     if (is_array(_targetShapes)) //We were given an array
     {
@@ -46,7 +46,7 @@ function BonkDeflectManyExt(_subjectShape, _targetShapes, _slopeThreshold = 0, _
         {
             with(_targetShapes[_i]) //Use `with()` here to support iterating over objects
             {
-                __CollideForDeflect(_collideArray, _subjectShape, _groupFilter);
+                __CollideAddToArray(_collideArrayContainer, _subjectShape, _groupFilter);
             }
             
             ++_i;
@@ -60,7 +60,7 @@ function BonkDeflectManyExt(_subjectShape, _targetShapes, _slopeThreshold = 0, _
         {
             with(_targetShapes[| _i]) //Use `with()` here to support iterating over objects
             {
-                __CollideForDeflect(_collideArray, _subjectShape, _groupFilter);
+                __CollideAddToArray(_collideArrayContainer, _subjectShape, _groupFilter);
             }
             
             ++_i;
@@ -70,12 +70,12 @@ function BonkDeflectManyExt(_subjectShape, _targetShapes, _slopeThreshold = 0, _
     {
         with(_targetShapes) //Use `with()` here to support iterating over objects
         {
-            __CollideForDeflect(_collideArray, _subjectShape, _groupFilter);
+            __CollideAddToArray(_collideArrayContainer, _subjectShape, _groupFilter);
         }
     }
     
-    var _return = __BonkConvertCollideArrayToDeflect(_subjectShape, _slopeThreshold, _collideArray);
-    array_resize(_collideArray, 0);
+    var _return = __BonkConvertCollideArrayToDeflect(_collideArrayContainer, _subjectShape, _slopeThreshold);
+    _collideArrayContainer.__count = 0;
     
     return _return;
 }

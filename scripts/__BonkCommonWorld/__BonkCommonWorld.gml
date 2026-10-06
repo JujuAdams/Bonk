@@ -252,7 +252,7 @@ function __BonkCommonWorld(_cellXSize, _cellYSize, _cellZSize)
         return (_struct == undefined)? _nullCollisionData : _struct.Null();
     }
     
-    __CollideForDeflect = function(_outputArray, _subjectShape, _groupFilter = -1)
+    __CollideAddToArray = function(_collideArrayContainer, _subjectShape, _groupFilter)
     {
         static _map = ds_map_create();
         
@@ -295,7 +295,7 @@ function __BonkCommonWorld(_cellXSize, _cellYSize, _cellZSize)
                 var _i = 0;
                 repeat(array_length(_shapeArray))
                 {
-                    _shapeArray[_i].__CollideForDeflect(_outputArray, _subjectShape, _groupFilter);
+                    _shapeArray[_i].__CollideAddToArray(_collideArrayContainer, _subjectShape, _groupFilter);
                     ++_i;
                 }
             }
@@ -327,7 +327,7 @@ function __BonkCommonWorld(_cellXSize, _cellYSize, _cellZSize)
                                 if (not ds_map_exists(_map, _shape))
                                 {
                                     _map[? _shape] = true;
-                                    _shape.__CollideForDeflect(_outputArray, _subjectShape, _groupFilter);
+                                    _shape.__CollideAddToArray(_collideArrayContainer, _subjectShape, _groupFilter);
                                 }
                                 
                                 ++_i;
@@ -349,12 +349,13 @@ function __BonkCommonWorld(_cellXSize, _cellYSize, _cellZSize)
     
     Deflect = function(_subjectShape, _slopeThreshold = 0, _groupFilter = -1)
     {
-        static _staticCollisionArray = [];
+        static _staticCollideArrayContainer = new __BonkClassCollideArrayContainer();
+        var _collideArrayContainer = _staticCollideArrayContainer;
         
-        __CollideForDeflect(_staticCollisionArray, _subjectShape, _groupFilter);
-        var _return = __BonkConvertCollideArrayToDeflect(_subjectShape, _slopeThreshold, _staticCollisionArray);
-        array_resize(_staticCollisionArray, 0);
+        __CollideAddToArray(_collideArrayContainer, _subjectShape, _groupFilter);
+        var _return = __BonkConvertCollideArrayToDeflect(_collideArrayContainer, _subjectShape, _slopeThreshold);
         
+        _collideArrayContainer.__count = 0;
         return _return;
     }
     

@@ -1,37 +1,44 @@
+/// @param collideArrayContainer
 /// @param subjectShape
 /// @param slopeThreshold
-/// @param collideArray
 
-function __BonkConvertCollideArrayToDeflect(_subjectShape, _slopeThreshold, _collideArray)
+function __BonkConvertCollideArrayToDeflect(_collideArrayContainer, _subjectShape, _slopeThreshold)
 {
     static _staticDeflect = new BonkResultDeflect();
-    var _result = _staticDeflect;
+    static _staticSortArray = [];
     
-    var _collisionCount = array_length(_collideArray);
+    var _result = _staticDeflect;
+    var _sortArray = _staticSortArray;
+    
+    var _collisionCount = _collideArrayContainer.__count;
     if (_collisionCount <= 0)
     {
         return _result.Null();
     }
     
+    array_resize(_sortArray, _collisionCount);
+    var _collideArray = _collideArrayContainer.__collideArray;
     var _minGripSlope = clamp(dcos(_slopeThreshold), 0, 1);
     
     //Flesh out all the collisions with extra data
     //TODO - Should we just do this for all collision returns?
     var _i = 0;
-    repeat(array_length(_collideArray))
+    repeat(_collisionCount)
     {
         with(_collideArray[_i])
         {
             __distance = point_distance_3d(0,0,0,   dX, dY, dZ);
             __slope = dZ / max(0.0001, __distance);
             __grippy = (__slope >= _minGripSlope);
+            
+            _sortArray[@ _i] = self;
         }
         
         ++_i;
     }
     
     //Sort the array with a special algorithm
-    array_sort(_collideArray, function(_a, _b)
+    array_sort(_sortArray, function(_a, _b)
     {
         return sign(_b.__slope - _a.__slope);
         
@@ -64,7 +71,7 @@ function __BonkConvertCollideArrayToDeflect(_subjectShape, _slopeThreshold, _col
     });
     
     //Handle the "most" collision first
-    with(_collideArray[0])
+    with(_sortArray[0])
     {
         if (__grippy)
         {
@@ -102,8 +109,7 @@ function __BonkConvertCollideArrayToDeflect(_subjectShape, _slopeThreshold, _col
     var _i = 1;
     repeat(_collisionCount-1)
     {
-        var _collideStruct = _subjectShape.Collide(_collideArray[_i].shape, -1, undefined, true);
-        with(_collideStruct)
+        with(_subjectShape.Collide(_sortArray[_i].shape, -1, undefined, true))
         {
             if (shape != undefined)
             {
@@ -119,7 +125,7 @@ function __BonkConvertCollideArrayToDeflect(_subjectShape, _slopeThreshold, _col
                     if (not _foundSlippery)
                     {
                         _foundSlippery = true;
-                        _collideStruct.__CopyTo(_result.slipperyCollision);
+                        __CopyTo(_result.slipperyCollision);
                     }
                     
                     //Otherwise move out as usual which will typically slide the subject down slopes

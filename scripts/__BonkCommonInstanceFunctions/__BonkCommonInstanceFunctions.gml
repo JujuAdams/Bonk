@@ -68,21 +68,19 @@ function __BonkCommonInstanceFunctions(_groupVector = BONK_DEFAULT_GROUP)
 
     Touch = function(_otherShape, _groupFilter = -1, _quietFail = false)
     {
-        if ((_groupFilter >= 0) && (not FilterTest(_groupFilter)))
+        if ((_groupFilter < 0) || FilterTest(_groupFilter))
         {
-            return false;
-        }
-        
-        var _insideFunc = __bonkTouchFuncLookup[_otherShape.bonkType];
-        if (is_callable(_insideFunc))
-        {
-            return _insideFunc(self, _otherShape);
-        }
-        else
-        {
-            if (BONK_STRICT)
+            var _insideFunc = __bonkTouchFuncLookup[_otherShape.bonkType];
+            if (is_callable(_insideFunc))
             {
-                __BonkConditionalError(not _quietFail, $".Touch() not supported between \"{instanceof(self)}\" (type={bonkType}) and \"{instanceof(_otherShape)}\" (type={_otherShape.bonkType})");
+                return _insideFunc(self, _otherShape);
+            }
+            else
+            {
+                if (BONK_STRICT)
+                {
+                    __BonkConditionalError(not _quietFail, $".Touch() not supported between \"{instanceof(self)}\" (type={bonkType}) and \"{instanceof(_otherShape)}\" (type={_otherShape.bonkType})");
+                }
             }
         }
     
@@ -112,15 +110,12 @@ function __BonkCommonInstanceFunctions(_groupVector = BONK_DEFAULT_GROUP)
         return (_struct == undefined)? _nullCollisionData : _struct.Null();
     }
     
-    __CollideForDeflect = function(_array, _otherShape, _groupFilter = -1)
+    __CollideAddToArray = function(_collideArrayContainer, _otherShape, _groupFilter)
     {
-        static _staticCollideStruct = new BonkResultCollide();
-        
-        var _collide = _otherShape.Collide(self, _groupFilter, _staticCollideStruct, true);
+        var _collide = _otherShape.Collide(self, _groupFilter, _collideArrayContainer.__collideArray[_collideArrayContainer.__count], true);
         if (_collide.shape != undefined)
         {
-            array_push(_array, _collide);
-            _staticCollideStruct = new BonkResultCollide();
+            ++_collideArrayContainer.__count;
         }
     }
     
