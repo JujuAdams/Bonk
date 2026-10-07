@@ -112,7 +112,7 @@ function __BonkSphereCollideTriangle(_sphereX, _sphereY, _sphereZ, _sphereRadius
         {
             shape = _triangleShape;
             
-            var _pushLength = sign(_refToPlaneDist) * (_sphereRadius - abs(_refToPlaneDist));
+            var _pushLength = __BONK_TRIANGLE_BIDIRECTIONAL? (sign(_refToPlaneDist) * (_sphereRadius - abs(_refToPlaneDist))) : (_sphereRadius - _refToPlaneDist);
             dX = _pushLength*_normalX;
             dY = _pushLength*_normalY;
             dZ = _pushLength*_normalZ;

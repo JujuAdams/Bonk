@@ -226,7 +226,7 @@ function __BonkCapsuleCollideTriangle(_capsuleX, _capsuleY, _capsuleZ, _capsuleH
         {
             //The reference point is inside the triangle but not exactly on the plane
             //This happens when the very end of a cap intersects the plane
-            var _pushLength = sign(_refToPlaneDist) * (_capsuleRadius - abs(_refToPlaneDist));
+            var _pushLength = __BONK_TRIANGLE_BIDIRECTIONAL? (sign(_refToPlaneDist) * (_capsuleRadius - abs(_refToPlaneDist))) : (_capsuleRadius - _refToPlaneDist);
         }
           
         with(_reaction)

@@ -1,9 +1,10 @@
+#macro __BONK_TRIANGLE_BIDIRECTIONAL  false
+
 #macro __BONK_VERIFY_UGG  static _uggPresent = __BonkSystem().__uggPresent;\
                           if (not _uggPresent)\
                           {\
                               __BonkError("Cannot draw shape, Ugg has not been imported to your project\nPlease visit https://www.github.com/jujuadams/Ugg/");\
                           }
-
 
 
 
