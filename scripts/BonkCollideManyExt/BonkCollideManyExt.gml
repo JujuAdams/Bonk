@@ -22,6 +22,8 @@
 
 function BonkCollideManyExt(_subjectShape, _targetShapes, _groupFilter = -1, _array = undefined)
 {
+    //TODO - Refactor to use collide array
+    
     static _staticArray = [];
     
     if (_array == undefined)

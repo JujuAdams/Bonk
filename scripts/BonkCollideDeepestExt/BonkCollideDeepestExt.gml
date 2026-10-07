@@ -22,6 +22,8 @@
 
 function BonkCollideDeepestExt(_subjectShape, _targetShapes, _groupFilter = -1)
 {
+    //TODO - Refactor to use collide array
+    
     static _staticCollideA = new BonkResultCollide();
     static _staticCollideB = new BonkResultCollide();
     
