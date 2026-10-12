@@ -283,6 +283,7 @@ function __BonkClassWorldWorker(_world, _vertexBufferArray, _vertexFormat, _matr
         var _vertexFormatStride = __vertexFormatStride;
         var _matrix             = __matrix;
         
+        var _vector = array_create(4, 0);
         repeat(min(BONK_VERTEX_BUFFER_ASYNC_TRIANGLE_RESOLUTION, __trianglesRemaining))
         {
             var _x1 = buffer_read(_buffer, buffer_f32);
@@ -305,13 +306,9 @@ function __BonkClassWorldWorker(_world, _vertexBufferArray, _vertexFormat, _matr
             
             if (_matrix != undefined)
             {
-                var _a = matrix_transform_vertex(_matrix, _x1, _y1, _z1, 1);
-                var _b = matrix_transform_vertex(_matrix, _x2, _y2, _z2, 1);
-                var _c = matrix_transform_vertex(_matrix, _x3, _y3, _z3, 1);
-                
-                _x1 = _a[0]; _y1 = _a[1]; _z1 = _a[2];
-                _x2 = _b[0]; _y2 = _b[1]; _z2 = _b[2];
-                _x3 = _c[0]; _y3 = _c[1]; _z3 = _c[2];
+                matrix_transform_vertex(_matrix, _x1, _y1, _z1, 1, _vector); _x1 = _vector[0]; _y1 = _vector[1]; _z1 = _vector[2];
+                matrix_transform_vertex(_matrix, _x2, _y2, _z2, 1, _vector); _x2 = _vector[0]; _y2 = _vector[1]; _z2 = _vector[2];
+                matrix_transform_vertex(_matrix, _x3, _y3, _z3, 1, _vector); _x3 = _vector[0]; _y3 = _vector[1]; _z3 = _vector[2];
             }
             
             var _bonkTri = new BonkStructTriangle(_x1, _y1, _z1,

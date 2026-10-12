@@ -5,8 +5,8 @@
   "isDnD":false,
   "name":"__BonkClassMeshWorker",
   "parent":{
-    "name":"Common Values",
-    "path":"folders/Bonk/(System)/Common Values.yy",
+    "name":"(System)",
+    "path":"folders/Bonk/(System).yy",
   },
   "resourceType":"GMScript",
   "resourceVersion":"2.0",
