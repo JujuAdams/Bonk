@@ -469,7 +469,7 @@ function __BonkCommonHeightmap(_function, _x, _y, _z, _cellCountX, _cellCountY, 
             {
                 var _index = 2*(_shapeXMin + _cellCountX*_y);
                 
-                repeat(2*_cellCheckWidth)
+                repeat(_cellCheckWidth)
                 {
                     var _reaction = _bonkTriangleArray[_index++].Collide(_subjectShape, _groupFilter, _struct);
                     if (_reaction.shape != undefined)
@@ -534,7 +534,7 @@ function __BonkCommonHeightmap(_function, _x, _y, _z, _cellCountX, _cellCountY, 
                 {
                     var _index = 2*(_shapeXMin + _cellCountX*_y);
                     
-                    repeat(2*_cellCheckWidth)
+                    repeat(_cellCheckWidth)
                     {
                         _bonkTriangleArray[_index].__CollideAddToArray(_collideArrayContainer, _subjectShape, -1);
                         ++_index;
