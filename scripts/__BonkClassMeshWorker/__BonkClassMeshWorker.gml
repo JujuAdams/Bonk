@@ -139,10 +139,9 @@ function __BonkClassMeshWorker(_mesh, _vertexBufferArray, _vertexFormat, _matrix
                 var _right  = __bonkCellXSize*(__bonkMaxCellX+1);
                 var _bottom = __bonkCellYSize*(__bonkMaxCellY+1);
                 
-                x = 0.5*(_left + _right);
-                y = 0.5*(_top + _bottom);
-                image_xscale = max(BONK_INSTANCE_MIN_SIZE, 1 + _right - _left) / BONK_MASK_SIZE;
-                image_yscale = max(BONK_INSTANCE_MIN_SIZE, 1 + _bottom - _top) / BONK_MASK_SIZE;
+                //FIXME - Generate a mask
+                image_xscale = max(BONK_INSTANCE_MIN_SIZE, 2*max(abs(_left), abs(_right))) / BONK_MASK_SIZE;
+                image_yscale = max(BONK_INSTANCE_MIN_SIZE, 2*max(abs(_top), abs(_bottom))) / BONK_MASK_SIZE;
             }
         }
     }
