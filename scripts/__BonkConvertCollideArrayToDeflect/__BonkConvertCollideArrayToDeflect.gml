@@ -109,7 +109,16 @@ function __BonkConvertCollideArrayToDeflect(_collideArrayContainer, _subjectShap
     var _i = 1;
     repeat(_collisionCount-1)
     {
-        with(_subjectShape.Collide(_sortArray[_i].shape, -1, undefined, true))
+        var _collision = _sortArray[_i];
+        
+        with(_collision.__heightmapCoordinateSpace)
+        {
+            _subjectShape.x -= x;
+            _subjectShape.y -= y;
+            _subjectShape.z -= z;
+        }
+        
+        with(_subjectShape.Collide(_collision.shape, -1, undefined, true))
         {
             if (shape != undefined)
             {
@@ -128,6 +137,13 @@ function __BonkConvertCollideArrayToDeflect(_collideArrayContainer, _subjectShap
                 //But always push the subject shape out of our collision using the slippery logic to improve stability
                 _subjectShape.AddPosition(dX, dY, dZ);
             }
+        }
+        
+        with(_collision.__heightmapCoordinateSpace)
+        {
+            _subjectShape.x += x;
+            _subjectShape.y += y;
+            _subjectShape.z += z;
         }
         
         ++_i;

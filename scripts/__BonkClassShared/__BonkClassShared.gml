@@ -110,9 +110,15 @@ function __BonkClassShared(_groupVector) constructor
     static __CollideAddToArray = function(_collideArrayContainer, _otherShape, _groupFilter)
     {
         var _collide = _otherShape.Collide(self, _groupFilter, _collideArrayContainer.__collideArray[_collideArrayContainer.__count], true);
+        
         if (_collide.shape != undefined)
         {
             ++_collideArrayContainer.__count;
+            return _collide;
+        }
+        else
+        {
+            return undefined;
         }
     }
     

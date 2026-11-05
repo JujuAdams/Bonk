@@ -538,7 +538,14 @@ function __BonkCommonHeightmap(_function, _x, _y, _z, _cellCountX, _cellCountY, 
                     
                     repeat(_cellCheckWidth)
                     {
-                        _bonkTriangleArray[_index].__CollideAddToArray(_collideArrayContainer, _subjectShape, -1);
+                        var _result = _bonkTriangleArray[_index].__CollideAddToArray(_collideArrayContainer, _subjectShape, -1);
+                        
+                        //If this was a collision, set the coordinate space
+                        if (_result != undefined)
+                        {
+                            _result.__heightmapCoordinateSpace = self;
+                        }
+                        
                         ++_index;
                     }
                     
