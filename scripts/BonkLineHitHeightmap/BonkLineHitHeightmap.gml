@@ -43,33 +43,34 @@ function BonkLineHitHeightmap(_heightmap, _x1, _y1, _z1, _x2, _y2, _z2, _struct 
             var _y = _pointArray[_i+1];
             
             var _index = 2*(_x + _y*_cellCountX);
-            if (_index >= _maxTriangles) break; //FIXME - This shouldn't be necessary
-            
-            repeat(2)
+            if (_index < _maxTriangles) //FIXME - This shouldn't be necessary
             {
-                if ((_bonkTriangleArray[_index++].LineHit(_x1, _y1, _z1, _x2, _y2, _z2, -1, _workingHit)).shape != undefined)
+                repeat(2)
                 {
-                    var _distance = point_distance_3d(_x1, _y1, _z1, _workingHit.x, _workingHit.y, _workingHit.z);
-                    if (_distance < _closestDistance)
+                    if ((_bonkTriangleArray[_index++].LineHit(_x1, _y1, _z1, _x2, _y2, _z2, -1, _workingHit)).shape != undefined)
                     {
-                        _closestDistance = _distance;
-                        
-                        //Swap over
-                        var _tempHit = _workingHit;
-                        _workingHit = _returnHit;
-                        _returnHit  = _tempHit;
+                        var _distance = point_distance_3d(_x1, _y1, _z1, _workingHit.x, _workingHit.y, _workingHit.z);
+                        if (_distance < _closestDistance)
+                        {
+                            _closestDistance = _distance;
+                            
+                            //Swap over
+                            var _tempHit = _workingHit;
+                            _workingHit = _returnHit;
+                            _returnHit  = _tempHit;
+                        }
                     }
                 }
-            }
-            
-            if (not is_infinity(_closestDistance))
-            {
-                //Re-correct for the heightmap's position
-                _returnHit.x += x;
-                _returnHit.y += y;
-                _returnHit.z += z;
                 
-                return (_struct == undefined)? _returnHit : _returnHit.__CopyTo(_struct);
+                if (not is_infinity(_closestDistance))
+                {
+                    //Re-correct for the heightmap's position
+                    _returnHit.x += x;
+                    _returnHit.y += y;
+                    _returnHit.z += z;
+                    
+                    return (_struct == undefined)? _returnHit : _returnHit.__CopyTo(_struct);
+                }
             }
             
             _i += 2;
