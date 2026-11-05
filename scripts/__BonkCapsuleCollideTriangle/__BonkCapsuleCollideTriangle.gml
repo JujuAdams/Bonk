@@ -28,6 +28,7 @@ function __BonkCapsuleCollideTriangle(_capsuleX, _capsuleY, _capsuleZ, _capsuleH
     {
         var _penDepth = undefined;
         
+        //Calculate the intersection point between the axis of the capsule and the triangle's plane
         var _trace = dot_product_3d(_triX1 - _capsuleX, _triY1 - _capsuleY, _triZ1 - _capsuleZ, _normalX, _normalY, _normalZ) / _normalZ;
         var _traceX = _capsuleX;
         var _traceY = _capsuleY;
@@ -83,6 +84,7 @@ function __BonkCapsuleCollideTriangle(_capsuleX, _capsuleY, _capsuleZ, _capsuleH
                                    _tempY*_edgeX - _tempX*_edgeY,
                                    _normalX, _normalY, _normalZ) > 0)
                 {
+                    //Intersection point is within the triangle
                     _penDepth = clamp(_trace, 0, _capsuleHeight);
                 }
             }
