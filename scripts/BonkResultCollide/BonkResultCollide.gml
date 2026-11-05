@@ -34,6 +34,11 @@ function BonkResultCollide() constructor
         return (GetGradient() > max(dcos(_slopeThreshold), 0));
     }
     
+    static GetMagnitude = function()
+    {
+        return point_distance_3d(0, 0, 0, dX, dY, dZ);
+    }
+    
     static GetSlope = function()
     {
         var _dX = dX;
