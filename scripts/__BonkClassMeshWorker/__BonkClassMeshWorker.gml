@@ -300,6 +300,7 @@ function __BonkClassMeshWorker(_mesh, _vertexBufferArray, _vertexFormat, _matrix
         var _buffer             = __buffer;
         var _vertexFormatStride = __vertexFormatStride;
         var _matrix             = __matrix;
+        var _meshTriangleArray  = _mesh.__bonkTriangleArray;
         
         with(_mesh)
         {
@@ -361,6 +362,8 @@ function __BonkClassMeshWorker(_mesh, _vertexBufferArray, _vertexFormat, _matrix
             var _bonkTri = new BonkStructTriangle(_x1, _y1, _z1,
                                                   _x2, _y2, _z2,
                                                   _x3, _y3, _z3);
+            
+            array_push(_meshTriangleArray, _bonkTri);
             
             if (_applySoftEdges && (BONK_EXPERIMENT_FORCE_EDGE_KIND == undefined))
             {

@@ -25,6 +25,7 @@ function __BonkCommonMesh(_cellXSize, _cellYSize, _cellZSize)
     __bonkMaxCellZ = 0;
     
     __bonkSpatialDict = {};
+    __bonkTriangleArray = [];
     
     __bonkWorkerArray = [];
     
