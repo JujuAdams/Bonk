@@ -16,6 +16,8 @@ function __BonkCommonHeightmap(_function, _x, _y, _z, _cellCountX, _cellCountY, 
     bonkType = BONK_TYPE_HEIGHTMAP;
     
     heightFunction = _function;
+    heightFunctionXOffset = 0;
+    heightFunctionYOffset = 0;
     
     x = _x;
     y = _y;
@@ -39,12 +41,16 @@ function __BonkCommonHeightmap(_function, _x, _y, _z, _cellCountX, _cellCountY, 
     //TODO - Add partial variant
     UpdateAllTriangles = function()
     {
-        var _function   = heightFunction;
+        var _function        = heightFunction;
+        var _functionXOffset = heightFunctionXOffset;
+        var _functionYOffset = heightFunctionYOffset;
+        
         var _cellCountX = cellCountX;
         var _cellCountY = cellCountY
-        var _xScale     = xScale;
-        var _yScale     = yScale;
-        var _zScale     = zScale;
+        
+        var _xScale = xScale;
+        var _yScale = yScale;
+        var _zScale = zScale;
         
         var _tesselation = tesselation;
         var _simpleMode  = (_tesselation == BONK_TESSELATE_SIMPLE);
@@ -64,7 +70,7 @@ function __BonkCommonHeightmap(_function, _x, _y, _z, _cellCountX, _cellCountY, 
         var _z00 = undefined;
         var _z10 = undefined;
         var _z01 = undefined;
-        var _z11 = _zScale*_function(0, 0);
+        var _z11 = _zScale*(_function(_functionXOffset, _functionYOffset) ?? 0);
         
         var _y0 = undefined;
         var _y1 = 0;
@@ -81,8 +87,8 @@ function __BonkCommonHeightmap(_function, _x, _y, _z, _cellCountX, _cellCountY, 
             _y0 = _y1;
             _y1 = _y0 + _yScale;
             
-            _z10 = _zScale*_function(0, _yCell);
-            _z11 = _zScale*_function(0, _yCell+1);
+            _z10 = _zScale*(_function(_functionXOffset, _functionYOffset + _yCell  ) ?? 0);
+            _z11 = _zScale*(_function(_functionXOffset, _functionYOffset + _yCell+1) ?? 0);
             
             _zMinCell = min(_zMinCell, _z10, _z11);
             _zMaxCell = max(_zMaxCell, _z10, _z11);
@@ -98,8 +104,8 @@ function __BonkCommonHeightmap(_function, _x, _y, _z, _cellCountX, _cellCountY, 
                 
                 _z00 = _z10;
                 _z01 = _z11;
-                _z10 = _zScale*_function(_xCell+1, _yCell);
-                _z11 = _zScale*_function(_xCell+1, _yCell+1);
+                _z10 = _zScale*(_function(_functionXOffset + _xCell+1, _functionYOffset + _yCell  ) ?? 0);
+                _z11 = _zScale*(_function(_functionXOffset + _xCell+1, _functionYOffset + _yCell+1) ?? 0);
                 
                 _zMinCell    = min(_zMinCell, _z10, _z11);
                 _zMaxCell    = max(_zMaxCell, _z10, _z11);
@@ -160,10 +166,13 @@ function __BonkCommonHeightmap(_function, _x, _y, _z, _cellCountX, _cellCountY, 
         var _cellCountX = 1 + _regionX2 - _regionX1;
         var _cellCountY = 1 + _regionY2 - _regionY1;
         
-        var _function = heightFunction;
-        var _xScale   = xScale;
-        var _yScale   = yScale;
-        var _zScale   = zScale;
+        var _function        = heightFunction;
+        var _functionXOffset = heightFunctionXOffset;
+        var _functionYOffset = heightFunctionYOffset;
+        
+        var _xScale = xScale;
+        var _yScale = yScale;
+        var _zScale = zScale;
         
         var _tesselation = tesselation;
         var _simpleMode  = (_tesselation == BONK_TESSELATE_SIMPLE);
@@ -176,7 +185,7 @@ function __BonkCommonHeightmap(_function, _x, _y, _z, _cellCountX, _cellCountY, 
         var _z00 = undefined;
         var _z10 = undefined;
         var _z01 = undefined;
-        var _z11 = _zScale*_function(_regionX1, _regionY1);
+        var _z11 = _zScale*(_function(_functionXOffset + _regionX1, _functionYOffset + _regionY1) ?? 0);
         
         var _y0 = undefined;
         var _y1 = 0;
@@ -192,8 +201,8 @@ function __BonkCommonHeightmap(_function, _x, _y, _z, _cellCountX, _cellCountY, 
             _y0 = _y1;
             _y1 = _y0 + _yScale;
             
-            _z10 = _zScale*_function(0, _yCell);
-            _z11 = _zScale*_function(0, _yCell+1);
+            _z10 = _zScale*(_function(_functionXOffset, _functionYOffset + _yCell  ) ?? 0);
+            _z11 = _zScale*(_function(_functionXOffset, _functionYOffset + _yCell+1) ?? 0);
             
             _zMinCell = min(_zMinCell, _z10, _z11);
             _zMaxCell = max(_zMaxCell, _z10, _z11);
@@ -210,8 +219,8 @@ function __BonkCommonHeightmap(_function, _x, _y, _z, _cellCountX, _cellCountY, 
                 
                 _z00 = _z10;
                 _z01 = _z11;
-                _z10 = _zScale*_function(_xCell+1, _yCell);
-                _z11 = _zScale*_function(_xCell+1, _yCell+1);
+                _z10 = _zScale*(_function(_functionXOffset + _xCell+1, _functionYOffset + _yCell  ) ?? 0);
+                _z11 = _zScale*(_function(_functionXOffset + _xCell+1, _functionYOffset + _yCell+1) ?? 0);
                 
                 _zMinCell    = min(_zMinCell, _z10, _z11);
                 _zMaxCell    = max(_zMaxCell, _z10, _z11);
@@ -320,20 +329,9 @@ function __BonkCommonHeightmap(_function, _x, _y, _z, _cellCountX, _cellCountY, 
             xMin: x,
             yMin: y,
             zMin: z + __bonkMinZ,
+            
             xMax: x + __bonkWidth,
             yMax: y + __bonkHeight,
-            zMax: z + __bonkMaxZ,
-        };
-    }
-    
-    GetAABB = function()
-    {
-        return {
-            xMin: bbox_left,
-            yMin: bbox_top,
-            zMin: z + __bonkMinZ,
-            xMax: bbox_right,
-            yMax: bbox_bottom,
             zMax: z + __bonkMaxZ,
         };
     }
@@ -484,6 +482,10 @@ function __BonkCommonHeightmap(_function, _x, _y, _z, _cellCountX, _cellCountY, 
                 
                 ++_y;
             }
+            
+            _subjectShape.x += x;
+            _subjectShape.y += y;
+            _subjectShape.z += z;
         }
         
         return (_struct == undefined)? _nullCollisionData : _struct.Null();
@@ -594,19 +596,6 @@ function __BonkCommonHeightmap(_function, _x, _y, _z, _cellCountX, _cellCountY, 
         }
         
         return false;
-    }
-    
-    GetAABB = function()
-    {
-        return {
-            xMin: x,
-            yMin: y,
-            zMin: z + __bonkMinZ,
-            
-            xMax: x + __bonkWidth,
-            yMax: y + __bonkHeight,
-            zMax: z + __bonkMaxZ,
-        };
     }
     
     GetShapeArrayFromPoint = function(_x, _y)
