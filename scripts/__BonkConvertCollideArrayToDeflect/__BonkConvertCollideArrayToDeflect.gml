@@ -114,23 +114,19 @@ function __BonkConvertCollideArrayToDeflect(_collideArrayContainer, _subjectShap
             if (shape != undefined)
             {
                 var _distance = point_distance_3d(0,0,0,   dX, dY, dZ);
-                if (dZ / max(0.0001, _distance) > _minGripSlope)
-                {
-                    //If the slope is shallow enough, just move upwards
-                    //This movement is approximate but good enough
-                    _subjectShape.AddPosition(0, 0, _distance);
-                }
-                else
+                
+                //If we would ordinarily be considered a slippery collision then use our data
+                if (dZ / max(0.0001, _distance) <= _minGripSlope)
                 {
                     if (not _foundSlippery)
                     {
                         _foundSlippery = true;
                         __CopyTo(_result.slipperyCollision);
                     }
-                    
-                    //Otherwise move out as usual which will typically slide the subject down slopes
-                    _subjectShape.AddPosition(dX, dY, dZ);
                 }
+                
+                //But always push the subject shape out of our collision using the slippery logic to improve stability
+                _subjectShape.AddPosition(dX, dY, dZ);
             }
         }
         
