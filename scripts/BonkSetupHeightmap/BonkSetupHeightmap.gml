@@ -36,6 +36,19 @@ function BonkSetupHeightmap(_function, _x, _y, _z, _cellCountX, _cellCountY, _xS
     image_angle  = 0;
     
     
+    SetPosition = function(_x = x, _y = y, _z = z)
+    {
+        x = _x;
+        y = _y;
+        z = _z;
+        
+        if (BONK_SET_INSTANCE_DEPTH)
+        {
+            depth = _z;
+        }
+        
+        return self;
+    }
     
     SetHeightmapSize = function(_cellCountX = cellCountX, _cellCountY = cellCountY)
     {
@@ -58,6 +71,18 @@ function BonkSetupHeightmap(_function, _x, _y, _z, _cellCountX, _cellCountY, _xS
         
         image_xscale = __bonkWidth / BONK_MASK_SIZE;
         image_yscale = __bonkHeight / BONK_MASK_SIZE;
+    }
+    
+    GetAABB = function()
+    {
+        return {
+            xMin: bbox_left,
+            yMin: bbox_top,
+            zMin: z + __bonkMinZ,
+            xMax: bbox_right,
+            yMax: bbox_bottom,
+            zMax: z + __bonkMaxZ,
+        };
     }
     
     DebugDrawMask = function(_color = c_white)
