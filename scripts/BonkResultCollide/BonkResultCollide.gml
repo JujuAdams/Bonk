@@ -31,11 +31,21 @@ function BonkResultCollide() constructor
     
     static GetFloor = function(_slopeThreshold = 0)
     {
+        return (GetGradient() > max(dcos(_slopeThreshold), 0));
+    }
+    
+    static GetSlope = function()
+    {
         var _dX = dX;
         var _dY = dY;
         var _dZ = dZ;
         
-        return ((_dZ / max(0.00001, sqrt(_dX*_dX + _dY*_dY + _dZ*_dZ))) > max(dcos(_slopeThreshold), 0));
+        return (_dZ / max(0.00001, sqrt(_dX*_dX + _dY*_dY + _dZ*_dZ)));
+    }
+    
+    static GetSlopeAngle = function()
+    {
+        return darccos(GetSlope());
     }
     
     static toString = function()
