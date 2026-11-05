@@ -57,4 +57,16 @@ function BonkStructHeightmap(_function, _x, _y, _z, _cellCountX, _cellCountY, _x
         
         UpdateAllTriangles();
     }
+    
+    static SetHeightmapSizeAndScale = function(_cellCountX = cellCountX, _cellCountY = cellCountY, _xScale = xScale, _yScale = yScale, _zScale = zScale)
+    {
+        cellCountX = _cellCountX;
+        cellCountY = _cellCountY;
+        
+        xScale = _xScale;
+        yScale = _yScale;
+        zScale = _zScale;
+        
+        UpdateAllTriangles();
+    }
 }
