@@ -1,5 +1,5 @@
-matrix_set(matrix_world, matrix);
+MatrixApplyWithTranslation(x, y, 0, matrix);
 UggSetShader();
 model.Submit();
 shader_reset();
-matrix_set(matrix_world, matrix_build_identity());
+MatrixReset();
