@@ -128,7 +128,10 @@ function __BonkCapsuleCollideTriangle(_capsuleX, _capsuleY, _capsuleZ, _capsuleH
         return _reaction.Null();
     }
     
-    var _hardEdge = _hardEdge12;
+    var _hardEdgePrev = _hardEdge31;
+    var _hardEdge     = _hardEdge12;
+    var _hardEdgeNext = _hardEdge23;
+    
     var _inside = false;
     
     _edgeSqrLen = _edgeSqrLength12;
@@ -147,7 +150,10 @@ function __BonkCapsuleCollideTriangle(_capsuleX, _capsuleY, _capsuleZ, _capsuleH
         _tempY = _refY - _triY2;
         _tempZ = _refZ - _triZ2;
         
-        _hardEdge = _hardEdge23;
+        _hardEdgePrev = _hardEdge;
+        _hardEdge     = _hardEdgeNext;
+        _hardEdgeNext = _hardEdge31;
+        
         _edgeSqrLen = _edgeSqrLength23;
         _edgeX = _dX23;
         _edgeY = _dY23;
@@ -164,7 +170,10 @@ function __BonkCapsuleCollideTriangle(_capsuleX, _capsuleY, _capsuleZ, _capsuleH
             _tempY = _refY - _triY3;
             _tempZ = _refZ - _triZ3;
             
-            _hardEdge = _hardEdge31;
+            _hardEdgePrev = _hardEdge;
+            _hardEdge     = _hardEdgeNext;
+            _hardEdgeNext = _hardEdge12;
+            
             _edgeSqrLen = _edgeSqrLength31;
             _edgeX = _dX31;
             _edgeY = _dY31;
@@ -188,7 +197,18 @@ function __BonkCapsuleCollideTriangle(_capsuleX, _capsuleY, _capsuleZ, _capsuleH
         
         //Calculate the direction to push the reference point away from the triangle. This is the perpendicular
         //vector from the edge to the reference point
-        var _dot = clamp(dot_product_3d(_edgeX, _edgeY, _edgeZ, _tempX, _tempY, _tempZ) / _edgeSqrLen, 0, 1);
+        var _dot = dot_product_3d(_edgeX, _edgeY, _edgeZ, _tempX, _tempY, _tempZ) / _edgeSqrLen;
+        if (_dot <= 0)
+        {
+            _hardEdge |= _hardEdgePrev;
+        }
+        else if (_dot >= 1)
+        {
+            _hardEdge |= _hardEdgeNext;
+        }
+        
+        _dot = clamp(_dot, 0, 1);
+        
         var _pushX = _tempX - _dot*_edgeX; 
         var _pushY = _tempY - _dot*_edgeY;
         var _pushZ = _tempZ - _dot*_edgeZ;
