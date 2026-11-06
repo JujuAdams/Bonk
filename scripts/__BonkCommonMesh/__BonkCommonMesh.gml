@@ -1,16 +1,21 @@
 // Feather disable all
 
+/// @param x
+/// @param y
+/// @param z
 /// @param cellXSize
 /// @param cellYSize
 /// @param cellZSize
 
-function __BonkCommonMesh(_cellXSize, _cellYSize, _cellZSize)
+function __BonkCommonMesh(_x, _y, _z, _cellXSize, _cellYSize, _cellZSize)
 {
     bonkType = BONK_TYPE_MESH;
     __bonkWorld = undefined;
     bonkGroup = -1;
     
-    
+    x = _x;
+    y = _y;
+    z = _z;
     
     __bonkCellXSize = _cellXSize;
     __bonkCellYSize = _cellYSize;
@@ -23,6 +28,9 @@ function __BonkCommonMesh(_cellXSize, _cellYSize, _cellZSize)
     __bonkMaxCellX = 0;
     __bonkMaxCellY = 0;
     __bonkMaxCellZ = 0;
+    
+    __bonkWidth  = 1;
+    __bonkHeight = 1;
     
     __bonkSpatialDict = {};
     __bonkTriangleArray = [];
@@ -190,6 +198,9 @@ function __BonkCommonMesh(_cellXSize, _cellYSize, _cellZSize)
             __bonkMaxCellX = 0;
             __bonkMaxCellY = 0;
             __bonkMaxCellZ = 0;
+            
+            __bonkWidth  = 1;
+            __bonkHeight = 1;
         }
         else
         {
@@ -200,6 +211,9 @@ function __BonkCommonMesh(_cellXSize, _cellYSize, _cellZSize)
             __bonkMaxCellX = _meshMaxCellX;
             __bonkMaxCellY = _meshMaxCellY;
             __bonkMaxCellZ = _meshMaxCellZ;
+        
+            __bonkWidth  = __bonkCellXSize*(1 + _meshMaxCellX - _meshMinCellX);
+            __bonkHeight = __bonkCellYSize*(1 + _meshMaxCellY - _meshMinCellY);
         }
         
         if (__bonkWorld != undefined)
@@ -224,138 +238,42 @@ function __BonkCommonMesh(_cellXSize, _cellYSize, _cellZSize)
     {
         static _map = ds_map_create();
         
-        var _minCellX = __bonkMinCellX;
-        var _minCellY = __bonkMinCellY;
-        var _minCellZ = __bonkMinCellZ;
-        
-        var _maxCellX = __bonkMaxCellX;
-        var _maxCellY = __bonkMaxCellY;
-        var _maxCellZ = __bonkMaxCellZ;
-        
-        var _aabb = _subjectShape.GetAABB();
-        
-        var _shapeXMin = floor(_aabb.xMin / __bonkCellXSize);
-        var _shapeYMin = floor(_aabb.yMin / __bonkCellYSize);
-        var _shapeZMin = floor(_aabb.zMin / __bonkCellZSize);
-        
-        var _shapeXMax = floor(_aabb.xMax / __bonkCellXSize);
-        var _shapeYMax = floor(_aabb.yMax / __bonkCellYSize);
-        var _shapeZMax = floor(_aabb.zMax / __bonkCellZSize);
-        
-        if ((_shapeXMin > _maxCellX) || (_shapeYMin > _maxCellY) || (_shapeZMin > _maxCellZ)
-        ||  (_shapeXMax < _minCellX) || (_shapeYMax < _minCellY) || (_shapeZMax < _minCellZ))
-        {
-            //Shape is outside bounds
-            return false;
-        }
-        
-        _shapeXMin = clamp(_shapeXMin, _minCellX, _maxCellX);
-        _shapeYMin = clamp(_shapeYMin, _minCellY, _maxCellY);
-        _shapeZMin = clamp(_shapeZMin, _minCellZ, _maxCellZ);
-        
-        _shapeXMax = clamp(_shapeXMax, _minCellX, _maxCellX);
-        _shapeYMax = clamp(_shapeYMax, _minCellY, _maxCellY);
-        _shapeZMax = clamp(_shapeZMax, _minCellZ, _maxCellZ);
-        
-        if ((_shapeXMin == _shapeXMax) && (_shapeYMin == _shapeYMax) && (_shapeZMin == _shapeZMax))
-        {
-            var _shapeArray = GetShapeArrayFromCell(_shapeXMin, _shapeYMin, _shapeZMin);
-            var _i = 0;
-            repeat(array_length(_shapeArray))
-            {
-                if (_shapeArray[_i].Touch(_subjectShape, _groupFilter, true))
-                {
-                    return true;
-                }
-                
-                ++_i;
-            }
-        }
-        else
-        {
-            _shapeXMin = clamp(_shapeXMin, BONK_WORLD_CELL_MIN, BONK_WORLD_CELL_MAX);
-            _shapeYMin = clamp(_shapeYMin, BONK_WORLD_CELL_MIN, BONK_WORLD_CELL_MAX);
-            _shapeZMin = clamp(_shapeZMin, BONK_WORLD_CELL_MIN, BONK_WORLD_CELL_MAX);
+        if ((_groupFilter < 0) || FilterTest(_groupFilter))
+        { 
+            _subjectShape.x -= x;
+            _subjectShape.y -= y;
+            _subjectShape.z -= z;
             
-            var _cellXSize = 1 + clamp(_shapeXMax, BONK_WORLD_CELL_MIN, BONK_WORLD_CELL_MAX) - _shapeXMin;
-            var _cellYSize = 1 + clamp(_shapeYMax, BONK_WORLD_CELL_MIN, BONK_WORLD_CELL_MAX) - _shapeYMin;
-            var _cellZSize = 1 + clamp(_shapeZMax, BONK_WORLD_CELL_MIN, BONK_WORLD_CELL_MAX) - _shapeZMin;
+            var _minCellX = __bonkMinCellX;
+            var _minCellY = __bonkMinCellY;
+            var _minCellZ = __bonkMinCellZ;
             
-            var _z = _shapeZMin;
-            repeat(_cellZSize)
+            var _maxCellX = __bonkMaxCellX;
+            var _maxCellY = __bonkMaxCellY;
+            var _maxCellZ = __bonkMaxCellZ;
+            
+            var _aabb = _subjectShape.GetAABB();
+            
+            var _shapeXMin = floor(_aabb.xMin / __bonkCellXSize);
+            var _shapeYMin = floor(_aabb.yMin / __bonkCellYSize);
+            var _shapeZMin = floor(_aabb.zMin / __bonkCellZSize);
+            
+            var _shapeXMax = floor(_aabb.xMax / __bonkCellXSize);
+            var _shapeYMax = floor(_aabb.yMax / __bonkCellYSize);
+            var _shapeZMax = floor(_aabb.zMax / __bonkCellZSize);
+            
+            if ((_shapeXMin > _maxCellX) || (_shapeYMin > _maxCellY) || (_shapeZMin > _maxCellZ)
+            ||  (_shapeXMax < _minCellX) || (_shapeYMax < _minCellY) || (_shapeZMax < _minCellZ))
             {
-                var _y = _shapeYMin;
-                repeat(_cellYSize)
-                {
-                    var _x = _shapeXMin;
-                    repeat(_cellXSize)
-                    {
-                        var _shapeArray = __GetShapeArrayFromCellUnsafe(_x, _y, _z);
-                        
-                        var _i = 0;
-                        repeat(array_length(_shapeArray))
-                        {
-                            var _shape = _shapeArray[_i];
-                            if (not ds_map_exists(_map, _shape))
-                            {
-                                _map[? _shape] = true;
-                                
-                                if (_shapeArray[_i].Touch(_subjectShape, _groupFilter))
-                                {
-                                    ds_map_clear(_map);
-                                    return true;
-                                }
-                            }
-                            
-                            ++_i;
-                        }
-                        
-                        ++_x;
-                    }
-                    
-                    ++_y;
-                }
+                //Shape is outside bounds
                 
-                ++_z;
+                _subjectShape.x += x;
+                _subjectShape.y += y;
+                _subjectShape.z += z;
+                
+                return false;
             }
             
-            ds_map_clear(_map);
-        }
-        
-        return false;
-    }
-    
-    Collide = function(_subjectShape, _groupFilter = -1, _struct = undefined)
-    {
-        static _map = ds_map_create();
-        static _nullCollisionData = new BonkResultCollide();
-        
-        var _minCellX = __bonkMinCellX;
-        var _minCellY = __bonkMinCellY;
-        var _minCellZ = __bonkMinCellZ;
-        
-        var _maxCellX = __bonkMaxCellX;
-        var _maxCellY = __bonkMaxCellY;
-        var _maxCellZ = __bonkMaxCellZ;
-        
-        var _aabb = _subjectShape.GetAABB();
-        
-        var _shapeXMin = floor(_aabb.xMin / __bonkCellXSize);
-        var _shapeYMin = floor(_aabb.yMin / __bonkCellYSize);
-        var _shapeZMin = floor(_aabb.zMin / __bonkCellZSize);
-        
-        var _shapeXMax = floor(_aabb.xMax / __bonkCellXSize);
-        var _shapeYMax = floor(_aabb.yMax / __bonkCellYSize);
-        var _shapeZMax = floor(_aabb.zMax / __bonkCellZSize);
-        
-        if ((_shapeXMin > _maxCellX) || (_shapeYMin > _maxCellY) || (_shapeZMin > _maxCellZ)
-        ||  (_shapeXMax < _minCellX) || (_shapeYMax < _minCellY) || (_shapeZMax < _minCellZ))
-        {
-            //Shape is outside bounds
-            return _nullCollisionData;
-        }
-        else
-        {
             _shapeXMin = clamp(_shapeXMin, _minCellX, _maxCellX);
             _shapeYMin = clamp(_shapeYMin, _minCellY, _maxCellY);
             _shapeZMin = clamp(_shapeZMin, _minCellZ, _maxCellZ);
@@ -366,14 +284,17 @@ function __BonkCommonMesh(_cellXSize, _cellYSize, _cellZSize)
             
             if ((_shapeXMin == _shapeXMax) && (_shapeYMin == _shapeYMax) && (_shapeZMin == _shapeZMax))
             {
-                var _shapeArray = GetShapeArrayFromPoint(_subjectShape.x, _subjectShape.y, _subjectShape.z);
+                var _shapeArray = GetShapeArrayFromCell(_shapeXMin, _shapeYMin, _shapeZMin);
                 var _i = 0;
                 repeat(array_length(_shapeArray))
                 {
-                    var _reaction = _shapeArray[_i].Collide(_subjectShape, _groupFilter, _struct);
-                    if (_reaction.shape != undefined)
+                    if (_shapeArray[_i].Touch(_subjectShape, _groupFilter, true))
                     {
-                        return _reaction;
+                        _subjectShape.x += x;
+                        _subjectShape.y += y;
+                        _subjectShape.z += z;
+                        
+                        return true;
                     }
                     
                     ++_i;
@@ -407,14 +328,15 @@ function __BonkCommonMesh(_cellXSize, _cellYSize, _cellZSize)
                                 if (not ds_map_exists(_map, _shape))
                                 {
                                     _map[? _shape] = true;
-                                    
-                                    //TODO - Call triangle collision code directly
-                                    
-                                    var _reaction = _shape.Collide(_subjectShape, _groupFilter, _struct);
-                                    if (_reaction.shape != undefined)
+                                
+                                    if (_shapeArray[_i].Touch(_subjectShape, _groupFilter))
                                     {
+                                        _subjectShape.x += x;
+                                        _subjectShape.y += y;
+                                        _subjectShape.z += z;
+                                        
                                         ds_map_clear(_map);
-                                        return _reaction;
+                                        return true;
                                     }
                                 }
                                 
@@ -432,17 +354,26 @@ function __BonkCommonMesh(_cellXSize, _cellYSize, _cellZSize)
                 
                 ds_map_clear(_map);
             }
+            
+            _subjectShape.x += x;
+            _subjectShape.y += y;
+            _subjectShape.z += z;
         }
         
-        return (_struct == undefined)? _nullCollisionData : _struct.Null();
+        return false;
     }
     
-    __CollideAddToArray = function(_collideArrayContainer, _subjectShape, _groupFilter)
+    Collide = function(_subjectShape, _groupFilter = -1, _struct = undefined)
     {
         static _map = ds_map_create();
+        static _nullCollisionData = new BonkResultCollide();
         
         if ((_groupFilter < 0) || FilterTest(_groupFilter))
         {
+            _subjectShape.x -= x;
+            _subjectShape.y -= y;
+            _subjectShape.z -= z;
+            
             var _minCellX = __bonkMinCellX;
             var _minCellY = __bonkMinCellY;
             var _minCellZ = __bonkMinCellZ;
@@ -465,7 +396,12 @@ function __BonkCommonMesh(_cellXSize, _cellYSize, _cellZSize)
             ||  (_shapeXMax < _minCellX) || (_shapeYMax < _minCellY) || (_shapeZMax < _minCellZ))
             {
                 //Shape is outside bounds
-                return;
+                
+                _subjectShape.x += x;
+                _subjectShape.y += y;
+                _subjectShape.z += z;
+                
+                return _nullCollisionData;
             }
             else
             {
@@ -483,7 +419,16 @@ function __BonkCommonMesh(_cellXSize, _cellYSize, _cellZSize)
                     var _i = 0;
                     repeat(array_length(_shapeArray))
                     {
-                        _shapeArray[_i].__CollideAddToArray(_collideArrayContainer, _subjectShape, -1);
+                        var _reaction = _shapeArray[_i].Collide(_subjectShape, _groupFilter, _struct);
+                        if (_reaction.shape != undefined)
+                        {
+                            _subjectShape.x += x;
+                            _subjectShape.y += y;
+                            _subjectShape.z += z;
+                            
+                            return _reaction;
+                        }
+                        
                         ++_i;
                     }
                 }
@@ -515,7 +460,19 @@ function __BonkCommonMesh(_cellXSize, _cellYSize, _cellZSize)
                                     if (not ds_map_exists(_map, _shape))
                                     {
                                         _map[? _shape] = true;
-                                        _shape.__CollideAddToArray(_collideArrayContainer, _subjectShape, -1);
+                                        
+                                        //TODO - Call triangle collision code directly
+                                        
+                                        var _reaction = _shape.Collide(_subjectShape, _groupFilter, _struct);
+                                        if (_reaction.shape != undefined)
+                                        {
+                                            _subjectShape.x += x;
+                                            _subjectShape.y += y;
+                                            _subjectShape.z += z;
+                                            
+                                            ds_map_clear(_map);
+                                            return _reaction;
+                                        }
                                     }
                                     
                                     ++_i;
@@ -533,6 +490,130 @@ function __BonkCommonMesh(_cellXSize, _cellYSize, _cellZSize)
                     ds_map_clear(_map);
                 }
             }
+        
+            _subjectShape.x += x;
+            _subjectShape.y += y;
+            _subjectShape.z += z;
+        }
+        
+        return (_struct == undefined)? _nullCollisionData : _struct.Null();
+    }
+    
+    __CollideAddToArray = function(_collideArrayContainer, _subjectShape, _groupFilter)
+    {
+        static _map = ds_map_create();
+        
+        if ((_groupFilter < 0) || FilterTest(_groupFilter))
+        {
+            _subjectShape.x -= x;
+            _subjectShape.y -= y;
+            _subjectShape.z -= z;
+            
+            var _minCellX = __bonkMinCellX;
+            var _minCellY = __bonkMinCellY;
+            var _minCellZ = __bonkMinCellZ;
+            
+            var _maxCellX = __bonkMaxCellX;
+            var _maxCellY = __bonkMaxCellY;
+            var _maxCellZ = __bonkMaxCellZ;
+            
+            var _aabb = _subjectShape.GetAABB();
+            
+            var _shapeXMin = floor(_aabb.xMin / __bonkCellXSize);
+            var _shapeYMin = floor(_aabb.yMin / __bonkCellYSize);
+            var _shapeZMin = floor(_aabb.zMin / __bonkCellZSize);
+            
+            var _shapeXMax = floor(_aabb.xMax / __bonkCellXSize);
+            var _shapeYMax = floor(_aabb.yMax / __bonkCellYSize);
+            var _shapeZMax = floor(_aabb.zMax / __bonkCellZSize);
+            
+            if ((_shapeXMin > _maxCellX) || (_shapeYMin > _maxCellY) || (_shapeZMin > _maxCellZ)
+            ||  (_shapeXMax < _minCellX) || (_shapeYMax < _minCellY) || (_shapeZMax < _minCellZ))
+            {
+                //Shape is outside bounds
+            }
+            else
+            {
+                _shapeXMin = clamp(_shapeXMin, _minCellX, _maxCellX);
+                _shapeYMin = clamp(_shapeYMin, _minCellY, _maxCellY);
+                _shapeZMin = clamp(_shapeZMin, _minCellZ, _maxCellZ);
+                
+                _shapeXMax = clamp(_shapeXMax, _minCellX, _maxCellX);
+                _shapeYMax = clamp(_shapeYMax, _minCellY, _maxCellY);
+                _shapeZMax = clamp(_shapeZMax, _minCellZ, _maxCellZ);
+                
+                if ((_shapeXMin == _shapeXMax) && (_shapeYMin == _shapeYMax) && (_shapeZMin == _shapeZMax))
+                {
+                    var _shapeArray = GetShapeArrayFromPoint(_subjectShape.x, _subjectShape.y, _subjectShape.z);
+                    var _i = 0;
+                    repeat(array_length(_shapeArray))
+                    {
+                        var _result = _shapeArray[_i].__CollideAddToArray(_collideArrayContainer, _subjectShape, -1);
+                        //If this was a collision, set the coordinate space
+                        if (_result != undefined)
+                        {
+                            _result.__coordinateSpace = self;
+                        }
+                        
+                        ++_i;
+                    }
+                }
+                else
+                {
+                    _shapeXMin = clamp(_shapeXMin, BONK_WORLD_CELL_MIN, BONK_WORLD_CELL_MAX);
+                    _shapeYMin = clamp(_shapeYMin, BONK_WORLD_CELL_MIN, BONK_WORLD_CELL_MAX);
+                    _shapeZMin = clamp(_shapeZMin, BONK_WORLD_CELL_MIN, BONK_WORLD_CELL_MAX);
+                    
+                    var _cellXSize = 1 + clamp(_shapeXMax, BONK_WORLD_CELL_MIN, BONK_WORLD_CELL_MAX) - _shapeXMin;
+                    var _cellYSize = 1 + clamp(_shapeYMax, BONK_WORLD_CELL_MIN, BONK_WORLD_CELL_MAX) - _shapeYMin;
+                    var _cellZSize = 1 + clamp(_shapeZMax, BONK_WORLD_CELL_MIN, BONK_WORLD_CELL_MAX) - _shapeZMin;
+                    
+                    var _z = _shapeZMin;
+                    repeat(_cellZSize)
+                    {
+                        var _y = _shapeYMin;
+                        repeat(_cellYSize)
+                        {
+                            var _x = _shapeXMin;
+                            repeat(_cellXSize)
+                            {
+                                var _shapeArray = __GetShapeArrayFromCellUnsafe(_x, _y, _z);
+                                
+                                var _i = 0;
+                                repeat(array_length(_shapeArray))
+                                {
+                                    var _shape = _shapeArray[_i];
+                                    if (not ds_map_exists(_map, _shape))
+                                    {
+                                        _map[? _shape] = true;
+                                        
+                                        var _result = _shape.__CollideAddToArray(_collideArrayContainer, _subjectShape, -1);
+                                        //If this was a collision, set the coordinate space
+                                        if (_result != undefined)
+                                        {
+                                            _result.__coordinateSpace = self;
+                                        }
+                                    }
+                                    
+                                    ++_i;
+                                }
+                                
+                                ++_x;
+                            }
+                            
+                            ++_y;
+                        }
+                        
+                        ++_z;
+                    }
+                    
+                    ds_map_clear(_map);
+                }
+            }
+            
+            _subjectShape.x += x;
+            _subjectShape.y += y;
+            _subjectShape.z += z;
         }
     }
     
@@ -590,19 +671,19 @@ function __BonkCommonMesh(_cellXSize, _cellYSize, _cellZSize)
     GetAABB = function()
     {
         return {
-            xMin: __bonkCellXSize*__bonkMinCellX,
-            yMin: __bonkCellYSize*__bonkMinCellY,
-            zMin: __bonkCellZSize*__bonkMinCellZ,
+            xMin: x + __bonkCellXSize*__bonkMinCellX,
+            yMin: y + __bonkCellYSize*__bonkMinCellY,
+            zMin: z + __bonkCellZSize*__bonkMinCellZ,
             
-            xMax: __bonkCellXSize*(__bonkMaxCellX+1),
-            yMax: __bonkCellYSize*(__bonkMaxCellY+1),
-            zMax: __bonkCellZSize*(__bonkMaxCellZ+1),
+            xMax: x + __bonkCellXSize*(__bonkMaxCellX+1),
+            yMax: y + __bonkCellYSize*(__bonkMaxCellY+1),
+            zMax: z + __bonkCellZSize*(__bonkMaxCellZ+1),
         };
     }
     
     GetShapeArrayFromPoint = function(_x, _y, _z)
     {
-        return GetShapeArrayFromCell(_x / __bonkCellXSize, _y / __bonkCellYSize, _z / __bonkCellZSize);
+        return GetShapeArrayFromCell((_x - x) / __bonkCellXSize, (_y - y) / __bonkCellYSize, (_z - z) / __bonkCellZSize);
     }
     
     GetShapeArrayFromCell = function(_x, _y, _z)
@@ -721,6 +802,10 @@ function __BonkCommonMesh(_cellXSize, _cellYSize, _cellZSize)
     {
         static _map = ds_map_create();
         
+        var _xShape = x;
+        var _yShape = y;
+        var _zShape = z;
+        
         var _minCellX = __bonkMinCellX;
         var _minCellY = __bonkMinCellY;
         var _minCellZ = __bonkMinCellZ;
@@ -729,13 +814,13 @@ function __BonkCommonMesh(_cellXSize, _cellYSize, _cellZSize)
         var _maxCellY = __bonkMaxCellY;
         var _maxCellZ = __bonkMaxCellZ;
         
-        var _xMin = floor(_struct.xMin / __bonkCellXSize);
-        var _yMin = floor(_struct.yMin / __bonkCellYSize);
-        var _zMin = floor(_struct.zMin / __bonkCellZSize);
+        var _xMin = floor((_struct.xMin - _xShape) / __bonkCellXSize);
+        var _yMin = floor((_struct.yMin - _yShape) / __bonkCellYSize);
+        var _zMin = floor((_struct.zMin - _zShape) / __bonkCellZSize);
         
-        var _xMax = floor(_struct.xMax / __bonkCellXSize);
-        var _yMax = floor(_struct.yMax / __bonkCellYSize);
-        var _zMax = floor(_struct.zMax / __bonkCellZSize);
+        var _xMax = floor((_struct.xMax - _xShape) / __bonkCellXSize);
+        var _yMax = floor((_struct.yMax - _yShape) / __bonkCellYSize);
+        var _zMax = floor((_struct.zMax - _zShape) / __bonkCellZSize);
         
         if ((_xMin > _maxCellX) || (_yMin > _maxCellY) || (_zMin > _maxCellZ)
         ||  (_xMax < _minCellX) || (_yMax < _minCellY) || (_zMax < _minCellZ))
@@ -791,6 +876,10 @@ function __BonkCommonMesh(_cellXSize, _cellYSize, _cellZSize)
     {
         static _map = ds_map_create();
         
+        var _xShape = x;
+        var _yShape = y;
+        var _zShape = z;
+        
         var _minCellX = __bonkMinCellX;
         var _minCellY = __bonkMinCellY;
         var _minCellZ = __bonkMinCellZ;
@@ -799,12 +888,14 @@ function __BonkCommonMesh(_cellXSize, _cellYSize, _cellZSize)
         var _maxCellY = __bonkMaxCellY;
         var _maxCellZ = __bonkMaxCellZ;
         
+        __BonkSetWorldMatrix(x, y, z);
+        
         var _j = 0;
         repeat(array_length(_array) div 3)
         {
-            var _x = floor(clamp(_array[_j  ], _minCellX, _maxCellX));
-            var _y = floor(clamp(_array[_j+1], _minCellY, _maxCellY));
-            var _z = floor(clamp(_array[_j+2], _minCellZ, _maxCellZ));
+            var _x = floor(clamp(_array[_j  ] - _xShape, _minCellX, _maxCellX));
+            var _y = floor(clamp(_array[_j+1] - _yShape, _minCellY, _maxCellY));
+            var _z = floor(clamp(_array[_j+2] - _zShape, _minCellZ, _maxCellZ));
             
             var _shapeArray = __GetShapeArrayFromCellUnsafe(_x, _y, _z);
             var _i = 0;
@@ -824,17 +915,32 @@ function __BonkCommonMesh(_cellXSize, _cellYSize, _cellZSize)
         }
         
         ds_map_clear(_map);
+        __BonkResetWorldMatrix();
     }
     
     DrawShapes = function(_color = undefined, _wireframe = undefined)
     {
-        return DrawShapesFromRange(GetAABB(), _color, _wireframe);
+        __BonkSetWorldMatrix(x, y, z);
+        
+        var _bonkTriangleArray = __bonkTriangleArray;
+        var _i = 0;
+        repeat(array_length(_bonkTriangleArray))
+        {
+            _bonkTriangleArray[_i].DebugDraw(_color, _wireframe);
+            ++_i;
+        }
+        
+        __BonkResetWorldMatrix();
     }
     
     DebugDraw = DrawShapes;
     
     DrawCellsFromArray = function(_array, _color = undefined, _wireframe = true)
     {
+        var _xShape = x;
+        var _yShape = y;
+        var _zShape = z;
+        
         var _cellXSize = __bonkCellXSize;
         var _cellYSize = __bonkCellYSize;
         var _cellZSize = __bonkCellZSize;
@@ -854,9 +960,9 @@ function __BonkCommonMesh(_cellXSize, _cellYSize, _cellZSize)
             var _y = floor(clamp(_array[_i+1], _minCellY, _maxCellY));
             var _z = floor(clamp(_array[_i+2], _minCellZ, _maxCellZ));
             
-            UggAABB(_cellXSize*(_x + 0.5),
-                    _cellYSize*(_y + 0.5),
-                    _cellZSize*(_z + 0.5),
+            UggAABB(_xShape + _cellXSize*(_x + 0.5),
+                    _yShape + _cellYSize*(_y + 0.5),
+                    _zShape + _cellZSize*(_z + 0.5),
                     _cellXSize, _cellYSize, _cellZSize,
                     _color, _wireframe);
             
@@ -866,6 +972,10 @@ function __BonkCommonMesh(_cellXSize, _cellYSize, _cellZSize)
     
     DrawCellsFromRange = function(_struct, _color = undefined, _wireframe = true, _checkerboard = false)
     {
+        var _xShape = x;
+        var _yShape = y;
+        var _zShape = z;
+        
         var _cellXSize = __bonkCellXSize;
         var _cellYSize = __bonkCellYSize;
         var _cellZSize = __bonkCellZSize;
@@ -878,13 +988,13 @@ function __BonkCommonMesh(_cellXSize, _cellYSize, _cellZSize)
         var _maxCellY = __bonkMaxCellY;
         var _maxCellZ = __bonkMaxCellZ;
         
-        var _xMin = floor(_struct.xMin / _cellXSize);
-        var _yMin = floor(_struct.yMin / _cellYSize);
-        var _zMin = floor(_struct.zMin / _cellZSize);
+        var _xMin = floor((_struct.xMin - _xShape) / _cellXSize);
+        var _yMin = floor((_struct.yMin - _yShape) / _cellYSize);
+        var _zMin = floor((_struct.zMin - _zShape) / _cellZSize);
         
-        var _xMax = floor(_struct.xMax / _cellXSize);
-        var _yMax = floor(_struct.yMax / _cellYSize);
-        var _zMax = floor(_struct.zMax / _cellZSize);
+        var _xMax = floor((_struct.xMax - _xShape) / _cellXSize);
+        var _yMax = floor((_struct.yMax - _yShape) / _cellYSize);
+        var _zMax = floor((_struct.zMax - _zShape) / _cellZSize);
         
         if ((_xMin > _maxCellX) || (_yMin > _maxCellY) || (_zMin > _maxCellZ)
         ||  (_xMax < _minCellX) || (_yMax < _minCellY) || (_zMax < _minCellZ))
@@ -912,9 +1022,9 @@ function __BonkCommonMesh(_cellXSize, _cellYSize, _cellZSize)
                 {
                     if ((not _checkerboard) || ((abs(_x + _y + _z) mod 2) == 1))
                     {
-                        UggAABB(_cellXSize*(_x + 0.5),
-                                _cellYSize*(_y + 0.5),
-                                _cellZSize*(_z + 0.5),
+                        UggAABB(_xShape + _cellXSize*(_x + 0.5),
+                                _yShape + _cellYSize*(_y + 0.5),
+                                _zShape + _cellZSize*(_z + 0.5),
                                 _cellXSize, _cellYSize, _cellZSize,
                                 _color, _wireframe);
                     }
@@ -1013,6 +1123,11 @@ function __BonkCommonMesh(_cellXSize, _cellYSize, _cellZSize)
     }
     
     GetCellsFromLineExt = function(_x1, _y1, _z1, _x2, _y2, _z2)
+    {
+        return __GetCellsFromLineExtInternal(_x1-x, _y1-y, _z1-z, _x2-x, _y2-y, _z2-z);
+    }
+    
+    __GetCellsFromLineExtInternal = function(_x1, _y1, _z1, _x2, _y2, _z2)
     {
         //FIXME - Return a static array
         

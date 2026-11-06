@@ -123,11 +123,14 @@
 ///   Various cached values that are used to speed up collision detection. These are **read-only**
 ///   and even then you'll probably never need to read these variables.
 /// 
+/// @param x
+/// @param y
+/// @param z
 /// @param cellXSize
 /// @param cellYSize
 /// @param cellZSize
 
-function BonkSetupMesh(_cellXSize, _cellYSize, _cellZSize)
+function BonkSetupMesh(_x, _y, _z, _cellXSize, _cellYSize, _cellZSize)
 {
     if (not __BonkIsInstance())
     {
@@ -140,11 +143,11 @@ function BonkSetupMesh(_cellXSize, _cellYSize, _cellZSize)
         array_pop(bonkCreateCallstack);
     }
     
-    __BonkCommonMesh(_cellXSize, _cellYSize, _cellZSize);
+    __BonkCommonMesh(_x, _y, _z, _cellXSize, _cellYSize, _cellZSize);
     
     mask_index = __BonkMaskAAB;
-    image_xscale = 0;
-    image_yscale = 0;
+    image_xscale = __bonkWidth / BONK_MASK_SIZE;
+    image_yscale = __bonkHeight / BONK_MASK_SIZE;
     
     DebugDrawMask = function(_color = c_white)
     {

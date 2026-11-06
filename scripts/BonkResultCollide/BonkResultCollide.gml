@@ -31,7 +31,7 @@ function BonkResultCollide() constructor
     
     //This is only set when creating collisions with triangles found in heightmap and only when
     //handling deflection. It is normally unset
-    __heightmapCoordinateSpace = undefined;
+    __coordinateSpace = undefined;
     
     static GetFloor = function(_slopeThreshold = 0)
     {
@@ -83,7 +83,7 @@ function BonkResultCollide() constructor
         dY = 0;
         dZ = 0;
         
-        __heightmapCoordinateSpace = undefined;
+        __coordinateSpace = undefined;
         
         return self;
     }
@@ -100,7 +100,7 @@ function BonkResultCollide() constructor
         dZ = -dZ;
         
         //N.B. This is not correct. However, we never call `.__Reverse()` in a situation where it would matter
-        __heightmapCoordinateSpace = undefined;
+        __coordinateSpace = undefined;
         
         return self;
     }
@@ -113,7 +113,7 @@ function BonkResultCollide() constructor
         _other.dY = dY;
         _other.dZ = dZ;
         
-        _other.__heightmapCoordinateSpace = __heightmapCoordinateSpace;
+        _other.__coordinateSpace = __coordinateSpace;
         
         return _other;
     }

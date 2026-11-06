@@ -444,6 +444,8 @@
     {"id":{"name":"DotobjTryCache","path":"scripts/DotobjTryCache/DotobjTryCache.yy",},},
     {"id":{"name":"GetHeightmapVolumeVertexFormat","path":"scripts/GetHeightmapVolumeVertexFormat/GetHeightmapVolumeVertexFormat.yy",},},
     {"id":{"name":"GetHeightmapWireframeVertexFormat","path":"scripts/GetHeightmapWireframeVertexFormat/GetHeightmapWireframeVertexFormat.yy",},},
+    {"id":{"name":"MatrixApplyWithTranslation","path":"scripts/MatrixApplyWithTranslation/MatrixApplyWithTranslation.yy",},},
+    {"id":{"name":"MatrixReset","path":"scripts/MatrixReset/MatrixReset.yy",},},
     {"id":{"name":"Supercover3D","path":"scripts/Supercover3D/Supercover3D.yy",},},
     {"id":{"name":"UggAABB","path":"scripts/UggAABB/UggAABB.yy",},},
     {"id":{"name":"UggArrow","path":"scripts/UggArrow/UggArrow.yy",},},

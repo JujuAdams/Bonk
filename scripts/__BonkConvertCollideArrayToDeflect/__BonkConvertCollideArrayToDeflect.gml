@@ -111,7 +111,7 @@ function __BonkConvertCollideArrayToDeflect(_collideArrayContainer, _subjectShap
     {
         var _collision = _sortArray[_i];
         
-        with(_collision.__heightmapCoordinateSpace)
+        with(_collision.__coordinateSpace)
         {
             _subjectShape.x -= x;
             _subjectShape.y -= y;
@@ -139,7 +139,7 @@ function __BonkConvertCollideArrayToDeflect(_collideArrayContainer, _subjectShap
             }
         }
         
-        with(_collision.__heightmapCoordinateSpace)
+        with(_collision.__coordinateSpace)
         {
             _subjectShape.x += x;
             _subjectShape.y += y;
