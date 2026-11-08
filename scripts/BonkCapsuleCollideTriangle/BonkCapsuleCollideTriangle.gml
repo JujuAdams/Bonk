@@ -18,7 +18,9 @@ function BonkCapsuleCollideTriangle(_capsule, _triangle, _struct = undefined)
     
     with(_triangle)
     {
-        return __BonkCapsuleCollideTriangle(_capsuleX, _capsuleY, _capsuleZ, _capsuleHeight, _capsuleRadius,
+        return __BonkCapsuleCollideTriangle(_capsuleX, _capsuleY, _capsuleZ,
+                                            _capsuleHeight, _capsuleRadius,
+                                            0, 0, 1,
                                             self,
                                             x1, y1, z1,
                                             x2, y2, z2,

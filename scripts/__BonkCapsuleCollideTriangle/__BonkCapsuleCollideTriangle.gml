@@ -1,6 +1,6 @@
 // Feather disable all
 
-function __BonkCapsuleCollideTriangle(_capsuleX, _capsuleY, _capsuleZ, _capsuleHeight, _capsuleRadius,   _triangleShape,   _triX1, _triY1, _triZ1,   _triX2, _triY2, _triZ2,   _triX3, _triY3, _triZ3,    _dX12, _dY12, _dZ12,    _dX23, _dY23, _dZ23,    _dX31, _dY31, _dZ31,   _normalX, _normalY, _normalZ,   _hardEdge12, _hardEdge23, _hardEdge31,   _edgeSqrLength12, _edgeSqrLength23, _edgeSqrLength31,   _struct = undefined)
+function __BonkCapsuleCollideTriangle(_capsuleX, _capsuleY, _capsuleZ, _capsuleHeight, _capsuleRadius, _capsuleUpX, _capsuleUpY, _capsuleUpZ,   _triangleShape,   _triX1, _triY1, _triZ1,   _triX2, _triY2, _triZ2,   _triX3, _triY3, _triZ3,    _dX12, _dY12, _dZ12,    _dX23, _dY23, _dZ23,    _dX31, _dY31, _dZ31,   _normalX, _normalY, _normalZ,   _hardEdge12, _hardEdge23, _hardEdge31,   _edgeSqrLength12, _edgeSqrLength23, _edgeSqrLength31,   _struct = undefined)
 {
     if (BONK_EXPERIMENT_FORCE_EDGE_KIND != undefined)
     {
@@ -12,30 +12,28 @@ function __BonkCapsuleCollideTriangle(_capsuleX, _capsuleY, _capsuleZ, _capsuleH
     static _staticStruct = new BonkResultCollide();
     var _reaction = _struct ?? _staticStruct;
     
-    if (_normalZ == 0)
+    if (point_distance_3d(_capsuleUpX, _capsuleUpY, _capsuleUpZ,   _normalX, _normalY, _normalZ) == 0)
     {
-        if ((_normalX == 0) && (_normalY == 0))
+        if ((_normalX == 0) && (_normalY == 0) && (_normalZ == 0))
         {
-            //Gegenerate triangle
+            //Degenerate triangle
             return _reaction.Null();
         }
-        else
-        {
-            var _penDepth = clamp(_triZ1 - _capsuleZ, 0, _capsuleHeight);
-        }
+        
+        var _penDepth = clamp(dot_product_3d(_triX1 - _capsuleX, _triY1 - _capsuleY, _triZ1 - _capsuleZ,   _capsuleUpX, _capsuleUpY, _capsuleUpZ), 0, _capsuleHeight);
     }
     else
     {
         var _penDepth = undefined;
         
         //Calculate the intersection point between the axis of the capsule and the triangle's plane
-        var _trace = dot_product_3d(_triX1 - _capsuleX, _triY1 - _capsuleY, _triZ1 - _capsuleZ, _normalX, _normalY, _normalZ) / _normalZ;
-        var _traceX = _capsuleX;
-        var _traceY = _capsuleY;
-        var _traceZ = _capsuleZ + _trace;
+        var _trace = dot_product_3d(_triX1 - _capsuleX, _triY1 - _capsuleY, _triZ1 - _capsuleZ,   _normalX, _normalY, _normalZ) / _normalZ;
+        var _traceX = _capsuleX + _capsuleUpX*_trace;
+        var _traceY = _capsuleY + _capsuleUpY*_trace;
+        var _traceZ = _capsuleZ + _capsuleUpZ*_trace;
         
         //Check the intersection point is on the inner side of the edge 1->2
-        //If we fail, these values fall through
+        //If we fail and the point is outside this edge these values fall through
         var _tempX = _traceX - _triX1;
         var _tempY = _traceY - _triY1;
         var _tempZ = _traceZ - _triZ1;
@@ -52,7 +50,7 @@ function __BonkCapsuleCollideTriangle(_capsuleX, _capsuleY, _capsuleZ, _capsuleH
         {
             
             //Check the intersection point is on the inner side of the edge 2->3
-            //If we fail, these values fall through
+            //If we fail and the point is outside this edge these values fall through
             _tempX = _traceX - _triX2;
             _tempY = _traceY - _triY2;
             _tempZ = _traceZ - _triZ2;
@@ -69,7 +67,7 @@ function __BonkCapsuleCollideTriangle(_capsuleX, _capsuleY, _capsuleZ, _capsuleH
             {
                 
                 //Check the intersection point is on the inner side of the edge 3->1
-                //If we fail, these values fall through
+                //If we fail and the point is outside this edge these values fall through
                 _tempX = _traceX - _triX3;
                 _tempY = _traceY - _triY3;
                 _tempZ = _traceZ - _triZ3;
@@ -85,7 +83,7 @@ function __BonkCapsuleCollideTriangle(_capsuleX, _capsuleY, _capsuleZ, _capsuleH
                                    _normalX, _normalY, _normalZ) > 0)
                 {
                     //Intersection point is within the triangle
-                    _penDepth = clamp(_trace, 0, _capsuleHeight);
+                    _penDepth = _trace;
                 }
             }
         }
@@ -94,26 +92,37 @@ function __BonkCapsuleCollideTriangle(_capsuleX, _capsuleY, _capsuleZ, _capsuleH
         {
             //Catch intersection points that are outside the triangle
             
-            //Work backwards to get the original vertex z component
-            var _triZ = _tempZ - _trace;
+            var _vectorX = _capsuleX + (_tempX - _traceX);
+            var _vectorY = _capsuleY + (_tempY - _traceY);
+            var _vectorZ = _capsuleZ + (_tempZ - _traceZ);
             
-            //The projection of the edge vector onto the capsule axis will always just be the z-component because
-            //the axis vector is {0,0,1}
-            if (_edgeZ*_edgeZ == _edgeSqrLen)
+            var _upDot = dot_product_3d(_edgeX, _edgeY, _edgeZ,   _capsuleUpX, _capsuleUpY, _capsuleUpZ);
+            if (_upDot*_upDot == _edgeSqrLen)
             {
-                _penDepth = clamp(_triZ, 0, _capsuleHeight);
+                //Edge is parallel to the up vector
+                _penDepth = clamp(dot_product_3d(_vectorX, _vectorY, _vectorZ,   _capsuleUpX, _capsuleUpY, _capsuleUpZ), 0, _capsuleHeight);
             }
             else
             {
-                var _gradient = clamp((_tempX*_edgeX + _tempY*_edgeY) / (_edgeSqrLen - _edgeZ*_edgeZ), 0, 1);
-                _penDepth = clamp(_gradient*_edgeZ - _triZ, 0, _capsuleHeight);
+                //Projection of the vector on the edge
+                var _dot1 = dot_product_3d(_vectorX, _vectorY, _vectorZ,   _edgeX, _edgeY, _edgeZ);
+                
+                //Projection of the vector on the up axis
+                var _dot2 = dot_product_3d(_vectorX, _vectorY, _vectorZ,   _capsuleUpX, _capsuleUpY, _capsuleUpZ);
+                
+                var _parameter = clamp((_dot1 - _dot2*_upDot) / (_edgeSqrLen - _upDot*_upDot), 0, 1);
+                
+                //Project the penetration onto the up vector
+                var _penDepth = dot_product_3d(_parameter*_edgeX - _vectorX, _parameter*_edgeY - _vectorY, _parameter*_edgeZ - _vectorZ,   _capsuleUpX, _capsuleUpY, _capsuleUpZ);
             }
         }
     }
     
-    var _refX = _capsuleX;
-    var _refY = _capsuleY;
-    var _refZ = _capsuleZ + _penDepth;
+    _penDepth = clamp(_penDepth, 0, _capsuleHeight);
+    
+    var _refX = _capsuleX + _capsuleUpX*_penDepth;
+    var _refY = _capsuleY + _capsuleUpY*_penDepth;
+    var _refZ = _capsuleZ + _capsuleUpZ*_penDepth;
     
     //Check the reference point is on the inner side of the edge 1->2
     //If we fail, these values fall through
