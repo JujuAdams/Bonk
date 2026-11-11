@@ -12,7 +12,7 @@ function BonkAABTouchHeightmap(_aab, _heightmap)
 {
     with(_aab)
     {
-        return ((z - zSize/2) < _heightmap.GetHeightAt(x, y));
+        return ((z - zSize/2) < _heightmap.GetZ(x, y));
     }
     
     return false;

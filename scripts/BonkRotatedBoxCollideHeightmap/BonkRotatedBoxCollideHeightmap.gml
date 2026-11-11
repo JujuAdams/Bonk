@@ -12,7 +12,7 @@ function BonkRotatedBoxCollideHeightmap(_box, _heightmap, _struct = undefined)
     var _dZ = 0;
     with(_box)
     {
-        _dZ = _heightmap.GetHeightAt(x, y) - (z - zSize/2);
+        _dZ = _heightmap.GetZ(x, y) - (z - zSize/2);
     }
     
     if (_dZ <= 0)

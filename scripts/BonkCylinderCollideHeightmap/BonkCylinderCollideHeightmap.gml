@@ -12,7 +12,7 @@ function BonkCylinderCollideHeightmap(_cylinder, _heightmap, _struct = undefined
     var _dZ = 0;
     with(_cylinder)
     {
-        _dZ = _heightmap.GetHeightAt(x, y) - (z - height/2);
+        _dZ = _heightmap.GetZ(x, y) - (z - height/2);
     }
     
     if (_dZ <= 0)

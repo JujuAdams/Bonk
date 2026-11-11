@@ -266,24 +266,24 @@ function __BonkCommonHeightmap(_function, _x, _y, _z, _cellCountX, _cellCountY, 
         __bonkMaxZ = max(__bonkMaxZ, _zMaxOverall);
     }
     
-    GetHeightAt = function(_x, _y)
+    GetZ = function(_x, _y)
     {
         var _xCell = (_x - x) / xScale;
-        if ((_xCell < 0) || (_xCell > cellCountX-1))
+        if ((_xCell < 0) || (_xCell > cellCountX))
         {
             return undefined;
         }
         
         var _yCell = (_y - y) / yScale;
-        if ((_yCell < 0) || (_yCell > cellCountY-1))
+        if ((_yCell < 0) || (_yCell > cellCountY))
         {
             return undefined;
         }
         
-        return zScale*heightFunction(_xCell, _yCell);
+        return z + zScale*heightFunction(_xCell, _yCell);
     }
     
-    GetNormalAt = function(_x, _y)
+    GetNormal = function(_x, _y)
     {
         //TODO - Is this correct?
         
@@ -747,7 +747,40 @@ function __BonkCommonHeightmap(_function, _x, _y, _z, _cellCountX, _cellCountY, 
         __BonkResetWorldMatrix();
     }
     
-    DebugDraw = DrawShapes;
+    DebugDraw = function(_color = undefined, _wireframe = undefined)
+    {
+        var _density = 5;
+        
+        var _xScale = xScale;
+        var _yScale = yScale;
+        var _zScale = zScale;
+        
+        var _incrX = _xScale / _density;
+        var _incrY = _yScale / _density;
+        
+        var _worldY = y;
+        repeat(_density*cellCountY + 1)
+        {
+            var _worldX = x;
+            repeat(_density*cellCountX + 1)
+            {
+                UggPoint(_worldX, _worldY, GetZ(_worldX, _worldY));
+                
+                
+                
+                
+                //DrawSurface(x + _worldX,           y + _worldY,
+                //            x + _worldX + _xScale, y + _worldY + _yScale,
+                //            z + _zScale*_heightFunction(_cellX, _cellY  ), z + _zScale*_heightFunction(_cellX+1, _cellY  ),
+                //            z + _zScale*_heightFunction(_cellX, _cellY+1), z + _zScale*_heightFunction(_cellX+1, _cellY+1),
+                //            7);
+                
+                _worldX += _incrX;
+            }
+            
+            _worldY += _incrY;
+        }
+    }
     
     //DebugDraw = function(_color = undefined, _wireframe = undefined)
     //{

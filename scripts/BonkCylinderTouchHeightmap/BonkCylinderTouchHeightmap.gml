@@ -12,7 +12,7 @@ function BonkCylinderTouchHeightmap(_cylinder, _heightmap)
 {
     with(_cylinder)
     {
-        return ((z - zSize/2) < _heightmap.GetHeightAt(x, y));
+        return ((z - zSize/2) < _heightmap.GetZ(x, y));
     }
     
     return false;
