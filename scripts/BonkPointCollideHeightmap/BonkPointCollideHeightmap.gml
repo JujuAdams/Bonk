@@ -25,85 +25,108 @@ function BonkPointCollideHeightmap(_pointX, _pointY, _pointZ, _heightmap, _struc
             return _reaction.Null();
         }
         
-        var _funcLine = function(_cellX1, _cellY1, _cellZ1, _cellX2, _cellY2, _cellZ2)
-        {
-            //UggLine(x + xScale*_cellX1, y + yScale*_cellY1, z + zScale*_cellZ1,
-            //        x + xScale*_cellX2, y + yScale*_cellY2, z + zScale*_cellZ2,
-            //        undefined, 0.5);
-        }
-        
         var _zc = heightFunction(_cellX, _cellY);
         if (_pointZ >= z + zScale*_zc)
         {
             return _reaction.Null();
         }
         
-        var _innerX = (_pointX - x) / xScale;
-        var _innerY = (_pointY - y) / yScale;
-        var _innerZ = (_pointZ - z) / zScale;
+        _cellX = floor(_cellX);
+        _cellY = floor(_cellY);
         
-        _funcLine(_innerX, _innerY, _innerZ, _cellX, _cellY, _zc);
+        var _z1 = zScale*heightFunction(_cellX,   _cellY);
+        var _z2 = zScale*heightFunction(_cellX+1, _cellY);
+        var _z3 = zScale*heightFunction(_cellX,   _cellY+1);
+        var _z4 = zScale*heightFunction(_cellX+1, _cellY+1);
         
-        var _intCellX = floor(_cellX);
-        var _intCellY = floor(_cellY);
+        var _cellWorldX = x + xScale*_cellX;
+        var _cellWorldY = y + yScale*_cellY;
         
-        var _x1 = _intCellX;
-        var _y1 = _cellY;
-        var _x2 = _intCellX + 1;
-        var _y2 = _cellY;
+        var _closestPoint = __BonkNearestPointOnCell(_pointX, _pointY, _pointZ,
+                                                     _cellWorldX, _cellWorldY,
+                                                     _cellWorldX + xScale, _cellWorldY + yScale,
+                                                     _z1, _z2, _z3, _z4);
         
-        var _z1 = heightFunction(_x1, _y1);
-        var _z2 = heightFunction(_x2, _y2);
-        _funcLine(_x1, _y1, _z1, _x2, _y2, _z2);
+        with(_reaction)
+        {
+            shape = _heightmap;
+        
+            dX = _closestPoint.x - _pointX;
+            dY = _closestPoint.y - _pointY;
+            dZ = _closestPoint.z - _pointZ;
+        
+            return self;
+        }
+    }
+}
+
+function __BonkNearestPointOnCell(_pointX, _pointY, _pointZ,   _cellX1, _cellY1, _cellX2, _cellY2,   _cellZ1, _cellZ2, _cellZ3, _cellZ4)
+{
+    static _result = {};
+    with(_result)
+    {
+        var _paramX = (_pointX - _cellX1) / (_cellX2 - _cellX1);
+        var _paramY = (_pointY - _cellY1) / (_cellY2 - _cellY1);
+        
+        
+        
+        var _x1 = _cellX1;
+        var _y1 = _pointY;
+        var _z1 = lerp(_cellZ1, _cellZ3, _paramY);
+        var _x2 = _cellX2;
+        var _y2 = _pointY;
+        var _z2 = lerp(_cellZ2, _cellZ4, _paramY);
+        //UggLine(_x1, _y1, _z1,   _x2, _y2, _z2,   undefined, 0.5);
         
         var _dX = _x2 - _x1;
         var _dY = _y2 - _y1;
         var _dZ = _z2 - _z1;
-        var _coeff = 1 / point_distance_3d(0, 0, 0, _dX, _dY, _dZ);
-        _dX *= _coeff;
-        _dY *= _coeff;
-        _dZ *= _coeff;
+        var _length = point_distance_3d(0, 0, 0,   _dX, _dY, _dZ);
+        _dX /= _length;
+        _dY /= _length;
+        _dZ /= _length;
         
-        var _vX = _innerX - _x1;
-        var _vY = _innerY - _y1;
-        var _vZ = _innerZ - _z1;
-        var _dot = clamp(dot_product_3d(_vX, _vY, _vZ, _dX, _dY, _dZ), 0, 1);
+        var _vX = _pointX - _x1;
+        var _vY = _pointY - _y1;
+        var _vZ = _pointZ - _z1;
+        var _dot = dot_product_3d(_vX, _vY, _vZ,   _dX, _dY, _dZ);
+        _dot = clamp(_dot, 0, _length);
         
         var _rX1 = _x1 + _dot*_dX;
         var _rY1 = _y1 + _dot*_dY;
         var _rZ1 = _z1 + _dot*_dZ;
-        _funcLine(_innerX, _innerY, _innerZ, _rX1, _rY1, _rZ1);
+        //UggLine(_pointX, _pointY, _pointZ,   _rX1, _rY1, _rZ1,   undefined, 0.5);
         
         
         
-        var _x1 = _cellX;
-        var _y1 = _intCellY;
-        var _x2 = _cellX;
-        var _y2 = _intCellY + 1;
-        
-        var _z1 = heightFunction(_x1, _y1);
-        var _z2 = heightFunction(_x2, _y2);
-        _funcLine(_x1, _y1, _z1, _x2, _y2, _z2);
+        var _x1 = _pointX;
+        var _y1 = _cellY1;
+        var _z1 = lerp(_cellZ1, _cellZ2, _paramX);
+        var _x2 = _pointX;
+        var _y2 = _cellY2;
+        var _z2 = lerp(_cellZ3, _cellZ4, _paramX);
+        //UggLine(_x1, _y1, _z1,   _x2, _y2, _z2,   undefined, 0.5);
         
         var _dX = _x2 - _x1;
         var _dY = _y2 - _y1;
         var _dZ = _z2 - _z1;
-        var _coeff = 1 / point_distance_3d(0, 0, 0, _dX, _dY, _dZ);
-        _dX *= _coeff;
-        _dY *= _coeff;
-        _dZ *= _coeff;
+        var _length = point_distance_3d(0, 0, 0,   _dX, _dY, _dZ);
+        _dX /= _length;
+        _dY /= _length;
+        _dZ /= _length;
         
-        var _vX = _innerX - _x1;
-        var _vY = _innerY - _y1;
-        var _vZ = _innerZ - _z1;
-        var _dot = clamp(dot_product_3d(_vX, _vY, _vZ, _dX, _dY, _dZ), 0, 1);
+        var _vX = _pointX - _x1;
+        var _vY = _pointY - _y1;
+        var _vZ = _pointZ - _z1;
+        var _dot = dot_product_3d(_vX, _vY, _vZ,   _dX, _dY, _dZ);
+        _dot = clamp(_dot, 0, _length);
         
         var _rX2 = _x1 + _dot*_dX;
         var _rY2 = _y1 + _dot*_dY;
         var _rZ2 = _z1 + _dot*_dZ;
-        _funcLine(_innerX, _innerY, _innerZ, _rX2, _rY2, _rZ2);
+        //UggLine(_pointX, _pointY, _pointZ,   _rX2, _rY2, _rZ2,   undefined, 0.5);
         
-        _funcLine(_rX1, _rY1, _rZ1, _rX2, _rY2, _rZ2);
+        
         
         var _x1 = _rX1;
         var _y1 = _rY1;
@@ -111,39 +134,29 @@ function BonkPointCollideHeightmap(_pointX, _pointY, _pointZ, _heightmap, _struc
         var _x2 = _rX2;
         var _y2 = _rY2;
         var _z2 = _rZ2;
-        _funcLine(_x1, _y1, _z1, _x2, _y2, _z2);
+        //UggLine(_x1, _y1, _z1,   _x2, _y2, _z2,   undefined, 0.5);
         
         var _dX = _x2 - _x1;
         var _dY = _y2 - _y1;
         var _dZ = _z2 - _z1;
-        var _coeff = 1 / point_distance_3d(0, 0, 0, _dX, _dY, _dZ);
-        _dX *= _coeff;
-        _dY *= _coeff;
-        _dZ *= _coeff;
+        var _length = point_distance_3d(0, 0, 0,   _dX, _dY, _dZ);
+        _dX /= _length;
+        _dY /= _length;
+        _dZ /= _length;
         
-        var _vX = _innerX - _x1;
-        var _vY = _innerY - _y1;
-        var _vZ = _innerZ - _z1;
-        var _dot = clamp(dot_product_3d(_vX, _vY, _vZ, _dX, _dY, _dZ), 0, 1);
+        var _vX = _pointX - _x1;
+        var _vY = _pointY - _y1;
+        var _vZ = _pointZ - _z1;
+        var _dot = dot_product_3d(_vX, _vY, _vZ,   _dX, _dY, _dZ);
+        _dot = clamp(_dot, 0, _length);
         
-        var _rX3 = _x1 + _dot*_dX;
-        var _rY3 = _y1 + _dot*_dY;
-        var _rZ3 = _z1 + _dot*_dZ;
-        _funcLine(_innerX, _innerY, _innerZ, _rX3, _rY3, _rZ3);
+        x = _x1 + _dot*_dX;
+        y = _y1 + _dot*_dY;
+        z = _z1 + _dot*_dZ;
+        //UggLine(_pointX, _pointY, _pointZ,   x, y, z,   undefined, 0.5);
         
-        _rX3 = x + xScale*_rX3;
-        _rY3 = y + yScale*_rY3;
-        _rZ3 = z + zScale*_rZ3;
         
-        with(_reaction)
-        {
-            shape = _heightmap;
         
-            dX = _rX3 - _pointX;
-            dY = _rY3 - _pointY;
-            dZ = _rZ3 - _pointZ;
-        
-            return self;
-        }
+        return self;
     }
 }

@@ -263,7 +263,7 @@
     {"name":"BonkPointCollideHeightmap","order":7,"path":"scripts/BonkPointCollideHeightmap/BonkPointCollideHeightmap.yy",},
     {"name":"BonkPointTouchCapsule","order":1,"path":"scripts/BonkPointTouchCapsule/BonkPointTouchCapsule.yy",},
     {"name":"BonkPointTouchCylinder","order":2,"path":"scripts/BonkPointTouchCylinder/BonkPointTouchCylinder.yy",},
-    {"name":"BonkPointTouchHeightmap","order":2,"path":"scripts/BonkPointTouchHeightmap/BonkPointTouchHeightmap.yy",},
+    {"name":"BonkPointTouchHeightmap","order":8,"path":"scripts/BonkPointTouchHeightmap/BonkPointTouchHeightmap.yy",},
     {"name":"BonkPointTouchSphere","order":3,"path":"scripts/BonkPointTouchSphere/BonkPointTouchSphere.yy",},
     {"name":"BonkQuadCollideSphere","order":1,"path":"scripts/BonkQuadCollideSphere/BonkQuadCollideSphere.yy",},
     {"name":"BonkQuadCollideWorld","order":2,"path":"scripts/BonkQuadCollideWorld/BonkQuadCollideWorld.yy",},

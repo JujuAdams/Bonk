@@ -7,9 +7,9 @@ vertex_submit(vbuffVolume, pr_trianglelist, -1);
 shader_reset();
 __BonkResetWorldMatrix();
 
-testX += 5*(keyboard_check(vk_right) - keyboard_check(vk_left));
-testY += 5*(keyboard_check(vk_down) - keyboard_check(vk_up));
-testZ -= 2;
+testX += 2*(keyboard_check(vk_right) - keyboard_check(vk_left));
+testY += 2*(keyboard_check(vk_down) - keyboard_check(vk_up));
+testZ -= 3;
 
 var _collision = BonkPointCollideHeightmap(testX, testY, testZ, shape);
 var _length = point_distance_3d(0, 0, 0, _collision.dX, _collision.dY, _collision.dZ);
@@ -31,5 +31,3 @@ UggPoint(150, 150, _z, BonkPointTouchHeightmap(150, 150, _z, shape)? c_red : c_l
 
 UggSphere(testX, testY, testZ+10, 10, c_fuchsia);
 UggSphere(0, 0, 10, 10, c_fuchsia);
-
-//BonkPointCollideHeightmap(testX, testY, testZ, shape);
