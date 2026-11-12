@@ -250,6 +250,7 @@
     {"name":"BonkLineHitFirst","order":8,"path":"scripts/BonkLineHitFirst/BonkLineHitFirst.yy",},
     {"name":"BonkLineHitFirstExt","order":6,"path":"scripts/BonkLineHitFirstExt/BonkLineHitFirstExt.yy",},
     {"name":"BonkLineHitHeightmap","order":9,"path":"scripts/BonkLineHitHeightmap/BonkLineHitHeightmap.yy",},
+    {"name":"BonkLineHitHeightmapNew","order":2,"path":"scripts/BonkLineHitHeightmapNew/BonkLineHitHeightmapNew.yy",},
     {"name":"BonkLineHitMany","order":9,"path":"scripts/BonkLineHitMany/BonkLineHitMany.yy",},
     {"name":"BonkLineHitManyExt","order":7,"path":"scripts/BonkLineHitManyExt/BonkLineHitManyExt.yy",},
     {"name":"BonkLineHitMesh","order":8,"path":"scripts/BonkLineHitMesh/BonkLineHitMesh.yy",},

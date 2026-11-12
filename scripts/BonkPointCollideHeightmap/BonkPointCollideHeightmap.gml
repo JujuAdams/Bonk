@@ -1,12 +1,12 @@
 // Feather disable all
 
+/// @param heightmap
 /// @param x
 /// @param y
 /// @param z
-/// @param heightmap
 /// @param [struct]
 
-function BonkPointCollideHeightmap(_pointX, _pointY, _pointZ, _heightmap, _struct = undefined)
+function BonkPointCollideHeightmap(_heightmap, _pointX, _pointY, _pointZ, _struct = undefined)
 {
     static _staticStruct = new BonkResultCollide();
     var _reaction = _struct ?? _staticStruct;

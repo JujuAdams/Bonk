@@ -313,6 +313,7 @@
     {"id":{"name":"BonkLineHitFirst","path":"scripts/BonkLineHitFirst/BonkLineHitFirst.yy",},},
     {"id":{"name":"BonkLineHitFirstExt","path":"scripts/BonkLineHitFirstExt/BonkLineHitFirstExt.yy",},},
     {"id":{"name":"BonkLineHitHeightmap","path":"scripts/BonkLineHitHeightmap/BonkLineHitHeightmap.yy",},},
+    {"id":{"name":"BonkLineHitHeightmapNew","path":"scripts/BonkLineHitHeightmapNew/BonkLineHitHeightmapNew.yy",},},
     {"id":{"name":"BonkLineHitMany","path":"scripts/BonkLineHitMany/BonkLineHitMany.yy",},},
     {"id":{"name":"BonkLineHitManyExt","path":"scripts/BonkLineHitManyExt/BonkLineHitManyExt.yy",},},
     {"id":{"name":"BonkLineHitMesh","path":"scripts/BonkLineHitMesh/BonkLineHitMesh.yy",},},
