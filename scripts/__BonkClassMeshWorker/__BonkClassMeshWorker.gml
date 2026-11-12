@@ -308,7 +308,7 @@ function __BonkClassMeshWorker(_mesh, _vertexBufferArray, _vertexFormat, _matrix
             var _bonkCellYSize = __bonkCellYSize;
             var _bonkCellZSize = __bonkCellZSize;
             
-            var _meshEmpty = (struct_names_count(__bonkSpatialDict) == 0);
+            var _meshEmpty = (ds_map_size(__bonkSpatialMap) == 0);
             if (_meshEmpty)
             {
                 var _workMinCellX = infinity;

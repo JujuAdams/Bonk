@@ -38,7 +38,6 @@ function BonkDeflectManyExt(_subjectShape, _targetShapes, _slopeThreshold = 0, _
 {
     static _staticCollideArrayContainer = new __BonkClassCollideArrayContainer();
     var _collideArrayContainer = _staticCollideArrayContainer;
-    global.__Bonk.__collideArrayContainer = _collideArrayContainer;
     
     if (is_array(_targetShapes)) //We were given an array
     {

@@ -11,7 +11,7 @@ function __BonkCommonMesh(_x, _y, _z, _cellXSize, _cellYSize, _cellZSize)
 {
     bonkType = BONK_TYPE_MESH;
     __bonkWorld = undefined;
-    bonkGroup = -1;
+    bonkGroup = BONK_DEFAULT_GROUP;
     
     x = _x;
     y = _y;
@@ -32,7 +32,7 @@ function __BonkCommonMesh(_x, _y, _z, _cellXSize, _cellYSize, _cellZSize)
     __bonkWidth  = 1;
     __bonkHeight = 1;
     
-    __bonkSpatialDict = {};
+    __bonkSpatialMap = ds_map_create(); //FIXME - Memory leak!
     __bonkTriangleArray = [];
     
     __bonkWorkerArray = [];
@@ -112,7 +112,7 @@ function __BonkCommonMesh(_x, _y, _z, _cellXSize, _cellYSize, _cellZSize)
             ++_z;
         }
         
-        __bonkSpatialDict = {};
+        ds_map_clear(__bonkSpatialMap);
         
         var _bonkCellXSize = __bonkCellXSize;
         var _bonkCellYSize = __bonkCellYSize;
@@ -694,24 +694,24 @@ function __BonkCommonMesh(_x, _y, _z, _cellXSize, _cellYSize, _cellZSize)
         _y = floor(clamp(_y, BONK_WORLD_CELL_MIN, BONK_WORLD_CELL_MAX));
         _z = floor(clamp(_z, BONK_WORLD_CELL_MIN, BONK_WORLD_CELL_MAX));
         
-        return struct_get_from_hash(__bonkSpatialDict, (_x + BONK_WORLD_CELL_MIN) + ((_y + BONK_WORLD_CELL_MIN) << 11) + ((_z + BONK_WORLD_CELL_MIN) << 22)) ?? _emptyArray;
+        return __bonkSpatialMap[? (_x + BONK_WORLD_CELL_MIN) + ((_y + BONK_WORLD_CELL_MIN) << 11) + ((_z + BONK_WORLD_CELL_MIN) << 22)] ?? _emptyArray;
     }
     
     __GetShapeArrayFromCellUnsafe = function(_x, _y, _z)
     {
         static _emptyArray = [];
-        return struct_get_from_hash(__bonkSpatialDict, (_x + BONK_WORLD_CELL_MIN) + ((_y + BONK_WORLD_CELL_MIN) << 11) + ((_z + BONK_WORLD_CELL_MIN) << 22)) ?? _emptyArray;
+        return __bonkSpatialMap[? (_x + BONK_WORLD_CELL_MIN) + ((_y + BONK_WORLD_CELL_MIN) << 11) + ((_z + BONK_WORLD_CELL_MIN) << 22)] ?? _emptyArray;
     }
     
     __EnsureShapeArrayFromCell = function(_x, _y, _z)
     {
         var _key = (_x + BONK_WORLD_CELL_MIN) + ((_y + BONK_WORLD_CELL_MIN) << 11) + ((_z + BONK_WORLD_CELL_MIN) << 22);
         
-        var _array = struct_get_from_hash(__bonkSpatialDict, _key);
+        var _array = __bonkSpatialMap[? _key];
         if (_array == undefined)
         {
             _array = [];
-            struct_set_from_hash(__bonkSpatialDict, _key, _array);
+            __bonkSpatialMap[? _key] = _array;
         }
         
         return _array;
