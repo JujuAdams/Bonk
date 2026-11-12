@@ -9,13 +9,11 @@
 /// @param xScale      Scaling factor to apply (this is analogous to the width of a single cell in the x-axis)
 /// @param yScale      Scaling factor to apply (this is analogous to the height of a single cell in the y-axis)
 /// @param zScale      Scaling factor to apply
-/// @param [tesselation=simple]
 /// @param [groupVector=BONK_DEFAULT_GROUP]
 
-function BonkStructHeightmap(_function, _x, _y, _z, _cellCountX, _cellCountY, _xScale, _yScale, _zScale, _tesselation = BONK_TESSELATE_SIMPLE, _groupVector = BONK_DEFAULT_GROUP) : __BonkClassShared(_groupVector) constructor
+function BonkStructHeightmap(_function, _x, _y, _z, _cellCountX, _cellCountY, _xScale, _yScale, _zScale, _groupVector = BONK_DEFAULT_GROUP) : __BonkClassShared(_groupVector) constructor
 {
-    __BonkCommonHeightmap(_function, _x, _y, _z, _cellCountX, _cellCountY, _xScale, _yScale, _zScale, _tesselation);
-    UpdateAllTriangles();
+    __BonkCommonHeightmap(_function, _x, _y, _z, _cellCountX, _cellCountY, _xScale, _yScale, _zScale);
     
     
     

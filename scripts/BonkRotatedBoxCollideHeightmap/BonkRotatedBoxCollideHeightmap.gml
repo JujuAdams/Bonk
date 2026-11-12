@@ -8,6 +8,6 @@ function BonkRotatedBoxCollideHeightmap(_box, _heightmap, _struct = undefined)
 {
     with(_box)
     {
-        return BonkPointCollideHeightmap(_heightmap, x, y, z - zSize/2);
+        return BonkPointCollideHeightmap(_heightmap, x, y, z - zSize/2, _struct);
     }
 }

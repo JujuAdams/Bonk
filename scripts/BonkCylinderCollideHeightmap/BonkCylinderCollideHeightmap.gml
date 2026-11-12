@@ -8,6 +8,6 @@ function BonkCylinderCollideHeightmap(_cylinder, _heightmap, _struct = undefined
 {
     with(_cylinder)
     {
-        return BonkPointCollideHeightmap(_heightmap, x, y, z - height/2);
+        return BonkPointCollideHeightmap(_heightmap, x, y, z - height/2, _struct);
     }
 }
