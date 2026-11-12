@@ -80,7 +80,7 @@ function BonkLineHitHeightmapNew(_heightmap, _lineX1, _lineY1, _lineZ1, _lineX2,
             //
             //If we solve for t then we'll get the intersection point. Rearranging into a quadratic form yields:
             //
-            //  0 = tt.a + t.b + a
+            //  0 = tt.a + t.b + c
             //  
             //  a = (dz34 - dz12).dX.dY
             //  b = dz12.dX + dz13 + (dz34 - dz12)(y1.dX + x1.dY) - dZ
@@ -107,6 +107,7 @@ function BonkLineHitHeightmapNew(_heightmap, _lineX1, _lineY1, _lineZ1, _lineX2,
                 var _det = _b*_b - 4*_a*_c;
                 if (_det == 0)
                 {
+                    //Line gracefully glances across the curve and gives us one solution
                     _t1 = -_b / (2*_a);
                     _t2 = infinity;
                 }
@@ -115,9 +116,9 @@ function BonkLineHitHeightmapNew(_heightmap, _lineX1, _lineY1, _lineZ1, _lineX2,
                     var _t1 = (-_b - sqrt(_det)) / (2*_a);
                     var _t2 = (-_b + sqrt(_det)) / (2*_a);
                     
-                    //Both intersection points are valid, try to solve using the first intersection point first
                     if (_t2 < _t1)
                     {
+                        //Try to resolve in order of contact
                         var _temp = _t1;
                         _t1 = _t2;
                         _t2 = _temp;
@@ -131,24 +132,26 @@ function BonkLineHitHeightmapNew(_heightmap, _lineX1, _lineY1, _lineZ1, _lineX2,
                 }
             }
             
-            if ((_t1 >= 0) && (_t1 <= 1))
+            //Check if t1 gives us a valid point
+            if ((_t1 >= 0) && (_t1 <= 1)) //On line
             {
                 var _u = _lineU + _t1*_lineDX;
                 var _v = _lineV + _t1*_lineDY;
                 
-                if ((_u >= 0) && (_u <= 1) && (_v >= 0) && (_v <= 1))
+                if ((_u >= 0) && (_u <= 1) && (_v >= 0) && (_v <= 1)) //Inside cell
                 {
                     _t = _t1;
                     break;
                 }
             }
             
-            if ((_t2 >= 0) && (_t2 <= 1))
+            //Check if t2 gives us a valid point
+            if ((_t2 >= 0) && (_t2 <= 1)) //On line
             {
                 var _u = _lineU + _t2*_lineDX;
                 var _v = _lineV + _t2*_lineDY;
                         
-                if ((_u >= 0) && (_u <= 1) && (_v >= 0) && (_v <= 1))
+                if ((_u >= 0) && (_u <= 1) && (_v >= 0) && (_v <= 1)) //Inside cell
                 {
                     _t = _t2;
                     break;
@@ -160,10 +163,8 @@ function BonkLineHitHeightmapNew(_heightmap, _lineX1, _lineY1, _lineZ1, _lineX2,
         
         if (_t != undefined)
         {
-            var _x1 = xScale*(_u + _cellX);
-            var _y1 = yScale*(_v + _cellY);
+            //Find the normal of the surface at the point of contact
             var _z1 = zScale*(_lineZ1 + _t*_lineDZ);
-            
             var _z2 = zScale*(_cellZ1 + _dZ12*(_u + 0.001) + _dZ13*_v + _dZ12_dZ34*(_u + 0.001)*_v);
             var _z3 = zScale*(_cellZ1 + _dZ12*_u + _dZ13*(_v + 0.001) + _dZ12_dZ34*_u*(_v + 0.001));
             
@@ -171,14 +172,20 @@ function BonkLineHitHeightmapNew(_heightmap, _lineX1, _lineY1, _lineZ1, _lineX2,
             var _normalY = -(_z3 - _z1)*0.001*xScale;
             var _normalZ = 0.001*xScale*0.001*yScale;
             
+            //Then find the scaled up x/y coordinates
+            var _x1 = xScale*(_u + _cellX);
+            var _y1 = yScale*(_v + _cellY);
+            
             with(_returnHit)
             {
                 shape = _heightmap;
                 
+                //Recorrect for the heightmap's position
                 x = other.x + _x1;
                 y = other.y + _y1;
                 z = other.z + _z1;
                 
+                //Normalize the normal
                 var _length = point_distance_3d(0, 0, 0,   _normalX, _normalY, _normalZ)
                 if (_length <= 0)
                 {
