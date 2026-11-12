@@ -5,8 +5,8 @@
   "isDnD":false,
   "name":"BonkPointTouchHeightmap",
   "parent":{
-    "name":"Touch",
-    "path":"folders/Bonk/Direct Control/Manual Checkers/Touch.yy",
+    "name":"Point",
+    "path":"folders/Bonk/Direct Control/Manual Checkers/Touch/Point.yy",
   },
   "resourceType":"GMScript",
   "resourceVersion":"2.0",

@@ -12,7 +12,7 @@ function BonkSphereTouchHeightmap(_sphere, _heightmap)
 {
     with(_sphere)
     {
-        return ((z - radius) < _heightmap.GetZ(x, y));
+        return BonkPointTouchHeightmap(_heightmap, x, y, z - radius);
     }
     
     return false;

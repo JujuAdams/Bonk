@@ -766,9 +766,6 @@ function __BonkCommonHeightmap(_function, _x, _y, _z, _cellCountX, _cellCountY, 
             {
                 UggPoint(_worldX, _worldY, GetZ(_worldX, _worldY));
                 
-                
-                
-                
                 //DrawSurface(x + _worldX,           y + _worldY,
                 //            x + _worldX + _xScale, y + _worldY + _yScale,
                 //            z + _zScale*_heightFunction(_cellX, _cellY  ), z + _zScale*_heightFunction(_cellX+1, _cellY  ),
@@ -823,7 +820,7 @@ function __BonkCommonHeightmap(_function, _x, _y, _z, _cellCountX, _cellCountY, 
     {
         var _xShape = x;
         var _yShape = y;
-        var _zShape = z + 0.5*_zScale;
+        var _zShape = z + 0.5*zScale;
         
         var _cellCountX = cellCountX;
         var _cellCountY = cellCountY;

@@ -40,7 +40,7 @@ var _y2 = 5*(230 - _y1);
 var _z2 = 5*(200 - _z1);
 UggArrow(_x1, _y1, _z1,   _x2, _y2, _z2,   undefined, undefined, undefined, true);
 
-var _result = BonkLineHitHeightmapNew(shape,   _x1, _y1, _z1,   _x2, _y2, _z2);
+var _result = BonkLineHitHeightmap(shape,   _x1, _y1, _z1,   _x2, _y2, _z2);
 with(_result)
 {
     if (shape != undefined)
