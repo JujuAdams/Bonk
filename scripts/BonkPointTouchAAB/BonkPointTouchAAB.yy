@@ -5,8 +5,8 @@
   "isDnD":false,
   "name":"BonkPointTouchAAB",
   "parent":{
-    "name":"Coordinate",
-    "path":"folders/Bonk/Direct Control/Manual Checkers/Touch/Coordinate.yy",
+    "name":"Point",
+    "path":"folders/Bonk/Direct Control/Manual Checkers/Touch/Point.yy",
   },
   "resourceType":"GMScript",
   "resourceVersion":"2.0",

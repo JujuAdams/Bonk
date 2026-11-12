@@ -6,5 +6,8 @@
 
 function BonkSphereCollideHeightmap(_sphere, _heightmap, _struct = undefined)
 {
-    return _heightmap.Collide(_sphere, undefined, _struct).__Reverse(_heightmap);
+    with(_sphere)
+    {
+        return BonkPointCollideHeightmap(_heightmap, x, y, z - radius, _struct);
+    }
 }

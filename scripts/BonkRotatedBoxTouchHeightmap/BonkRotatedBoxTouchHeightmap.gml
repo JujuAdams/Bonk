@@ -12,7 +12,7 @@ function BonkRotatedBoxTouchHeightmap(_box, _heightmap)
 {
     with(_box)
     {
-        return ((z - zSize/2) < _heightmap.GetHeightAt(x, y));
+        return BonkPointTouchHeightmap(_heightmap, x, y, z - zSize/2);
     }
     
     return false;

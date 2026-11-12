@@ -12,7 +12,7 @@ function BonkCapsuleTouchHeightmap(_capsule, _heightmap)
 {
     with(_capsule)
     {
-        return ((z - height/2) < _heightmap.GetHeightAt(x, y));
+        return BonkPointTouchHeightmap(_heightmap, x, y, z - height/2);
     }
     
     return false;
