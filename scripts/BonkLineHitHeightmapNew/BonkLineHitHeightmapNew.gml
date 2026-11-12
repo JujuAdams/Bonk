@@ -42,8 +42,8 @@ function BonkLineHitHeightmapNew(_heightmap, _lineX1, _lineY1, _lineZ1, _lineX2,
         var _lineDZ = _lineZ2 - _lineZ1
         
         var _heightFunction = heightFunction;
-        var _t1 = undefined;
-        var _t2 = undefined;
+        var _t1 = infinity;
+        var _t2 = infinity;
         var _t  = undefined;
         
         var _i = 0;
@@ -61,49 +61,6 @@ function BonkLineHitHeightmapNew(_heightmap, _lineX1, _lineY1, _lineZ1, _lineX2,
             var _dZ13 = _cellZ3 - _cellZ1;
             var _dZ34 = _cellZ4 - _cellZ3;
             var _dZ12_dZ34 = _dZ34 - _dZ12;
-            
-            //var _v = 0;
-            //repeat(6)
-            //{
-            //    var _u = 0;
-            //    repeat(6)
-            //    {
-            //        var _x = x + xScale*(_cellX + _u);
-            //        var _y = y + yScale*(_cellY + _v);
-            //        var _z = z + zScale*(_cellZ1 + _u*_dZ12 + _v*_dZ13 + _u*_v*_dZ12_dZ34);
-            //        UggSphere(_x, _y, _z, 2, c_lime, true);
-            //        
-            //        _u += 0.2;
-            //    }
-            //    
-            //    _v += 0.2;
-            //}
-            //
-            //var _u1 = undefined;
-            //var _v1 = undefined;
-            //var _w1 = undefined;
-            //
-            //var _u2 = x + xScale*_lineX1;
-            //var _v2 = y + yScale*_lineY1;
-            //var _w2 = z + zScale*(_cellZ1 + _lineX1*_dZ12 + _lineY1*_dZ13 + _lineX1*_lineY1*_dZ12_dZ34);
-            //
-            //var _t = 0;
-            //repeat(21)
-            //{
-            //    _u1 = _u2;
-            //    _v1 = _v2;
-            //    _w1 = _w2;
-            //    
-            //    var _u = _lineX1 + _lineDX*_t;
-            //    var _v = _lineY1 + _lineDY*_t;
-            //    _w2 = z + zScale*(_cellZ1 + _u*_dZ12 + _v*_dZ13 + _u*_v*_dZ12_dZ34);
-            //    _u2 = x + xScale*_u;
-            //    _v2 = y + yScale*_v;
-            //    
-            //    UggLine(_u1, _v1, _w1,   _u2, _v2, _w2,   c_blue, undefined, true);
-            //    
-            //    _t += 0.05;
-            //}
             
             //We'll find the point of intersection by intersection of the line segment with a curved surface for the cell
             //The cell's curved surface is defined by:
@@ -133,18 +90,17 @@ function BonkLineHitHeightmapNew(_heightmap, _lineX1, _lineY1, _lineZ1, _lineX2,
             //
             //  t = (-b +- sqrt(bb - 4ac)) / 2a
             
-            var _lineU1 = _lineX1 - _cellX;
-            var _lineV1 = _lineY1 - _cellY;
+            var _lineU = _lineX1 - _cellX;
+            var _lineV = _lineY1 - _cellY;
             
-            //Quadratic solution:
             var _a = _dZ12_dZ34*_lineDX*_lineDY;
-            var _b = _dZ12*_lineDX + _dZ13*_lineDY + _dZ12_dZ34*(_lineV1*_lineDX + _lineU1*_lineDY) - _lineDZ;
-            var _c = _cellZ1 + _dZ12*_lineU1 + _dZ13*_lineV1 + _dZ12_dZ34*_lineU1*_lineV1 - _lineZ1;
+            var _b = _dZ12*_lineDX + _dZ13*_lineDY + _dZ12_dZ34*(_lineV*_lineDX + _lineU*_lineDY) - _lineDZ;
+            var _c = _cellZ1 + _dZ12*_lineU + _dZ13*_lineV + _dZ12_dZ34*_lineU*_lineV - _lineZ1;
             
             if (_a == 0)
             {
                 _t1 = -_c / _b;
-                _t2 = undefined;
+                _t2 = infinity;
             }
             else
             {
@@ -152,83 +108,48 @@ function BonkLineHitHeightmapNew(_heightmap, _lineX1, _lineY1, _lineZ1, _lineX2,
                 if (_det == 0)
                 {
                     _t1 = -_b / (2*_a);
-                    _t2 = undefined;
+                    _t2 = infinity;
                 }
                 else if (_det > 0)
                 {
                     var _t1 = (-_b - sqrt(_det)) / (2*_a);
                     var _t2 = (-_b + sqrt(_det)) / (2*_a);
                     
-                    if ((_t1 >= 0) && (_t1 <= 1))
+                    //Both intersection points are valid, try to solve using the first intersection point first
+                    if (_t2 < _t1)
                     {
-                        if ((_t2 >= 0) && (_t2 <= 1))
-                        {
-                            //Both intersection points are valid, try to solve using the first intersection point first
-                            if (_t2 < _t1)
-                            {
-                                var _temp = _t1;
-                                _t1 = _t2;
-                                _t2 = _temp;
-                            }
-                        }
-                        else
-                        {
-                            //Only t1 is valid
-                            _t2 = undefined;
-                        }
-                    }
-                    else
-                    {
-                        if ((_t2 >= 0) && (_t2 <= 1))
-                        {
-                            //Only t2 is valid
-                            _t1 = undefined;
-                        }
-                        else
-                        {
-                            //Neither t1 nor t2 is valid
-                            _t1 = undefined;
-                            _t2 = undefined;
-                        }
+                        var _temp = _t1;
+                        _t1 = _t2;
+                        _t2 = _temp;
                     }
                 }
                 else
                 {
                     //Line doesn't intersect curve
-                    _t1 = undefined;
-                    _t2 = undefined;
+                    _t1 = infinity;
+                    _t2 = infinity;
                 }
             }
             
-            if (_t1 != undefined)
+            if ((_t1 >= 0) && (_t1 <= 1))
             {
-                var _u1 = _lineU1 + _t1*_lineDX;
-                var _v1 = _lineV1 + _t1*_lineDY;
+                var _u = _lineU + _t1*_lineDX;
+                var _v = _lineV + _t1*_lineDY;
                 
-                if ((_u1 >= 0) && (_u1 <= 1) && (_v1 >= 0) && (_v1 <= 1))
+                if ((_u >= 0) && (_u <= 1) && (_v >= 0) && (_v <= 1))
                 {
-                    var _x = x + xScale*(_u1 + _cellX);
-                    var _y = y + yScale*(_v1 + _cellY);
-                    var _z = z + zScale*(_lineZ1 + _t1*_lineDZ);
-                    UggSphere(_x, _y, _z, 3, c_yellow);
-                    
                     _t = _t1;
                     break;
                 }
             }
             
-            if (_t2 != undefined)
+            if ((_t2 >= 0) && (_t2 <= 1))
             {
-                var _u2 = _lineU1 + _t2*_lineDX;
-                var _v2 = _lineV1 + _t2*_lineDY;
+                var _u = _lineU + _t2*_lineDX;
+                var _v = _lineV + _t2*_lineDY;
                         
-                if ((_u2 >= 0) && (_u2 <= 1) && (_v2 >= 0) && (_v2 <= 1))
+                if ((_u >= 0) && (_u <= 1) && (_v >= 0) && (_v <= 1))
                 {
-                    var _x = x + xScale*(_u2 + _cellX);
-                    var _y = y + yScale*(_v2 + _cellY);
-                    var _z = z + zScale*(_lineZ1 + _t2*_lineDZ);
-                    UggSphere(_x, _y, _z, 3, c_yellow);
-                    
                     _t = _t2;
                     break;
                 }
@@ -239,21 +160,38 @@ function BonkLineHitHeightmapNew(_heightmap, _lineX1, _lineY1, _lineZ1, _lineX2,
         
         if (_t != undefined)
         {
-            var _x = x + xScale*(_lineX1 + _t*_lineDX);
-            var _y = y + yScale*(_lineY1 + _t*_lineDY);
-            var _z = z + zScale*(_lineZ1 + _t*_lineDZ);
+            var _x1 = xScale*(_u + _cellX);
+            var _y1 = yScale*(_v + _cellY);
+            var _z1 = zScale*(_lineZ1 + _t*_lineDZ);
+            
+            var _z2 = zScale*(_cellZ1 + _dZ12*(_u + 0.001) + _dZ13*_v + _dZ12_dZ34*(_u + 0.001)*_v);
+            var _z3 = zScale*(_cellZ1 + _dZ12*_u + _dZ13*(_v + 0.001) + _dZ12_dZ34*_u*(_v + 0.001));
+            
+            var _normalX = -0.001*yScale*(_z2 - _z1);
+            var _normalY = -(_z3 - _z1)*0.001*xScale;
+            var _normalZ = 0.001*xScale*0.001*yScale;
             
             with(_returnHit)
             {
                 shape = _heightmap;
                 
-                x = _x;
-                y = _y;
-                z = _z;
+                x = other.x + _x1;
+                y = other.y + _y1;
+                z = other.z + _z1;
                 
-                normalX = 0;
-                normalY = 0;
-                normalZ = 1;
+                var _length = point_distance_3d(0, 0, 0,   _normalX, _normalY, _normalZ)
+                if (_length <= 0)
+                {
+                    normalX = 0;
+                    normalY = 0;
+                    normalZ = 0;
+                }
+                else
+                {
+                    normalX = _normalX / _length;
+                    normalY = _normalY / _length;
+                    normalZ = _normalZ / _length;
+                }
                 
                 return self;
             }
