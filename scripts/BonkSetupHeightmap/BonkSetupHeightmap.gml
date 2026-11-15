@@ -4,14 +4,18 @@
 /// @param x           Position of the top-left corner
 /// @param y           Position of the top-left corner
 /// @param z           Position of the top-left corner
+/// @param cellLeft
+/// @param cellTop
 /// @param cellCountX  Number of cells in the x axis
 /// @param cellCountY  Number of cells in the y axis
 /// @param xScale      Scaling factor to apply (this is analogous to the width of a single cell in the x-axis)
 /// @param yScale      Scaling factor to apply (this is analogous to the height of a single cell in the y-axis)
 /// @param zScale      Scaling factor to apply
+/// @param [zMin]
+/// @param [zMaz]
 /// @param [groupVector=BONK_DEFAULT_GROUP]
 
-function BonkSetupHeightmap(_function, _x, _y, _z, _cellCountX, _cellCountY, _xScale, _yScale, _zScale, _groupVector = BONK_DEFAULT_GROUP)
+function BonkSetupHeightmap(_function, _x, _y, _z, _cellLeft, _cellTop, _cellCountX, _cellCountY, _xScale, _yScale, _zScale, _zMin = undefined, _zMax = undefined, _groupVector = BONK_DEFAULT_GROUP)
 {
     if (not __BonkIsInstance())
     {
@@ -19,10 +23,11 @@ function BonkSetupHeightmap(_function, _x, _y, _z, _cellCountX, _cellCountY, _xS
     }
     
     __BonkCommonInstanceFunctions(_groupVector);
-    __BonkCommonHeightmap(_function, _x, _y, _z, _cellCountX, _cellCountY, _xScale, _yScale, _zScale);
-    UpdateAllTriangles();
-    
-    
+    __BonkCommonHeightmap(_function,
+                          _x, _y, _z,
+                          _cellLeft, _cellTop, _cellCountX, _cellCountY,
+                          _xScale, _yScale, _zScale,
+                          _zMin, _zMax);
     
     if (BONK_SET_INSTANCE_DEPTH)
     {
@@ -54,7 +59,7 @@ function BonkSetupHeightmap(_function, _x, _y, _z, _cellCountX, _cellCountY, _xS
         cellCountX = _cellCountX;
         cellCountY = _cellCountY;
         
-        UpdateAllTriangles();
+        UpdateBoundingBox();
         
         image_xscale = __bonkWidth / BONK_MASK_SIZE;
         image_yscale = __bonkHeight / BONK_MASK_SIZE;
@@ -66,7 +71,7 @@ function BonkSetupHeightmap(_function, _x, _y, _z, _cellCountX, _cellCountY, _xS
         yScale = _yScale;
         zScale = _zScale;
         
-        UpdateAllTriangles();
+        UpdateBoundingBox();
         
         image_xscale = __bonkWidth / BONK_MASK_SIZE;
         image_yscale = __bonkHeight / BONK_MASK_SIZE;

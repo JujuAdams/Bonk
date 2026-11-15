@@ -25,7 +25,13 @@ function BonkPointCollideHeightmap(_heightmap, _pointX, _pointY, _pointZ, _struc
             return _reaction.Null();
         }
         
-        var _zc = heightFunction(_cellX, _cellY);
+        var _cellXOffset = cellLeft;
+        var _cellYOffset = cellTop;
+        
+        _cellX += _cellXOffset;
+        _cellY += _cellYOffset;
+        
+        var _zc = heightFunction(_cellX, _cellY) ?? 0;
         if (_pointZ >= z + zScale*_zc)
         {
             return _reaction.Null();
@@ -34,13 +40,13 @@ function BonkPointCollideHeightmap(_heightmap, _pointX, _pointY, _pointZ, _struc
         _cellX = floor(_cellX);
         _cellY = floor(_cellY);
         
-        var _z1 = zScale*heightFunction(_cellX,   _cellY);
-        var _z2 = zScale*heightFunction(_cellX+1, _cellY);
-        var _z3 = zScale*heightFunction(_cellX,   _cellY+1);
-        var _z4 = zScale*heightFunction(_cellX+1, _cellY+1);
+        var _z1 = zScale*(heightFunction(_cellX,   _cellY  ) ?? 0);
+        var _z2 = zScale*(heightFunction(_cellX+1, _cellY  ) ?? 0);
+        var _z3 = zScale*(heightFunction(_cellX,   _cellY+1) ?? 0);
+        var _z4 = zScale*(heightFunction(_cellX+1, _cellY+1) ?? 0);
         
-        var _cellWorldX = x + xScale*_cellX;
-        var _cellWorldY = y + yScale*_cellY;
+        var _cellWorldX = x + xScale*(_cellX - _cellXOffset);
+        var _cellWorldY = y + yScale*(_cellY - _cellYOffset);
         
         var _closestPoint = __BonkNearestPointOnCell(_pointX, _pointY, _pointZ,
                                                      _cellWorldX, _cellWorldY,
@@ -82,9 +88,12 @@ function __BonkNearestPointOnCell(_pointX, _pointY, _pointZ,   _cellX1, _cellY1,
         var _dY = _y2 - _y1;
         var _dZ = _z2 - _z1;
         var _length = point_distance_3d(0, 0, 0,   _dX, _dY, _dZ);
-        _dX /= _length;
-        _dY /= _length;
-        _dZ /= _length;
+        if (_length > 0)
+        {
+            _dX /= _length;
+            _dY /= _length;
+            _dZ /= _length;
+        }
         
         var _vX = _pointX - _x1;
         var _vY = _pointY - _y1;
@@ -111,9 +120,12 @@ function __BonkNearestPointOnCell(_pointX, _pointY, _pointZ,   _cellX1, _cellY1,
         var _dY = _y2 - _y1;
         var _dZ = _z2 - _z1;
         var _length = point_distance_3d(0, 0, 0,   _dX, _dY, _dZ);
-        _dX /= _length;
-        _dY /= _length;
-        _dZ /= _length;
+        if (_length > 0)
+        {
+            _dX /= _length;
+            _dY /= _length;
+            _dZ /= _length;
+        }
         
         var _vX = _pointX - _x1;
         var _vY = _pointY - _y1;
@@ -140,9 +152,12 @@ function __BonkNearestPointOnCell(_pointX, _pointY, _pointZ,   _cellX1, _cellY1,
         var _dY = _y2 - _y1;
         var _dZ = _z2 - _z1;
         var _length = point_distance_3d(0, 0, 0,   _dX, _dY, _dZ);
-        _dX /= _length;
-        _dY /= _length;
-        _dZ /= _length;
+        if (_length > 0)
+        {
+            _dX /= _length;
+            _dY /= _length;
+            _dZ /= _length;
+        }
         
         var _vX = _pointX - _x1;
         var _vY = _pointY - _y1;

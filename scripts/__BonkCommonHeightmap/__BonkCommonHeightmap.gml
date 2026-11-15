@@ -4,13 +4,17 @@
 /// @param x
 /// @param y
 /// @param z
+/// @param cellLeft
+/// @param cellTop
 /// @param cellCountX
 /// @param cellCountY
 /// @param xScale
 /// @param yScale
 /// @param zScale
+/// @param [zMin]
+/// @param [zMaz]
 
-function __BonkCommonHeightmap(_function, _x, _y, _z, _cellCountX, _cellCountY, _xScale, _yScale, _zScale)
+function __BonkCommonHeightmap(_function, _x, _y, _z, _cellLeft, _cellTop, _cellCountX, _cellCountY, _xScale, _yScale, _zScale, _zMin = undefined, _zMax = undefined)
 {
     bonkType = BONK_TYPE_HEIGHTMAP;
     
@@ -39,16 +43,15 @@ function __BonkCommonHeightmap(_function, _x, _y, _z, _cellCountX, _cellCountY, 
     })();
     
     heightFunction = _function;
-    heightFunctionXOffset = 0;
-    heightFunctionYOffset = 0;
-    
-    __bonkMinZ = -500;
-    __bonkMaxZ =  500;
+    cellLeft = _cellLeft;
+    cellTop  = _cellTop;
     
     x = _x;
     y = _y;
     z = _z;
     
+    cellLeft   = _cellLeft;
+    cellTop    = _cellTop;
     cellCountX = _cellCountX;
     cellCountY = _cellCountY;
     
@@ -56,10 +59,61 @@ function __BonkCommonHeightmap(_function, _x, _y, _z, _cellCountX, _cellCountY, 
     yScale = _yScale;
     zScale = _zScale;
     
-    __bonkWidth  = cellCountX*xScale;
-    __bonkHeight = cellCountY*yScale;
     
     
+    UpdateBoundingBox = function(_zMin = undefined, _zMax = undefined)
+    {
+        __bonkWidth  = cellCountX*xScale;
+        __bonkHeight = cellCountY*yScale;
+        
+        if ((_zMin != undefined) && (_zMax != undefined))
+        {
+            __bonkMinZ = _zMin;
+            __bonkMaxZ = _zMax;
+        }
+        else
+        {
+            var _cellCountX = cellCountX;
+            var _cellCountY = cellCountY;
+            
+            var _heightFunction = heightFunction;
+            var _cellXOffset = cellLeft;
+            var _cellYOffset = cellTop;
+            
+            _zMin =  infinity;
+            _zMax = -infinity;
+            
+            var _cellY = 0;
+            repeat(_cellCountY)
+            {
+                var _cellX = 0;
+                repeat(_cellCountX)
+                {
+                    var _z = _heightFunction(_cellX + _cellXOffset, _cellY + _cellYOffset);
+                    if (_z != undefined)
+                    {
+                        _zMin = min(_zMin, _z);
+                        _zMax = max(_zMax, _z);
+                    }
+                    
+                    ++_cellX;
+                }
+                
+                ++_cellY;
+            }
+            
+            if (not is_infinity(_zMin))
+            {
+                __bonkMinZ = zScale*_zMin;
+                __bonkMaxZ = zScale*_zMax;
+            }
+            else
+            {
+                __bonkMinZ = 0;
+                __bonkMaxZ = 0;
+            }
+        }
+    }
     
     GetZ = function(_x, _y)
     {
@@ -75,7 +129,13 @@ function __BonkCommonHeightmap(_function, _x, _y, _z, _cellCountX, _cellCountY, 
             return undefined;
         }
         
-        return z + zScale*heightFunction(_xCell, _yCell);
+        var _z = heightFunction(_xCell + cellLeft, _yCell + cellTop);
+        if (_z == undefined)
+        {
+            return undefined;
+        }
+        
+        return z + zScale*_z;
     }
     
     GetNormal = function(_x, _y)
@@ -717,4 +777,8 @@ function __BonkCommonHeightmap(_function, _x, _y, _z, _cellCountX, _cellCountY, 
         
         return __BonkSupercover2D(_clampedX1/xScale, _clampedY1/yScale, _clampedX2/xScale, _clampedY2/yScale);
     }
+    
+    
+    
+    UpdateBoundingBox(_zMin, _zMax);
 }

@@ -41,6 +41,9 @@ function BonkLineHitHeightmap(_heightmap, _lineX1, _lineY1, _lineZ1, _lineX2, _l
         var _lineDY = _lineY2 - _lineY1;
         var _lineDZ = _lineZ2 - _lineZ1
         
+        var _cellXOffset = cellLeft;
+        var _cellYOffset = cellTop;
+        
         var _heightFunction = heightFunction;
         var _t1 = infinity;
         var _t2 = infinity;
@@ -52,10 +55,10 @@ function BonkLineHitHeightmap(_heightmap, _lineX1, _lineY1, _lineZ1, _lineX2, _l
             var _cellX = _pointArray[_i  ];
             var _cellY = _pointArray[_i+1];
             
-            var _cellZ1 = _heightFunction(_cellX,   _cellY  );
-            var _cellZ2 = _heightFunction(_cellX+1, _cellY  );
-            var _cellZ3 = _heightFunction(_cellX,   _cellY+1);
-            var _cellZ4 = _heightFunction(_cellX+1, _cellY+1);
+            var _cellZ1 = _heightFunction(_cellX   + _cellXOffset, _cellY   + _cellYOffset) ?? 0;
+            var _cellZ2 = _heightFunction(_cellX+1 + _cellXOffset, _cellY   + _cellYOffset) ?? 0;
+            var _cellZ3 = _heightFunction(_cellX   + _cellXOffset, _cellY+1 + _cellYOffset) ?? 0;
+            var _cellZ4 = _heightFunction(_cellX+1 + _cellXOffset, _cellY+1 + _cellYOffset) ?? 0;
             
             var _dZ12 = _cellZ2 - _cellZ1;
             var _dZ13 = _cellZ3 - _cellZ1;

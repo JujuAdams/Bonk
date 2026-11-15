@@ -4,18 +4,24 @@
 /// @param x           Position of the top-left corner
 /// @param y           Position of the top-left corner
 /// @param z           Position of the top-left corner
+/// @param cellLeft
+/// @param cellTop
 /// @param cellCountX  Number of cells in the x axis
 /// @param cellCountY  Number of cells in the y axis
 /// @param xScale      Scaling factor to apply (this is analogous to the width of a single cell in the x-axis)
 /// @param yScale      Scaling factor to apply (this is analogous to the height of a single cell in the y-axis)
 /// @param zScale      Scaling factor to apply
+/// @param [zMin]
+/// @param [zMaz]
 /// @param [groupVector=BONK_DEFAULT_GROUP]
 
-function BonkStructHeightmap(_function, _x, _y, _z, _cellCountX, _cellCountY, _xScale, _yScale, _zScale, _groupVector = BONK_DEFAULT_GROUP) : __BonkClassShared(_groupVector) constructor
+function BonkStructHeightmap(_function, _x, _y, _z, _cellLeft, _cellTop, _cellCountX, _cellCountY, _xScale, _yScale, _zScale, _zMin = undefined, _zMax = undefined, _groupVector = BONK_DEFAULT_GROUP) : __BonkClassShared(_groupVector) constructor
 {
-    __BonkCommonHeightmap(_function, _x, _y, _z, _cellCountX, _cellCountY, _xScale, _yScale, _zScale);
-    
-    
+    __BonkCommonHeightmap(_function,
+                          _x, _y, _z,
+                          _cellLeft, _cellTop, _cellCountX, _cellCountY,
+                          _xScale, _yScale, _zScale,
+                          _zMin, _zMax);
     
     static __SetPositionFree = function(_x = x, _y = y, _z = z)
     {
@@ -44,7 +50,7 @@ function BonkStructHeightmap(_function, _x, _y, _z, _cellCountX, _cellCountY, _x
         cellCountX = _cellCountX;
         cellCountY = _cellCountY;
         
-        UpdateAllTriangles();
+        UpdateBoundingBox();
     }
     
     static SetScale = function(_xScale = xScale, _yScale = yScale, _zScale = zScale)
@@ -53,7 +59,7 @@ function BonkStructHeightmap(_function, _x, _y, _z, _cellCountX, _cellCountY, _x
         yScale = _yScale;
         zScale = _zScale;
         
-        UpdateAllTriangles();
+        UpdateBoundingBox();
     }
     
     static SetHeightmapSizeAndScale = function(_cellCountX = cellCountX, _cellCountY = cellCountY, _xScale = xScale, _yScale = yScale, _zScale = zScale)
@@ -65,6 +71,6 @@ function BonkStructHeightmap(_function, _x, _y, _z, _cellCountX, _cellCountY, _x
         yScale = _yScale;
         zScale = _zScale;
         
-        UpdateAllTriangles();
+        UpdateBoundingBox();
     }
 }
