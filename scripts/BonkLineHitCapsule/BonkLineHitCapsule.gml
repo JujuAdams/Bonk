@@ -133,7 +133,7 @@ function BonkLineHitCapsule(_capsule, _x1, _y1, _z1, _x2, _y2, _z2, _struct = un
         if ((_axisZ <= _capsuleZMin) || (_axisZ >= _capsuleZMax))
         {
             //Choose a sphere centre depending on which end of the capsule the ray is pointed at
-            _axisZ = (_axisZ <= 0)? _capsuleZMin : _capsuleZMax;
+            _axisZ = (_axisZ <= _capsuleZMin)? _capsuleZMin : _capsuleZMax;
             
             //Set up a quadratic solution
             var _a = _dX*_dX + _dY*_dY + _dZ*_dZ;
