@@ -36,3 +36,7 @@
 
 // Forces triangle edges to be soft edges. Don't turn this on unless directed.
 #macro BONK_EXPERIMENT_FORCE_EDGE_KIND  undefined
+
+// Maximum number of collisions to consider during deflection. Increasing this value will lead to
+// more accurate deflection at the expense of performance.
+#macro BONK_MAX_DEFLECT_COLLISIONS  3

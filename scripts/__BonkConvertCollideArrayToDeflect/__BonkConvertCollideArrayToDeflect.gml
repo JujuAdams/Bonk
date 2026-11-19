@@ -107,7 +107,7 @@ function __BonkConvertCollideArrayToDeflect(_collideArrayContainer, _subjectShap
     
     //Then re-check and handle all other collisions
     var _i = 1;
-    repeat(_collisionCount-1)
+    repeat(min(BONK_MAX_DEFLECT_COLLISIONS, _collisionCount)-1)
     {
         var _collision = _sortArray[_i];
         

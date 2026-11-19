@@ -39,3 +39,8 @@
 //this value is really more of a "how often should we check to see if we've gone over our time
 //budget" rather than any measure of speed.
 #macro BONK_VERTEX_BUFFER_ASYNC_TRIANGLE_RESOLUTION  200
+
+//Maximum number of internal collisions. We generate an array of length n for collision results
+//that are collected when deflecting against multiple shapes. However, we don't check against the
+//length of the array for performance reasons so this array needs to be very big.
+#macro BONK_INTERNAL_MAX_COLLISIONS  100
