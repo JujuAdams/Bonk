@@ -24,6 +24,11 @@ function BonkVelocity(_xSpeed = 0, _ySpeed = 0, _zSpeed = 0) constructor
     ySpeed = _ySpeed;
     zSpeed = _zSpeed;
     
+    static toString = function()
+    {
+        return $"<velocity {xSpeed}, {ySpeed}, {zSpeed}>";
+    }
+    
     static LimitSpeed = function(_maxSpeed)
     {
         var _coeff = _maxSpeed / max(_maxSpeed, point_distance_3d(0,0,0,  xSpeed, ySpeed, zSpeed));
