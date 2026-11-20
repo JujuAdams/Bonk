@@ -20,7 +20,7 @@
 /// @param [groupFilter]
 /// @param [list]
 
-function BonkInstancePlaceList(_subjectInstance, _dX, _dY, _objectOrArray = BonkObject, _groupFilter = -1, _list = undefined)
+function BonkInstancePlaceList(_subjectInstance, _dX, _dY, _objectOrArray = BonkObject, _groupFilter = undefined, _list = undefined)
 {
     static _staticList = ds_list_create();
     

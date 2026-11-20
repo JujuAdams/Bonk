@@ -20,7 +20,7 @@
 /// @param targetShapes
 /// @param [groupFilter]
 
-function BonkCollideDeepestExt(_subjectShape, _targetShapes, _groupFilter = -1)
+function BonkCollideDeepestExt(_subjectShape, _targetShapes, _groupFilter = undefined)
 {
     //TODO - Refactor to use collide array
     

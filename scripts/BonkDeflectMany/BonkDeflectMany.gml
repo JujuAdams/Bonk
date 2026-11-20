@@ -30,7 +30,7 @@
 /// @param [objectOrArray=BonkObject]
 /// @param [groupFilter]
 
-function BonkDeflectMany(_subjectInstance, _objectOrArray = BonkObject, _groupFilter = -1)
+function BonkDeflectMany(_subjectInstance, _objectOrArray = BonkObject, _groupFilter = undefined)
 {
     return BonkDeflectManyExt(_subjectInstance, BonkInstancePlaceList(_subjectInstance, 0, 0, _objectOrArray), _groupFilter);
 }

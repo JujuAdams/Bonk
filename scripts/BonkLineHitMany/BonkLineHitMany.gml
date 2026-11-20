@@ -20,7 +20,7 @@
 /// @param [objectOrArray=BonkObject]
 /// @param [groupFilter]
 
-function BonkLineHitMany(_x1, _y1, _z1, _x2, _y2, _z2, _objectOrArray = BonkObject, _groupFilter = -1)
+function BonkLineHitMany(_x1, _y1, _z1, _x2, _y2, _z2, _objectOrArray = BonkObject, _groupFilter = undefined)
 {
     return BonkLineHitManyExt(_x1, _y1, _z1, _x2, _y2, _z2, BonkCollisionLineList(_x1, _y1, _x2, _y2, _objectOrArray), _groupFilter);
 }

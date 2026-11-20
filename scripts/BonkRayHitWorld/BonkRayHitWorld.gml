@@ -10,7 +10,7 @@
 /// @param [struct]
 /// @param [groupFilter]
 
-function BonkRayHitWorld(_world, _rayX, _rayY, _rayZ, _dX, _dY, _dZ, _struct = undefined, _groupFilter = -1)
+function BonkRayHitWorld(_world, _rayX, _rayY, _rayZ, _dX, _dY, _dZ, _struct = undefined, _groupFilter = undefined)
 {
     return BonkLineHitWorld(_world,
                             _rayX, _rayY, _rayZ,

@@ -20,7 +20,7 @@
 /// @param [groupFilter]
 /// @param [array]
 
-function BonkTouchManyExt(_subjectShape, _targetShapes, _groupFilter = -1, _array = undefined)
+function BonkTouchManyExt(_subjectShape, _targetShapes, _groupFilter = undefined, _array = undefined)
 {
     static _staticArray = [];
     

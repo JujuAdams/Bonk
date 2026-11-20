@@ -19,7 +19,7 @@
 /// @param [groupFilter]
 /// @param [list]
 
-function BonkCollisionLineList(_x1, _y1, _x2, _y2, _objectOrArray = BonkObject, _groupFilter = -1, _list = undefined)
+function BonkCollisionLineList(_x1, _y1, _x2, _y2, _objectOrArray = BonkObject, _groupFilter = undefined, _list = undefined)
 {
     static _staticList = ds_list_create();
     

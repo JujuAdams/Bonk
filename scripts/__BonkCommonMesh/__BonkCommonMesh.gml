@@ -229,12 +229,12 @@ function __BonkCommonMesh(_x, _y, _z, _cellXSize, _cellYSize, _cellZSize)
         return __bonkMatrix;
     };
     
-    LineHit = function(_x1, _y1, _z1, _x2, _y2, _z2, _groupFilter = -1, _struct = undefined)
+    LineHit = function(_x1, _y1, _z1, _x2, _y2, _z2, _groupFilter = undefined, _struct = undefined)
     {
         return BonkLineHitMesh(self, _x1, _y1, _z1, _x2, _y2, _z2, _struct, _groupFilter);
     }
     
-    Touch = function(_subjectShape, _groupFilter = -1)
+    Touch = function(_subjectShape, _groupFilter = undefined)
     {
         static _map = ds_map_create();
         
@@ -363,7 +363,7 @@ function __BonkCommonMesh(_x, _y, _z, _cellXSize, _cellYSize, _cellZSize)
         return false;
     }
     
-    Collide = function(_subjectShape, _groupFilter = -1, _struct = undefined)
+    Collide = function(_subjectShape, _groupFilter = undefined, _struct = undefined)
     {
         static _map = ds_map_create();
         static _nullCollisionData = new BonkResultCollide();
@@ -617,7 +617,7 @@ function __BonkCommonMesh(_x, _y, _z, _cellXSize, _cellYSize, _cellZSize)
         }
     }
     
-    Deflect = function(_subjectShape, _slopeThreshold = 0, _groupFilter = -1)
+    Deflect = function(_subjectShape, _slopeThreshold = 0, _groupFilter = undefined)
     {
         static _staticCollideArrayContainer = new __BonkClassCollideArrayContainer();
         var _collideArrayContainer = _staticCollideArrayContainer;

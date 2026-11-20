@@ -20,7 +20,7 @@
 /// @param [groupFilter]
 /// @param [array]
 
-function BonkCollideManyExt(_subjectShape, _targetShapes, _groupFilter = -1, _array = undefined)
+function BonkCollideManyExt(_subjectShape, _targetShapes, _groupFilter = undefined, _array = undefined)
 {
     //TODO - Refactor to use collide array
     
