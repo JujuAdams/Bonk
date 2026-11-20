@@ -238,7 +238,7 @@ function __BonkCommonMesh(_x, _y, _z, _cellXSize, _cellYSize, _cellZSize)
     {
         static _map = ds_map_create();
         
-        if ((_groupFilter < 0) || FilterTest(_groupFilter))
+        if (BonkFilterTest(bonkGroup, _groupFilter))
         { 
             _subjectShape.x -= x;
             _subjectShape.y -= y;
@@ -368,7 +368,7 @@ function __BonkCommonMesh(_x, _y, _z, _cellXSize, _cellYSize, _cellZSize)
         static _map = ds_map_create();
         static _nullCollisionData = new BonkResultCollide();
         
-        if ((_groupFilter < 0) || FilterTest(_groupFilter))
+        if (BonkFilterTest(bonkGroup, _groupFilter))
         {
             _subjectShape.x -= x;
             _subjectShape.y -= y;
@@ -503,7 +503,7 @@ function __BonkCommonMesh(_x, _y, _z, _cellXSize, _cellYSize, _cellZSize)
     {
         static _map = ds_map_create();
         
-        if ((_groupFilter < 0) || FilterTest(_groupFilter))
+        if (BonkFilterTest(bonkGroup, _groupFilter))
         {
             _subjectShape.x -= x;
             _subjectShape.y -= y;
@@ -627,38 +627,6 @@ function __BonkCommonMesh(_x, _y, _z, _cellXSize, _cellYSize, _cellZSize)
         
         _collideArrayContainer.__count = 0;
         return _return;
-    }
-    
-    FilterTest = function(_filter = -1)
-    {
-        if (_filter < 0)
-        {
-            return true;
-        }
-        
-        var _bonkGroup = bonkGroup;
-        
-        //Filter out shapes that conflict with the NOT vector (if in use)
-        var _notVector = (_filter >> 40) & 0xFFFFF;
-        if ((_notVector > 0) && (_bonkGroup & _notVector))
-        {
-            return false;
-        }
-        
-        //Accept shapes that hit the OR vector
-        if (_bonkGroup & (_filter & 0xFFFFF))
-        {
-            return true;
-        }
-        
-        //Accept shapes the hit all of the AND vector (if in use)
-        var _andVector = (_filter >> 20) & 0xFFFFF;
-        if ((_andVector > 0) && ((_bonkGroup & _andVector) == _andVector))
-        {
-            return true;
-        }
-        
-        return false;
     }
     
     CellInside = function(_x, _y, _z)

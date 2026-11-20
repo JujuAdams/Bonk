@@ -57,12 +57,12 @@ function BonkInstancePlaceList(_subjectInstance, _dX, _dY, _objectOrArray = Bonk
         }
     }
     
-    if (_groupFilter >= 0)
+    if ((_groupFilter != undefined) && (_groupFilter != 0))
     {
         var _i = ds_list_size(_list)-1;
         repeat(_i+1 - _listStart)
         {
-            if (not _list[| _i].FilterTest(_groupFilter))
+            if (not BonkFilterTest(_list[| _i].bonkGroup, _groupFilter))
             {
                 ds_list_delete(_list, _i);
             }

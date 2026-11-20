@@ -34,41 +34,9 @@ function __BonkCommonInstanceFunctions(_groupVector = BONK_DEFAULT_GROUP)
         SetPosition(x + _dX, y + _dY, z + _dZ);
     }
     
-    FilterTest = function(_filter = -1)
-    {
-        if (_filter < 0)
-        {
-            return true;
-        }
-        
-        var _bonkGroup = bonkGroup;
-        
-        //Filter out shapes that conflict with the NOT vector (if in use)
-        var _notVector = (_filter >> 40) & 0xFFFFF;
-        if ((_notVector > 0) && (_bonkGroup & _notVector))
-        {
-            return false;
-        }
-        
-        //Accept shapes that hit the OR vector
-        if (_bonkGroup & (_filter & 0xFFFFF))
-        {
-            return true;
-        }
-        
-        //Accept shapes the hit all of the AND vector (if in use)
-        var _andVector = (_filter >> 20) & 0xFFFFF;
-        if ((_andVector > 0) && ((_bonkGroup & _andVector) == _andVector))
-        {
-            return true;
-        }
-        
-        return false;
-    }
-
     Touch = function(_otherShape, _groupFilter = undefined, _quietFail = false)
     {
-        if ((_groupFilter < 0) || FilterTest(_groupFilter))
+        if (BonkFilterTest(bonkGroup, _groupFilter))
         {
             var _insideFunc = __bonkTouchFuncLookup[_otherShape.bonkType];
             if (is_callable(_insideFunc))
@@ -91,7 +59,7 @@ function __BonkCommonInstanceFunctions(_groupVector = BONK_DEFAULT_GROUP)
     {
         static _nullCollisionData = new BonkResultCollide();
         
-        if ((_groupFilter < 0) || FilterTest(_groupFilter))
+        if (BonkFilterTest(bonkGroup, _groupFilter))
         {
             var _collideFunc = __bonkCollideFuncLookup[_otherShape.bonkType];
             if (is_callable(_collideFunc))

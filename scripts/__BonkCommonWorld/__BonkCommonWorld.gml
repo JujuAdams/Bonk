@@ -8,7 +8,7 @@ function __BonkCommonWorld(_cellXSize, _cellYSize, _cellZSize)
 {
     bonkType = BONK_TYPE_WORLD;
     __bonkWorld = undefined;
-    bonkGroup = -1;
+    bonkGroup = undefined;
     
     
     
@@ -357,11 +357,6 @@ function __BonkCommonWorld(_cellXSize, _cellYSize, _cellZSize)
         
         _collideArrayContainer.__count = 0;
         return _return;
-    }
-    
-    FilterTest = function()
-    {
-        return true;
     }
     
     CellInside = function(_x, _y, _z)

@@ -29,14 +29,9 @@ function __BonkClassShared(_groupVector) constructor
         }
     }
     
-    static FilterTest = function(_filter)
-    {
-        return BonkFilterTest(bonkGroup, _filter);
-    }
-    
     static Touch = function(_otherShape, _groupFilter = -1, _quietFail = false)
     {
-        if ((_groupFilter >= 0) && (not FilterTest(_groupFilter)))
+        if (BonkFilterTest(bonkGroup, _groupFilter))
         {
             return false;
         }
@@ -61,7 +56,7 @@ function __BonkClassShared(_groupVector) constructor
     {
         static _nullCollisionData = new BonkResultCollide();
         
-        if ((_groupFilter < 0) || FilterTest(_groupFilter))
+        if (BonkFilterTest(bonkGroup, _groupFilter))
         {
             var _collideFunc = __bonkCollideFuncLookup[_otherShape.bonkType];
             if (is_callable(_collideFunc))

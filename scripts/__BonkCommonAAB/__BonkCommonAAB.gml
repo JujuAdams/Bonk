@@ -35,7 +35,7 @@ function __BonkCommonAAB()
     {
         static _nullHit = new BonkResultHit();
         
-        if ((_groupFilter < 0) || FilterTest(_groupFilter))
+        if (BonkFilterTest(bonkGroup, _groupFilter))
         {
             return BonkLineHitAAB(self, _x1, _y1, _z1, _x2, _y2, _z2, _struct);
         }

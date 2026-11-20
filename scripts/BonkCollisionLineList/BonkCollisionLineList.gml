@@ -48,12 +48,12 @@ function BonkCollisionLineList(_x1, _y1, _x2, _y2, _objectOrArray = BonkObject, 
         collision_line_list(_x1, _y1, _x2, _y2, _objectOrArray, false, false, _list, false);
     }
     
-    if (_groupFilter >= 0)
+    if ((_groupFilter != undefined) && (_groupFilter != 0))
     {
         var _i = ds_list_size(_list)-1;
         repeat(_i+1 - _listStart)
         {
-            if (not _list[| _i].FilterTest(_groupFilter))
+            if (not BonkFilterTest(_list[| _i].bonkGroup, _groupFilter))
             {
                 ds_list_delete(_list, _i);
             }
