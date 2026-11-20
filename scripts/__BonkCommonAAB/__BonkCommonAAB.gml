@@ -30,11 +30,5 @@ function __BonkCommonAAB()
     
     __bonkCollideFuncLookup = _collideFuncLookup;
     __bonkTouchFuncLookup   = _touchFuncLookup;
-    
-    DebugDraw = method(undefined, function(_color = undefined, _wireframe = undefined)
-    {
-        __BONK_VERIFY_UGG
-        UggAABB(x, y, z, xSize, ySize, zSize, _color, _wireframe);
-    });
     __bonkLineHit           = BonkLineHitAAB;
 }

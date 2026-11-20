@@ -72,4 +72,10 @@ function BonkStructAAB(_x, _y, _z, _xSize, _ySize, _zSize, _groupVector = BONK_D
             zMax: z + 0.5*zSize,
         };
     }
+    
+    static DebugDraw = function(_color = undefined, _wireframe = undefined)
+    {
+        __BONK_VERIFY_UGG
+        UggAABB(x, y, z, xSize, ySize, zSize, _color, _wireframe);
+    };
 }
