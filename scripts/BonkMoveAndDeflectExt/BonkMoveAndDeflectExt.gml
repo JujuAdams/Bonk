@@ -49,7 +49,6 @@ function BonkMoveAndDeflectExt(_subjectShape, _velocityStruct, _targetShapes, _s
         
         with(_velocityStruct)
         {
-            var _prevSpeed = point_distance_3d(0,0,0,   xSpeed, ySpeed, zSpeed);
             _subjectShape.SetPosition(_prevX + xSpeed, _prevY + ySpeed, _prevZ + zSpeed);
         }
         
@@ -62,19 +61,9 @@ function BonkMoveAndDeflectExt(_subjectShape, _velocityStruct, _targetShapes, _s
         
         with(_velocityStruct)
         {
-            //If we've made a massive jump then don't fling the shape off into outer space
-            if ((_prevSpeed > 1) && (point_distance_3d(0,0,0,   _xSpeed, _ySpeed, _zSpeed) > 10*_prevSpeed))
-            {
-                xSpeed = 0;
-                ySpeed = 0;
-                zSpeed = 0;
-            }
-            else
-            {
-                xSpeed = _xSpeed;
-                ySpeed = _ySpeed;
-                zSpeed = _zSpeed;
-            }
+            xSpeed = _xSpeed;
+            ySpeed = _ySpeed;
+            zSpeed = _zSpeed;
         }
         
         return _return;
