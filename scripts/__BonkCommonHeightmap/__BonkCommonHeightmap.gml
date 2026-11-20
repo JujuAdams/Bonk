@@ -174,7 +174,7 @@ function __BonkCommonHeightmap(_function, _x, _y, _z, _cellLeft, _cellTop, _cell
         }
     }
     
-    LineHit = function(_x1, _y1, _z1, _x2, _y2, _z2, _groupFilter = -1, _struct = undefined)
+    LineHit = function(_x1, _y1, _z1, _x2, _y2, _z2, _groupFilter = undefined, _struct = undefined)
     {
         static _nullHit = new BonkResultHit();
         
@@ -188,7 +188,7 @@ function __BonkCommonHeightmap(_function, _x, _y, _z, _cellLeft, _cellTop, _cell
         }
     }
     
-    Touch = function(_otherShape, _groupFilter = -1, _quietFail = false)
+    Touch = function(_otherShape, _groupFilter = undefined, _quietFail = false)
     {
         if ((_groupFilter >= 0) && (not FilterTest(_groupFilter)))
         {
@@ -211,7 +211,7 @@ function __BonkCommonHeightmap(_function, _x, _y, _z, _cellLeft, _cellTop, _cell
         return false;
     }
     
-    Collide = function(_otherShape, _groupFilter = -1, _struct = undefined, _quietFail = false)
+    Collide = function(_otherShape, _groupFilter = undefined, _struct = undefined, _quietFail = false)
     {
         static _nullCollisionData = new BonkResultCollide();
         
@@ -249,7 +249,7 @@ function __BonkCommonHeightmap(_function, _x, _y, _z, _cellLeft, _cellTop, _cell
         }
     }
     
-    Deflect = function(_subjectShape, _slopeThreshold = 0, _groupFilter = -1)
+    Deflect = function(_subjectShape, _slopeThreshold = 0, _groupFilter = undefined)
     {
         return __BonkConvertCollideToDeflect(_subjectShape, _slopeThreshold, _subjectShape.Collide(self, _groupFilter));
     }

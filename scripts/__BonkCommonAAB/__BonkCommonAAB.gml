@@ -31,7 +31,7 @@ function __BonkCommonAAB()
     __bonkCollideFuncLookup = _collideFuncLookup;
     __bonkTouchFuncLookup   = _touchFuncLookup;
     
-    LineHit = method(undefined, function(_x1, _y1, _z1, _x2, _y2, _z2, _groupFilter = -1, _struct = undefined)
+    LineHit = method(undefined, function(_x1, _y1, _z1, _x2, _y2, _z2, _groupFilter = undefined, _struct = undefined)
     {
         static _nullHit = new BonkResultHit();
         

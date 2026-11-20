@@ -23,7 +23,7 @@
 /// @param targetShapes
 /// @param [groupFilter]
 
-function BonkRayHitManyExt(_rayX, _rayY, _rayZ, _dX, _dY, _dZ, _targetShapes, _groupFilter = -1)
+function BonkRayHitManyExt(_rayX, _rayY, _rayZ, _dX, _dY, _dZ, _targetShapes, _groupFilter = undefined)
 {
     return BonkLineHitManyExt(_rayX, _rayY, _rayZ,
                               _rayX + BONK_RAY_LENGTH*_dX, _rayY + BONK_RAY_LENGTH*_dY, _rayZ + BONK_RAY_LENGTH*_dZ,

@@ -15,7 +15,7 @@
 /// @param targetShapes
 /// @param [groupFilter]
 
-function BonkTouchAnyExt(_subjectShape, _targetShapes, _groupFilter = -1)
+function BonkTouchAnyExt(_subjectShape, _targetShapes, _groupFilter = undefined)
 {
     if (is_array(_targetShapes)) //We were given an array
     {

@@ -34,7 +34,7 @@
 /// @param [slopeThreshold=0]
 /// @param [groupFilter]
 
-function BonkDeflectManyExt(_subjectShape, _targetShapes, _slopeThreshold = 0, _groupFilter = -1)
+function BonkDeflectManyExt(_subjectShape, _targetShapes, _slopeThreshold = 0, _groupFilter = undefined)
 {
     static _staticCollideArrayContainer = new __BonkClassCollideArrayContainer();
     var _collideArrayContainer = _staticCollideArrayContainer;

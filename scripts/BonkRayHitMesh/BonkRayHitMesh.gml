@@ -10,7 +10,7 @@
 /// @param [struct]
 /// @param [groupFilter]
 
-function BonkRayHitMesh(_mesh, _rayX, _rayY, _rayZ, _dX, _dY, _dZ, _struct = undefined, _groupFilter = -1)
+function BonkRayHitMesh(_mesh, _rayX, _rayY, _rayZ, _dX, _dY, _dZ, _struct = undefined, _groupFilter = undefined)
 {
     return BonkLineHitMesh(_mesh,
                            _rayX, _rayY, _rayZ,

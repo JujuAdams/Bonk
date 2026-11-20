@@ -11,7 +11,7 @@
 /// @param [objectOrArray=BonkObject]
 /// @param [groupFilter]
 
-function BonkTouchAny(_subjectInstance, _objectOrArray = BonkObject, _groupFilter = -1)
+function BonkTouchAny(_subjectInstance, _objectOrArray = BonkObject, _groupFilter = undefined)
 {
     return BonkTouchAnyExt(_subjectInstance, BonkInstancePlaceList(_subjectInstance, 0, 0, _objectOrArray), _groupFilter);
 }

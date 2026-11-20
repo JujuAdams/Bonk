@@ -37,7 +37,7 @@
 /// @param [slopeThreshold=0]
 /// @param [groupFilter]
 
-function BonkMoveAndDeflectExt(_subjectShape, _velocityStruct, _targetShapes, _slopeThreshold = 0, _groupFilter = -1)
+function BonkMoveAndDeflectExt(_subjectShape, _velocityStruct, _targetShapes, _slopeThreshold = 0, _groupFilter = undefined)
 {
     static _staticNullDeflect = new BonkResultDeflect();
     

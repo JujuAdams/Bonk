@@ -34,7 +34,7 @@
 /// @param [objectOrArray=BonkObject]
 /// @param [groupFilter]
 
-function BonkMoveAndDeflect(_subjectInstance, _velocityStruct, _slopeThreshold = 0, _objectOrArray = BonkObject, _groupFilter = -1)
+function BonkMoveAndDeflect(_subjectInstance, _velocityStruct, _slopeThreshold = 0, _objectOrArray = BonkObject, _groupFilter = undefined)
 {
     return BonkMoveAndDeflectExt(_subjectInstance, _velocityStruct, BonkInstancePlaceList(_subjectInstance, _velocityStruct.xSpeed, _velocityStruct.ySpeed, _objectOrArray), _slopeThreshold, _groupFilter);
 }

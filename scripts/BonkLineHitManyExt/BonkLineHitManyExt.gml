@@ -23,7 +23,7 @@
 /// @param targetShapes
 /// @param [groupFilter]
 
-function BonkLineHitManyExt(_x1, _y1, _z1, _x2, _y2, _z2, _targetShapes, _groupFilter = -1)
+function BonkLineHitManyExt(_x1, _y1, _z1, _x2, _y2, _z2, _targetShapes, _groupFilter = undefined)
 {
     static _returnData = [];
     array_resize(_returnData, 0);

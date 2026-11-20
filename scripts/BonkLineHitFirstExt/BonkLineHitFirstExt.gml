@@ -26,7 +26,7 @@
 /// @param [groupFilter]
 /// @param [struct]
 
-function BonkLineHitFirstExt(_x1, _y1, _z1, _x2, _y2, _z2, _targetShapes, _groupFilter = -1, _struct = undefined)
+function BonkLineHitFirstExt(_x1, _y1, _z1, _x2, _y2, _z2, _targetShapes, _groupFilter = undefined, _struct = undefined)
 {
     static _map = ds_map_create();
     

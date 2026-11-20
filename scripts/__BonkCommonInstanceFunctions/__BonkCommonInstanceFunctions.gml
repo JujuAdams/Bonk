@@ -66,7 +66,7 @@ function __BonkCommonInstanceFunctions(_groupVector = BONK_DEFAULT_GROUP)
         return false;
     }
 
-    Touch = function(_otherShape, _groupFilter = -1, _quietFail = false)
+    Touch = function(_otherShape, _groupFilter = undefined, _quietFail = false)
     {
         if ((_groupFilter < 0) || FilterTest(_groupFilter))
         {
@@ -87,7 +87,7 @@ function __BonkCommonInstanceFunctions(_groupVector = BONK_DEFAULT_GROUP)
         return false;
     }
     
-    Collide = function(_otherShape, _groupFilter = -1, _struct = undefined, _quietFail = false)
+    Collide = function(_otherShape, _groupFilter = undefined, _struct = undefined, _quietFail = false)
     {
         static _nullCollisionData = new BonkResultCollide();
         
@@ -119,7 +119,7 @@ function __BonkCommonInstanceFunctions(_groupVector = BONK_DEFAULT_GROUP)
         }
     }
     
-    Deflect = function(_subjectShape, _slopeThreshold = 0, _groupFilter = -1)
+    Deflect = function(_subjectShape, _slopeThreshold = 0, _groupFilter = undefined)
     {
         return __BonkConvertCollideToDeflect(_subjectShape, _slopeThreshold, _subjectShape.Collide(self, _groupFilter));
     }
