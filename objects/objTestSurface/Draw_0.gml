@@ -11,7 +11,7 @@ testX += 2*(keyboard_check(vk_right) - keyboard_check(vk_left));
 testY += 2*(keyboard_check(vk_down) - keyboard_check(vk_up));
 testZ -= 3;
 
-var _collision = BonkPointCollideHeightmap(shape, testX, testY, testZ);
+var _collision = BonkPointCollideHeightmap(testX, testY, testZ, shape);
 var _length = point_distance_3d(0, 0, 0, _collision.dX, _collision.dY, _collision.dZ);
 if (_collision.dZ / max(0.0001, _length) > dcos(35))
 {

@@ -8,6 +8,6 @@ function BonkAABCollideHeightmap(_aab, _heightmap, _struct = undefined)
 {
     with(_aab)
     {
-        return BonkPointCollideHeightmap(_heightmap, x, y, z - zSize/2, _struct);
+        return BonkPointCollideHeightmap(x, y, z - zSize/2, _heightmap, _struct);
     }
 }

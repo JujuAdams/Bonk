@@ -8,6 +8,6 @@ function BonkSphereCollideHeightmap(_sphere, _heightmap, _struct = undefined)
 {
     with(_sphere)
     {
-        return BonkPointCollideHeightmap(_heightmap, x, y, z - radius, _struct);
+        return BonkPointCollideHeightmap(x, y, z - radius, _heightmap, _struct);
     }
 }

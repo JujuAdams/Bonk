@@ -20,11 +20,11 @@ function __BonkCommonHeightmap()
     {
         //TODO - Make reversed versions of these functions?
         var _array = array_create(BONK_NUMBER_OF_TYPES, undefined);
-        _array[@ BONK_TYPE_AAB     ] = BonkAABTouchHeightmap;
-        _array[@ BONK_TYPE_OBB     ] = BonkRotatedBoxTouchHeightmap;
-        _array[@ BONK_TYPE_CAPSULE ] = BonkCapsuleTouchHeightmap;
-        _array[@ BONK_TYPE_CYLINDER] = BonkCylinderTouchHeightmap;
-        _array[@ BONK_TYPE_SPHERE  ] = BonkSphereTouchHeightmap;
+        _array[@ BONK_TYPE_AAB     ] = BonkHeightmapTouchAAB;
+        _array[@ BONK_TYPE_OBB     ] = BonkHeightmapTouchRotatedBox;
+        _array[@ BONK_TYPE_CAPSULE ] = BonkHeightmapTouchCapsule;
+        _array[@ BONK_TYPE_CYLINDER] = BonkHeightmapTouchCylinder;
+        _array[@ BONK_TYPE_SPHERE  ] = BonkHeightmapTouchSphere;
         return _array;
     })();
     
