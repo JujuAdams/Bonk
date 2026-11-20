@@ -500,8 +500,8 @@
   "resourceType":"GMProject",
   "resourceVersion":"2.0",
   "RoomOrderNodes":[
-    {"roomId":{"name":"rmTestConstructorHeightmap","path":"rooms/rmTestConstructorHeightmap/rmTestConstructorHeightmap.yy",},},
     {"roomId":{"name":"rmTestInstanceHeightmap","path":"rooms/rmTestInstanceHeightmap/rmTestInstanceHeightmap.yy",},},
+    {"roomId":{"name":"rmTestConstructorHeightmap","path":"rooms/rmTestConstructorHeightmap/rmTestConstructorHeightmap.yy",},},
     {"roomId":{"name":"rmTestRaycastHeightmap","path":"rooms/rmTestRaycastHeightmap/rmTestRaycastHeightmap.yy",},},
     {"roomId":{"name":"rmTestSurface","path":"rooms/rmTestSurface/rmTestSurface.yy",},},
     {"roomId":{"name":"rmTestConstructorPlayground","path":"rooms/rmTestConstructorPlayground/rmTestConstructorPlayground.yy",},},

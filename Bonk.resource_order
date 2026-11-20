@@ -145,7 +145,7 @@
     {"name":"__BonkCommonQuad","order":4,"path":"scripts/__BonkCommonQuad/__BonkCommonQuad.yy",},
     {"name":"__BonkCommonRotatedBox","order":5,"path":"scripts/__BonkCommonRotatedBox/__BonkCommonRotatedBox.yy",},
     {"name":"__BonkCommonSphere","order":6,"path":"scripts/__BonkCommonSphere/__BonkCommonSphere.yy",},
-    {"name":"__BonkCommonTriangle","order":8,"path":"scripts/__BonkCommonTriangle/__BonkCommonTriangle.yy",},
+    {"name":"__BonkCommonTriangle","order":9,"path":"scripts/__BonkCommonTriangle/__BonkCommonTriangle.yy",},
     {"name":"__BonkCommonWorld","order":10,"path":"scripts/__BonkCommonWorld/__BonkCommonWorld.yy",},
     {"name":"__BonkConditionalError","order":2,"path":"scripts/__BonkConditionalError/__BonkConditionalError.yy",},
     {"name":"__BonkConstants","order":1,"path":"scripts/__BonkConstants/__BonkConstants.yy",},

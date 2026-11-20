@@ -15,13 +15,34 @@
 /// @param [zMaz]
 /// @param [groupVector=BONK_DEFAULT_GROUP]
 
+//Set up statics
+with(static_get(BonkStructHeightmap))
+{
+    __BonkCommonHeightmap();
+}
+
 function BonkStructHeightmap(_function, _x, _y, _z, _cellLeft, _cellTop, _cellCountX, _cellCountY, _xScale, _yScale, _zScale, _zMin = undefined, _zMax = undefined, _groupVector = BONK_DEFAULT_GROUP) : __BonkClassShared(_groupVector) constructor
 {
-    __BonkCommonHeightmap(_function,
-                          _x, _y, _z,
-                          _cellLeft, _cellTop, _cellCountX, _cellCountY,
-                          _xScale, _yScale, _zScale,
-                          _zMin, _zMax);
+    heightFunction = _function;
+    
+    x = _x;
+    y = _y;
+    z = _z;
+    
+    cellLeft   = _cellLeft;
+    cellTop    = _cellTop;
+    cellCountX = _cellCountX;
+    cellCountY = _cellCountY;
+    
+    xScale = _xScale;
+    yScale = _yScale;
+    zScale = _zScale;
+    
+    UpdateBoundingBox(_zMin, _zMax);
+    
+    
+    
+    
     
     static __SetPositionFree = function(_x = x, _y = y, _z = z)
     {
@@ -45,32 +66,5 @@ function BonkStructHeightmap(_function, _x, _y, _z, _cellLeft, _cellTop, _cellCo
     
     SetPosition = __SetPositionFree;
     
-    static SetHeightmapSize = function(_cellCountX = cellCountX, _cellCountY = cellCountY)
-    {
-        cellCountX = _cellCountX;
-        cellCountY = _cellCountY;
-        
-        UpdateBoundingBox();
-    }
-    
-    static SetScale = function(_xScale = xScale, _yScale = yScale, _zScale = zScale)
-    {
-        xScale = _xScale;
-        yScale = _yScale;
-        zScale = _zScale;
-        
-        UpdateBoundingBox();
-    }
-    
-    static SetHeightmapSizeAndScale = function(_cellCountX = cellCountX, _cellCountY = cellCountY, _xScale = xScale, _yScale = yScale, _zScale = zScale)
-    {
-        cellCountX = _cellCountX;
-        cellCountY = _cellCountY;
-        
-        xScale = _xScale;
-        yScale = _yScale;
-        zScale = _zScale;
-        
-        UpdateBoundingBox();
-    }
+    static __UpdateBoundingBox = function() {}
 }

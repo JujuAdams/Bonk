@@ -1,20 +1,6 @@
 // Feather disable all
 
-/// @param function
-/// @param x
-/// @param y
-/// @param z
-/// @param cellLeft
-/// @param cellTop
-/// @param cellCountX
-/// @param cellCountY
-/// @param xScale
-/// @param yScale
-/// @param zScale
-/// @param [zMin]
-/// @param [zMaz]
-
-function __BonkCommonHeightmap(_function, _x, _y, _z, _cellLeft, _cellTop, _cellCountX, _cellCountY, _xScale, _yScale, _zScale, _zMin = undefined, _zMax = undefined)
+function __BonkCommonHeightmap()
 {
     bonkType = BONK_TYPE_HEIGHTMAP;
     
@@ -42,26 +28,24 @@ function __BonkCommonHeightmap(_function, _x, _y, _z, _cellLeft, _cellTop, _cell
         return _array;
     })();
     
-    heightFunction = _function;
-    cellLeft = _cellLeft;
-    cellTop  = _cellTop;
+    __bonkCollideFuncLookup = _collideFuncLookup;
+    __bonkTouchFuncLookup   = _touchFuncLookup;
     
-    x = _x;
-    y = _y;
-    z = _z;
+    LineHit = method(undefined, function(_x1, _y1, _z1, _x2, _y2, _z2, _groupFilter = undefined, _struct = undefined)
+    {
+        static _nullHit = new BonkResultHit();
+        
+        if ((_groupFilter < 0) || FilterTest(_groupFilter))
+        {
+            return BonkLineHitHeightmap(self, _x1, _y1, _z1, _x2, _y2, _z2, _struct);
+        }
+        else
+        {
+            return (_struct == undefined)? _nullHit : _struct.Null();
+        }
+    });
     
-    cellLeft   = _cellLeft;
-    cellTop    = _cellTop;
-    cellCountX = _cellCountX;
-    cellCountY = _cellCountY;
-    
-    xScale = _xScale;
-    yScale = _yScale;
-    zScale = _zScale;
-    
-    
-    
-    UpdateBoundingBox = function(_zMin = undefined, _zMax = undefined)
+    UpdateBoundingBox = method(undefined, function(_zMin = undefined, _zMax = undefined)
     {
         __bonkWidth  = cellCountX*xScale;
         __bonkHeight = cellCountY*yScale;
@@ -113,9 +97,44 @@ function __BonkCommonHeightmap(_function, _x, _y, _z, _cellLeft, _cellTop, _cell
                 __bonkMaxZ = 0;
             }
         }
-    }
+        
+        if (__BonkIsInstance(self))
+        {
+            image_xscale = __bonkWidth / BONK_MASK_SIZE;
+            image_yscale = __bonkHeight / BONK_MASK_SIZE;
+        }
+    });
     
-    GetZ = function(_x, _y)
+    SetHeightmapSize = method(undefined, function(_cellCountX = cellCountX, _cellCountY = cellCountY)
+    {
+        cellCountX = _cellCountX;
+        cellCountY = _cellCountY;
+        
+        UpdateBoundingBox();
+    });
+    
+    SetScale = method(undefined, function(_xScale = xScale, _yScale = yScale, _zScale = zScale)
+    {
+        xScale = _xScale;
+        yScale = _yScale;
+        zScale = _zScale;
+        
+        UpdateBoundingBox();
+    });
+    
+    SetHeightmapSizeAndScale = method(undefined, function(_cellCountX = cellCountX, _cellCountY = cellCountY, _xScale = xScale, _yScale = yScale, _zScale = zScale)
+    {
+        cellCountX = _cellCountX;
+        cellCountY = _cellCountY;
+        
+        xScale = _xScale;
+        yScale = _yScale;
+        zScale = _zScale;
+        
+        UpdateBoundingBox();
+    });
+    
+    GetZ = method(undefined, function(_x, _y)
     {
         var _xCell = (_x - x) / xScale;
         if ((_xCell < 0) || (_xCell > cellCountX))
@@ -136,9 +155,9 @@ function __BonkCommonHeightmap(_function, _x, _y, _z, _cellLeft, _cellTop, _cell
         }
         
         return z + zScale*_z;
-    }
+    });
     
-    GetNormal = function(_x, _y)
+    GetNormal = method(undefined, function(_x, _y)
     {
         //TODO - Is this correct?
         
@@ -172,121 +191,9 @@ function __BonkCommonHeightmap(_function, _x, _y, _z, _cellLeft, _cellTop, _cell
             
             return self;
         }
-    }
+    });
     
-    LineHit = function(_x1, _y1, _z1, _x2, _y2, _z2, _groupFilter = undefined, _struct = undefined)
-    {
-        static _nullHit = new BonkResultHit();
-        
-        if ((_groupFilter < 0) || FilterTest(_groupFilter))
-        {
-            return BonkLineHitHeightmap(self, _x1, _y1, _z1, _x2, _y2, _z2, _struct);
-        }
-        else
-        {
-            return (_struct == undefined)? _nullHit : _struct.Null();
-        }
-    }
-    
-    Touch = function(_otherShape, _groupFilter = undefined, _quietFail = false)
-    {
-        if ((_groupFilter >= 0) && (not FilterTest(_groupFilter)))
-        {
-            return false;
-        }
-        
-        var _insideFunc = __bonkTouchFuncLookup[_otherShape.bonkType];
-        if (is_callable(_insideFunc))
-        {
-            return _insideFunc(_otherShape, self);
-        }
-        else
-        {
-            if (BONK_STRICT)
-            {
-                __BonkConditionalError(not _quietFail, $".Touch() not supported between \"{instanceof(self)}\" (type={bonkType}) and \"{instanceof(_otherShape)}\" (type={_otherShape.bonkType})");
-            }
-        }
-        
-        return false;
-    }
-    
-    Collide = function(_otherShape, _groupFilter = undefined, _struct = undefined, _quietFail = false)
-    {
-        static _nullCollisionData = new BonkResultCollide();
-        
-        if ((_groupFilter < 0) || FilterTest(_groupFilter))
-        {
-            var _collideFunc = __bonkCollideFuncLookup[_otherShape.bonkType];
-            if (is_callable(_collideFunc))
-            {
-                return _collideFunc(_otherShape, self, _struct).__Reverse(self);
-            }
-            else
-            {
-                if (BONK_STRICT)
-                {
-                    __BonkConditionalError(not _quietFail, $".Collide() not supported between \"{instanceof(self)}\" (type={bonkType}) and \"{instanceof(_otherShape)}\" (type={_otherShape.bonkType})");
-                }
-            }
-        }
-        
-        return (_struct == undefined)? _nullCollisionData : _struct.Null();
-    }
-    
-    __CollideAddToArray = function(_collideArrayContainer, _otherShape, _groupFilter)
-    {
-        var _collide = _otherShape.Collide(self, _groupFilter, _collideArrayContainer.__collideArray[_collideArrayContainer.__count], true);
-        
-        if (_collide.shape != undefined)
-        {
-            ++_collideArrayContainer.__count;
-            return _collide;
-        }
-        else
-        {
-            return undefined;
-        }
-    }
-    
-    Deflect = function(_subjectShape, _slopeThreshold = 0, _groupFilter = undefined)
-    {
-        return __BonkConvertCollideToDeflect(_subjectShape, _slopeThreshold, _subjectShape.Collide(self, _groupFilter));
-    }
-    
-    FilterTest = function(_filter = -1)
-    {
-        if (_filter < 0)
-        {
-            return true;
-        }
-        
-        var _bonkGroup = bonkGroup;
-        
-        //Filter out shapes that conflict with the NOT vector (if in use)
-        var _notVector = (_filter >> 40) & 0xFFFFF;
-        if ((_notVector > 0) && (_bonkGroup & _notVector))
-        {
-            return false;
-        }
-        
-        //Accept shapes that hit the OR vector
-        if (_bonkGroup & (_filter & 0xFFFFF))
-        {
-            return true;
-        }
-        
-        //Accept shapes the hit all of the AND vector (if in use)
-        var _andVector = (_filter >> 20) & 0xFFFFF;
-        if ((_andVector > 0) && ((_bonkGroup & _andVector) == _andVector))
-        {
-            return true;
-        }
-        
-        return false;
-    }
-    
-    GetAABB = function()
+    GetAABB = method(undefined, function()
     {
         return {
             xMin: x,
@@ -297,14 +204,14 @@ function __BonkCommonHeightmap(_function, _x, _y, _z, _cellLeft, _cellTop, _cell
             yMax: y + __bonkHeight,
             zMax: z + __bonkMaxZ,
         };
-    }
+    });
     
-    GetShapeArrayFromPoint = function(_x, _y)
+    GetShapeArrayFromPoint = method(undefined, function(_x, _y)
     {
         return GetShapeArrayFromCell((_x - x) / xScale, (_y - y) / yScale);
-    }
+    });
     
-    GetShapeArrayFromCell = function(_xCell, _yCell)
+    GetShapeArrayFromCell = method(undefined, function(_xCell, _yCell)
     {
         static _array = [];
         
@@ -319,9 +226,9 @@ function __BonkCommonHeightmap(_function, _x, _y, _z, _cellLeft, _cellTop, _cell
         }
         
         return _array;
-    }
+    });
     
-    DrawAABB = function(_color = undefined, _wireframe = true)
+    DrawAABB = method(undefined, function(_color = undefined, _wireframe = true)
     {
         __BONK_VERIFY_UGG
         
@@ -331,9 +238,9 @@ function __BonkCommonHeightmap(_function, _x, _y, _z, _cellLeft, _cellTop, _cell
                     xMax - xMin, yMax - yMin, zMax - zMin,
                     _color, _wireframe);
         }
-    }
+    });
     
-    DrawShapesFromRange = function(_struct, _color = undefined, _wireframe = undefined)
+    DrawShapesFromRange = method(undefined, function(_struct, _color = undefined, _wireframe = undefined)
     {
         var _cellCountX = cellCountX;
         var _cellCountY = cellCountY;
@@ -384,9 +291,9 @@ function __BonkCommonHeightmap(_function, _x, _y, _z, _cellLeft, _cellTop, _cell
             
             ++_y;
         }
-    }
+    });
     
-    DrawShapesFromArray = function(_array, _color = undefined, _wireframe = undefined)
+    DrawShapesFromArray = method(undefined, function(_array, _color = undefined, _wireframe = undefined)
     {
         var _xShape = x;
         var _yShape = y;
@@ -426,9 +333,9 @@ function __BonkCommonHeightmap(_function, _x, _y, _z, _cellLeft, _cellTop, _cell
         }
         
         __BonkResetWorldMatrix();
-    }
+    });
     
-    DrawShapes = function(_color = undefined, _wireframe = undefined)
+    DrawShapes = method(undefined, function(_color = undefined, _wireframe = undefined)
     {
         __BonkSetWorldMatrix(x, y, z);
         
@@ -441,9 +348,9 @@ function __BonkCommonHeightmap(_function, _x, _y, _z, _cellLeft, _cellTop, _cell
         }
         
         __BonkResetWorldMatrix();
-    }
+    });
     
-    DebugDraw = function(_color = undefined, _wireframe = undefined)
+    DebugDraw = method(undefined, function(_color = undefined, _wireframe = undefined)
     {
         var _density = 5;
         
@@ -473,7 +380,7 @@ function __BonkCommonHeightmap(_function, _x, _y, _z, _cellLeft, _cellTop, _cell
             
             _worldY += _incrY;
         }
-    }
+    });
     
     //DebugDraw = function(_color = undefined, _wireframe = undefined)
     //{
@@ -512,7 +419,7 @@ function __BonkCommonHeightmap(_function, _x, _y, _z, _cellLeft, _cellTop, _cell
     //    }
     //}
     
-    DrawCellsFromArray = function(_array, _color = undefined, _wireframe = true)
+    DrawCellsFromArray = method(undefined, function(_array, _color = undefined, _wireframe = true)
     {
         var _xShape = x;
         var _yShape = y;
@@ -542,9 +449,9 @@ function __BonkCommonHeightmap(_function, _x, _y, _z, _cellLeft, _cellTop, _cell
             
             _i += 2;
         }
-    }
+    });
     
-    DrawCellsFromRange = function(_struct, _color = undefined, _wireframe = true, _checkerboard = false)
+    DrawCellsFromRange = method(undefined, function(_struct, _color = undefined, _wireframe = true, _checkerboard = false)
     {
         var _xShape = x;
         var _yShape = y;
@@ -602,14 +509,14 @@ function __BonkCommonHeightmap(_function, _x, _y, _z, _cellLeft, _cellTop, _cell
             
             ++_y;
         }
-    }
+    });
     
-    DrawCells = function(_color = undefined, _wireframe = true, _checkerboard = true)
+    DrawCells = method(undefined, function(_color = undefined, _wireframe = true, _checkerboard = true)
     {
         return DrawCellsFromRange(GetAABB(), _color, _wireframe, _checkerboard);
-    }
+    });
     
-    DrawNeighborhoodForRange = function(_aabb, _color)
+    DrawNeighborhoodForRange = method(undefined, function(_aabb, _color)
     {
         DrawCellsFromRange(_aabb);
         
@@ -624,9 +531,9 @@ function __BonkCommonHeightmap(_function, _x, _y, _z, _cellLeft, _cellTop, _cell
         gpu_set_zwriteenable(_oldWrite);
         
         return self;
-    }
+    });
     
-    DrawNeighborhoodForArray = function(_array, _color)
+    DrawNeighborhoodForArray = method(undefined, function(_array, _color)
     {
         DrawCellsFromArray(_array);
         
@@ -641,30 +548,30 @@ function __BonkCommonHeightmap(_function, _x, _y, _z, _cellLeft, _cellTop, _cell
         gpu_set_zwriteenable(_oldWrite);
         
         return self;
-    }
+    });
     
-    DrawNeighborhoodForShape = function(_shape, _color)
+    DrawNeighborhoodForShape = method(undefined, function(_shape, _color)
     {
         DrawNeighborhoodForRange(_shape.GetAABB(), _color);
         
         return self;
-    }
+    });
     
-    DrawNeighborhoodForLine = function(_lineShape, _color)
+    DrawNeighborhoodForLine = method(undefined, function(_lineShape, _color)
     {
         DrawNeighborhoodForArray(GetCellsFromLine(_lineShape), _color);
         
         return self;
-    }
+    });
     
-    DrawNeighborhoodForLineExt = function(_x1, _y1, _z1, _x2, _y2, _z2, _color)
+    DrawNeighborhoodForLineExt = method(undefined, function(_x1, _y1, _z1, _x2, _y2, _z2, _color)
     {
         DrawNeighborhoodForArray(GetCellsFromLineExt(_x1, _y1, _z1, _x2, _y2, _z2), _color);
         
         return self;
-    }
+    });
     
-    GetCellsFromLine = function(_lineShape)
+    GetCellsFromLine = method(undefined, function(_lineShape)
     {
         with(_lineShape)
         {
@@ -683,14 +590,14 @@ function __BonkCommonHeightmap(_function, _x, _y, _z, _cellLeft, _cellTop, _cell
         }
         
         return [];
-    }
+    });
     
-    GetCellsFromLineExt = function(_x1, _y1, _z1, _x2, _y2, _z2)
+    GetCellsFromLineExt = method(undefined, function(_x1, _y1, _z1, _x2, _y2, _z2)
     {
         return __GetCellsFromLineExtInternal(_x1-x, _y1-y, _z1-z, _x2-x, _y2-y, _z2-z);
-    }
+    });
     
-    __GetCellsFromLineExtInternal = function(_x1, _y1, _z1, _x2, _y2, _z2)
+    __GetCellsFromLineExtInternal = method(undefined, function(_x1, _y1, _z1, _x2, _y2, _z2)
     {
         //FIXME - Return a static array
         
@@ -776,9 +683,5 @@ function __BonkCommonHeightmap(_function, _x, _y, _z, _cellLeft, _cellTop, _cell
         var _clampedY2 = _y1 + _tMax*_dY;
         
         return __BonkSupercover2D(_clampedX1/xScale, _clampedY1/yScale, _clampedX2/xScale, _clampedY2/yScale);
-    }
-    
-    
-    
-    UpdateBoundingBox(_zMin, _zMax);
+    });
 }

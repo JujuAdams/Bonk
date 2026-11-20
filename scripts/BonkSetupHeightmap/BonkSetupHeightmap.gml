@@ -23,21 +23,34 @@ function BonkSetupHeightmap(_function, _x, _y, _z, _cellLeft, _cellTop, _cellCou
     }
     
     __BonkCommonInstanceFunctions(_groupVector);
-    __BonkCommonHeightmap(_function,
-                          _x, _y, _z,
-                          _cellLeft, _cellTop, _cellCountX, _cellCountY,
-                          _xScale, _yScale, _zScale,
-                          _zMin, _zMax);
+    __BonkCommonHeightmap();
     
     if (BONK_SET_INSTANCE_DEPTH)
     {
         depth = _z;
     }
     
-    mask_index   = __BonkMaskHeightmap;
-    image_xscale = __bonkWidth / BONK_MASK_SIZE;
-    image_yscale = __bonkHeight / BONK_MASK_SIZE;
-    image_angle  = 0;
+    heightFunction = _function;
+    
+    x = _x;
+    y = _y;
+    z = _z;
+    
+    cellLeft   = _cellLeft;
+    cellTop    = _cellTop;
+    cellCountX = _cellCountX;
+    cellCountY = _cellCountY;
+    
+    xScale = _xScale;
+    yScale = _yScale;
+    zScale = _zScale;
+    
+    UpdateBoundingBox(_zMin, _zMax);
+    
+    mask_index  = __BonkMaskHeightmap;
+    image_angle = 0;
+    //image_*scale set by `UpdateBoundingBox()`
+    
     
     
     SetPosition = function(_x = x, _y = y, _z = z)
@@ -52,29 +65,6 @@ function BonkSetupHeightmap(_function, _x, _y, _z, _cellLeft, _cellTop, _cellCou
         }
         
         return self;
-    }
-    
-    SetHeightmapSize = function(_cellCountX = cellCountX, _cellCountY = cellCountY)
-    {
-        cellCountX = _cellCountX;
-        cellCountY = _cellCountY;
-        
-        UpdateBoundingBox();
-        
-        image_xscale = __bonkWidth / BONK_MASK_SIZE;
-        image_yscale = __bonkHeight / BONK_MASK_SIZE;
-    }
-    
-    SetScale = function(_xScale = xScale, _yScale = yScale, _zScale = zScale)
-    {
-        xScale = _xScale;
-        yScale = _yScale;
-        zScale = _zScale;
-        
-        UpdateBoundingBox();
-        
-        image_xscale = __bonkWidth / BONK_MASK_SIZE;
-        image_yscale = __bonkHeight / BONK_MASK_SIZE;
     }
     
     GetAABB = function()
