@@ -32,18 +32,5 @@ function __BonkCommonCylinder()
     
     __bonkCollideFuncLookup = _collideFuncLookup;
     __bonkTouchFuncLookup   = _touchFuncLookup;
-    
-    LineHit = method(undefined, function(_x1, _y1, _z1, _x2, _y2, _z2, _groupFilter = undefined, _struct = undefined)
-    {
-        static _nullHit = new BonkResultHit();
-        
-        if (BonkFilterTest(bonkGroup, _groupFilter))
-        {
-            return BonkLineHitCylinder(self, _x1, _y1, _z1, _x2, _y2, _z2, _struct);
-        }
-        else
-        {
-            return (_struct == undefined)? _nullHit : _struct.Null();
-        }
-    });
+    __bonkLineHit           = BonkLineHitCylinder;
 }

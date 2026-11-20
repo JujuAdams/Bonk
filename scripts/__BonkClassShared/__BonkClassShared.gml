@@ -75,6 +75,20 @@ function __BonkClassShared(_groupVector) constructor
         return (_struct == undefined)? _nullCollisionData : _struct.Null();
     }
     
+    static LineHit = function(_x1, _y1, _z1, _x2, _y2, _z2, _groupFilter = undefined, _struct = undefined)
+    {
+        static _nullHit = new BonkResultHit();
+        
+        if (BonkFilterTest(bonkGroup, _groupFilter))
+        {
+            return __bonkLineHit(self, _x1, _y1, _z1, _x2, _y2, _z2, _struct);
+        }
+        else
+        {
+            return (_struct == undefined)? _nullHit : _struct.Null();
+        }
+    }
+    
     static __CollideAddToArray = function(_collideArrayContainer, _otherShape, _groupFilter)
     {
         var _collide = _otherShape.Collide(self, _groupFilter, _collideArrayContainer.__collideArray[_collideArrayContainer.__count], true);

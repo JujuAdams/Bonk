@@ -31,23 +31,10 @@ function __BonkCommonAAB()
     __bonkCollideFuncLookup = _collideFuncLookup;
     __bonkTouchFuncLookup   = _touchFuncLookup;
     
-    LineHit = method(undefined, function(_x1, _y1, _z1, _x2, _y2, _z2, _groupFilter = undefined, _struct = undefined)
-    {
-        static _nullHit = new BonkResultHit();
-        
-        if (BonkFilterTest(bonkGroup, _groupFilter))
-        {
-            return BonkLineHitAAB(self, _x1, _y1, _z1, _x2, _y2, _z2, _struct);
-        }
-        else
-        {
-            return (_struct == undefined)? _nullHit : _struct.Null();
-        }
-    });
-    
     DebugDraw = method(undefined, function(_color = undefined, _wireframe = undefined)
     {
         __BONK_VERIFY_UGG
         UggAABB(x, y, z, xSize, ySize, zSize, _color, _wireframe);
     });
+    __bonkLineHit           = BonkLineHitAAB;
 }

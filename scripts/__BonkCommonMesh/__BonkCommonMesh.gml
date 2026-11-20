@@ -231,7 +231,16 @@ function __BonkCommonMesh(_x, _y, _z, _cellXSize, _cellYSize, _cellZSize)
     
     LineHit = function(_x1, _y1, _z1, _x2, _y2, _z2, _groupFilter = undefined, _struct = undefined)
     {
-        return BonkLineHitMesh(self, _x1, _y1, _z1, _x2, _y2, _z2, _struct, _groupFilter);
+        static _nullHit = new BonkResultHit();
+        
+        if (BonkFilterTest(bonkGroup, _groupFilter))
+        {
+            return BonkLineHitMesh(self, _x1, _y1, _z1, _x2, _y2, _z2, _struct);
+        }
+        else
+        {
+            return (_struct == undefined)? _nullHit : _struct.Null();
+        }
     }
     
     Touch = function(_subjectShape, _groupFilter = undefined)
