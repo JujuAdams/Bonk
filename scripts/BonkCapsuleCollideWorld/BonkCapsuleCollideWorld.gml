@@ -6,5 +6,5 @@
 
 function BonkCapsuleCollideWorld(_capsule, _world, _struct = undefined)
 {
-    return _world.Collide(_capsule, -1, _struct).__Reverse(_world);
+    return _world.Collide(_capsule, undefined, _struct).__Reverse(_world);
 }

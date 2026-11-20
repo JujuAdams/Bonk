@@ -557,7 +557,7 @@ function __BonkCommonMesh(_x, _y, _z, _cellXSize, _cellYSize, _cellZSize)
                     var _i = 0;
                     repeat(array_length(_shapeArray))
                     {
-                        var _result = _shapeArray[_i].__CollideAddToArray(_collideArrayContainer, _subjectShape, -1);
+                        var _result = _shapeArray[_i].__CollideAddToArray(_collideArrayContainer, _subjectShape, undefined);
                         //If this was a collision, set the coordinate space
                         if (_result != undefined)
                         {
@@ -596,7 +596,7 @@ function __BonkCommonMesh(_x, _y, _z, _cellXSize, _cellYSize, _cellZSize)
                                     {
                                         _map[? _shape] = true;
                                         
-                                        var _result = _shape.__CollideAddToArray(_collideArrayContainer, _subjectShape, -1);
+                                        var _result = _shape.__CollideAddToArray(_collideArrayContainer, _subjectShape, undefined);
                                         //If this was a collision, set the coordinate space
                                         if (_result != undefined)
                                         {

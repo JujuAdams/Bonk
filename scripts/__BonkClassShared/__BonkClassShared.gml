@@ -29,7 +29,7 @@ function __BonkClassShared(_groupVector) constructor
         }
     }
     
-    static Touch = function(_otherShape, _groupFilter = -1, _quietFail = false)
+    static Touch = function(_otherShape, _groupFilter = undefined, _quietFail = false)
     {
         if (BonkFilterTest(bonkGroup, _groupFilter))
         {
@@ -52,7 +52,7 @@ function __BonkClassShared(_groupVector) constructor
         return false;
     }
     
-    static Collide = function(_otherShape, _groupFilter = -1, _struct = undefined, _quietFail = false)
+    static Collide = function(_otherShape, _groupFilter = undefined, _struct = undefined, _quietFail = false)
     {
         static _nullCollisionData = new BonkResultCollide();
         
@@ -104,7 +104,7 @@ function __BonkClassShared(_groupVector) constructor
         }
     }
     
-    static Deflect = function(_subjectShape, _slopeThreshold = 0, _groupFilter = -1)
+    static Deflect = function(_subjectShape, _slopeThreshold = 0, _groupFilter = undefined)
     {
         return __BonkConvertCollideToDeflect(_subjectShape, _slopeThreshold, _subjectShape.Collide(self, _groupFilter));
     }

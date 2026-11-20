@@ -118,7 +118,7 @@ function __BonkConvertCollideArrayToDeflect(_collideArrayContainer, _subjectShap
             _subjectShape.z -= z;
         }
         
-        with(_subjectShape.Collide(_collision.shape, -1, undefined, true))
+        with(_subjectShape.Collide(_collision.shape, undefined, undefined, true))
         {
             if (shape != undefined)
             {
