@@ -31,4 +31,9 @@ function __BonkCommonAAB()
     __bonkCollideFuncLookup = _collideFuncLookup;
     __bonkTouchFuncLookup   = _touchFuncLookup;
     __bonkLineHit           = BonkLineHitAAB;
+    
+    toString = method(undefined, function()
+    {
+        return $"<aab {x}, {y}, {z} / size {xSize} {ySize} {zSize}>";
+    });
 }

@@ -43,6 +43,22 @@ function BonkResultDeflect() constructor
     primaryCollision  = slipperyCollision;
     deflectType       = BONK_DEFLECT_NONE;
     
+    static toString = function()
+    {
+        if (deflectType == BONK_DEFLECT_GRIPPY)
+        {
+            return $"<grippy {grippyCollision} / slippery {slipperyCollision}>";
+        }
+        else if (deflectType == BONK_DEFLECT_SLIPPERY)
+        {
+            return $"<slippery {slipperyCollision} / grippy {grippyCollision}>";
+        }
+        else
+        {
+            return "<no deflect>";
+        }
+    }
+    
     static Null = function()
     {
         if (deflectType != BONK_DEFLECT_NONE)

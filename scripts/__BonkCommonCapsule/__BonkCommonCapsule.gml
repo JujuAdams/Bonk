@@ -39,4 +39,9 @@ function __BonkCommonCapsule()
     __bonkCollideFuncLookup = _collideFuncLookup;
     __bonkTouchFuncLookup   = _touchFuncLookup;
     __bonkLineHit           = BonkLineHitCapsule;
+    
+    toString = method(undefined, function()
+    {
+        return $"<capsule {x}, {y}, {z} / height {height} / radius {radius}>";
+    });
 }

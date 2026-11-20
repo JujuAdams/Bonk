@@ -48,6 +48,11 @@ function __BonkCommonMesh(_x, _y, _z, _cellXSize, _cellYSize, _cellZSize)
     __SetPositionFree    = function() {};
     AddPosition          = function() {};
     
+    toString = function()
+    {
+        return $"<mesh {x}, {y}, {z}>";
+    }
+    
     SetMatrix = function(_matrix)
     {
         static _map = ds_map_create();

@@ -39,4 +39,9 @@ function __BonkCommonSphere()
     __bonkCollideFuncLookup = _collideFuncLookup;
     __bonkTouchFuncLookup   = _touchFuncLookup;
     __bonkLineHit           = BonkLineHitSphere;
+    
+    toString = method(undefined, function()
+    {
+        return $"<sphere {x}, {y}, {z} / radius {radius}>";
+    });
 }

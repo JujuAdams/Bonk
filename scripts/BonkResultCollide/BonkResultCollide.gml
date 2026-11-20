@@ -33,6 +33,22 @@ function BonkResultCollide() constructor
     //handling deflection. It is normally unset
     __coordinateSpace = undefined;
     
+    static toString = function()
+    {
+        if (shape == undefined)
+        {
+            return "<no collision>";
+        }
+        else if (__coordinateSpace == undefined)
+        {
+            return $"<collision {dX}, {dY}, {dZ} / shape {shape}>";
+        }
+        else
+        {
+            return $"<collision {dX}, {dY}, {dZ} / coordSpace {__coordinateSpace.x}, {__coordinateSpace.y}, {__coordinateSpace.z} / shape {shape}>";
+        }
+    }
+    
     static GetFloor = function(_slopeThreshold = 0)
     {
         return (GetGradient() > max(dcos(_slopeThreshold), 0));
@@ -55,24 +71,6 @@ function BonkResultCollide() constructor
     static GetSlopeAngle = function()
     {
         return darccos(GetSlope());
-    }
-    
-    static toString = function()
-    {
-        if (instance_exists(shape))
-        {
-            var _shape = $"{object_get_name(shape.object_index)} {string(real(shape.id))}";
-        }
-        else if (is_struct(shape))
-        {
-            var _shape = $"{instanceof(shape)} {string_delete(string(ptr(shape)), 1, 8)}";
-        }
-        else
-        {
-            var _shape = "<none>";
-        }
-        
-        return $"\{\"shape\":\"{_shape}\",\"dX\":{dX},\"dY\":{dY},\"dZ\":{dZ}\}";
     }
     
     static Null = function()

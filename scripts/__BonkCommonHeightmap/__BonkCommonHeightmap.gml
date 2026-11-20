@@ -32,6 +32,11 @@ function __BonkCommonHeightmap()
     __bonkTouchFuncLookup   = _touchFuncLookup;
     __bonkLineHit           = BonkLineHitHeightmap;
     
+    toString = method(undefined, function()
+    {
+        return $"<heightmap {x}, {y}, {z} / cells {cellLeft}, {cellTop} \{{cellCountX} x {cellCountY}\} / scale {xScale} {yScale} {zScale}>";
+    });
+    
     UpdateBoundingBox = method(undefined, function(_zMin = undefined, _zMax = undefined)
     {
         __bonkWidth  = cellCountX*xScale;

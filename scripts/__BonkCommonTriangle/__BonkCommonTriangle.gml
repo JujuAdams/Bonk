@@ -25,4 +25,9 @@ function __BonkCommonTriangle()
     __bonkCollideFuncLookup = _collideFuncLookup;
     __bonkTouchFuncLookup   = _touchFuncLookup;
     __bonkLineHit           = BonkLineHitTriangle;
+    
+    toString = method(undefined, function()
+    {
+        return $"<triangle {x1}, {y1}, {z1} -> {x2}, {y2}, {z2} -> {x3}, {y3}, {z3} / hardEdge {hardEdge12? "true" : "false"} : {hardEdge23? "true" : "false"} : {hardEdge31? "true" : "false"}>";
+    });
 }

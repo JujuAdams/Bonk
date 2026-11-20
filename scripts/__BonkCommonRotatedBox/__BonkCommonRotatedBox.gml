@@ -29,4 +29,9 @@ function __BonkCommonRotatedBox()
     __bonkCollideFuncLookup = _collideFuncLookup;
     __bonkTouchFuncLookup   = _touchFuncLookup;
     __bonkLineHit           = BonkLineHitRotatedBox;
+    
+    toString = method(undefined, function()
+    {
+        return $"<aab {x}, {y}, {z} / size {xSize} {ySize} {zSize} / rotation {zRotation}>";
+    });
 }

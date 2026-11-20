@@ -33,4 +33,9 @@ function __BonkCommonCylinder()
     __bonkCollideFuncLookup = _collideFuncLookup;
     __bonkTouchFuncLookup   = _touchFuncLookup;
     __bonkLineHit           = BonkLineHitCylinder;
+    
+    toString = method(undefined, function()
+    {
+        return $"<cylinder {x}, {y}, {z} / height {height} / radius {radius}>";
+    });
 }
