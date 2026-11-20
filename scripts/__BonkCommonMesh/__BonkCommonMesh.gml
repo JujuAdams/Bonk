@@ -110,6 +110,7 @@ function __BonkCommonMesh(_cellXSize, _cellYSize, _cellZSize)
             var _maxCellY = __bonkMaxCellY;
             var _maxCellZ = __bonkMaxCellZ;
             
+            //TODO - Use matrix transform
             var _aabb = _subjectShape.GetAABB();
             
             var _shapeXMin = floor(_aabb.xMin / __bonkCellXSize);
@@ -223,6 +224,7 @@ function __BonkCommonMesh(_cellXSize, _cellYSize, _cellZSize)
             var _maxCellY = __bonkMaxCellY;
             var _maxCellZ = __bonkMaxCellZ;
             
+            //TODO - Use matrix transform
             var _aabb = _subjectShape.GetAABB();
             
             var _shapeXMin = floor(_aabb.xMin / __bonkCellXSize);
@@ -340,6 +342,8 @@ function __BonkCommonMesh(_cellXSize, _cellYSize, _cellZSize)
             var _maxCellZ = __bonkMaxCellZ;
             
             var _aabb = _subjectShape.GetAABB();
+            
+            //TODO - Use matrix transform that supports rotation (half box?)
             
             matrix_transform_vertex(__bonkInverseMatrix, _aabb.xMin, _aabb.yMin, _aabb.zMin, 1, _vector);
             var _shapeXMin = floor(_vector[0] / __bonkCellXSize);
@@ -581,6 +585,7 @@ function __BonkCommonMesh(_cellXSize, _cellYSize, _cellZSize)
     {
         static _map = ds_map_create();
         
+        //TODO - Use matrix transform
         var _xShape = x;
         var _yShape = y;
         var _zShape = z;
@@ -655,6 +660,7 @@ function __BonkCommonMesh(_cellXSize, _cellYSize, _cellZSize)
     {
         static _map = ds_map_create();
         
+        //TODO - Use matrix transform
         var _xShape = x;
         var _yShape = y;
         var _zShape = z;
@@ -699,6 +705,7 @@ function __BonkCommonMesh(_cellXSize, _cellYSize, _cellZSize)
     
     DrawShapes = function(_color = undefined, _wireframe = undefined)
     {
+        //TODO - Use matrix transform
         __BonkSetWorldMatrix(x, y, z);
         
         var _bonkTriangleArray = __bonkTriangleArray;
@@ -716,6 +723,7 @@ function __BonkCommonMesh(_cellXSize, _cellYSize, _cellZSize)
     
     DrawCellsFromArray = function(_array, _color = undefined, _wireframe = true)
     {
+        //TODO - Use matrix transform
         var _xShape = x;
         var _yShape = y;
         var _zShape = z;
@@ -751,6 +759,7 @@ function __BonkCommonMesh(_cellXSize, _cellYSize, _cellZSize)
     
     DrawCellsFromRange = function(_struct, _color = undefined, _wireframe = true, _checkerboard = false)
     {
+        //TODO - Use matrix transform
         var _xShape = x;
         var _yShape = y;
         var _zShape = z;
