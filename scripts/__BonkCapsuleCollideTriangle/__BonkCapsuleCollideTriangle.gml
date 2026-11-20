@@ -1,6 +1,6 @@
 // Feather disable all
 
-function __BonkCapsuleCollideTriangle(_capsuleX, _capsuleY, _capsuleZ, _capsuleHeight, _capsuleRadius,   _triangleShape,   _triX1, _triY1, _triZ1,   _triX2, _triY2, _triZ2,   _triX3, _triY3, _triZ3,    _dX12, _dY12, _dZ12,    _dX23, _dY23, _dZ23,    _dX31, _dY31, _dZ31,   _normalX, _normalY, _normalZ,   _hardEdge12, _hardEdge23, _hardEdge31,   _edgeSqrLength12, _edgeSqrLength23, _edgeSqrLength31,   _struct = undefined)
+function __BonkCapsuleCollideTriangle(_capsuleX, _capsuleY, _capsuleZ, _capsuleHeight, _capsuleRadius,   _triangleShape,   _triX1, _triY1, _triZ1,   _triX2, _triY2, _triZ2,   _triX3, _triY3, _triZ3,   _hardEdge12, _hardEdge23, _hardEdge31,   _struct = undefined)
 {
     if (BONK_EXPERIMENT_FORCE_EDGE_KIND != undefined)
     {
@@ -11,6 +11,35 @@ function __BonkCapsuleCollideTriangle(_capsuleX, _capsuleY, _capsuleZ, _capsuleH
     
     static _staticStruct = new BonkResultCollide();
     var _reaction = _struct ?? _staticStruct;
+    
+    var _dX12 = _triX2 - _triX1;
+    var _dY12 = _triY2 - _triY1;
+    var _dZ12 = _triZ2 - _triZ1;
+    
+    var _dX23 = _triX3 - _triX2;
+    var _dY23 = _triY3 - _triY2;
+    var _dZ23 = _triZ3 - _triZ2;
+    
+    var _dX31 = _triX1 - _triX3;
+    var _dY31 = _triY1 - _triY3;
+    var _dZ31 = _triZ1 - _triZ3;
+    
+    var _edgeSqrLength12 = _dX12*_dX12 + _dY12*_dY12 + _dZ12*_dZ12;
+    var _edgeSqrLength23 = _dX23*_dX23 + _dY23*_dY23 + _dZ23*_dZ23;
+    var _edgeSqrLength31 = _dX31*_dX31 + _dY31*_dY31 + _dZ31*_dZ31;
+    
+    var _normalX = _dZ12*_dY31 - _dY12*_dZ31;
+    var _normalY = _dX12*_dZ31 - _dZ12*_dX31;
+    var _normalZ = _dY12*_dX31 - _dX12*_dY31;
+    
+    var _length = sqrt(_normalX*_normalX + _normalY*_normalY + _normalZ*_normalZ);
+    if (_length > 0)
+    {
+        var _coeff = 1 / _length;
+        _normalX *= _coeff;
+        _normalY *= _coeff;
+        _normalZ *= _coeff;
+    }
     
     if (_normalZ == 0)
     {

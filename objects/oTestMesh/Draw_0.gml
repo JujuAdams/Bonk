@@ -1,4 +1,4 @@
-MatrixApplyWithTranslation(shape.x, shape.y, shape.z, shape.GetMatrix());
+matrix_set(matrix_world, matrix);
 UggSetShader();
 model.Submit();
 shader_reset();

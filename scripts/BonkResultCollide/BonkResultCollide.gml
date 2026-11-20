@@ -29,23 +29,15 @@ function BonkResultCollide() constructor
     dY = 0;
     dZ = 0;
     
-    //This is only set when creating collisions with triangles found in heightmap and only when
-    //handling deflection. It is normally unset
-    __coordinateSpace = undefined;
-    
     static toString = function()
     {
         if (shape == undefined)
         {
             return "<no collision>";
         }
-        else if (__coordinateSpace == undefined)
-        {
-            return $"<collision {dX}, {dY}, {dZ} / shape {shape}>";
-        }
         else
         {
-            return $"<collision {dX}, {dY}, {dZ} / coordSpace {__coordinateSpace.x}, {__coordinateSpace.y}, {__coordinateSpace.z} / shape {shape}>";
+            return $"<collision {dX}, {dY}, {dZ} / shape {shape}>";
         }
     }
     
@@ -81,8 +73,6 @@ function BonkResultCollide() constructor
         dY = 0;
         dZ = 0;
         
-        __coordinateSpace = undefined;
-        
         return self;
     }
     
@@ -97,9 +87,6 @@ function BonkResultCollide() constructor
         dY = -dY;
         dZ = -dZ;
         
-        //N.B. This is not correct. However, we never call `.__Reverse()` in a situation where it would matter
-        __coordinateSpace = undefined;
-        
         return self;
     }
     
@@ -110,8 +97,6 @@ function BonkResultCollide() constructor
         _other.dX = dX;
         _other.dY = dY;
         _other.dZ = dZ;
-        
-        _other.__coordinateSpace = __coordinateSpace;
         
         return _other;
     }

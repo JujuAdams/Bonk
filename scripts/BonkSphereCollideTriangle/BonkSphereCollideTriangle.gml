@@ -21,12 +21,7 @@ function BonkSphereCollideTriangle(_sphere, _triangle, _struct = undefined)
                                            x1, y1, z1,
                                            x2, y2, z2,
                                            x3, y3, z3,
-                                           __bonkDX12, __bonkDY12, __bonkDZ12,
-                                           __bonkDX23, __bonkDY23, __bonkDZ23,
-                                           __bonkDX31, __bonkDY31, __bonkDZ31,
-                                           normalX, normalY, normalZ,
                                            hardEdge12, hardEdge23, hardEdge31,
-                                           __bonkLengthSqr12, __bonkLengthSqr23, __bonkLengthSqr31,
                                            _struct);
     }
 }

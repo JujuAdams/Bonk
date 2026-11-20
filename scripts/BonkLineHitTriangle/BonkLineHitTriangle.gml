@@ -14,19 +14,37 @@ function BonkLineHitTriangle(_triangle, _x1, _y1, _z1, _x2, _y2, _z2, _struct = 
     static _staticHit = new BonkResultHit();
     var _reaction = _struct ?? _staticHit;
     
+    static _staticVector = array_create(4, 0);
+    var _vector = _staticVector;
+    
     with(_triangle)
     {
-        var _triX1 = x1;
-        var _triY1 = y1;
-        var _triZ1 = z1;
-        
-        var _triX2 = x2;
-        var _triY2 = y2;
-        var _triZ2 = z2;
-        
-        var _triX3 = x3;
-        var _triY3 = y3;
-        var _triZ3 = z3;
+        if (matrix == undefined)
+        {
+            var _triX1 = x1;
+            var _triY1 = y1;
+            var _triZ1 = z1;
+            
+            var _triX2 = x2;
+            var _triY2 = y2;
+            var _triZ2 = z2;
+            
+            var _triX3 = x3;
+            var _triY3 = y3;
+            var _triZ3 = z3;
+        }
+        else
+        {
+            var _matrix = matrix;
+            matrix_transform_vertex(_matrix, x1, y1, z1, 1, _vector);
+            var _triX1 = _vector[0]; var _triY1 = _vector[1]; var _triZ1 = _vector[2];
+            
+            matrix_transform_vertex(_matrix, x2, y2, z2, 1, _vector);
+            var _triX2 = _vector[0]; var _triY2 = _vector[1]; var _triZ2 = _vector[2];
+            
+            matrix_transform_vertex(_matrix, x3, y3, z3, 1, _vector);
+            var _triX3 = _vector[0]; var _triY3 = _vector[1]; var _triZ3 = _vector[2];
+        }
         
         var _dX12 = _triX2 - _triX1;
         var _dY12 = _triY2 - _triY1;
