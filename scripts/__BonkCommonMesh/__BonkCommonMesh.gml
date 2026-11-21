@@ -10,8 +10,10 @@ function __BonkCommonMesh(_cellXSize, _cellYSize, _cellZSize)
     __bonkWorld = undefined;
     bonkGroup = BONK_DEFAULT_GROUP;
     
-    __bonkMatrix = matrix_build_identity();
-    __bonkInverseMatrix = matrix_build_identity();
+    __bonkMatrix           = matrix_build_identity();
+    __bonkInverseMatrix    = matrix_build_identity();
+    __bonkAbsMatrix        = matrix_build_identity();
+    __bonkAbsInverseMatrix = matrix_build_identity();
     
     __bonkCellXSize = _cellXSize;
     __bonkCellYSize = _cellYSize;
@@ -51,15 +53,32 @@ function __BonkCommonMesh(_cellXSize, _cellYSize, _cellZSize)
         
         if (__bonkWorld != undefined)
         {
-            __bonkWorld.__RemoveShape(self);
+            //__bonkWorld.__RemoveShape(self);
         }
         
         array_copy(__bonkMatrix, 0, _matrix, 0, 16);
         matrix_inverse(__bonkMatrix, __bonkInverseMatrix);
         
+        var _absMatrix = __bonkAbsMatrix;
+        var _i = 0;
+        repeat(16)
+        {
+            _absMatrix[@ _i] = abs(_matrix[_i]);
+            ++_i;
+        }
+        
+        var _inverseMatrix = __bonkInverseMatrix;
+        var _absMatrix = __bonkAbsInverseMatrix;
+        var _i = 0;
+        repeat(16)
+        {
+            _absMatrix[@ _i] = abs(_inverseMatrix[_i]);
+            ++_i;
+        }
+        
         if (__bonkWorld != undefined)
         {
-            __bonkWorld.__AddShape(self);
+            //__bonkWorld.__AddShape(self);
         }
         
         return self;
@@ -224,16 +243,26 @@ function __BonkCommonMesh(_cellXSize, _cellYSize, _cellZSize)
             var _maxCellY = __bonkMaxCellY;
             var _maxCellZ = __bonkMaxCellZ;
             
-            //TODO - Use matrix transform
             var _aabb = _subjectShape.GetAABB();
             
-            var _shapeXMin = floor(_aabb.xMin / __bonkCellXSize);
-            var _shapeYMin = floor(_aabb.yMin / __bonkCellYSize);
-            var _shapeZMin = floor(_aabb.zMin / __bonkCellZSize);
+            matrix_transform_vertex(__bonkInverseMatrix, _aabb.xMin, _aabb.yMin, _aabb.zMin, 1, _vectorMin);
+            matrix_transform_vertex(__bonkInverseMatrix, _aabb.xMax, _aabb.yMax, _aabb.zMax, 1, _vectorMax);
             
-            var _shapeXMax = floor(_aabb.xMax / __bonkCellXSize);
-            var _shapeYMax = floor(_aabb.yMax / __bonkCellYSize);
-            var _shapeZMax = floor(_aabb.zMax / __bonkCellZSize);
+            var _shapeXMin = min(_vectorMin[0], _vectorMax[0]);
+            var _shapeYMin = min(_vectorMin[1], _vectorMax[1]);
+            var _shapeZMin = min(_vectorMin[2], _vectorMax[2]);
+            
+            var _shapeXMax = max(_vectorMin[0], _vectorMax[0]);
+            var _shapeYMax = max(_vectorMin[1], _vectorMax[1]);
+            var _shapeZMax = max(_vectorMin[2], _vectorMax[2]);
+            
+            _shapeXMin = floor(_shapeXMin / __bonkCellXSize);
+            _shapeYMin = floor(_shapeYMin / __bonkCellYSize);
+            _shapeZMin = floor(_shapeZMin / __bonkCellZSize);
+                               
+            _shapeXMax = floor(_shapeXMax / __bonkCellXSize);
+            _shapeYMax = floor(_shapeYMax / __bonkCellYSize);
+            _shapeZMax = floor(_shapeZMax / __bonkCellZSize);
             
             if ((_shapeXMin > _maxCellX) || (_shapeYMin > _maxCellY) || (_shapeZMin > _maxCellZ)
             ||  (_shapeXMax < _minCellX) || (_shapeYMax < _minCellY) || (_shapeZMax < _minCellZ))
@@ -328,8 +357,9 @@ function __BonkCommonMesh(_cellXSize, _cellYSize, _cellZSize)
     __CollideAddToArray = function(_collideArrayContainer, _subjectShape, _groupFilter)
     {
         static _map = ds_map_create();
-        static _staticVector = array_create(4, 0);
-        var _vector = _staticVector;
+        
+        static _staticVectorMin = array_create(4, 0);
+        static _staticVectorMax = array_create(4, 0);
         
         if (BonkFilterTest(bonkGroup, _groupFilter))
         {
@@ -343,17 +373,26 @@ function __BonkCommonMesh(_cellXSize, _cellYSize, _cellZSize)
             
             var _aabb = _subjectShape.GetAABB();
             
-            //TODO - Use matrix transform that supports rotation (half box?)
+            var _vectorMin = _staticVectorMin;
+            var _vectorMax = _staticVectorMax;
+            matrix_transform_vertex(__bonkInverseMatrix, _aabb.xMin, _aabb.yMin, _aabb.zMin, 1, _vectorMin);
+            matrix_transform_vertex(__bonkInverseMatrix, _aabb.xMax, _aabb.yMax, _aabb.zMax, 1, _vectorMax);
             
-            matrix_transform_vertex(__bonkInverseMatrix, _aabb.xMin, _aabb.yMin, _aabb.zMin, 1, _vector);
-            var _shapeXMin = floor(_vector[0] / __bonkCellXSize);
-            var _shapeYMin = floor(_vector[1] / __bonkCellYSize);
-            var _shapeZMin = floor(_vector[2] / __bonkCellZSize);
+            var _shapeXMin = min(_vectorMin[0], _vectorMax[0]);
+            var _shapeYMin = min(_vectorMin[1], _vectorMax[1]);
+            var _shapeZMin = min(_vectorMin[2], _vectorMax[2]);
             
-            matrix_transform_vertex(__bonkInverseMatrix, _aabb.xMax, _aabb.yMax, _aabb.zMax, 1, _vector);
-            var _shapeXMax = floor(_vector[0] / __bonkCellXSize);
-            var _shapeYMax = floor(_vector[1] / __bonkCellYSize);
-            var _shapeZMax = floor(_vector[2] / __bonkCellZSize);
+            var _shapeXMax = max(_vectorMin[0], _vectorMax[0]);
+            var _shapeYMax = max(_vectorMin[1], _vectorMax[1]);
+            var _shapeZMax = max(_vectorMin[2], _vectorMax[2]);
+            
+            _shapeXMin = floor(_shapeXMin / __bonkCellXSize);
+            _shapeYMin = floor(_shapeYMin / __bonkCellYSize);
+            _shapeZMin = floor(_shapeZMin / __bonkCellZSize);
+                               
+            _shapeXMax = floor(_shapeXMax / __bonkCellXSize);
+            _shapeYMax = floor(_shapeYMax / __bonkCellYSize);
+            _shapeZMax = floor(_shapeZMax / __bonkCellZSize);
             
             if ((_shapeXMin > _maxCellX) || (_shapeYMin > _maxCellY) || (_shapeZMin > _maxCellZ)
             ||  (_shapeXMax < _minCellX) || (_shapeYMax < _minCellY) || (_shapeZMax < _minCellZ))
@@ -452,22 +491,42 @@ function __BonkCommonMesh(_cellXSize, _cellYSize, _cellZSize)
     {
         //TODO - Calculate these values when setting the shared matrix
         
-        var _result = {};
+        static _staticVectorMin = array_create(4, 0);
+        static _staticVectorMax = array_create(4, 0);
+        var _vectorMin = _staticVectorMin;
+        var _vectorMax = _staticVectorMax;
         
-        static _staticVector = array_create(4, 0);
-        var _vector = _staticVector;
+        var _xMin = __bonkCellXSize*__bonkMinCellX;
+        var _yMin = __bonkCellYSize*__bonkMinCellY;
+        var _zMin = __bonkCellZSize*__bonkMinCellZ;
         
-        matrix_transform_vertex(__bonkMatrix, __bonkCellXSize*__bonkMinCellX, __bonkCellXSize*__bonkMinCellX, __bonkCellXSize*__bonkMinCellX, 1, _vector);
-        _result.xMin = _vector[0];
-        _result.yMin = _vector[1];
-        _result.zMin = _vector[2];
+        var _xMax = __bonkCellXSize*(__bonkMaxCellX+1);
+        var _yMax = __bonkCellYSize*(__bonkMaxCellY+1);
+        var _zMax = __bonkCellZSize*(__bonkMaxCellZ+1);
         
-        matrix_transform_vertex(__bonkMatrix, __bonkCellXSize*(__bonkMaxCellX+1), __bonkCellYSize*(__bonkMaxCellY+1), __bonkCellZSize*(__bonkMaxCellZ+1), 1, _vector);
-        _result.xMax = _vector[0];
-        _result.yMax = _vector[1];
-        _result.zMax = _vector[2];
+        var _xMid = 0.5*(_xMin + _xMax);
+        var _yMid = 0.5*(_yMin + _yMax);
+        var _zMid = 0.5*(_zMin + _zMax);
         
-        return _result;
+        var _xSize = 0.5*(_xMax - _xMin);
+        var _ySize = 0.5*(_yMax - _yMin);
+        var _zSize = 0.5*(_zMax - _zMin);
+        
+        matrix_transform_vertex(__bonkMatrix, _xMid, _yMid, _zMid, 1, _vectorMin);
+        matrix_transform_vertex(__bonkAbsMatrix, _xSize, _ySize, _zSize, 0, _vectorMax);
+        
+        with({})
+        {
+            xMin = _vectorMin[0] - _vectorMax[0];
+            yMin = _vectorMin[1] - _vectorMax[1];
+            zMin = _vectorMin[2] - _vectorMax[2];
+            
+            xMax = _vectorMin[0] + _vectorMax[0];
+            yMax = _vectorMin[1] + _vectorMax[1];
+            zMax = _vectorMin[2] + _vectorMax[2];
+            
+            return self;
+        }
     }
     
     GetShapeArrayFromPoint = function(_x, _y, _z)

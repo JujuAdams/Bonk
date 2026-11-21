@@ -3,3 +3,5 @@ UggSetShader();
 model.Submit();
 shader_reset();
 MatrixReset();
+
+shape.DrawAABB();
