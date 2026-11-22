@@ -2,8 +2,5 @@ DotobjSetTransformOnLoad(true);
 DotobjSetReverseTriangles(true);
 model = DotobjModelLoadFile("FoxyBar.obj");
 
-matrix = matrix_build(x, y, 0,    0,0,0,   3,3,3);
-
-BonkSetupMesh(10, 10, 10);
+BonkSetupMesh(matrix_build(x, y, 0,    0,0,45,   3,3,3), 10, 10, 10);
 AddVertexBuffer(model.GetVertexBufferArray(), DotobjGetVertexFormat());
-SetMatrix(matrix);

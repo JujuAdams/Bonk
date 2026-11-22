@@ -132,16 +132,47 @@ function __BonkClassMeshWorker(_mesh, _vertexBufferArray, _vertexFormat, _matrix
                 break;
             }
             
-            if (__BonkIsInstance()) //TODO - Optimize
-            {
-                var _left   = __bonkCellXSize*__bonkMinCellX;
-                var _top    = __bonkCellYSize*__bonkMinCellY;
-                var _right  = __bonkCellXSize*(__bonkMaxCellX+1);
-                var _bottom = __bonkCellYSize*(__bonkMaxCellY+1);
+            //Precalculate AAB for the transformed mesh
+            var _xMin = __bonkCellXSize*__bonkMinCellX;
+            var _yMin = __bonkCellYSize*__bonkMinCellY;
+            var _zMin = __bonkCellZSize*__bonkMinCellZ;
+            
+            var _xMax = __bonkCellXSize*(__bonkMaxCellX+1);
+            var _yMax = __bonkCellYSize*(__bonkMaxCellY+1);
+            var _zMax = __bonkCellZSize*(__bonkMaxCellZ+1);
+            
+            var _xMid = 0.5*(_xMin + _xMax);
+            var _yMid = 0.5*(_yMin + _yMax);
+            var _zMid = 0.5*(_zMin + _zMax);
+            
+            var _xSize = 0.5*(_xMax - _xMin);
+            var _ySize = 0.5*(_yMax - _yMin);
+            var _zSize = 0.5*(_zMax - _zMin);
+            
+            var _vectorMid  = matrix_transform_vertex(__bonkMatrix,    _xMid,  _yMid,  _zMid,  1);
+            var _vectorSize = matrix_transform_vertex(__bonkAbsMatrix, _xSize, _ySize, _zSize, 0);
+            
+            x = _vectorMid[0];
+            y = _vectorMid[1];
+            z = _vectorMid[2];
+            
+            __bonkWidth  = 2*_vectorSize[0];
+            __bonkHeight = 2*_vectorSize[1];
+            
+            __bonkAAB = {
+                xMin: _vectorMid[0] - _vectorSize[0],
+                yMin: _vectorMid[1] - _vectorSize[1],
+                zMin: _vectorMid[2] - _vectorSize[2],
                 
-                //FIXME - Generate a mask
-                image_xscale = max(BONK_INSTANCE_MIN_SIZE, 2*max(abs(_left), abs(_right))) / BONK_MASK_SIZE;
-                image_yscale = max(BONK_INSTANCE_MIN_SIZE, 2*max(abs(_top), abs(_bottom))) / BONK_MASK_SIZE;
+                xMax: _vectorMid[0] + _vectorSize[0],
+                yMax: _vectorMid[1] + _vectorSize[1],
+                zMax: _vectorMid[2] + _vectorSize[2],
+            };
+            
+            if (__BonkIsInstance())
+            {
+                image_xscale = max(BONK_INSTANCE_MIN_SIZE, __bonkWidth ) / BONK_MASK_SIZE;
+                image_yscale = max(BONK_INSTANCE_MIN_SIZE, __bonkHeight) / BONK_MASK_SIZE;
             }
         }
     }

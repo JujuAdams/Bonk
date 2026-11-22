@@ -123,11 +123,12 @@
 ///   Various cached values that are used to speed up collision detection. These are **read-only**
 ///   and even then you'll probably never need to read these variables.
 /// 
+/// @param matrix
 /// @param cellXSize
 /// @param cellYSize
 /// @param cellZSize
 
-function BonkSetupMesh(_cellXSize, _cellYSize, _cellZSize)
+function BonkSetupMesh(_matrix, _cellXSize, _cellYSize, _cellZSize)
 {
     if (not __BonkIsInstance())
     {
@@ -141,6 +142,7 @@ function BonkSetupMesh(_cellXSize, _cellYSize, _cellZSize)
     }
     
     __BonkCommonMesh(_cellXSize, _cellYSize, _cellZSize);
+    SetMatrix(_matrix);
     
     mask_index   = __BonkMaskAAB;
     image_xscale = __bonkWidth / BONK_MASK_SIZE;

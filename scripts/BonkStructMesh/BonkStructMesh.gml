@@ -4,11 +4,12 @@
 /// information please refer to `BonkSetupMesh()` (though native GameMaker variables other than
 /// `x` and `y` will not be set for structs).
 /// 
+/// @param matrix
 /// @param cellXSize
 /// @param cellYSize
 /// @param cellZSize
 
-function BonkStructMesh(_cellXSize, _cellYSize, _cellZSize) constructor
+function BonkStructMesh(_matrix, _cellXSize, _cellYSize, _cellZSize) constructor
 {
     if (BONK_DEBUG_STRUCTS)
     {
@@ -17,6 +18,7 @@ function BonkStructMesh(_cellXSize, _cellYSize, _cellZSize) constructor
     }
     
     __BonkCommonMesh(_cellXSize, _cellYSize, _cellZSize);
+    SetMatrix(_matrix);
     
     static RemoveFromWorld = function()
     {

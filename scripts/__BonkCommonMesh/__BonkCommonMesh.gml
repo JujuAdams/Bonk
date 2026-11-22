@@ -10,14 +10,14 @@ function __BonkCommonMesh(_cellXSize, _cellYSize, _cellZSize)
     __bonkWorld = undefined;
     bonkGroup = BONK_DEFAULT_GROUP;
     
-    __bonkMatrix           = matrix_build_identity();
-    __bonkInverseMatrix    = matrix_build_identity();
-    __bonkAbsMatrix        = matrix_build_identity();
-    __bonkAbsInverseMatrix = matrix_build_identity();
-    
     __bonkCellXSize = _cellXSize;
     __bonkCellYSize = _cellYSize;
     __bonkCellZSize = _cellZSize;
+    
+    __bonkMatrix           = undefined;
+    __bonkInverseMatrix    = matrix_build_identity();
+    __bonkAbsMatrix        = matrix_build_identity();
+    __bonkAbsInverseMatrix = matrix_build_identity();
     
     __bonkMinCellX = 0;
     __bonkMinCellY = 0;
@@ -29,6 +29,16 @@ function __BonkCommonMesh(_cellXSize, _cellYSize, _cellZSize)
     
     __bonkWidth  = 1;
     __bonkHeight = 1;
+    
+    __bonkAAB = {
+        xMin: 0,
+        yMin: 0,
+        zMin: 0,
+        
+        xMax: 0,
+        yMax: 0,
+        zMax: 0,
+    };
     
     __bonkSpatialMap = ds_map_create(); //FIXME - Memory leak!
     __bonkTriangleArray = [];
@@ -49,14 +59,22 @@ function __BonkCommonMesh(_cellXSize, _cellYSize, _cellZSize)
     
     SetMatrix = function(_matrix)
     {
-        if (array_equals(__bonkMatrix, _matrix)) return;
-        
-        if (__bonkWorld != undefined)
+        if (__bonkMatrix != undefined)
         {
-            __bonkWorld.__RemoveShape(self);
+            if (array_equals(__bonkMatrix, _matrix)) return;
+            
+            if (__bonkWorld != undefined)
+            {
+                __bonkWorld.__RemoveShape(self);
+            }
+            
+            array_copy(__bonkMatrix, 0, _matrix, 0, 16);
+        }
+        else
+        {
+            __bonkMatrix = variable_clone(_matrix);
         }
         
-        array_copy(__bonkMatrix, 0, _matrix, 0, 16);
         matrix_inverse(__bonkMatrix, __bonkInverseMatrix);
         
         var _absMatrix = __bonkAbsMatrix;
@@ -199,10 +217,6 @@ function __BonkCommonMesh(_cellXSize, _cellYSize, _cellZSize)
                                 
                                     if (_shapeArray[_i].Touch(_subjectShape, _groupFilter))
                                     {
-                                        _subjectShape.x += x;
-                                        _subjectShape.y += y;
-                                        _subjectShape.z += z;
-                                        
                                         ds_map_clear(_map);
                                         return true;
                                     }
@@ -493,44 +507,7 @@ function __BonkCommonMesh(_cellXSize, _cellYSize, _cellZSize)
     
     GetAABB = function()
     {
-        //TODO - Calculate these values when setting the shared matrix
-        
-        static _staticVectorMid  = array_create(4, 0);
-        static _staticVectorSize = array_create(4, 0);
-        var _vectorMid  = _staticVectorMid;
-        var _vectorSize = _staticVectorSize;
-        
-        var _xMin = __bonkCellXSize*__bonkMinCellX;
-        var _yMin = __bonkCellYSize*__bonkMinCellY;
-        var _zMin = __bonkCellZSize*__bonkMinCellZ;
-        
-        var _xMax = __bonkCellXSize*(__bonkMaxCellX+1);
-        var _yMax = __bonkCellYSize*(__bonkMaxCellY+1);
-        var _zMax = __bonkCellZSize*(__bonkMaxCellZ+1);
-        
-        var _xMid = 0.5*(_xMin + _xMax);
-        var _yMid = 0.5*(_yMin + _yMax);
-        var _zMid = 0.5*(_zMin + _zMax);
-        
-        var _xSize = 0.5*(_xMax - _xMin);
-        var _ySize = 0.5*(_yMax - _yMin);
-        var _zSize = 0.5*(_zMax - _zMin);
-        
-        matrix_transform_vertex(__bonkMatrix,    _xMid,  _yMid,  _zMid,  1, _vectorMid);
-        matrix_transform_vertex(__bonkAbsMatrix, _xSize, _ySize, _zSize, 0, _vectorSize);
-        
-        with({})
-        {
-            xMin = _vectorMid[0] - _vectorSize[0];
-            yMin = _vectorMid[1] - _vectorSize[1];
-            zMin = _vectorMid[2] - _vectorSize[2];
-            
-            xMax = _vectorMid[0] + _vectorSize[0];
-            yMax = _vectorMid[1] + _vectorSize[1];
-            zMax = _vectorMid[2] + _vectorSize[2];
-            
-            return self;
-        }
+        return variable_clone(__bonkAAB);
     }
     
     GetShapeArrayFromPoint = function(_x, _y, _z)
