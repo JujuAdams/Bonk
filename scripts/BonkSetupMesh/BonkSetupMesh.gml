@@ -124,11 +124,9 @@
 ///   and even then you'll probably never need to read these variables.
 /// 
 /// @param matrix
-/// @param cellXSize
-/// @param cellYSize
-/// @param cellZSize
+/// @param meshData
 
-function BonkSetupMesh(_matrix, _cellXSize, _cellYSize, _cellZSize)
+function BonkSetupMesh(_matrix, _meshData)
 {
     if (not __BonkIsInstance())
     {
@@ -141,12 +139,8 @@ function BonkSetupMesh(_matrix, _cellXSize, _cellYSize, _cellZSize)
         array_pop(bonkCreateCallstack);
     }
     
-    __BonkCommonMesh(_cellXSize, _cellYSize, _cellZSize);
+    __BonkCommonMesh(_meshData);
     SetMatrix(_matrix);
-    
-    x = _matrix[12];
-    y = _matrix[13];
-    z = _matrix[14];
     
     image_xscale = __bonkWidth / BONK_MASK_SIZE;
     image_yscale = __bonkHeight / BONK_MASK_SIZE;

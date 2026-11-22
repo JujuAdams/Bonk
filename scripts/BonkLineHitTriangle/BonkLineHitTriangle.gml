@@ -19,7 +19,7 @@ function BonkLineHitTriangle(_triangle, _x1, _y1, _z1, _x2, _y2, _z2, _struct = 
     
     with(_triangle)
     {
-        if (matrix == undefined)
+        if (__matrix == undefined)
         {
             var _triX1 = x1;
             var _triY1 = y1;
@@ -35,7 +35,7 @@ function BonkLineHitTriangle(_triangle, _x1, _y1, _z1, _x2, _y2, _z2, _struct = 
         }
         else
         {
-            var _matrix = matrix;
+            var _matrix = __matrix;
             matrix_transform_vertex(_matrix, x1, y1, z1, 1, _vector);
             var _triX1 = _vector[0]; var _triY1 = _vector[1]; var _triZ1 = _vector[2];
             

@@ -22,7 +22,7 @@ function BonkCapsuleCollideTriangle(_capsule, _triangle, _struct = undefined)
     
     with(_triangle)
     {
-        if (matrix == undefined)
+        if (__matrix == undefined)
         {
             return __BonkCapsuleCollideTriangle(_capsuleX, _capsuleY, _capsuleZ, _capsuleHeight, _capsuleRadius,
                                                 self,
@@ -34,7 +34,7 @@ function BonkCapsuleCollideTriangle(_capsule, _triangle, _struct = undefined)
         }
         else
         {
-            var _matrix = matrix;
+            var _matrix = __matrix;
             
             matrix_transform_vertex(_matrix, x1, y1, z1, 1, _vector);
             var _x1 = _vector[0]; var _y1 = _vector[1]; var _z1 = _vector[2];

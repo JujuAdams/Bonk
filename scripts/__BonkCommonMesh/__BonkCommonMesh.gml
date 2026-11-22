@@ -1,34 +1,17 @@
 // Feather disable all
 
-/// @param cellXSize
-/// @param cellYSize
-/// @param cellZSize
+/// @param meshData
 
-function __BonkCommonMesh(_cellXSize, _cellYSize, _cellZSize)
+function __BonkCommonMesh(_meshData)
 {
     bonkType = BONK_TYPE_MESH;
     __bonkWorld = undefined;
     bonkGroup = BONK_DEFAULT_GROUP;
     
-    __bonkCellXSize = _cellXSize;
-    __bonkCellYSize = _cellYSize;
-    __bonkCellZSize = _cellZSize;
-    
     __bonkMatrix           = undefined;
     __bonkInverseMatrix    = matrix_build_identity();
     __bonkAbsMatrix        = matrix_build_identity();
     __bonkAbsInverseMatrix = matrix_build_identity();
-    
-    __bonkMinCellX = 0;
-    __bonkMinCellY = 0;
-    __bonkMinCellZ = 0;
-    
-    __bonkMaxCellX = 0;
-    __bonkMaxCellY = 0;
-    __bonkMaxCellZ = 0;
-    
-    __bonkWidth  = 1;
-    __bonkHeight = 1;
     
     __bonkAAB = {
         xMin: 0,
@@ -40,10 +23,29 @@ function __BonkCommonMesh(_cellXSize, _cellYSize, _cellZSize)
         zMax: 0,
     };
     
-    __bonkSpatialMap = ds_map_create(); //FIXME - Memory leak!
-    __bonkTriangleArray = [];
+    if (_meshData.GetVertexBufferAsyncRemaining() > 0)
+    {
+        __BonkError("Cannot create mesh shape, mesh data async worker has not finished");
+    }
     
-    __bonkWorkerArray = [];
+    //Copy a bunch of values from the mesh data
+    __bonkWidth  = _meshData.__bonkWidth;
+    __bonkHeight = _meshData.__bonkHeight;
+    
+    __bonkMinCellX = _meshData.__bonkMinCellX;
+    __bonkMinCellY = _meshData.__bonkMinCellY;
+    __bonkMinCellZ = _meshData.__bonkMinCellZ;
+    
+    __bonkMaxCellX = _meshData.__bonkMaxCellX;
+    __bonkMaxCellY = _meshData.__bonkMaxCellY;
+    __bonkMaxCellZ = _meshData.__bonkMaxCellZ;
+    
+    __bonkCellXSize = _meshData.__bonkCellXSize;
+    __bonkCellYSize = _meshData.__bonkCellYSize;
+    __bonkCellZSize = _meshData.__bonkCellZSize;
+    
+    __bonkSpatialMap    = _meshData.__bonkSpatialMap;
+    __bonkTriangleArray = _meshData.__bonkTriangleArray;
     
     //These are not available and don't do anything. Users should move meshes by setting the
     //transformation matrix
@@ -63,6 +65,7 @@ function __BonkCommonMesh(_cellXSize, _cellYSize, _cellZSize)
         {
             if (array_equals(__bonkMatrix, _matrix)) return;
             
+            //Remove the shape from its world before we change the AABB
             if (__bonkWorld != undefined)
             {
                 __bonkWorld.__RemoveShape(self);
@@ -75,6 +78,7 @@ function __BonkCommonMesh(_cellXSize, _cellYSize, _cellZSize)
             __bonkMatrix = variable_clone(_matrix);
         }
         
+        //Create commonly used matrices from the input matrix
         matrix_inverse(__bonkMatrix, __bonkInverseMatrix);
         
         var _absMatrix = __bonkAbsMatrix;
@@ -93,7 +97,52 @@ function __BonkCommonMesh(_cellXSize, _cellYSize, _cellZSize)
             _absMatrix[@ _i] = abs(_inverseMatrix[_i]);
             ++_i;
         }
+            
+        //Precalculate AAB for the transformed mesh
+        var _xMin = __bonkCellXSize*__bonkMinCellX;
+        var _yMin = __bonkCellYSize*__bonkMinCellY;
+        var _zMin = __bonkCellZSize*__bonkMinCellZ;
         
+        var _xMax = __bonkCellXSize*(__bonkMaxCellX+1);
+        var _yMax = __bonkCellYSize*(__bonkMaxCellY+1);
+        var _zMax = __bonkCellZSize*(__bonkMaxCellZ+1);
+        
+        var _xMid = 0.5*(_xMin + _xMax);
+        var _yMid = 0.5*(_yMin + _yMax);
+        var _zMid = 0.5*(_zMin + _zMax);
+        
+        var _xSize = 0.5*(_xMax - _xMin);
+        var _ySize = 0.5*(_yMax - _yMin);
+        var _zSize = 0.5*(_zMax - _zMin);
+        
+        var _vectorMid  = matrix_transform_vertex(__bonkMatrix,    _xMid,  _yMid,  _zMid,  1);
+        var _vectorSize = matrix_transform_vertex(__bonkAbsMatrix, _xSize, _ySize, _zSize, 0);
+        
+        x = _vectorMid[0];
+        y = _vectorMid[1];
+        z = _vectorMid[2];
+        
+        __bonkWidth  = 2*_vectorSize[0];
+        __bonkHeight = 2*_vectorSize[1];
+        
+        __bonkAAB = {
+            xMin: _vectorMid[0] - _vectorSize[0],
+            yMin: _vectorMid[1] - _vectorSize[1],
+            zMin: _vectorMid[2] - _vectorSize[2],
+            
+            xMax: _vectorMid[0] + _vectorSize[0],
+            yMax: _vectorMid[1] + _vectorSize[1],
+            zMax: _vectorMid[2] + _vectorSize[2],
+        };
+        
+        //Set the collision mask for shape instances
+        if (__BonkIsInstance())
+        {
+            image_xscale = max(BONK_INSTANCE_MIN_SIZE, __bonkWidth ) / BONK_MASK_SIZE;
+            image_yscale = max(BONK_INSTANCE_MIN_SIZE, __bonkHeight) / BONK_MASK_SIZE;
+        }
+        
+        //Re-add to the world
         if (__bonkWorld != undefined)
         {
             __bonkWorld.__AddShape(self);
@@ -433,6 +482,7 @@ function __BonkCommonMesh(_cellXSize, _cellYSize, _cellZSize)
                                     if (not ds_map_exists(_map, _shape))
                                     {
                                         _map[? _shape] = true;
+                                        _shape.__matrix = __bonkMatrix;
                                         _shape.__CollideAddToArray(_collideArrayContainer, _subjectShape, undefined);
                                     }
                                     
@@ -536,20 +586,6 @@ function __BonkCommonMesh(_cellXSize, _cellYSize, _cellZSize)
         return __bonkSpatialMap[? (_x + BONK_WORLD_CELL_MIN) + ((_y + BONK_WORLD_CELL_MIN) << 11) + ((_z + BONK_WORLD_CELL_MIN) << 22)] ?? _emptyArray;
     }
     
-    __EnsureShapeArrayFromCell = function(_x, _y, _z)
-    {
-        var _key = (_x + BONK_WORLD_CELL_MIN) + ((_y + BONK_WORLD_CELL_MIN) << 11) + ((_z + BONK_WORLD_CELL_MIN) << 22);
-        
-        var _array = __bonkSpatialMap[? _key];
-        if (_array == undefined)
-        {
-            _array = [];
-            __bonkSpatialMap[? _key] = _array;
-        }
-        
-        return _array;
-    }
-    
     AddVertexBuffer = function(_vertexBufferArray, _vertexFormat, _matrix = matrix_build_identity(), _applySoftEdges = true)
     {
         if (not is_array(_vertexBufferArray))
@@ -574,37 +610,6 @@ function __BonkCommonMesh(_cellXSize, _cellYSize, _cellZSize)
         _worker.__StartAsync();
         
         return _worker;
-    }
-    
-    GetVertexBufferAsyncRemaining = function()
-    {
-        var _value = 0;
-        
-        var _i = 0;
-        repeat(array_length(__bonkWorkerArray))
-        {
-            _value += __bonkWorkerArray[_i].GetRemaining();
-            ++_i;
-        }
-        
-        return _value;
-    }
-    
-    GetVertexBufferAsyncCount = function()
-    {
-        return array_length(__bonkWorkerArray);
-    }
-    
-    CancelVertexBufferAsync = function()
-    {
-        var _i = array_length(__bonkWorkerArray)-1;
-        repeat(array_length(__bonkWorkerArray))
-        {
-            __bonkWorkerArray[_i].Cancel();
-            --_i;
-        }
-        
-        return self;
     }
     
     #region Draw

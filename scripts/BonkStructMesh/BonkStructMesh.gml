@@ -5,11 +5,9 @@
 /// `x` and `y` will not be set for structs).
 /// 
 /// @param matrix
-/// @param cellXSize
-/// @param cellYSize
-/// @param cellZSize
+/// @param meshData
 
-function BonkStructMesh(_matrix, _cellXSize, _cellYSize, _cellZSize) constructor
+function BonkStructMesh(_matrix, _meshData) constructor
 {
     if (BONK_DEBUG_STRUCTS)
     {
@@ -17,12 +15,8 @@ function BonkStructMesh(_matrix, _cellXSize, _cellYSize, _cellZSize) constructor
         array_pop(bonkCreateCallstack);
     }
     
-    __BonkCommonMesh(_cellXSize, _cellYSize, _cellZSize);
+    __BonkCommonMesh(_meshData);
     SetMatrix(_matrix);
-    
-    x = _matrix[12];
-    y = _matrix[13];
-    z = _matrix[14];
     
     static RemoveFromWorld = function()
     {

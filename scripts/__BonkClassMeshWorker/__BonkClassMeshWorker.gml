@@ -131,49 +131,6 @@ function __BonkClassMeshWorker(_mesh, _vertexBufferArray, _vertexFormat, _matrix
                 __BonkTrace($"Warning! Could not find worker {string(ptr(self))} in mesh {string(ptr(self))}");
                 break;
             }
-            
-            //Precalculate AAB for the transformed mesh
-            var _xMin = __bonkCellXSize*__bonkMinCellX;
-            var _yMin = __bonkCellYSize*__bonkMinCellY;
-            var _zMin = __bonkCellZSize*__bonkMinCellZ;
-            
-            var _xMax = __bonkCellXSize*(__bonkMaxCellX+1);
-            var _yMax = __bonkCellYSize*(__bonkMaxCellY+1);
-            var _zMax = __bonkCellZSize*(__bonkMaxCellZ+1);
-            
-            var _xMid = 0.5*(_xMin + _xMax);
-            var _yMid = 0.5*(_yMin + _yMax);
-            var _zMid = 0.5*(_zMin + _zMax);
-            
-            var _xSize = 0.5*(_xMax - _xMin);
-            var _ySize = 0.5*(_yMax - _yMin);
-            var _zSize = 0.5*(_zMax - _zMin);
-            
-            var _vectorMid  = matrix_transform_vertex(__bonkMatrix,    _xMid,  _yMid,  _zMid,  1);
-            var _vectorSize = matrix_transform_vertex(__bonkAbsMatrix, _xSize, _ySize, _zSize, 0);
-            
-            x = _vectorMid[0];
-            y = _vectorMid[1];
-            z = _vectorMid[2];
-            
-            __bonkWidth  = 2*_vectorSize[0];
-            __bonkHeight = 2*_vectorSize[1];
-            
-            __bonkAAB = {
-                xMin: _vectorMid[0] - _vectorSize[0],
-                yMin: _vectorMid[1] - _vectorSize[1],
-                zMin: _vectorMid[2] - _vectorSize[2],
-                
-                xMax: _vectorMid[0] + _vectorSize[0],
-                yMax: _vectorMid[1] + _vectorSize[1],
-                zMax: _vectorMid[2] + _vectorSize[2],
-            };
-            
-            if (__BonkIsInstance())
-            {
-                image_xscale = max(BONK_INSTANCE_MIN_SIZE, __bonkWidth ) / BONK_MASK_SIZE;
-                image_yscale = max(BONK_INSTANCE_MIN_SIZE, __bonkHeight) / BONK_MASK_SIZE;
-            }
         }
     }
     
@@ -332,7 +289,6 @@ function __BonkClassMeshWorker(_mesh, _vertexBufferArray, _vertexFormat, _matrix
         var _vertexFormatStride = __vertexFormatStride;
         var _matrix             = __matrix;
         var _meshTriangleArray  = _mesh.__bonkTriangleArray;
-        var _sharedMatrix       = _mesh.__bonkMatrix;
         
         with(_mesh)
         {
@@ -394,7 +350,6 @@ function __BonkClassMeshWorker(_mesh, _vertexBufferArray, _vertexFormat, _matrix
             var _bonkTri = new BonkStructTriangle(_x1, _y1, _z1,
                                                   _x2, _y2, _z2,
                                                   _x3, _y3, _z3);
-            _bonkTri.matrix = _sharedMatrix;
             array_push(_meshTriangleArray, _bonkTri);
             
             if (_applySoftEdges && (BONK_EXPERIMENT_FORCE_EDGE_KIND == undefined))

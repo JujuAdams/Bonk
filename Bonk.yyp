@@ -334,6 +334,7 @@
     {"id":{"name":"BonkLineHitSphere","path":"scripts/BonkLineHitSphere/BonkLineHitSphere.yy",},},
     {"id":{"name":"BonkLineHitTriangle","path":"scripts/BonkLineHitTriangle/BonkLineHitTriangle.yy",},},
     {"id":{"name":"BonkLineHitWorld","path":"scripts/BonkLineHitWorld/BonkLineHitWorld.yy",},},
+    {"id":{"name":"BonkMeshData","path":"scripts/BonkMeshData/BonkMeshData.yy",},},
     {"id":{"name":"BonkMoveAndDeflect","path":"scripts/BonkMoveAndDeflect/BonkMoveAndDeflect.yy",},},
     {"id":{"name":"BonkMoveAndDeflectExt","path":"scripts/BonkMoveAndDeflectExt/BonkMoveAndDeflectExt.yy",},},
     {"id":{"name":"BonkPoint","path":"scripts/BonkPoint/BonkPoint.yy",},},
@@ -512,8 +513,8 @@
   "resourceType":"GMProject",
   "resourceVersion":"2.0",
   "RoomOrderNodes":[
-    {"roomId":{"name":"rmTestBigModelToMeshInstance","path":"rooms/rmTestBigModelToMeshInstance/rmTestBigModelToMeshInstance.yy",},},
     {"roomId":{"name":"rmTestBigModelToMesh","path":"rooms/rmTestBigModelToMesh/rmTestBigModelToMesh.yy",},},
+    {"roomId":{"name":"rmTestBigModelToMeshInstance","path":"rooms/rmTestBigModelToMeshInstance/rmTestBigModelToMeshInstance.yy",},},
     {"roomId":{"name":"rmTestBigModelToWorld","path":"rooms/rmTestBigModelToWorld/rmTestBigModelToWorld.yy",},},
     {"roomId":{"name":"rmTestConstructorPlayground","path":"rooms/rmTestConstructorPlayground/rmTestConstructorPlayground.yy",},},
     {"roomId":{"name":"rmTestInstancePlayground","path":"rooms/rmTestInstancePlayground/rmTestInstancePlayground.yy",},},

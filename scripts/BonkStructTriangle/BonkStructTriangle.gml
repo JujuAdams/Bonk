@@ -39,7 +39,7 @@ function BonkStructTriangle(_x1, _y1, _z1, _x2, _y2, _z2, _x3, _y3, _z3, _groupV
     hardEdge23 = BONK_EXPERIMENT_FORCE_EDGE_KIND ?? true;
     hardEdge31 = BONK_EXPERIMENT_FORCE_EDGE_KIND ?? true;
     
-    matrix = undefined;
+    __matrix = undefined;
     
     static __SetPositionFree = function() {}
     static __SetPositionInWorld = function() {}

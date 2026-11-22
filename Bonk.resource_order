@@ -269,6 +269,7 @@
     {"name":"BonkLineHitSphere","order":5,"path":"scripts/BonkLineHitSphere/BonkLineHitSphere.yy",},
     {"name":"BonkLineHitTriangle","order":6,"path":"scripts/BonkLineHitTriangle/BonkLineHitTriangle.yy",},
     {"name":"BonkLineHitWorld","order":7,"path":"scripts/BonkLineHitWorld/BonkLineHitWorld.yy",},
+    {"name":"BonkMeshData","order":5,"path":"scripts/BonkMeshData/BonkMeshData.yy",},
     {"name":"BonkMoveAndDeflect","order":2,"path":"scripts/BonkMoveAndDeflect/BonkMoveAndDeflect.yy",},
     {"name":"BonkPoint","order":3,"path":"scripts/BonkPoint/BonkPoint.yy",},
     {"name":"BonkPointCollideHeightmap","order":8,"path":"scripts/BonkPointCollideHeightmap/BonkPointCollideHeightmap.yy",},
