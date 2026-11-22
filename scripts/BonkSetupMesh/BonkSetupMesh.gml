@@ -14,7 +14,7 @@
 /// 
 ///  3. Set variables to Bonk methods:
 ///     `SetPosition()`  `AddPosition()`  `Touch()`  `Collide()`  `Deflect()`  `LineHit()`
-///     `DebugDraw()`  `DebugDrawMask()`
+///     `DebugDraw()`  `DrawMask()`
 /// 
 ///  4. Set a handful of further variables and methods for the specific shape type
 /// 
@@ -144,13 +144,19 @@ function BonkSetupMesh(_matrix, _cellXSize, _cellYSize, _cellZSize)
     __BonkCommonMesh(_cellXSize, _cellYSize, _cellZSize);
     SetMatrix(_matrix);
     
-    mask_index   = __BonkMaskAAB;
+    x = _matrix[12];
+    y = _matrix[13];
+    z = _matrix[14];
+    
     image_xscale = __bonkWidth / BONK_MASK_SIZE;
     image_yscale = __bonkHeight / BONK_MASK_SIZE;
     
-    DebugDrawMask = function(_color = c_white)
+    DrawMask = function(_color = c_white, _z = z)
     {
+        var _oldZ = gpu_get_depth();
+        gpu_set_depth(_z);
         draw_sprite_ext(mask_index, 0, x, y, image_xscale, image_yscale, image_angle, _color, 1);
+        gpu_set_depth(_oldZ);
     }
     
     RemoveFromWorld = function() {} //Do nothing!

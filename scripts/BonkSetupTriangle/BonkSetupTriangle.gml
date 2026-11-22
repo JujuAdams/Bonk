@@ -13,7 +13,7 @@
 /// 
 ///  3. Set variables to Bonk methods:
 ///     `SetPosition()`  `AddPosition()`  `Touch()`  `Collide()`  `Deflect()`  `LineHit()`
-///     `DebugDraw()`  `DebugDrawMask()`
+///     `DebugDraw()`  `DrawMask()`
 /// 
 ///  4. Set a handful of further variables and methods for the specific shape type
 /// 

@@ -79,8 +79,11 @@ function BonkSetupHeightmap(_function, _x, _y, _z, _cellLeft, _cellTop, _cellCou
         };
     }
     
-    DebugDrawMask = function(_color = c_white)
+    DrawMask = function(_color = c_white, _z = z)
     {
+        var _oldZ = gpu_get_depth();
+        gpu_set_depth(_z);
         draw_sprite_ext(mask_index, 0, x, y, image_xscale, image_yscale, image_angle, _color, 1);
+        gpu_set_depth(_oldZ);
     }
 }

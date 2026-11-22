@@ -20,6 +20,10 @@ function BonkStructMesh(_matrix, _cellXSize, _cellYSize, _cellZSize) constructor
     __BonkCommonMesh(_cellXSize, _cellYSize, _cellZSize);
     SetMatrix(_matrix);
     
+    x = _matrix[12];
+    y = _matrix[13];
+    z = _matrix[14];
+    
     static RemoveFromWorld = function()
     {
         if (__bonkWorld != undefined)

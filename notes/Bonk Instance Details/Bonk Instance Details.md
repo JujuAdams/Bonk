@@ -12,7 +12,7 @@ Bonk will do the following things:
 
 3. Set variables to Bonk methods:
    `SetPosition()`  `AddPosition()`  `Touch()`  `Collide()`  `Deflect()`  `LineHit()`
-   `FilterTest()`  `DebugDraw()`  `DebugDrawMask()`
+   `FilterTest()`  `DebugDraw()`  `DrawMask()`
 
 4. Set a handful of further variables and methods for the specific shape type.
 
@@ -152,7 +152,7 @@ the final fourth point (e.g. `BonkSetupAAB()`).
   into your project for this function to work; please visit https://www.github.com/jujuadams/Ugg .
 
 
-`.DebugDrawMask([color])`
+`.DrawMask([color])`
   Draws a sprite that represents the mask being used for instance collisions in the XY plane.
   This mask will not usually be drawn at the correct z position and is offered for debugging use
   only.
