@@ -125,8 +125,9 @@
 /// 
 /// @param matrix
 /// @param meshData
+/// @param [groupVector=BONK_DEFAULT_GROUP]
 
-function BonkSetupMesh(_matrix, _meshData)
+function BonkSetupMesh(_matrix, _meshData, _groupVector = BONK_DEFAULT_GROUP)
 {
     if (not __BonkIsInstance())
     {
@@ -139,11 +140,9 @@ function BonkSetupMesh(_matrix, _meshData)
         array_pop(bonkCreateCallstack);
     }
     
+    __BonkCommonInstanceFunctions(_groupVector);
     __BonkCommonMesh(_meshData);
     SetMatrix(_matrix);
-    
-    image_xscale = __bonkWidth / BONK_MASK_SIZE;
-    image_yscale = __bonkHeight / BONK_MASK_SIZE;
     
     DrawMask = function(_color = c_white, _z = z)
     {

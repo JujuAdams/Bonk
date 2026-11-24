@@ -225,6 +225,7 @@
     {"name":"BonkCreateCapsule","order":1,"path":"scripts/BonkCreateCapsule/BonkCreateCapsule.yy",},
     {"name":"BonkCreateCylinder","order":2,"path":"scripts/BonkCreateCylinder/BonkCreateCylinder.yy",},
     {"name":"BonkCreateHeightmap","order":9,"path":"scripts/BonkCreateHeightmap/BonkCreateHeightmap.yy",},
+    {"name":"BonkCreateMesh","order":10,"path":"scripts/BonkCreateMesh/BonkCreateMesh.yy",},
     {"name":"BonkCreateQuad","order":3,"path":"scripts/BonkCreateQuad/BonkCreateQuad.yy",},
     {"name":"BonkCreateRotatedBox","order":4,"path":"scripts/BonkCreateRotatedBox/BonkCreateRotatedBox.yy",},
     {"name":"BonkCreateSphere","order":5,"path":"scripts/BonkCreateSphere/BonkCreateSphere.yy",},

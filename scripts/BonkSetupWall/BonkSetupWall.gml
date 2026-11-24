@@ -13,5 +13,5 @@
 
 function BonkSetupWall(_x1, _y1, _z1, _x2, _y2, _z2, _groupVector = BONK_DEFAULT_GROUP)
 {
-    return BonkSetupQuad(_x1, _y1, _z1,   _x2, _y2, _z2,   _x2, _y2, _z1);
+    return BonkSetupQuad(_x1, _y1, _z1,   _x2, _y2, _z2,   _x2, _y2, _z1,   _groupVector);
 }
